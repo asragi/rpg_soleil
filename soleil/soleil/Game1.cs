@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace soleil
+namespace Soleil
 {
     /// <summary>
     /// This is the main type for your game.
@@ -11,11 +11,56 @@ namespace soleil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        
+        Drawing drawing;
+
+        //実際の画面サイズ
+        public const int VirtualWindowSizeX = 320;
+        public const int VirtualWindowSizeY = 240;
+
+        //拡大して描画
+        public static bool IsFullScreen = false;
+        public static int DrawRate = 2;
+        public static int WindowSizeX => (int)(VirtualWindowSizeX * DrawRate);
+        public static int WindowSizeY => (int)(VirtualWindowSizeY * DrawRate);
+        public static int GameCenterX => WindowSizeX / 2;
+        public static int GameCenterY => WindowSizeY / 2;
+        public static int VirtualCenterX => VirtualWindowSizeX / 2;
+        public static int VirtualCenterY => VirtualWindowSizeY / 2;
 
         public Game1()
         {
+            //タイトル
+            this.Window.Title = "hoge";
+
             graphics = new GraphicsDeviceManager(this);
+
             Content.RootDirectory = "Content";
+
+            //画面サイズを決める
+            graphics.SynchronizeWithVerticalRetrace = true;   //垂直同期
+
+            ReadWindowSize();
+
+            graphics.PreferredBackBufferWidth = WindowSizeX;
+            graphics.PreferredBackBufferHeight = WindowSizeY;
+            if (IsFullScreen)
+                graphics.ToggleFullScreen();
+            graphics.ApplyChanges();
+
+        }
+
+        void ReadWindowSize()
+        {
+            Resources.ReadWindowSize();
+
+            if (Resources.OptionData?.Count >= 2)
+            {
+                if (Resources.OptionData[0] != 0)
+                    DrawRate = Resources.OptionData[0];
+                if (Resources.OptionData[1] != 0)
+                    IsFullScreen = true;
+            }
         }
 
         /// <summary>
@@ -27,8 +72,10 @@ namespace soleil
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             base.Initialize();
+
+            drawing = new Drawing(spriteBatch, new Drawing3D(GraphicsDevice));
+            drawing.DrawRate = DrawRate;
         }
 
         /// <summary>
@@ -41,6 +88,9 @@ namespace soleil
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            ColorChanger.Init(GraphicsDevice);
+            Resources.Init(Content);
+            KeyInput.Init();
         }
 
         /// <summary>
@@ -57,12 +107,23 @@ namespace soleil
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
+
+        public static int frame = 0;
+        public static bool End = false;
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            //    Exit();
+            if (End)
+            {
                 Exit();
+                End = false;
+            }
 
             // TODO: Add your update logic here
+            //Audio.Update();
+
+            frame++;
 
             base.Update(gameTime);
         }
@@ -73,7 +134,8 @@ namespace soleil
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
 

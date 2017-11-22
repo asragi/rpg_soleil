@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GCP
+namespace Soleil
 {
     //同時進行しない演出
     abstract class CutIn

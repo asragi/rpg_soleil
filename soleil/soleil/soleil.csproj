@@ -43,21 +43,24 @@
   <ItemGroup>
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
+    <Compile Include="Function\Camera.cs" />
     <Compile Include="Function\ColorChanger.cs" />
     <Compile Include="Function\CSVIO.cs" />
     <Compile Include="Function\CutIn.cs" />
     <Compile Include="Function\Effect.cs" />
-    <Compile Include="Function\EffectData.cs" />
     <Compile Include="Function\Global.cs" />
     <Compile Include="Function\MathEx.cs" />
     <Compile Include="Function\TryParser.cs" />
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Images\Image.cs" />
+    <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
     <Compile Include="Mono\KeyInput.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -67,6 +70,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

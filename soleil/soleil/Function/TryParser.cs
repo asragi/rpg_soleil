@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GCP
+namespace Soleil
 {
     static class TryParser
     {

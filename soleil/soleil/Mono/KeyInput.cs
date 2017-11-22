@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace GCP
+namespace Soleil
 {
     //Key types
     enum Key : int
@@ -24,6 +24,7 @@ namespace GCP
 
     static class KeyInput
     {
+        const int PlayerCount = 1;
         static int[,] input;
         static Controller[] controller;
         static KeyboardState keyState;
@@ -64,9 +65,9 @@ namespace GCP
         public static void Init()
         {
             //input is the time bottun is pushing [keytype, playerCount]
-            input = new int[(int)Key.TotalKeys, SceneManager.PlayerCount];
+            input = new int[(int)Key.TotalKeys, PlayerCount];
 
-            controller = new Controller[SceneManager.PlayerCount];
+            controller = new Controller[PlayerCount];
 
             //keyconfig will be perserved in config file.
             //keyPosition will read from this.
@@ -96,8 +97,8 @@ namespace GCP
                 }
             };
 
-            currentDirection = new Direction[SceneManager.PlayerCount];
-            preDirection = new Direction[SceneManager.PlayerCount];
+            currentDirection = new Direction[PlayerCount];
+            preDirection = new Direction[PlayerCount];
 
             InitGamePad();
         }
@@ -166,11 +167,11 @@ namespace GCP
             }
 
 
-            UseGamepad = new bool[SceneManager.PlayerCount];
+            UseGamepad = new bool[PlayerCount];
             for (int i = 0; i < pads.Count; i++)
             {
                 //Gamepadは2P優先
-                UseGamepad[SceneManager.PlayerCount-1-i] = true;
+                UseGamepad[PlayerCount-1-i] = true;
             }
 
 
@@ -209,7 +210,7 @@ namespace GCP
             gamepadState = gamepad.Select(p=>GamePad.GetState(p)).ToList();
             keyState = Keyboard.GetState();
 
-            for (int i = 0; i < SceneManager.PlayerCount; i++)
+            for (int i = 0; i < PlayerCount; i++)
                 switch (controller[i])
                 {
                     case Controller.KeyBoard:
@@ -234,7 +235,7 @@ namespace GCP
                 input[(int)Key.B, 1] = Game1.frame % 120 + 1;
             }*/
 
-            for (int i = 0; i < SceneManager.PlayerCount; i++)
+            for (int i = 0; i < PlayerCount; i++)
             {
                 preDirection[i] = currentDirection[i];
                 currentDirection[i] = GetStickInput(i + 1);
@@ -300,7 +301,7 @@ namespace GCP
         public static bool GetKeyPush(Key key)
         {
             bool flag = false;
-            for (int i = 0; i < SceneManager.PlayerCount; i++)
+            for (int i = 0; i < PlayerCount; i++)
                 flag |= input[(int)key, i] == 1;
             return flag;
         }
@@ -314,7 +315,7 @@ namespace GCP
         public static bool GetKeyDown(Key key)
         {
             bool flag = false;
-            for (int i = 0; i < SceneManager.PlayerCount; i++)
+            for (int i = 0; i < PlayerCount; i++)
                 flag |= input[(int)key, i] > 0;
             return flag;
         }
@@ -404,7 +405,7 @@ namespace GCP
         /// <param name="p"></param>
         public static void SetGamepad(List<PlayerIndex?> p)
         {
-            for (int i = 0; i < SceneManager.PlayerCount; i++)
+            for (int i = 0; i < PlayerCount; i++)
             {
                 if (p[i].HasValue)
                 {

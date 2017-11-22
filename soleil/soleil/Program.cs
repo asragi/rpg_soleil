@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace soleil
+namespace Soleil
 {
 #if WINDOWS || LINUX
     /// <summary>

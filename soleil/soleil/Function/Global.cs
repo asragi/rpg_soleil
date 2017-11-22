@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GCP
+namespace Soleil
 {
     /// <summary>
     /// いろんな場面で使いたい機能をつめるとこ

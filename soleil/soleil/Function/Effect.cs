@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GCP
+namespace Soleil
 {
 
     abstract class Effect
@@ -178,91 +178,6 @@ namespace GCP
         }
     }
     
-    class AnimationEffectWithPlayer : Effect
-    {
-        Animation animation;
-        public Player player
-        {
-            get;
-            private set;
-        }
-        bool flip;
-        public AnimationEffectWithPlayer(Player player, EffectAnimationData animationData, bool flip, List<Effect> effect)
-            : base(Vector.Zero, effect)
-        {
-            animation = new Animation(animationData);
-            this.player = player;
-            this.flip = flip;
-        }
-        public AnimationEffectWithPlayer(Player player, EffectAnimationData animationData, bool flip, List<Effect> effect, Color color)
-            : base(Vector.Zero, effect, color)
-        {
-            animation = new Animation(animationData);
-            this.player = player;
-            this.flip = flip;
-        }
-
-        public override void Move()
-        {
-            base.Move();
-            animation.Move();
-            if (animation.IsEnd())
-                Disable = true;
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            if (flip)
-                animation.DrawFlipHorizontally(d, player.Position);
-            else
-                animation.Draw(d, player.Position);
-        }
-    }
-
-    class TextureEffectWithPlayer : Effect
-    {
-        Texture2D texture;
-        public Player player
-        {
-            get;
-            private set;
-        }
-        bool flip;
-        readonly int FrameLimit;
-        public TextureEffectWithPlayer(Player player, Vector position, int frame, Texture2D texture, bool flip, List<Effect> effect)
-            : base(position, effect)
-        {
-            FrameLimit = frame;
-            this.texture = texture;
-            this.player = player;
-            this.flip = flip;
-        }
-        public TextureEffectWithPlayer(Player player, Vector position, int frame, Texture2D texture, bool flip, List<Effect> effect, Color color)
-            : base(position, effect, color)
-        {
-            FrameLimit = frame;
-            this.texture = texture;
-            this.player = player;
-            this.flip = flip;
-        }
-
-        public override void Move()
-        {
-            base.Move();
-            if(frame>=FrameLimit)
-                Disable = true;
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            if (flip)
-                d.DrawFlipHorizontally(player.Position+Position,texture,DepthID.Effect);
-            else
-                d.Draw(player.Position+Position, texture, DepthID.Effect);
-        }
-    }
 
     class ShakeWindowEffect : Effect
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GCP
+namespace Soleil
 {
     //Animation設定に使う
     struct AnimationData

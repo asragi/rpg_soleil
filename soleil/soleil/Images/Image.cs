@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GCP
+namespace Soleil
 {
     /// <summary>
     /// 動きなど機能を与えたSpriteの基底クラス

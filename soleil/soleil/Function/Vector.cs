@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 
-namespace GCP
+namespace Soleil
 {
     /// <summary>
     /// 位置、速度などを扱う構造体
