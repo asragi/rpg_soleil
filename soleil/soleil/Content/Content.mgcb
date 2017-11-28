@@ -10,6 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:WPFpipeline.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -46,8 +47,24 @@
 
 #begin kkmincho.spritefont
 /importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0
+/processorParam:OutlineColor=64,64,64,255
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=False
+/processorParam:GradientBeginColor=64,128,255,255
+/processorParam:GradientEndColor=0,0,128,255
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
 /build:kkmincho.spritefont
 
