@@ -44,3 +44,10 @@
 /processorParam:TextureFormat=Color
 /build:white.png
 
+#begin kkmincho.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:kkmincho.spritefont
+
