@@ -15,12 +15,12 @@ namespace Soleil
         Drawing drawing;
 
         //実際の画面サイズ
-        public const int VirtualWindowSizeX = 320;
-        public const int VirtualWindowSizeY = 240;
+        public const int VirtualWindowSizeX = 960;
+        public const int VirtualWindowSizeY = 540;
 
         //拡大して描画
         public static bool IsFullScreen = false;
-        public static int DrawRate = 2;
+        public static int DrawRate = 1;
         public static int WindowSizeX => (int)(VirtualWindowSizeX * DrawRate);
         public static int WindowSizeY => (int)(VirtualWindowSizeY * DrawRate);
         public static int GameCenterX => WindowSizeX / 2;
@@ -31,7 +31,7 @@ namespace Soleil
         public Game1()
         {
             //タイトル
-            this.Window.Title = "hoge";
+            this.Window.Title = "soleil";
 
             graphics = new GraphicsDeviceManager(this);
 

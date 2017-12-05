@@ -72,7 +72,7 @@ namespace Soleil
         static string[] characterDataPath;
         static string[] songPath;
         static string[] sePath;
-        static string optionPath;
+        static string optionPath = "Data/option.csv";
 
         const string UIPath = "UI/";
         const string TitlePath = "Title/";
@@ -118,8 +118,8 @@ namespace Soleil
 
         public static void ReadWindowSize()
         {
-            //optionPath = Option.FilePath;
-            //OptionData = CSVIO.ReadInt(optionPath).FirstOrDefault();
+            //optionPath = "Data/option.csv";
+            OptionData = CSVIO.ReadInt(optionPath).FirstOrDefault();
         }
 
         //画像資源の読み込みのための設定
