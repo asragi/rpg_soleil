@@ -41,6 +41,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Battle\AbilityScore.cs" />
+    <Compile Include="Battle\Attack.cs" />
+    <Compile Include="Battle\CharacterStatus.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
     <Compile Include="Function\Camera.cs" />
