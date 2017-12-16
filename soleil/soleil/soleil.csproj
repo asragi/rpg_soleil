@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Battle\AbilityScore.cs" />
+    <Compile Include="Battle\Action.cs" />
     <Compile Include="Battle\Attack.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
     <Compile Include="Battle\MagicField.cs" />

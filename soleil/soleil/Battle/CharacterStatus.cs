@@ -49,6 +49,13 @@ namespace Soleil
         float MAGrate = 1.0f;
         float SPDrate = 1.0f;
 
+        public int WP = 0;
+
+        public int NextTurn(int t)
+        {
+            return (WP + 10000 * t + SPD - 1) / SPD;
+        }
+
         static int Fraction(float x)
         {
             return (int)x;
@@ -58,6 +65,13 @@ namespace Soleil
         {
             HP = 0;
             MP = 0;
+        }
+        public CharacterStatus(AbilityScore aScore, int _WP)
+        {
+            abilityScore = aScore;
+            HP = abilityScore.HPMAX;
+            MP = abilityScore.MPMAX;
+            WP = _WP;
         }
     }
 

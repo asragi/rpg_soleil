@@ -24,8 +24,7 @@ namespace Soleil
         public MagicField()
         {
         }
-
-        public void SetMagicRate(MagicFieldName field, float value);
+        
         public abstract float GetMagicRate(MagicFieldName field);
 
         public abstract void Fluctuate(MagicFieldName field, float power);
