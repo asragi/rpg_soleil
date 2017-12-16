@@ -3,9 +3,8 @@
 
     public struct AbilityScore
     {
-        //最大値
-        public int HP;
-        public int MP;
+        public int HPMAX;
+        public int MPMAX;
 
         /// <summary>
         /// 物理攻撃の威力に関係

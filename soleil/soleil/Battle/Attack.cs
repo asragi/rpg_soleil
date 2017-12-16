@@ -5,7 +5,7 @@ using System.Linq;
 using static System.Math;
 namespace Soleil
 {
-    enum AttackName
+    enum ActionName
     {
         NormalAttack,
         ExampleMagic,
@@ -15,7 +15,7 @@ namespace Soleil
 
     public static class Attacks
     {
-        static List<Func<AbilityScore, AbilityScore, int>> attackTable;
+        static List<Func<CharacterStatus, CharacterStatus, float>> attackTable;
 
         /// <summary>
         /// 補正
@@ -26,12 +26,16 @@ namespace Soleil
         {
             return (float)Global.RandomDouble(0.8, 1.2);
         }
+        static int Fraction(float x)
+        {
+            return (int)x;
+        }
 
         static Attacks()
         {
-            attackTable = new List<Func<AbilityScore, AbilityScore, int>>();
-            attackTable[(int)AttackName.NormalAttack] = (a, b) => { return (int)(Max(a.STR * 4 - b.VIT * 2, 5) * Revision()); };
-            attackTable[(int)AttackName.ExampleMagic] = (a, b) => { return (int)(Max(a.MAG * 4 - (b.VIT + b.MAG), 0) * Revision()); };
+            attackTable = new List<Func<CharacterStatus, CharacterStatus, float>>();
+            attackTable[(int)ActionName.NormalAttack] = (a, b) => { return Max(a.STR * 4.0f - b.VIT * 2.0f, 5.0f) * Revision(); };
+            attackTable[(int)ActionName.ExampleMagic] = (a, b) => { return Max(a.MAG * 4.0f - (b.VIT + b.MAG), 0.0f) * Revision(); };
         }
     }
 

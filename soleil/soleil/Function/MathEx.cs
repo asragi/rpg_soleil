@@ -50,7 +50,7 @@ namespace Soleil
         public static bool TrueExist(IEnumerable<bool> e) => e.Aggregate((i,j)=>i||j);
 
         public static float ToRadian(double r) => (float)(r * Rad);
-        public static double Sin(double r) => Math.Sin(r*Rad);
+        public static double Sin(double r) => Math.Sin(r * Rad);
         public static double Cos(double r) => Math.Cos(r * Rad);
         public static double Tan(double r) => Math.Tan(r * Rad);
         public static double Atan2(double y,double x) => Math.Atan2(y,x)/Rad;
