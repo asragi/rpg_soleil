@@ -58,3 +58,4 @@ monodroid*.msi
 
 #monogame Contentfile
 *.mgcontent
+/soleil/.vs/soleil/v15/Server/sqlite3

@@ -6,7 +6,7 @@ using static System.Math;
 namespace Soleil
 {
 
-    public static class Attacks
+    public static class AttackInfo
     {
         static List<Action> actions;
         static List<Func<CharacterStatus, CharacterStatus, float>> attackTable;
@@ -25,7 +25,7 @@ namespace Soleil
         {
             return (int)x;
         }
-        static Attacks()
+        static AttackInfo()
         {
             attackTable = new List<Func<CharacterStatus, CharacterStatus, float>>();
             for (int i = 0; i < (int)ActionName.Size; i++)
@@ -35,8 +35,9 @@ namespace Soleil
 
             actions = new List<Action>();
             for (int i = 0; i < (int)ActionName.Size; i++)
-                actions.Add(new Action());
-            actions[(int)ActionName.NormalAttack] = new Action(attackTable[(int)ActionName.NormalAttack]);
+                actions.Add(null);
+            actions[(int)ActionName.NormalAttack] = new AttackForOne(attackTable[(int)ActionName.NormalAttack]);
+            actions[(int)ActionName.ExampleMagic] = new AttackForOne(attackTable[(int)ActionName.ExampleMagic]);
         }
     }
 
