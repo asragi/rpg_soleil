@@ -13,6 +13,7 @@ namespace Soleil
         SpriteBatch spriteBatch;
         
         Drawing drawing;
+        SceneManager sm;
 
         //実際の画面サイズ
         public const int VirtualWindowSizeX = 960;
@@ -75,6 +76,11 @@ namespace Soleil
             base.Initialize();
 
             drawing = new Drawing(spriteBatch, new Drawing3D(GraphicsDevice));
+            
+            // SceneManager
+            sm = new SceneManager();
+            new TestScene(sm);
+
             drawing.DrawRate = DrawRate;
         }
 
@@ -123,6 +129,7 @@ namespace Soleil
             // TODO: Add your update logic here
             //Audio.Update();
 
+            sm.Update();
             frame++;
 
             base.Update(gameTime);

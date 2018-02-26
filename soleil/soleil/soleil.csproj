@@ -75,6 +75,7 @@
     <Compile Include="Resources.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\TestScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
