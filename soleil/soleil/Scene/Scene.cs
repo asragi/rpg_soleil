@@ -20,7 +20,7 @@ namespace Soleil
 
         virtual public void Update()
         {
-
+            if (!active) return;
         } 
 
         virtual public void Draw(SpriteBatch sb)

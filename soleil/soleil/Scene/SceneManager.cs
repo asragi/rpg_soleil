@@ -24,7 +24,7 @@ namespace Soleil
         public void Update()
         {
             scenes.RemoveAll(s => s.isDead());
-            scenes.FindAll(s => s.isActive());
+            //scenes.FindAll(s => s.isActive());
         }
 
         public void Draw(SpriteBatch sb)
