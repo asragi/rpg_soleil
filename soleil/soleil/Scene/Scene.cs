@@ -28,6 +28,17 @@ namespace Soleil
 
         }
 
+        public void Kill()
+        {
+            dead = true;
+        }
+
+        public void SetActive(bool _active)
+        {
+            active = _active;
+        }
+
+
         public bool isDead()
         {
             return dead;
