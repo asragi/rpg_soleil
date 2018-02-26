@@ -9,11 +9,9 @@ namespace Soleil
 {
     class TestMap : Map
     {
-        PlayerObject player;
         public TestMap()
             : base(MapName.test)
         {
-            player = new PlayerObject(om);
         }
 
         override public void Update()

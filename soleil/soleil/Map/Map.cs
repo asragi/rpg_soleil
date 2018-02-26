@@ -15,11 +15,14 @@ namespace Soleil
     {
         protected MapData data;
         protected ObjectManager om;
+        protected CollisionManager cm;
+        PlayerObject player;
 
         public Map(MapName _name)
         {
             data = new MapData(_name);
             om = new ObjectManager();
+            player = new PlayerObject(om);
         }
 
         virtual public void Update()

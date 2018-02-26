@@ -10,6 +10,7 @@ namespace Soleil
 {
     class PlayerObject : MapObject
     {
+        bool movable;
         // AnimationSet anim;
         public PlayerObject(ObjectManager om)
             : base(om)
@@ -24,7 +25,6 @@ namespace Soleil
 
         public override void Draw(Drawing sb)
         {
-            Console.WriteLine("iikanji");
             sb.Draw(pos,Resources.GetTexture(TextureID.White),DepthID.Item);
             base.Draw(sb);
         }
