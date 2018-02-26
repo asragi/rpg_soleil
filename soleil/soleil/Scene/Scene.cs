@@ -39,12 +39,12 @@ namespace Soleil
         }
 
 
-        public bool isDead()
+        public bool IsDead()
         {
             return dead;
         }
 
-        public bool isActive()
+        public bool IsActive()
         {
             return active;
         }

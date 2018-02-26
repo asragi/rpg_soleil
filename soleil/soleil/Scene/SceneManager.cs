@@ -23,7 +23,7 @@ namespace Soleil
 
         public void Update()
         {
-            scenes.RemoveAll(s => s.isDead());
+            scenes.RemoveAll(s => s.IsDead());
             //scenes.FindAll(s => s.isActive());
         }
 
