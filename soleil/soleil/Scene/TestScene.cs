@@ -9,21 +9,22 @@ namespace Soleil
 {
     class TestScene : Scene
     {
-        
+        TestMap testMap;
         public TestScene(SceneManager sm)
             : base(sm)
         {
-
+            testMap = new TestMap();
         }
 
         override public void Update()
         {
-            Console.WriteLine("おけぴー");
+            testMap.Update();
             base.Update();
         }
 
-        override public void Draw(SpriteBatch sb)
+        override public void Draw(Drawing sb)
         {
+            testMap.Draw(sb);
             base.Draw(sb);
         }
     }

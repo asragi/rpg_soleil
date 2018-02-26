@@ -145,7 +145,7 @@ namespace Soleil
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
-
+            sm.Draw(drawing);
             base.Draw(gameTime);
         }
     }

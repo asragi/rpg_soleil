@@ -23,7 +23,7 @@ namespace Soleil
             if (!active) return;
         } 
 
-        virtual public void Draw(SpriteBatch sb)
+        virtual public void Draw(Drawing sb)
         {
 
         }

@@ -9,6 +9,7 @@ namespace Soleil
 {
     abstract class MapObject
     {
+        protected Vector pos;
         protected bool dead;
         public MapObject(ObjectManager om)
         {
@@ -21,7 +22,7 @@ namespace Soleil
 
         }
 
-        virtual public void Draw(SpriteBatch sb)
+        virtual public void Draw(Drawing sb)
         {
             
         }

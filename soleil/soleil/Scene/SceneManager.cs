@@ -30,7 +30,7 @@ namespace Soleil
             //scenes.FindAll(s => s.isActive());
         }
 
-        public void Draw(SpriteBatch sb)
+        public void Draw(Drawing sb)
         {
             scenes.Last().Draw(sb); // いい感じにする
         }
