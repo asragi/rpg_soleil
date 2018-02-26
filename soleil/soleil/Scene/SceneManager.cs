@@ -10,10 +10,9 @@ namespace Soleil
     class SceneManager
     {
         List<Scene> scenes;
-        public SceneManager(Scene s)
+        public SceneManager()
         {
             scenes = new List<Scene>();
-            Add(s);
         }
 
         public void Add(Scene scene)
@@ -24,6 +23,10 @@ namespace Soleil
         public void Update()
         {
             scenes.RemoveAll(s => s.IsDead());
+            foreach (var s in scenes)
+            {
+                s.Update();
+            }
             //scenes.FindAll(s => s.isActive());
         }
 
