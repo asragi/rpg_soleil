@@ -66,6 +66,7 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\Maps\TestMap.cs" />
     <Compile Include="Map\ObjectManager.cs" />
+    <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

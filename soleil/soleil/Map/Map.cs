@@ -28,7 +28,7 @@ namespace Soleil
             om.Update();
         }
 
-        virtual public void Draw(SpriteBatch sb)
+        virtual public void Draw(Drawing sb)
         {
             data.Draw(sb);
             om.Draw(sb);

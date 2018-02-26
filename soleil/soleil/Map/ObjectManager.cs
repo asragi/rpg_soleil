@@ -30,7 +30,7 @@ namespace Soleil
             }
         }
 
-        public void Draw(SpriteBatch sb)
+        public void Draw(Drawing sb)
         {
             foreach (var item in objects)
             {
