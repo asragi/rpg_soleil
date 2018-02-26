@@ -64,6 +64,7 @@
     <Compile Include="Map\MapData.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
+    <Compile Include="Map\Maps\TestMap.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
@@ -97,9 +98,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="app.manifest" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Map\Maps\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

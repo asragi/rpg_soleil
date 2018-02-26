@@ -23,6 +23,7 @@ namespace Soleil
 
         public void Update()
         {
+            objects.RemoveAll(s => s.IsDead());
             foreach (var item in objects)
             {
                 item.Update();

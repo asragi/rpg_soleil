@@ -9,19 +9,26 @@ namespace Soleil
 {
     abstract class MapObject
     {
+        protected bool dead;
         public MapObject(ObjectManager om)
         {
-            
+            dead = false;
+            om.Add(this);
         }
 
-        public void Update()
+        virtual public void Update()
         {
 
         }
 
-        public void Draw(SpriteBatch sb)
+        virtual public void Draw(SpriteBatch sb)
         {
             
+        }
+
+        public bool IsDead()
+        {
+            return dead;
         }
     }
 }
