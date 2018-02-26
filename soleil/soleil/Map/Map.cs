@@ -11,7 +11,7 @@ namespace Soleil
     {
         test,
     }
-    class Map
+    abstract class Map
     {
         protected MapData data;
         protected ObjectManager om;
@@ -19,15 +19,16 @@ namespace Soleil
         public Map(MapName _name)
         {
             data = new MapData(_name);
+            om = new ObjectManager();
         }
 
-        public void Update()
+        virtual public void Update()
         {
             data.Update();
             om.Update();
         }
 
-        public void Draw(SpriteBatch sb)
+        virtual public void Draw(SpriteBatch sb)
         {
             data.Draw(sb);
             om.Draw(sb);

@@ -7,22 +7,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Soleil
 {
-    class TestScene : Scene
+    class TestMap : Map
     {
-        
-        public TestScene(SceneManager sm)
-            : base(sm)
+        public TestMap()
+            : base(MapName.test)
         {
 
         }
 
         override public void Update()
         {
-            Console.WriteLine("おけぴー");
-            base.Update();
+
         }
 
-        override public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             base.Draw(sb);
         }
