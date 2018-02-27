@@ -15,7 +15,7 @@ namespace Soleil
     {
         protected MapData data;
         protected ObjectManager om;
-        protected CollisionManager cm;
+        protected CollideBox cm;
         PlayerObject player;
 
         public Map(MapName _name)
@@ -23,6 +23,7 @@ namespace Soleil
             data = new MapData(_name);
             om = new ObjectManager();
             player = new PlayerObject(om);
+            CollideBox.Init(player, data);
         }
 
         virtual public void Update()

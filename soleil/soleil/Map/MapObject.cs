@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Soleil
     {
         protected Vector pos;
         protected bool dead;
+        protected int frame;
         public MapObject(ObjectManager om)
         {
             dead = false;
@@ -19,12 +21,17 @@ namespace Soleil
 
         virtual public void Update()
         {
-
+            frame++;
         }
 
         virtual public void Draw(Drawing sb)
         {
             
+        }
+
+        public Vector GetPosition()
+        {
+            return pos;
         }
 
         public bool IsDead()

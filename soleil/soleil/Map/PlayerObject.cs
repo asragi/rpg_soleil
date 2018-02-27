@@ -10,12 +10,11 @@ namespace Soleil
 {
     class PlayerObject : MapObject
     {
-        bool movable;
+        bool movable, visible;
         // AnimationSet anim;
         public PlayerObject(ObjectManager om)
             : base(om)
         {
-
         }
 
         public override void Update()
