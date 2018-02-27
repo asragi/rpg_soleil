@@ -12,6 +12,7 @@ namespace Soleil
         public TestMap()
             : base(MapName.test)
         {
+
         }
 
         override public void Update()

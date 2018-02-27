@@ -15,6 +15,7 @@ namespace Soleil
         public PlayerObject(ObjectManager om)
             : base(om)
         {
+
         }
 
         public override void Update()

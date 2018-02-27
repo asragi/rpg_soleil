@@ -13,6 +13,7 @@ namespace Soleil
         protected Vector pos;
         protected bool dead;
         protected int frame;
+
         public MapObject(ObjectManager om)
         {
             dead = false;
