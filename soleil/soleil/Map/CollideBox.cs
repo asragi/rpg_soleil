@@ -30,11 +30,13 @@ namespace Soleil
         Vector size;
         Vector localPos;
         Vector parentPos;
+        MapObject parent;
         CollideLayer layer;
 
         /// <param name="_localPos">相対的な矩形中心位置</param>
-        public CollideBox(MapObject parent, Vector _localPos, Vector _size, CollideLayer _layer)
+        public CollideBox(MapObject _parent, Vector _localPos, Vector _size, CollideLayer _layer)
         {
+            parent = _parent;
             parentPos = parent.GetPosition();
             localPos = _localPos;
             size = _size;
@@ -56,5 +58,22 @@ namespace Soleil
         {
 
         }
+
+        void CollideEnter()
+        {
+            parent.OnCollisionEnter();
+        }
+
+        void CollideStay()
+        {
+            parent.OnCollisionStay();
+        }
+
+        void CollideExit()
+        {
+            parent.OnCollisionExit();
+        }
+
+
     }
 }

@@ -39,5 +39,20 @@ namespace Soleil
         {
             return dead;
         }
+
+        virtual public void OnCollisionEnter()
+        {
+
+        }
+
+        virtual public void OnCollisionStay()
+        {
+
+        }
+
+        virtual public void OnCollisionExit()
+        {
+
+        }
     }
 }
