@@ -26,6 +26,7 @@ namespace Soleil
         static List<CollideBox> boxList;
         static MapData mapData;
         static PlayerObject player;
+        static bool visible = true;
 
         Vector size;
         Vector localPos;
@@ -54,7 +55,12 @@ namespace Soleil
             player = _player;
         }
 
-        public void CheckCollide()
+        static public void Update()
+        {
+            CheckCollide();
+        }
+
+        static void CheckCollide()
         {
 
         }
@@ -74,6 +80,16 @@ namespace Soleil
             parent.OnCollisionExit();
         }
 
+        Vector WorldPos() => parent.GetPosition() + localPos; // あまりよくない
+
+        static public void Draw(Drawing d)
+        {
+            if (!visible) return;
+            foreach (var item in boxList)
+            {
+                d.DrawBox(item.WorldPos(), item.size, Microsoft.Xna.Framework.Color.Red, DepthID.Debug);
+            }
+        }
 
     }
 }

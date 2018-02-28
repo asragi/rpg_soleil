@@ -28,12 +28,14 @@ namespace Soleil
 
         virtual public void Update()
         {
+            CollideBox.Update();
             data.Update();
             om.Update();
         }
 
         virtual public void Draw(Drawing sb)
         {
+            CollideBox.Draw(sb);
             data.Draw(sb);
             om.Draw(sb);
         }
