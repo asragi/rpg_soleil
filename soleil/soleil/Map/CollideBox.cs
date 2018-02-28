@@ -62,7 +62,34 @@ namespace Soleil
 
         static void CheckCollide()
         {
-
+            for (int i = 0; i < boxList.Count; i++)
+            {
+                for (int j = i+1; j < boxList.Count; j++)
+                {
+                    Vector[] boxj = new Vector[]
+                    {
+                        // box[j]の4頂点の位置を取る
+                        new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
+                        new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
+                        new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
+                        new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
+                    };
+                    bool col = false;
+                    for (int c = 0; c < 4; c++)
+                    {
+                        col = ((boxList[i].WorldPos().X - boxList[i].size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].size.X / 2))
+                            && ((boxList[i].WorldPos().Y - boxList[i].size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().X + boxList[i].size.X / 2));
+                        if (col)
+                        {
+                            Console.WriteLine("hit");
+                            // 双方のboxに衝突相手の情報を渡す
+                            // boxList[j].Collide(boxList[i]);
+                            // boxList[i].Collide(boxList[j]);
+                            break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
+                        }
+                    }
+                }
+            }
         }
 
         void CollideEnter()

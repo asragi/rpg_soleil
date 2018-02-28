@@ -27,7 +27,7 @@ namespace Soleil
 
         virtual public void Draw(Drawing sb)
         {
-            
+
         }
 
         public Vector GetPosition()
