@@ -78,7 +78,7 @@ namespace Soleil
                     for (int c = 0; c < 4; c++)
                     {
                         col = ((boxList[i].WorldPos().X - boxList[i].size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].size.X / 2))
-                            && ((boxList[i].WorldPos().Y - boxList[i].size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().X + boxList[i].size.X / 2));
+                            && ((boxList[i].WorldPos().Y - boxList[i].size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].size.Y / 2));
                         if (col)
                         {
                             Console.WriteLine("hit");
