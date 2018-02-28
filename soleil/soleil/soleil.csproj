@@ -53,6 +53,7 @@
     <Compile Include="Function\ColorChanger.cs" />
     <Compile Include="Function\CSVIO.cs" />
     <Compile Include="Function\CutIn.cs" />
+    <Compile Include="Function\Easing.cs" />
     <Compile Include="Function\Effect.cs" />
     <Compile Include="Function\Global.cs" />
     <Compile Include="Function\MathEx.cs" />
