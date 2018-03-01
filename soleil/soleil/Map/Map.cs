@@ -11,24 +11,31 @@ namespace Soleil
     {
         test,
     }
-    class Map
+    abstract class Map
     {
         protected MapData data;
         protected ObjectManager om;
+        protected CollideBox cm;
+        PlayerObject player;
 
         public Map(MapName _name)
         {
             data = new MapData(_name);
+            om = new ObjectManager();
+            player = new PlayerObject(om);
+            CollideBox.Init(player, data);
         }
 
-        public void Update()
+        virtual public void Update()
         {
+            CollideBox.Update();
             data.Update();
             om.Update();
         }
 
-        public void Draw(SpriteBatch sb)
+        virtual public void Draw(Drawing sb)
         {
+            CollideBox.Draw(sb);
             data.Draw(sb);
             om.Draw(sb);
         }

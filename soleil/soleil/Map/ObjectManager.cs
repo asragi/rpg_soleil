@@ -23,13 +23,14 @@ namespace Soleil
 
         public void Update()
         {
+            objects.RemoveAll(s => s.IsDead());
             foreach (var item in objects)
             {
                 item.Update();
             }
         }
 
-        public void Draw(SpriteBatch sb)
+        public void Draw(Drawing sb)
         {
             foreach (var item in objects)
             {
