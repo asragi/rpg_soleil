@@ -13,30 +13,26 @@ namespace Soleil
     }
     abstract class Map
     {
-        protected MapData data;
         protected ObjectManager om;
-        protected CollideBox cm;
+        protected BoxManager bm;
         PlayerObject player;
 
         public Map(MapName _name)
         {
-            data = new MapData(_name);
             om = new ObjectManager();
-            player = new PlayerObject(om);
-            CollideBox.Init(player, data);
+            bm = new BoxManager(new MapData(_name), player);
+            player = new PlayerObject(om, bm);
         }
 
         virtual public void Update()
         {
-            CollideBox.Update();
-            data.Update();
             om.Update();
+            bm.Update();
         }
 
         virtual public void Draw(Drawing sb)
         {
-            CollideBox.Draw(sb);
-            data.Draw(sb);
+            bm.Draw(sb);
             om.Draw(sb);
         }
     }

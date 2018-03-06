@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Soleil
+{
+    /// <summary>
+    /// 衝突判定用Boxの管理・判定計算を行う
+    /// </summary>
+    class BoxManager
+    {
+        List<CollideBox> boxList;
+        bool visible = true; // for debug
+        MapData mapData;
+        PlayerObject player;
+
+        public BoxManager(MapData data, PlayerObject pl)
+        {
+            boxList = new List<CollideBox>();
+            mapData = data;
+            player = pl;
+        }
+
+        public void Add(CollideBox box)
+        {
+            boxList.Add(box);
+        }
+
+        public void Update()
+        {
+            CheckCollide();
+        }
+
+        void CheckCollide()
+        {
+            for (int i = 0; i < boxList.Count; i++)
+            {
+                for (int j = i + 1; j < boxList.Count; j++)
+                {
+                    CalcCollide(i, j);
+                }
+            }
+        }
+
+        private void CalcCollide(int i, int j)
+        {
+            Vector[] boxj = new Vector[]
+            {
+                // box[j]の4頂点の位置を取る
+                new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
+                new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
+                new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
+                new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
+            };
+            bool col = false;
+            for (int c = 0; c < 4; c++)
+            {
+                col = ((boxList[i].WorldPos().X - boxList[i].size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].size.X / 2))
+                    && ((boxList[i].WorldPos().Y - boxList[i].size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].size.Y / 2));
+                if (col)
+                {
+                    Console.WriteLine("hit");
+                    // 双方のboxに衝突相手の情報を渡す
+                    // boxList[j].Collide(boxList[i]);
+                    // boxList[i].Collide(boxList[j]);
+                    break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
+                }
+            }
+        }
+
+        public void Draw(Drawing d)
+        {
+            if (!!!visible) return;
+            foreach (var item in boxList)
+            {
+                d.DrawBox(item.WorldPos(), item.size, Microsoft.Xna.Framework.Color.Red, DepthID.Debug);
+            }
+        }
+    }
+}
