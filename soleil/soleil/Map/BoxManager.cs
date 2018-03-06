@@ -12,12 +12,14 @@ namespace Soleil
     class BoxManager
     {
         List<CollideBox> boxList;
+        int indexNum;
         bool visible = true; // for debug
         MapData mapData;
         PlayerObject player;
 
         public BoxManager(MapData data, PlayerObject pl)
         {
+            indexNum = 0;
             boxList = new List<CollideBox>();
             mapData = data;
             player = pl;
@@ -25,11 +27,15 @@ namespace Soleil
 
         public void Add(CollideBox box)
         {
+            boxList.ForEach(b => b.ExtendBoolTable());
+            box.ID = indexNum++;
+            box.SetBoolTable(indexNum);
             boxList.Add(box);
         }
 
         public void Update()
         {
+            boxList.ForEach(b => b.Update());
             CheckCollide();
         }
 
@@ -49,33 +55,29 @@ namespace Soleil
             Vector[] boxj = new Vector[]
             {
                 // box[j]の4頂点の位置を取る
-                new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
-                new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
-                new Vector(boxList[j].WorldPos().X-boxList[j].size.X/2,boxList[j].WorldPos().Y+boxList[j].size.Y/2),
-                new Vector(boxList[j].WorldPos().X+boxList[j].size.X/2,boxList[j].WorldPos().Y-boxList[j].size.Y/2),
+                new Vector(boxList[j].WorldPos().X-boxList[j].Size.X/2,boxList[j].WorldPos().Y-boxList[j].Size.Y/2),
+                new Vector(boxList[j].WorldPos().X+boxList[j].Size.X/2,boxList[j].WorldPos().Y+boxList[j].Size.Y/2),
+                new Vector(boxList[j].WorldPos().X-boxList[j].Size.X/2,boxList[j].WorldPos().Y+boxList[j].Size.Y/2),
+                new Vector(boxList[j].WorldPos().X+boxList[j].Size.X/2,boxList[j].WorldPos().Y-boxList[j].Size.Y/2),
             };
             bool col = false;
             for (int c = 0; c < 4; c++)
             {
-                col = ((boxList[i].WorldPos().X - boxList[i].size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].size.X / 2))
-                    && ((boxList[i].WorldPos().Y - boxList[i].size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].size.Y / 2));
-                if (col)
-                {
-                    Console.WriteLine("hit");
-                    // 双方のboxに衝突相手の情報を渡す
-                    // boxList[j].Collide(boxList[i]);
-                    // boxList[i].Collide(boxList[j]);
-                    break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
-                }
+                col = ((boxList[i].WorldPos().X - boxList[i].Size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].Size.X / 2))
+                    && ((boxList[i].WorldPos().Y - boxList[i].Size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].Size.Y / 2));
+                if (col) break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
             }
+            // 双方のboxに衝突相手の情報を渡す
+            boxList[j].Collide(boxList[i],col);
+            boxList[i].Collide(boxList[j],col);
         }
 
         public void Draw(Drawing d)
         {
-            if (!!!visible) return;
+            if (!visible) return;
             foreach (var item in boxList)
             {
-                d.DrawBox(item.WorldPos(), item.size, Microsoft.Xna.Framework.Color.Red, DepthID.Debug);
+                d.DrawBox(item.WorldPos(), item.Size, Microsoft.Xna.Framework.Color.Red, DepthID.Debug);
             }
         }
     }
