@@ -31,10 +31,19 @@ namespace Soleil
 
         public void Update()
         {
+
             for (int i = 0; i < preCollide.Count; i++)
             {
-                preCollide[i] = nowCollide[i];
+                CollideStateCheck(i);
             }
+        }
+
+        private void CollideStateCheck(int i)
+        {
+            if (!preCollide[i] & nowCollide[i]) CollideEnter();
+            if (preCollide[i] & nowCollide[i]) CollideStay();
+            if (preCollide[i] & !nowCollide[i]) CollideExit();
+            preCollide[i] = nowCollide[i];
         }
 
         /// <summary>
@@ -63,7 +72,6 @@ namespace Soleil
         public void Collide(CollideBox target, bool col)
         {
             nowCollide[target.ID] = col;
-            if(col) System.Console.WriteLine("Hit" + target.ID);
         }
 
         void CollideEnter()

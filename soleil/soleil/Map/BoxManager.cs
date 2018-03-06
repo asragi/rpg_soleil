@@ -35,8 +35,8 @@ namespace Soleil
 
         public void Update()
         {
-            boxList.ForEach(b => b.Update());
             CheckCollide();
+            boxList.ForEach(b => b.Update());
         }
 
         void CheckCollide()
