@@ -9,11 +9,11 @@ namespace Soleil
     class TestObject :MapObject
     {
         CollideBox exi;
-        public TestObject(ObjectManager om)
+        public TestObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
             pos = new Vector(500, 300);
-            exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character);
+            exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character, bm);
         }
     }
 }

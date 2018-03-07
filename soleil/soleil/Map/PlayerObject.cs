@@ -13,11 +13,11 @@ namespace Soleil
         bool movable, visible;
         CollideBox existanceBox;
         // AnimationSet anim;
-        public PlayerObject(ObjectManager om)
+        public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
             pos = new Vector(200, 200);
-            existanceBox = new CollideBox(this, Vector.Zero, new Soleil.Vector(30, 30), CollideLayer.Player);
+            existanceBox = new CollideBox(this, Vector.Zero, new Soleil.Vector(30, 30), CollideLayer.Player,bm);
         }
 
         public override void Update()
