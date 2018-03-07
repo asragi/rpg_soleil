@@ -52,6 +52,19 @@ namespace Soleil
 
         private void CalcCollide(int i, int j)
         {
+            double xi = boxList[i].WorldPos().X, 
+                yi = boxList[i].WorldPos().Y, 
+                wi = boxList[i].Size.X, 
+                hi = boxList[i].Size.Y;
+            double xj = boxList[j].WorldPos().X, 
+                yj = boxList[j].WorldPos().Y,
+                wj = boxList[j].Size.X,
+                hj = boxList[j].Size.Y;
+
+            bool col = xi + wi/2 > xj - wj/2 && xi - wi/2 < xj + wj/2 &&
+                yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
+
+            /*
             Vector[] boxj = new Vector[]
             {
                 // box[j]の4頂点の位置を取る
@@ -60,13 +73,13 @@ namespace Soleil
                 new Vector(boxList[j].WorldPos().X-boxList[j].Size.X/2,boxList[j].WorldPos().Y+boxList[j].Size.Y/2),
                 new Vector(boxList[j].WorldPos().X+boxList[j].Size.X/2,boxList[j].WorldPos().Y-boxList[j].Size.Y/2),
             };
-            bool col = false;
             for (int c = 0; c < 4; c++)
             {
                 col = ((boxList[i].WorldPos().X - boxList[i].Size.X / 2 < boxj[c].X) && (boxj[c].X < boxList[i].WorldPos().X + boxList[i].Size.X / 2))
                     && ((boxList[i].WorldPos().Y - boxList[i].Size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].Size.Y / 2));
                 if (col) break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
-            }
+            }*/
+
             // 双方のboxに衝突相手の情報を渡す
             boxList[j].Collide(boxList[i],col);
             boxList[i].Collide(boxList[j],col);
