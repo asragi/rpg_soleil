@@ -53,6 +53,7 @@ namespace Soleil
 
         public int NextTurn(int t)
         {
+            //Todo:Deque
             return (WP + 10000 * t + SPD - 1) / SPD;
         }
 
