@@ -14,6 +14,7 @@ namespace Soleil
             : base(sm)
         {
             testMap = new TestMap();
+            new Window(new Vector(100, 100), new Vector(300, 200), wm);
         }
 
         override public void Update()

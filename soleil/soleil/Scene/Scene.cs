@@ -9,10 +9,11 @@ namespace Soleil
 {
     abstract class Scene
     {
-
+        protected WindowManager wm;
         bool active,dead;
         public Scene(SceneManager sm)
         {
+            wm = new WindowManager();
             active = true;
             dead = false;
             sm.Add(this);
@@ -21,11 +22,12 @@ namespace Soleil
         virtual public void Update()
         {
             if (!active) return;
-        } 
+            wm.Update();
+        }
 
         virtual public void Draw(Drawing sb)
         {
-
+            wm.Draw(sb);
         }
 
         public void Kill()

@@ -83,6 +83,8 @@
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Window\Window.cs" />
+    <Compile Include="Window\WindowManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
