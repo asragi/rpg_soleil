@@ -90,7 +90,7 @@ namespace Soleil
         public static Vector operator -(Vector v1) => v1 * (-1);
         //implicitとexplicitは本来は意味的に逆にすべきだが楽をするための手抜き
         //（Vector→Vector2は情報が落ちるが、Vector2→Vectorは情報が落ちない）
-        public static implicit operator Vector2(Vector v) => new Vector2((int)(v.X/* + 0.5*/), (int)(v.Y/* + 0.5*/));
+        public static implicit operator Vector2(Vector v) => new Vector2((float)(v.X/* + 0.5*/), (float)(v.Y/* + 0.5*/));
         public static explicit operator Vector(Vector2 v) => new Vector(v.X, v.Y);
         public override bool Equals(object obj)
         {
