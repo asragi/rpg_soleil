@@ -43,7 +43,6 @@ namespace Soleil
         {
             if (messageArray == null) return;
             if (charIndex >= messageArray.Length) return;
-            Console.WriteLine(messageArray.Length+":"+charIndex);
             messageToDraw += messageArray[charIndex];
             charIndex++;
         }

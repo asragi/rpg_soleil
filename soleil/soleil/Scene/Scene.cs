@@ -13,7 +13,7 @@ namespace Soleil
         bool active,dead;
         public Scene(SceneManager sm)
         {
-            wm = new WindowManager();
+            wm = WindowManager.GetInstance();
             active = true;
             dead = false;
             sm.Add(this);

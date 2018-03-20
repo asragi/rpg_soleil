@@ -32,6 +32,7 @@ namespace Soleil
         Vector size;
         public bool active { get; set; }
         public bool visible { get; set; }
+        public bool Dead { get; protected set; }
         protected int frame;
 
         public Window(Vector _pos, Vector _size, WindowManager wm)
@@ -68,6 +69,11 @@ namespace Soleil
         {
             if (!visible) return true;
             return true;
+        }
+
+        public void Destroy()
+        {
+            Dead = true;
         }
 
         public void Draw(Drawing d)

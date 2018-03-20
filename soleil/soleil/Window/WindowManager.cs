@@ -11,11 +11,14 @@ namespace Soleil
     /// </summary>
     class WindowManager
     {
+        private static WindowManager windowManager = new WindowManager(); 
         List<Window> windows;
-        public WindowManager()
+        private WindowManager()
         {
             windows = new List<Window>();
         }
+
+        public static WindowManager GetInstance() => windowManager;
 
         public void Add(Window w)
         {
@@ -24,6 +27,7 @@ namespace Soleil
 
         public void Update()
         {
+            windows.RemoveAll(s => s.Dead);
             windows.ForEach(s => s.Update());
         }
 
