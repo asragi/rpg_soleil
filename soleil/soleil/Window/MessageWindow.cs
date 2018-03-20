@@ -12,14 +12,16 @@ namespace Soleil
         String message;
         char[] messageArray;
         String messageToDraw;
-        int drawCharPeriod = 8; // nフレームごとに文字更新
+        int drawCharPeriod = 5; // nフレームごとに文字更新
         int charIndex;
+        Vector textPos;
 
         public MessageWindow(Vector _pos, Vector _size, WindowManager wm)
             : base(_pos,_size,wm)
         {
             messageToDraw = "";
             charIndex = 0;
+            textPos = pos + new Vector(Spacing, Spacing);
         }
 
         public void SetMessage(String msg)
@@ -48,7 +50,7 @@ namespace Soleil
 
         public override void DrawContent(Drawing d)
         {
-            d.DrawText(pos, Resources.GetFont(FontID.Test), messageToDraw, Microsoft.Xna.Framework.Color.White, DepthID.Frame);
+            d.DrawStaticText(textPos, Resources.GetFont(FontID.Test), messageToDraw, Microsoft.Xna.Framework.Color.White, DepthID.Frame,Vector.One,0,false);
             base.DrawContent(d);
         }
     }
