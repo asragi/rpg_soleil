@@ -9,11 +9,14 @@ namespace Soleil
 {
     class SceneManager
     {
+        private static SceneManager sceneManager = new SceneManager();
         List<Scene> scenes;
-        public SceneManager()
+        private SceneManager()
         {
             scenes = new List<Scene>();
         }
+
+        public static SceneManager GetInstance() => sceneManager;
 
         public void Add(Scene scene)
         {
