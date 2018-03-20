@@ -158,7 +158,7 @@ namespace Soleil
             #endregion
 
             
-            SetPath(FontID.Test, "Aerial");
+            SetPath(FontID.Test, "kkmincho");
             
             //optionPath = Option.FilePath;
             #endregion 
