@@ -20,5 +20,15 @@ namespace Soleil
             Status = new CharacterStatus(aScore, 10000);
             turns = new List<Turn>();
         }
+
+        //kari
+        Reference<int> SPD;
+        public Turn NextTurn()
+        {
+            SPD.Val = Status.SPD;
+            var turn = new Turn(Status.NextWaitPoint(), SPD);
+            turns.Add(turn);
+            return turn;
+        }
     }
 }

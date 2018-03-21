@@ -8,7 +8,7 @@ namespace Soleil
 {
     class TurnQueue
     {
-        const int Length = 7;
+        public const int Length = 7;
         List<Turn> queue;
         public TurnQueue()
         {
@@ -45,24 +45,24 @@ namespace Soleil
             queue.AddRange(turns);
             Update();
         }
+
+        public bool IsFulfilled() => Length <= queue.Count;
     }
     class Turn
     {
-        public int Index;
+        public int Index = -1;
         public Side Side;
         public int WaitPoint;
-        public int SPD;
+        public Reference<int> SPD;
         
         /// <summary>
         /// WaitPointが0以下になるのにかかる時間
         /// </summary>
         public float TurnTime
         {
-            get { return WaitPoint / SPD; }
+            get { return WaitPoint / SPD.Val; }
         }
 
-        public Turn()
-        {
-        }
+        public Turn(int _WaitPoint, Reference<int> _SPD) => (WaitPoint, SPD) = (_WaitPoint, _SPD);
     }
 }

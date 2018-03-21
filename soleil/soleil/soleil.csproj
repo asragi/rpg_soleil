@@ -59,6 +59,7 @@
     <Compile Include="Function\Easing.cs" />
     <Compile Include="Function\Effect.cs" />
     <Compile Include="Function\Global.cs" />
+    <Compile Include="Function\IEnumeratorEx.cs" />
     <Compile Include="Function\MathEx.cs" />
     <Compile Include="Function\Reference.cs" />
     <Compile Include="Function\TryParser.cs" />

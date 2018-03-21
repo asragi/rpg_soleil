@@ -57,16 +57,23 @@ namespace Soleil
             return WP + 10000 * (turn++);
         }
 
+        /// <summary>
+        /// float->int への丸め
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
         static int Fraction(float x)
         {
             return (int)x;
         }
+
 
         public CharacterStatus()
         {
             HP = 0;
             MP = 0;
         }
+
         public CharacterStatus(AbilityScore aScore, int _WP)
         {
             abilityScore = aScore;
