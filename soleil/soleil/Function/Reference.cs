@@ -12,9 +12,8 @@ namespace Soleil
     /// <typeparam name="T"></typeparam>
     class Reference<T>
     {
-        T value;
+        public T Val { get; set; }
         public Reference() { }
-        public Reference(T _value) => value = _value;
-        public T Get() => value;
+        public Reference(T val) => Val = val;
     }
 }
