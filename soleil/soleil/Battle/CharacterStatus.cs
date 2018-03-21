@@ -49,12 +49,12 @@ namespace Soleil
         float MAGrate = 1.0f;
         float SPDrate = 1.0f;
 
-        public int WP = 0;
+        public int WP = 10000;
 
-        public int NextTurn(int t)
+        int turn = 0;
+        public int NextWaitPoint()
         {
-            //Todo:Deque
-            return (WP + 10000 * t + SPD - 1) / SPD;
+            return WP + 10000 * (turn++);
         }
 
         static int Fraction(float x)

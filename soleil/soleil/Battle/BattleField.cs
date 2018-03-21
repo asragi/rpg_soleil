@@ -14,29 +14,34 @@ namespace Soleil
     }
     class BattleField
     {
-        List<CharacterStatus> charas;
+        List<Character> charas;
         List<int>[] campIndex;
         List<Side> sides;
         MagicField magicField;
+        TurnQueue turnQueue;
         public BattleField()
         {
             campIndex = new List<int>[(int)Side.Size];
             for (int i = 0; i < 2; i++)
                 campIndex[i] = new List<int>();
 
-            charas.Add(new CharacterStatus());
+            charas.Add(new Character(this));
             sides.Add(Side.Right);
-            charas.Add(new CharacterStatus());
+            charas.Add(new Character(this));
             sides.Add(Side.Right);
-            charas.Add(new CharacterStatus());
+            charas.Add(new Character(this));
             sides.Add(Side.Left);
-            charas.Add(new CharacterStatus());
+            charas.Add(new Character(this));
             sides.Add(Side.Left);
-            charas.Add(new CharacterStatus());
+            charas.Add(new Character(this));
             sides.Add(Side.Left);
 
             magicField = new SimpleMagicField();
+            turnQueue = new TurnQueue();
         }
+
+        public void AddTurn(Turn turn) => turnQueue.Push(turn);
+        public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
 
         bool select = false;
         enum Command

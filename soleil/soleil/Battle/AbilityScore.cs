@@ -29,5 +29,15 @@
         /// [1,99]
         /// </summary>
         public int SPD;
+
+        public AbilityScore(int _HPMAX, int _MPMAX, int _STR, int _VIT, int _MAG, int _SPD)
+        {
+            HPMAX = _HPMAX;
+            MPMAX = _MPMAX;
+            STR = _STR;
+            VIT = _VIT;
+            MAG = _MAG;
+            SPD = _SPD;
+        }
     }
 }

@@ -18,8 +18,8 @@ namespace Soleil
         public void Update()
         {
             queue.Sort((x,y)=> {
-                if (x.TurnCount > y.TurnCount) return 1;
-                else if (x.TurnCount < y.TurnCount) return -1;
+                if (x.TurnTime > y.TurnTime) return 1;
+                else if (x.TurnTime < y.TurnTime) return -1;
                 else return 0;
             });
             for (int i = 0; i < queue.Count; i++)
@@ -50,11 +50,19 @@ namespace Soleil
     {
         public int Index;
         public Side Side;
-        public int TurnCount;
-        public Turn(int index_, Side side_)
+        public int WaitPoint;
+        public int SPD;
+        
+        /// <summary>
+        /// WaitPointが0以下になるのにかかる時間
+        /// </summary>
+        public float TurnTime
         {
-            Index = index_;
-            Side = side_;
+            get { return WaitPoint / SPD; }
+        }
+
+        public Turn()
+        {
         }
     }
 }
