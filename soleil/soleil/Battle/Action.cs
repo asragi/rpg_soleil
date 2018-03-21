@@ -34,7 +34,7 @@ namespace Soleil
             target = target_;
         }
 
-        public abstract List<Occurence> Act(BattleField battle, CharacterStatus offence, List<CharacterStatus> deffences);
+        public abstract List<Occurence> Act(BattleField battle);
     }
 
     abstract class Attack : Action
@@ -44,20 +44,29 @@ namespace Soleil
         {
             attack = attack_;
         }
+        
     }
 
     class AttackForOne : Attack
     {
+        int offenceIndex, defenseIndex;
         public AttackForOne(AttackFunc attack_) : base(attack_, TargetCoverage.OneEnemy)
         {
 
         }
 
-        public override List<Occurence> Act(BattleField battle, CharacterStatus offence, List<CharacterStatus> deffences)
+        public AttackForOne GenerateAttack(int offenceIndex, int defenseIndex)
+        {
+            var tmp = (AttackForOne)MemberwiseClone();
+            tmp.offenceIndex = offenceIndex;
+            tmp.defenseIndex = defenseIndex;
+            return tmp;
+        }
+
+        public override List<Occurence> Act(BattleField battle)
         {
             List<Occurence> ocr = new List<Occurence>();
-            if (deffences.Count < 1) return ocr;
-            float damage = attack(offence, deffences[0]);
+            float damage = attack(battle.GetCharacter(offenceIndex).Status, battle.GetCharacter(defenseIndex).Status);
             ocr.Add(new Occurence("nankano damage"));
             return ocr;
         }

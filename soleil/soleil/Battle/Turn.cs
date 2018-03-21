@@ -27,11 +27,14 @@ namespace Soleil
                 queue[i].Index = i;
             }
         }
+        public Turn Top() => queue[0];
 
-        public void Pop()
+        public Turn Pop()
         {
+            var top = queue[0];
             queue.RemoveAt(0);
             Update();
+            return top;
         }
 
         public void Push(Turn turn)
@@ -54,6 +57,7 @@ namespace Soleil
         public Side Side;
         public int WaitPoint;
         public Reference<int> SPD;
+        public int CharaIndex;
         
         /// <summary>
         /// WaitPointが0以下になるのにかかる時間
@@ -63,6 +67,12 @@ namespace Soleil
             get { return WaitPoint / SPD.Val; }
         }
 
-        public Turn(int _WaitPoint, Reference<int> _SPD) => (WaitPoint, SPD) = (_WaitPoint, _SPD);
+        public Turn(int _WaitPoint, Reference<int> _SPD, int _CharaIndex) => (WaitPoint, SPD, CharaIndex) = (_WaitPoint, _SPD, _CharaIndex);
+    }
+
+    class ActionTurn : Turn
+    {
+        public Action action;
+        public ActionTurn(int _WaitPoint, Reference<int> _SPD, int _CharaIndex, Action _action) : base(_WaitPoint, _SPD, _CharaIndex) => action = _action;
     }
 }

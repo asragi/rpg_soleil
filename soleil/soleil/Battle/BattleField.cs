@@ -15,7 +15,6 @@ namespace Soleil
     class BattleField
     {
         List<Character> charas;
-        List<int>[] campIndex;
         MagicField magicField;
         TurnQueue turnQueue;
 
@@ -26,15 +25,14 @@ namespace Soleil
 
         public BattleField()
         {
-            campIndex = new List<int>[(int)Side.Size];
-            for (int i = 0; i < 2; i++)
-                campIndex[i] = new List<int>();
-
-            charas.Add(new Character(this));
-            charas.Add(new Character(this));
-            charas.Add(new Character(this));
-            charas.Add(new Character(this));
-            charas.Add(new Character(this));
+            charas = new List<Character>
+            {
+                new Character(this, 0),
+                new Character(this, 1),
+                new Character(this, 2),
+                new Character(this, 3),
+                new Character(this, 4),
+            };
 
             magicField = new SimpleMagicField();
             turnQueue = new TurnQueue();
@@ -48,40 +46,40 @@ namespace Soleil
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
         public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
 
-        bool select = false;
-        enum Command
-        {
-            Attack,
-            Magic,
-            Item,
-            Escape,
-            Size,
-        }
-        Command selectCommand;
+        public Character GetCharacter(int index) => charas[index];
+
+        /// <summary>
+        /// 行動するCharacterのIndex
+        /// </summary>
+
+        bool turnUpdate = true;
+        Turn topTurn;
         public void Move()
         {
-
-            if(select)
+            if(turnUpdate)
             {
-                if (KeyInput.GetKeyPush(Key.Down))
-                {
-                    selectCommand++;
-                    if (selectCommand == Command.Size)
-                    {
-                        selectCommand = Command.Attack;
-                    }
-                }
-                if (KeyInput.GetKeyPush(Key.Up))
-                {
-                    if (selectCommand == Command.Attack)
-                    {
-                        selectCommand = Command.Size;
-                    }
-                    selectCommand--;
-                }
-                if (KeyInput.GetKeyPush(Key.A))
-                {
+                topTurn = turnQueue.Top();
+                turnUpdate = false;
+            }
 
+            //Turnが行動実行Turnのとき
+            if (topTurn is ActionTurn actTurn)
+            {
+                //行動を実行
+                actTurn.action.Act(this);
+                turnQueue.Pop();
+                EnqueueTurn();
+                turnUpdate = true;
+            }
+            //Turnが行動選択Turnのとき
+            else
+            {
+                var action = charas[topTurn.CharaIndex].SelectAction();
+                if(action != null)
+                {
+                    turnQueue.Pop();
+                    turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
+                    turnUpdate = true;
                 }
             }
         }

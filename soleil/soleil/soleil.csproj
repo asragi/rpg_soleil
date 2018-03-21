@@ -48,6 +48,7 @@
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
+    <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Function\Animation.cs" />

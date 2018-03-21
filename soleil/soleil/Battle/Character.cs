@@ -11,14 +11,24 @@ namespace Soleil
         public CharacterStatus Status;
         List<Turn> turns;
         BattleField bf;
-        public Character(BattleField bField)
+        CommandSelect commandSelect;
+
+        int charaIndex;
+        public Character(BattleField bField, int index)
         {
             bf = bField;
+            charaIndex = index;
 
             //てきとう
             var aScore = new AbilityScore(100, 100, 100, 100, 100, 100);
             Status = new CharacterStatus(aScore, 10000);
             turns = new List<Turn>();
+            commandSelect = new DefaultCharacterCommandSelect();
+        }
+
+        public Action SelectAction()
+        {
+            return commandSelect.GetAction();
         }
 
         //kari
@@ -26,7 +36,7 @@ namespace Soleil
         public Turn NextTurn()
         {
             SPD.Val = Status.SPD;
-            var turn = new Turn(Status.NextWaitPoint(), SPD);
+            var turn = new Turn(Status.NextWaitPoint(), SPD, charaIndex);
             turns.Add(turn);
             return turn;
         }
