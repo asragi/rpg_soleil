@@ -254,6 +254,20 @@ namespace Soleil
         }
 
         /// <summary>
+        /// 文字を描画(カメラに依存しない)
+        /// </summary>
+        /// <param name="pos">位置</param>
+        /// <param name="font">フォント</param>
+        /// <param name="text">表示する文字</param>
+        /// <param name="color">色</param>
+        /// <param name="size">文字の拡大ベクトル</param>
+        /// <param name="depth">文字の表示優先度（小さいほうが優先される）</param>
+        public void DrawStaticText(Vector2 pos, SpriteFont font, string text, Color color, Depth depth, Vector2 size, float angle = 0, bool center=true)
+        {
+            sb.DrawString(font, text, pos * DrawRate, color, angle, center ? font.MeasureString(text) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
+        }
+
+        /// <summary>
         /// 中が塗りつぶされた長方形を描画
         /// </summary>
         /// <param name="pos">位置</param>

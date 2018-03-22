@@ -13,7 +13,7 @@ namespace Soleil
 
     enum TextureID : int
     {
-
+        FrameTest,
         White, Size
     }
 
@@ -140,15 +140,15 @@ namespace Soleil
             #region Texture
 
             SetPath(TextureID.White, "white");
-            
+
 
             #endregion
 
-            #region AkaAnimation
-            
+            #region UI
+            SetPath(TextureID.FrameTest, UIPath + "window2");
 
             #endregion
-            
+
 
             SetPath(AnimationID.Arrow, "Arrow");
             SetSize(AnimationID.Arrow, 1, 9);
@@ -158,7 +158,7 @@ namespace Soleil
             #endregion
 
             
-            SetPath(FontID.Test, "Aerial");
+            SetPath(FontID.Test, "kkmincho");
             
             //optionPath = Option.FilePath;
             #endregion 
