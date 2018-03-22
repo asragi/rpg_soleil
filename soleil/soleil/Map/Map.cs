@@ -19,7 +19,7 @@ namespace Soleil
 
         public Map(MapName _name)
         {
-            om = new ObjectManager();
+            om = ObjectManager.GetInstance();
             bm = new BoxManager(new MapData(_name), player);
             player = new PlayerObject(om, bm);
         }

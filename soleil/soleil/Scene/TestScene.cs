@@ -13,7 +13,7 @@ namespace Soleil
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            testMap = new TestMap();
+            testMap = new TestMap(wm);
         }
 
         override public void Update()

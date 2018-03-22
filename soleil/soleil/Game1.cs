@@ -78,7 +78,7 @@ namespace Soleil
             drawing = new Drawing(spriteBatch, new Drawing3D(GraphicsDevice));
             
             // SceneManager
-            sm = new SceneManager();
+            sm = SceneManager.GetInstance();
             new TestScene(sm);
 
             drawing.DrawRate = DrawRate;

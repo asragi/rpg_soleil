@@ -10,10 +10,12 @@ namespace Soleil
     class TestMap : Map
     {
         TestObject testO;
-        public TestMap()
+        WindowManager wm;
+        public TestMap(WindowManager w)
             : base(MapName.test)
         {
-            testO = new TestObject(om,bm);
+            wm = w;
+            testO = new TestObject(om,bm,wm);
         }
 
         override public void Update()
