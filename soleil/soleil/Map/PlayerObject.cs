@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Soleil
 {
@@ -24,11 +25,11 @@ namespace Soleil
         {
             // for Debug
             int speed = 3;
-            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.X)) speed = 6;
-            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Up)) pos.Y += -speed;
-            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Down)) pos.Y += speed;
-            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Right)) pos.X += speed;
-            if (Microsoft.Xna.Framework.Input.Keyboard.GetState().IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left)) pos.X += -speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.X)) speed = 6;
+            if (Keyboard.GetState().IsKeyDown(Keys.Up)) pos.Y += -speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.Down)) pos.Y += speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.Right)) pos.X += speed;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left)) pos.X += -speed;
 
 
             base.Update();
