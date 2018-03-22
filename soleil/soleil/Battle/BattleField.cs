@@ -66,7 +66,10 @@ namespace Soleil
             if (topTurn is ActionTurn actTurn)
             {
                 //行動を実行
-                actTurn.action.Act(this);
+                var ocrs = actTurn.action.Act(this);
+                foreach(var ocr in ocrs)
+                    ExecOccurence(ocr);
+
                 turnQueue.Pop();
                 EnqueueTurn();
                 turnUpdate = true;
@@ -99,6 +102,18 @@ namespace Soleil
             var minIndex = lastTurn.FindMin(p => p.TurnTime).Index;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
+        }
+
+        void ExecOccurence(Occurence ocr)
+        {
+            switch (ocr)
+            {
+                case OccurenceForCharacter ocrc:
+                    charas[ocrc.CharaIndex].Damage(ocrc.HPDamage, ocrc.MPDamage);
+                    break;
+                case OccurenceForField ocrf:
+                    break;
+            }
         }
 
         public void Draw()

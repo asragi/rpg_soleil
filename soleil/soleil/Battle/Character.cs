@@ -31,6 +31,12 @@ namespace Soleil
             return commandSelect.GetAction();
         }
 
+        public void Damage(int HP, int MP)
+        {
+            Status.HP -= HP;
+            Status.MP -= MP;
+        }
+
         //kari
         Reference<int> SPD;
         public Turn NextTurn()
