@@ -14,6 +14,8 @@ namespace Soleil
     }
     class BattleField
     {
+        List<Side> sides;
+        List<int>[] indexes;
         List<Character> charas;
         MagicField magicField;
         TurnQueue turnQueue;
@@ -34,13 +36,24 @@ namespace Soleil
                 new TestEnemyCharacter(this, 4),
             };
 
+            sides = new List<Side>
+            {
+                Side.Right,
+                Side.Right,
+                Side.Left,
+                Side.Left,
+                Side.Left,
+            };
+            indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
+            indexes[(int)Side.Right] = new List<int> { 0, 1, };
+
             magicField = new SimpleMagicField();
             turnQueue = new TurnQueue();
 
             lastTurn = new List<Turn>();
             for (int i = 0; i < charas.Count; i++)
                 lastTurn.Add(charas[i].NextTurn());
-            while(!turnQueue.IsFulfilled())
+            while (!turnQueue.IsFulfilled())
                 EnqueueTurn();
         }
 
@@ -48,6 +61,20 @@ namespace Soleil
         public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
 
         public Character GetCharacter(int index) => charas[index];
+
+        public Side OppositeSide(Side side)
+        {
+            switch (side)
+            {
+                case Side.Right:
+                    return Side.Left;
+                case Side.Left:
+                    return Side.Right;
+                default:
+                    return Side.Size;
+            }
+        }
+        public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
 
         /// <summary>
         /// 行動するCharacterのIndex

@@ -34,6 +34,16 @@ namespace Soleil
             Status.MP -= MP;
         }
 
+        /// <summary>
+        /// デバフ攻撃を受ける
+        /// </summary>
+        public void Debuff()
+        {
+
+            //SPDを更新
+            SPD.Val = Status.SPD;
+        }
+
         //kari
         protected Reference<int> SPD;
         public Turn NextTurn()

@@ -8,19 +8,33 @@ namespace Soleil
 {
     abstract class CommandSelect
     {
+        public int CharaIndex = -1;
+        protected BattleField BF;
+        public CommandSelect(BattleField bf, int charaIndex) => (BF, CharaIndex) = (bf, charaIndex);
         public abstract Action GetAction();
     }
 
     class DefaultCharacterCommandSelect : CommandSelect
     {
+        public DefaultCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+        {
+        }
+
         public override Action GetAction()
         {
-            return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(0, 1);
+            var indexes = BF.OppositeIndexes(CharaIndex);
+            int target = indexes[Global.Random(indexes.Count)];
+            return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target);
         }
     }
 
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
+        public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+        {
+        }
+
+
         bool select = false;
         enum Command
         {
