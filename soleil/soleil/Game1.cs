@@ -79,7 +79,8 @@ namespace Soleil
             
             // SceneManager
             sm = SceneManager.GetInstance();
-            new TestScene(sm);
+            //new TestScene(sm);
+            new TestBattleScene(sm);
 
             drawing.DrawRate = DrawRate;
         }

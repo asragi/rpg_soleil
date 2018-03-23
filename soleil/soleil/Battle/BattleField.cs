@@ -27,16 +27,17 @@ namespace Soleil
         {
             charas = new List<Character>
             {
-                new Character(this, 0),
-                new Character(this, 1),
-                new Character(this, 2),
-                new Character(this, 3),
-                new Character(this, 4),
+                new TestPlayableCharacter(this, 0),
+                new TestPlayableCharacter(this, 1),
+                new TestEnemyCharacter(this, 2),
+                new TestEnemyCharacter(this, 3),
+                new TestEnemyCharacter(this, 4),
             };
 
             magicField = new SimpleMagicField();
             turnQueue = new TurnQueue();
 
+            lastTurn = new List<Turn>();
             for (int i = 0; i < charas.Count; i++)
                 lastTurn.Add(charas[i].NextTurn());
             while(!turnQueue.IsFulfilled())
@@ -99,7 +100,7 @@ namespace Soleil
                     minIndex = i;
                 }
                 */
-            var minIndex = lastTurn.FindMin(p => p.TurnTime).Index;
+            var minIndex = lastTurn.FindMin(p => p.TurnTime).CharaIndex;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
         }
@@ -116,7 +117,7 @@ namespace Soleil
             }
         }
 
-        public void Draw()
+        public void Draw(Drawing sb)
         {
 
         }

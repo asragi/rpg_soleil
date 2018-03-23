@@ -32,29 +32,26 @@ namespace Soleil
         }
         Command selectCommand;
         public override Action GetAction()
-        { 
-            if(select)
+        {
+            if (KeyInput.GetKeyPush(Key.Down))
             {
-                if (KeyInput.GetKeyPush(Key.Down))
+                selectCommand++;
+                if (selectCommand == Command.Size)
                 {
-                    selectCommand++;
-                    if (selectCommand == Command.Size)
-                    {
-                        selectCommand = Command.Attack;
-                    }
+                    selectCommand = Command.Attack;
                 }
-                if (KeyInput.GetKeyPush(Key.Up))
+            }
+            if (KeyInput.GetKeyPush(Key.Up))
+            {
+                if (selectCommand == Command.Attack)
                 {
-                    if (selectCommand == Command.Attack)
-                    {
-                        selectCommand = Command.Size;
-                    }
-                    selectCommand--;
+                    selectCommand = Command.Size;
                 }
-                if (KeyInput.GetKeyPush(Key.A))
-                {
-                    return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(0, 1);
-                }
+                selectCommand--;
+            }
+            if (KeyInput.GetKeyPush(Key.A))
+            {
+                return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(0, 1);
             }
 
             return null;

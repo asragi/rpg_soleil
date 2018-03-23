@@ -67,7 +67,7 @@ namespace Soleil
         {
             List<Occurence> ocr = new List<Occurence>();
             float damage = attack(battle.GetCharacter(offenceIndex).Status, battle.GetCharacter(defenseIndex).Status);
-            ocr.Add(new Occurence("nankano damage"));
+            ocr.Add(new OccurenceForCharacter(((int)damage).ToString() + " damage", defenseIndex, HPDmg: (int)damage));
             return ocr;
         }
     }

@@ -9,21 +9,18 @@ namespace Soleil
     class Character
     {
         public CharacterStatus Status;
-        List<Turn> turns;
-        BattleField bf;
-        CommandSelect commandSelect;
+        protected List<Turn> turns;
+        protected BattleField bf;
+        protected CommandSelect commandSelect;
 
-        int charaIndex;
+        protected int charaIndex;
         public Character(BattleField bField, int index)
         {
             bf = bField;
             charaIndex = index;
 
-            //てきとう
-            var aScore = new AbilityScore(100, 100, 100, 100, 100, 100);
-            Status = new CharacterStatus(aScore, 10000);
             turns = new List<Turn>();
-            commandSelect = new DefaultCharacterCommandSelect();
+            SPD = new Reference<int>();
         }
 
         public Action SelectAction()
@@ -38,7 +35,7 @@ namespace Soleil
         }
 
         //kari
-        Reference<int> SPD;
+        protected Reference<int> SPD;
         public Turn NextTurn()
         {
             SPD.Val = Status.SPD;
