@@ -45,13 +45,24 @@ namespace Soleil
             wm.Add(this);
         }
 
-        virtual public void Update()
+
+        /// <summary>
+        /// 継承後の振る舞いはMove()で記述する.
+        /// </summary>
+        public void Update()
         {
             // visibleなのにactiveという状態を回避したい
             active = visible ? active : false;
             if (!active) return;
             frame++;
+
+            Move();
         }
+
+        /// <summary>
+        /// 継承先でのUpdate()記述用関数.
+        /// </summary>
+        protected virtual void Move(){}
 
         /// <summary>
         /// 演出付きでウィンドウを出現させる(ウィンドウが出現しきったかどうかを返す)

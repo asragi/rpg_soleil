@@ -12,10 +12,25 @@ namespace Soleil
     class SelectableWindow
         :Window
     {
-        public SelectableWindow(Vector _pos, Vector _size, WindowManager wm)
+        string[] options;
+        int optionNum;
+        protected int index;
+        public SelectableWindow(Vector _pos, Vector _size, WindowManager wm, params string[] _options)
             : base(_pos, _size, wm)
         {
+            options = _options;
+            optionNum = options.Length;
+            index = 0;
+        }
 
+        protected override void Move()
+        {
+            Console.WriteLine("hoge");
+        }
+
+        public override void DrawContent(Drawing d)
+        {
+            base.DrawContent(d);
         }
     }
 }

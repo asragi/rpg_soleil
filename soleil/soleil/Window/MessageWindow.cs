@@ -32,7 +32,7 @@ namespace Soleil
             charIndex = 0;
         }
 
-        public override void Update()
+        protected override void Move()
         {
             if (frame % drawCharPeriod == 0) AddChar();
             base.Update();

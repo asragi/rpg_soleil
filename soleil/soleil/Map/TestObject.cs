@@ -9,7 +9,7 @@ namespace Soleil
     class TestObject :MapObject
     {
         CollideBox exi;
-        MessageWindow testWindow;
+        SelectableWindow testWindow;
         WindowManager wm;
         public TestObject(ObjectManager om, BoxManager bm, WindowManager wm)
             : base(om)
@@ -21,8 +21,9 @@ namespace Soleil
 
         public override void OnCollisionEnter()
         {
-            testWindow = new MessageWindow(pos, new Vector(300, 100), wm);
-            testWindow.SetMessage("テストメッセージ");
+            testWindow = new SelectableWindow(pos, new Vector(300, 100), wm,
+                "はい", "いいえ", "よさ");
+            testWindow.active = false;
             base.OnCollisionEnter();
         }
 
