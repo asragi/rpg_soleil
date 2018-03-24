@@ -44,6 +44,7 @@ namespace Soleil
                 Side.Left,
                 Side.Left,
             };
+            indexes = new List<int>[(int)Side.Size];
             indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
             indexes[(int)Side.Right] = new List<int> { 0, 1, };
 
