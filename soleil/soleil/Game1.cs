@@ -129,7 +129,7 @@ namespace Soleil
 
             // TODO: Add your update logic here
             //Audio.Update();
-
+            KeyInput.Move();
             sm.Update();
             frame++;
 
