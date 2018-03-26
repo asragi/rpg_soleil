@@ -31,6 +31,11 @@ namespace Soleil
             windows.ForEach(s => s.Update());
         }
 
+        public void Destroy(int tag)
+        {
+            windows.FindAll(s => s.Tag == tag).ForEach(t => t.Destroy());
+        }
+
         public void Draw(Drawing d)
         {
             windows.ForEach(s => s.Draw(d));
