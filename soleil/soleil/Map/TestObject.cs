@@ -20,10 +20,46 @@ namespace Soleil
 
         public override void OnCollisionEnter()
         {
-            eventManager.CreateMessageWindow(pos,new Vector(200,100),0);
-            eventManager.CreateMessageWindow(pos + new Vector(100,100), new Vector(200, 100), 0);
+            EventA();
             base.OnCollisionEnter();
         }
+
+        private void EventA()
+        {
+            eventManager.CreateSelectWindow(pos, new Vector(120, 145), 0, "はい", "いいえ", "わからん");
+        }
+
+        private void EventAUpdate()
+        {
+            switch (eventManager.ReturnSelectIndex(0))
+            {
+                case 0:
+                    Console.WriteLine("hai");
+                    eventManager.DestroyWindow(0);
+                    eventManager.SetFocusPlayer();
+                    break;
+                case 1:
+                    Console.WriteLine("iie");
+                    eventManager.DestroyWindow(0);
+                    eventManager.SetFocusPlayer();
+                    break;
+                case 2:
+                    Console.WriteLine("wakaran");
+                    eventManager.DestroyWindow(0);
+                    eventManager.SetFocusPlayer();
+                    break;
+                default:
+                    Console.WriteLine("test");
+                    break;
+            }
+        }
+
+        public override void Update()
+        {
+            EventAUpdate();
+            base.Update();
+        }
+
 
         public override void OnCollisionExit()
         {
