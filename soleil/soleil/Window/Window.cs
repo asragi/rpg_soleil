@@ -30,35 +30,51 @@ namespace Soleil
         /// </summary>
         protected Vector pos;
         Vector size;
-        public bool active { get; set; }
-        public bool visible { get; set; }
+        public bool Active { get; set; }
+        public bool Visible { get; set; }
         public bool Dead { get; protected set; }
+        /// <summary>
+        /// ウィンドウ識別用変数. 重複可能.
+        /// </summary>
+        public int Tag { get; private set; }
         protected int frame;
 
-        public Window(Vector _pos, Vector _size, WindowManager wm)
+        public Window(Vector _pos, Vector _size,int _tag, WindowManager wm)
         {
             frameTexture = frameTexture ?? Resources.GetTexture(TextureID.FrameTest);
             pos = _pos;
             size = _size;
-            visible = true;
-            active = true;
+            Tag = _tag;
+            Visible = true;
+            Active = true;
             wm.Add(this);
         }
 
-        virtual public void Update()
+
+        /// <summary>
+        /// 継承後の振る舞いはMove()で記述する.
+        /// </summary>
+        public void Update()
         {
             // visibleなのにactiveという状態を回避したい
-            active = visible ? active : false;
-            if (!active) return;
+            Active = Visible ? Active : false;
+            if (!Active) return;
             frame++;
+
+            Move();
         }
+
+        /// <summary>
+        /// 継承先でのUpdate()記述用関数.
+        /// </summary>
+        protected virtual void Move(){}
 
         /// <summary>
         /// 演出付きでウィンドウを出現させる(ウィンドウが出現しきったかどうかを返す)
         /// </summary>
         public bool PopUpWindow()
         {
-            if (visible) return true;
+            if (Visible) return true;
             return true;
         }
 
@@ -67,7 +83,7 @@ namespace Soleil
         /// </summary>
         public bool VanishWindow()
         {
-            if (!visible) return true;
+            if (!Visible) return true;
             return true;
         }
 

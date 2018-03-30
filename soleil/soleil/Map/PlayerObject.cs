@@ -11,29 +11,40 @@ namespace Soleil
 {
     class PlayerObject : MapObject
     {
+        // const
+        const int MoveSpeed = 3;
+        const int RunSpeed = 6;
+
         bool movable, visible;
         CollideBox existanceBox;
         // AnimationSet anim;
+        int speed;
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
+            speed = MoveSpeed;
             pos = new Vector(200, 200);
             existanceBox = new CollideBox(this, Vector.Zero, new Soleil.Vector(30, 30), CollideLayer.Player,bm);
         }
 
         public override void Update()
         {
-            // for Debug
-            int speed = 3;
-            if (Keyboard.GetState().IsKeyDown(Keys.X)) speed = 6;
-            if (Keyboard.GetState().IsKeyDown(Keys.Up)) pos.Y += -speed;
-            if (Keyboard.GetState().IsKeyDown(Keys.Down)) pos.Y += speed;
-            if (Keyboard.GetState().IsKeyDown(Keys.Right)) pos.X += speed;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left)) pos.X += -speed;
-
-
             base.Update();
         }
+        public void Walk()
+        {
+            speed = MoveSpeed;
+        }
+        public void Run()
+        {
+            speed = RunSpeed;
+        }
+
+        public void Move(Vector dir)
+        {
+            pos += dir * speed;
+        }
+
 
         public override void Draw(Drawing sb)
         {

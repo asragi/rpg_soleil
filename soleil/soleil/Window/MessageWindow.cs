@@ -16,8 +16,8 @@ namespace Soleil
         int charIndex;
         Vector textPos;
 
-        public MessageWindow(Vector _pos, Vector _size, WindowManager wm)
-            : base(_pos,_size,wm)
+        public MessageWindow(Vector _pos, Vector _size,int tag, WindowManager wm)
+            : base(_pos,_size,tag,wm)
         {
             messageToDraw = "";
             charIndex = 0;
@@ -32,10 +32,10 @@ namespace Soleil
             charIndex = 0;
         }
 
-        public override void Update()
+        protected override void Move()
         {
             if (frame % drawCharPeriod == 0) AddChar();
-            base.Update();
+            base.Move();
 
         }
 

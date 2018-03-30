@@ -15,7 +15,7 @@ namespace Soleil
             : base(MapName.test)
         {
             wm = w;
-            testO = new TestObject(om,bm,wm);
+            testO = new TestObject(om,bm);
         }
 
         override public void Update()

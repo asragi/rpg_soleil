@@ -13,6 +13,8 @@ namespace Soleil
     }
     abstract class Map
     {
+        MapEventManager mapEventManager;
+        MapInputManager mapInput;
         protected ObjectManager om;
         protected BoxManager bm;
         PlayerObject player;
@@ -22,12 +24,17 @@ namespace Soleil
             om = ObjectManager.GetInstance();
             bm = new BoxManager(new MapData(_name), player);
             player = new PlayerObject(om, bm);
+            mapInput = new MapInputManager(player);
+            mapEventManager = MapEventManager.GetInstance();
+            mapEventManager.SetMapInputManager(mapInput);
         }
 
         virtual public void Update()
         {
             om.Update();
             bm.Update();
+            mapInput.Update();
+            mapEventManager.Update();
         }
 
         virtual public void Draw(Drawing sb)
