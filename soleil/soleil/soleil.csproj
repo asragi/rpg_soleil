@@ -76,6 +76,7 @@
     <Compile Include="Map\MapData.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
+    <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\TestMap.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
