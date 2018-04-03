@@ -10,12 +10,22 @@ namespace Soleil
     class TestMap : Map
     {
         TestObject testO;
+        MapConstruct[] mapConstructs;
+        List<CollideBox> hoge;
         WindowManager wm;
         public TestMap(WindowManager w)
             : base(MapName.test)
         {
             wm = w;
             testO = new TestObject(om,bm);
+            
+            mapConstructs = new MapConstruct[]{
+                new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia4,MapDepth.Adjust,om),
+                new MapConstruct(TextureID.Somnia5,MapDepth.Adjust,om),
+                new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
+            };
         }
 
         override public void Update()
