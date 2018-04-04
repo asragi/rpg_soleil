@@ -20,11 +20,15 @@ namespace Soleil
             testO = new TestObject(om,bm);
             
             mapConstructs = new MapConstruct[]{
-                new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
-                new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
+                /*
                 new MapConstruct(TextureID.Somnia4,MapDepth.Adjust,om),
                 new MapConstruct(TextureID.Somnia5,MapDepth.Adjust,om),
-                new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
+                */
+                new AdjustConstruct(TextureID.Somnia4,300,om),
+                new AdjustConstruct(TextureID.Somnia5,500,om),
+                new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
             };
         }
 
