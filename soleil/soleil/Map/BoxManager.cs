@@ -91,7 +91,7 @@ namespace Soleil
             if (!visible) return;
             foreach (var item in boxList)
             {
-                d.DrawBox(item.WorldPos(), item.Size, Color.Red, DepthID.Debug);
+                d.DrawBox(item.WorldPos(), item.Size, Color.Red, DepthID.Player);
             }
         }
     }

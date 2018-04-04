@@ -25,8 +25,8 @@ namespace Soleil
                 new MapConstruct(TextureID.Somnia4,MapDepth.Adjust,om),
                 new MapConstruct(TextureID.Somnia5,MapDepth.Adjust,om),
                 */
-                new AdjustConstruct(TextureID.Somnia4,300,om),
-                new AdjustConstruct(TextureID.Somnia5,500,om),
+                new AdjustConstruct(TextureID.Somnia4,600,om),
+                new AdjustConstruct(TextureID.Somnia5,850,om),
                 new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
                 new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
             };

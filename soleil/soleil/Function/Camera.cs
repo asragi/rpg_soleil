@@ -12,8 +12,8 @@ namespace Soleil
         private Camera(){}
         public static Camera GeInstance() => camera;
 
-        public Vector Position;
-        public Vector Delta;
+        private Vector position;
+        public Vector delta;
         Drawing drawing;
 
         public void SetDrawing(Drawing d)
@@ -21,9 +21,15 @@ namespace Soleil
             drawing = d;
         }
 
-        public void Move(Drawing d)
+        public void SetPositon(Vector pos)
         {
-            d.Camera = Position + Delta;
+            position = pos;
+        }
+
+
+        public void Update()
+        {
+            drawing.Camera = position + delta;
         }
     }
 }
