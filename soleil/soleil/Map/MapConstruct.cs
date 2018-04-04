@@ -13,12 +13,7 @@ namespace Soleil
     public enum MapDepth
     {
         Ground,
-
-        /// <summary>
-        /// プレイヤーのY座標に応じて描画深度を変更.
-        /// </summary>
         Adjust,
-
         Top,
     }
     /// <summary>
@@ -26,11 +21,11 @@ namespace Soleil
     /// </summary>
     class MapConstruct : MapObject
     {
-        const DepthID LowerLayer = DepthID.PlayerBack;
-        const DepthID HigherLayer = DepthID.PlayerFront;
+        protected const DepthID LowerLayer = DepthID.PlayerBack;
+        protected const DepthID HigherLayer = DepthID.PlayerFront;
         Texture2D texture;
-        MapDepth depth;
-        DepthID depthId;
+        MapDepth mapDepth;
+        protected DepthID depthId;
 
         public MapConstruct(TextureID tex,MapDepth dep,ObjectManager om)
             : this(Vector.Zero,tex,dep,om){}
@@ -40,32 +35,35 @@ namespace Soleil
         {
             pos = _pos;
             texture = Resources.GetTexture(tex);
-            depth = dep;
-            switch (depth)
+            mapDepth = dep;
+            switch (mapDepth)
             {
                 case MapDepth.Ground:
                     depthId = LowerLayer;
                     break;
                 case MapDepth.Adjust:
-                    depthId = HigherLayer;
+                    depthId = 0;
                     break;
                 case MapDepth.Top:
                     depthId = HigherLayer;
                     break;
                 default:
-                    break;
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
         public override void Update()
         {
-
             base.Update();
         }
 
+
         public override void Draw(Drawing d)
         {
+            var t = d.CenterBased;
+            d.CenterBased = false;
             d.Draw(pos, texture, depthId);
+            d.CenterBased = t;
             base.Draw(d);
         }
     }

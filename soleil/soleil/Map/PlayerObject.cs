@@ -17,6 +17,7 @@ namespace Soleil
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
+            om.SetPlayer(this);
             pos = new Vector(200, 200);
             existanceBox = new CollideBox(this, Vector.Zero, new Soleil.Vector(30, 30), CollideLayer.Player,bm);
         }
