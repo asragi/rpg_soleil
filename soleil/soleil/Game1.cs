@@ -82,6 +82,12 @@ namespace Soleil
             new TestScene(sm);
             //new TestBattleScene(sm);
 
+            // Camera
+            var camera = Camera.GeInstance();
+            camera.SetDrawing(drawing);
+
+
+
             drawing.DrawRate = DrawRate;
         }
 

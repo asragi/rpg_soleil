@@ -14,7 +14,8 @@ namespace Soleil
     abstract class Map
     {
         MapEventManager mapEventManager;
-        MapInputManager mapInput;
+        MapInputManager mapInputManager;
+        MapCameraManager mapCameraManager;
         protected ObjectManager om;
         protected BoxManager bm;
         PlayerObject player;
@@ -24,17 +25,19 @@ namespace Soleil
             om = ObjectManager.GetInstance();
             bm = new BoxManager(new MapData(_name), player);
             player = new PlayerObject(om, bm);
-            mapInput = new MapInputManager(player);
+            mapInputManager = new MapInputManager(player);
             mapEventManager = MapEventManager.GetInstance();
-            mapEventManager.SetMapInputManager(mapInput);
+            mapCameraManager = new MapCameraManager(player);
+            mapEventManager.SetMapInputManager(mapInputManager);
         }
 
         virtual public void Update()
         {
             om.Update();
             bm.Update();
-            mapInput.Update();
+            mapInputManager.Update();
             mapEventManager.Update();
+            mapCameraManager.Update();
         }
 
         virtual public void Draw(Drawing sb)

@@ -201,13 +201,13 @@ namespace Soleil
             base.Move();
             if (!onFlag)
             {
-                camera.Delta += Position;
+                camera.delta += Position;
                 onFlag = true;
             }
 
             if (frame >= limitFrame - 1 && !offFlag)
             {
-                camera.Delta -= Position;
+                camera.delta -= Position;
                 offFlag = true;
                 Disable = true;
             }

@@ -14,6 +14,14 @@ namespace Soleil
     enum TextureID : int
     {
         FrameTest,
+
+        Somnia1,
+        Somnia2,
+        Somnia3,
+        Somnia4,
+        Somnia5,
+        Somnia6,
+
         White, Size
     }
 
@@ -140,6 +148,13 @@ namespace Soleil
             #region Texture
 
             SetPath(TextureID.White, "white");
+
+            SetPath(TextureID.Somnia1, "Map/Back/Somnia/back2-1");
+            SetPath(TextureID.Somnia2, "Map/Back/Somnia/back2-2");
+            SetPath(TextureID.Somnia3, "Map/Back/Somnia/back2-3");
+            SetPath(TextureID.Somnia4, "Map/Back/Somnia/back2-4");
+            SetPath(TextureID.Somnia5, "Map/Back/Somnia/back2-5");
+            SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
 
 
             #endregion

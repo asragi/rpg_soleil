@@ -11,6 +11,7 @@ namespace Soleil
     {
         private static ObjectManager objectManager = new ObjectManager();
         List<MapObject> objects;
+        PlayerObject player;
 
         private ObjectManager()
         {
@@ -23,6 +24,9 @@ namespace Soleil
         {
             objects.Add(obj);
         }
+
+        public void SetPlayer(PlayerObject pl) => player = pl;
+        public PlayerObject GetPlayer() => player;
 
         public void Update()
         {

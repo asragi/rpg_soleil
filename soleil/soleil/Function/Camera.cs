@@ -7,12 +7,29 @@ namespace Soleil
 {
     class Camera
     {
-        public Vector Position;
-        public Vector Delta;
+        // Singleton
+        private static Camera camera = new Camera();
+        private Camera(){}
+        public static Camera GeInstance() => camera;
 
-        public void Move(Drawing d)
+        private Vector position;
+        public Vector delta;
+        Drawing drawing;
+
+        public void SetDrawing(Drawing d)
         {
-            d.Camera = Position + Delta;
+            drawing = d;
+        }
+
+        public void SetPositon(Vector pos)
+        {
+            position = pos;
+        }
+
+
+        public void Update()
+        {
+            drawing.Camera = position + delta;
         }
     }
 }
