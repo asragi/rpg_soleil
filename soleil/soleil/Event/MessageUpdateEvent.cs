@@ -5,8 +5,8 @@
     {
         WindowManager wm;
         WindowTag tag;
-        public MessageUpdateEvent(WindowTag _tag, EventManager e)
-            : base(e)
+        public MessageUpdateEvent(WindowTag _tag)
+            : base()
         {
             tag = _tag;
         }

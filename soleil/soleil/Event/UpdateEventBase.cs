@@ -3,8 +3,8 @@
     abstract class UpdateEventBase
         :EventBase
     {
-        public UpdateEventBase(EventManager e)
-            :base(e)
+        public UpdateEventBase()
+            :base()
         {
         }
     }

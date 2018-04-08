@@ -5,33 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Soleil {
-    public enum MapFocus { None, Player, Window, }
+    public enum InputFocus { None, Player, Window, }
     /// <summary>
     /// MapSceneでのInputの受付を管理するクラス
     /// </summary>
     class MapInputManager
     {
-        MapFocus nowFocus;
+        InputFocus nowFocus;
         PlayerObject player;
         WindowManager wm;
 
-        public MapInputManager(PlayerObject p)
+        private static MapInputManager mapInputManager = new MapInputManager();
+        public static MapInputManager GetInstance() => mapInputManager;
+        private MapInputManager()
         {
             wm = WindowManager.GetInstance();
-            player = p;
-            nowFocus = MapFocus.Player;
+            nowFocus = InputFocus.Player;
         }
+        public void SetPlayer(PlayerObject p) => player = p;
 
         public void Update()
         {
             switch (nowFocus)
             {
-                case MapFocus.None:
+                case InputFocus.None:
                     break;
-                case MapFocus.Player:
+                case InputFocus.Player:
                     PlayerMove();
                     break;
-                case MapFocus.Window:
+                case InputFocus.Window:
                     SelectWindowMove();
                     break;
                 default:
@@ -46,7 +48,7 @@ namespace Soleil {
             if (KeyInput.GetKeyPush(Key.A)) wm.Decide();
         }
 
-        public void SetFocus(MapFocus f)
+        public void SetFocus(InputFocus f)
         {
             nowFocus = f;
         }

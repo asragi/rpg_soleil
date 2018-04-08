@@ -25,7 +25,8 @@ namespace Soleil
             om = ObjectManager.GetInstance();
             bm = new BoxManager(new MapData(_name), player);
             player = new PlayerObject(om, bm);
-            mapInputManager = new MapInputManager(player);
+            mapInputManager = MapInputManager.GetInstance();
+            mapInputManager.SetPlayer(player);
             mapEventManager = MapEventManager.GetInstance();
             mapCameraManager = new MapCameraManager(player);
             mapEventManager.SetMapInputManager(mapInputManager);

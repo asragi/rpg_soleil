@@ -64,7 +64,7 @@ namespace Soleil
         /// </summary>
         private void SetFocusSelectWindow(WindowTag tag)
         {
-            mapInputManager.SetFocus(MapFocus.Window);
+            mapInputManager.SetFocus(InputFocus.Window);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Soleil
         /// </summary>
         public void SetFocusPlayer()
         {
-            mapInputManager.SetFocus(MapFocus.Player);
+            mapInputManager.SetFocus(InputFocus.Player);
         }
 
 

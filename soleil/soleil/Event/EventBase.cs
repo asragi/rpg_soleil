@@ -5,11 +5,16 @@
     /// </summary>
     abstract class EventBase
     {
-        protected EventManager EventManager;
-        public EventBase(EventManager _eventManager)
+        //protected EventManager EventManager;
+        EventSet myEventSet;
+        public EventBase()
         {
-            EventManager = _eventManager;
-            EventManager.AddEvent(this);
+
+        }
+
+        public void SetEventSet(EventSet es)
+        {
+            myEventSet = es;
         }
 
         /// <summary>
@@ -22,7 +27,7 @@
         /// </summary>
         protected void Next()
         {
-            EventManager.NextIndex();
+            myEventSet.Next();
         }
     }
 }

@@ -53,7 +53,11 @@
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\Turn.cs" />
-    <Compile Include="Event\EventManager.cs" />
+    <Compile Include="Event\ChangeInputFocusEvent.cs" />
+    <Compile Include="Event\EventBranch.cs" />
+    <Compile Include="Event\EventSequence.cs" />
+    <Compile Include="Event\EventSequenceIterator.cs" />
+    <Compile Include="Event\Iterator.cs" />
     <Compile Include="Event\MessageUpdateEvent.cs" />
     <Compile Include="Event\MessageWindowEvent.cs" />
     <Compile Include="Event\UpdateEventBase.cs" />
@@ -80,6 +84,7 @@
     <Compile Include="Map\CollideBox.cs" />
     <Compile Include="Map\CollideLayer.cs" />
     <Compile Include="Event\EventBase.cs" />
+    <Compile Include="Event\EventSet.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapData.cs" />
