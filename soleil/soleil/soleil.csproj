@@ -108,6 +108,7 @@
     <Compile Include="Window\SelectableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
+    <Compile Include="Window\WindowTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

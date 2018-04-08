@@ -19,7 +19,7 @@ namespace Soleil
         int optionNum;
         protected int index;
         bool decided;
-        public SelectableWindow(Vector _pos, Vector _size,int tag, WindowManager wm, params string[] _options)
+        public SelectableWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, params string[] _options)
             : base(_pos, _size, tag, wm)
         {
             options = _options;

@@ -26,7 +26,7 @@ namespace Soleil
         /// メッセージウィンドウを作る.
         /// </summary>
         /// <param name="tag">ウィンドウ識別用変数</param>
-        public void CreateMessageWindow(Vector pos, Vector size,int tag)
+        public void CreateMessageWindow(Vector pos, Vector size, WindowTag tag)
         {
             new MessageWindow(pos, size, tag, wm);
         }
@@ -35,7 +35,7 @@ namespace Soleil
         /// ウィンドウを消去する.指定したtagのウィンドウをすべて消去する.
         /// </summary>
         /// <param name="tag">ウィンドウ識別用変数</param>
-        public void DestroyWindow(int tag)
+        public void DestroyWindow(WindowTag tag)
         {
             wm.Destroy(tag);
         }
@@ -43,7 +43,7 @@ namespace Soleil
         /// <summary>
         /// 選択肢を表示する.
         /// </summary>
-        public void CreateSelectWindow(Vector pos,Vector size,int tag, params string[] option)
+        public void CreateSelectWindow(Vector pos,Vector size, WindowTag tag, params string[] option)
         {
             new SelectableWindow(pos, size, tag, wm, option);
             wm.SetNowSelectWindow(tag);
@@ -54,7 +54,7 @@ namespace Soleil
         /// 選んだ選択肢のindexを返す.
         /// </summary>
         /// <returns>未選択時は-1を返す.</returns>
-        public int ReturnSelectIndex(int tag)
+        public int ReturnSelectIndex(WindowTag tag)
         {
             return wm.GetDecideIndex();
         }
@@ -62,7 +62,7 @@ namespace Soleil
         /// <summary>
         /// 選択肢のフォーカスをウィンドウに変更する.
         /// </summary>
-        private void SetFocusSelectWindow(int tag)
+        private void SetFocusSelectWindow(WindowTag tag)
         {
             mapInputManager.SetFocus(MapFocus.Window);
         }

@@ -50,7 +50,7 @@ namespace Soleil
         /// <summary>
         /// フォーカスする選択肢ウィンドウを変更する.
         /// </summary>
-        public void SetNowSelectWindow(int tag)
+        public void SetNowSelectWindow(WindowTag tag)
         {
             var selectWindows = windows.FindAll(s => s.Active && s is SelectableWindow)
                 .ConvertAll<SelectableWindow>(t=>(SelectableWindow)t);
@@ -68,12 +68,12 @@ namespace Soleil
             return nowSelectWindow.ReturnIndex();
         }
 
-        public void SetFocusWindow(int tag)
+        public void SetFocusWindow(WindowTag tag)
         {
             var selectWindows = windows.FindAll(s => s.Tag == tag);
             selectWindows.ForEach(s => s.Active = true);
         }
-        public void Destroy(int tag)
+        public void Destroy(WindowTag tag)
         {
             windows.FindAll(s => s.Tag == tag).ForEach(t => t.Destroy());
         }

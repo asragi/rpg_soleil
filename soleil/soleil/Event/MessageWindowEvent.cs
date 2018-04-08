@@ -13,7 +13,7 @@ namespace Soleil.Event
         :WindowEventBase
     {
         string message;
-        public MessageWindowEvent(Vector _pos, Vector _size, int _tag, string _message, EventManager e)
+        public MessageWindowEvent(Vector _pos, Vector _size, WindowTag _tag, string _message, EventManager e)
             :base(_pos,_size,_tag,e)
         {
             message = _message;

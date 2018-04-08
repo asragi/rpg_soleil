@@ -36,10 +36,10 @@ namespace Soleil
         /// <summary>
         /// ウィンドウ識別用変数. 重複可能.
         /// </summary>
-        public int Tag { get; private set; }
+        public WindowTag Tag { get; private set; }
         protected int frame;
 
-        public Window(Vector _pos, Vector _size,int _tag, WindowManager wm)
+        public Window(Vector _pos, Vector _size,WindowTag _tag, WindowManager wm)
         {
             frameTexture = frameTexture ?? Resources.GetTexture(TextureID.FrameTest);
             pos = _pos;

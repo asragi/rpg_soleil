@@ -4,8 +4,8 @@
         :UpdateEventBase
     {
         WindowManager wm;
-        int tag;
-        public MessageUpdateEvent(int _tag, EventManager e)
+        WindowTag tag;
+        public MessageUpdateEvent(WindowTag _tag, EventManager e)
             : base(e)
         {
             tag = _tag;

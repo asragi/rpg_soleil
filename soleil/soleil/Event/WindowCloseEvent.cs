@@ -3,9 +3,9 @@
     class WindowCloseEvent
         :EventBase
     {
-        int tag;
+        WindowTag tag;
         WindowManager wm;
-        public WindowCloseEvent(int _tag, EventManager em)
+        public WindowCloseEvent(WindowTag _tag, EventManager em)
             :base(em)
         {
             tag = _tag;
