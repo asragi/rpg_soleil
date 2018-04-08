@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     class MessageWindow
-        :SelectableWindow
+        :Window
     {
         String message;
         char[] messageArray;
