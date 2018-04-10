@@ -1,69 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Soleil.Event;
 
 namespace Soleil
 {
     class TestObject :MapObject
     {
         CollideBox exi;
-        MapEventManager eventManager;
+        EventSequence eventSequence;
+        //EventManager eventManager;
         public TestObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
             pos = new Vector(500, 300);
             exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character, bm);
-            eventManager = MapEventManager.GetInstance();
+
+            
+            //eventManager = new EventManager();
+
+
+            var testBool = false;
+            eventSequence = new EventSequence(
+                new EventSet(
+                    new MessageWindowEvent(pos, new Vector(200, 76), 0, "テストメッセージ"),
+                    new MessageWindowEvent(pos, new Vector(250, 76), 0, "いい感じになってる？")
+                    ),
+                EventBranch.BoolEventBranch(testBool,
+                    new EventSet(
+                        new MessageWindowEvent(pos, new Vector(200, 76), 0, "うまくいってそう")),
+                    new EventSet(
+                        new MessageWindowEvent(pos, new Vector(220, 76), 0, "本当によくやった")
+                        )
+                    ),
+                new EventSet(
+                    new ChangeInputFocusEvent(InputFocus.Player)
+                    ));
         }
 
         public override void OnCollisionEnter()
         {
-            EventA();
+            eventSequence.StartEvent();
             base.OnCollisionEnter();
-        }
-
-        private void EventA()
-        {
-            eventManager.CreateSelectWindow(pos, new Vector(120, 145), 0, "はい", "いいえ", "わからん");
-        }
-
-        private void EventAUpdate()
-        {
-            switch (eventManager.ReturnSelectIndex(0))
-            {
-                case 0:
-                    Console.WriteLine("hai");
-                    eventManager.DestroyWindow(0);
-                    eventManager.SetFocusPlayer();
-                    break;
-                case 1:
-                    Console.WriteLine("iie");
-                    eventManager.DestroyWindow(0);
-                    eventManager.SetFocusPlayer();
-                    break;
-                case 2:
-                    Console.WriteLine("wakaran");
-                    eventManager.DestroyWindow(0);
-                    eventManager.SetFocusPlayer();
-                    break;
-                default:
-                    Console.WriteLine("test");
-                    break;
-            }
         }
 
         public override void Update()
         {
-            EventAUpdate();
+            eventSequence.Update();
             base.Update();
         }
 
 
         public override void OnCollisionExit()
         {
-            eventManager.DestroyWindow(0);
             base.OnCollisionExit();
         }
     }

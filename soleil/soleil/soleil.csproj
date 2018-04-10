@@ -53,6 +53,16 @@
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\Turn.cs" />
+    <Compile Include="Event\ChangeInputFocusEvent.cs" />
+    <Compile Include="Event\EventBranch.cs" />
+    <Compile Include="Event\EventSequence.cs" />
+    <Compile Include="Event\EventSequenceIterator.cs" />
+    <Compile Include="Event\Iterator.cs" />
+    <Compile Include="Event\MessageUpdateEvent.cs" />
+    <Compile Include="Event\MessageWindowEvent.cs" />
+    <Compile Include="Event\UpdateEventBase.cs" />
+    <Compile Include="Event\WindowCloseEvent.cs" />
+    <Compile Include="Event\WindowEventBase.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
     <Compile Include="Function\Camera.cs" />
@@ -73,6 +83,8 @@
     <Compile Include="Map\BoxManager.cs" />
     <Compile Include="Map\CollideBox.cs" />
     <Compile Include="Map\CollideLayer.cs" />
+    <Compile Include="Event\EventBase.cs" />
+    <Compile Include="Event\EventSet.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapData.cs" />
@@ -101,6 +113,7 @@
     <Compile Include="Window\SelectableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
+    <Compile Include="Window\WindowTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

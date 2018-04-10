@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     class MessageWindow
-        :SelectableWindow
+        :Window
     {
         String message;
         char[] messageArray;
@@ -16,7 +16,7 @@ namespace Soleil
         int charIndex;
         Vector textPos;
 
-        public MessageWindow(Vector _pos, Vector _size,int tag, WindowManager wm)
+        public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
             : base(_pos,_size,tag,wm)
         {
             messageToDraw = "";
