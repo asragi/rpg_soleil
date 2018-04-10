@@ -14,13 +14,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Aerial.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:Aerial.spritefont
-
 #begin Arrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
