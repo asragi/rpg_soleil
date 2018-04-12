@@ -64,7 +64,6 @@ namespace Soleil.Event
 
         public virtual void Execute()
         {
-            Console.WriteLine(index + ":" + events.Count);
             events[index].Execute();
         }
 
