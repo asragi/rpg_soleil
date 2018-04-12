@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Soleil.Event
+﻿namespace Soleil.Event
 {
-    static class EventBranch
+    /// <summary>
+    /// 条件に応じてEventSequenceのEventSetListに新しくEventSetを挿入する。
+    /// </summary>
+    abstract class EventBranch : EventSet
     {
-        public static EventSet BoolEventBranch(bool condition, EventSet trueSet, EventSet falseSet)
+        protected EventSequence MySequence;
+        public EventBranch(EventSequence e)
+            : base()
         {
-            return condition ? trueSet : falseSet;
-        }
-
-        public static EventSet NumEventBranch(int num, params EventSet[] eventSets)
-        {
-            return eventSets[num];
+            MySequence = e;
         }
     }
 }

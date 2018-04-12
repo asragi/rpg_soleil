@@ -68,11 +68,6 @@ namespace Soleil
             return nowSelectWindow.ReturnIndex();
         }
 
-        public void SetFocusWindow(WindowTag tag)
-        {
-            var selectWindows = windows.FindAll(s => s.Tag == tag);
-            selectWindows.ForEach(s => s.Active = true);
-        }
         public void Destroy(WindowTag tag)
         {
             windows.FindAll(s => s.Tag == tag).ForEach(t => t.Destroy());

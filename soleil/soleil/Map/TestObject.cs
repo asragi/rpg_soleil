@@ -16,23 +16,24 @@ namespace Soleil
             
             //eventManager = new EventManager();
 
-
-            var testBool = false;
-            eventSequence = new EventSequence(
+            eventSequence = new EventSequence();
+            eventSequence.SetEventSet(
                 new EventSet(
                     new MessageWindowEvent(pos, new Vector(200, 76), 0, "テストメッセージ"),
-                    new MessageWindowEvent(pos, new Vector(250, 76), 0, "いい感じになってる？")
-                    ),
-                EventBranch.BoolEventBranch(testBool,
+                    new MessageWindowEvent(pos, new Vector(250, 76), 0, "いい感じになってる？"),
+                    new SelectWindowEvent(pos, new Vector(100, 110), 0, "はい", "いいえ")
+                ),
+                // GetInstance()はのちのちいい感じにする（どこにwindowManager設置したら書きやすいか悩んでる）
+                new BoolEventBranch(eventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 1,
                     new EventSet(
                         new MessageWindowEvent(pos, new Vector(200, 76), 0, "うまくいってそう")),
                     new EventSet(
-                        new MessageWindowEvent(pos, new Vector(220, 76), 0, "本当によくやった")
-                        )
-                    ),
+                        new MessageWindowEvent(pos, new Vector(220, 76), 0, "本当によくやった"))
+                ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player)
-                    ));
+                )
+            );
         }
 
         public override void OnCollisionEnter()

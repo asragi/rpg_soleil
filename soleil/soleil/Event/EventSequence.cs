@@ -10,12 +10,24 @@ namespace Soleil.Event
         :IAggregate
     {
         bool startEvent;
-        EventSet[] eventSets;
+        List<EventSet> eventSets;
+        EventSet[] eventSetsDefault; // 引数を保存する。
         int index;
-        public EventSequence(params EventSet[] _eventSets)
+        public EventSequence()
         {
-            eventSets = _eventSets;
-            for (int i = 0; i < eventSets.Length; i++)
+            index = 0;
+        }
+
+        public void SetEventSet(params EventSet[] _eventSets)
+        {
+            eventSetsDefault = _eventSets;
+            SetEventSetsByDefault();
+        }
+
+        private void SetEventSetsByDefault()
+        {
+            eventSets = eventSetsDefault.ToList<EventSet>();
+            for (int i = 0; i < eventSets.Count; i++)
             {
                 eventSets[i].SetEventSequence(this);
             }
@@ -29,8 +41,9 @@ namespace Soleil.Event
         public void StartEvent()
         {
             index = 0;
+            SetEventSetsByDefault();
             startEvent = true;
-            for (int i = 0; i < eventSets.Length; i++)
+            for (int i = 0; i < eventSets.Count; i++)
             {
                 eventSets[i].Reset();
             }
@@ -41,7 +54,7 @@ namespace Soleil.Event
         /// </summary>
         public void Next()
         {
-            if(++index >= eventSets.Length)
+            if(++index >= eventSets.Count)
             {
                 EndEvent();
                 return;
@@ -58,6 +71,13 @@ namespace Soleil.Event
             eventSets[index].Execute();
         }
 
+        public int GetNowIndex() => index;
+
+        public void InsertEventSet(int index,EventSet item)
+        {
+            item.SetEventSequence(this);
+            eventSets.Insert(index, item);
+        }
 
 
         // Iterator
@@ -71,6 +91,6 @@ namespace Soleil.Event
             return eventSets[_index];
         }
 
-        public int GetLength() => eventSets.Length;
+        public int GetLength() => eventSets.Count;
     }
 }
