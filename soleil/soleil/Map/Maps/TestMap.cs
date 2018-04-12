@@ -22,10 +22,6 @@ namespace Soleil
             test2 = new TestObject2(om, bm);
             mapConstructs = new MapConstruct[]{
                 new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
-                /*
-                new MapConstruct(TextureID.Somnia4,MapDepth.Adjust,om),
-                new MapConstruct(TextureID.Somnia5,MapDepth.Adjust,om),
-                */
                 new AdjustConstruct(TextureID.Somnia4,600,om),
                 new AdjustConstruct(TextureID.Somnia5,850,om),
                 new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
