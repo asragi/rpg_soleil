@@ -15,13 +15,9 @@ namespace Soleil.Event
             condition = _condition;
         }
 
-        public override void Execute()
+        protected override EventSet DecideEventSet()
         {
-            int index = MySequence.GetNowIndex();
-            var item = (condition()) ? trueSet : falseSet;
-            item.Reset();
-            MySequence.InsertEventSet(index+1, item);
-            Next();
+            return (condition()) ? trueSet : falseSet;
         }
     }
 }
