@@ -55,7 +55,6 @@ namespace Soleil.Event
 
         private void Execute()
         {
-            Console.WriteLine(index + ":" + eventSets.Length);
             eventSets[index].Execute();
         }
 
