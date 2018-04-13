@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-
-namespace Soleil
+﻿namespace Soleil
 {
     class TestScene : Scene
     {
         TestMap testMap;
+        Transition transition; // debug
         public TestScene(SceneManager sm)
             : base(sm)
         {
             testMap = new TestMap(wm);
+            transition = new Transition();
         }
 
         override public void Update()
         {
+            if (KeyInput.GetKeyPush(Key.A)) transition.SetMode(TransitionMode.FadeIn);
             testMap.Update();
+            transition.Update();
             base.Update();
         }
 
         override public void Draw(Drawing sb)
         {
+            transition.Draw(sb);
             testMap.Draw(sb);
             base.Draw(sb);
         }
