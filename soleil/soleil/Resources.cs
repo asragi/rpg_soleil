@@ -14,6 +14,8 @@ namespace Soleil
     enum TextureID : int
     {
         FrameTest,
+        WhiteWindow,
+        Rule1,
 
         Somnia1,
         Somnia2,
@@ -156,6 +158,8 @@ namespace Soleil
             SetPath(TextureID.Somnia5, "Map/Back/Somnia/back2-5");
             SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
 
+            SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
+            SetPath(TextureID.Rule1, "UI/Rule/Rule");
 
             #endregion
 
