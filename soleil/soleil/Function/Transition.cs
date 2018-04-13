@@ -47,6 +47,7 @@ namespace Soleil
                 case TransitionMode.None:
                     break;
                 case TransitionMode.FadeOut:
+                    RefreshForFadeOut();
                     break;
                 case TransitionMode.FadeIn:
                     RefreshForFadeIn();
@@ -61,6 +62,7 @@ namespace Soleil
             switch (mode)
             {
                 case TransitionMode.FadeOut:
+                    FadeOutUpdate();
                     break;
                 case TransitionMode.FadeIn:
                     FadeInUpdate();
@@ -68,6 +70,25 @@ namespace Soleil
                 default:
                     break;
             }
+        }
+
+        private void RefreshForFadeOut()
+        {
+            for (int i = 0; i < nowAlpha.Length; i++)
+            {
+                nowAlpha[i] = alphaData[i] - 255;
+            }
+            white.GetData(texData);
+        }
+
+        private void FadeOutUpdate()
+        {
+            for (int i = 0; i < texData.Length; i++)
+            {
+                nowAlpha[i] += transitionSpeed;
+                texData[i] = Color.White * (MathEx.Clamp(nowAlpha[i], 255, 0)/255.0f);
+            }
+            white.SetData(texData);
         }
 
 

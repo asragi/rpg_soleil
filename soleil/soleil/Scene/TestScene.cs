@@ -13,7 +13,8 @@
 
         override public void Update()
         {
-            if (KeyInput.GetKeyPush(Key.A)) transition.SetMode(TransitionMode.FadeIn);
+            if (KeyInput.GetKeyPush(Key.B)) transition.SetMode(TransitionMode.FadeIn);
+            if (KeyInput.GetKeyPush(Key.A)) transition.SetMode(TransitionMode.FadeOut);
             testMap.Update();
             transition.Update();
             base.Update();
