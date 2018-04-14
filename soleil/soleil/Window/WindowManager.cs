@@ -57,11 +57,19 @@ namespace Soleil
             nowSelectWindow = selectWindows.FindLast(s => s.Tag == tag);
         }
 
+        /// <summary>
+        /// 現在のSelectWindowに選択肢を決定した処理を送る.
+        /// </summary>
         public void Decide()
         {
             if (nowSelectWindow == null) return;
             nowSelectWindow.Decide();
         }
+
+        /// <summary>
+        /// 現在のSelectWindowにて決定されたIndexを返す.
+        /// </summary>
+        /// <returns>未決定時は-1を返す.</returns>
         public int GetDecideIndex()
         {
             if (nowSelectWindow == null) return -1;
