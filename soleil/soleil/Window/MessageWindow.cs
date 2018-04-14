@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Soleil
 {
@@ -11,14 +7,16 @@ namespace Soleil
     {
         String message;
         char[] messageArray;
-        String messageToDraw;
-        int drawCharPeriod = 5; // nフレームごとに文字更新
-        int charIndex;
+        String messageToDraw; // 表示されるStringを保持する変数
+        int drawCharPeriod = 4; // nフレームごとに文字更新
+        int charIndex; // char配列アクセス用index
         Vector textPos;
+        bool endAnimation;
 
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
             : base(_pos,_size,tag,wm)
         {
+            endAnimation = false;
             messageToDraw = "";
             charIndex = 0;
             textPos = pos + new Vector(Spacing, Spacing);
@@ -26,6 +24,7 @@ namespace Soleil
 
         public void SetMessage(String msg)
         {
+            endAnimation = false;
             message = msg;
             messageArray = message.ToCharArray();
             messageToDraw = ""; // 表示メッセージを初期化
@@ -34,15 +33,20 @@ namespace Soleil
 
         protected override void Move()
         {
-            if (frame % drawCharPeriod == 0) AddChar();
+            if (!endAnimation && frame % drawCharPeriod == 0) AddChar();
             base.Move();
-
         }
+
+        public bool GetAnimIsEnd() => endAnimation;
 
         void AddChar()
         {
             if (messageArray == null) return;
-            if (charIndex >= messageArray.Length) return;
+            if (charIndex >= messageArray.Length)
+            {
+                endAnimation = true;
+                return;
+            }
             messageToDraw += messageArray[charIndex];
             charIndex++;
         }
