@@ -9,21 +9,25 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Soleil
 {
-    public enum PlayerMoveDir { None,R,UR,U,UL,L,DL,D,DR}
+    public enum PlayerMoveDir:int { None=-1,R=0,UR=315,U=270,UL=225,L=180,DL=135,D=90,DR=45}
 
     class PlayerObject : MapObject
     {
         // const
         const int MoveSpeed = 3;
         const int RunSpeed = 6;
-        const int MoveBoxNum = 7; // 移動先を判定するboxの個数
+        const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
+        // 衝突判定大きさ
+        const int CollideBoxWidth = 30;
+        const int CollideBoxHeight = 30;
 
+        // Variables
         bool movable, visible;
         CollideBox existanceBox;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
-        // AnimationSet anim;
         int speed;
+
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
@@ -32,7 +36,15 @@ namespace Soleil
             speed = MoveSpeed;
             om.SetPlayer(this);
             pos = new Vector(200, 200);
-            existanceBox = new CollideBox(this, Vector.Zero, new Soleil.Vector(30, 30), CollideLayer.Player,bm);
+
+            var collideSize = new Vector(CollideBoxWidth, CollideBoxHeight);
+            existanceBox = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player,bm);
+
+            moveBoxes = new CollideBox[MoveBoxNum];
+            for (int i = 0; i < MoveBoxNum; i++)
+            {
+                moveBoxes[i] = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player, bm);
+            }
         }
 
         public override void Update()
@@ -61,34 +73,33 @@ namespace Soleil
                 case PlayerMoveDir.None:
                     delta = Vector.Zero;
                     break;
-                case PlayerMoveDir.R:
-                    delta = delta.Rotate(0);
-                    break;
-                case PlayerMoveDir.UR:
-                    delta = delta.Rotate(315);
-                    break;
-                case PlayerMoveDir.U:
-                    delta = delta.Rotate(270);
-                    break;
-                case PlayerMoveDir.UL:
-                    delta = delta.Rotate(225);
-                    break;
-                case PlayerMoveDir.L:
-                    delta = delta.Rotate(180);
-                    break;
-                case PlayerMoveDir.DL:
-                    delta = delta.Rotate(135);
-                    break;
-                case PlayerMoveDir.D:
-                    delta = delta.Rotate(90);
-                    break;
-                case PlayerMoveDir.DR:
-                    delta = delta.Rotate(45);
-                    break;
                 default:
+                    delta = delta.Rotate((int)dir);
+                    SetCollideBoxes((int)dir);
                     break;
             }
             pos += delta;
+        }
+
+        private void NeutralizeCollideBoxes()
+        {
+            for (int i = 0; i < moveBoxes.Length; i++)
+            {
+                moveBoxes[i].SetLocalPos(Vector.Zero);
+            }
+        }
+        private void SetCollideBoxes(int centerAngle)
+        {
+            var speedVector = new Vector(speed, 0);
+            for (int i = 0; i < moveBoxes.Length; i++)
+            {
+                // 不思議計算でいい感じにする
+                var modifyAngle = CheckBoxAngle * ((i + 1) / 2); // 0,15,15,30,30,45,45,.....
+                if (i % 2 == 0) modifyAngle *= -1; // 0,15,-15,30,-30,45,...
+                var resultAngle = centerAngle + modifyAngle;
+                var resultPos = speedVector.Rotate(resultAngle);
+                moveBoxes[i].SetLocalPos(resultPos);
+            }
         }
 
 

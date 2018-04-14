@@ -29,6 +29,8 @@ namespace Soleil
             bm.Add(this);
         }
 
+        public void SetLocalPos(Vector _pos) => localPos = _pos;
+
         public void Update()
         {
 
