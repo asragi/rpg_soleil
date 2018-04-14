@@ -57,10 +57,56 @@ namespace Soleil {
         {
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
+
             if (KeyInput.GetKeyDown(Key.Left)) player.Move(new Vector(-1, 0));
             if (KeyInput.GetKeyDown(Key.Right)) player.Move(new Vector(1, 0));
             if (KeyInput.GetKeyDown(Key.Up)) player.Move(new Vector(0, -1));
             if (KeyInput.GetKeyDown(Key.Down)) player.Move(new Vector(0, 1));
+            
+            var input = InputDirection();
+        }
+
+        /// <summary>
+        /// 入力に応じて8方向のEnumを返す
+        /// </summary>
+        PlayerMoveDir InputDirection()
+        {
+            if (KeyInput.GetKeyDown(Key.Right))
+            {
+                if (KeyInput.GetKeyDown(Key.Up))
+                {
+                    return PlayerMoveDir.UR;
+                }
+
+                if (KeyInput.GetKeyDown(Key.Down))
+                {
+                    return PlayerMoveDir.DR;
+                }
+                return PlayerMoveDir.R;
+            }
+            if (KeyInput.GetKeyDown(Key.Left))
+            {
+                if (KeyInput.GetKeyDown(Key.Up))
+                {
+                    return PlayerMoveDir.UL;
+                }
+
+                if (KeyInput.GetKeyDown(Key.Down))
+                {
+                    return PlayerMoveDir.DL;
+                }
+                return PlayerMoveDir.L;
+            }
+            if (KeyInput.GetKeyDown(Key.Up))
+            {
+                return PlayerMoveDir.U;
+            }
+
+            if (KeyInput.GetKeyDown(Key.Down))
+            {
+                return PlayerMoveDir.D;
+            }
+            return PlayerMoveDir.None;
         }
     }
 }

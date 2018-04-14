@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Soleil
 {
+    public enum PlayerMoveDir { None,R,UR,U,UL,L,DL,D,DR}
+
     class PlayerObject : MapObject
     {
         // const
