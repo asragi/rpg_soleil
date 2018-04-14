@@ -89,6 +89,7 @@ namespace Soleil
                         var tmpData = tmp.ToCharArray();
                         for (int i = 0; i < width; i++)
                         {
+                            // 0が通行可能らしい
                             result[i, count] = (tmpData[i] == '1');
                         }
                         count++;

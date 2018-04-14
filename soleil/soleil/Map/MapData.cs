@@ -1,13 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace Soleil
 {
+    /// <summary>
+    /// Mapのデータをまとめるクラス. SetMapFlagを呼び出してFlagの設定をすること.
+    /// </summary>
     class MapData
     {
         MapName mapName;
@@ -18,7 +15,16 @@ namespace Soleil
         {
             mapName = _name;
             SetData();
-            SetFlag();
+        }
+
+
+        /// <summary>
+        /// 通行可・不可のフラグ設定. 1F程度処理にかかるので呼び出しタイミングを管理するため分けて処理.
+        /// </summary>
+        public void SetMapFlag()
+        {
+            // Debug
+            flags = CSVIO.GetMapData("somnia2", 1505, 1058);
         }
 
         void SetData()
@@ -34,23 +40,10 @@ namespace Soleil
             }
         }
 
-        /// <summary>
-        /// 通行可・不可のフラグ設定
-        /// </summary>
-        void SetFlag()
-        {
-            flags = new bool[tex.Width, tex.Height];
-            Color[] tmp = new Color[tex.Width * tex.Height];
-            tex.GetData(tmp);
-            for (int i = 0; i < tex.Width*tex.Height; i++)
-            {
-                flags[i % tex.Width, i / tex.Width]
-                    = tmp[i].R < 128;
-            }
-        }
+        public int GetFlagLengthX() => flags.GetLength(0);
+        public int GetFlagLengthY() => flags.GetLength(1);
 
-
-        public bool GetData(int x, int y)
+        public bool GetFlagData(int x, int y)
         {
             return flags[x,y];
         }

@@ -79,15 +79,15 @@ namespace Soleil
                     SetCollideBoxes((int)dir);
                     break;
             }
-            pos += delta;
+            pos += WallCheck();
         }
 
         private Vector WallCheck()
         {
             for (int i = 0; i < moveBoxes.Length; i++)
             {
-                // if(moveBoxes[i].IsCollideWall() == false)
-                return moveBoxes[i].GetLocalPos();
+                if(moveBoxes[i].GetWallCollide() == false)
+                   return moveBoxes[i].GetLocalPos();
             }
             return Vector.Zero; // どこにも移動できなさそうなとき
         }

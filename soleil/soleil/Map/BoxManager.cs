@@ -37,7 +37,38 @@ namespace Soleil
         public void Update()
         {
             CheckCollide();
+            CheckWallCollide();
             boxList.ForEach(b => b.Update());
+        }
+
+        void CheckWallCollide()
+        {
+            for (int i = 0; i < boxList.Count; i++)
+            {
+                double xi = boxList[i].WorldPos().X,
+                    yi = boxList[i].WorldPos().Y,
+                    wi = boxList[i].Size.X,
+                    hi = boxList[i].Size.Y;
+                bool col = false;
+                for (int j = 0; j < wi; j++)
+                {
+                    for (int k = 0; k < hi; k++)
+                    {
+                        col = col || CalcWallCollide(xi, yi, wi, hi, j, k); // 一つでもtrueならtrue
+                    }
+                }
+                boxList[i].SetWallCollide(col);
+            }
+        }
+
+        private bool CalcWallCollide(double xi, double yi, double wi, double hi, int j, int k)
+        {
+            int checkX = (int)(xi - wi / 2 + j);
+            int checkY = (int)(yi - hi / 2 + k);
+            // マップ外は壁ではないとする.
+            if (checkX >= mapData.GetFlagLengthX() || checkX < 0) return false;
+            if (checkY >= mapData.GetFlagLengthY() || checkY < 0) return false;
+            return mapData.GetFlagData(checkX, checkY);
         }
 
         void CheckCollide()
@@ -80,6 +111,7 @@ namespace Soleil
                     && ((boxList[i].WorldPos().Y - boxList[i].Size.Y / 2 < boxj[c].Y) && (boxj[c].Y < boxList[i].WorldPos().Y + boxList[i].Size.Y / 2));
                 if (col) break; // 1頂点でもbox[i]に含まれていることがわかれば計算を終了する
             }*/
+
 
             // 双方のboxに衝突相手の情報を渡す
             boxList[j].Collide(boxList[i],col);
