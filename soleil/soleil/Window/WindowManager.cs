@@ -76,6 +76,25 @@ namespace Soleil
             return nowSelectWindow.ReturnIndex();
         }
 
+        public void FinishMessageWindowAnim(WindowTag tag)
+        {
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
+                .ConvertAll<MessageWindow>(s=>(MessageWindow)s);
+            messageWindows.ForEach(mw => mw.FinishAnim());
+        }
+
+        /// <summary>
+        /// tagで指定した全てのMessageWindowが表示アニメーションを終えているかを返す
+        /// </summary>
+        public bool GetIsMessageWindowAnimFinished(WindowTag tag)
+        {
+            var flag = true;
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
+                .ConvertAll<MessageWindow>(s => (MessageWindow)s);
+            messageWindows.ForEach(mw => flag = flag && mw.GetAnimIsEnd()); // 一つでもfalseのものがあればfalse
+            return flag;
+        }
+
         public void SetFocusWindow(WindowTag tag)
         {
             var selectWindows = windows.FindAll(s => s.Tag == tag);

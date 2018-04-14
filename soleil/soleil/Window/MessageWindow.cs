@@ -39,6 +39,16 @@ namespace Soleil
 
         public bool GetAnimIsEnd() => endAnimation;
 
+        /// <summary>
+        /// 強制的に文字列表示アニメーションを終了させる.
+        /// </summary>
+        public void FinishAnim()
+        {
+            messageToDraw = message;
+            charIndex = messageArray.Length;
+            endAnimation = true;
+        }
+
         void AddChar()
         {
             if (messageArray == null) return;
