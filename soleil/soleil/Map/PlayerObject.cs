@@ -15,7 +15,7 @@ namespace Soleil
     {
         // const
         const int MoveSpeed = 3;
-        const int RunSpeed = 6;
+        const int RunSpeed = 8;
         const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
         // 衝突判定大きさ
@@ -72,6 +72,7 @@ namespace Soleil
             {
                 case PlayerMoveDir.None:
                     delta = Vector.Zero;
+                    NeutralizeCollideBoxes();
                     break;
                 default:
                     delta = delta.Rotate((int)dir);
@@ -79,6 +80,16 @@ namespace Soleil
                     break;
             }
             pos += delta;
+        }
+
+        private Vector WallCheck()
+        {
+            for (int i = 0; i < moveBoxes.Length; i++)
+            {
+                // if(moveBoxes[i].IsCollideWall() == false)
+                return moveBoxes[i].GetLocalPos();
+            }
+            return Vector.Zero; // どこにも移動できなさそうなとき
         }
 
         private void NeutralizeCollideBoxes()

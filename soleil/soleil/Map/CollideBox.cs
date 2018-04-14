@@ -30,6 +30,7 @@ namespace Soleil
         }
 
         public void SetLocalPos(Vector _pos) => localPos = _pos;
+        public Vector GetLocalPos() => localPos;
 
         public void Update()
         {
