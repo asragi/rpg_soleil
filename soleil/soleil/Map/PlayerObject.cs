@@ -16,14 +16,19 @@ namespace Soleil
         // const
         const int MoveSpeed = 3;
         const int RunSpeed = 6;
+        const int MoveBoxNum = 7; // 移動先を判定するboxの個数
+        const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
 
         bool movable, visible;
         CollideBox existanceBox;
+        CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         // AnimationSet anim;
         int speed;
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
+            movable = true;
+            visible = true;
             speed = MoveSpeed;
             om.SetPlayer(this);
             pos = new Vector(200, 200);
@@ -46,6 +51,44 @@ namespace Soleil
         public void Move(Vector dir)
         {
             pos += dir * speed;
+        }
+
+        public void Move(PlayerMoveDir dir)
+        {
+            var delta = new Vector(speed, 0);
+            switch (dir)
+            {
+                case PlayerMoveDir.None:
+                    delta = Vector.Zero;
+                    break;
+                case PlayerMoveDir.R:
+                    delta = delta.Rotate(0);
+                    break;
+                case PlayerMoveDir.UR:
+                    delta = delta.Rotate(315);
+                    break;
+                case PlayerMoveDir.U:
+                    delta = delta.Rotate(270);
+                    break;
+                case PlayerMoveDir.UL:
+                    delta = delta.Rotate(225);
+                    break;
+                case PlayerMoveDir.L:
+                    delta = delta.Rotate(180);
+                    break;
+                case PlayerMoveDir.DL:
+                    delta = delta.Rotate(135);
+                    break;
+                case PlayerMoveDir.D:
+                    delta = delta.Rotate(90);
+                    break;
+                case PlayerMoveDir.DR:
+                    delta = delta.Rotate(45);
+                    break;
+                default:
+                    break;
+            }
+            pos += delta;
         }
 
 

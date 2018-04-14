@@ -58,12 +58,14 @@ namespace Soleil {
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
 
+            /*
             if (KeyInput.GetKeyDown(Key.Left)) player.Move(new Vector(-1, 0));
             if (KeyInput.GetKeyDown(Key.Right)) player.Move(new Vector(1, 0));
             if (KeyInput.GetKeyDown(Key.Up)) player.Move(new Vector(0, -1));
             if (KeyInput.GetKeyDown(Key.Down)) player.Move(new Vector(0, 1));
-            
-            var input = InputDirection();
+            */
+
+            player.Move(InputDirection());
         }
 
         /// <summary>
