@@ -73,5 +73,31 @@ namespace Soleil
             }
             catch { }
         }
+
+        public static bool[,] GetMapData(string fileName, int width, int height)
+        {
+            var result = new bool[width,height];
+            try
+            {
+                using (var fs = new FileStream(fileName, FileMode.Open))
+                using(var sr = new StreamReader(fs))
+                {
+                    var count = 0;
+                    while (!sr.EndOfStream)
+                    {
+                        var tmp = sr.ReadLine();
+                        var tmpData = tmp.ToCharArray();
+                        for (int i = 0; i < width; i++)
+                        {
+                            result[i, count] = (tmpData[i] == '1');
+                        }
+                        count++;
+                    }
+
+                }
+            }
+            catch { Console.WriteLine("false!"); }
+            return result;
+        }
     }
 }
