@@ -12,27 +12,29 @@ namespace Soleil.Event
     class EventSet
     {
         EventSequence myEventSequence;
+        EventBase[] eventsDefault;
         List<EventBase> events;
         int index;
 
         public EventSet(params EventBase[] _events)
         {
-            index = 0;
-            events = new List<EventBase>();
-            for (int i = 0; i < _events.Length; i++)
-            {
-                events.Add(_events[i]);
-                AddExtraEvents(events, _events[i]);
-            }
-            for (int i = 0; i < events.Count; i++)
-            {
-                events[i].SetEventSet(this);
-            }
+            eventsDefault = _events;
+            Reset();
         }
 
         public void Reset()
         {
             index = 0;
+            events = new List<EventBase>();
+            for (int i = 0; i < eventsDefault.Length; i++)
+            {
+                events.Add(eventsDefault[i]);
+                AddExtraEvents(events, eventsDefault[i]);
+            }
+            for (int i = 0; i < events.Count; i++)
+            {
+                events[i].SetEventSet(this);
+            }
         }
 
         private void AddExtraEvents(List<EventBase> list, EventBase e)
@@ -43,6 +45,11 @@ namespace Soleil.Event
                     list.Add(new ChangeInputFocusEvent(InputFocus.Window));
                     list.Add(new MessageUpdateEvent(mwe.Tag));
                     list.Add(new WindowCloseEvent(mwe.Tag));
+                    break;
+                case SelectWindowEvent swe:
+                    list.Add(new ChangeInputFocusEvent(InputFocus.Window));
+                    list.Add(new SelectUpdateEvent(swe.Tag));
+                    list.Add(new WindowCloseEvent(swe.Tag));
                     break;
                 default:
                     break;
@@ -55,7 +62,7 @@ namespace Soleil.Event
             myEventSequence = es;
         }
 
-        public void Execute()
+        public virtual void Execute()
         {
             events[index].Execute();
         }

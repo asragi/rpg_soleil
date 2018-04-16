@@ -53,6 +53,7 @@
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\Turn.cs" />
+    <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
@@ -60,6 +61,9 @@
     <Compile Include="Event\Iterator.cs" />
     <Compile Include="Event\MessageUpdateEvent.cs" />
     <Compile Include="Event\MessageWindowEvent.cs" />
+    <Compile Include="Event\NumEventBranch.cs" />
+    <Compile Include="Event\SelectUpdateEvent.cs" />
+    <Compile Include="Event\SelectWindowEvent.cs" />
     <Compile Include="Event\UpdateEventBase.cs" />
     <Compile Include="Event\WindowCloseEvent.cs" />
     <Compile Include="Event\WindowEventBase.cs" />
@@ -96,6 +100,7 @@
     <Compile Include="Map\Maps\TestMap.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
+    <Compile Include="Map\TestObject2.cs" />
     <Compile Include="Map\TestObject.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
