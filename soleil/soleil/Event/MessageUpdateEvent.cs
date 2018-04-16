@@ -9,12 +9,25 @@
             : base()
         {
             tag = _tag;
+            wm = WindowManager.GetInstance();
         }
 
         public override void Execute()
         {
-            if (KeyInput.GetKeyPush(Key.A)) Next();
+            if (KeyInput.GetKeyPush(Key.A))
+            {
+                ReactToInput();
+            }
         }
 
+        private void ReactToInput()
+        {
+            if (wm.GetIsMessageWindowAnimFinished(tag))
+            {
+                Next();
+                return;
+            }
+            wm.FinishMessageWindowAnim(tag);
+        }
     }
 }

@@ -57,15 +57,48 @@ namespace Soleil
             nowSelectWindow = selectWindows.FindLast(s => s.Tag == tag);
         }
 
+        /// <summary>
+        /// 現在のSelectWindowに選択肢を決定した処理を送る.
+        /// </summary>
         public void Decide()
         {
             if (nowSelectWindow == null) return;
             nowSelectWindow.Decide();
         }
+
+        /// <summary>
+        /// 現在のSelectWindowにて決定されたIndexを返す.
+        /// </summary>
+        /// <returns>未決定時は-1を返す.</returns>
         public int GetDecideIndex()
         {
             if (nowSelectWindow == null) return -1;
             return nowSelectWindow.ReturnIndex();
+        }
+
+        public void FinishMessageWindowAnim(WindowTag tag)
+        {
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
+                .ConvertAll<MessageWindow>(s=>(MessageWindow)s);
+            messageWindows.ForEach(mw => mw.FinishAnim());
+        }
+
+        /// <summary>
+        /// tagで指定した全てのMessageWindowが表示アニメーションを終えているかを返す
+        /// </summary>
+        public bool GetIsMessageWindowAnimFinished(WindowTag tag)
+        {
+            var flag = true;
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
+                .ConvertAll<MessageWindow>(s => (MessageWindow)s);
+            messageWindows.ForEach(mw => flag = flag && mw.GetAnimIsEnd()); // 一つでもfalseのものがあればfalse
+            return flag;
+        }
+
+        public void SetFocusWindow(WindowTag tag)
+        {
+            var selectWindows = windows.FindAll(s => s.Tag == tag);
+            selectWindows.ForEach(s => s.Active = true);
         }
 
         public void Destroy(WindowTag tag)
