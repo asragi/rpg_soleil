@@ -9,7 +9,8 @@ namespace Soleil
 {
     enum MapName
     {
-        test,
+        Somnia1,
+        Somnia2,
     }
     abstract class Map
     {

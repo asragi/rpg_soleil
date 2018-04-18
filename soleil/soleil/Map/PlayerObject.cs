@@ -35,7 +35,7 @@ namespace Soleil
             visible = true;
             speed = MoveSpeed;
             om.SetPlayer(this);
-            pos = new Vector(200, 200);
+            pos = new Vector(800, 800);
 
             var collideSize = new Vector(CollideBoxWidth, CollideBoxHeight);
             existanceBox = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player,bm);

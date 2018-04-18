@@ -16,7 +16,7 @@ namespace Soleil
         List<CollideBox> hoge;
         WindowManager wm;
         public TestMap(WindowManager w)
-            : base(MapName.test)
+            : base(MapName.Somnia2)
         {
             wm = w;
             testO = new TestObject(om,bm);

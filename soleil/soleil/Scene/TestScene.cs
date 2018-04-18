@@ -2,11 +2,11 @@
 {
     class TestScene : Scene
     {
-        TestMap testMap;
+        TestMap2 testMap;
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            testMap = new TestMap(wm);
+            testMap = new TestMap2(wm);
         }
 
         override public void Update()

@@ -23,15 +23,24 @@ namespace Soleil
         /// </summary>
         public void SetMapFlag()
         {
-            // Debug
-            flags = CSVIO.GetMapData("somnia2", 1505, 1058);
+            switch (mapName)
+            {
+                case MapName.Somnia1:
+                    flags = CSVIO.GetMapData("somnia1", 1881, 1323);
+                    break;
+                case MapName.Somnia2:
+                    flags = CSVIO.GetMapData("somnia2", 1505, 1058);
+                    break;
+                default:
+                    break;
+            }
         }
 
         void SetData()
         {
             switch (mapName)
             {
-                case MapName.test:
+                case MapName.Somnia2:
                     tex = Resources.GetTexture(TextureID.White);
                     flagTex = Resources.GetTexture(TextureID.White);
                     break;
