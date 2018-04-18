@@ -79,6 +79,7 @@
     <Compile Include="Function\IEnumeratorEx.cs" />
     <Compile Include="Function\MathEx.cs" />
     <Compile Include="Function\Reference.cs" />
+    <Compile Include="Function\Transition.cs" />
     <Compile Include="Function\TryParser.cs" />
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
