@@ -2,7 +2,7 @@
 {
     class TestScene : Scene
     {
-        TestMap2 testMap;
+        Map testMap;
         public TestScene(SceneManager sm)
             : base(sm)
         {

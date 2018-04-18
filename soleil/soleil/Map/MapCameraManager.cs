@@ -19,11 +19,12 @@ namespace Soleil
         {
             player = _player;
             camera = Camera.GeInstance();
+        }
 
-            // debug
-            mapWidth = 1505;
-            mapHeight = 1058;
-
+        public void SetMapSize(int width, int height)
+        {
+            mapWidth = width;
+            mapHeight = height;
             maxX = mapWidth - Game1.VirtualWindowSizeX;
             maxY = mapHeight - Game1.VirtualWindowSizeY;
         }

@@ -9,12 +9,9 @@ namespace Soleil
     {
         MapName mapName;
         bool[,] flags;
-        Texture2D tex;
-        Texture2D flagTex;
         public MapData(MapName _name)
         {
             mapName = _name;
-            SetData();
         }
 
 
@@ -36,19 +33,6 @@ namespace Soleil
             }
         }
 
-        void SetData()
-        {
-            switch (mapName)
-            {
-                case MapName.Somnia2:
-                    tex = Resources.GetTexture(TextureID.White);
-                    flagTex = Resources.GetTexture(TextureID.White);
-                    break;
-                default:
-                    break;
-            }
-        }
-
         public int GetFlagLengthX() => flags.GetLength(0);
         public int GetFlagLengthY() => flags.GetLength(1);
 
@@ -57,14 +41,5 @@ namespace Soleil
             return flags[x,y];
         }
 
-        public void Update()
-        {
-
-        }
-
-        public void Draw(Drawing sb)
-        {
-
-        }
     }
 }

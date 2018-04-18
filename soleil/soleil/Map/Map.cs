@@ -16,23 +16,23 @@ namespace Soleil
     {
         MapEventManager mapEventManager;
         MapInputManager mapInputManager;
-        MapCameraManager mapCameraManager;
+        protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
         protected BoxManager bm;
         PlayerObject player;
-        MapData mapData;
+        protected MapData MapData;
 
         public Map(MapName _name)
         {
             om = ObjectManager.GetInstance();
-            mapData = new MapData(_name);
-            mapData.SetMapFlag();
-            bm = new BoxManager(mapData, player);
+            MapData = new MapData(_name);
+            MapData.SetMapFlag();
+            bm = new BoxManager(MapData, player);
             player = new PlayerObject(om, bm);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
             mapEventManager = MapEventManager.GetInstance();
-            mapCameraManager = new MapCameraManager(player);
+            MapCameraManager = new MapCameraManager(player);
             mapEventManager.SetMapInputManager(mapInputManager);
         }
 
@@ -42,7 +42,7 @@ namespace Soleil
             bm.Update();
             mapInputManager.Update();
             mapEventManager.Update();
-            mapCameraManager.Update();
+            MapCameraManager.Update();
         }
 
         virtual public void Draw(Drawing sb)

@@ -29,6 +29,7 @@ namespace Soleil
                 new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
                 new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
             };
+            MapCameraManager.SetMapSize(1505, 1058);
         }
 
         override public void Update()
