@@ -11,6 +11,7 @@ namespace Soleil
     {
         TestObject testO;
         TestObject2 test2;
+        TestMapJump testJump;
         MapConstruct[] mapConstructs;
         List<CollideBox> hoge;
         WindowManager wm;
@@ -20,6 +21,7 @@ namespace Soleil
             wm = w;
             testO = new TestObject(om,bm);
             test2 = new TestObject2(om, bm);
+            testJump = new TestMapJump(om, bm);
             mapConstructs = new MapConstruct[]{
                 new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
                 new AdjustConstruct(TextureID.Somnia4,600,om),
