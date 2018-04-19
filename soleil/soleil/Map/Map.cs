@@ -45,6 +45,11 @@ namespace Soleil
             MapCameraManager.Update();
         }
 
+        public void EventUpdate()
+        {
+            mapEventManager.Update();
+        }
+
         virtual public void Draw(Drawing sb)
         {
             bm.Draw(sb);

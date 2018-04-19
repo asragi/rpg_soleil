@@ -2,22 +2,25 @@
 {
     class TestScene : Scene
     {
-        Map testMap;
+        //Map testMap;
+        MapManager mapManager;
+
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            testMap = new TestMap2(wm);
+            mapManager = new MapManager();
+            mapManager.AddNew(new TestMap(wm));
         }
 
         override public void Update()
         {
-            testMap.Update();
+            mapManager.Update();
             base.Update();
         }
 
         override public void Draw(Drawing sb)
         {
-            testMap.Draw(sb);
+            mapManager.Draw(sb);
             base.Draw(sb);
         }
     }
