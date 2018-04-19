@@ -14,7 +14,6 @@ namespace Soleil
     }
     abstract class Map
     {
-        MapEventManager mapEventManager;
         MapInputManager mapInputManager;
         protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
@@ -31,9 +30,7 @@ namespace Soleil
             player = new PlayerObject(om, bm);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
-            mapEventManager = MapEventManager.GetInstance();
             MapCameraManager = new MapCameraManager(player);
-            mapEventManager.SetMapInputManager(mapInputManager);
         }
 
         virtual public void Update()
@@ -41,13 +38,11 @@ namespace Soleil
             om.Update();
             bm.Update();
             mapInputManager.Update();
-            mapEventManager.Update();
             MapCameraManager.Update();
         }
 
         public void EventUpdate()
         {
-            mapEventManager.Update();
         }
 
         virtual public void Draw(Drawing sb)
