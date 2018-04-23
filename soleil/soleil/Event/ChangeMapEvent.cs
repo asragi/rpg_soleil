@@ -25,7 +25,6 @@
 
         public override void Execute()
         {
-            // debug
             var map = MapFactory.GetMap(nextMap);
             // マップを変更する
             mm.ChangeMap(map);

@@ -9,7 +9,7 @@
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.ChangeMap(new TestMap());
+            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia1));
         }
 
         override public void Update()
