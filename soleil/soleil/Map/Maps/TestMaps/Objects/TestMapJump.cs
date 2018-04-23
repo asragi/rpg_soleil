@@ -17,6 +17,7 @@ namespace Soleil
                 new EventSet(
                     new FadeOutEvent()
                     ,new ChangeMapEvent(om.GetPlayer(), MapName.Somnia1, new Vector(400, 400), 0)
+                    ,new FadeInEvent()
                     )
                 );
         }

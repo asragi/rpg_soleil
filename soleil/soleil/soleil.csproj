@@ -59,6 +59,7 @@
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
     <Compile Include="Event\EventSequenceIterator.cs" />
+    <Compile Include="Event\FadeInEvent.cs" />
     <Compile Include="Event\FadeOutEvent.cs" />
     <Compile Include="Event\Iterator.cs" />
     <Compile Include="Event\MessageUpdateEvent.cs" />

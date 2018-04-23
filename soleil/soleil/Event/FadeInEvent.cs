@@ -2,12 +2,12 @@
 
 namespace Soleil.Event
 {
-    class FadeOutEvent
+    class FadeInEvent
         :EventBase
     {
         Transition transition;
         bool started;
-        public FadeOutEvent()
+        public FadeInEvent()
             :base()
         {
             transition = Transition.GetInstance();
@@ -18,7 +18,7 @@ namespace Soleil.Event
             if (!started)
             {
                 started = true;
-                transition.SetMode(TransitionMode.FadeOut);
+                transition.SetMode(TransitionMode.FadeIn);
                 return;
             }
             if (transition.GetTransitionMode() == TransitionMode.None)
