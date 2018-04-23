@@ -24,6 +24,7 @@ namespace Soleil
 
         public void SetPlayer(PlayerObject pl) => player = pl;
         public PlayerObject GetPlayer() => player;
+        public void SetPlayerPos(Vector pos) => player.SetPosition(pos);
 
         public void Update()
         {

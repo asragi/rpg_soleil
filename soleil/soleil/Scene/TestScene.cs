@@ -9,7 +9,7 @@
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.ChangeMap(new TestMap(wm));
+            mapManager.ChangeMap(new TestMap());
         }
 
         override public void Update()

@@ -14,7 +14,7 @@ namespace Soleil
             EventSequence.SetEventSet(
                 new EventSet(
                     new FadeOutEvent()
-                    ,new ChangeMapEvent(om.GetPlayer(), MapName.Somnia1, new Vector(70, 700), 0)
+                    ,new ChangeMapEvent(MapName.Somnia1, new Vector(70, 700), 0)
                     ,new FadeInEvent()
                     )
                 );

@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Soleil
+﻿namespace Soleil
 {
     class MapManager
     {
         private static MapManager mapManager = new MapManager();
         public static MapManager GetInstance() => mapManager;
-        private MapManager() { }
 
         Map nowMap;
         Map previousMap;
+        PlayerObject player;
 
         public void ChangeMap(Map map)
         {

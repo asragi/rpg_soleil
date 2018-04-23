@@ -46,6 +46,8 @@ namespace Soleil
             om.EventUpdate();
         }
 
+        public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);
+
         virtual public void Draw(Drawing sb)
         {
             bm.Draw(sb);

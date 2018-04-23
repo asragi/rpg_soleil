@@ -13,12 +13,9 @@ namespace Soleil
         TestObject2 test2;
         TestMapJump testJump;
         MapConstruct[] mapConstructs;
-        List<CollideBox> hoge;
-        WindowManager wm;
-        public TestMap(WindowManager w)
+        public TestMap()
             : base(MapName.Somnia2)
         {
-            wm = w;
             testO = new TestObject(om,bm);
             test2 = new TestObject2(om, bm);
             testJump = new TestMapJump(om, bm);

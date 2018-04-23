@@ -5,11 +5,9 @@ namespace Soleil
     class TestMap2 : Map
     {
         MapConstruct[] mapConstructs;
-        WindowManager wm;
-        public TestMap2(WindowManager w)
+        public TestMap2()
             : base(MapName.Somnia1)
         {
-            wm = w;
             mapConstructs = new MapConstruct[]{
                 new MapConstruct(TextureID.Somnia1_2,MapDepth.Ground,om),
                 new AdjustConstruct(TextureID.Somnia1_3,600,om),
