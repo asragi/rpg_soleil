@@ -8,9 +8,12 @@ namespace Soleil
 {
     class MapManager
     {
+        private static MapManager mapManager = new MapManager();
+        public static MapManager GetInstance() => mapManager;
+        private MapManager() { }
+
         Map nowMap;
         Map previousMap;
-        public MapManager() { }
 
         public void AddNew(Map map)
         {

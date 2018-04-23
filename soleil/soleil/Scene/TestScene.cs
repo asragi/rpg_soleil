@@ -8,7 +8,7 @@
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            mapManager = new MapManager();
+            mapManager = MapManager.GetInstance();
             mapManager.AddNew(new TestMap(wm));
         }
 
