@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Soleil.Event
+﻿namespace Soleil.Event
 {
     /// <summary>
     /// マップを変更しプレイヤーの位置を変更する.
@@ -32,7 +26,7 @@ namespace Soleil.Event
         public override void Execute()
         {
             // debug
-            var map = new TestMap2();
+            var map = MapFactory.GetMap(nextMap);
             // マップを変更する
             mm.ChangeMap(map);
             // プレイヤーのポジションを変更する
