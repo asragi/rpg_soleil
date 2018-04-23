@@ -34,6 +34,18 @@ namespace Soleil
             }
         }
 
+        /// <summary>
+        /// Map遷移時に前のMapの発火済みイベントを引き続き処理するための関数.
+        /// </summary>
+        public void EventUpdate()
+        {
+            objects.RemoveAll(s => s.IsDead());
+            foreach (var item in objects)
+            {
+                item.EventUpdate();
+            }
+        }
+
         public void Draw(Drawing sb)
         {
             foreach (var item in objects)

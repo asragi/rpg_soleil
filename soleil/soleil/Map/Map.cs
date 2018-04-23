@@ -43,6 +43,7 @@ namespace Soleil
 
         public void EventUpdate()
         {
+            om.EventUpdate();
         }
 
         virtual public void Draw(Drawing sb)
