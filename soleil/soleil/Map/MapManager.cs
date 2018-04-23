@@ -15,7 +15,7 @@ namespace Soleil
         Map nowMap;
         Map previousMap;
 
-        public void AddNew(Map map)
+        public void ChangeMap(Map map)
         {
             previousMap = nowMap;
             nowMap = map;

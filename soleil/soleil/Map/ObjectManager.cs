@@ -9,16 +9,13 @@ namespace Soleil
 {
     class ObjectManager
     {
-        private static ObjectManager objectManager = new ObjectManager();
         List<MapObject> objects;
         PlayerObject player;
 
-        private ObjectManager()
+        public ObjectManager()
         {
             objects = new List<MapObject>();
         }
-
-        public static ObjectManager GetInstance() => objectManager;
 
         public void Add(MapObject obj)
         {

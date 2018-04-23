@@ -23,7 +23,7 @@ namespace Soleil
 
         public Map(MapName _name)
         {
-            om = ObjectManager.GetInstance();
+            om = new ObjectManager();
             MapData = new MapData(_name);
             MapData.SetMapFlag();
             bm = new BoxManager(MapData, player);

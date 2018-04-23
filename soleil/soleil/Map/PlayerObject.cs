@@ -60,11 +60,6 @@ namespace Soleil
             speed = RunSpeed;
         }
 
-        public void Move(Vector dir)
-        {
-            pos += dir * speed;
-        }
-
         public void Move(PlayerMoveDir dir)
         {
             var delta = new Vector(speed, 0);
@@ -82,6 +77,9 @@ namespace Soleil
             pos += WallCheck();
         }
 
+        public void SetPosition(Vector _pos) => pos = _pos;
+
+        #region Box
         private Vector WallCheck()
         {
             for (int i = 0; i < moveBoxes.Length; i++)
@@ -99,6 +97,10 @@ namespace Soleil
                 moveBoxes[i].SetLocalPos(Vector.Zero);
             }
         }
+
+        /// <summary>
+        /// 移動先が移動可能か判定するboxを複数生成し位置を決定する.
+        /// </summary>
         private void SetCollideBoxes(int centerAngle)
         {
             var speedVector = new Vector(speed, 0);
@@ -112,7 +114,7 @@ namespace Soleil
                 moveBoxes[i].SetLocalPos(resultPos);
             }
         }
-
+        #endregion
 
         public override void Draw(Drawing sb)
         {
