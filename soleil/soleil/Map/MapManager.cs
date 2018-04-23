@@ -7,7 +7,6 @@
 
         Map nowMap;
         Map previousMap;
-        PlayerObject player;
 
         public void ChangeMap(Map map)
         {
