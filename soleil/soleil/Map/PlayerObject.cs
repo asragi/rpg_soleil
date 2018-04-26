@@ -1,7 +1,5 @@
 ﻿namespace Soleil
 {
-    public enum PlayerMoveDir:int { None=-1,R=0,UR=315,U=270,UL=225,L=180,DL=135,D=90,DR=45}
-    enum ObjectDir { None=-1,R,DR,D,DL,L,UL,U,UR}
     class PlayerObject : MapCharacter
     {
         // const
@@ -53,25 +51,25 @@
             speed = RunSpeed;
         }
 
-        public void Move(PlayerMoveDir dir)
+        public void Move(ObjectDir dir)
         {
             var delta = new Vector(speed, 0);
             switch (dir)
             {
-                case PlayerMoveDir.None:
+                case ObjectDir.None:
                     delta = Vector.Zero;
                     NeutralizeCollideBoxes();
                     break;
                 default:
-                    delta = delta.Rotate((int)dir);
-                    SetCollideBoxes((int)dir);
+                    delta = delta.Rotate(dir.GetAngle());
+                    SetCollideBoxes(dir.GetAngle());
                     break;
             }
             Pos += WallCheck();
 
             // debug
-            if (dir == PlayerMoveDir.None) nowAnim = 2;
-            else if ((int)dir <= 225 && (int)dir >= 135) nowAnim = 0;
+            if (dir == ObjectDir.None) nowAnim = 2;
+            else if (dir.GetAngle() <= 225 && dir.GetAngle() >= 135) nowAnim = 0;
             else nowAnim = 1;
         }
 

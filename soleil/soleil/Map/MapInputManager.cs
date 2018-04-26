@@ -71,44 +71,44 @@ namespace Soleil {
         /// <summary>
         /// 入力に応じて8方向のEnumを返す
         /// </summary>
-        PlayerMoveDir InputDirection()
+        ObjectDir InputDirection()
         {
             if (KeyInput.GetKeyDown(Key.Right))
             {
                 if (KeyInput.GetKeyDown(Key.Up))
                 {
-                    return PlayerMoveDir.UR;
+                    return ObjectDir.UR;
                 }
 
                 if (KeyInput.GetKeyDown(Key.Down))
                 {
-                    return PlayerMoveDir.DR;
+                    return ObjectDir.DR;
                 }
-                return PlayerMoveDir.R;
+                return ObjectDir.R;
             }
             if (KeyInput.GetKeyDown(Key.Left))
             {
                 if (KeyInput.GetKeyDown(Key.Up))
                 {
-                    return PlayerMoveDir.UL;
+                    return ObjectDir.UL;
                 }
 
                 if (KeyInput.GetKeyDown(Key.Down))
                 {
-                    return PlayerMoveDir.DL;
+                    return ObjectDir.DL;
                 }
-                return PlayerMoveDir.L;
+                return ObjectDir.L;
             }
             if (KeyInput.GetKeyDown(Key.Up))
             {
-                return PlayerMoveDir.U;
+                return ObjectDir.U;
             }
 
             if (KeyInput.GetKeyDown(Key.Down))
             {
-                return PlayerMoveDir.D;
+                return ObjectDir.D;
             }
-            return PlayerMoveDir.None;
+            return ObjectDir.None;
         }
     }
 }

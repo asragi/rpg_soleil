@@ -96,6 +96,7 @@
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapCharacter.cs" />
+    <Compile Include="Map\MapDirection.cs" />
     <Compile Include="Map\MapEventObject.cs" />
     <Compile Include="Map\MapData.cs" />
     <Compile Include="Map\MapFactory.cs" />
