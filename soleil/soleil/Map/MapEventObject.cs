@@ -11,7 +11,7 @@ namespace Soleil
     /// </summary>
     abstract class MapEventObject:MapObject
     {
-        public static Vector defaultBoxSize = new Vector(30, 30);
+        public static Vector DefaultBoxSize = new Vector(30, 30);
         CollideBox existanceBox;
 
 
@@ -20,7 +20,7 @@ namespace Soleil
         {
             Pos = _pos;
             // boxsizeが指定されていなければ既定の値にする。
-            var boxSize = _boxSize ?? defaultBoxSize;
+            var boxSize = _boxSize ?? DefaultBoxSize;
             existanceBox = new CollideBox(this, Vector.Zero, boxSize, layer, bm);
         }
     }
