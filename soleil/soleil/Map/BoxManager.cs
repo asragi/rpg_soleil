@@ -14,7 +14,7 @@ namespace Soleil
     {
         List<CollideBox> boxList;
         int indexNum;
-        bool visible = true; // for debug
+        bool visible = false; // for debug
         MapData mapData;
         PlayerObject player;
 

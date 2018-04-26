@@ -19,6 +19,10 @@
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         int speed;
 
+        Animation[] walkAnimations;
+        Animation[] standAnimation;
+        int nowAnim;
+
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(om)
         {
@@ -26,7 +30,7 @@
             visible = true;
             speed = MoveSpeed;
             om.SetPlayer(this);
-            pos = new Vector(800, 800);
+            Pos = new Vector(800, 800);
 
             var collideSize = new Vector(CollideBoxWidth, CollideBoxHeight);
             existanceBox = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player,bm);
@@ -36,10 +40,17 @@
             {
                 moveBoxes[i] = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player, bm);
             }
+
+            // 8方向歩きアニメーション
+            walkAnimations = new Animation[8];
+            walkAnimations[0] = new Animation(AnimationID.LuneWalkL, 8, DepthID.Player, true);
+            walkAnimations[1] = new Animation(AnimationID.LuneWalkR, 8, DepthID.Player, true);
+            walkAnimations[2] = new Animation(AnimationID.LuneWalkL, 20000000, DepthID.Player, true);
         }
 
         public override void Update()
         {
+            walkAnimations[nowAnim].Move();
             base.Update();
         }
         public void Walk()
@@ -65,10 +76,15 @@
                     SetCollideBoxes((int)dir);
                     break;
             }
-            pos += WallCheck();
+            Pos += WallCheck();
+
+            // debug
+            if (dir == PlayerMoveDir.None) nowAnim = 2;
+            else if ((int)dir <= 225 && (int)dir >= 135) nowAnim = 0;
+            else nowAnim = 1;
         }
 
-        public void SetPosition(Vector _pos) => pos = _pos;
+        public void SetPosition(Vector _pos) => Pos = _pos;
 
         #region Box
         private Vector WallCheck()
@@ -109,8 +125,14 @@
 
         public override void Draw(Drawing sb)
         {
-            sb.Draw(pos,Resources.GetTexture(TextureID.White),DepthID.Item);
+            sb.Draw(Pos,Resources.GetTexture(TextureID.White),DepthID.Item);
+            DrawAnimation(sb);
             base.Draw(sb);
+        }
+
+        void DrawAnimation(Drawing d)
+        {
+            walkAnimations[nowAnim].Draw(d, Pos + new Vector(0,-40));
         }
     }
 }

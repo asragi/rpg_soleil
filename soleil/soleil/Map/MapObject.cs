@@ -4,7 +4,7 @@ namespace Soleil
 {
     abstract class MapObject
     {
-        protected Vector pos;
+        protected Vector Pos;
         protected bool dead;
         protected int frame;
         protected EventSequence EventSequence;
@@ -35,7 +35,7 @@ namespace Soleil
 
         public Vector GetPosition()
         {
-            return pos;
+            return Pos;
         }
 
         public bool IsDead()

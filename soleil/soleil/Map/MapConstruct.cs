@@ -33,7 +33,7 @@ namespace Soleil
         public MapConstruct(Vector _pos, TextureID tex,MapDepth dep, ObjectManager om)
             :base(om)
         {
-            pos = _pos;
+            Pos = _pos;
             texture = Resources.GetTexture(tex);
             mapDepth = dep;
             switch (mapDepth)
@@ -62,7 +62,7 @@ namespace Soleil
         {
             var t = d.CenterBased;
             d.CenterBased = false;
-            d.Draw(pos, texture, depthId);
+            d.Draw(Pos, texture, depthId);
             d.CenterBased = t;
             base.Draw(d);
         }

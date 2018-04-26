@@ -8,7 +8,7 @@ namespace Soleil
         public TestMapJump(ObjectManager om, BoxManager bm)
             : base(om)
         {
-            pos = new Vector(1500, 738);
+            Pos = new Vector(1500, 738);
             exi = new CollideBox(this, Vector.Zero, new Vector(30, 275), CollideLayer.Character, bm);
 
             EventSequence.SetEventSet(
