@@ -93,6 +93,7 @@
     <Compile Include="Map\CollideLayer.cs" />
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
+    <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapCharacter.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
+    <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

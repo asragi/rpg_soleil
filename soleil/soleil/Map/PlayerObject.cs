@@ -1,4 +1,4 @@
-﻿namespace Soleil
+﻿namespace Soleil.Map
 {
     class PlayerObject : MapCharacter
     {

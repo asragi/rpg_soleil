@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 
 namespace Soleil.Event
 {

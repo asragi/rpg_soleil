@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// Map上の描画深度を管理する列挙型.

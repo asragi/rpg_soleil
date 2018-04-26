@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// オブジェクト・マップの接触・衝突を管理する判定Boxクラス

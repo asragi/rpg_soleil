@@ -1,4 +1,6 @@
-﻿namespace Soleil.Event
+﻿using Soleil.Map;
+
+namespace Soleil.Event
 {
     /// <summary>
     /// マップを変更しプレイヤーの位置を変更する.

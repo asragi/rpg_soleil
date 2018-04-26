@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil {
+namespace Soleil.Map
+{
     public enum InputFocus { None, Player, Window, }
     /// <summary>
     /// MapSceneでのInputの受付を管理するクラス

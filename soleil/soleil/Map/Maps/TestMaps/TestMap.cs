@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Soleil
+namespace Soleil.Map
 {
-    class TestMap : Map
+    class TestMap : MapBase
     {
         TestObject testO;
         TestObject2 test2;

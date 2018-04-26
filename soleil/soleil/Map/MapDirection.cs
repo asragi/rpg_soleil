@@ -4,16 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
-    enum ObjectDir { None = -1, R, DR, D, DL, L, UL, U, UR }
+    enum ObjectDir {R=0, DR=1, D=2, DL=3, L=4, UL=5, U=6, UR=7,None }
 
     static partial class MapDirection
     {
-        public static int GetAngle(this ObjectDir dir)
-        {
-            if (dir == ObjectDir.None) throw new ArgumentOutOfRangeException();
-            return (int)dir * 45;
-        }
+        public static int GetAngle(this ObjectDir dir) => (int)dir * 45;
     }
 }

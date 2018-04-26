@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// 衝突判定用Boxの管理・判定計算を行う

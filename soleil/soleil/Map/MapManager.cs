@@ -1,14 +1,14 @@
-﻿namespace Soleil
+﻿namespace Soleil.Map
 {
     class MapManager
     {
         private static MapManager mapManager = new MapManager();
         public static MapManager GetInstance() => mapManager;
 
-        Map nowMap;
-        Map previousMap;
+        MapBase nowMap;
+        MapBase previousMap;
 
-        public void ChangeMap(Map map)
+        public void ChangeMap(MapBase map)
         {
             previousMap = nowMap;
             nowMap = map;

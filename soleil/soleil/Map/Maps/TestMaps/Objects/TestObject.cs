@@ -1,6 +1,6 @@
 ﻿using Soleil.Event;
 
-namespace Soleil
+namespace Soleil.Map
 {
     class TestObject :MapObject
     {

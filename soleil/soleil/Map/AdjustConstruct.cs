@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// プレイヤーの位置によって描画レイヤーを変更するマップオブジェクトのクラス.
