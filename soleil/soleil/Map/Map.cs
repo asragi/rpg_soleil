@@ -9,30 +9,28 @@ namespace Soleil
 {
     enum MapName
     {
-        test,
+        Somnia1,
+        Somnia2,
     }
     abstract class Map
     {
-        MapEventManager mapEventManager;
         MapInputManager mapInputManager;
-        MapCameraManager mapCameraManager;
+        protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
         protected BoxManager bm;
         PlayerObject player;
-        MapData mapData;
+        protected MapData MapData;
 
         public Map(MapName _name)
         {
-            om = ObjectManager.GetInstance();
-            mapData = new MapData(_name);
-            mapData.SetMapFlag();
-            bm = new BoxManager(mapData, player);
+            om = new ObjectManager();
+            MapData = new MapData(_name);
+            MapData.SetMapFlag();
+            bm = new BoxManager(MapData, player);
             player = new PlayerObject(om, bm);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
-            mapEventManager = MapEventManager.GetInstance();
-            mapCameraManager = new MapCameraManager(player);
-            mapEventManager.SetMapInputManager(mapInputManager);
+            MapCameraManager = new MapCameraManager(player);
         }
 
         virtual public void Update()
@@ -40,9 +38,15 @@ namespace Soleil
             om.Update();
             bm.Update();
             mapInputManager.Update();
-            mapEventManager.Update();
-            mapCameraManager.Update();
+            MapCameraManager.Update();
         }
+
+        public void EventUpdate()
+        {
+            om.EventUpdate();
+        }
+
+        public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);
 
         virtual public void Draw(Drawing sb)
         {

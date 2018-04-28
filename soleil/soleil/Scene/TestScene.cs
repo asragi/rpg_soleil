@@ -2,28 +2,25 @@
 {
     class TestScene : Scene
     {
-        TestMap testMap;
-        Transition transition; // debug
+        //Map testMap;
+        MapManager mapManager;
+
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            testMap = new TestMap(wm);
-            transition = new Transition();
+            mapManager = MapManager.GetInstance();
+            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia1));
         }
 
         override public void Update()
         {
-            if (KeyInput.GetKeyPush(Key.B)) transition.SetMode(TransitionMode.FadeIn);
-            if (KeyInput.GetKeyPush(Key.A)) transition.SetMode(TransitionMode.FadeOut);
-            testMap.Update();
-            transition.Update();
+            mapManager.Update();
             base.Update();
         }
 
         override public void Draw(Drawing sb)
         {
-            transition.Draw(sb);
-            testMap.Draw(sb);
+            mapManager.Draw(sb);
             base.Draw(sb);
         }
     }

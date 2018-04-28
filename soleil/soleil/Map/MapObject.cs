@@ -1,10 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Soleil.Event;
 
 namespace Soleil
 {
@@ -13,16 +7,25 @@ namespace Soleil
         protected Vector pos;
         protected bool dead;
         protected int frame;
+        protected EventSequence EventSequence;
 
         public MapObject(ObjectManager om)
         {
             dead = false;
             om.Add(this);
+
+            EventSequence = new EventSequence();
         }
 
         virtual public void Update()
         {
+            EventUpdate();
             frame++;
+        }
+
+        virtual public void EventUpdate()
+        {
+            EventSequence.Update();
         }
 
         virtual public void Draw(Drawing sb)

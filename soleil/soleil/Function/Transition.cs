@@ -13,14 +13,16 @@ namespace Soleil
         int index;
         bool stop;
 
-        public Transition()
+        private static Transition transition = new Transition();
+        public static Transition GetInstance() => transition;
+        private Transition()
         {
             white = new Texture2D[TransitionTime];
             for (int i = 0; i < TransitionTime; i++)
             {
                 white[i] = Resources.GetTexture(TextureID.Rule0 + i);
             }
-            index = 0;
+            index = TransitionTime-1;
             stop = true;
             mode = TransitionMode.None;
         }
@@ -57,6 +59,9 @@ namespace Soleil
                     break;
             }
         }
+
+        public TransitionMode GetTransitionMode() => mode;
+
 
         private void RefreshForFade(TransitionMode mode)
         {

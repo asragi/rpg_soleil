@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-
-namespace Soleil
+﻿namespace Soleil
 {
     public enum PlayerMoveDir:int { None=-1,R=0,UR=315,U=270,UL=225,L=180,DL=135,D=90,DR=45}
 
@@ -35,7 +26,7 @@ namespace Soleil
             visible = true;
             speed = MoveSpeed;
             om.SetPlayer(this);
-            pos = new Vector(200, 200);
+            pos = new Vector(800, 800);
 
             var collideSize = new Vector(CollideBoxWidth, CollideBoxHeight);
             existanceBox = new CollideBox(this, Vector.Zero, collideSize, CollideLayer.Player,bm);
@@ -60,11 +51,6 @@ namespace Soleil
             speed = RunSpeed;
         }
 
-        public void Move(Vector dir)
-        {
-            pos += dir * speed;
-        }
-
         public void Move(PlayerMoveDir dir)
         {
             var delta = new Vector(speed, 0);
@@ -82,6 +68,9 @@ namespace Soleil
             pos += WallCheck();
         }
 
+        public void SetPosition(Vector _pos) => pos = _pos;
+
+        #region Box
         private Vector WallCheck()
         {
             for (int i = 0; i < moveBoxes.Length; i++)
@@ -99,6 +88,10 @@ namespace Soleil
                 moveBoxes[i].SetLocalPos(Vector.Zero);
             }
         }
+
+        /// <summary>
+        /// 移動先が移動可能か判定するboxを複数生成し位置を決定する.
+        /// </summary>
         private void SetCollideBoxes(int centerAngle)
         {
             var speedVector = new Vector(speed, 0);
@@ -112,7 +105,7 @@ namespace Soleil
                 moveBoxes[i].SetLocalPos(resultPos);
             }
         }
-
+        #endregion
 
         public override void Draw(Drawing sb)
         {

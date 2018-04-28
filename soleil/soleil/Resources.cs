@@ -37,6 +37,11 @@ namespace Soleil
         Rule18,
         Rule19,
 
+        Somnia1_1,
+        Somnia1_2,
+        Somnia1_3,
+        Somnia1_4,
+
         Somnia1,
         Somnia2,
         Somnia3,
@@ -170,6 +175,11 @@ namespace Soleil
             #region Texture
 
             SetPath(TextureID.White, "white");
+
+            SetPath(TextureID.Somnia1_1, "Map/Back/Somnia/1/back1-1");
+            SetPath(TextureID.Somnia1_2, "Map/Back/Somnia/1/back1-2");
+            SetPath(TextureID.Somnia1_3, "Map/Back/Somnia/1/back1-3");
+            SetPath(TextureID.Somnia1_4, "Map/Back/Somnia/1/back1-4");
 
             SetPath(TextureID.Somnia1, "Map/Back/Somnia/back2-1");
             SetPath(TextureID.Somnia2, "Map/Back/Somnia/back2-2");

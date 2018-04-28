@@ -9,12 +9,9 @@ namespace Soleil
     {
         MapName mapName;
         bool[,] flags;
-        Texture2D tex;
-        Texture2D flagTex;
         public MapData(MapName _name)
         {
             mapName = _name;
-            SetData();
         }
 
 
@@ -23,17 +20,13 @@ namespace Soleil
         /// </summary>
         public void SetMapFlag()
         {
-            // Debug
-            flags = CSVIO.GetMapData("somnia2", 1505, 1058);
-        }
-
-        void SetData()
-        {
             switch (mapName)
             {
-                case MapName.test:
-                    tex = Resources.GetTexture(TextureID.White);
-                    flagTex = Resources.GetTexture(TextureID.White);
+                case MapName.Somnia1:
+                    flags = CSVIO.GetMapData("somnia1", 1881, 1323);
+                    break;
+                case MapName.Somnia2:
+                    flags = CSVIO.GetMapData("somnia2", 1505, 1058);
                     break;
                 default:
                     break;
@@ -48,14 +41,5 @@ namespace Soleil
             return flags[x,y];
         }
 
-        public void Update()
-        {
-
-        }
-
-        public void Draw(Drawing sb)
-        {
-
-        }
     }
 }

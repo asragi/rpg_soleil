@@ -5,8 +5,6 @@ namespace Soleil
     class TestObject2 :MapObject
     {
         CollideBox exi;
-        EventSequence eventSequence;
-        //EventManager eventManager;
         public TestObject2(ObjectManager om, BoxManager bm)
             : base(om)
         {
@@ -14,17 +12,15 @@ namespace Soleil
             exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character, bm);
 
             
-            //eventManager = new EventManager();
-
-            eventSequence = new EventSequence();
-            eventSequence.SetEventSet(
+            EventSequence = new EventSequence();
+            EventSequence.SetEventSet(
                 new EventSet(
                     new MessageWindowEvent(pos, new Vector(200, 76), 0, "テストメッセージ"),
                     new MessageWindowEvent(pos, new Vector(250, 76), 0, "いい感じになってる？"),
                     new SelectWindowEvent(pos, new Vector(134, 144), 0, "はい", "いいえ", "わからん")
                 ),
                 // GetInstance()はのちのちいい感じにする（どこにwindowManager設置したら書きやすいか悩んでる）
-                new NumEventBranch(eventSequence, () => WindowManager.GetInstance().GetDecideIndex(),
+                new NumEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex(),
                     new EventSet(
                         new MessageWindowEvent(pos, new Vector(200, 76), 0, "はいじゃないが")),
                     new EventSet(
@@ -40,13 +36,12 @@ namespace Soleil
 
         public override void OnCollisionEnter()
         {
-            eventSequence.StartEvent();
+            EventSequence.StartEvent();
             base.OnCollisionEnter();
         }
 
         public override void Update()
         {
-            eventSequence.Update();
             base.Update();
         }
 
