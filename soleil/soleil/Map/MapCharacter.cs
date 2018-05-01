@@ -11,18 +11,20 @@ namespace Soleil.Map
     /// <summary>
     /// Map上の存在判定のあるオブジェクトのうち、移動しないもの。
     /// </summary>
-    class MapCharacter:MapEventObject
+    abstract class MapCharacter:MapEventObject
     {
+        protected bool Symmetry; // アニメーションが左右対称かどうか
         protected ObjectDir Direction;
         protected MoveState MoveState;
         protected Animation NowAnimation;
         protected Animation[] StandAnimation;
-        public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm)
+        public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
             :base(pos,boxSize,CollideLayer.Player,om,bm)
         {
+            Symmetry = _symmetry;
             MoveState = MoveState.Stand;
-            // 8方向のアニメーション
-            StandAnimation = new Animation[8];
+            // n方向のアニメーション
+            StandAnimation = Symmetry ? new Animation[5] : new Animation[8];
         }
 
         protected void ChangeDirection(ObjectDir dir)
@@ -30,9 +32,15 @@ namespace Soleil.Map
             Direction = dir;
         }
 
-        void ChangeAnimStand(ObjectDir dir)
+        void ChangeAnimStand()
         {
-            NowAnimation = StandAnimation[(int)dir];
+            NowAnimation = StandAnimation[(int)Direction];
         }
+
+        public override void Draw(Drawing sb)
+        {
+            base.Draw(sb);
+        }
+
     }
 }

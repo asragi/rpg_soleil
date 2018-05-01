@@ -5,13 +5,13 @@ namespace Soleil.Map
     abstract class MapObject
     {
         protected Vector Pos;
-        protected bool dead;
-        protected int frame;
+        protected bool Dead;
+        protected int Frame;
         protected EventSequence EventSequence;
 
         public MapObject(ObjectManager om)
         {
-            dead = false;
+            Dead = false;
             om.Add(this);
 
             EventSequence = new EventSequence();
@@ -20,7 +20,7 @@ namespace Soleil.Map
         virtual public void Update()
         {
             EventUpdate();
-            frame++;
+            Frame++;
         }
 
         virtual public void EventUpdate()
@@ -40,7 +40,7 @@ namespace Soleil.Map
 
         public bool IsDead()
         {
-            return dead;
+            return Dead;
         }
 
         virtual public void OnCollisionEnter()

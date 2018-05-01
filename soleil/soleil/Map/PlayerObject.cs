@@ -1,6 +1,6 @@
 ﻿namespace Soleil.Map
 {
-    class PlayerObject : MapCharacter
+    class PlayerObject : DashCharacter
     {
         // const
         const int MoveSpeed = 3;
