@@ -8,11 +8,31 @@ namespace Soleil.Map
 {
     abstract class WalkCharacter : MapCharacter
     {
-        protected Animation[] WalkAnimation;
+        private Animation[] walkAnimation;
         public WalkCharacter(Vector pos, Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
             : base(pos, boxSize, om, bm,symmetry)
         {
-            WalkAnimation = symmetry ? new Animation[5] : new Animation[8];
+            walkAnimation = symmetry ? new Animation[5] : new Animation[8];
+        }
+
+        protected void SetWalkAnimation(AnimationData[] data)
+        {
+            for (int i = 0; i < walkAnimation.Length; i++)
+            {
+                walkAnimation[i] = new Animation(data[i]);
+            }
+        }
+
+        /// <summary>
+        /// 基底クラスのUpdateから呼び出される。MoveStateに応じてアニメーションを変更する。
+        /// </summary>
+        protected override void CheckMoveState()
+        {
+            if(MoveState == MoveState.Walk)
+            {
+                NowAnimation = walkAnimation[(int)Direction];
+            }
+            base.CheckMoveState();
         }
     }
 }

@@ -17,14 +17,40 @@ namespace Soleil.Map
         protected ObjectDir Direction;
         protected MoveState MoveState;
         protected Animation NowAnimation;
-        protected Animation[] StandAnimation;
+        private Animation[] standAnimation;
         public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
             :base(pos,boxSize,CollideLayer.Player,om,bm)
         {
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;
             // n方向のアニメーション
-            StandAnimation = Symmetry ? new Animation[5] : new Animation[8];
+            standAnimation = Symmetry ? new Animation[5] : new Animation[8];
+        }
+
+        /// <summary>
+        /// Stand状態のアニメーションを設定する.
+        /// </summary>
+        protected void SetStandAnimation(AnimationData[] data)
+        {
+            for (int i = 0; i < standAnimation.Length; i++)
+            {
+                standAnimation[i] = new Animation(data[i]);
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            CheckMoveState();
+            NowAnimation.Move();
+        }
+
+        protected virtual void CheckMoveState()
+        {
+            if (MoveState == MoveState.Stand)
+            {
+                NowAnimation = standAnimation[(int)Direction];
+            }
         }
 
         protected void ChangeDirection(ObjectDir dir)
@@ -32,13 +58,9 @@ namespace Soleil.Map
             Direction = dir;
         }
 
-        void ChangeAnimStand()
-        {
-            NowAnimation = StandAnimation[(int)Direction];
-        }
-
         public override void Draw(Drawing sb)
         {
+            NowAnimation?.Draw(sb, Pos);
             base.Draw(sb);
         }
 

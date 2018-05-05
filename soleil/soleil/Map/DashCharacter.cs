@@ -6,12 +6,39 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
+    /// <summary>
+    /// Map上のオブジェクトのうち、Dashを実装するもの。
+    /// </summary>
     abstract class DashCharacter : WalkCharacter
     {
+        private Animation[] dashAnimation;
         public DashCharacter(Vector pos,Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
             :base(pos,boxSize,om,bm, symmetry)
         {
+            dashAnimation = symmetry ? new Animation[5] : new Animation[8];
+        }
 
+        /// <summary>
+        /// Stand状態のアニメーションを設定する.
+        /// </summary>
+        protected void SetDashAnimation(AnimationData[] data)
+        {
+            for (int i = 0; i < dashAnimation.Length; i++)
+            {
+                dashAnimation[i] = new Animation(data[i]);
+            }
+        }
+
+        /// <summary>
+        /// 基底クラスのUpdateから呼び出される。MoveStateに応じてアニメーションを変更する。
+        /// </summary>
+        protected override void CheckMoveState()
+        {
+            if (MoveState == MoveState.Dash)
+            {
+                NowAnimation = dashAnimation[(int)Direction];
+            }
+            base.CheckMoveState();
         }
     }
 }

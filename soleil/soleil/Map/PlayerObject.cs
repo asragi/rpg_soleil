@@ -13,11 +13,8 @@
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         int speed;
 
-        Animation[] walkAnimations;
-        int nowAnim;
-
         public PlayerObject(ObjectManager om, BoxManager bm)
-            : base(new Vector(800,800),null,om,bm)
+            : base(new Vector(800,800),null,om,bm,false)
         {
             movable = true;
             visible = true;
@@ -29,17 +26,50 @@
             {
                 moveBoxes[i] = new CollideBox(this, Vector.Zero, DefaultBoxSize, CollideLayer.Player, bm);
             }
+            SetAnimation();
+        }
 
-            // 8方向歩きアニメーション
-            walkAnimations = new Animation[8];
-            walkAnimations[0] = new Animation(AnimationID.LuneWalkL, 8, DepthID.Player, true);
-            walkAnimations[1] = new Animation(AnimationID.LuneWalkR, 8, DepthID.Player, true);
-            walkAnimations[2] = new Animation(AnimationID.LuneWalkL, 20000000, DepthID.Player, true);
+        private void SetAnimation()
+        {
+            var standAnims = new AnimationData[8];
+            var sPeriod = 8;
+            standAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, true, sPeriod);
+            standAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            standAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, true, sPeriod);
+            SetStandAnimation(standAnims);
+
+            var walkAnims = new AnimationData[8];
+            var wPeriod = 8;
+            walkAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, true, wPeriod);
+            walkAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, true, wPeriod);
+            walkAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, true, wPeriod);
+            walkAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkL, true, wPeriod);
+            walkAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, true, wPeriod);
+            walkAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, true, wPeriod);
+            walkAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, true, wPeriod);
+            walkAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, true, wPeriod);
+            SetWalkAnimation(walkAnims);
+
+            var dashAnims = new AnimationData[8];
+            var dPeriod = 8;
+            dashAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, true, dPeriod);
+            dashAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, true, dPeriod);
+            dashAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, true, dPeriod);
+            dashAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkL, true, dPeriod);
+            dashAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, true, dPeriod);
+            dashAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, true, dPeriod);
+            dashAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, true, dPeriod);
+            dashAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, true, dPeriod);
+            SetDashAnimation(dashAnims);
         }
 
         public override void Update()
         {
-            walkAnimations[nowAnim].Move();
             base.Update();
         }
         public void Walk()
@@ -66,11 +96,6 @@
                     break;
             }
             Pos += WallCheck();
-
-            // debug
-            if (dir == ObjectDir.None) nowAnim = 2;
-            else if (dir.GetAngle() <= 225 && dir.GetAngle() >= 135) nowAnim = 0;
-            else nowAnim = 1;
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;
@@ -115,13 +140,7 @@
         public override void Draw(Drawing sb)
         {
             sb.Draw(Pos,Resources.GetTexture(TextureID.White),DepthID.Item);
-            DrawAnimation(sb);
             base.Draw(sb);
-        }
-
-        void DrawAnimation(Drawing d)
-        {
-            walkAnimations[nowAnim].Draw(d, Pos + new Vector(0,-40));
         }
     }
 }
