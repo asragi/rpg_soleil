@@ -73,12 +73,20 @@
         {
             base.Update();
         }
+
+        public void Stand()
+        {
+            MoveState = MoveState.Stand;
+        }
+
         public void Walk()
         {
+            MoveState = MoveState.Walk;
             speed = MoveSpeed;
         }
         public void Run()
         {
+            MoveState = MoveState.Dash;
             speed = RunSpeed;
         }
 
@@ -96,6 +104,10 @@
                     SetCollideBoxes(dir.GetAngle());
                     break;
             }
+
+            // 向きを変更する
+            Direction = (dir == ObjectDir.None)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
+            // 行けたら行く
             Pos += WallCheck();
         }
 
