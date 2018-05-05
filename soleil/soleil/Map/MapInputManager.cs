@@ -56,17 +56,14 @@ namespace Soleil.Map
 
         private void PlayerMove()
         {
+            var inputDir = InputDirection();
+
+            
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
+            if (inputDir == ObjectDir.None) player.Stand();
 
-            /*
-            if (KeyInput.GetKeyDown(Key.Left)) player.Move(new Vector(-1, 0));
-            if (KeyInput.GetKeyDown(Key.Right)) player.Move(new Vector(1, 0));
-            if (KeyInput.GetKeyDown(Key.Up)) player.Move(new Vector(0, -1));
-            if (KeyInput.GetKeyDown(Key.Down)) player.Move(new Vector(0, 1));
-            */
-
-            player.Move(InputDirection());
+            player.Move(inputDir);
         }
 
         /// <summary>
