@@ -87,6 +87,7 @@
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Images\Image.cs" />
+    <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Map\CameraPoint.cs" />
     <Compile Include="Map\AdjustConstruct.cs" />
     <Compile Include="Map\BoxManager.cs" />
