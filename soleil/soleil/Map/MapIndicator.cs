@@ -17,6 +17,7 @@ namespace Soleil.Map
         {
             imageManager = new ImageManager();
             backImageID = imageManager.Create(TextureID.IndicatorBack, upperRight + new Vector(-10,0), DepthID.Frame);
+            imageManager.Get(backImageID).Alpha = 0.5f;
         }
 
         public void Update()
