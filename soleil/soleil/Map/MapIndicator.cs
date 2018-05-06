@@ -16,12 +16,12 @@ namespace Soleil.Map
         public MapIndicator()
         {
             imageManager = new ImageManager();
-            backImageID = imageManager.Create(TextureID.FrameTest, upperRight, DepthID.Frame);
+            backImageID = imageManager.Create(TextureID.IndicatorBack, upperRight + new Vector(-10,0), DepthID.Frame);
         }
 
         public void Update()
         {
-            imageManager.Get(backImageID).Angle += 0.003f;
+            imageManager.Get(backImageID).Angle += 0.002f;
             imageManager.Update();
         }
 

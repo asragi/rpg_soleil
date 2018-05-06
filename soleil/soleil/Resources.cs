@@ -15,6 +15,7 @@ namespace Soleil
     {
         FrameTest,
         WhiteWindow,
+        IndicatorBack,
 
         Rule0,
         Rule1,
@@ -193,6 +194,7 @@ namespace Soleil
             SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
+            SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
             #endregion
 
