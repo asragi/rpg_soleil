@@ -14,11 +14,17 @@ namespace Soleil
             mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia1));
 
             imageManager = new ImageManager();
+            imageManager.Create(TextureID.FrameTest, Vector.Zero, DepthID.Debug);
         }
 
         override public void Update()
         {
             imageManager.Update();
+            if (KeyInput.GetKeyPush(Key.C))
+            {
+                imageManager.MoveTo(0, new Vector(300, 300), 60, Easing.OutQuart);
+                imageManager.FadeIn(0,60, Easing.OutCirc);
+            }
             mapManager.Update();
             base.Update();
         }

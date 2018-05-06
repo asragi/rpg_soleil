@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,10 @@ namespace Soleil
         DepthID depth;
         Vector origin;
         protected int frame;
-        protected bool isUI;
+        protected bool isStatic;
         protected float angle;
         public int Id { get; private set; }
         public bool IsDead { get; set; }
-        public float Alpha { get; set; }
         public Vector Pos { get; set; }
 
         // Easing移動実現用位置保持変数
@@ -29,6 +29,11 @@ namespace Soleil
         private int easeDuration;
         private Func<double, double, double, double, double> easeFunc;
 
+        // Alpha
+        public float Alpha { get; set; }
+        private int alphaFrame;
+        private int alphaDuration;
+        private Func<double, double, double, double, double> alphaEaseFunc;
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
@@ -41,9 +46,10 @@ namespace Soleil
             targetPos = Pos;
             startPos = Pos;
             frame = 0;
+            Alpha = 1;
             origin = (centerOrigin) ? new Vector(tex.Width, tex.Height) / 2 : Vector.Zero;
             IsDead = false;
-            this.isUI = isStatic;
+            this.isStatic = isStatic;
         }
 
         public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
@@ -55,9 +61,17 @@ namespace Soleil
             easeFunc = _easeFunc;
         }
 
+        public void FadeIn(int duration, Func<double, double, double, double, double> _easeFunc)
+        {
+            alphaFrame = 0;
+            alphaDuration = duration;
+            alphaEaseFunc = _easeFunc;
+        }
+
         public virtual void Update()
         {
             Easing();
+            FadeIn();
             frame++;
         }
 
@@ -71,10 +85,18 @@ namespace Soleil
             easeFrame++;
         }
 
+        private void FadeIn()
+        {
+            if (alphaFrame >= alphaDuration) return;
+            if (alphaEaseFunc == null) return;
+            Alpha = (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0);
+            alphaFrame++;
+        }
+
         public virtual void Draw(Drawing d)
         {
-            if (isUI) d.DrawUI(Pos, tex, depth, angle: angle);
-            else d.Draw(Pos, tex, depth, origin, 1, angle);
+            if (isStatic) d.DrawUI(Pos, tex, depth, 1,Alpha,angle);
+            else d.DrawWithColor(Pos, tex, depth, Color.White * Alpha, 1, angle);
         }
     }
 }

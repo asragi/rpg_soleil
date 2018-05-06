@@ -46,6 +46,11 @@ namespace Soleil
             Get(id).MoveTo(target, duration, easeFunc);
         }
 
+        public void FadeIn(int id, int duration, Func<double,double,double,double,double> easeFunc)
+        {
+            Get(id).FadeIn(duration, easeFunc);
+        }
+
 
         public void Update()
         {
