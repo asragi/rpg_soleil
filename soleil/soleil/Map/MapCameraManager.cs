@@ -16,7 +16,7 @@ namespace Soleil.Map
         PlayerObject player;
         Camera camera;
         CameraPoint[] cameraPoints;
-        static Vector CameraDiff = new Vector(Game1.VirtualWindowSizeX / 2, Game1.VirtualWindowSizeY / 2);
+        static Vector CameraDiff = new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY);
 
         public MapCameraManager(PlayerObject _player)
         {
@@ -30,8 +30,8 @@ namespace Soleil.Map
         {
             mapWidth = width;
             mapHeight = height;
-            maxX = mapWidth - Game1.VirtualWindowSizeX;
-            maxY = mapHeight - Game1.VirtualWindowSizeY;
+            maxX = mapWidth - Game1.VirtualCenterX;
+            maxY = mapHeight - Game1.VirtualCenterY;
         }
 
         public void Update()
@@ -47,7 +47,7 @@ namespace Soleil.Map
             // tempPos = ClampCameraPos(tempPos);
             Vector tempPos;
             tempPos = SmoothMove() - CameraDiff;
-            camera.SetPositon(ClampCameraPos(tempPos));
+            camera.SetPositon(tempPos);
         }
 
         #region CameraStrategy
@@ -74,7 +74,7 @@ namespace Soleil.Map
             {
                 nowTarget = nextTarget;
                 startPos = camera.GetPosition() + CameraDiff;
-                targetPos = cameraPoints[nextTarget].GetPos();
+                targetPos = ClampCameraPos(cameraPoints[nextTarget].GetPos());
                 frame = 0;
             }
             var X = Easing.OutQuart(frame, duration, targetPos.X, startPos.X);
@@ -91,8 +91,8 @@ namespace Soleil.Map
         private Vector ClampCameraPos(Vector pos)
         {
             Vector temp;
-            temp.X = Math.Min(maxX, Math.Max(0, pos.X));
-            temp.Y = Math.Min(maxY, Math.Max(0, pos.Y));
+            temp.X = Math.Min(maxX, Math.Max(Game1.VirtualCenterX, pos.X));
+            temp.Y = Math.Min(maxY, Math.Max(Game1.VirtualCenterY, pos.Y));
             return temp;
         }
     }
