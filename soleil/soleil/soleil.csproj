@@ -103,6 +103,7 @@
     <Compile Include="Map\MapEventObject.cs" />
     <Compile Include="Map\MapData.cs" />
     <Compile Include="Map\MapFactory.cs" />
+    <Compile Include="Map\MapIndicator.cs" />
     <Compile Include="Map\MapInputManager.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />

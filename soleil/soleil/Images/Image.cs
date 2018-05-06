@@ -17,7 +17,7 @@ namespace Soleil
         Vector origin;
         protected int frame;
         protected bool isStatic;
-        protected float angle;
+        public float Angle { get; set; }
         public int Id { get; private set; }
         public bool IsDead { get; set; }
         public Vector Pos { get; set; }
@@ -97,8 +97,8 @@ namespace Soleil
 
         public virtual void Draw(Drawing d)
         {
-            if (isStatic) d.DrawUI(Pos, tex, depth, 1,Alpha,angle);
-            else d.DrawWithColor(Pos, tex, depth, Color.White * Alpha, 1, angle);
+            if (isStatic) d.DrawUI(Pos, tex, depth, 1,Alpha,Angle);
+            else d.DrawWithColor(Pos, tex, depth, Color.White * Alpha, 1, Angle);
         }
     }
 }

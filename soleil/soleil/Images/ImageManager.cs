@@ -67,6 +67,6 @@ namespace Soleil
             images.ForEach(s => s.Draw(d));
         }
 
-        Image Get(int id) => images.Find(s => s.Id == id);
+        public Image Get(int id) => images.Find(s => s.Id == id);
     }
 }
