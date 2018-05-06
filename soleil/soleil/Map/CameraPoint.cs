@@ -9,9 +9,13 @@ namespace Soleil.Map
     class CameraPoint
     {
         Vector pos;
-        public CameraPoint(Vector _pos)
+        public CameraPoint(int x, int y)
         {
-            pos = _pos;
+            pos = new Vector(x,y);
+        }
+        public CameraPoint(Vector vec)
+        {
+            pos = vec;
         }
 
         public Vector GetPos() => pos;
