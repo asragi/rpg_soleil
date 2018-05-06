@@ -81,10 +81,6 @@ namespace Soleil.Map
             var Y = Easing.OutQuart(frame, duration, targetPos.Y, startPos.Y);
             if (frame < duration) frame++;
             return new Vector(X, Y);
-
-
-
-            //return cameraPoints[nextTarget].GetPos();
         }
 
         #endregion

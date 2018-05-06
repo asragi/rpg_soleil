@@ -13,6 +13,7 @@ namespace Soleil.Map
         TestObject2 test2;
         TestMapJump testJump;
         MapConstruct[] mapConstructs;
+        CameraPoint[] cameraPoints;
         public TestMap()
             : base(MapName.Somnia2)
         {
@@ -27,6 +28,14 @@ namespace Soleil.Map
                 new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
             };
             MapCameraManager.SetMapSize(1505, 1058);
+            cameraPoints = new CameraPoint[] {
+                new CameraPoint(242,457),
+                new CameraPoint(559,269),
+                new CameraPoint(644,744),
+                new CameraPoint(1068,779),
+                new CameraPoint(235,965),
+            };
+            MapCameraManager.SetCameraPoint(cameraPoints);
         }
 
         override public void Update()
