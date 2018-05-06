@@ -23,7 +23,12 @@ namespace Soleil
             if (KeyInput.GetKeyPush(Key.C))
             {
                 imageManager.MoveTo(0, new Vector(300, 300), 60, Easing.OutQuart);
-                imageManager.FadeIn(0,60, Easing.OutCirc);
+                imageManager.FadeOut(0,30, Easing.OutCirc);
+            }
+            if (KeyInput.GetKeyPush(Key.D))
+            {
+                imageManager.MoveTo(0, new Vector(0, 0), 60, Easing.OutQuart);
+                imageManager.FadeIn(0, 30, Easing.OutCirc);
             }
             mapManager.Update();
             base.Update();

@@ -48,7 +48,11 @@ namespace Soleil
 
         public void FadeIn(int id, int duration, Func<double,double,double,double,double> easeFunc)
         {
-            Get(id).FadeIn(duration, easeFunc);
+            Get(id).Fade(duration, easeFunc,true);
+        }
+        public void FadeOut(int id, int duration, Func<double, double, double, double, double> easeFunc)
+        {
+            Get(id).Fade(duration, easeFunc,false);
         }
 
 

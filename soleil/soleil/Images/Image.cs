@@ -34,6 +34,7 @@ namespace Soleil
         private int alphaFrame;
         private int alphaDuration;
         private Func<double, double, double, double, double> alphaEaseFunc;
+        bool fadeIn;
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
@@ -61,17 +62,18 @@ namespace Soleil
             easeFunc = _easeFunc;
         }
 
-        public void FadeIn(int duration, Func<double, double, double, double, double> _easeFunc)
+        public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
         {
             alphaFrame = 0;
             alphaDuration = duration;
             alphaEaseFunc = _easeFunc;
+            fadeIn = isFadeIn;
         }
 
         public virtual void Update()
         {
             Easing();
-            FadeIn();
+            Fade();
             frame++;
         }
 
@@ -85,11 +87,11 @@ namespace Soleil
             easeFrame++;
         }
 
-        private void FadeIn()
+        private void Fade()
         {
             if (alphaFrame >= alphaDuration) return;
             if (alphaEaseFunc == null) return;
-            Alpha = (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0);
+            Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
             alphaFrame++;
         }
 
