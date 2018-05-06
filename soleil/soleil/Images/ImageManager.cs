@@ -15,6 +15,7 @@ namespace Soleil
         int index;
         public ImageManager()
         {
+            index = 0;
             images = new List<Image>();
         }
 
@@ -34,7 +35,15 @@ namespace Soleil
 
         public void Destroy(int id)
         {
-            images.Find(s => s.Id == id).IsDead = true;
+            Get(id).IsDead = true;
+        }
+
+        /// <summary>
+        /// 指定したIDのImageをTargetに向けてdurationフレームかけて移動させる。
+        /// </summary>
+        public void MoveTo(int id, Vector target, int duration, Func<double,double,double,double,double> easeFunc)
+        {
+            Get(id).MoveTo(target, duration, easeFunc);
         }
 
 
@@ -48,5 +57,7 @@ namespace Soleil
         {
             images.ForEach(s => s.Draw(d));
         }
+
+        Image Get(int id) => images.Find(s => s.Id == id);
     }
 }
