@@ -15,7 +15,7 @@ namespace Soleil.Map
         public DashCharacter(Vector pos,Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
             :base(pos,boxSize,om,bm, symmetry)
         {
-            dashAnimation = symmetry ? new Animation[5] : new Animation[8];
+            dashAnimation = new Animation[8];
         }
 
         /// <summary>
