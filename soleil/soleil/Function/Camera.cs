@@ -26,6 +26,7 @@ namespace Soleil
             position = pos;
         }
 
+        public Vector GetPosition() => position;
 
         public void Update()
         {

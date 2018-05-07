@@ -87,6 +87,8 @@
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Images\Image.cs" />
+    <Compile Include="Images\ImageManager.cs" />
+    <Compile Include="Map\CameraPoint.cs" />
     <Compile Include="Map\AdjustConstruct.cs" />
     <Compile Include="Map\BoxManager.cs" />
     <Compile Include="Map\CollideBox.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Map\MapEventObject.cs" />
     <Compile Include="Map\MapData.cs" />
     <Compile Include="Map\MapFactory.cs" />
+    <Compile Include="Map\MapIndicator.cs" />
     <Compile Include="Map\MapInputManager.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
