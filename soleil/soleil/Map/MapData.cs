@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// Mapのデータをまとめるクラス. SetMapFlagを呼び出してFlagの設定をすること.

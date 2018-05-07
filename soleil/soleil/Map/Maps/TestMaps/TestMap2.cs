@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Soleil
+namespace Soleil.Map
 {
-    class TestMap2 : Map
+    class TestMap2 : MapBase
     {
         MapConstruct[] mapConstructs;
         TestMapJump2 test;

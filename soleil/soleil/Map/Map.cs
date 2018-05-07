@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     enum MapName
     {
         Somnia1,
         Somnia2,
     }
-    abstract class Map
+    abstract class MapBase
     {
         MapInputManager mapInputManager;
         protected MapCameraManager MapCameraManager;
@@ -21,7 +21,7 @@ namespace Soleil
         PlayerObject player;
         protected MapData MapData;
 
-        public Map(MapName _name)
+        public MapBase(MapName _name)
         {
             om = new ObjectManager();
             MapData = new MapData(_name);

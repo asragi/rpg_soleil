@@ -1,4 +1,6 @@
-﻿namespace Soleil
+﻿using Soleil.Map;
+
+namespace Soleil
 {
     class TestScene : Scene
     {

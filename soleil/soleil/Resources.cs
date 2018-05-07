@@ -55,6 +55,10 @@ namespace Soleil
     enum AnimationID : int
     {
         Arrow,
+        
+        LuneWalkL,
+        LuneWalkR,
+        
         Size,
     }
 
@@ -189,6 +193,15 @@ namespace Soleil
             SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
+
+            #endregion
+
+            #region Animation
+
+            SetPath(AnimationID.LuneWalkL, "Animation/Map/Character/Lune/walking_Left");
+            SetSize(AnimationID.LuneWalkL, 6, 1);
+            SetPath(AnimationID.LuneWalkR, "Animation/Map/Character/Lune/walking_Right");
+            SetSize(AnimationID.LuneWalkR, 6, 1);
 
             #endregion
 

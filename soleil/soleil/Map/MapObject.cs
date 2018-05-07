@@ -1,17 +1,17 @@
 ﻿using Soleil.Event;
 
-namespace Soleil
+namespace Soleil.Map
 {
     abstract class MapObject
     {
-        protected Vector pos;
-        protected bool dead;
-        protected int frame;
+        protected Vector Pos;
+        protected bool Dead;
+        protected int Frame;
         protected EventSequence EventSequence;
 
         public MapObject(ObjectManager om)
         {
-            dead = false;
+            Dead = false;
             om.Add(this);
 
             EventSequence = new EventSequence();
@@ -20,7 +20,7 @@ namespace Soleil
         virtual public void Update()
         {
             EventUpdate();
-            frame++;
+            Frame++;
         }
 
         virtual public void EventUpdate()
@@ -35,12 +35,12 @@ namespace Soleil
 
         public Vector GetPosition()
         {
-            return pos;
+            return Pos;
         }
 
         public bool IsDead()
         {
-            return dead;
+            return Dead;
         }
 
         virtual public void OnCollisionEnter()

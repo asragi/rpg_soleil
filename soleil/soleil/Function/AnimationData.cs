@@ -12,6 +12,7 @@ namespace Soleil
         public ColorDictionaryID ColorID;
         public int Interval;
         public bool Repeat;
+        public bool Flip;
         public Vector Position; //プレイヤーの座標とのずれ
         public DepthID DepthID;
 
@@ -21,6 +22,7 @@ namespace Soleil
             ColorID = ColorDictionaryID.Default;
             Interval = interval;
             Repeat = repeat;
+            Flip = false;
             DepthID = depthID;
             Position = new Vector(0, 0);
         }
@@ -31,16 +33,18 @@ namespace Soleil
             ColorID = colorID;
             Interval = interval;
             Repeat = repeat;
+            Flip = false;
             DepthID = depthID;
             Position = new Vector(0, 0);
         }
 
-        public AnimationData(AnimationID animationID, Vector position, bool repeat = false, int interval = 4, DepthID depthID = DepthID.Player)
+        public AnimationData(AnimationID animationID, Vector position, bool repeat = false, int interval = 4, DepthID depthID = DepthID.Player, bool flip = false)
         {
             AnimationID = animationID;
             ColorID = ColorDictionaryID.Default;
             Interval = interval;
             Repeat = repeat;
+            Flip = flip;
             DepthID = depthID;
             Position = position;
         }
@@ -51,6 +55,7 @@ namespace Soleil
             ColorID = colorID;
             Interval = interval;
             Repeat = repeat;
+            Flip = false;
             DepthID = depthID;
             Position = position;
         }

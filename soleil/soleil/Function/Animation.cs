@@ -25,7 +25,7 @@ namespace Soleil
         //the viewing sheet of graph.
         int sheets;
 
-        bool flipHorizontally;  //使っていない
+        bool flipHorizontally; // アニメーションを左右反転させるフラグ.
         bool repeat;
         public int Sheets
         {
@@ -80,6 +80,7 @@ namespace Soleil
             sheetNum = xNum * yNum;
             Width = Resources.Animes[(int)data.AnimationID].Width / xNum;
             Height = Resources.Animes[(int)data.AnimationID].Height / yNum;
+            flipHorizontally = data.Flip;
 
             this.interval = data.Interval;
             this.depth = data.DepthID;

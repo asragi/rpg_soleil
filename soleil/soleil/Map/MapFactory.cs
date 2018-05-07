@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     static class MapFactory
     {
-        public static Map GetMap(MapName mapName)
+        public static MapBase GetMap(MapName mapName)
         {
             return SwitchMap(mapName);
         }
 
-        private static Map SwitchMap(MapName mapName)
+        private static MapBase SwitchMap(MapName mapName)
         {
             switch (mapName)
             {

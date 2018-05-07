@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     /// <summary>
     /// 衝突判定用Boxの管理・判定計算を行う
@@ -14,7 +14,7 @@ namespace Soleil
     {
         List<CollideBox> boxList;
         int indexNum;
-        bool visible = true; // for debug
+        bool visible = false; // for debug
         MapData mapData;
         PlayerObject player;
 

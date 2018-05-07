@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil {
+namespace Soleil.Map
+{
     public enum InputFocus { None, Player, Window, }
     /// <summary>
     /// MapSceneでのInputの受付を管理するクラス
@@ -55,60 +56,57 @@ namespace Soleil {
 
         private void PlayerMove()
         {
+            var inputDir = InputDirection();
+
+            
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
+            if (inputDir == ObjectDir.None) player.Stand();
 
-            /*
-            if (KeyInput.GetKeyDown(Key.Left)) player.Move(new Vector(-1, 0));
-            if (KeyInput.GetKeyDown(Key.Right)) player.Move(new Vector(1, 0));
-            if (KeyInput.GetKeyDown(Key.Up)) player.Move(new Vector(0, -1));
-            if (KeyInput.GetKeyDown(Key.Down)) player.Move(new Vector(0, 1));
-            */
-
-            player.Move(InputDirection());
+            player.Move(inputDir);
         }
 
         /// <summary>
         /// 入力に応じて8方向のEnumを返す
         /// </summary>
-        PlayerMoveDir InputDirection()
+        ObjectDir InputDirection()
         {
             if (KeyInput.GetKeyDown(Key.Right))
             {
                 if (KeyInput.GetKeyDown(Key.Up))
                 {
-                    return PlayerMoveDir.UR;
+                    return ObjectDir.UR;
                 }
 
                 if (KeyInput.GetKeyDown(Key.Down))
                 {
-                    return PlayerMoveDir.DR;
+                    return ObjectDir.DR;
                 }
-                return PlayerMoveDir.R;
+                return ObjectDir.R;
             }
             if (KeyInput.GetKeyDown(Key.Left))
             {
                 if (KeyInput.GetKeyDown(Key.Up))
                 {
-                    return PlayerMoveDir.UL;
+                    return ObjectDir.UL;
                 }
 
                 if (KeyInput.GetKeyDown(Key.Down))
                 {
-                    return PlayerMoveDir.DL;
+                    return ObjectDir.DL;
                 }
-                return PlayerMoveDir.L;
+                return ObjectDir.L;
             }
             if (KeyInput.GetKeyDown(Key.Up))
             {
-                return PlayerMoveDir.U;
+                return ObjectDir.U;
             }
 
             if (KeyInput.GetKeyDown(Key.Down))
             {
-                return PlayerMoveDir.D;
+                return ObjectDir.D;
             }
-            return PlayerMoveDir.None;
+            return ObjectDir.None;
         }
     }
 }
