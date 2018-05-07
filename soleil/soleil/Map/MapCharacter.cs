@@ -24,7 +24,7 @@ namespace Soleil.Map
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;
             // n方向のアニメーション
-            standAnimation = Symmetry ? new Animation[5] : new Animation[8];
+            standAnimation = new Animation[8];
         }
 
         /// <summary>
