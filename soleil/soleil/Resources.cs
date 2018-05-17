@@ -59,6 +59,8 @@ namespace Soleil
         
         LuneWalkL,
         LuneWalkR,
+        LuneWalkDL,
+        LuneWalkDR,
         
         Size,
     }
@@ -204,7 +206,10 @@ namespace Soleil
             SetSize(AnimationID.LuneWalkL, 6, 1);
             SetPath(AnimationID.LuneWalkR, "Animation/Map/Character/Lune/walking_Right");
             SetSize(AnimationID.LuneWalkR, 6, 1);
-
+            SetPath(AnimationID.LuneWalkDL, "Animation/Map/Character/Lune/walking_lowerleft");
+            SetSize(AnimationID.LuneWalkDL, 6, 1);
+            SetPath(AnimationID.LuneWalkDR, "Animation/Map/Character/Lune/walking_lowerright");
+            SetSize(AnimationID.LuneWalkDR, 6, 1);
             #endregion
 
             #region UI
