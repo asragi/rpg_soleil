@@ -35,11 +35,11 @@
             var standAnims = new AnimationData[8];
             var sPeriod = 8;
             standAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR,posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkDR, posDiff, true, sPeriod);
             standAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkDL, posDiff, true, sPeriod);
             standAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, sPeriod);
             standAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
             standAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
             SetStandAnimation(standAnims);
@@ -47,9 +47,9 @@
             var walkAnims = new AnimationData[8];
             var wPeriod = 8;
             walkAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkDR, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkDL, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
