@@ -56,12 +56,25 @@ namespace Soleil
     enum AnimationID : int
     {
         Arrow,
-        
+
+        LuneStandL,
+        LuneStandR,
+        LuneStandDL,
+        LuneStandDR,
+        LuneStandUL,
+        LuneStandUR,
+        LuneStandU,
+        LuneStandD,
+
         LuneWalkL,
         LuneWalkR,
         LuneWalkDL,
         LuneWalkDR,
-        
+        LuneWalkUL,
+        LuneWalkUR,
+        LuneWalkU,
+        LuneWalkD,
+
         Size,
     }
 
@@ -202,6 +215,22 @@ namespace Soleil
 
             #region Animation
 
+            SetPath(AnimationID.LuneStandL, "Animation/Map/Character/Lune/Standing_Left");
+            SetSize(AnimationID.LuneStandL, 1, 1);
+            SetPath(AnimationID.LuneStandR, "Animation/Map/Character/Lune/Standing_Right");
+            SetSize(AnimationID.LuneStandR, 1, 1);
+            SetPath(AnimationID.LuneStandDL, "Animation/Map/Character/Lune/Standing_lowerleft");
+            SetSize(AnimationID.LuneStandDL, 1, 1);
+            SetPath(AnimationID.LuneStandDR, "Animation/Map/Character/Lune/Standing_lowerright");
+            SetSize(AnimationID.LuneStandDR, 1, 1);
+            SetPath(AnimationID.LuneStandUL, "Animation/Map/Character/Lune/Standing_upperleft");
+            SetSize(AnimationID.LuneStandUL, 1, 1);
+            SetPath(AnimationID.LuneStandUR, "Animation/Map/Character/Lune/Standing_upperright");
+            SetSize(AnimationID.LuneStandUR, 1, 1);
+            SetPath(AnimationID.LuneStandU, "Animation/Map/Character/Lune/Standing_up");
+            SetSize(AnimationID.LuneStandU, 1, 1);
+            SetPath(AnimationID.LuneStandD, "Animation/Map/Character/Lune/Standing_down");
+            SetSize(AnimationID.LuneStandD, 1, 1);
             SetPath(AnimationID.LuneWalkL, "Animation/Map/Character/Lune/walking_Left");
             SetSize(AnimationID.LuneWalkL, 6, 1);
             SetPath(AnimationID.LuneWalkR, "Animation/Map/Character/Lune/walking_Right");
@@ -210,6 +239,14 @@ namespace Soleil
             SetSize(AnimationID.LuneWalkDL, 6, 1);
             SetPath(AnimationID.LuneWalkDR, "Animation/Map/Character/Lune/walking_lowerright");
             SetSize(AnimationID.LuneWalkDR, 6, 1);
+            SetPath(AnimationID.LuneWalkUL, "Animation/Map/Character/Lune/walking_upperleft");
+            SetSize(AnimationID.LuneWalkUL, 6, 1);
+            SetPath(AnimationID.LuneWalkUR, "Animation/Map/Character/Lune/walking_upperright");
+            SetSize(AnimationID.LuneWalkUR, 6, 1);
+            SetPath(AnimationID.LuneWalkU, "Animation/Map/Character/Lune/walking_up");
+            SetSize(AnimationID.LuneWalkU, 6, 1);
+            SetPath(AnimationID.LuneWalkD, "Animation/Map/Character/Lune/walking_down");
+            SetSize(AnimationID.LuneWalkD, 6, 1);
             #endregion
 
             #region UI
