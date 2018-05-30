@@ -215,21 +215,21 @@ namespace Soleil
 
             #region Animation
 
-            SetPath(AnimationID.LuneStandL, "Animation/Map/Character/Lune/Standing_Left");
+            SetPath(AnimationID.LuneStandL, "Animation/Map/Character/Lune/Lune_standing_3");
             SetSize(AnimationID.LuneStandL, 1, 1);
-            SetPath(AnimationID.LuneStandR, "Animation/Map/Character/Lune/Standing_Right");
+            SetPath(AnimationID.LuneStandR, "Animation/Map/Character/Lune/Lune_standing_7");
             SetSize(AnimationID.LuneStandR, 1, 1);
-            SetPath(AnimationID.LuneStandDL, "Animation/Map/Character/Lune/Standing_lowerleft");
+            SetPath(AnimationID.LuneStandDL, "Animation/Map/Character/Lune/Lune_standing_2");
             SetSize(AnimationID.LuneStandDL, 1, 1);
-            SetPath(AnimationID.LuneStandDR, "Animation/Map/Character/Lune/Standing_lowerright");
+            SetPath(AnimationID.LuneStandDR, "Animation/Map/Character/Lune/Lune_standing_8");
             SetSize(AnimationID.LuneStandDR, 1, 1);
-            SetPath(AnimationID.LuneStandUL, "Animation/Map/Character/Lune/Standing_upperleft");
+            SetPath(AnimationID.LuneStandUL, "Animation/Map/Character/Lune/Lune_standing_4");
             SetSize(AnimationID.LuneStandUL, 1, 1);
-            SetPath(AnimationID.LuneStandUR, "Animation/Map/Character/Lune/Standing_upperright");
+            SetPath(AnimationID.LuneStandUR, "Animation/Map/Character/Lune/Lune_standing_6");
             SetSize(AnimationID.LuneStandUR, 1, 1);
-            SetPath(AnimationID.LuneStandU, "Animation/Map/Character/Lune/Standing_up");
+            SetPath(AnimationID.LuneStandU, "Animation/Map/Character/Lune/Lune_standing_5");
             SetSize(AnimationID.LuneStandU, 1, 1);
-            SetPath(AnimationID.LuneStandD, "Animation/Map/Character/Lune/Standing_down");
+            SetPath(AnimationID.LuneStandD, "Animation/Map/Character/Lune/Lune_standing_1");
             SetSize(AnimationID.LuneStandD, 1, 1);
             SetPath(AnimationID.LuneWalkL, "Animation/Map/Character/Lune/walking_Left");
             SetSize(AnimationID.LuneWalkL, 6, 1);
