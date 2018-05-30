@@ -34,38 +34,38 @@
             var posDiff = new Vector(0, -40);
             var standAnims = new AnimationData[8];
             var sPeriod = 8;
-            standAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR,posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkDR, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkDL, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
-            standAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneStandR,posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneStandDR, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneStandD, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneStandDL, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneStandL, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneStandUL, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneStandU, posDiff, true, sPeriod);
+            standAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneStandUR, posDiff, true, sPeriod);
             SetStandAnimation(standAnims);
 
             var walkAnims = new AnimationData[8];
             var wPeriod = 8;
             walkAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkDR, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkD, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkDL, posDiff, true, wPeriod);
             walkAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
-            walkAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkUL, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkU, posDiff, true, wPeriod);
+            walkAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkUR, posDiff, true, wPeriod);
             SetWalkAnimation(walkAnims);
 
             var dashAnims = new AnimationData[8];
-            var dPeriod = 8;
+            var dPeriod = 5;
             dashAnims[(int)ObjectDir.R] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.DR] = new AnimationData(AnimationID.LuneWalkDR, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.D] = new AnimationData(AnimationID.LuneWalkD, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.DL] = new AnimationData(AnimationID.LuneWalkDL, posDiff, true, dPeriod);
             dashAnims[(int)ObjectDir.L] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkL, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, dPeriod);
-            dashAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkR, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.UL] = new AnimationData(AnimationID.LuneWalkUL, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.U] = new AnimationData(AnimationID.LuneWalkU, posDiff, true, dPeriod);
+            dashAnims[(int)ObjectDir.UR] = new AnimationData(AnimationID.LuneWalkUR, posDiff, true, dPeriod);
             SetDashAnimation(dashAnims);
         }
 
