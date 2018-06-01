@@ -50,6 +50,7 @@
     <Compile Include="Battle\CharacterStatus.cs" />
     <Compile Include="Battle\Character\TestEnemyCharacter.cs" />
     <Compile Include="Battle\Character\TestPlayableCharacter.cs" />
+    <Compile Include="Battle\BattleQueue.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\Turn.cs" />

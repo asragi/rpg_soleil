@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Soleil
 {
@@ -80,40 +81,61 @@ namespace Soleil
         /// <summary>
         /// 行動するCharacterのIndex
         /// </summary>
-
-        bool turnUpdate = true;
+        
         Turn topTurn;
+
+        Queue<BattleEvent> battleQue;
+        BattleEvent beTop;
+        int delayCount = 0;
         public void Move()
         {
-            if(turnUpdate)
+            if (delayCount > 0)
+            {
+                delayCount--;
+            }
+            
+            if(battleQue.Count==0)
             {
                 topTurn = turnQueue.Top();
-                turnUpdate = false;
-            }
-
-            //Turnが行動実行Turnのとき
-            if (topTurn is ActionTurn actTurn)
-            {
-                //行動を実行
-                var ocrs = actTurn.action.Act(this);
-                foreach(var ocr in ocrs)
-                    ExecOccurence(ocr);
-
                 turnQueue.Pop();
-                EnqueueTurn();
-                turnUpdate = true;
-            }
-            //Turnが行動選択Turnのとき
-            else
-            {
-                var action = charas[topTurn.CharaIndex].SelectAction();
-                if(action != null)
+
+                //Turnが行動実行Turnのとき
+                if (topTurn is ActionTurn actTurn)
                 {
-                    turnQueue.Pop();
-                    turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
-                    turnUpdate = true;
+                    //行動を実行
+                    var ocrs = actTurn.action.Act(this);
+                    foreach (var ocr in ocrs)
+                        ExecOccurence(ocr);
+                    
+                    EnqueueTurn();
+                }
+                //Turnが行動選択Turnのとき
+                else
+                {
+                    battleQue.Enqueue(new BattleCommandSelect(topTurn.CharaIndex, -1));
                 }
             }
+
+            if(delayCount==0)
+            {
+                beTop = battleQue.Dequeue();
+                delayCount = beTop.DequeCount;
+            }
+            switch (beTop)
+            {
+                case BattleMessage bm:
+                    message = bm.Message;
+                    break;
+                case BattleCommandSelect bcs:
+                    var action = charas[topTurn.CharaIndex].SelectAction();
+                    if (action != null)
+                    {
+                        turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
+                        delayCount = 0;
+                    }
+                    break;
+            }
+
         }
 
         void EnqueueTurn()
@@ -135,19 +157,13 @@ namespace Soleil
 
         void ExecOccurence(Occurence ocr)
         {
-            switch (ocr)
-            {
-                case OccurenceForCharacter ocrc:
-                    charas[ocrc.CharaIndex].Damage(ocrc.HPDamage, ocrc.MPDamage);
-                    break;
-                case OccurenceForField ocrf:
-                    break;
-            }
+            ocr.Affect(this);
         }
 
+        string message;
         public void Draw(Drawing sb)
         {
-
+            sb.DrawText(new Vector(0, 0), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
         }
     }
 }

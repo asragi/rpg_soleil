@@ -20,6 +20,7 @@ namespace Soleil
         {
             Message = message;
         }
+        public virtual void Affect(BattleField bf) { }
     }
 
     class OccurenceForCharacter : Occurence
@@ -31,6 +32,10 @@ namespace Soleil
             CharaIndex = charaIndex;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
+        public override void Affect(BattleField bf)
+        {
+            bf.GetCharacter(CharaIndex).Damage(HPDamage, MPDamage);
+        }
     }
 
     class OccurenceForField : Occurence
@@ -39,5 +44,6 @@ namespace Soleil
         {
 
         }
+        public override void Affect(BattleField bf) { }
     }
 }
