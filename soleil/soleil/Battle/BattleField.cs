@@ -57,6 +57,8 @@ namespace Soleil
                 lastTurn.Add(charas[i].NextTurn());
             while (!turnQueue.IsFulfilled())
                 EnqueueTurn();
+
+            battleQue = new Queue<BattleEvent>();
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
@@ -160,10 +162,19 @@ namespace Soleil
             ocr.Affect(this);
         }
 
-        string message;
+        string message="";
         public void Draw(Drawing sb)
         {
+            //てきとう
             sb.DrawText(new Vector(0, 0), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
+
+
+            sb.DrawText(new Vector(100, 400), Resources.GetFont(FontID.Test), "Magic", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 440), Resources.GetFont(FontID.Test), "Skill", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 480), Resources.GetFont(FontID.Test), "Guard", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
+
+            sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);
         }
     }
 }
