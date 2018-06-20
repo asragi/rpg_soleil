@@ -17,6 +17,20 @@ namespace Soleil
         WhiteWindow,
         IndicatorBack,
 
+        MenuFront,
+        MenuEquip1,
+        MenuEquip2,
+        MenuItem1,
+        MenuItem2,
+        MenuMagic1,
+        MenuMagic2,
+        MenuOption1,
+        MenuOption2,
+        MenuStatus1,
+        MenuStatus2,
+        MenuSave1,
+        MenuSave2,
+
         Rule0,
         Rule1,
         Rule2,
@@ -252,6 +266,20 @@ namespace Soleil
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
 
+
+            SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
+            SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
+            SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
+            SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
+            SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
+            SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
+            SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");
+            SetPath(TextureID.MenuStatus2, UIPath + MenuPath + "menustatus2");
+            SetPath(TextureID.MenuSave1, UIPath + MenuPath + "menusave1");
+            SetPath(TextureID.MenuSave2, UIPath + MenuPath + "menusave2");
+            SetPath(TextureID.MenuEquip1, UIPath + MenuPath + "menuequip1");
+            SetPath(TextureID.MenuEquip2, UIPath + MenuPath + "menuequip2");
             for (int i = 0; i < 20; i++)
             {
                 SetPath(TextureID.Rule0 + i, "UI/Rule/" + i);
