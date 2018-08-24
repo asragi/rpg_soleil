@@ -25,6 +25,7 @@ namespace Soleil
         /// turnQueueにPushされていない最初のTurn
         /// </summary>
         List<Turn> lastTurn;
+        List<BattleUI> UIList;
 
         public BattleField()
         {
@@ -59,6 +60,8 @@ namespace Soleil
                 EnqueueTurn();
 
             battleQue = new Queue<BattleEvent>();
+
+            UIList = new List<BattleUI>();
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
@@ -89,6 +92,7 @@ namespace Soleil
         Queue<BattleEvent> battleQue;
         BattleEvent beTop;
         int delayCount = 0;
+        bool executed = true;
         public void Move()
         {
             if (delayCount > 0)
@@ -96,7 +100,7 @@ namespace Soleil
                 delayCount--;
             }
             
-            if(battleQue.Count==0)
+            if(battleQue.Count==0 && executed)
             {
                 topTurn = turnQueue.Top();
                 turnQueue.Pop();
@@ -110,6 +114,7 @@ namespace Soleil
                         ExecOccurence(ocr);
                     
                     EnqueueTurn();
+                    ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
                 }
                 //Turnが行動選択Turnのとき
                 else
@@ -127,11 +132,14 @@ namespace Soleil
             {
                 case BattleMessage bm:
                     message = bm.Message;
+                    executed = true;
                     break;
                 case BattleCommandSelect bcs:
+                    executed = false;
                     var action = charas[topTurn.CharaIndex].SelectAction();
                     if (action != null)
                     {
+                        executed = true;
                         turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
                         delayCount = 0;
                     }
@@ -162,19 +170,31 @@ namespace Soleil
             ocr.Affect(this);
         }
 
+        public void AddUI(BattleUI bui) => UIList.Add(bui);
+        public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
+
         string message="";
         public void Draw(Drawing sb)
         {
             //てきとう
-            sb.DrawText(new Vector(0, 0), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
+            sb.DrawText(new Vector(300, 50), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
 
-
+            /*
             sb.DrawText(new Vector(100, 400), Resources.GetFont(FontID.Test), "Magic", Color.White, DepthID.Message);
             sb.DrawText(new Vector(100, 440), Resources.GetFont(FontID.Test), "Skill", Color.White, DepthID.Message);
             sb.DrawText(new Vector(100, 480), Resources.GetFont(FontID.Test), "Guard", Color.White, DepthID.Message);
             sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
+            */
 
-            sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);
+            for(int i=0;i<charas.Count;i++)
+            {
+                sb.DrawText(new Vector(150 + i * 150, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
+                sb.DrawText(new Vector(150 + i * 150, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message);
+            }
+
+            //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);
+
+            UIList.ForEach(e => e.Draw(sb));
         }
     }
 }

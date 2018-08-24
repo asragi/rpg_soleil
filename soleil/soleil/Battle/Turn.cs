@@ -51,6 +51,8 @@ namespace Soleil
 
         public bool IsFulfilled() => Length <= queue.Count;
     }
+
+
     class Turn
     {
         public int Index = -1;

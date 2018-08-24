@@ -30,44 +30,63 @@ namespace Soleil
 
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
+        Stack<BattleUI> windows;
+        BattleField bf;
         public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
         {
+            this.bf = bf;
+            windows = new Stack<BattleUI>();
         }
 
-
-        bool select = false;
-        enum Command
-        {
-            Attack,
-            Magic,
-            Item,
-            Escape,
-            Size,
-        }
-        Command selectCommand;
+        
         public override Action GetAction()
         {
-            if (KeyInput.GetKeyPush(Key.Down))
+            Action act = null;
+            if(windows.Count==0)
             {
-                selectCommand++;
-                if (selectCommand == Command.Size)
-                {
-                    selectCommand = Command.Attack;
-                }
-            }
-            if (KeyInput.GetKeyPush(Key.Up))
-            {
-                if (selectCommand == Command.Attack)
-                {
-                    selectCommand = Command.Size;
-                }
-                selectCommand--;
-            }
-            if (KeyInput.GetKeyPush(Key.A))
-            {
-                return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(0, 1);
+                var sw = new CommandSelectWindow(new Vector(600, 200));
+                windows.Push(sw);
+                bf.AddUI(sw);
             }
 
+            var top = windows.Peek();
+            switch (top)
+            {
+                case CommandSelectWindow csw:
+                    var cmd = csw.Select();
+                    if (!cmd.HasValue) return null;
+
+                    //debug なにを選んでも攻撃
+                    switch (cmd.Value)
+                    {
+                        case Command.Magic:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            break;
+                        case Command.Skill:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            break;
+                        case Command.Guard:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            break;
+                        case Command.Escape:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            break;
+                        default:
+                            break;
+                    }
+
+                    break;
+                default:
+                    throw new Exception("??????");
+            }
+            
+
+            if(act!=null)
+            {
+                windows.ForEach2(e => bf.RemoveUI(e));
+                windows.Clear();
+                return act;
+            }
             return null;
         }
     }
