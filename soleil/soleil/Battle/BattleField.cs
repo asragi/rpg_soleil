@@ -110,8 +110,8 @@ namespace Soleil
                 {
                     //行動を実行
                     var ocrs = actTurn.action.Act(this);
-                    foreach (var ocr in ocrs)
-                        ExecOccurence(ocr);
+                    for (int i=0;i<ocrs.Count;i++)
+                        ExecOccurence(ocrs[i]);
 
                     EnqueueTurn();
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
@@ -193,8 +193,8 @@ namespace Soleil
 
             for (int i = 0; i < charas.Count; i++)
             {
-                sb.DrawText(new Vector(150 + i * 150, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
-                sb.DrawText(new Vector(150 + i * 150, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message);
+                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
+                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message);
             }
 
             //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);

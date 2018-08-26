@@ -72,6 +72,10 @@ namespace Soleil
             mes += defenseIndex.ToString() + "に";
             mes += ((int)damage).ToString() + " ダメージを与えた";
             ocr.Add(new OccurenceForCharacter(mes, defenseIndex, HPDmg: (int)damage));
+
+            if (battle.GetCharacter(defenseIndex).Status.Dead)
+                ocr.Add(new Occurence(defenseIndex.ToString() + " is dead"));
+
             return ocr;
         }
     }

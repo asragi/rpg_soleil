@@ -8,9 +8,19 @@ namespace Soleil
     {
         public AbilityScore abilityScore;
 
-        public int HP;
-        public int MP;
+        int hp, mp;
+        public int HP
+        {
+            get => hp;
+            set => hp = Math.Max(value, 0);
+        }
+        public int MP
+        {
+            get => mp;
+            set => mp = Math.Max(value, 0);
+        }
 
+        public bool Dead { get => HP <= 0; }
 
         public int STR
         {
