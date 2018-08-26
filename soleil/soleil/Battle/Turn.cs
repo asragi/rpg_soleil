@@ -49,6 +49,19 @@ namespace Soleil
             Update();
         }
 
+        public Turn this[int index]
+        {
+            get
+            {
+                return queue[index];
+            }
+            set
+            {
+                queue[index]=value;
+            }
+        }
+        public int Count => queue.Count;
+
         public bool IsFulfilled() => Length <= queue.Count;
     }
 

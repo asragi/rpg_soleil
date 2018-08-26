@@ -86,7 +86,7 @@ namespace Soleil
         /// <summary>
         /// 行動するCharacterのIndex
         /// </summary>
-        
+
         Turn topTurn;
 
         Queue<BattleEvent> battleQue;
@@ -99,8 +99,8 @@ namespace Soleil
             {
                 delayCount--;
             }
-            
-            if(battleQue.Count==0 && executed)
+
+            if (battleQue.Count == 0 && executed)
             {
                 topTurn = turnQueue.Top();
                 turnQueue.Pop();
@@ -112,7 +112,7 @@ namespace Soleil
                     var ocrs = actTurn.action.Act(this);
                     foreach (var ocr in ocrs)
                         ExecOccurence(ocr);
-                    
+
                     EnqueueTurn();
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
                 }
@@ -123,7 +123,7 @@ namespace Soleil
                 }
             }
 
-            if(delayCount==0)
+            if (delayCount == 0)
             {
                 beTop = battleQue.Dequeue();
                 delayCount = beTop.DequeCount;
@@ -140,7 +140,7 @@ namespace Soleil
                     if (action != null)
                     {
                         executed = true;
-                        turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
+                        turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.CharaIndex, action));
                         delayCount = 0;
                     }
                     break;
@@ -173,11 +173,11 @@ namespace Soleil
         public void AddUI(BattleUI bui) => UIList.Add(bui);
         public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
 
-        string message="";
+        string message = "";
         public void Draw(Drawing sb)
         {
             //てきとう
-            sb.DrawText(new Vector(300, 50), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
+            sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
 
             /*
             sb.DrawText(new Vector(100, 400), Resources.GetFont(FontID.Test), "Magic", Color.White, DepthID.Message);
@@ -186,7 +186,12 @@ namespace Soleil
             sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
             */
 
-            for(int i=0;i<charas.Count;i++)
+            sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.Test), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+            for (int i = 0; i < turnQueue.Count; i++)
+                sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.Test), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+
+
+            for (int i = 0; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(150 + i * 150, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
                 sb.DrawText(new Vector(150 + i * 150, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message);
