@@ -28,7 +28,7 @@ namespace Soleil
             return commandSelect.GetAction();
         }
 
-        public void Damage(int HP, int MP)
+        public void Damage(int HP=0, int MP=0)
         {
             Status.HP -= HP;
             Status.MP -= MP;

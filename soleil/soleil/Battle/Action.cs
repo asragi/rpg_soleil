@@ -63,18 +63,32 @@ namespace Soleil
             return tmp;
         }
 
-        public override List<Occurence> Act(BattleField battle)
+        public override List<Occurence> Act(BattleField bf)
         {
             List<Occurence> ocr = new List<Occurence>();
-            float damage = attack(battle.GetCharacter(offenceIndex).Status, battle.GetCharacter(defenseIndex).Status);
-            string mes = "";
-            mes = offenceIndex.ToString() + "が";
-            mes += defenseIndex.ToString() + "に";
-            mes += ((int)damage).ToString() + " ダメージを与えた";
-            ocr.Add(new OccurenceForCharacter(mes, defenseIndex, HPDmg: (int)damage));
 
-            if (battle.GetCharacter(defenseIndex).Status.Dead)
-                ocr.Add(new Occurence(defenseIndex.ToString() + " is dead"));
+            float dmg = attack(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
+            int damage = (int)dmg;
+
+            if(bf.GetCharacter(defenseIndex).Status.Dead)
+            {
+                ocr.Add(new Occurence(defenseIndex.ToString() + "は既に倒している"));
+                return ocr;
+            }
+            else
+            {
+                string mes = offenceIndex.ToString() + "が";
+                mes += defenseIndex.ToString() + "に";
+                mes += (damage).ToString() + " ダメージを与えた";
+                ocr.Add(new OccurenceForCharacter(mes, defenseIndex, HPDmg: damage));
+            }
+
+            bf.GetCharacter(defenseIndex).Damage(HP:damage);
+            if (bf.GetCharacter(defenseIndex).Status.Dead)
+            {
+                bf.RemoveCharacter(defenseIndex);
+                ocr.Add(new Occurence(defenseIndex.ToString() + "はやられた"));
+            }
 
             return ocr;
         }

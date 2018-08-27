@@ -18,6 +18,8 @@ namespace Soleil
         List<Side> sides;
         List<int>[] indexes;
         List<Character> charas;
+        List<bool> alive;
+
         MagicField magicField;
         TurnQueue turnQueue;
 
@@ -49,6 +51,8 @@ namespace Soleil
             indexes = new List<int>[(int)Side.Size];
             indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
             indexes[(int)Side.Right] = new List<int> { 0, 1, };
+            alive = new List<bool>(charas.Count);
+            for (int i = 0; i < charas.Count; i++) alive.Add(true);
 
             magicField = new SimpleMagicField();
             turnQueue = new TurnQueue();
@@ -83,9 +87,16 @@ namespace Soleil
         }
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
 
-        /// <summary>
-        /// 行動するCharacterのIndex
-        /// </summary>
+        public void RemoveCharacter(int index)
+        {
+            var sd = sides[index];
+            indexes[(int)sd].Remove(index);
+            //charas[index] = null;
+            turnQueue.RemoveAll(p => p.CharaIndex == index);
+            alive[index] = false;
+            while (!turnQueue.IsFulfilled())
+                EnqueueTurn();
+        }
 
         Turn topTurn;
 
@@ -110,11 +121,10 @@ namespace Soleil
                 {
                     //行動を実行
                     var ocrs = actTurn.action.Act(this);
-                    for (int i=0;i<ocrs.Count;i++)
-                        ExecOccurence(ocrs[i]);
 
-                    EnqueueTurn();
+                    //TODO:Occurenceに応じたBattleEventを生成する
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
+                    EnqueueTurn();
                 }
                 //Turnが行動選択Turnのとき
                 else
@@ -160,15 +170,18 @@ namespace Soleil
                     minIndex = i;
                 }
                 */
-            var minIndex = lastTurn.FindMin(p => p.TurnTime).CharaIndex;
+            var minIndex = lastTurn.Where(p => alive[p.CharaIndex])
+                .FindMin(p => p.TurnTime).CharaIndex;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
         }
 
+        /*
         void ExecOccurence(Occurence ocr)
         {
             ocr.Affect(this);
         }
+        */
 
         public void AddUI(BattleUI bui) => UIList.Add(bui);
         public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
@@ -194,7 +207,8 @@ namespace Soleil
             for (int i = 0; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
-                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message);
+                //TODO:表示するステータスはchara[i].Statusから分離する
+                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
             }
 
             //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);

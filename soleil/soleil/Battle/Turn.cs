@@ -61,6 +61,7 @@ namespace Soleil
             }
         }
         public int Count => queue.Count;
+        public int RemoveAll(Predicate<Turn> f) => queue.RemoveAll(f);
 
         public bool IsFulfilled() => Length <= queue.Count;
     }

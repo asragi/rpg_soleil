@@ -20,6 +20,7 @@ namespace Soleil
         {
             Message = message;
         }
+        //使わないかも
         public virtual void Affect(BattleField bf) { }
     }
 
@@ -34,7 +35,6 @@ namespace Soleil
         }
         public override void Affect(BattleField bf)
         {
-            bf.GetCharacter(CharaIndex).Damage(HPDamage, MPDamage);
         }
     }
 
