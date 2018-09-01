@@ -28,6 +28,10 @@ namespace Soleil.Menu
         MenuItem[] menuItems;
         int index;
 
+        // 入力を良い感じにする処理用
+        const int InputWait = 8;
+        int waitFrame;
+
         public MenuSystem()
         {
             index = 0;
@@ -67,8 +71,25 @@ namespace Soleil.Menu
             // Activeな子ウィンドウに入力を送る
 
             // 自身の項目を動かす
-            if (dir.IsContainUp()) index--;
-            if (dir.IsContainDown()) index++;
+            InputSmoother(dir);
+        }
+
+        private void InputSmoother(ObjectDir dir)
+        {
+            waitFrame--;
+            if (dir.IsContainUp())
+            {
+                if (waitFrame > 0) return;
+                index--;
+                waitFrame = InputWait;
+            }
+            else if (dir.IsContainDown())
+            {
+                if (waitFrame > 0) return;
+                index++;
+                waitFrame = InputWait;
+            }
+            else{ waitFrame = 0; }
             index = (index + menuItems.Length) % menuItems.Length; // -1 to 5, 6 to 0
         }
 
