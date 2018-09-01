@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    public enum InputFocus { None, Player, Window, }
+    public enum InputFocus { None, Player, Window, Menu,}
     /// <summary>
     /// MapSceneでのInputの受付を管理するクラス
     /// </summary>
@@ -37,6 +37,8 @@ namespace Soleil.Map
                 case InputFocus.Window:
                     SelectWindowMove();
                     break;
+                case InputFocus.Menu:
+
                 default:
                     break;
             }
