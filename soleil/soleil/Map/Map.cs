@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace Soleil.Map
         protected BoxManager bm;
         PlayerObject player;
         protected MapData MapData;
+        MenuSystem menuSystem;
 
         public MapBase(MapName _name)
         {
@@ -28,8 +30,10 @@ namespace Soleil.Map
             MapData.SetMapFlag();
             bm = new BoxManager(MapData, player);
             player = new PlayerObject(om, bm);
+            menuSystem = new MenuSystem();
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
+            mapInputManager.SetMenuSystem(menuSystem);
             MapCameraManager = new MapCameraManager(player);
         }
 
@@ -37,6 +41,7 @@ namespace Soleil.Map
         {
             om.Update();
             bm.Update();
+            menuSystem.Update();
             mapInputManager.Update();
             MapCameraManager.Update();
         }
@@ -50,6 +55,7 @@ namespace Soleil.Map
 
         virtual public void Draw(Drawing sb)
         {
+            menuSystem.Draw(sb);
             bm.Draw(sb);
             om.Draw(sb);
         }

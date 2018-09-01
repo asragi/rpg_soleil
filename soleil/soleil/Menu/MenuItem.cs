@@ -10,11 +10,11 @@ namespace Soleil.Menu
     class MenuItem
     {
         const int StartX = 100; // 0個目の項目のx座標
-        const int StartY = 300; // 0個目の項目のy座標
-        const int SpaceSize = 80; // 項目ごとの感覚
+        const int StartY = 100; // 0個目の項目のy座標
+        const int SpaceSize = 55; // 項目ごとの感覚
         MenuName menuName;
         Vector pos;
-        bool isSelected;
+        public bool IsSelected { get; set; }
         Image unselectedImg;
         Image selectedImg;
 
@@ -24,39 +24,39 @@ namespace Soleil.Menu
             // menuNameのenumの割当てintegerを利用して位置を決定
             pos = new Vector(StartX, StartY + SpaceSize * (int)menuName);
             // 選択されているかどうか
-            isSelected = select;
+            IsSelected = select;
 
+            TextureID unselectedTexID = 0;
             TextureID texID = 0;
-            TextureID untexID = 0;
             switch (menuName)
             {
                 case MenuName.Items:
-                    texID = TextureID.MenuItem1;
-                    untexID = TextureID.MenuItem2;
+                    unselectedTexID = TextureID.MenuItem1;
+                    texID = TextureID.MenuItem2;
                     break;
                 case MenuName.Magic:
-                    texID = TextureID.MenuMagic1;
-                    untexID = TextureID.MenuMagic2;
+                    unselectedTexID = TextureID.MenuMagic1;
+                    texID = TextureID.MenuMagic2;
                     break;
                 case MenuName.Equip:
-                    texID = TextureID.MenuEquip1;
-                    untexID = TextureID.MenuEquip2;
+                    unselectedTexID = TextureID.MenuEquip1;
+                    texID = TextureID.MenuEquip2;
                     break;
                 case MenuName.Status:
-                    texID = TextureID.MenuStatus1;
-                    untexID = TextureID.MenuStatus2;
+                    unselectedTexID = TextureID.MenuStatus1;
+                    texID = TextureID.MenuStatus2;
                     break;
                 case MenuName.Option:
-                    texID = TextureID.MenuOption1;
-                    untexID = TextureID.MenuOption2;
+                    unselectedTexID = TextureID.MenuOption1;
+                    texID = TextureID.MenuOption2;
                     break;
                 case MenuName.Save:
-                    texID = TextureID.MenuSave1;
-                    untexID = TextureID.MenuSave2;
+                    unselectedTexID = TextureID.MenuSave1;
+                    texID = TextureID.MenuSave2;
                     break;
             }
+            unselectedImg = new Image(0, Resources.GetTexture(unselectedTexID), pos, DepthID.MessageBack, false, true);
             selectedImg = new Image(0, Resources.GetTexture(texID), pos, DepthID.MessageBack, false, true);
-            unselectedImg = new Image(0, Resources.GetTexture(untexID), pos, DepthID.MessageBack, false, true);
         }
 
         public void Update()
@@ -67,7 +67,7 @@ namespace Soleil.Menu
 
         public void Draw(Drawing d)
         {
-            if (isSelected)
+            if (IsSelected)
             {
                 selectedImg.Draw(d);
             }

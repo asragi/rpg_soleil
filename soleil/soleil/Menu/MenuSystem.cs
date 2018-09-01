@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,10 @@ namespace Soleil.Menu
     }
     class MenuSystem
     {
+        /// <summary>
+        /// メニューを閉じたかどうかのフラグを伝える
+        /// </summary>
+        public bool IsQuit { get; private set; }
         bool isActive;
         Image backImage, frontImage;
         MenuItem[] menuItems;
@@ -30,7 +35,8 @@ namespace Soleil.Menu
             // Image初期化
             backImage = new Image(0, Resources.GetTexture(TextureID.WhiteWindow), Vector.Zero, DepthID.MessageBack, false, true);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true);
-            for (int i = 0; i < (int)MenuName.size; i++)
+            menuItems = new MenuItem[(int)MenuName.size];
+            for (int i = 0; i < menuItems.Length; i++)
             {
                 // i==0 のみ selected=trueとする
                 menuItems[i] = new MenuItem((MenuName)i, i == 0);
@@ -53,6 +59,19 @@ namespace Soleil.Menu
             isActive = false;
         }
 
+        /// <summary>
+        /// 入力を受けメニューを操作する。
+        /// </summary>
+        public void MoveCursor(ObjectDir dir)
+        {
+            // Activeな子ウィンドウに入力を送る
+
+            // 自身の項目を動かす
+            if (dir.IsContainUp()) index--;
+            if (dir.IsContainDown()) index++;
+            index = (index + menuItems.Length) % menuItems.Length; // -1 to 5, 6 to 0
+        }
+
         public void Update()
         {
             // ImageUpdate
@@ -62,6 +81,12 @@ namespace Soleil.Menu
                 menuItems[i].Update();
             }
             frontImage.Update();
+
+            // Update Selected
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].IsSelected = i == index;
+            }
         }
 
         public void Draw(Drawing d)

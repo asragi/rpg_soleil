@@ -48,7 +48,7 @@ namespace Soleil
             startPos = Pos;
             frame = 0;
             Alpha = 1;
-            origin = (centerOrigin) ? new Vector(tex.Width, tex.Height) / 2 : Vector.Zero;
+            origin = (centerOrigin) ? Vector.Zero : new Vector(tex.Width, tex.Height) / 2;
             IsDead = false;
             this.isStatic = isStatic;
         }
@@ -97,8 +97,8 @@ namespace Soleil
 
         public virtual void Draw(Drawing d)
         {
-            if (isStatic) d.DrawUI(Pos, tex, depth, 1,Alpha,Angle);
-            else d.DrawWithColor(Pos, tex, depth, Color.White * Alpha, 1, Angle);
+            if (isStatic) d.DrawUI(Pos + origin, tex, depth, 1 ,Alpha, Angle);
+            else d.DrawWithColor(Pos + origin, tex, depth, Color.White * Alpha, 1, Angle);
         }
     }
 }
