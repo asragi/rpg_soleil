@@ -28,6 +28,7 @@ namespace Soleil.Menu
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
         int index;
+        Transition transition;
 
         // 入力を良い感じにする処理用
         const int InputWait = 8;
@@ -49,6 +50,8 @@ namespace Soleil.Menu
             // Image line
             menuLineUpper = new MenuLine(70, true);
             menuLineLower = new MenuLine(470, false);
+            // Transition
+            transition = Transition.GetInstance();
         }
 
         /// <summary>
@@ -56,7 +59,12 @@ namespace Soleil.Menu
         /// </summary>
         public void CallMenu()
         {
+            transition.SetDepth(DepthID.Effect);
+            transition.SetMode(TransitionMode.FadeOut);
             isActive = true;
+            Func<double, double, double, double, double> func = Easing.OutQuad;
+            backImage.Fade(20, func, true);
+
             IsQuit = false;
         }
 
@@ -65,7 +73,10 @@ namespace Soleil.Menu
         /// </summary>
         public void QuitMenu()
         {
-            isActive = false;
+            //transition.SetDepth(DepthID.Debug);
+            transition.SetMode(TransitionMode.FadeIn);
+            backImage.Fade(20, Easing.OutQuad, false);
+            //isActive = false;
             IsQuit = true;
         }
 
