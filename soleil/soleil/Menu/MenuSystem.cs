@@ -19,6 +19,7 @@ namespace Soleil.Menu
     }
     class MenuSystem
     {
+        const int FadeSpeed = 23;
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
@@ -83,14 +84,14 @@ namespace Soleil.Menu
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
             // Transition Images
-            backImage.Fade(23, Easing.OutQuad, isFadeOut);
-            frontImage.Fade(23, Easing.OutQuad, isFadeOut);
+            backImage.Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
+            frontImage.Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].Fade(23, Easing.OutQuad, isFadeOut);
+                menuItems[i].Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
             }
-            menuLineLower.Fade(20, Easing.OutQuad, isFadeOut);
-            menuLineUpper.Fade(20, Easing.OutQuad, isFadeOut);
+            menuLineLower.Fade(FadeSpeed-3, Easing.OutQuad, isFadeOut);
+            menuLineUpper.Fade(FadeSpeed-3, Easing.OutQuad, isFadeOut);
         }
 
         /// <summary>
