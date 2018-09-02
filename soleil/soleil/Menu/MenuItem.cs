@@ -55,14 +55,20 @@ namespace Soleil.Menu
                     texID = TextureID.MenuSave2;
                     break;
             }
-            unselectedImg = new Image(0, Resources.GetTexture(unselectedTexID), pos, DepthID.MessageBack, false, true);
-            selectedImg = new Image(0, Resources.GetTexture(texID), pos, DepthID.MessageBack, false, true);
+            unselectedImg = new Image(0, Resources.GetTexture(unselectedTexID), pos, DepthID.MessageBack, false, true, 0);
+            selectedImg = new Image(0, Resources.GetTexture(texID), pos, DepthID.MessageBack, false, true, 0);
         }
 
         public void Update()
         {
             selectedImg.Update();
             unselectedImg.Update();
+        }
+
+        public void Fade(int duration, Func<double, double, double, double, double> easing, bool isFadein)
+        {
+            selectedImg.Fade(duration, easing, isFadein);
+            unselectedImg.Fade(duration, easing, isFadein);
         }
 
         public void Draw(Drawing d)

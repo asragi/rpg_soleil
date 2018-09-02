@@ -24,7 +24,15 @@ namespace Soleil.Menu
             lines = new Image[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new Image(0, tex, new Vector(i * texWidth, posY), DepthID.MessageBack, false);
+                lines[i] = new Image(0, tex, new Vector(i * texWidth, posY), DepthID.MessageBack, false, true, 0);
+            }
+        }
+
+        public void Fade(int duration, Func<double, double, double, double, double> easing, bool isFadein)
+        {
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i].Fade(duration, easing, isFadein);
             }
         }
 

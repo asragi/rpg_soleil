@@ -39,8 +39,8 @@ namespace Soleil.Menu
             index = 0;
             isActive = false;
             // Image初期化
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true);
-            frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true);
+            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
+            frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
             menuItems = new MenuItem[(int)MenuName.size];
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -63,8 +63,13 @@ namespace Soleil.Menu
             transition.SetMode(TransitionMode.FadeOut);
             isActive = true;
             Func<double, double, double, double, double> func = Easing.OutQuad;
-            backImage.Fade(20, func, true);
-
+            backImage.Fade(23, func, true);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Fade(23, Easing.OutQuad, true);
+            }
+            menuLineLower.Fade(23, Easing.OutQuad, true);
+            menuLineUpper.Fade(23, Easing.OutQuad, true);
             IsQuit = false;
         }
 
@@ -74,9 +79,18 @@ namespace Soleil.Menu
         public void QuitMenu()
         {
             //transition.SetDepth(DepthID.Debug);
+            // Transition
             transition.SetMode(TransitionMode.FadeIn);
-            backImage.Fade(20, Easing.OutQuad, false);
-            //isActive = false;
+            // Transition Images
+            backImage.Fade(23, Easing.OutQuad, false);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Fade(23, Easing.OutQuad, false);
+            }
+            menuLineLower.Fade(23, Easing.OutQuad, false);
+            menuLineUpper.Fade(23, Easing.OutQuad, false);
+            // Set bools
+            isActive = false;
             IsQuit = true;
         }
 
@@ -137,8 +151,6 @@ namespace Soleil.Menu
 
         public void Draw(Drawing d)
         {
-            // Activeでなければ実行しない
-            if (!isActive) return;
             // 背景描画
             backImage.Draw(d);
             // Line描画

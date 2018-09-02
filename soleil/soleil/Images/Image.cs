@@ -38,7 +38,7 @@ namespace Soleil
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
-        public Image(int id, Texture2D tex, Vector pos,DepthID depth,bool centerOrigin = true,bool isStatic = true)
+        public Image(int id, Texture2D tex, Vector pos,DepthID depth,bool centerOrigin = true,bool isStatic = true, float alpha = 1)
         {
             Id = id;
             this.tex = tex;
@@ -47,7 +47,7 @@ namespace Soleil
             targetPos = Pos;
             startPos = Pos;
             frame = 0;
-            Alpha = 1;
+            Alpha = alpha;
             origin = (centerOrigin) ? Vector.Zero : new Vector(tex.Width, tex.Height) / 2;
             IsDead = false;
             this.isStatic = isStatic;
