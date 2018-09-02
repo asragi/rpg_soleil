@@ -61,6 +61,11 @@ namespace Soleil.Menu
                 }
                 lines[i].Pos = tmp;
             }
+            // Image Update
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i].Update();
+            }
         }
 
         public void Draw(Drawing d)

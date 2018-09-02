@@ -60,16 +60,8 @@ namespace Soleil.Menu
         public void CallMenu()
         {
             transition.SetDepth(DepthID.Effect);
-            transition.SetMode(TransitionMode.FadeOut);
+            ImageTransition(TransitionMode.FadeOut);
             isActive = true;
-            Func<double, double, double, double, double> func = Easing.OutQuad;
-            backImage.Fade(23, func, true);
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].Fade(23, Easing.OutQuad, true);
-            }
-            menuLineLower.Fade(23, Easing.OutQuad, true);
-            menuLineUpper.Fade(23, Easing.OutQuad, true);
             IsQuit = false;
         }
 
@@ -79,19 +71,26 @@ namespace Soleil.Menu
         public void QuitMenu()
         {
             //transition.SetDepth(DepthID.Debug);
-            // Transition
-            transition.SetMode(TransitionMode.FadeIn);
-            // Transition Images
-            backImage.Fade(23, Easing.OutQuad, false);
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].Fade(23, Easing.OutQuad, false);
-            }
-            menuLineLower.Fade(23, Easing.OutQuad, false);
-            menuLineUpper.Fade(23, Easing.OutQuad, false);
+            ImageTransition(TransitionMode.FadeIn);
             // Set bools
             isActive = false;
             IsQuit = true;
+        }
+
+        private void ImageTransition(TransitionMode mode)
+        {
+            // Transition
+            transition.SetMode(mode);
+            var isFadeOut = mode == TransitionMode.FadeOut;
+            // Transition Images
+            backImage.Fade(23, Easing.OutQuad, isFadeOut);
+            frontImage.Fade(23, Easing.OutQuad, isFadeOut);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Fade(23, Easing.OutQuad, isFadeOut);
+            }
+            menuLineLower.Fade(20, Easing.OutQuad, isFadeOut);
+            menuLineUpper.Fade(20, Easing.OutQuad, isFadeOut);
         }
 
         /// <summary>
