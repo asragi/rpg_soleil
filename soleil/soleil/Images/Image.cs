@@ -64,6 +64,7 @@ namespace Soleil
 
         public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
         {
+            Alpha = (isFadeIn) ? 0 : 1;
             alphaFrame = 0;
             alphaDuration = duration;
             alphaEaseFunc = _easeFunc;
