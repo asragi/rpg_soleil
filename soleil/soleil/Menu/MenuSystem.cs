@@ -19,7 +19,6 @@ namespace Soleil.Menu
     }
     class MenuSystem
     {
-        const int FadeSpeed = 23;
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
@@ -35,6 +34,26 @@ namespace Soleil.Menu
         const int InputWait = 8;
         int waitFrame;
 
+        // Transition
+        const int FadeSpeed = 23;
+        readonly Func<double, double, double, double, double> func = Easing.OutQuad;
+
+        // Menuの項目の対応用配列
+        public static readonly TextureID[] optionTextures =
+        {
+            TextureID.MenuItem1,
+            TextureID.MenuItem2,
+            TextureID.MenuMagic1,
+            TextureID.MenuMagic2,
+            TextureID.MenuEquip1,
+            TextureID.MenuEquip2,
+            TextureID.MenuStatus1,
+            TextureID.MenuStatus2,
+            TextureID.MenuOption1,
+            TextureID.MenuOption2,
+            TextureID.MenuSave1,
+            TextureID.MenuSave2
+        };
         public MenuSystem()
         {
             index = 0;
@@ -84,14 +103,14 @@ namespace Soleil.Menu
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
             // Transition Images
-            backImage.Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
-            frontImage.Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
+            backImage.Fade(FadeSpeed, func, isFadeOut);
+            frontImage.Fade(FadeSpeed, func, isFadeOut);
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].Fade(FadeSpeed, Easing.OutQuad, isFadeOut);
+                menuItems[i].Fade(FadeSpeed, func, isFadeOut);
             }
-            menuLineLower.Fade(FadeSpeed-3, Easing.OutQuad, isFadeOut);
-            menuLineUpper.Fade(FadeSpeed-3, Easing.OutQuad, isFadeOut);
+            menuLineLower.Fade(FadeSpeed-3, func, isFadeOut);
+            menuLineUpper.Fade(FadeSpeed-3, func, isFadeOut);
         }
 
         /// <summary>

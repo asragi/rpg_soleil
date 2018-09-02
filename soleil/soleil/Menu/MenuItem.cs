@@ -26,35 +26,8 @@ namespace Soleil.Menu
             // 選択されているかどうか
             IsSelected = select;
 
-            TextureID unselectedTexID = 0;
-            TextureID texID = 0;
-            switch (menuName)
-            {
-                case MenuName.Items:
-                    unselectedTexID = TextureID.MenuItem1;
-                    texID = TextureID.MenuItem2;
-                    break;
-                case MenuName.Magic:
-                    unselectedTexID = TextureID.MenuMagic1;
-                    texID = TextureID.MenuMagic2;
-                    break;
-                case MenuName.Equip:
-                    unselectedTexID = TextureID.MenuEquip1;
-                    texID = TextureID.MenuEquip2;
-                    break;
-                case MenuName.Status:
-                    unselectedTexID = TextureID.MenuStatus1;
-                    texID = TextureID.MenuStatus2;
-                    break;
-                case MenuName.Option:
-                    unselectedTexID = TextureID.MenuOption1;
-                    texID = TextureID.MenuOption2;
-                    break;
-                case MenuName.Save:
-                    unselectedTexID = TextureID.MenuSave1;
-                    texID = TextureID.MenuSave2;
-                    break;
-            }
+            TextureID unselectedTexID = MenuSystem.optionTextures[(int)menuName * 2];
+            TextureID texID = MenuSystem.optionTextures[(int)menuName * 2 + 1];
             unselectedImg = new Image(0, Resources.GetTexture(unselectedTexID), pos, DepthID.MessageBack, false, true, 0);
             selectedImg = new Image(0, Resources.GetTexture(texID), pos, DepthID.MessageBack, false, true, 0);
         }
