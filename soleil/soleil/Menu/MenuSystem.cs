@@ -26,6 +26,7 @@ namespace Soleil.Menu
         bool isActive;
         Image backImage, frontImage;
         MenuItem[] menuItems;
+        MenuLine menuLineUpper, menuLineLower;
         int index;
 
         // 入力を良い感じにする処理用
@@ -37,7 +38,7 @@ namespace Soleil.Menu
             index = 0;
             isActive = false;
             // Image初期化
-            backImage = new Image(0, Resources.GetTexture(TextureID.WhiteWindow), Vector.Zero, DepthID.MessageBack, false, true);
+            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true);
             menuItems = new MenuItem[(int)MenuName.size];
             for (int i = 0; i < menuItems.Length; i++)
@@ -45,6 +46,9 @@ namespace Soleil.Menu
                 // i==0 のみ selected=trueとする
                 menuItems[i] = new MenuItem((MenuName)i, i == 0);
             }
+            // Image line
+            menuLineUpper = new MenuLine(70, true);
+            menuLineLower = new MenuLine(470, false);
         }
 
         /// <summary>
@@ -53,6 +57,7 @@ namespace Soleil.Menu
         public void CallMenu()
         {
             isActive = true;
+            IsQuit = false;
         }
 
         /// <summary>
@@ -61,6 +66,7 @@ namespace Soleil.Menu
         public void QuitMenu()
         {
             isActive = false;
+            IsQuit = true;
         }
 
         /// <summary>
@@ -74,6 +80,9 @@ namespace Soleil.Menu
             InputSmoother(dir);
         }
 
+        /// <summary>
+        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
+        /// </summary>
         private void InputSmoother(ObjectDir dir)
         {
             waitFrame--;
@@ -102,12 +111,17 @@ namespace Soleil.Menu
                 menuItems[i].Update();
             }
             frontImage.Update();
+            menuLineUpper.Update();
+            menuLineLower.Update();
 
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].IsSelected = i == index;
             }
+
+            // Debug
+            if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
         }
 
         public void Draw(Drawing d)
@@ -116,11 +130,16 @@ namespace Soleil.Menu
             if (!isActive) return;
             // 背景描画
             backImage.Draw(d);
+            // Line描画
+            menuLineUpper.Draw(d);
+            menuLineLower.Draw(d);
             // 選択肢描画
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Draw(d);
             }
+            // 文章描画
+
             // 前景描画
             frontImage.Draw(d);
         }
