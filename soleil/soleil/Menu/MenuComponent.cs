@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Soleil.Menu
+{
+    abstract class MenuComponent
+    {
+        public bool IsActive { get; set; }
+        public MenuComponent() { }
+    }
+}

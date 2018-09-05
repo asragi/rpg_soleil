@@ -17,13 +17,13 @@ namespace Soleil.Menu
         Save,
         size,
     }
-    class MenuSystem
+    class MenuSystem : MenuComponent
     {
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
-        bool isActive;
+        
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -57,7 +57,7 @@ namespace Soleil.Menu
         public MenuSystem()
         {
             index = 0;
-            isActive = false;
+            IsActive = false;
             // Image初期化
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
@@ -81,7 +81,7 @@ namespace Soleil.Menu
         {
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
-            isActive = true;
+            IsActive = true;
             IsQuit = false;
         }
 
@@ -93,7 +93,7 @@ namespace Soleil.Menu
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
             // Set bools
-            isActive = false;
+            IsActive = false;
             IsQuit = true;
         }
 
