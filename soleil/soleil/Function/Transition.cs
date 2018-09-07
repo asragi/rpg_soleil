@@ -12,6 +12,7 @@ namespace Soleil
         Texture2D[] white;
         int index;
         bool stop;
+        DepthID depth = DepthID.Debug;
 
         private static Transition transition = new Transition();
         public static Transition GetInstance() => transition;
@@ -44,6 +45,8 @@ namespace Soleil
                     break;
             }
         }
+
+        public void SetDepth(DepthID id) => depth = id;
 
         public void Update()
         {
@@ -109,7 +112,7 @@ namespace Soleil
             var tmp = d.CenterBased;
             d.CenterBased = false;
             d.SetDrawAbsolute();
-            d.Draw(Vector.Zero, white[index], DepthID.Debug);
+            d.Draw(Vector.Zero, white[index], depth);
             d.SetDrawNormal();
             d.CenterBased = tmp;
         }

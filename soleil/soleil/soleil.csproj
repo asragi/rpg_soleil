@@ -117,6 +117,9 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
+    <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Menu\MenuLine.cs" />
+    <Compile Include="Menu\MenuSystem.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

@@ -32,5 +32,13 @@ namespace Soleil.Map
                     throw new ArgumentOutOfRangeException();
             }
         }
+        public static bool IsContainUp(this ObjectDir dir)
+        {
+            return (dir == ObjectDir.U) || (dir == ObjectDir.UL) || (dir == ObjectDir.UR);
+        }
+        public static bool IsContainDown(this ObjectDir dir)
+        {
+            return (dir == ObjectDir.D) || (dir == ObjectDir.DL) || (dir == ObjectDir.DR);
+        }
     }
 }

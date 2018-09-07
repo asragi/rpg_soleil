@@ -38,7 +38,7 @@ namespace Soleil
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
-        public Image(int id, Texture2D tex, Vector pos,DepthID depth,bool centerOrigin = true,bool isStatic = true)
+        public Image(int id, Texture2D tex, Vector pos,DepthID depth,bool centerOrigin = true,bool isStatic = true, float alpha = 1)
         {
             Id = id;
             this.tex = tex;
@@ -47,8 +47,8 @@ namespace Soleil
             targetPos = Pos;
             startPos = Pos;
             frame = 0;
-            Alpha = 1;
-            origin = (centerOrigin) ? new Vector(tex.Width, tex.Height) / 2 : Vector.Zero;
+            Alpha = alpha;
+            origin = (centerOrigin) ? Vector.Zero : new Vector(tex.Width, tex.Height) / 2;
             IsDead = false;
             this.isStatic = isStatic;
         }
@@ -64,6 +64,7 @@ namespace Soleil
 
         public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
         {
+            Alpha = (isFadeIn) ? 0 : 1;
             alphaFrame = 0;
             alphaDuration = duration;
             alphaEaseFunc = _easeFunc;
@@ -97,8 +98,8 @@ namespace Soleil
 
         public virtual void Draw(Drawing d)
         {
-            if (isStatic) d.DrawUI(Pos, tex, depth, 1,Alpha,Angle);
-            else d.DrawWithColor(Pos, tex, depth, Color.White * Alpha, 1, Angle);
+            if (isStatic) d.DrawUI(Pos + origin, tex, depth, 1 ,Alpha, Angle);
+            else d.DrawWithColor(Pos + origin, tex, depth, Color.White * Alpha, 1, Angle);
         }
     }
 }
