@@ -8,7 +8,25 @@ namespace Soleil.Menu
 {
     abstract class MenuComponent
     {
-        public bool IsActive { get; set; }
+        bool isActive;
+        public bool IsActive
+        {
+            get { return isActive; }
+            set
+            {
+                isActive = value;
+                if (isActive) OnEnable();
+                else OnDisable();
+            }
+        }
         public MenuComponent() { }
+        /// <summary>
+        /// IsActiveがtrueになったときに行われる処理
+        /// </summary>
+        protected virtual void OnEnable() { }
+        /// <summary>
+        /// IsActiveがfalseになったときに行われる処理
+        /// </summary>
+        protected virtual void OnDisable() { }
     }
 }

@@ -30,6 +30,9 @@ namespace Soleil.Menu
         int index;
         Transition transition;
 
+        // MenuChildren
+        MenuChild[] menuChildren;
+
         // 入力を良い感じにする処理用
         const int InputWait = 8;
         int waitFrame;
@@ -57,7 +60,6 @@ namespace Soleil.Menu
         public MenuSystem()
         {
             index = 0;
-            IsActive = false;
             // Image初期化
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
@@ -72,6 +74,7 @@ namespace Soleil.Menu
             menuLineLower = new MenuLine(470, false);
             // Transition
             transition = Transition.GetInstance();
+            IsActive = false;
         }
 
         /// <summary>
@@ -90,11 +93,11 @@ namespace Soleil.Menu
         /// </summary>
         public void QuitMenu()
         {
-            //transition.SetDepth(DepthID.Debug);
-            ImageTransition(TransitionMode.FadeIn);
             // Set bools
             IsActive = false;
             IsQuit = true;
+            //transition.SetDepth(DepthID.Debug);
+            ImageTransition(TransitionMode.FadeIn);
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -118,8 +121,17 @@ namespace Soleil.Menu
         /// </summary>
         public void MoveCursor(ObjectDir dir)
         {
+            if (IsActive)
+            {
+                InputSmoother(dir);
+                return;
+            }
             // Activeな子ウィンドウに入力を送る
-
+            foreach (var child in menuChildren)
+            {
+                if (!child.IsActive) continue;
+                child.Input();
+            }
             // 自身の項目を動かす
             InputSmoother(dir);
         }
@@ -144,6 +156,26 @@ namespace Soleil.Menu
             }
             else{ waitFrame = 0; }
             index = (index + menuItems.Length) % menuItems.Length; // -1 to 5, 6 to 0
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            // Transition Images
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, func);
+            }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            // Transition Images
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, func);
+            }
         }
 
         public void Update()

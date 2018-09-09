@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    /// <summary>
+    /// メニュー内に存在する入力を受け取る子要素の抽象クラス
+    /// </summary>
     abstract class MenuChild : MenuComponent
     {
         MenuComponent parent;
@@ -22,5 +25,18 @@ namespace Soleil.Menu
             parent.IsActive = true;
             IsActive = false;
         }
+
+        public void Input()
+        {
+
+        }
+
+        public abstract void OnInputRight();
+        public abstract void OnInputLeft();
+        public abstract void OnInputUp();
+        public abstract void OnInputDown();
+        public abstract void OnInputSubmit();
+        public abstract void OnInputCancel();
+
     }
 }
