@@ -21,6 +21,9 @@ namespace Soleil
         public Vector Pos { get; set; }
         public String Text { get; set; }
         public Color Color { get; set; }
+        public bool EnableShadow { get; set; }
+        public Color ShadowColor { get; set; }
+        public Vector ShadowPos { get; set; }
 
         // Easing移動実現用位置保持変数
         private Vector targetPos;
@@ -49,6 +52,10 @@ namespace Soleil
             Alpha = alpha;
             IsDead = false;
             this.isStatic = isStatic;
+
+            EnableShadow = false;
+            ShadowColor = Color.Black;
+            ShadowPos = Vector.Zero;
         }
 
         public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
@@ -97,6 +104,7 @@ namespace Soleil
         public virtual void Draw(Drawing d)
         {
             d.DrawStaticText(Pos, Resources.GetFont(font), Text, Color * Alpha, depth, Vector2.One, Angle, false);
+            if(EnableShadow) d.DrawStaticText(Pos + ShadowPos, Resources.GetFont(font), Text, ShadowColor * Alpha, depth, Vector2.One, Angle, false);
         }
     }
 }
