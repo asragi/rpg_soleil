@@ -11,7 +11,7 @@ namespace Soleil.Menu
         readonly Vector WindowPos = new Vector(330, 100);
         readonly Vector WindowStartPos = new Vector(830, 100);
 
-        readonly Vector ItemDrawStartPos = new Vector(40, 30);
+        readonly Vector ItemDrawStartPos = new Vector(40, 28);
         readonly int ItemPanelSpacing = 4;
         Image backImage;
         ItemPanel[] itemPanels;

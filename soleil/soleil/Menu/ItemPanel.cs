@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// </summary>
     class ItemPanel
     {
-        public readonly Vector PanelSize = new Vector(300, 38);
+        public readonly Vector PanelSize = new Vector(300, 36);
         /// <summary>
         /// パネルの文字描画を左上からどれだけの位置にするか
         /// </summary>
