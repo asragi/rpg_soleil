@@ -52,7 +52,7 @@ namespace Soleil
             Alpha = alpha;
             IsDead = false;
             this.isStatic = isStatic;
-
+            Text = "";
             EnableShadow = false;
             ShadowColor = Color.Black;
             ShadowPos = Vector.Zero;

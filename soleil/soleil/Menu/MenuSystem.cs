@@ -23,10 +23,20 @@ namespace Soleil.Menu
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
-        
+        readonly String[] Descriptions = new String[]
+        {
+            "アイテムを確認・選択して使用します。",
+            "魔法を確認・選択して使用します。",
+            "装備を確認・変更します。",
+            "ステータスを確認します。",
+            "音量などの設定を行います。",
+            "ゲームデータのセーブを行います。"
+        };
+
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
+        MenuDescription menuDescription;
         int index;
         Transition transition;
 
@@ -77,6 +87,8 @@ namespace Soleil.Menu
             transition = Transition.GetInstance();
             IsActive = false;
 
+            // MenuDescription
+            menuDescription = new MenuDescription(new Vector(125, 35));
             // MenuChildren
             menuChildren = new MenuChild[] { new ItemMenu(this) };
         }
@@ -118,6 +130,7 @@ namespace Soleil.Menu
             }
             menuLineLower.Fade(FadeSpeed-3, func, isFadeOut);
             menuLineUpper.Fade(FadeSpeed-3, func, isFadeOut);
+            menuDescription.Fade(FadeSpeed, func, isFadeOut);
         }
 
         /// <summary>
@@ -129,6 +142,7 @@ namespace Soleil.Menu
             if (IsActive)
             {
                 InputSmoother(dir);
+                menuDescription.Text = Descriptions[index];
                 if (inputs[Key.A]) Decide();
                 else if (inputs[Key.B]) QuitMenu();
                 return;
@@ -201,6 +215,7 @@ namespace Soleil.Menu
             frontImage.Update();
             menuLineUpper.Update();
             menuLineLower.Update();
+            menuDescription.Update();
 
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
@@ -229,7 +244,7 @@ namespace Soleil.Menu
                 menuItems[i].Draw(d);
             }
             // 文章描画
-
+            menuDescription.Draw(d);
             // 子ウィンドウ描画
             foreach (var child in menuChildren)
             {

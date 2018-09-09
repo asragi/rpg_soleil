@@ -38,7 +38,7 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new FontImage(ItemFont, Vector.Zero, DepthID.Message, true, 0);
             itemNameImage.Color = ColorPalette.DarkBlue;
-            itemNameImage.EnableShadow = true;
+            itemNameImage.EnableShadow = false;
             itemNameImage.ShadowPos = new Vector(3, 3);
             itemNameImage.ShadowColor = ColorPalette.GlayBlue;
             itemNameImage.Text = itemName;

@@ -15,7 +15,7 @@ namespace Soleil.Menu
         readonly int ItemPanelSpacing = 4;
         Image backImage;
         ItemPanel[] itemPanels;
-
+        
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
