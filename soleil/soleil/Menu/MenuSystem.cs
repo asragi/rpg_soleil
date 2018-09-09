@@ -57,6 +57,7 @@ namespace Soleil.Menu
             TextureID.MenuSave1,
             TextureID.MenuSave2
         };
+
         public MenuSystem()
         {
             index = 0;
@@ -75,6 +76,9 @@ namespace Soleil.Menu
             // Transition
             transition = Transition.GetInstance();
             IsActive = false;
+
+            // MenuChildren
+            menuChildren = new MenuChild[] { new ItemMenu(this) };
         }
 
         /// <summary>
@@ -125,6 +129,7 @@ namespace Soleil.Menu
             if (IsActive)
             {
                 InputSmoother(dir);
+                if (inputs[Key.B]) QuitMenu();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
@@ -194,9 +199,6 @@ namespace Soleil.Menu
             {
                 menuItems[i].IsSelected = i == index;
             }
-
-            // Debug
-            if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
         }
 
         public void Draw(Drawing d)

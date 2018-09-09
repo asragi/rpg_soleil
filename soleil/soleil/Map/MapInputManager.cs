@@ -46,7 +46,7 @@ namespace Soleil.Map
                     SelectWindowMove(inputDir);
                     break;
                 case InputFocus.Menu:
-                    menuSystem.Input(inputDir);
+                    menuSystem.Input(inputDir, inputs);
                     // debug
                     if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
                     break;
@@ -130,10 +130,10 @@ namespace Soleil.Map
 
         void UpdateInputKeysDown()
         {
-            inputs[Key.A] = KeyInput.GetKeyDown(Key.A);
-            inputs[Key.B] = KeyInput.GetKeyDown(Key.B);
-            inputs[Key.C] = KeyInput.GetKeyDown(Key.C);
-            inputs[Key.D] = KeyInput.GetKeyDown(Key.D);
+            inputs[Key.A] = KeyInput.GetKeyPush(Key.A);
+            inputs[Key.B] = KeyInput.GetKeyPush(Key.B);
+            inputs[Key.C] = KeyInput.GetKeyPush(Key.C);
+            inputs[Key.D] = KeyInput.GetKeyPush(Key.D);
         }
     }
 }
