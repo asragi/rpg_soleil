@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,12 @@ namespace Soleil.Menu
             IsActive = false;
         }
 
-        public void Input()
+        public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
         {
-
+            if (inputs[Key.A]) { OnInputSubmit(); return; }
+            if (inputs[Key.B]) { OnInputCancel(); return; }
+            if (dir.IsContainUp()) OnInputUp();
+            if (dir.IsContainDown()) OnInputDown();
         }
 
         public abstract void OnInputRight();

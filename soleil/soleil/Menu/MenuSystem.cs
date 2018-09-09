@@ -119,8 +119,9 @@ namespace Soleil.Menu
         /// <summary>
         /// 入力を受けメニューを操作する。
         /// </summary>
-        public void MoveCursor(ObjectDir dir)
+        public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
         {
+            // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
                 InputSmoother(dir);
@@ -130,10 +131,8 @@ namespace Soleil.Menu
             foreach (var child in menuChildren)
             {
                 if (!child.IsActive) continue;
-                child.Input();
+                child.Input(dir, inputs);
             }
-            // 自身の項目を動かす
-            InputSmoother(dir);
         }
 
         /// <summary>

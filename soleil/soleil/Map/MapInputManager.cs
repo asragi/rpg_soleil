@@ -13,6 +13,7 @@ namespace Soleil.Map
     /// </summary>
     class MapInputManager
     {
+        Dictionary<Key, bool> inputs;
         InputFocus nowFocus;
         PlayerObject player;
         WindowManager wm;
@@ -25,25 +26,27 @@ namespace Soleil.Map
             wm = WindowManager.GetInstance();
             menuSystem = new MenuSystem();
             nowFocus = InputFocus.Player;
+            inputs = new Dictionary<Key, bool>();
         }
         public void SetPlayer(PlayerObject p) => player = p;
         public void SetMenuSystem(MenuSystem m) => menuSystem = m; // 地獄
 
         public void Update()
         {
+            // 入力を受け取る
+            var inputDir = InputDirection();
+            UpdateInputKeysDown();
+            // フォーカスに応じて処理を振り分ける
             switch (nowFocus)
             {
-                case InputFocus.None:
-                    break;
                 case InputFocus.Player:
-                    PlayerMove();
+                    PlayerMove(inputDir);
                     break;
                 case InputFocus.Window:
-                    SelectWindowMove();
+                    SelectWindowMove(inputDir);
                     break;
                 case InputFocus.Menu:
-                    var input = InputDirection();
-                    menuSystem.MoveCursor(input);
+                    menuSystem.Input(inputDir);
                     // debug
                     if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
                     break;
@@ -52,11 +55,11 @@ namespace Soleil.Map
             }
         }
 
-        private void SelectWindowMove()
+        private void SelectWindowMove(ObjectDir inputDir)
         {
-            if (KeyInput.GetKeyPush(Key.Up)) wm.MoveCursor(Key.Up);
-            else if (KeyInput.GetKeyPush(Key.Down)) wm.MoveCursor(Key.Down);
-            if (KeyInput.GetKeyPush(Key.A)) wm.Decide();
+            if (inputDir.IsContainUp()) wm.MoveCursor(Key.Up);
+            else if (inputDir.IsContainDown()) wm.MoveCursor(Key.Down);
+            if (inputs[Key.A]) wm.Decide();
         }
 
         public void SetFocus(InputFocus f)
@@ -64,21 +67,19 @@ namespace Soleil.Map
             nowFocus = f;
         }
 
-        private void PlayerMove()
+        private void PlayerMove(ObjectDir inputDir)
         {
-            var inputDir = InputDirection();
-
-            
             // Run, Dash or stand
-            if (KeyInput.GetKeyDown(Key.A)) player.Run();
+            if (inputs[Key.A]) player.Run();
             else player.Walk();
             if (inputDir == ObjectDir.None) player.Stand();
 
             // Call Menu
-            if (KeyInput.GetKeyPush(Key.B))
+            if (inputs[Key.B])
             {
                 menuSystem.CallMenu();
                 nowFocus = InputFocus.Menu;
+                return;
             }
 
             player.Move(inputDir);
@@ -125,6 +126,14 @@ namespace Soleil.Map
                 return ObjectDir.D;
             }
             return ObjectDir.None;
+        }
+
+        void UpdateInputKeysDown()
+        {
+            inputs[Key.A] = KeyInput.GetKeyDown(Key.A);
+            inputs[Key.B] = KeyInput.GetKeyDown(Key.B);
+            inputs[Key.C] = KeyInput.GetKeyDown(Key.C);
+            inputs[Key.D] = KeyInput.GetKeyDown(Key.D);
         }
     }
 }

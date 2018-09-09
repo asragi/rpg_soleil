@@ -16,8 +16,8 @@ namespace Soleil.Menu
 
         public override void OnInputRight() { }
         public override void OnInputLeft() { }
-        public override void OnInputUp() { }
-        public override void OnInputDown() { }
+        public override void OnInputUp() { Console.WriteLine("Up"); }
+        public override void OnInputDown() { Console.WriteLine("Down"); }
         public override void OnInputSubmit() { }
         public override void OnInputCancel() { Quit(); }
     }
