@@ -103,8 +103,8 @@ namespace Soleil
 
         public virtual void Draw(Drawing d)
         {
+            if (EnableShadow) d.DrawStaticText(Pos + ShadowPos, Resources.GetFont(font), Text, ShadowColor * Alpha, depth, Vector2.One, Angle, false);
             d.DrawStaticText(Pos, Resources.GetFont(font), Text, Color * Alpha, depth, Vector2.One, Angle, false);
-            if(EnableShadow) d.DrawStaticText(Pos + ShadowPos, Resources.GetFont(font), Text, ShadowColor * Alpha, depth, Vector2.One, Angle, false);
         }
     }
 }

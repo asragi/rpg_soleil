@@ -16,9 +16,12 @@ namespace Soleil.Menu
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
-            test = new FontImage(FontID.Test, new Vector(100, 100), DepthID.Message, true, 0);
-            test.Text = "TestTestTest";
-            test.Color = Microsoft.Xna.Framework.Color.Black;
+            test = new FontImage(FontID.Test, new Vector(500, 100), DepthID.Message, true, 0);
+            test.Text = "フェニックスの手羽先A";
+            test.Color = ColorPalette.DarkBlue;
+            test.EnableShadow = true;
+            test.ShadowColor = ColorPalette.GlayBlue;
+            test.ShadowPos = new Vector(2, 2);
             backImage = new Image(0, Resources.GetTexture(TextureID.WhiteWindow), WindowStartPos, DepthID.MessageBack, false, true, 0);
         }
 
@@ -28,6 +31,7 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowStartPos, 35, Easing.OutCubic);
             backImage.Fade(35, Easing.OutCubic, false);
+            test.MoveTo(WindowStartPos + new Vector(100, 80), 35, Easing.OutCubic);
             test.Fade(35, Easing.OutCubic, false);
         }
 
@@ -37,6 +41,7 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, 35, Easing.OutCubic);
             backImage.Fade(35, Easing.OutCubic, true);
+            test.MoveTo(WindowPos + new Vector(100, 80), 35, Easing.OutCubic);
             test.Fade(35, Easing.OutCubic, true);
         }
 
