@@ -70,7 +70,7 @@ namespace Soleil.Map
         private void PlayerMove(ObjectDir inputDir)
         {
             // Run, Dash or stand
-            if (inputs[Key.A]) player.Run();
+            if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
             if (inputDir == ObjectDir.None) player.Stand();
 

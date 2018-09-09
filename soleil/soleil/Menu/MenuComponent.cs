@@ -28,5 +28,8 @@ namespace Soleil.Menu
         /// IsActiveがfalseになったときに行われる処理
         /// </summary>
         protected virtual void OnDisable() { }
+
+        public virtual void Update() { }
+        public virtual void Draw(Drawing d) { }
     }
 }

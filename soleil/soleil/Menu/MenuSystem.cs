@@ -189,8 +189,9 @@ namespace Soleil.Menu
             }
         }
 
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             // ImageUpdate
             backImage.Update();
             for (int i = 0; i < menuItems.Length; i++)
@@ -206,10 +207,17 @@ namespace Soleil.Menu
             {
                 menuItems[i].IsSelected = i == index;
             }
+
+            // Update Children
+            foreach (var child in menuChildren)
+            {
+                child.Update();
+            }
         }
 
-        public void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
+            base.Draw(d);
             // 背景描画
             backImage.Draw(d);
             // Line描画
@@ -221,6 +229,12 @@ namespace Soleil.Menu
                 menuItems[i].Draw(d);
             }
             // 文章描画
+
+            // 子ウィンドウ描画
+            foreach (var child in menuChildren)
+            {
+                child.Draw(d);
+            }
 
             // 前景描画
             frontImage.Draw(d);
