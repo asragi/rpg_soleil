@@ -120,6 +120,7 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
+    <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MenuChild.cs" />
     <Compile Include="Menu\MenuComponent.cs" />
     <Compile Include="Menu\MenuItem.cs" />

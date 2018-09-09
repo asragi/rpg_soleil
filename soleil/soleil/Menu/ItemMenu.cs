@@ -10,18 +10,31 @@ namespace Soleil.Menu
     {
         readonly Vector WindowPos = new Vector(300, 0);
         readonly Vector WindowStartPos = new Vector(800, 0);
+
+        readonly Vector ItemDrawStartPos = new Vector(100, 120);
+        readonly int ItemPanelSpacing = 4;
         Image backImage;
-        FontImage test;
+        ItemPanel[] itemPanels;
 
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
-            test = new FontImage(FontID.Test, new Vector(500, 100), DepthID.Message, true, 0);
-            test.Text = "フェニックスの手羽先A";
-            test.Color = ColorPalette.DarkBlue;
-            test.EnableShadow = true;
-            test.ShadowColor = ColorPalette.GlayBlue;
-            test.ShadowPos = new Vector(2, 2);
+            // 実際は所持アイテムのデータから生成する
+            itemPanels = new ItemPanel[]{
+                new ItemPanel("ハイポーション"),
+                new ItemPanel("エーテル"),
+                new ItemPanel("フェニックスの手羽先"),
+                new ItemPanel("活きのいいザリガニ"),
+                new ItemPanel("きれいな石"),
+                new ItemPanel("きれいな石"),
+                new ItemPanel("きれいな石"),
+            };
+
+            for (int i = 0; i < itemPanels.Length; ++i)
+            {
+                itemPanels[i].Pos = ItemDrawStartPos + new Vector(0, (itemPanels[i].PanelSize.Y + ItemPanelSpacing) * i);
+            }
+
             backImage = new Image(0, Resources.GetTexture(TextureID.WhiteWindow), WindowStartPos, DepthID.MessageBack, false, true, 0);
         }
 
@@ -31,8 +44,12 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowStartPos, 35, Easing.OutCubic);
             backImage.Fade(35, Easing.OutCubic, false);
-            test.MoveTo(WindowStartPos + new Vector(100, 80), 35, Easing.OutCubic);
-            test.Fade(35, Easing.OutCubic, false);
+
+            foreach (var item in itemPanels)
+            {
+                item.MoveTo(WindowStartPos + item.Pos, 35, Easing.OutCubic);
+                item.Fade(35, Easing.OutCubic, false);
+            }
         }
 
         protected override void OnEnable()
@@ -41,22 +58,31 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, 35, Easing.OutCubic);
             backImage.Fade(35, Easing.OutCubic, true);
-            test.MoveTo(WindowPos + new Vector(100, 80), 35, Easing.OutCubic);
-            test.Fade(35, Easing.OutCubic, true);
+            foreach (var item in itemPanels)
+            {
+                item.MoveTo(WindowPos + item.Pos, 35, Easing.OutCubic);
+                item.Fade(35, Easing.OutCubic, true);
+            }
         }
 
         public override void Update()
         {
             base.Update();
             backImage.Update();
-            test.Update();
+            foreach (var item in itemPanels)
+            {
+                item.Update();
+            }
         }
 
         public override void Draw(Drawing d)
         {
             base.Draw(d);
             backImage.Draw(d);
-            test.Draw(d);
+            foreach (var item in itemPanels)
+            {
+                item.Draw(d);
+            }
         }
 
         public override void OnInputRight() { }
