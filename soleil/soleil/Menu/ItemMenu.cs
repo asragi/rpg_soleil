@@ -12,11 +12,12 @@ namespace Soleil.Menu
         readonly Vector WindowPos = new Vector(330, 100);
         readonly Vector WindowStartPos = new Vector(830, 100);
 
-        readonly Vector ItemDrawStartPos = new Vector(40, 28);
+        readonly Vector ItemDrawStartPos = new Vector(25, 28);
         readonly int ItemPanelSpacing = 4;
         Image backImage;
         ItemPanel[] itemPanels;
-        
+
+        int index;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
@@ -36,6 +37,8 @@ namespace Soleil.Menu
             }
 
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
+
+            index = 0;
         }
 
         protected override void OnDisable()
@@ -87,8 +90,24 @@ namespace Soleil.Menu
 
         public override void OnInputRight() { }
         public override void OnInputLeft() { }
-        public override void OnInputUp() { Console.WriteLine("Up"); }
-        public override void OnInputDown() { Console.WriteLine("Down"); }
+
+        public override void OnInputUp()
+        {
+            index = (index - 1 + itemPanels.Length) % itemPanels.Length;
+            for (int i = 0; i < itemPanels.Length; i++)
+            {
+                itemPanels[i].SetSelected(i == index);
+            }
+        }
+
+        public override void OnInputDown()
+        {
+            index = (index + 1 + itemPanels.Length) % itemPanels.Length;
+            for (int i = 0; i < itemPanels.Length; i++)
+            {
+                itemPanels[i].SetSelected(i == index);
+            }
+        }
         public override void OnInputSubmit() { }
         public override void OnInputCancel() { Quit(); }
     }
