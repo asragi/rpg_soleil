@@ -30,11 +30,19 @@ namespace Soleil.Menu
 
         FontImage itemNameImage;
         readonly public String ItemName;
-        public ItemPanel(String itemName)
+
+        // 当該アイテムの所持数
+        int itemNum;
+        FontImage itemNumImage;
+        public ItemPanel(String itemName, int num)
         {
             ItemName = itemName;
             pos = Vector.Zero;
-
+            // itemNum
+            itemNum = num;
+            itemNumImage = new FontImage(ItemFont, Vector.Zero, DepthID.Message, true, 0);
+            itemNumImage.Color = ColorPalette.DarkBlue;
+            itemNumImage.Text = itemNum.ToString();
             // Set Font Image
             itemNameImage = new FontImage(ItemFont, Vector.Zero, DepthID.Message, true, 0);
             itemNameImage.Color = ColorPalette.DarkBlue;
@@ -47,21 +55,25 @@ namespace Soleil.Menu
         public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
         {
             itemNameImage.Fade(duration, _easeFunc, isFadeIn);
+            itemNumImage.Fade(duration, _easeFunc, isFadeIn);
         }
 
         public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
         {
             itemNameImage.MoveTo(target, duration, _easeFunc);
+            itemNumImage.MoveTo(target + new Vector(300,0), duration, _easeFunc);
         }
 
         public void Update()
         {
             itemNameImage.Update();
+            itemNumImage.Update();
         }
 
         public void Draw(Drawing d)
         {
             itemNameImage.Draw(d);
+            itemNumImage.Draw(d);
         }
     }
 }

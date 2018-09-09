@@ -8,6 +8,7 @@ namespace Soleil.Menu
 {
     class ItemMenu : MenuChild
     {
+        const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
         readonly Vector WindowPos = new Vector(330, 100);
         readonly Vector WindowStartPos = new Vector(830, 100);
 
@@ -21,14 +22,12 @@ namespace Soleil.Menu
         {
             // 実際は所持アイテムのデータから生成する
             itemPanels = new ItemPanel[]{
-                new ItemPanel("ハイポーション"),
-                new ItemPanel("エーテル"),
-                new ItemPanel("フェニックスの手羽先"),
-                new ItemPanel("活きのいいザリガニ"),
-                new ItemPanel("セミの抜け殻"),
-                new ItemPanel("きれいな石"),
-                new ItemPanel("きれいな石"),
-                new ItemPanel("きれいな石"),
+                new ItemPanel("ハイポーション", 2),
+                new ItemPanel("エーテル", 3),
+                new ItemPanel("フェニックスの手羽先", 3),
+                new ItemPanel("活きのいいザリガニ", 2),
+                new ItemPanel("セミの抜け殻", 1),
+                new ItemPanel("きれいな石", 99),
             };
 
             for (int i = 0; i < itemPanels.Length; ++i)
