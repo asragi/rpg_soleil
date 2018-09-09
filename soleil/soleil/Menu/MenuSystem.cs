@@ -129,7 +129,8 @@ namespace Soleil.Menu
             if (IsActive)
             {
                 InputSmoother(dir);
-                if (inputs[Key.B]) QuitMenu();
+                if (inputs[Key.A]) Decide();
+                else if (inputs[Key.B]) QuitMenu();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
@@ -138,6 +139,12 @@ namespace Soleil.Menu
                 if (!child.IsActive) continue;
                 child.Input(dir, inputs);
             }
+        }
+
+        void Decide()
+        {
+            IsActive = false;
+            menuChildren[index].IsActive = true;
         }
 
         /// <summary>
