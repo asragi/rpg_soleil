@@ -138,10 +138,13 @@ namespace Soleil.Menu
         /// </summary>
         public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
         {
+            var input = InputSmoother(dir);
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
-                InputSmoother(dir);
+                if (input.IsContainUp()) index--;
+                if (input.IsContainDown()) index++;
+                index = (index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[index];
                 if (inputs[Key.A]) Decide();
                 else if (inputs[Key.B]) QuitMenu();
@@ -151,7 +154,7 @@ namespace Soleil.Menu
             foreach (var child in menuChildren)
             {
                 if (!child.IsActive) continue;
-                child.Input(dir, inputs);
+                child.Input(input, inputs);
             }
         }
 
@@ -164,23 +167,22 @@ namespace Soleil.Menu
         /// <summary>
         /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
         /// </summary>
-        private void InputSmoother(ObjectDir dir)
+        private ObjectDir InputSmoother(ObjectDir dir)
         {
             waitFrame--;
             if (dir.IsContainUp())
             {
-                if (waitFrame > 0) return;
-                index--;
+                if (waitFrame > 0) return ObjectDir.None;
                 waitFrame = InputWait;
+                return ObjectDir.U;
             }
             else if (dir.IsContainDown())
             {
-                if (waitFrame > 0) return;
-                index++;
+                if (waitFrame > 0) return ObjectDir.None;
                 waitFrame = InputWait;
+                return ObjectDir.D;
             }
-            else{ waitFrame = 0; }
-            index = (index + menuItems.Length) % menuItems.Length; // -1 to 5, 6 to 0
+            else{ waitFrame = 0; return ObjectDir.None; }
         }
 
         protected override void OnDisable()
