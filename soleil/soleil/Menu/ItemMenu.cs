@@ -8,10 +8,10 @@ namespace Soleil.Menu
 {
     class ItemMenu : MenuChild
     {
-        readonly Vector WindowPos = new Vector(300, 0);
-        readonly Vector WindowStartPos = new Vector(800, 0);
+        readonly Vector WindowPos = new Vector(330, 100);
+        readonly Vector WindowStartPos = new Vector(830, 100);
 
-        readonly Vector ItemDrawStartPos = new Vector(100, 120);
+        readonly Vector ItemDrawStartPos = new Vector(40, 30);
         readonly int ItemPanelSpacing = 4;
         Image backImage;
         ItemPanel[] itemPanels;
@@ -25,6 +25,7 @@ namespace Soleil.Menu
                 new ItemPanel("エーテル"),
                 new ItemPanel("フェニックスの手羽先"),
                 new ItemPanel("活きのいいザリガニ"),
+                new ItemPanel("セミの抜け殻"),
                 new ItemPanel("きれいな石"),
                 new ItemPanel("きれいな石"),
                 new ItemPanel("きれいな石"),
@@ -35,7 +36,7 @@ namespace Soleil.Menu
                 itemPanels[i].Pos = ItemDrawStartPos + new Vector(0, (itemPanels[i].PanelSize.Y + ItemPanelSpacing) * i);
             }
 
-            backImage = new Image(0, Resources.GetTexture(TextureID.WhiteWindow), WindowStartPos, DepthID.MessageBack, false, true, 0);
+            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
         }
 
         protected override void OnDisable()

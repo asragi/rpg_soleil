@@ -32,6 +32,7 @@ namespace Soleil
         MenuStatus2,
         MenuSave1,
         MenuSave2,
+        MenuModalBack,
 
         Rule0,
         Rule1,
@@ -284,6 +285,8 @@ namespace Soleil
             SetPath(TextureID.MenuEquip2, UIPath + MenuPath + "menuequip2");
             SetPath(TextureID.MenuBack, UIPath + MenuPath + "menuback");
             SetPath(TextureID.MenuLine, UIPath + MenuPath + "menuline");
+            SetPath(TextureID.MenuModalBack, UIPath + MenuPath + "menuModalBack");
+
             for (int i = 0; i < 20; i++)
             {
                 SetPath(TextureID.Rule0 + i, "UI/Rule/" + i);
