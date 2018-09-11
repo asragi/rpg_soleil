@@ -146,11 +146,10 @@ namespace Soleil
                     break;
                 case BattleCommandSelect bcs:
                     executed = false;
-                    var action = charas[topTurn.CharaIndex].SelectAction();
-                    if (action != null)
+                    var action = charas[topTurn.CharaIndex].SelectAction(topTurn);
+                    if (action)
                     {
                         executed = true;
-                        turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.CharaIndex, action));
                         delayCount = 0;
                     }
                     break;
@@ -158,6 +157,7 @@ namespace Soleil
 
         }
 
+        public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
         void EnqueueTurn()
         {
             /*

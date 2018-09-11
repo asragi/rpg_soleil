@@ -11,7 +11,11 @@ namespace Soleil
         public int CharaIndex = -1;
         protected BattleField BF;
         public CommandSelect(BattleField bf, int charaIndex) => (BF, CharaIndex) = (bf, charaIndex);
-        public abstract Action GetAction();
+        public abstract bool GetAction(Turn turn);
+        protected void EnqueueTurn(Action action, Turn turn)
+        {
+            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + 100, turn.SPD, turn.CharaIndex, action));
+        }
     }
 
     class DefaultCharacterCommandSelect : CommandSelect
@@ -20,11 +24,12 @@ namespace Soleil
         {
         }
 
-        public override Action GetAction()
+        public override bool GetAction(Turn turn)
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target);
+            EnqueueTurn(((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target), turn);
+            return true;
         }
     }
 
@@ -39,7 +44,7 @@ namespace Soleil
         }
 
         
-        public override Action GetAction()
+        public override bool GetAction(Turn turn)
         {
             Action act = null;
             if(windows.Count==0)
@@ -54,7 +59,7 @@ namespace Soleil
             {
                 case CommandSelectWindow csw:
                     var cmd = csw.Select();
-                    if (!cmd.HasValue) return null;
+                    if (!cmd.HasValue) return false;
 
                     //debug なにを選んでも攻撃
                     switch (cmd.Value)
@@ -85,9 +90,10 @@ namespace Soleil
             {
                 windows.ForEach2(e => bf.RemoveUI(e));
                 windows.Clear();
-                return act;
+                EnqueueTurn(act, turn);
+                return true;
             }
-            return null;
+            return false;
         }
     }
 }

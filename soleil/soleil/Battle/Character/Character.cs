@@ -23,9 +23,9 @@ namespace Soleil
             SPD = new Reference<int>();
         }
 
-        public Action SelectAction()
+        public bool SelectAction(Turn turn)
         {
-            return commandSelect.GetAction();
+            return commandSelect.GetAction(turn);
         }
 
         public void Damage(int HP=0, int MP=0)
