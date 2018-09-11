@@ -31,10 +31,15 @@ namespace Soleil.Map
         public void SetPlayer(PlayerObject p) => player = p;
         public void SetMenuSystem(MenuSystem m) => menuSystem = m; // 地獄
 
+        // 入力を良い感じにする処理用
+        const int InputWait = 8;
+        int waitFrame;
+
         public void Update()
         {
             // 入力を受け取る
             var inputDir = InputDirection();
+            var smoothInput = InputSmoother(inputDir);
             UpdateInputKeysDown();
             // フォーカスに応じて処理を振り分ける
             switch (nowFocus)
@@ -43,23 +48,16 @@ namespace Soleil.Map
                     PlayerMove(inputDir);
                     break;
                 case InputFocus.Window:
-                    SelectWindowMove(inputDir);
+                    wm.Input(smoothInput, inputs);
                     break;
                 case InputFocus.Menu:
-                    menuSystem.Input(inputDir, inputs);
+                    menuSystem.Input(smoothInput, inputs);
                     // debug
                     if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
                     break;
                 default:
                     break;
             }
-        }
-
-        private void SelectWindowMove(ObjectDir inputDir)
-        {
-            if (inputDir.IsContainUp()) wm.MoveCursor(Key.Up);
-            else if (inputDir.IsContainDown()) wm.MoveCursor(Key.Down);
-            if (inputs[Key.A]) wm.Decide();
         }
 
         public void SetFocus(InputFocus f)
@@ -126,6 +124,27 @@ namespace Soleil.Map
                 return ObjectDir.D;
             }
             return ObjectDir.None;
+        }
+
+        /// <summary>
+        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
+        /// </summary>
+        private ObjectDir InputSmoother(ObjectDir dir)
+        {
+            waitFrame--;
+            if (dir.IsContainUp())
+            {
+                if (waitFrame > 0) return ObjectDir.None;
+                waitFrame = InputWait;
+                return ObjectDir.U;
+            }
+            else if (dir.IsContainDown())
+            {
+                if (waitFrame > 0) return ObjectDir.None;
+                waitFrame = InputWait;
+                return ObjectDir.D;
+            }
+            else { waitFrame = 0; return ObjectDir.None; }
         }
 
         void UpdateInputKeysDown()

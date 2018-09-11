@@ -43,10 +43,6 @@ namespace Soleil.Menu
         // MenuChildren
         MenuChild[] menuChildren;
 
-        // 入力を良い感じにする処理用
-        const int InputWait = 8;
-        int waitFrame;
-
         // Transition
         const int FadeSpeed = 23;
         readonly Func<double, double, double, double, double> func = Easing.OutQuad;
@@ -138,7 +134,7 @@ namespace Soleil.Menu
         /// </summary>
         public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
         {
-            var input = InputSmoother(dir);
+            var input = dir;
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
@@ -162,27 +158,6 @@ namespace Soleil.Menu
         {
             IsActive = false;
             menuChildren[index].IsActive = true;
-        }
-
-        /// <summary>
-        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
-        /// </summary>
-        private ObjectDir InputSmoother(ObjectDir dir)
-        {
-            waitFrame--;
-            if (dir.IsContainUp())
-            {
-                if (waitFrame > 0) return ObjectDir.None;
-                waitFrame = InputWait;
-                return ObjectDir.U;
-            }
-            else if (dir.IsContainDown())
-            {
-                if (waitFrame > 0) return ObjectDir.None;
-                waitFrame = InputWait;
-                return ObjectDir.D;
-            }
-            else{ waitFrame = 0; return ObjectDir.None; }
         }
 
         protected override void OnDisable()
