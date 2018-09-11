@@ -8,12 +8,14 @@ namespace Soleil.Menu
 {
     class ItemMenu : MenuChild
     {
+        const int FadeSpeed = 35;
         const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
         readonly Vector WindowPos = new Vector(330, 100);
         readonly Vector WindowStartPos = new Vector(830, 100);
 
         readonly Vector ItemDrawStartPos = new Vector(25, 28);
         readonly int ItemPanelSpacing = 4;
+        readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
 
         Image backImage;
         ItemPanel[] itemPanels;
@@ -46,13 +48,13 @@ namespace Soleil.Menu
         {
             base.OnDisable();
             // Transition Images
-            backImage.MoveTo(WindowStartPos, 35, Easing.OutCubic);
-            backImage.Fade(35, Easing.OutCubic, false);
+            backImage.MoveTo(WindowStartPos, FadeSpeed, EaseFunc);
+            backImage.Fade(FadeSpeed, EaseFunc, false);
 
             foreach (var item in itemPanels)
             {
-                item.MoveTo(WindowStartPos + item.LocalPos, 35, Easing.OutCubic);
-                item.Fade(35, Easing.OutCubic, false);
+                item.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, EaseFunc);
+                item.Fade(FadeSpeed, EaseFunc, false);
             }
         }
 
@@ -60,12 +62,12 @@ namespace Soleil.Menu
         {
             base.OnEnable();
             // Transition Images
-            backImage.MoveTo(WindowPos, 35, Easing.OutCubic);
-            backImage.Fade(35, Easing.OutCubic, true);
+            backImage.MoveTo(WindowPos, FadeSpeed, EaseFunc);
+            backImage.Fade(FadeSpeed, EaseFunc, true);
             foreach (var item in itemPanels)
             {
-                item.MoveTo(WindowPos + item.LocalPos, 35, Easing.OutCubic);
-                item.Fade(35, Easing.OutCubic, true);
+                item.MoveTo(WindowPos + item.LocalPos, FadeSpeed, EaseFunc);
+                item.Fade(FadeSpeed, EaseFunc, true);
             }
             RefreshSelected();
         }
