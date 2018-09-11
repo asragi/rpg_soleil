@@ -19,6 +19,7 @@ namespace Soleil.Menu
                 else OnDisable();
             }
         }
+
         public MenuComponent() { }
         /// <summary>
         /// IsActiveがtrueになったときに行われる処理

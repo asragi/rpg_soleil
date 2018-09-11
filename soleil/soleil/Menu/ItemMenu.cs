@@ -14,29 +14,30 @@ namespace Soleil.Menu
 
         readonly Vector ItemDrawStartPos = new Vector(25, 28);
         readonly int ItemPanelSpacing = 4;
+
         Image backImage;
         ItemPanel[] itemPanels;
-
+        public Vector Pos { get { return backImage.Pos; } }
         int index;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
+            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
+
             // 実際は所持アイテムのデータから生成する
             itemPanels = new ItemPanel[]{
-                new ItemPanel("ハイポーション", 2),
-                new ItemPanel("エーテル", 3),
-                new ItemPanel("フェニックスの手羽先", 3),
-                new ItemPanel("活きのいいザリガニ", 2),
-                new ItemPanel("セミの抜け殻", 1),
-                new ItemPanel("きれいな石", 99),
+                new ItemPanel("ハイポーション", 2, this),
+                new ItemPanel("エーテル", 3, this),
+                new ItemPanel("フェニックスの手羽先", 3, this),
+                new ItemPanel("活きのいいザリガニ", 2, this),
+                new ItemPanel("セミの抜け殻", 1, this),
+                new ItemPanel("きれいな石", 99, this),
             };
 
             for (int i = 0; i < itemPanels.Length; ++i)
             {
-                itemPanels[i].Pos = ItemDrawStartPos + new Vector(0, (itemPanels[i].PanelSize.Y + ItemPanelSpacing) * i);
+                itemPanels[i].LocalPos = ItemDrawStartPos + new Vector(0, (itemPanels[i].PanelSize.Y + ItemPanelSpacing) * i);
             }
-
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
 
             index = 0;
         }
@@ -50,7 +51,7 @@ namespace Soleil.Menu
 
             foreach (var item in itemPanels)
             {
-                item.MoveTo(WindowStartPos + item.Pos, 35, Easing.OutCubic);
+                item.MoveTo(WindowStartPos + item.LocalPos, 35, Easing.OutCubic);
                 item.Fade(35, Easing.OutCubic, false);
             }
         }
@@ -63,7 +64,7 @@ namespace Soleil.Menu
             backImage.Fade(35, Easing.OutCubic, true);
             foreach (var item in itemPanels)
             {
-                item.MoveTo(WindowPos + item.Pos, 35, Easing.OutCubic);
+                item.MoveTo(WindowPos + item.LocalPos, 35, Easing.OutCubic);
                 item.Fade(35, Easing.OutCubic, true);
             }
         }
