@@ -46,7 +46,12 @@ namespace Soleil
         
         public override bool GetAction(Turn turn)
         {
-            Action act = null;
+            System.Action retExec = () =>
+            {
+                windows.ForEach2(e => bf.RemoveUI(e));
+                windows.Clear();
+            };
+
             if(windows.Count==0)
             {
                 var sw = new CommandSelectWindow(new Vector(600, 200));
@@ -61,21 +66,32 @@ namespace Soleil
                     var cmd = csw.Select();
                     if (!cmd.HasValue) return false;
 
+                    Action act = null;
                     //debug なにを選んでも攻撃
                     switch (cmd.Value)
                     {
                         case Command.Magic:
                             act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
-                            break;
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
                         case Command.Skill:
                             act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
-                            break;
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
                         case Command.Guard:
-                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
-                            break;
+                            act = ((BuffMe)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(CharaIndex);
+                            EnqueueTurn(act, turn);
+                            act = ((BuffMe)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(CharaIndex);
+                            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.WP + 100, turn.SPD, turn.CharaIndex, act));
+                            retExec();
+                            return true;
                         case Command.Escape:
                             act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
-                            break;
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
                         default:
                             break;
                     }
@@ -85,14 +101,7 @@ namespace Soleil
                     throw new Exception("??????");
             }
             
-
-            if(act!=null)
-            {
-                windows.ForEach2(e => bf.RemoveUI(e));
-                windows.Clear();
-                EnqueueTurn(act, turn);
-                return true;
-            }
+            
             return false;
         }
     }
