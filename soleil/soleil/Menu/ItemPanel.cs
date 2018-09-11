@@ -12,11 +12,13 @@ namespace Soleil.Menu
     class ItemPanel
     {
         public readonly Vector PanelSize = new Vector(300, 36);
+        public readonly Vector ItemNumPosDiff = new Vector(300, 0);
         /// <summary>
         /// パネルの文字描画を左上からどれだけの位置にするか
         /// </summary>
         readonly Vector Spacing = new Vector(8, 4);
         readonly FontID ItemFont = FontID.Test;
+        readonly Func<double, double, double, double, double> func = Easing.OutCubic;
 
         // Parentに対する相対的な基準座標
         private Vector localPos;
@@ -26,7 +28,7 @@ namespace Soleil.Menu
             set
             {
                 localPos = value;
-                itemNumImage.Pos = localPos + Spacing + itemMenu.Pos + new Vector(300, 0);
+                itemNumImage.Pos = localPos + Spacing + itemMenu.Pos + ItemNumPosDiff;
                 itemNameImage.Pos = localPos + Spacing + itemMenu.Pos;
                 selectedBack.Pos = localPos + itemMenu.Pos;
             }
@@ -44,6 +46,7 @@ namespace Soleil.Menu
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
         Image unselectedBack;
+        bool isSelected;
 
         public ItemPanel(String itemName, int num, ItemMenu parent)
         {
@@ -51,7 +54,7 @@ namespace Soleil.Menu
             itemMenu = parent;
             // itemNum
             itemNum = num;
-            itemNumImage = new FontImage(ItemFont, LocalPos+parent.Pos + new Vector(300,0), DepthID.Message, true, 0);
+            itemNumImage = new FontImage(ItemFont, LocalPos+parent.Pos + ItemNumPosDiff, DepthID.Message, true, 0);
             itemNumImage.Color = ColorPalette.DarkBlue;
             itemNumImage.Text = itemNum.ToString();
             // Set Font Image
@@ -73,32 +76,33 @@ namespace Soleil.Menu
         {
             itemNameImage.Fade(duration, _easeFunc, isFadeIn);
             itemNumImage.Fade(duration, _easeFunc, isFadeIn);
-            selectedBack.Fade(duration, _easeFunc, isFadeIn);
+            if(isSelected) selectedBack.Fade(duration, _easeFunc, isFadeIn);
             unselectedBack.Fade(duration, _easeFunc, isFadeIn);
         }
 
         public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
         {
             itemNameImage.MoveTo(target + Spacing, duration, _easeFunc);
-            itemNumImage.MoveTo(target + new Vector(300,0), duration, _easeFunc);
+            itemNumImage.MoveTo(target + ItemNumPosDiff, duration, _easeFunc);
             selectedBack.MoveTo(target, duration, _easeFunc);
             unselectedBack.MoveTo(target, duration, _easeFunc);
         }
 
-        public void SetSelected(bool select)
+        public void SetSelectedAndFade(bool select)
         {
             if (select)
             {
-                selectedBack.Fade(20, Easing.OutCubic, true);
-                unselectedBack.Fade(20, Easing.OutCubic, false);
+                selectedBack.Fade(20, func, true);
+                unselectedBack.Fade(20, func, false);
                 itemNameImage.Color = ColorPalette.AliceBlue;
             }
-            else
+            else if(!select && isSelected) // 選択が解除された瞬間
             {
-                selectedBack.Fade(20, Easing.OutCubic, false);
-                unselectedBack.Fade(20, Easing.OutCubic, true);
+                selectedBack.Fade(20, func, false);
+                unselectedBack.Fade(20, func, true);
                 itemNameImage.Color = ColorPalette.DarkBlue;
             }
+            isSelected = select;
         }
 
         public void Update()

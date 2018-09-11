@@ -67,6 +67,7 @@ namespace Soleil.Menu
                 item.MoveTo(WindowPos + item.LocalPos, 35, Easing.OutCubic);
                 item.Fade(35, Easing.OutCubic, true);
             }
+            RefreshSelected();
         }
 
         public override void Update()
@@ -89,25 +90,28 @@ namespace Soleil.Menu
             }
         }
 
+        private void RefreshSelected()
+        {
+            for (int i = 0; i < itemPanels.Length; i++)
+            {
+                itemPanels[i].SetSelectedAndFade(i == index);
+            }
+        }
+
+        // Input
         public override void OnInputRight() { }
         public override void OnInputLeft() { }
 
         public override void OnInputUp()
         {
             index = (index - 1 + itemPanels.Length) % itemPanels.Length;
-            for (int i = 0; i < itemPanels.Length; i++)
-            {
-                itemPanels[i].SetSelected(i == index);
-            }
+            RefreshSelected();
         }
 
         public override void OnInputDown()
         {
             index = (index + 1 + itemPanels.Length) % itemPanels.Length;
-            for (int i = 0; i < itemPanels.Length; i++)
-            {
-                itemPanels[i].SetSelected(i == index);
-            }
+            RefreshSelected();
         }
         public override void OnInputSubmit() { }
         public override void OnInputCancel() { Quit(); }
