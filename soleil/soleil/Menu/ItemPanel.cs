@@ -60,9 +60,6 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new FontImage(ItemFont, LocalPos+parent.Pos, DepthID.Message, true, 0);
             itemNameImage.Color = ColorPalette.DarkBlue;
-            itemNameImage.EnableShadow = false;
-            itemNameImage.ShadowPos = new Vector(3, 3);
-            itemNameImage.ShadowColor = ColorPalette.GlayBlue;
             itemNameImage.Text = itemName;
 
             // 選択状態を示すやつ
