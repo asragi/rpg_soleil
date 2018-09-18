@@ -47,11 +47,11 @@ namespace Soleil
                 else if (key == Key.Down) s.DownCursor();
             }
         }
-        public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
+        public void Input(Direction dir)
         {
-            if (dir.IsContainUp()) MoveCursor(Key.Up);
-            else if (dir.IsContainDown()) MoveCursor(Key.Down);
-            if (inputs[Key.A]) Decide();
+            if (dir == Direction.U) MoveCursor(Key.Up);
+            else if (dir == Direction.D) MoveCursor(Key.Down);
+            if (KeyInput.GetKeyPush(Key.A)) Decide();
         }
 
         /// <summary>

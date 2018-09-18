@@ -45,13 +45,13 @@ namespace Soleil.Map
             switch (nowFocus)
             {
                 case InputFocus.Player:
-                    PlayerMove(inputDir);
+                    PlayerMove();
                     break;
                 case InputFocus.Window:
-                    wm.Input(smoothInput, inputs);
+                    wm.Input(smoothInput);
                     break;
                 case InputFocus.Menu:
-                    menuSystem.Input(smoothInput, inputs);
+                    menuSystem.Input(smoothInput);
                     // debug
                     if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
                     break;
@@ -65,15 +65,16 @@ namespace Soleil.Map
             nowFocus = f;
         }
 
-        private void PlayerMove(Direction inputDir)
+        private void PlayerMove()
         {
+            var inputDir = KeyInput.GetStickInclineDirection(1);
             // Run, Dash or stand
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
             if (inputDir == Direction.N) player.Stand();
 
             // Call Menu
-            if (inputs[Key.B])
+            if (KeyInput.GetKeyPush(Key.B))
             {
                 menuSystem.CallMenu();
                 nowFocus = InputFocus.Menu;
@@ -86,22 +87,22 @@ namespace Soleil.Map
         /// <summary>
         /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
         /// </summary>
-        private ObjectDir InputSmoother(Direction dir)
+        private Direction InputSmoother(Direction dir)
         {
             waitFrame--;
-            if (dir == Direction.U || dir == Direction.RU || dir == Direction.LU)
+            if (dir.IsContainUp())
             {
-                if (waitFrame > 0) return ObjectDir.None;
+                if (waitFrame > 0) return Direction.N;
                 waitFrame = InputWait;
-                return ObjectDir.U;
+                return Direction.U;
             }
-            else if (dir == Direction.D || dir == Direction.RD || dir == Direction.LD)
+            else if (dir.IsContainDown())
             {
-                if (waitFrame > 0) return ObjectDir.None;
+                if (waitFrame > 0) return Direction.N;
                 waitFrame = InputWait;
-                return ObjectDir.D;
+                return Direction.D;
             }
-            else { waitFrame = 0; return ObjectDir.None; }
+            else { waitFrame = 0; return Direction.N; }
         }
 
         void UpdateInputKeysDown()

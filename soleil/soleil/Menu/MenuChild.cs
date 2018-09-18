@@ -27,12 +27,12 @@ namespace Soleil.Menu
             IsActive = false;
         }
 
-        public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
+        public void Input(Direction dir)
         {
-            if (inputs[Key.A]) { OnInputSubmit(); return; }
-            if (inputs[Key.B]) { OnInputCancel(); return; }
-            if (dir.IsContainUp()) OnInputUp();
-            if (dir.IsContainDown()) OnInputDown();
+            if (KeyInput.GetKeyPush(Key.A)) { OnInputSubmit(); return; }
+            if (KeyInput.GetKeyPush(Key.B)) { OnInputCancel(); return; }
+            if (dir == Direction.U) OnInputUp();
+            if (dir == Direction.D) OnInputDown();
         }
 
         public abstract void OnInputRight();

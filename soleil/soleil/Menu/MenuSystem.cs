@@ -132,25 +132,25 @@ namespace Soleil.Menu
         /// <summary>
         /// 入力を受けメニューを操作する。
         /// </summary>
-        public void Input(ObjectDir dir, Dictionary<Key, bool> inputs)
+        public void Input(Direction dir)
         {
             var input = dir;
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
-                if (input.IsContainUp()) index--;
-                if (input.IsContainDown()) index++;
+                if (dir == Direction.U) index--;
+                if (dir == Direction.D) index++;
                 index = (index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[index];
-                if (inputs[Key.A]) Decide();
-                else if (inputs[Key.B]) QuitMenu();
+                if (KeyInput.GetKeyPush(Key.A)) Decide();
+                else if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
             foreach (var child in menuChildren)
             {
                 if (!child.IsActive) continue;
-                child.Input(input, inputs);
+                child.Input(input);
             }
         }
 
