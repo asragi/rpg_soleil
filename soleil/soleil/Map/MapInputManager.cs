@@ -38,7 +38,7 @@ namespace Soleil.Map
         public void Update()
         {
             // 入力を受け取る
-            var inputDir = InputDirection();
+            var inputDir = KeyInput.GetStickInclineDirection(1);
             var smoothInput = InputSmoother(inputDir);
             UpdateInputKeysDown();
             // フォーカスに応じて処理を振り分ける
@@ -65,12 +65,12 @@ namespace Soleil.Map
             nowFocus = f;
         }
 
-        private void PlayerMove(ObjectDir inputDir)
+        private void PlayerMove(Direction inputDir)
         {
             // Run, Dash or stand
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
-            if (inputDir == ObjectDir.None) player.Stand();
+            if (inputDir == Direction.N) player.Stand();
 
             // Call Menu
             if (inputs[Key.B])
@@ -84,61 +84,18 @@ namespace Soleil.Map
         }
 
         /// <summary>
-        /// 入力に応じて8方向のEnumを返す
-        /// </summary>
-        ObjectDir InputDirection()
-        {
-            if (KeyInput.GetKeyDown(Key.Right))
-            {
-                if (KeyInput.GetKeyDown(Key.Up))
-                {
-                    return ObjectDir.UR;
-                }
-
-                if (KeyInput.GetKeyDown(Key.Down))
-                {
-                    return ObjectDir.DR;
-                }
-                return ObjectDir.R;
-            }
-            if (KeyInput.GetKeyDown(Key.Left))
-            {
-                if (KeyInput.GetKeyDown(Key.Up))
-                {
-                    return ObjectDir.UL;
-                }
-
-                if (KeyInput.GetKeyDown(Key.Down))
-                {
-                    return ObjectDir.DL;
-                }
-                return ObjectDir.L;
-            }
-            if (KeyInput.GetKeyDown(Key.Up))
-            {
-                return ObjectDir.U;
-            }
-
-            if (KeyInput.GetKeyDown(Key.Down))
-            {
-                return ObjectDir.D;
-            }
-            return ObjectDir.None;
-        }
-
-        /// <summary>
         /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
         /// </summary>
-        private ObjectDir InputSmoother(ObjectDir dir)
+        private ObjectDir InputSmoother(Direction dir)
         {
             waitFrame--;
-            if (dir.IsContainUp())
+            if (dir == Direction.U || dir == Direction.RU || dir == Direction.LU)
             {
                 if (waitFrame > 0) return ObjectDir.None;
                 waitFrame = InputWait;
                 return ObjectDir.U;
             }
-            else if (dir.IsContainDown())
+            else if (dir == Direction.D || dir == Direction.RD || dir == Direction.LD)
             {
                 if (waitFrame > 0) return ObjectDir.None;
                 waitFrame = InputWait;

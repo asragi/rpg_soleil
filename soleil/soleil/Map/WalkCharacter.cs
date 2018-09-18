@@ -12,12 +12,12 @@ namespace Soleil.Map
         public WalkCharacter(Vector pos, Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
             : base(pos, boxSize, om, bm,symmetry)
         {
-            walkAnimation = new Animation[8];
+            walkAnimation = new Animation[9];
         }
 
         protected void SetWalkAnimation(AnimationData[] data)
         {
-            for (int i = 0; i < walkAnimation.Length; i++)
+            for (int i = 1; i < walkAnimation.Length; i++)
             {
                 walkAnimation[i] = new Animation(data[i]);
             }

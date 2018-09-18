@@ -14,7 +14,7 @@ namespace Soleil.Map
     abstract class MapCharacter:MapEventObject
     {
         protected bool Symmetry; // アニメーションが左右対称かどうか
-        protected ObjectDir Direction;
+        protected Direction Direction = Direction.D;
         protected MoveState MoveState;
         protected Animation NowAnimation;
         private Animation[] standAnimation;
@@ -24,7 +24,7 @@ namespace Soleil.Map
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;
             // n方向のアニメーション
-            standAnimation = new Animation[8];
+            standAnimation = new Animation[9];
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Soleil.Map
         /// </summary>
         protected void SetStandAnimation(AnimationData[] data)
         {
-            for (int i = 0; i < standAnimation.Length; i++)
+            for (int i = 1; i < standAnimation.Length; i++)
             {
                 standAnimation[i] = new Animation(data[i]);
             }
@@ -53,7 +53,7 @@ namespace Soleil.Map
             }
         }
 
-        protected void ChangeDirection(ObjectDir dir)
+        protected void ChangeDirection(Direction dir)
         {
             Direction = dir;
         }
@@ -63,6 +63,5 @@ namespace Soleil.Map
             NowAnimation?.Draw(sb, Pos);
             base.Draw(sb);
         }
-
     }
 }
