@@ -42,6 +42,8 @@ namespace Soleil.Menu
 
         // MenuChildren
         MenuChild[] menuChildren;
+        // Status 表示
+        StatusMenu statusMenu;
 
         // Transition
         const int FadeSpeed = 23;
@@ -87,6 +89,8 @@ namespace Soleil.Menu
             menuDescription = new MenuDescription(new Vector(125, 35));
             // MenuChildren
             menuChildren = new MenuChild[] { new ItemMenu(this) };
+            // Status Menu
+            statusMenu = new StatusMenu(this);
         }
 
         /// <summary>
@@ -98,6 +102,9 @@ namespace Soleil.Menu
             ImageTransition(TransitionMode.FadeOut);
             IsActive = true;
             IsQuit = false;
+
+            // statusMenu召喚
+            statusMenu.FadeIn();
         }
 
         /// <summary>
@@ -110,6 +117,9 @@ namespace Soleil.Menu
             IsQuit = true;
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
+
+            // statusMenu退散
+            statusMenu.FadeOut();
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -193,6 +203,7 @@ namespace Soleil.Menu
             menuLineUpper.Update();
             menuLineLower.Update();
             menuDescription.Update();
+            statusMenu.Update();
 
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
@@ -222,12 +233,13 @@ namespace Soleil.Menu
             }
             // 文章描画
             menuDescription.Draw(d);
+            // Status描画（子ウィンドウより先に描画）
+            statusMenu.Draw(d);
             // 子ウィンドウ描画
             foreach (var child in menuChildren)
             {
                 child.Draw(d);
             }
-
             // 前景描画
             frontImage.Draw(d);
         }

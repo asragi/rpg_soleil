@@ -127,6 +127,7 @@
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuLine.cs" />
     <Compile Include="Menu\MenuSystem.cs" />
+    <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
