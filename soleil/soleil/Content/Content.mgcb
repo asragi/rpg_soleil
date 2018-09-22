@@ -662,6 +662,7 @@
 /build:Animation/Map/Character/Lune/walking_up.png
 
 #begin UI/Menu/menuequip1.PNG
+#begin Animation/Map/Character/Mob/somniamob1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -840,4 +841,4 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Menu/menuline.png
-
+/build:Animation/Map/Character/Mob/somniamob1.png

@@ -91,6 +91,8 @@ namespace Soleil
         LuneWalkU,
         LuneWalkD,
 
+        SomniaMob1,
+
         Size,
     }
 
@@ -263,6 +265,10 @@ namespace Soleil
             SetSize(AnimationID.LuneWalkU, 6, 1);
             SetPath(AnimationID.LuneWalkD, "Animation/Map/Character/Lune/walking_down");
             SetSize(AnimationID.LuneWalkD, 6, 1);
+
+            // Somnia
+            SetPath(AnimationID.SomniaMob1, "Animation/Map/Character/Mob/somniamob1");
+            SetSize(AnimationID.SomniaMob1, 3, 1);
             #endregion
 
             #region UI
