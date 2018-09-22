@@ -11,6 +11,7 @@
         // Variables
         bool movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
+        CollideBox decideBox; // 決定キーを押したときに飛び出す判定
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
@@ -26,6 +27,8 @@
             {
                 moveBoxes[i] = new CollideBox(this, Vector.Zero, DefaultBoxSize, CollideLayer.Player, bm);
             }
+            decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
+            decideBox.IsActive = false;
             SetAnimation();
         }
 
@@ -147,6 +150,14 @@
                 var resultPos = speedVector.Rotate(resultAngle);
                 moveBoxes[i].SetLocalPos(resultPos);
             }
+        }
+
+        /// <summary>
+        /// 決定キーで起動するイベントを判定する用boxを一瞬出す．
+        /// </summary>
+        public void ProjectHitBox()
+        {
+            decideBox.SetLocalPos(new Vector(100, 0));
         }
         #endregion
 

@@ -68,9 +68,13 @@ namespace Soleil.Map
         {
             var inputDir = InputDirection();
 
-            
+
             // Run, Dash or stand
-            if (KeyInput.GetKeyDown(Key.A)) player.Run();
+            if (KeyInput.GetKeyDown(Key.A))
+            {
+                player.Run();
+                player.ProjectHitBox();
+            }
             else player.Walk();
             if (inputDir == ObjectDir.None) player.Stand();
 
