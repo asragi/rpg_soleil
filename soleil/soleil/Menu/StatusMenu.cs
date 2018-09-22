@@ -11,9 +11,11 @@ namespace Soleil.Menu
         MenuCharacterPanel[] menuCharacterPanels;
         readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
 
+        int index;
         public StatusMenu(MenuComponent parent)
             :base(parent)
         {
+            index = 0;
             menuCharacterPanels = new MenuCharacterPanel[2];
             menuCharacterPanels[0] = new MenuCharacterPanel(new Vector(290, 120), TextureID.MenuLune);
             menuCharacterPanels[1] = new MenuCharacterPanel(new Vector(540, 120), TextureID.MenuSun);
@@ -73,8 +75,15 @@ namespace Soleil.Menu
         }
 
         // Input
-        public override void OnInputRight() { }
-        public override void OnInputLeft() { }
+        public override void OnInputRight() {
+            index++;
+            index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+        }
+
+        public override void OnInputLeft() {
+            index--;
+            index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+        }
         public override void OnInputUp() { }
         public override void OnInputDown(){ }
         public override void OnInputSubmit() { }
