@@ -16,6 +16,7 @@ namespace Soleil.Map
         List<bool> preCollide, nowCollide;
         bool wallCollide; // 壁に重なっているか
         public bool IsActive;
+        BoxManager boxManager;
 
         /// <param name="_localPos">相対的な矩形中心位置</param>
         public CollideBox(MapObject _parent, Vector _localPos, Vector _size, CollideLayer _layer, BoxManager bm)
@@ -30,6 +31,7 @@ namespace Soleil.Map
             nowCollide = new List<bool>();
             IsActive = true;
             bm.Add(this);
+            boxManager = bm;
         }
 
         public void SetLocalPos(Vector _pos) => localPos = _pos;
@@ -46,7 +48,7 @@ namespace Soleil.Map
 
         private void CollideStateCheck(int i)
         {
-            if (!preCollide[i] & nowCollide[i]) CollideEnter();
+            if (!preCollide[i] & nowCollide[i]) CollideEnter(i);
             if (preCollide[i] & nowCollide[i]) CollideStay();
             if (preCollide[i] & !nowCollide[i]) CollideExit();
             preCollide[i] = nowCollide[i];
@@ -87,9 +89,9 @@ namespace Soleil.Map
             nowCollide[target.ID] = col;
         }
 
-        void CollideEnter()
+        void CollideEnter(int id)
         {
-            parent.OnCollisionEnter();
+            parent.OnCollisionEnter(boxManager.GetBox(id));
         }
 
         void CollideStay()

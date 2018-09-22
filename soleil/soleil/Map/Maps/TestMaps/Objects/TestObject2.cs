@@ -34,10 +34,10 @@ namespace Soleil.Map
             );
         }
 
-        public override void OnCollisionEnter()
+        public override void OnCollisionEnter(CollideBox col)
         {
             EventSequence.StartEvent();
-            base.OnCollisionEnter();
+            base.OnCollisionEnter(col);
         }
 
         public override void Update()

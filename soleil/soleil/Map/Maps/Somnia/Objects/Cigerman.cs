@@ -35,10 +35,13 @@ namespace Soleil.Map.Maps.Somnia
             );
         }
 
-        public override void OnCollisionEnter()
+        public override void OnCollisionEnter(CollideBox col)
         {
-            EventSequence.StartEvent();
-            base.OnCollisionEnter();
+            if (col.Layer == CollideLayer.PlayerHit)
+            {
+                EventSequence.StartEvent();
+            }
+            base.OnCollisionEnter(col);
         }
     }
 }

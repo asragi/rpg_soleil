@@ -43,7 +43,7 @@ namespace Soleil.Map
             return Dead;
         }
 
-        virtual public void OnCollisionEnter()
+        virtual public void OnCollisionEnter(CollideBox collide)
         {
 
         }

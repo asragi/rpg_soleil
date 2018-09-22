@@ -12,10 +12,10 @@ namespace Soleil.Map
             exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character, bm);
         }
 
-        public override void OnCollisionEnter()
+        public override void OnCollisionEnter(CollideBox col)
         {
             EventSequence.StartEvent();
-            base.OnCollisionEnter();
+            base.OnCollisionEnter(col);
         }
 
         public override void Update()
