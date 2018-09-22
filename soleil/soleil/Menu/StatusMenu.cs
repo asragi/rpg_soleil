@@ -10,12 +10,14 @@ namespace Soleil.Menu
     {
         MenuCharacterPanel[] menuCharacterPanels;
         readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
+        MenuSystem menuSystem;
 
         int index;
-        public StatusMenu(MenuComponent parent)
+        public StatusMenu(MenuSystem parent)
             :base(parent)
         {
             index = 0;
+            menuSystem = parent;
             menuCharacterPanels = new MenuCharacterPanel[2];
             menuCharacterPanels[0] = new MenuCharacterPanel(new Vector(290, 120), TextureID.MenuLune);
             menuCharacterPanels[1] = new MenuCharacterPanel(new Vector(540, 120), TextureID.MenuSun);
@@ -78,15 +80,33 @@ namespace Soleil.Menu
         public override void OnInputRight() {
             index++;
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+
         }
 
         public override void OnInputLeft() {
             index--;
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
         }
+
         public override void OnInputUp() { }
         public override void OnInputDown(){ }
-        public override void OnInputSubmit() { }
+
+        public override void OnInputSubmit() {
+            // ステータス選択以前に選ばれていた項目を見る．
+            switch ((MenuName)menuSystem.Index)
+            {
+                case MenuName.Magic:
+                    Console.WriteLine("Magic");
+                    break;
+                case MenuName.Equip:
+                    Console.WriteLine("Equip");
+                    break;
+                case MenuName.Status:
+                    Console.WriteLine("Status");
+                    break;
+            }
+        }
+
         public override void OnInputCancel() { Quit(); }
     }
 }
