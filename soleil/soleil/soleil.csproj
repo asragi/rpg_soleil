@@ -108,6 +108,7 @@
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
+    <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
     <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />

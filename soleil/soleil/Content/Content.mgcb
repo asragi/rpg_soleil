@@ -661,3 +661,15 @@
 /processorParam:TextureFormat=Color
 /build:Animation/Map/Character/Lune/walking_up.png
 
+#begin Animation/Map/Character/Mob/somniamob1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Mob/somniamob1.png
+
