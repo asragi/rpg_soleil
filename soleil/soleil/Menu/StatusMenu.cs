@@ -96,7 +96,8 @@ namespace Soleil.Menu
             switch ((MenuName)menuSystem.Index)
             {
                 case MenuName.Magic:
-                    Console.WriteLine("Magic");
+                    menuSystem.CallChild(MenuName.Magic);
+                    IsActive = false;
                     break;
                 case MenuName.Equip:
                     Console.WriteLine("Equip");

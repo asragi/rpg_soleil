@@ -44,6 +44,8 @@ namespace Soleil.Menu
         MenuChild[] menuChildren;
         // ItemMenu
         ItemMenu itemMenu;
+        // MagicMenu
+        MagicMenu magicMenu;
         // Status 表示
         StatusMenu statusMenu;
 
@@ -91,10 +93,12 @@ namespace Soleil.Menu
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
             itemMenu = new ItemMenu(this);
+            // Magic Menu
+            magicMenu = new MagicMenu(this);
             // Status Menu
             statusMenu = new StatusMenu(this);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, itemMenu};
+            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
         }
 
         /// <summary>
@@ -166,6 +170,14 @@ namespace Soleil.Menu
                 if (!child.IsActive) continue;
                 child.Input(input);
             }
+        }
+
+        /// <summary>
+        /// 外部から特定のメニューを有効にする．
+        /// </summary>
+        public void CallChild(MenuName name)
+        {
+            if (name == MenuName.Magic) magicMenu.IsActive = true;
         }
 
         void Decide()
