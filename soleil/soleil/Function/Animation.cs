@@ -155,6 +155,20 @@ namespace Soleil
                 d.DrawWithColor(pos + position, texture, new Rectangle(x * Width, y * Height, Width, Height), depth, color, size, angle);
         }
 
+        /// <summary>
+        /// AnimのDepth設定を無視して描画する．
+        /// </summary>
+        public void DrawWithDepth(Drawing d, Vector2 pos, Color color, DepthID _depth, float size = 1, float angle = 0)
+        {
+            AnimationNext();
+            if (flipHorizontally)
+                d.DrawFlipHorizontallyWithColor(pos + position.YAxialInversion(), texture, new Rectangle(x * Width, y * Height, Width, Height), _depth, color, size, angle);
+            else
+                d.DrawWithColor(pos + position, texture, new Rectangle(x * Width, y * Height, Width, Height), _depth, color, size, angle);
+
+        }
+
+
         public void DrawFlipHorizontally(Drawing d, Vector2 pos, float size = 1, float angle = 0)
         {
             AnimationNext();
