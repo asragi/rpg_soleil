@@ -46,8 +46,8 @@ namespace Soleil.Menu
         StatusMenu statusMenu;
 
         // Transition
-        const int FadeSpeed = 23;
-        readonly Func<double, double, double, double, double> func = Easing.OutQuad;
+        public const int FadeSpeed = 23;
+        public static readonly Func<double, double, double, double, double> EaseFunc = Easing.OutQuad;
 
         // Menuの項目の対応用配列
         public static readonly TextureID[] optionTextures =
@@ -128,15 +128,15 @@ namespace Soleil.Menu
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
             // Transition Images
-            backImage.Fade(FadeSpeed, func, isFadeOut);
-            frontImage.Fade(FadeSpeed, func, isFadeOut);
+            backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
+            frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].Fade(FadeSpeed, func, isFadeOut);
+                menuItems[i].Fade(FadeSpeed, EaseFunc, isFadeOut);
             }
-            menuLineLower.Fade(FadeSpeed-3, func, isFadeOut);
-            menuLineUpper.Fade(FadeSpeed-3, func, isFadeOut);
-            menuDescription.Fade(FadeSpeed, func, isFadeOut);
+            menuLineLower.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
+            menuLineUpper.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
+            menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Soleil.Menu
             // Transition Images
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, func);
+                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, EaseFunc);
             }
         }
 
@@ -186,7 +186,7 @@ namespace Soleil.Menu
             // Transition Images
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, func);
+                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, EaseFunc);
             }
         }
 
