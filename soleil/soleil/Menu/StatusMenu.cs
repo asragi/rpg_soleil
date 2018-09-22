@@ -17,21 +17,21 @@ namespace Soleil.Menu
         public StatusMenu(MenuComponent parent)
             :base(parent)
         {
-            faceImgLune = new Image(0, Resources.GetTexture(TextureID.FrameTest), new Vector(370, 150), DepthID.MessageBack, false, true, 0);
-            faceImgSun = new Image(0, Resources.GetTexture(TextureID.FrameTest), new Vector(620, 150), DepthID.MessageBack, false, true, 0);
+            faceImgLune = new Image(0, Resources.GetTexture(TextureID.MenuLune), new Vector(290, 120), DepthID.MessageBack, false, true, 0);
+            faceImgSun = new Image(0, Resources.GetTexture(TextureID.MenuSun), new Vector(540, 120), DepthID.MessageBack, false, true, 0);
 
             // SetText
             fontImages = new List<FontImage>();
-            HPLune = new FontImage(FontID.Test, new Vector(470, 350), DepthID.MessageBack, true, 0);
+            HPLune = new FontImage(FontID.Test, new Vector(500, 370), DepthID.MessageBack, true, 0);
             HPLune.Text = "300";
             fontImages.Add(HPLune);
-            HPSun = new FontImage(FontID.Test, new Vector(720, 350), DepthID.MessageBack, true, 0);
+            HPSun = new FontImage(FontID.Test, new Vector(730, 370), DepthID.MessageBack, true, 0);
             HPSun.Text = "654";
             fontImages.Add(HPSun);
-            MPLune = new FontImage(FontID.Test, new Vector(470, 400), DepthID.MessageBack, true, 0);
+            MPLune = new FontImage(FontID.Test, new Vector(500, 420), DepthID.MessageBack, true, 0);
             MPLune.Text = "864";
             fontImages.Add(MPLune);
-            MPSun = new FontImage(FontID.Test, new Vector(720, 400), DepthID.MessageBack, true, 0);
+            MPSun = new FontImage(FontID.Test, new Vector(730, 420), DepthID.MessageBack, true, 0);
             MPSun.Text = "425";
             fontImages.Add(MPSun);
             foreach (var textImg in fontImages)
