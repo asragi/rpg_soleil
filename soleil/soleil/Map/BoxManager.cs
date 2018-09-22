@@ -84,6 +84,13 @@ namespace Soleil.Map
 
         private void CalcCollide(int i, int j)
         {
+            if(!boxList[i].IsActive || !boxList[j].IsActive)
+            {
+                // どちらかが非アクティブであれば衝突しない
+                boxList[j].Collide(boxList[i], false);
+                boxList[i].Collide(boxList[j], false);
+                return;
+            }
             double xi = boxList[i].WorldPos().X, 
                 yi = boxList[i].WorldPos().Y, 
                 wi = boxList[i].Size.X, 
