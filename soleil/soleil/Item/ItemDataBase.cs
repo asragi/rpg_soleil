@@ -39,21 +39,21 @@ namespace Soleil.Item
 
         static void SetData()
         {
-            Set("傷薬", ItemID.Portion, ItemType.Consumable, true, true, "味方一人を少量回復．");
-            Set("活きのいいザリガニ", ItemID.Zarigani, ItemType.Consumable, true, true, "食べる......？");
-            Set("石ころ", ItemID.Stone, ItemType.Unconsumable, "そこら辺の石ころ．");
-            Set("デバッグソード", ItemID.TestSword, ItemType.Weapon, "デバッグ用ソード");
+            Set("傷薬", ItemID.Portion, ItemType.Consumable, true, true, 30, "味方一人を少量回復．");
+            Set("活きのいいザリガニ", ItemID.Zarigani, ItemType.Consumable, true, true, 20, "食べる......？");
+            Set("石ころ", ItemID.Stone, ItemType.Unconsumable, 0, "そこら辺の石ころ．");
+            Set("デバッグソード", ItemID.TestSword, ItemType.Weapon, 50, "デバッグ用ソード");
         }
 
-        static void Set(String name, ItemID id, ItemType type, bool menu, bool battle, string desc)
+        static void Set(String name, ItemID id, ItemType type, bool menu, bool battle, int effectVal, string desc)
         {
-            data[(int)id] = new ItemData(id, type, menu, battle, name, desc);
+            data[(int)id] = new ItemData(id, type, menu, battle, effectVal, name, desc);
         }
         
         // 装備など自明に使用不可能なもの用のset
-        static void Set(String name, ItemID id, ItemType type, String desc)
+        static void Set(String name, ItemID id, ItemType type, int effectVal, String desc)
         {
-            data[(int)id] = new ItemData(id, type, false, false, name, desc);
+            data[(int)id] = new ItemData(id, type, false, false, effectVal, name, desc);
         }
     }
 }
