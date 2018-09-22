@@ -17,7 +17,7 @@ namespace Soleil.Map
                 new EventSet(
                     new MessageWindowEvent(Pos, 0, "テストメッセージ"),
                     new MessageWindowEvent(Pos, 0, "いい感じになってる？"),
-                    new SelectWindowEvent(Pos, new Vector (300,300) ,0, "はい", "いいえ", "わからん")
+                    new SelectWindowEvent(Pos,　0, "はい", "いいえ", "わからん")
                 ),
                 // GetInstance()はのちのちいい感じにする（どこにwindowManager設置したら書きやすいか悩んでる）
                 new NumEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex(),
