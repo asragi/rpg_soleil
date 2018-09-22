@@ -102,6 +102,17 @@ namespace Soleil.Map
                 waitFrame = InputWait;
                 return Direction.D;
             }
+            else if (dir == Direction.R)
+            {
+                if (waitFrame > 0) return Direction.N;
+                waitFrame = InputWait;
+                return Direction.R;
+            }else if(dir == Direction.L)
+            {
+                if (waitFrame > 0) return Direction.N;
+                waitFrame = InputWait;
+                return Direction.L;
+            }
             else { waitFrame = 0; return Direction.N; }
         }
 
