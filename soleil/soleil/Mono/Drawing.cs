@@ -234,9 +234,9 @@ namespace Soleil
         /// <param name="color">色</param>
         /// <param name="size">文字の拡大倍率</param>
         /// <param name="depth">文字の表示優先度（小さいほうが優先される）</param>
-        public void DrawText(Vector2 pos, SpriteFont font, string text, Color color, Depth depth, float size = 1, float angle = 0)
+        public void DrawText(Vector2 pos, SpriteFont font, string text, Color color, Depth depth, float size = 1, float angle = 0, bool center = true)
         {
-            sb.DrawString(font, text, (pos - Camera) * DrawRate, color, angle, CenterBased ? font.MeasureString(text) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
+            sb.DrawString(font, text, (pos - Camera) * DrawRate, color, angle, center ? font.MeasureString(text) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
         }
 
         /// <summary>

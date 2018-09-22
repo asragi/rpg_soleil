@@ -66,9 +66,9 @@ namespace Soleil
         {
             for (int i = 0; i < options.Length; i++)
             {
-                d.DrawStaticText(pos + new Vector(Spacing, Spacing + LineSpace * i), Resources.GetFont(FontID.Test), options[i], Color.White, DepthID.Frame, Vector.One, 0, false);
+                d.DrawText(pos + new Vector(Spacing, Spacing + LineSpace * i), Resources.GetFont(FontID.Test), options[i], Color.White, DepthID.Frame, 1, 0, false);
             }
-            d.DrawUI(pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
+            d.Draw(pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
             base.DrawContent(d);
         }
     }

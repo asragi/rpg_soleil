@@ -22,7 +22,7 @@ namespace Soleil.Map.Maps.Somnia
                     new MessageWindowEvent(Pos, new Vector(250, 76), 0, "俺の髪型，なかなかだろ？"),
                     new SelectWindowEvent(Pos, new Vector(100, 110), 0, "はい", "いいえ")
                 ),
-                new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 1,
+                new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
                     new EventSet(
                         new MessageWindowEvent(Pos, new Vector(200, 76), 0, "だよなあ．")),
                     new EventSet(
