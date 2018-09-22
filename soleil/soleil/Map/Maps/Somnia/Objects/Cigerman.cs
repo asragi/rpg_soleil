@@ -21,13 +21,13 @@ namespace Soleil.Map.Maps.Somnia
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "テストメッセージ"),
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型，なかなかだろ？"),
-                    new SelectWindowEvent(Pos + WindowPosDiff, new Vector(100, 110), 0, "はい", "いいえ")
+                    new SelectWindowEvent(Pos + WindowPosDiff, 0, "イケイケじゃん", "ハンバーグみたいだね")
                 ),
                 new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
                     new EventSet(
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "訊くまでもなかったか")),
                     new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "サザエさんみてーだと？？"))
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型が\nサザエさんみてーだと？？"))
                 ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player)

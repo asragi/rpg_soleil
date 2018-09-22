@@ -71,5 +71,23 @@ namespace Soleil
             d.Draw(pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
             base.DrawContent(d);
         }
+
+        /// <summary>
+        /// 選択肢の内容から適切なSelectableWindowのサイズを計算して返す．
+        /// </summary>
+        public static Vector ProperSize(FontID id, string[] options)
+        {
+            float length = 0;
+            var font = Resources.GetFont(id);
+
+            // 選択肢中一番長いものの長さを取得．
+            for (int i = 0; i < options.Length; i++)
+            {
+                var messageLength = font.MeasureString(options[i]).X;
+                length = (length < messageLength) ? messageLength : length;
+            }
+
+            return new Vector(2 * Spacing + length, 2 * Spacing + LineSpace * options.Length);
+        }
     }
 }
