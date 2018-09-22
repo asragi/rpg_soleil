@@ -12,7 +12,7 @@ namespace Soleil.Map
         Vector localPos;
         Vector parentPos;
         MapObject parent;
-        CollideLayer layer;
+        public CollideLayer Layer;
         List<bool> preCollide, nowCollide;
         bool wallCollide; // 壁に重なっているか
 
@@ -24,7 +24,7 @@ namespace Soleil.Map
             parentPos = parent.GetPosition();
             localPos = _localPos;
             Size = _size;
-            layer = _layer;
+            Layer = _layer;
             preCollide = new List<bool>();
             nowCollide = new List<bool>();
             bm.Add(this);

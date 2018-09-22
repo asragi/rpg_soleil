@@ -12,7 +12,7 @@ namespace Soleil.Map
     /// <summary>
     /// Map上の存在判定のあるオブジェクトのうち、移動しないもの。
     /// </summary>
-    abstract class MapCharacter:MapEventObject
+    abstract class MapCharacter : MapEventObject
     {
         readonly DepthID FrontDepth = DepthID.PlayerFront;
         readonly DepthID BackDepth = DepthID.PlayerBack;
@@ -24,7 +24,7 @@ namespace Soleil.Map
         private Animation[] standAnimation;
         protected PlayerObject Player;
         public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
-            :base(pos,boxSize,CollideLayer.Player,om,bm)
+            :base(pos, boxSize, om, bm)
         {
             Player = om.GetPlayer();
             Symmetry = _symmetry;
