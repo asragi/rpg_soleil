@@ -12,6 +12,7 @@
         bool movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         CollideBox decideBox; // 決定キーを押したときに飛び出す判定
+        int decideBoxCount;
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
@@ -74,6 +75,7 @@
 
         public override void Update()
         {
+            DecideBoxCheck();
             base.Update();
         }
 
@@ -158,7 +160,22 @@
         public void ProjectHitBox()
         {
             decideBox.SetLocalPos(new Vector(100, 0));
+            decideBox.IsActive = true;
+            decideBoxCount = 2;
         }
+
+        /// <summary>
+        /// 決定キーを押したときに出る判定boxの寿命判定
+        /// </summary>
+        private void DecideBoxCheck()
+        {
+            if (!decideBox.IsActive) return;
+            decideBoxCount--;
+            if (decideBoxCount > 0) return;
+            decideBox.IsActive = false;
+            decideBox.SetLocalPos(Vector.Zero);
+        }
+
         #endregion
 
         public override void Draw(Drawing sb)
