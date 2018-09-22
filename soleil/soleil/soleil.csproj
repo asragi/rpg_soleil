@@ -126,6 +126,7 @@
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
+    <Compile Include="Menu\MagicMenuPanel.cs" />
     <Compile Include="Menu\MenuCharacterPanel.cs" />
     <Compile Include="Menu\MenuChild.cs" />
     <Compile Include="Menu\MenuComponent.cs" />
