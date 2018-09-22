@@ -9,6 +9,7 @@ namespace Soleil.Map.Maps.Somnia
 {
     class Cigerman : MapCharacter
     {
+        readonly Vector WindowPosDiff = new Vector(30, -100);
         public Cigerman(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
         {
@@ -18,15 +19,15 @@ namespace Soleil.Map.Maps.Somnia
 
             EventSequence.SetEventSet(
                 new EventSet(
-                    new MessageWindowEvent(Pos, new Vector(200, 76), 0, "テストメッセージ"),
-                    new MessageWindowEvent(Pos, new Vector(250, 76), 0, "俺の髪型，なかなかだろ？"),
-                    new SelectWindowEvent(Pos, new Vector(100, 110), 0, "はい", "いいえ")
+                    new MessageWindowEvent(Pos + WindowPosDiff, new Vector(200, 76), 0, "テストメッセージ"),
+                    new MessageWindowEvent(Pos + WindowPosDiff, new Vector(250, 76), 0, "俺の髪型，なかなかだろ？"),
+                    new SelectWindowEvent(Pos + WindowPosDiff, new Vector(100, 110), 0, "はい", "いいえ")
                 ),
                 new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
                     new EventSet(
-                        new MessageWindowEvent(Pos, new Vector(200, 76), 0, "だよなあ．")),
+                        new MessageWindowEvent(Pos + WindowPosDiff, new Vector(200, 76), 0, "だよなあ．")),
                     new EventSet(
-                        new MessageWindowEvent(Pos, new Vector(250, 76), 0, "サザエさんみてーだと？？"))
+                        new MessageWindowEvent(Pos + WindowPosDiff, new Vector(250, 76), 0, "サザエさんみてーだと？？"))
                 ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player)
