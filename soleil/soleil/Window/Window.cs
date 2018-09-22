@@ -101,7 +101,7 @@ namespace Soleil
 
         private void DrawSkin(Drawing d)
         {
-            d.DrawUI(pos + new Vector(size.X, size.Y) / 2, frameTexture,
+            d.Draw(pos + new Vector(size.X, size.Y) / 2, frameTexture,
                 new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize),
                 DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
         }
@@ -109,22 +109,22 @@ namespace Soleil
         private void DrawFrame(Drawing d)
         {
             // 左上のフレーム角
-            d.DrawUI(pos + new Vector(FrameSize / 2, FrameSize / 2), frameTexture, new Rectangle(0, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
+            d.Draw(pos + new Vector(FrameSize / 2, FrameSize / 2), frameTexture, new Rectangle(0, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
             // 右上のフレーム角
-            d.DrawUI(pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
+            d.Draw(pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
             // 左上のフレーム角
-            d.DrawUI(pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(0, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
+            d.Draw(pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(0, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
             // 右下のフレーム角
-            d.DrawUI(pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
+            d.Draw(pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
 
             // 上部
-            d.DrawUI(pos + new Vector(size.X / 2, FrameSize / 2), frameTexture, new Rectangle(FrameSize, 0, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
+            d.Draw(pos + new Vector(size.X / 2, FrameSize / 2), frameTexture, new Rectangle(FrameSize, 0, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
             // 左
-            d.DrawUI(pos + new Vector(FrameSize / 2, size.Y / 2), frameTexture, new Rectangle(0, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
+            d.Draw(pos + new Vector(FrameSize / 2, size.Y / 2), frameTexture, new Rectangle(0, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
             // 右
-            d.DrawUI(pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
+            d.Draw(pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
             // 下
-            d.DrawUI(pos + new Vector(size.X / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(FrameSize, frameTexture.Height - FrameSize, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
+            d.Draw(pos + new Vector(size.X / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(FrameSize, frameTexture.Height - FrameSize, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
         }
 
         virtual public void DrawContent(Drawing d)
