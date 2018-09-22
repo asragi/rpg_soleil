@@ -661,8 +661,11 @@
 /processorParam:TextureFormat=Color
 /build:Map/Back/Somnia/1/somnia1_3.png
 
+<<<<<<< HEAD
 #begin UI/Menu/menuequip1.PNG
 #begin Animation/Map/Character/Mob/somniamob1.png
+=======
+>>>>>>> 544dc4851d802ea8d04192d1bd00db11079dde35
 #begin Map/Back/Somnia/1/somnia1_4.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -673,10 +676,26 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
+<<<<<<< HEAD
 /build:UI/Menu/menuequip1.PNG
 #begin UI/Menu/menuequip2.PNG
 /build:Map/Back/Somnia/1/somnia1_4.png
 #begin Map/Back/Somnia/1/somnia1_5.png
+=======
+/build:Map/Back/Somnia/1/somnia1_4.png
+
+#begin Map/Back/Somnia/1/somnia1_5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_5.png
+>>>>>>> 544dc4851d802ea8d04192d1bd00db11079dde35
 
 /importer:TextureImporter
 /processor:TextureProcessor
