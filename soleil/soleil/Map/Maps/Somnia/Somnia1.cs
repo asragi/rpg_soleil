@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soleil.Map.Maps.Somnia;
 
 namespace Soleil.Map
 {
@@ -10,6 +11,10 @@ namespace Soleil.Map
     {
         MapConstruct[] mapConstructs;
         CameraPoint[] cameraPoints;
+
+        // Objects
+        Cigerman cigerman;
+
         public Somnia1()
             : base(MapName.Somnia1)
         {
@@ -31,6 +36,9 @@ namespace Soleil.Map
                 new CameraPoint(620,440),
             };
             MapCameraManager.SetCameraPoint(cameraPoints);
+
+            // Objects
+            cigerman = new Cigerman(new Vector(750, 600), om, bm);
         }
     }
 }
