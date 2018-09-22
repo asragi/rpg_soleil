@@ -29,11 +29,11 @@ namespace Soleil.Map
             MapCameraManager.SetMapSize(1260, 886);
             // CameraPointの設定
             cameraPoints = new CameraPoint[] {
-                new CameraPoint(868,771),
-                new CameraPoint(1381,1140),
-                new CameraPoint(237,587),
-                new CameraPoint(1312,282),
-                new CameraPoint(620,440),
+                new CameraPoint(400, 300), // hotel entrance
+                new CameraPoint(650, 555), // center
+                new CameraPoint(1100, 840), // right down
+                new CameraPoint(140, 455), // left
+                new CameraPoint(880, 260),
             };
             MapCameraManager.SetCameraPoint(cameraPoints);
 
