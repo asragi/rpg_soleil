@@ -20,10 +20,10 @@ namespace Soleil.Map
         {
             mapConstructs = new MapConstruct[]{
                 new MapConstruct(TextureID.Somnia1_2,MapDepth.Ground,om),
-                new AdjustConstruct(TextureID.Somnia1_3,600,om),
-                new AdjustConstruct(TextureID.Somnia1_4,850,om),
+                new AdjustConstruct(TextureID.Somnia1_5,470,om),
+                new AdjustConstruct(TextureID.Somnia1_4,570,om),
+                new AdjustConstruct(TextureID.Somnia1_3,570,om),
                 new MapConstruct(TextureID.Somnia1_1,MapDepth.Top,om),
-                new AdjustConstruct(TextureID.Somnia1_5,600,om),
             };
             // マップサイズの設定
             MapCameraManager.SetMapSize(1260, 886);
