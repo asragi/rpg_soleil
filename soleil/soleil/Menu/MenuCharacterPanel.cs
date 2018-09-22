@@ -21,8 +21,6 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText;
         List<FontImage> fontImages;
 
-        readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
-
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Vector _pos, TextureID textureID)
         {
@@ -62,19 +60,19 @@ namespace Soleil.Menu
 
         public void FadeIn()
         {
-            faceImg.Fade(25, EaseFunc, true);
+            faceImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
             foreach (var textImg in fontImages)
             {
-                textImg.Fade(25, EaseFunc, true);
+                textImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
             }
         }
 
         public void FadeOut()
         {
-            faceImg.Fade(25, EaseFunc, false);
+            faceImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
             foreach (var textImg in fontImages)
             {
-                textImg.Fade(25, EaseFunc, false);
+                textImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
             }
         }
 
