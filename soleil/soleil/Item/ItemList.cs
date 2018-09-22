@@ -9,10 +9,10 @@ namespace Soleil.Item
     /// <summary>
     /// プレイヤーが所持するアイテムの個数を管理する．
     /// </summary>
-    class ItemList
+    static class ItemList
     {
-        Dictionary<ItemID, int> itemPossessMap;
-        public ItemList()
+        static Dictionary<ItemID, int> itemPossessMap;
+        static ItemList()
         {
             itemPossessMap = new Dictionary<ItemID, int>();
             for (int i = 0; i < (int)ItemID.size; i++)
@@ -25,17 +25,17 @@ namespace Soleil.Item
         /// <summary>
         /// 当該アイテムを1つ以上所持しているかどうかを返す．
         /// </summary>
-        public bool HasItem(ItemID id) => itemPossessMap[id] > 0;
+        public static bool HasItem(ItemID id) => itemPossessMap[id] > 0;
 
         /// <summary>
         /// 当該アイテムの所持数を返す．
         /// </summary>
-        public int HasItemNum(ItemID id) => itemPossessMap[id];
+        public static int HasItemNum(ItemID id) => itemPossessMap[id];
 
         /// <summary>
         /// 指定された個数アイテムを減らす．足りない場合は消費せずfalseを返す．
         /// </summary>
-        public bool Comsume(ItemID id, int num = 1)
+        public static bool Comsume(ItemID id, int num = 1)
         {
             if(itemPossessMap[id] >= num)
             {
