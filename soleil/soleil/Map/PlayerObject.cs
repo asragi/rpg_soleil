@@ -112,7 +112,7 @@
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;
-
+        protected override void ChangeDepth() => Depth = DepthID.Player;
         #region Box
         private Vector WallCheck()
         {
@@ -152,7 +152,6 @@
 
         public override void Draw(Drawing sb)
         {
-            sb.Draw(Pos,Resources.GetTexture(TextureID.White),DepthID.Item);
             base.Draw(sb);
         }
     }
