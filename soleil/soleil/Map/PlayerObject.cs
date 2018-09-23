@@ -98,6 +98,8 @@
 
         public void Move(ObjectDir dir)
         {
+            // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
+            Pos += WallCheck();
             var delta = new Vector(speed, 0);
             switch (dir)
             {
@@ -113,8 +115,6 @@
 
             // 向きを変更する
             Direction = (dir == ObjectDir.None)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
-            // 行けたら行く
-            Pos += WallCheck();
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;
@@ -126,8 +126,8 @@
             {
                 // 他キャラクターとの衝突確認
                 if (moveBoxes[i].GetCollideCharacter()) continue;
-                if(moveBoxes[i].GetWallCollide() == false)
-                   return moveBoxes[i].GetLocalPos();
+                if (moveBoxes[i].GetWallCollide()) continue;
+                return moveBoxes[i].GetLocalPos();
             }
             return Vector.Zero; // どこにも移動できなさそうなとき
         }
