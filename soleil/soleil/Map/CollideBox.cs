@@ -103,6 +103,23 @@ namespace Soleil.Map
         {
             parent.OnCollisionExit();
         }
+
+        /// <summary>
+        /// 他のキャラクターと衝突しているかどうか．
+        /// </summary>
+        public bool GetCollideCharacter()
+        {
+            for (int i = 0; i < nowCollide.Count; i++)
+            {
+                // キャラクターレイヤーでないならスキップ
+                if (boxManager.GetBox(i).Layer != CollideLayer.Character) continue;
+                // 判定対象Boxのparentが自身のparentと同一であればスキップ
+                if (boxManager.GetBox(i).parent == parent) continue;
+                if (nowCollide[i]) return true;
+            }
+            return false;
+        }
+
         public Vector WorldPos() => parent.GetPosition() + localPos; // あまりよくない
     }
 }

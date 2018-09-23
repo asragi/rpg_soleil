@@ -8,6 +8,7 @@
         const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
 
+        protected override CollideLayer CollideLayer => CollideLayer.Player;
         // Variables
         bool movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
@@ -123,6 +124,8 @@
         {
             for (int i = 0; i < moveBoxes.Length; i++)
             {
+                // 他キャラクターとの衝突確認
+                if (moveBoxes[i].GetCollideCharacter()) continue;
                 if(moveBoxes[i].GetWallCollide() == false)
                    return moveBoxes[i].GetLocalPos();
             }
