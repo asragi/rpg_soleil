@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +9,12 @@ namespace Soleil.Menu
 {
     class ItemMenu : BasicMenu
     {
+        ItemList itemList;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
+            // 実際は他のところでインスタンス生成して参照を受け取る．
+            itemList = new ItemList();
             // 実際は所持アイテムのデータから生成する
             Panels = new ItemPanel[]{
                 new ItemPanel("ハイポーション", 2, this),

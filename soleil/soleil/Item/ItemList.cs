@@ -12,7 +12,7 @@ namespace Soleil.Item
     class ItemList
     {
         Dictionary<ItemID, int> itemPossessMap;
-        ItemList()
+        public ItemList()
         {
             itemPossessMap = new Dictionary<ItemID, int>();
             for (int i = 0; i < (int)ItemID.size; i++)
@@ -35,7 +35,7 @@ namespace Soleil.Item
         /// <summary>
         /// 指定された個数アイテムを減らす．足りない場合は消費せずfalseを返す．
         /// </summary>
-        public bool Comsume(ItemID id, int num = 1)
+        public bool Consume(ItemID id, int num = 1)
         {
             if(itemPossessMap[id] >= num)
             {
@@ -43,6 +43,14 @@ namespace Soleil.Item
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        /// 指定された個数アイテムを増やす．
+        /// </summary>
+        public void AddItem(ItemID id, int num = 1)
+        {
+            itemPossessMap[id] += num;
         }
     }
 }
