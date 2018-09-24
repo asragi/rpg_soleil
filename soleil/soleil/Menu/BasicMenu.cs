@@ -80,7 +80,7 @@ namespace Soleil.Menu
             }
         }
 
-        private void RefreshSelected()
+        protected void RefreshSelected()
         {
             for (int i = 0; i < Panels.Length; i++)
             {

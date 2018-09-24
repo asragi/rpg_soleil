@@ -12,38 +12,30 @@ namespace Soleil.Menu
         ItemList itemList;
         // 所持しているすべてのアイテムのパネル
         List<ItemPanel> allItemPanels;
+        int initIndex = 2;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
             // 実際は他のところでインスタンス生成して参照を受け取る．
             itemList = new ItemList();
+            // debug
             itemList.AddItem(ItemID.Portion);
             itemList.AddItem(ItemID.Zarigani);
             for (int i = (int)ItemID.d0; i < (int)ItemID.d7+1; i++)
             {
-                itemList.AddItem((ItemID)i);
+                itemList.AddItem((ItemID)i,i);
             }
             // 所持しているすべてのアイテムのパネル
             allItemPanels = new List<ItemPanel>();
             // 表示用のパネル
             Panels = new ItemPanel[RowSize];
             // 所持しているすべてのアイテムの表示用パネルを生成
-            allItemPanels = RefreshPanels();
-
-            for (int i = 0; i < RowSize; ++i)
-            {
-                if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
-                {
-                    allItemPanels.Add(new ItemPanel("", -1, this));
-                }
-                if (allItemPanels.Count <= i) return;
-                IndexSize = i + 1;
-                Panels[i] = allItemPanels[i];
-                Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);
-            }
+            allItemPanels = MakeAllItemPanels();
+            // 描画すべきパネルを決定する．
+            SetPanels();
         }
 
-        private List<ItemPanel> RefreshPanels()
+        private List<ItemPanel> MakeAllItemPanels()
         {
             var items = new List<ItemPanel>();
             for (int i = 0; i < (int)ItemID.size; i++)
@@ -53,6 +45,47 @@ namespace Soleil.Menu
                 items.Add(new ItemPanel(data.Name, itemList.GetItemNum((ItemID)i), this));
             }
             return items;
+        }
+
+        private void SetPanels()
+        {
+            for (int i = 0; i < RowSize; ++i)
+            {
+                if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
+                {
+                    allItemPanels.Add(new ItemPanel("", -1, this));
+                }
+                if (allItemPanels.Count <= i) return;
+                IndexSize = i + 1;
+                Panels[i] = allItemPanels[initIndex + i];
+                Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);
+            }
+        }
+
+        public override void OnInputUp()
+        {
+            if (Index == 0 && initIndex > 0)
+            {
+                initIndex--;
+                SetPanels();
+                RefreshSelected();
+                return;
+            }
+            Index = (Index - 1 + IndexSize) % IndexSize;
+            RefreshSelected();
+        }
+
+        public override void OnInputDown()
+        {
+            if (Index == RowSize-1 && initIndex < allItemPanels.Count - RowSize)
+            {
+                initIndex++;
+                SetPanels();
+                RefreshSelected();
+                return;
+            }
+            Index = (Index + 1 + IndexSize) % IndexSize;
+            RefreshSelected();
         }
     }
 }
