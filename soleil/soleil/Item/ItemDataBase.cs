@@ -55,5 +55,7 @@ namespace Soleil.Item
         {
             data[(int)id] = new ItemData(id, type, false, false, effectVal, name, desc);
         }
+
+        public static ItemData Get(ItemID id) => data[(int)id];
     }
 }
