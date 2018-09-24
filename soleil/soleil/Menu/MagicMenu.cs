@@ -18,7 +18,7 @@ namespace Soleil.Menu
                 new MagicMenuPanel("エクスプロード", 16, this),
                 new MagicMenuPanel("ルナティックレイ", 66, this),
             };
-
+            IndexSize = Panels.Length;
             for (int i = 0; i < Panels.Length; ++i)
             {
                 Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);

@@ -18,16 +18,18 @@ namespace Soleil.Menu
             // 実際は他のところでインスタンス生成して参照を受け取る．
             itemList = new ItemList();
             itemList.AddItem(ItemID.Portion);
+            itemList.AddItem(ItemID.Zarigani);
             // 所持しているすべてのアイテムのパネル
             allItemPanels = new List<ItemPanel>();
             // 表示用のパネル
-            Panels = new ItemPanel[8];
+            Panels = new ItemPanel[RowSize];
             // 所持しているすべてのアイテムの表示用パネルを生成
             allItemPanels = RefreshPanels();
 
-            for (int i = 0; i < Panels.Length; ++i)
+            for (int i = 0; i < RowSize; ++i)
             {
                 if (allItemPanels.Count <= i) return;
+                IndexSize = i + 1;
                 Panels[i] = allItemPanels[i];
                 Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);
             }

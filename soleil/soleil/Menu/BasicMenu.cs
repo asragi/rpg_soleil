@@ -12,7 +12,7 @@ namespace Soleil.Menu
     abstract class BasicMenu : MenuChild
     {
         const int FadeSpeed = 30; // アイテムメニューが出現するスピード
-        const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
+        protected const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
         protected readonly Vector WindowPos = new Vector(330, 100);
         protected readonly Vector WindowStartPos = new Vector(830, 100);
 
@@ -23,6 +23,7 @@ namespace Soleil.Menu
         public Vector Pos { get { return backImage.Pos; } }
         protected int Index;
         protected SelectablePanel[] Panels;
+        protected int IndexSize;
 
         public BasicMenu(MenuComponent parent)
             : base(parent)
@@ -93,13 +94,13 @@ namespace Soleil.Menu
 
         public override void OnInputUp()
         {
-            Index = (Index - 1 + Panels.Length) % Panels.Length;
+            Index = (Index - 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }
 
         public override void OnInputDown()
         {
-            Index = (Index + 1 + Panels.Length) % Panels.Length;
+            Index = (Index + 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }
         public override void OnInputSubmit() { }
