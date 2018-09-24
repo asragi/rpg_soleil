@@ -19,6 +19,10 @@ namespace Soleil.Menu
             itemList = new ItemList();
             itemList.AddItem(ItemID.Portion);
             itemList.AddItem(ItemID.Zarigani);
+            for (int i = (int)ItemID.d0; i < (int)ItemID.d7+1; i++)
+            {
+                itemList.AddItem((ItemID)i);
+            }
             // 所持しているすべてのアイテムのパネル
             allItemPanels = new List<ItemPanel>();
             // 表示用のパネル
