@@ -15,7 +15,7 @@ namespace Soleil.Map
         public DashCharacter(Vector pos,Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
             :base(pos,boxSize,om,bm, symmetry)
         {
-            dashAnimation = new Animation[8];
+            dashAnimation = new Animation[9];
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Soleil.Map
         /// </summary>
         protected void SetDashAnimation(AnimationData[] data)
         {
-            for (int i = 0; i < dashAnimation.Length; i++)
+            for (int i = 1; i < dashAnimation.Length; i++)
             {
                 dashAnimation[i] = new Animation(data[i]);
             }
