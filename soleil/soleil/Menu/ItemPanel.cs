@@ -33,7 +33,7 @@ namespace Soleil.Menu
             itemNum = num;
             itemNumImage = new FontImage(ItemFont, LocalPos+parent.Pos + ItemNumPosDiff, DepthID.Message, true, 0);
             itemNumImage.Color = ColorPalette.DarkBlue;
-            itemNumImage.Text = itemNum.ToString();
+            itemNumImage.Text = (itemNum >= 0) ? itemNum.ToString() : ""; // Itemnumがおかしな値なら描画しない
 
             LocalPos = Vector.Zero;
         }

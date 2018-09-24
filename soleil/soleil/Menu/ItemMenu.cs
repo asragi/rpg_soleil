@@ -32,6 +32,10 @@ namespace Soleil.Menu
 
             for (int i = 0; i < RowSize; ++i)
             {
+                if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
+                {
+                    allItemPanels.Add(new ItemPanel("", -1, this));
+                }
                 if (allItemPanels.Count <= i) return;
                 IndexSize = i + 1;
                 Panels[i] = allItemPanels[i];
