@@ -62,6 +62,12 @@ namespace Soleil.Menu
             }
         }
 
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            allItemPanels.ForEach(s => s.Fade(FadeSpeed, MenuSystem.EaseFunc, true));
+        }
+
         public override void OnInputUp()
         {
             if (Index == 0 && initIndex > 0)

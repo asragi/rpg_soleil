@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// </summary>
     abstract class BasicMenu : MenuChild
     {
-        const int FadeSpeed = 30; // アイテムメニューが出現するスピード
+        protected const int FadeSpeed = 30; // アイテムメニューが出現するスピード
         protected const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
         protected readonly Vector WindowPos = new Vector(330, 100);
         protected readonly Vector WindowStartPos = new Vector(830, 100);
