@@ -13,6 +13,7 @@ namespace Soleil.Map
     /// </summary>
     class MapInputManager
     {
+        Dictionary<Key, bool> inputs;
         InputFocus nowFocus;
         PlayerObject player;
         WindowManager wm;
@@ -25,38 +26,38 @@ namespace Soleil.Map
             wm = WindowManager.GetInstance();
             menuSystem = new MenuSystem();
             nowFocus = InputFocus.Player;
+            inputs = new Dictionary<Key, bool>();
         }
         public void SetPlayer(PlayerObject p) => player = p;
         public void SetMenuSystem(MenuSystem m) => menuSystem = m; // 地獄
 
+        // 入力を良い感じにする処理用
+        const int InputWait = 8;
+        int waitFrame;
+
         public void Update()
         {
+            // 入力を受け取る
+            var inputDir = KeyInput.GetStickInclineDirection(1);
+            var smoothInput = InputSmoother(inputDir);
+            UpdateInputKeysDown();
+            // フォーカスに応じて処理を振り分ける
             switch (nowFocus)
             {
-                case InputFocus.None:
-                    break;
                 case InputFocus.Player:
                     PlayerMove();
                     break;
                 case InputFocus.Window:
-                    SelectWindowMove();
+                    wm.Input(smoothInput);
                     break;
                 case InputFocus.Menu:
-                    var input = InputDirection();
-                    menuSystem.MoveCursor(input);
+                    menuSystem.Input(smoothInput);
                     // debug
                     if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
                     break;
                 default:
                     break;
             }
-        }
-
-        private void SelectWindowMove()
-        {
-            if (KeyInput.GetKeyPush(Key.Up)) wm.MoveCursor(Key.Up);
-            else if (KeyInput.GetKeyPush(Key.Down)) wm.MoveCursor(Key.Down);
-            if (KeyInput.GetKeyPush(Key.A)) wm.Decide();
         }
 
         public void SetFocus(InputFocus f)
@@ -66,65 +67,50 @@ namespace Soleil.Map
 
         private void PlayerMove()
         {
-            var inputDir = InputDirection();
-
-            
+            var inputDir = KeyInput.GetStickInclineDirection(1);
             // Run, Dash or stand
             if (KeyInput.GetKeyDown(Key.A)) player.Run();
             else player.Walk();
-            if (inputDir == ObjectDir.None) player.Stand();
+            if (inputDir == Direction.N) player.Stand();
 
             // Call Menu
             if (KeyInput.GetKeyPush(Key.B))
             {
                 menuSystem.CallMenu();
                 nowFocus = InputFocus.Menu;
+                return;
             }
 
             player.Move(inputDir);
         }
 
         /// <summary>
-        /// 入力に応じて8方向のEnumを返す
+        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
         /// </summary>
-        ObjectDir InputDirection()
+        private Direction InputSmoother(Direction dir)
         {
-            if (KeyInput.GetKeyDown(Key.Right))
+            waitFrame--;
+            if (dir.IsContainUp())
             {
-                if (KeyInput.GetKeyDown(Key.Up))
-                {
-                    return ObjectDir.UR;
-                }
+                if (waitFrame > 0) return Direction.N;
+                waitFrame = InputWait;
+                return Direction.U;
+            }
+            else if (dir.IsContainDown())
+            {
+                if (waitFrame > 0) return Direction.N;
+                waitFrame = InputWait;
+                return Direction.D;
+            }
+            else { waitFrame = 0; return Direction.N; }
+        }
 
-                if (KeyInput.GetKeyDown(Key.Down))
-                {
-                    return ObjectDir.DR;
-                }
-                return ObjectDir.R;
-            }
-            if (KeyInput.GetKeyDown(Key.Left))
-            {
-                if (KeyInput.GetKeyDown(Key.Up))
-                {
-                    return ObjectDir.UL;
-                }
-
-                if (KeyInput.GetKeyDown(Key.Down))
-                {
-                    return ObjectDir.DL;
-                }
-                return ObjectDir.L;
-            }
-            if (KeyInput.GetKeyDown(Key.Up))
-            {
-                return ObjectDir.U;
-            }
-
-            if (KeyInput.GetKeyDown(Key.Down))
-            {
-                return ObjectDir.D;
-            }
-            return ObjectDir.None;
+        void UpdateInputKeysDown()
+        {
+            inputs[Key.A] = KeyInput.GetKeyPush(Key.A);
+            inputs[Key.B] = KeyInput.GetKeyPush(Key.B);
+            inputs[Key.C] = KeyInput.GetKeyPush(Key.C);
+            inputs[Key.D] = KeyInput.GetKeyPush(Key.D);
         }
     }
 }

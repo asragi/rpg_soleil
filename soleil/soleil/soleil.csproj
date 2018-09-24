@@ -86,6 +86,8 @@
     <Compile Include="Function\TryParser.cs" />
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Images\ColorPalette.cs" />
+    <Compile Include="Images\FontImage.cs" />
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Map\CameraPoint.cs" />
@@ -117,6 +119,11 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
+    <Compile Include="Menu\ItemMenu.cs" />
+    <Compile Include="Menu\ItemPanel.cs" />
+    <Compile Include="Menu\MenuChild.cs" />
+    <Compile Include="Menu\MenuComponent.cs" />
+    <Compile Include="Menu\MenuDescription.cs" />
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuLine.cs" />
     <Compile Include="Menu\MenuSystem.cs" />

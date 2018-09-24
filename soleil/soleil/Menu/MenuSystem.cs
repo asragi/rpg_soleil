@@ -17,22 +17,31 @@ namespace Soleil.Menu
         Save,
         size,
     }
-    class MenuSystem
+    class MenuSystem : MenuComponent
     {
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
-        bool isActive;
+        readonly String[] Descriptions = new String[]
+        {
+            "アイテムを確認・選択して使用します。",
+            "魔法を確認・選択して使用します。",
+            "装備を確認・変更します。",
+            "ステータスを確認します。",
+            "音量などの設定を行います。",
+            "ゲームデータのセーブを行います。"
+        };
+
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
+        MenuDescription menuDescription;
         int index;
         Transition transition;
 
-        // 入力を良い感じにする処理用
-        const int InputWait = 8;
-        int waitFrame;
+        // MenuChildren
+        MenuChild[] menuChildren;
 
         // Transition
         const int FadeSpeed = 23;
@@ -54,10 +63,10 @@ namespace Soleil.Menu
             TextureID.MenuSave1,
             TextureID.MenuSave2
         };
+
         public MenuSystem()
         {
             index = 0;
-            isActive = false;
             // Image初期化
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
@@ -72,6 +81,12 @@ namespace Soleil.Menu
             menuLineLower = new MenuLine(470, false);
             // Transition
             transition = Transition.GetInstance();
+            IsActive = false;
+
+            // MenuDescription
+            menuDescription = new MenuDescription(new Vector(125, 35));
+            // MenuChildren
+            menuChildren = new MenuChild[] { new ItemMenu(this) };
         }
 
         /// <summary>
@@ -81,7 +96,7 @@ namespace Soleil.Menu
         {
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
-            isActive = true;
+            IsActive = true;
             IsQuit = false;
         }
 
@@ -90,11 +105,11 @@ namespace Soleil.Menu
         /// </summary>
         public void QuitMenu()
         {
+            // Set bools
+            IsActive = false;
+            IsQuit = true;
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
-            // Set bools
-            isActive = false;
-            IsQuit = true;
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -111,43 +126,63 @@ namespace Soleil.Menu
             }
             menuLineLower.Fade(FadeSpeed-3, func, isFadeOut);
             menuLineUpper.Fade(FadeSpeed-3, func, isFadeOut);
+            menuDescription.Fade(FadeSpeed, func, isFadeOut);
         }
 
         /// <summary>
         /// 入力を受けメニューを操作する。
         /// </summary>
-        public void MoveCursor(ObjectDir dir)
+        public void Input(Direction dir)
         {
+            var input = dir;
+            // IsActiveなら自身の項目を動かす
+            if (IsActive)
+            {
+                if (dir == Direction.U) index--;
+                if (dir == Direction.D) index++;
+                index = (index + menuItems.Length) % menuItems.Length;
+                menuDescription.Text = Descriptions[index];
+                if (KeyInput.GetKeyPush(Key.A)) Decide();
+                else if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
+                return;
+            }
             // Activeな子ウィンドウに入力を送る
-
-            // 自身の項目を動かす
-            InputSmoother(dir);
+            foreach (var child in menuChildren)
+            {
+                if (!child.IsActive) continue;
+                child.Input(input);
+            }
         }
 
-        /// <summary>
-        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
-        /// </summary>
-        private void InputSmoother(ObjectDir dir)
+        void Decide()
         {
-            waitFrame--;
-            if (dir.IsContainUp())
-            {
-                if (waitFrame > 0) return;
-                index--;
-                waitFrame = InputWait;
-            }
-            else if (dir.IsContainDown())
-            {
-                if (waitFrame > 0) return;
-                index++;
-                waitFrame = InputWait;
-            }
-            else{ waitFrame = 0; }
-            index = (index + menuItems.Length) % menuItems.Length; // -1 to 5, 6 to 0
+            IsActive = false;
+            menuChildren[index].IsActive = true;
         }
 
-        public void Update()
+        protected override void OnDisable()
         {
+            base.OnDisable();
+            // Transition Images
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, func);
+            }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            // Transition Images
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, func);
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
             // ImageUpdate
             backImage.Update();
             for (int i = 0; i < menuItems.Length; i++)
@@ -157,6 +192,7 @@ namespace Soleil.Menu
             frontImage.Update();
             menuLineUpper.Update();
             menuLineLower.Update();
+            menuDescription.Update();
 
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
@@ -164,12 +200,16 @@ namespace Soleil.Menu
                 menuItems[i].IsSelected = i == index;
             }
 
-            // Debug
-            if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
+            // Update Children
+            foreach (var child in menuChildren)
+            {
+                child.Update();
+            }
         }
 
-        public void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
+            base.Draw(d);
             // 背景描画
             backImage.Draw(d);
             // Line描画
@@ -181,6 +221,12 @@ namespace Soleil.Menu
                 menuItems[i].Draw(d);
             }
             // 文章描画
+            menuDescription.Draw(d);
+            // 子ウィンドウ描画
+            foreach (var child in menuChildren)
+            {
+                child.Draw(d);
+            }
 
             // 前景描画
             frontImage.Draw(d);

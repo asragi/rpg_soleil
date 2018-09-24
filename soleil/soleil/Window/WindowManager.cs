@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -45,6 +46,12 @@ namespace Soleil
                 if (key == Key.Up) s.UpCursor();
                 else if (key == Key.Down) s.DownCursor();
             }
+        }
+        public void Input(Direction dir)
+        {
+            if (dir == Direction.U) MoveCursor(Key.Up);
+            else if (dir == Direction.D) MoveCursor(Key.Down);
+            if (KeyInput.GetKeyPush(Key.A)) Decide();
         }
 
         /// <summary>
