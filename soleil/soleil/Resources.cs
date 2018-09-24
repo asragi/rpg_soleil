@@ -61,6 +61,7 @@ namespace Soleil
         Somnia1_2,
         Somnia1_3,
         Somnia1_4,
+        Somnia1_5,
 
         Somnia1,
         Somnia2,
@@ -93,6 +94,8 @@ namespace Soleil
         LuneWalkUR,
         LuneWalkU,
         LuneWalkD,
+
+        SomniaMob1,
 
         Size,
     }
@@ -215,10 +218,11 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
 
-            SetPath(TextureID.Somnia1_1, "Map/Back/Somnia/1/back1-1");
-            SetPath(TextureID.Somnia1_2, "Map/Back/Somnia/1/back1-2");
-            SetPath(TextureID.Somnia1_3, "Map/Back/Somnia/1/back1-3");
-            SetPath(TextureID.Somnia1_4, "Map/Back/Somnia/1/back1-4");
+            SetPath(TextureID.Somnia1_1, "Map/Back/Somnia/1/somnia1_1");
+            SetPath(TextureID.Somnia1_2, "Map/Back/Somnia/1/somnia1_2");
+            SetPath(TextureID.Somnia1_3, "Map/Back/Somnia/1/somnia1_3");
+            SetPath(TextureID.Somnia1_4, "Map/Back/Somnia/1/somnia1_4");
+            SetPath(TextureID.Somnia1_5, "Map/Back/Somnia/1/somnia1_5");
 
             SetPath(TextureID.Somnia1, "Map/Back/Somnia/back2-1");
             SetPath(TextureID.Somnia2, "Map/Back/Somnia/back2-2");
@@ -266,6 +270,10 @@ namespace Soleil
             SetSize(AnimationID.LuneWalkU, 6, 1);
             SetPath(AnimationID.LuneWalkD, "Animation/Map/Character/Lune/walking_down");
             SetSize(AnimationID.LuneWalkD, 6, 1);
+
+            // Somnia
+            SetPath(AnimationID.SomniaMob1, "Animation/Map/Character/Mob/somniamob1");
+            SetSize(AnimationID.SomniaMob1, 3, 1);
             #endregion
 
             #region UI

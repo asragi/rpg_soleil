@@ -8,9 +8,12 @@
         const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
 
+        protected override CollideLayer CollideLayer => CollideLayer.Player;
         // Variables
         bool movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
+        CollideBox decideBox; // 決定キーを押したときに飛び出す判定
+        int decideBoxCount;
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
@@ -26,6 +29,8 @@
             {
                 moveBoxes[i] = new CollideBox(this, Vector.Zero, DefaultBoxSize, CollideLayer.Player, bm);
             }
+            decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
+            decideBox.IsActive = false;
             SetAnimation();
         }
 
@@ -71,6 +76,7 @@
 
         public override void Update()
         {
+            DecideBoxCheck();
             base.Update();
         }
 
@@ -92,6 +98,9 @@
 
         public void Move(Direction dir)
         {
+            // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
+            Pos += WallCheck();
+            var delta = new Vector(speed, 0);
             switch (dir)
             {
                 case Direction.N:
@@ -104,19 +113,19 @@
 
             // 向きを変更する
             Direction = (dir == Direction.N)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
-            // 行けたら行く
-            Pos += WallCheck();
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;
-
+        protected override void ChangeDepth() => Depth = DepthID.Player;
         #region Box
         private Vector WallCheck()
         {
             for (int i = 0; i < moveBoxes.Length; i++)
             {
-                if(moveBoxes[i].GetWallCollide() == false)
-                   return moveBoxes[i].GetLocalPos();
+                // 他キャラクターとの衝突確認
+                if (moveBoxes[i].GetCollideCharacter()) continue;
+                if (moveBoxes[i].GetWallCollide()) continue;
+                return moveBoxes[i].GetLocalPos();
             }
             return Vector.Zero; // どこにも移動できなさそうなとき
         }
@@ -145,11 +154,33 @@
                 moveBoxes[i].SetLocalPos(resultPos);
             }
         }
+
+        /// <summary>
+        /// 決定キーで起動するイベントを判定する用boxを一瞬出す．
+        /// </summary>
+        public void ProjectHitBox()
+        {
+            decideBox.SetLocalPos(new Vector(100, 0));
+            decideBox.IsActive = true;
+            decideBoxCount = 2;
+        }
+
+        /// <summary>
+        /// 決定キーを押したときに出る判定boxの寿命判定
+        /// </summary>
+        private void DecideBoxCheck()
+        {
+            if (!decideBox.IsActive) return;
+            decideBoxCount--;
+            if (decideBoxCount > 0) return;
+            decideBox.IsActive = false;
+            decideBox.SetLocalPos(Vector.Zero);
+        }
+
         #endregion
 
         public override void Draw(Drawing sb)
         {
-            sb.Draw(Pos,Resources.GetTexture(TextureID.White),DepthID.Item);
             base.Draw(sb);
         }
     }

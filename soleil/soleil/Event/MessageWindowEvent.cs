@@ -13,8 +13,8 @@ namespace Soleil.Event
         :WindowEventBase
     {
         string message;
-        public MessageWindowEvent(Vector _pos, Vector _size, WindowTag _tag, string _message)
-            :base(_pos,_size,_tag)
+        public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message)
+            :base(_pos, MessageWindow.GetProperSize(FontID.Test,_message),_tag)
         {
             message = _message;
         }
