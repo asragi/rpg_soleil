@@ -10,14 +10,12 @@ namespace Soleil
             t /= totaltime;
             return max * t * t + min;
         }
-
         public static double OutQuad(double t, double totaltime, double max, double min)
         {
             max -= min;
             t /= totaltime;
             return -max * t * (t - 2) + min;
         }
-
         public static double InOutQuad(double t, double totaltime, double max, double min)
         {
             max -= min;
@@ -27,21 +25,18 @@ namespace Soleil
             --t;
             return -max * (t * (t - 2) - 1) + min;
         }
-
         public static double InCubic(double t, double totaltime, double max, double min)
         {
             max -= min;
             t /= totaltime;
             return max * t * t * t + min;
         }
-
         public static double OutCubic(double t, double totaltime, double max, double min)
         {
             max -= min;
             t = t / totaltime - 1;
             return max * (t * t * t + 1) + min;
         }
-
         public static double InOutCubic(double t, double totaltime, double max, double min)
         {
             max -= min;
@@ -51,7 +46,6 @@ namespace Soleil
             t -= 2;
             return max / 2 * (t * t * t + 2) + min;
         }
-
         public static double InQuart(double t, double totaltime, double max, double min)
         {
             max -= min;

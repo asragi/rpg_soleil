@@ -438,7 +438,7 @@ namespace Soleil
 
         //Degree Measure Of Stick Direction
         // * If stick is neutral or left, return 0
-        static double GetDegreeDirection(int player)
+        public static double GetDegreeDirection(int player)
         {
             return MathEx.DegreeNormalize(
                 Math.Atan2((GetKeyDown(Key.Up, player) ? 1 : 0) - (GetKeyDown(Key.Down, player) ? 1 : 0),

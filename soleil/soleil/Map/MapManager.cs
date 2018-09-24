@@ -1,13 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Soleil
+﻿namespace Soleil.Map
 {
     class MapManager
     {
-        Map map;
+        private static MapManager mapManager = new MapManager();
+        public static MapManager GetInstance() => mapManager;
+
+        MapBase nowMap;
+        MapBase previousMap;
+
+        public void ChangeMap(MapBase map)
+        {
+            previousMap = nowMap;
+            nowMap = map;
+        }
+
+        public void Update()
+        {
+            // 移動前マップでイベント処理が終わっていない場合、続行する。
+            previousMap?.EventUpdate();
+            nowMap.Update();
+
+        }
+
+        public void Draw(Drawing d)
+        {
+            nowMap.Draw(d);
+        }
     }
 }

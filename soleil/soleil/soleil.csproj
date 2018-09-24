@@ -55,6 +55,23 @@
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
+    <Compile Include="Event\BoolEventBranch.cs" />
+    <Compile Include="Event\ChangeInputFocusEvent.cs" />
+    <Compile Include="Event\ChangeMapEvent.cs" />
+    <Compile Include="Event\EventBranch.cs" />
+    <Compile Include="Event\EventSequence.cs" />
+    <Compile Include="Event\EventSequenceIterator.cs" />
+    <Compile Include="Event\FadeInEvent.cs" />
+    <Compile Include="Event\FadeOutEvent.cs" />
+    <Compile Include="Event\Iterator.cs" />
+    <Compile Include="Event\MessageUpdateEvent.cs" />
+    <Compile Include="Event\MessageWindowEvent.cs" />
+    <Compile Include="Event\NumEventBranch.cs" />
+    <Compile Include="Event\SelectUpdateEvent.cs" />
+    <Compile Include="Event\SelectWindowEvent.cs" />
+    <Compile Include="Event\UpdateEventBase.cs" />
+    <Compile Include="Event\WindowCloseEvent.cs" />
+    <Compile Include="Event\WindowEventBase.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
     <Compile Include="Function\Camera.cs" />
@@ -67,21 +84,54 @@
     <Compile Include="Function\IEnumeratorEx.cs" />
     <Compile Include="Function\MathEx.cs" />
     <Compile Include="Function\Reference.cs" />
+    <Compile Include="Function\Transition.cs" />
     <Compile Include="Function\TryParser.cs" />
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="Images\ColorPalette.cs" />
+    <Compile Include="Images\FontImage.cs" />
     <Compile Include="Images\Image.cs" />
+    <Compile Include="Images\ImageManager.cs" />
+    <Compile Include="Item\ItemData.cs" />
+    <Compile Include="Item\ItemDataBase.cs" />
+    <Compile Include="Item\ItemList.cs" />
+    <Compile Include="Map\CameraPoint.cs" />
+    <Compile Include="Map\AdjustConstruct.cs" />
     <Compile Include="Map\BoxManager.cs" />
     <Compile Include="Map\CollideBox.cs" />
     <Compile Include="Map\CollideLayer.cs" />
+    <Compile Include="Event\EventBase.cs" />
+    <Compile Include="Event\EventSet.cs" />
+    <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapCameraManager.cs" />
+    <Compile Include="Map\MapCharacter.cs" />
+    <Compile Include="Map\MapDirection.cs" />
+    <Compile Include="Map\MapEventObject.cs" />
     <Compile Include="Map\MapData.cs" />
+    <Compile Include="Map\MapFactory.cs" />
+    <Compile Include="Map\MapIndicator.cs" />
+    <Compile Include="Map\MapInputManager.cs" />
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
-    <Compile Include="Map\Maps\TestMap.cs" />
+    <Compile Include="Map\MapConstruct.cs" />
+    <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump2.cs" />
+    <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
+    <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />
+    <Compile Include="Map\Maps\TestMaps\TestMap.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
-    <Compile Include="Map\TestObject.cs" />
+    <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
+    <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
+    <Compile Include="Map\WalkCharacter.cs" />
+    <Compile Include="Menu\ItemMenu.cs" />
+    <Compile Include="Menu\ItemPanel.cs" />
+    <Compile Include="Menu\MenuChild.cs" />
+    <Compile Include="Menu\MenuComponent.cs" />
+    <Compile Include="Menu\MenuDescription.cs" />
+    <Compile Include="Menu\MenuItem.cs" />
+    <Compile Include="Menu\MenuLine.cs" />
+    <Compile Include="Menu\MenuSystem.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
@@ -98,6 +148,7 @@
     <Compile Include="Window\SelectableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
+    <Compile Include="Window\WindowTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -107,12 +158,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\white.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>

@@ -30,6 +30,14 @@ namespace Soleil
 
         public static bool IsZero(double x) => Math.Abs(x) < Eps;
 
+        // Clamp
+        public static T Clamp<T>(T value, T max, T min) where T : IComparable<T>
+        {
+            if (value.CompareTo(max) > 0) return max;
+            if (value.CompareTo(min) < 0) return min;
+            return value;
+        }
+
         //if x>0 then x-y else x+y
         public static double AbsoluteMinus(double x, double y)
         {

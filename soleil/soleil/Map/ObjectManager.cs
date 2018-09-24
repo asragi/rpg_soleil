@@ -5,24 +5,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Map
 {
     class ObjectManager
     {
-        private static ObjectManager objectManager = new ObjectManager();
         List<MapObject> objects;
+        PlayerObject player;
 
-        private ObjectManager()
+        public ObjectManager()
         {
             objects = new List<MapObject>();
         }
-
-        public static ObjectManager GetInstance() => objectManager;
 
         public void Add(MapObject obj)
         {
             objects.Add(obj);
         }
+
+        public void SetPlayer(PlayerObject pl) => player = pl;
+        public PlayerObject GetPlayer() => player;
+        public void SetPlayerPos(Vector pos) => player.SetPosition(pos);
 
         public void Update()
         {
@@ -30,6 +32,18 @@ namespace Soleil
             foreach (var item in objects)
             {
                 item.Update();
+            }
+        }
+
+        /// <summary>
+        /// Map遷移時に前のMapの発火済みイベントを引き続き処理するための関数.
+        /// </summary>
+        public void EventUpdate()
+        {
+            objects.RemoveAll(s => s.IsDead());
+            foreach (var item in objects)
+            {
+                item.EventUpdate();
             }
         }
 

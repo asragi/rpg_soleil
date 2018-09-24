@@ -1,68 +1,45 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-namespace Soleil
+namespace Soleil.Map
 {
+    /// <summary>
+    /// Mapのデータをまとめるクラス. SetMapFlagを呼び出してFlagの設定をすること.
+    /// </summary>
     class MapData
     {
         MapName mapName;
         bool[,] flags;
-        Texture2D tex;
-        Texture2D flagTex;
         public MapData(MapName _name)
         {
             mapName = _name;
-            SetData();
-            SetFlag();
         }
 
-        void SetData()
+
+        /// <summary>
+        /// 通行可・不可のフラグ設定. 1F程度処理にかかるので呼び出しタイミングを管理するため分けて処理.
+        /// </summary>
+        public void SetMapFlag()
         {
             switch (mapName)
             {
-                case MapName.test:
-                    tex = Resources.GetTexture(TextureID.White);
-                    flagTex = Resources.GetTexture(TextureID.White);
+                case MapName.Somnia1:
+                    flags = CSVIO.GetMapData("somnia1", 1881, 1323);
+                    break;
+                case MapName.Somnia2:
+                    flags = CSVIO.GetMapData("somnia2", 1505, 1058);
                     break;
                 default:
                     break;
             }
         }
 
-        /// <summary>
-        /// 通行可・不可のフラグ設定
-        /// </summary>
-        void SetFlag()
-        {
-            flags = new bool[tex.Width, tex.Height];
-            Color[] tmp = new Color[tex.Width * tex.Height];
-            tex.GetData(tmp);
-            for (int i = 0; i < tex.Width*tex.Height; i++)
-            {
-                flags[i % tex.Width, i / tex.Width]
-                    = tmp[i].R < 128;
-            }
-        }
+        public int GetFlagLengthX() => flags.GetLength(0);
+        public int GetFlagLengthY() => flags.GetLength(1);
 
-
-        public bool GetData(int x, int y)
+        public bool GetFlagData(int x, int y)
         {
             return flags[x,y];
         }
 
-        public void Update()
-        {
-
-        }
-
-        public void Draw(Drawing sb)
-        {
-
-        }
     }
 }

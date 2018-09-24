@@ -1,28 +1,31 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Soleil.Event;
 
-namespace Soleil
+namespace Soleil.Map
 {
     abstract class MapObject
     {
-        protected Vector pos;
-        protected bool dead;
-        protected int frame;
+        protected Vector Pos;
+        protected bool Dead;
+        protected int Frame;
+        protected EventSequence EventSequence;
 
         public MapObject(ObjectManager om)
         {
-            dead = false;
+            Dead = false;
             om.Add(this);
+
+            EventSequence = new EventSequence();
         }
 
         virtual public void Update()
         {
-            frame++;
+            EventUpdate();
+            Frame++;
+        }
+
+        virtual public void EventUpdate()
+        {
+            EventSequence.Update();
         }
 
         virtual public void Draw(Drawing sb)
@@ -32,12 +35,12 @@ namespace Soleil
 
         public Vector GetPosition()
         {
-            return pos;
+            return Pos;
         }
 
         public bool IsDead()
         {
-            return dead;
+            return Dead;
         }
 
         virtual public void OnCollisionEnter()

@@ -10,10 +10,12 @@ namespace Soleil
     class SceneManager
     {
         private static SceneManager sceneManager = new SceneManager();
+        Transition transition;
         List<Scene> scenes;
         private SceneManager()
         {
             scenes = new List<Scene>();
+            transition = Transition.GetInstance();
         }
 
         public static SceneManager GetInstance() => sceneManager;
@@ -30,12 +32,13 @@ namespace Soleil
             {
                 s.Update();
             }
-            //scenes.FindAll(s => s.isActive());
+            transition.Update();
         }
 
         public void Draw(Drawing sb)
         {
             scenes.Last().Draw(sb); // いい感じにする
+            transition.Draw(sb);
         }
     }
 }

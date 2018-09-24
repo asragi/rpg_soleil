@@ -79,8 +79,14 @@ namespace Soleil
             
             // SceneManager
             sm = SceneManager.GetInstance();
-            //new TestScene(sm);
-            new TestBattleScene(sm);
+            new TestScene(sm);
+            //new TestBattleScene(sm);
+
+            // Camera
+            var camera = Camera.GeInstance();
+            camera.SetDrawing(drawing);
+
+
 
             drawing.DrawRate = DrawRate;
         }
@@ -129,7 +135,6 @@ namespace Soleil
 
             // TODO: Add your update logic here
             //Audio.Update();
-
             KeyInput.Move();
             sm.Update();
             frame++;

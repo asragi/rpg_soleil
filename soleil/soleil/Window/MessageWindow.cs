@@ -1,24 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Soleil
 {
     class MessageWindow
-        :SelectableWindow
+        :Window
     {
         String message;
         char[] messageArray;
-        String messageToDraw;
-        int drawCharPeriod = 5; // nフレームごとに文字更新
-        int charIndex;
+        String messageToDraw; // 表示されるStringを保持する変数
+        int drawCharPeriod = 4; // nフレームごとに文字更新
+        int charIndex; // char配列アクセス用index
         Vector textPos;
+        bool endAnimation;
 
-        public MessageWindow(Vector _pos, Vector _size, WindowManager wm)
-            : base(_pos,_size,wm)
+        public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
+            : base(_pos,_size,tag,wm)
         {
+            endAnimation = false;
             messageToDraw = "";
             charIndex = 0;
             textPos = pos + new Vector(Spacing, Spacing);
@@ -26,23 +24,39 @@ namespace Soleil
 
         public void SetMessage(String msg)
         {
+            endAnimation = false;
             message = msg;
             messageArray = message.ToCharArray();
             messageToDraw = ""; // 表示メッセージを初期化
             charIndex = 0;
         }
 
-        public override void Update()
+        protected override void Move()
         {
-            if (frame % drawCharPeriod == 0) AddChar();
-            base.Update();
+            if (!endAnimation && frame % drawCharPeriod == 0) AddChar();
+            base.Move();
+        }
 
+        public bool GetAnimIsEnd() => endAnimation;
+
+        /// <summary>
+        /// 強制的に文字列表示アニメーションを終了させる.
+        /// </summary>
+        public void FinishAnim()
+        {
+            messageToDraw = message;
+            charIndex = messageArray.Length;
+            endAnimation = true;
         }
 
         void AddChar()
         {
             if (messageArray == null) return;
-            if (charIndex >= messageArray.Length) return;
+            if (charIndex >= messageArray.Length)
+            {
+                endAnimation = true;
+                return;
+            }
             messageToDraw += messageArray[charIndex];
             charIndex++;
         }

@@ -1,30 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Soleil.Map;
 
 namespace Soleil
 {
     class TestScene : Scene
     {
-        TestMap testMap;
+        //Map testMap;
+        MapManager mapManager;
+        MapIndicator mapIndicator;
         public TestScene(SceneManager sm)
             : base(sm)
         {
-            testMap = new TestMap(wm);
+            mapManager = MapManager.GetInstance();
+            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia1));
+            mapIndicator = new MapIndicator();
         }
 
         override public void Update()
         {
-            testMap.Update();
+            mapIndicator.Update();
+            mapManager.Update();
             base.Update();
         }
 
         override public void Draw(Drawing sb)
         {
-            testMap.Draw(sb);
+            mapIndicator.Draw(sb);
+            mapManager.Draw(sb);
             base.Draw(sb);
         }
     }

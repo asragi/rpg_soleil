@@ -14,12 +14,86 @@ namespace Soleil
     enum TextureID : int
     {
         FrameTest,
+        WhiteWindow,
+        IndicatorBack,
+
+        MenuFront,
+        MenuBack,
+        MenuLine,
+        MenuEquip1,
+        MenuEquip2,
+        MenuItem1,
+        MenuItem2,
+        MenuMagic1,
+        MenuMagic2,
+        MenuOption1,
+        MenuOption2,
+        MenuStatus1,
+        MenuStatus2,
+        MenuSave1,
+        MenuSave2,
+        MenuModalBack,
+        MenuSelected,
+        MenuUnselected,
+
+        Rule0,
+        Rule1,
+        Rule2,
+        Rule3,
+        Rule4,
+        Rule5,
+        Rule6,
+        Rule7,
+        Rule8,
+        Rule9,
+        Rule10,
+        Rule11,
+        Rule12,
+        Rule13,
+        Rule14,
+        Rule15,
+        Rule16,
+        Rule17,
+        Rule18,
+        Rule19,
+
+        Somnia1_1,
+        Somnia1_2,
+        Somnia1_3,
+        Somnia1_4,
+
+        Somnia1,
+        Somnia2,
+        Somnia3,
+        Somnia4,
+        Somnia5,
+        Somnia6,
+
         White, Size
     }
 
     enum AnimationID : int
     {
         Arrow,
+
+        LuneStandL,
+        LuneStandR,
+        LuneStandDL,
+        LuneStandDR,
+        LuneStandUL,
+        LuneStandUR,
+        LuneStandU,
+        LuneStandD,
+
+        LuneWalkL,
+        LuneWalkR,
+        LuneWalkDL,
+        LuneWalkDR,
+        LuneWalkUL,
+        LuneWalkUR,
+        LuneWalkU,
+        LuneWalkD,
+
         Size,
     }
 
@@ -141,12 +215,86 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
 
+            SetPath(TextureID.Somnia1_1, "Map/Back/Somnia/1/back1-1");
+            SetPath(TextureID.Somnia1_2, "Map/Back/Somnia/1/back1-2");
+            SetPath(TextureID.Somnia1_3, "Map/Back/Somnia/1/back1-3");
+            SetPath(TextureID.Somnia1_4, "Map/Back/Somnia/1/back1-4");
 
+            SetPath(TextureID.Somnia1, "Map/Back/Somnia/back2-1");
+            SetPath(TextureID.Somnia2, "Map/Back/Somnia/back2-2");
+            SetPath(TextureID.Somnia3, "Map/Back/Somnia/back2-3");
+            SetPath(TextureID.Somnia4, "Map/Back/Somnia/back2-4");
+            SetPath(TextureID.Somnia5, "Map/Back/Somnia/back2-5");
+            SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
+
+            SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
+            SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
+
+            #endregion
+
+            #region Animation
+
+            SetPath(AnimationID.LuneStandL, "Animation/Map/Character/Lune/Lune_standing_3");
+            SetSize(AnimationID.LuneStandL, 1, 1);
+            SetPath(AnimationID.LuneStandR, "Animation/Map/Character/Lune/Lune_standing_7");
+            SetSize(AnimationID.LuneStandR, 1, 1);
+            SetPath(AnimationID.LuneStandDL, "Animation/Map/Character/Lune/Lune_standing_2");
+            SetSize(AnimationID.LuneStandDL, 1, 1);
+            SetPath(AnimationID.LuneStandDR, "Animation/Map/Character/Lune/Lune_standing_8");
+            SetSize(AnimationID.LuneStandDR, 1, 1);
+            SetPath(AnimationID.LuneStandUL, "Animation/Map/Character/Lune/Lune_standing_4");
+            SetSize(AnimationID.LuneStandUL, 1, 1);
+            SetPath(AnimationID.LuneStandUR, "Animation/Map/Character/Lune/Lune_standing_6");
+            SetSize(AnimationID.LuneStandUR, 1, 1);
+            SetPath(AnimationID.LuneStandU, "Animation/Map/Character/Lune/Lune_standing_5");
+            SetSize(AnimationID.LuneStandU, 1, 1);
+            SetPath(AnimationID.LuneStandD, "Animation/Map/Character/Lune/Lune_standing_1");
+            SetSize(AnimationID.LuneStandD, 1, 1);
+            SetPath(AnimationID.LuneWalkL, "Animation/Map/Character/Lune/walking_Left");
+            SetSize(AnimationID.LuneWalkL, 6, 1);
+            SetPath(AnimationID.LuneWalkR, "Animation/Map/Character/Lune/walking_Right");
+            SetSize(AnimationID.LuneWalkR, 6, 1);
+            SetPath(AnimationID.LuneWalkDL, "Animation/Map/Character/Lune/walking_lowerleft");
+            SetSize(AnimationID.LuneWalkDL, 6, 1);
+            SetPath(AnimationID.LuneWalkDR, "Animation/Map/Character/Lune/walking_lowerright");
+            SetSize(AnimationID.LuneWalkDR, 6, 1);
+            SetPath(AnimationID.LuneWalkUL, "Animation/Map/Character/Lune/walking_upperleft");
+            SetSize(AnimationID.LuneWalkUL, 6, 1);
+            SetPath(AnimationID.LuneWalkUR, "Animation/Map/Character/Lune/walking_upperright");
+            SetSize(AnimationID.LuneWalkUR, 6, 1);
+            SetPath(AnimationID.LuneWalkU, "Animation/Map/Character/Lune/walking_up");
+            SetSize(AnimationID.LuneWalkU, 6, 1);
+            SetPath(AnimationID.LuneWalkD, "Animation/Map/Character/Lune/walking_down");
+            SetSize(AnimationID.LuneWalkD, 6, 1);
             #endregion
 
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
 
+
+            SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
+            SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
+            SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
+            SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
+            SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
+            SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
+            SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");
+            SetPath(TextureID.MenuStatus2, UIPath + MenuPath + "menustatus2");
+            SetPath(TextureID.MenuSave1, UIPath + MenuPath + "menusave1");
+            SetPath(TextureID.MenuSave2, UIPath + MenuPath + "menusave2");
+            SetPath(TextureID.MenuEquip1, UIPath + MenuPath + "menuequip1");
+            SetPath(TextureID.MenuEquip2, UIPath + MenuPath + "menuequip2");
+            SetPath(TextureID.MenuBack, UIPath + MenuPath + "menuback");
+            SetPath(TextureID.MenuLine, UIPath + MenuPath + "menuline");
+            SetPath(TextureID.MenuModalBack, UIPath + MenuPath + "menuModalBack");
+            SetPath(TextureID.MenuSelected, UIPath + MenuPath + "selectBack");
+            SetPath(TextureID.MenuUnselected, UIPath + MenuPath + "unselectedBack");
+
+            for (int i = 0; i < 20; i++)
+            {
+                SetPath(TextureID.Rule0 + i, "UI/Rule/" + i);
+            }
             #endregion
 
 
