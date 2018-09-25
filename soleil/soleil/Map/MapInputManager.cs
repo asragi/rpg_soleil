@@ -68,8 +68,15 @@ namespace Soleil.Map
         private void PlayerMove()
         {
             var inputDir = KeyInput.GetStickInclineDirection(1);
+            if (KeyInput.GetKeyPush(Key.A))
+            {
+                player.ProjectHitBox();
+            }
             // Run, Dash or stand
-            if (KeyInput.GetKeyDown(Key.A)) player.Run();
+            if (KeyInput.GetKeyDown(Key.A))
+            {
+                player.Run();
+            }
             else player.Walk();
             if (inputDir == Direction.N) player.Stand();
 
