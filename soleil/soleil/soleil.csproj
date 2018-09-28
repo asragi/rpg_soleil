@@ -103,6 +103,7 @@
     <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
+    <Compile Include="Map\MapChangeObject.cs" />
     <Compile Include="Map\MapCharacter.cs" />
     <Compile Include="Map\MapDirection.cs" />
     <Compile Include="Map\MapEventObject.cs" />
