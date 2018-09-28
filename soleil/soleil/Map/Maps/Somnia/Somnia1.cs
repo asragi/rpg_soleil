@@ -38,7 +38,7 @@ namespace Soleil.Map
 
             // Objects
             cigerman = new Cigerman(new Vector(750, 600), om, bm);
-            mcoLeft = new MapChangeObject(new Vector(0, 500), new Vector(30, 260), MapName.Somnia1, new Vector(1000, 800), Direction.L, om, bm);
+            mcoLeft = new MapChangeObject(new Vector(0, 500), new Vector(30, 260), MapName.Somnia2, new Vector(1000, 800), Direction.L, om, bm);
         }
     }
 }
