@@ -13,6 +13,7 @@
         bool movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         CollideBox decideBox; // 決定キーを押したときに飛び出す判定
+        readonly Vector DecideBoxDist = new Vector(-20, 0);
         int decideBoxCount;
         int speed;
 
@@ -160,7 +161,7 @@
         /// </summary>
         public void ProjectHitBox()
         {
-            decideBox.SetLocalPos(new Vector(100, 0));
+            decideBox.SetLocalPos(DecideBoxDist.Rotate(Direction.Angle()));
             decideBox.IsActive = true;
             decideBoxCount = 2;
         }

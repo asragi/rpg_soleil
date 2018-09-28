@@ -16,5 +16,9 @@ namespace Soleil.Map
         {
             return (dir == Direction.D) || (dir == Direction.LD) || (dir == Direction.RD);
         }
+        public static int Angle(this Direction dir)
+        {
+            return ((int)dir - 1) * 45;
+        }
     }
 }
