@@ -76,7 +76,7 @@
 
         public override void Update()
         {
-            DecideBoxCheck(); System.Console.WriteLine(Pos);
+            DecideBoxCheck();
             base.Update();
         }
 
