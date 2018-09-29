@@ -89,6 +89,7 @@
     <Compile Include="Images\ColorPalette.cs" />
     <Compile Include="Images\FontImage.cs" />
     <Compile Include="Images\Image.cs" />
+    <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
