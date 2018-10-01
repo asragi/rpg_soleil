@@ -17,7 +17,7 @@ namespace Soleil
 
         override public void Update()
         {
-            bf.Move();
+            bf.Update();
             base.Update();
         }
 

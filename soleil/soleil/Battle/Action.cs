@@ -105,8 +105,8 @@ namespace Soleil
     
     abstract class Buff : Action
     {
-        protected BuffFunc buff;
-        public Buff(BuffFunc buff_, TargetCoverage target_) : base(target_) => buff = buff_;
+        protected BuffFunc BFunc;
+        public Buff(BuffFunc bFunc, TargetCoverage target_) : base(target_) => BFunc = bFunc;
     }
 
     class BuffForOne : Buff
@@ -126,7 +126,7 @@ namespace Soleil
         {
             List<Occurence> ocr = new List<Occurence>();
 
-            var rate = buff(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
+            var rate = BFunc(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
 
             if (bf.GetCharacter(defenseIndex).Status.Dead)
             {
@@ -167,7 +167,7 @@ namespace Soleil
         {
             List<Occurence> ocr = new List<Occurence>();
 
-            var rate = buff(bf.GetCharacter(index).Status, bf.GetCharacter(index).Status);
+            var rate = BFunc(bf.GetCharacter(index).Status, bf.GetCharacter(index).Status);
 
             if (bf.GetCharacter(index).Status.Dead)
             {
