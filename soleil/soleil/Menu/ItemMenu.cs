@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     class ItemMenu : MenuChild
     {
         const int FadeSpeed = 35;
@@ -15,7 +16,7 @@ namespace Soleil.Menu
 
         readonly Vector ItemDrawStartPos = new Vector(25, 28);
         readonly int ItemPanelSpacing = 4;
-        readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
+        readonly EFunc EaseFunc = Easing.OutCubic;
 
         Image backImage;
         ItemPanel[] itemPanels;

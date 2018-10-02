@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
+    using EFunc = Func<double, double, double, double, double>;
     abstract class ImageBase
     {
         protected DepthID DepthID;
@@ -18,7 +19,7 @@ namespace Soleil
         public float Alpha { get; set; }
         private int alphaFrame;
         private int alphaDuration;
-        private Func<double, double, double, double, double> alphaEaseFunc;
+        private EFunc alphaEaseFunc;
         bool fadeIn;
 
         // Easing
@@ -26,7 +27,7 @@ namespace Soleil
         private Vector startPos;
         private int easeFrame;
         private int easeDuration;
-        private Func<double, double, double, double, double> easeFunc;
+        private EFunc easeFunc;
 
         public ImageBase(Vector pos, DepthID _depthID, bool centerOrigin = true, bool isStatic = true, float alpha = 1)
         {
@@ -37,7 +38,7 @@ namespace Soleil
             IsStatic = isStatic;
         }
 
-        public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
             Alpha = (isFadeIn) ? 0 : 1;
             alphaFrame = 0;
@@ -46,7 +47,7 @@ namespace Soleil
             fadeIn = isFadeIn;
         }
 
-        public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public void MoveTo(Vector target, int duration, EFunc _easeFunc)
         {
             targetPos = target;
             startPos = Pos;
