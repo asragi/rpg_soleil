@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
     /// </summary>
     class ItemPanel : SelectablePanel
     {
         public readonly Vector ItemNumPosDiff = new Vector(300, 0);
+
         public override Vector LocalPos
         {
             get { return _LocalPos; }
@@ -39,13 +41,13 @@ namespace Soleil.Menu
             LocalPos = Vector.Zero;
         }
 
-        public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        public override void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
             base.Fade(duration, _easeFunc, isFadeIn);
             itemNumImage.Fade(duration, _easeFunc, isFadeIn);
         }
 
-        public override void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public override void MoveTo(Vector target, int duration, EFunc _easeFunc)
         {
             base.MoveTo(target, duration, _easeFunc);
             itemNumImage.MoveTo(target + ItemNumPosDiff, duration, _easeFunc);

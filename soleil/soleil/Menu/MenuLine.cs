@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     /// <summary>
     /// メニュー画面等で使う横に動く装飾用の罫線を描画するクラス
     /// </summary>
@@ -28,7 +29,7 @@ namespace Soleil.Menu
             }
         }
 
-        public void Fade(int duration, Func<double, double, double, double, double> easing, bool isFadein)
+        public void Fade(int duration, EFunc easing, bool isFadein)
         {
             for (int i = 0; i < lines.Length; i++)
             {

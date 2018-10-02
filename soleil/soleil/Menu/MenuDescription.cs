@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     class MenuDescription
     {
         FontImage fontImage;
@@ -20,12 +21,12 @@ namespace Soleil.Menu
             fontImage.ShadowColor = ColorPalette.GlayBlue;
         }
 
-        public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
             fontImage.Fade(duration, _easeFunc, isFadeIn);
         }
 
-        public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public void MoveTo(Vector target, int duration, EFunc _easeFunc)
         {
             fontImage.MoveTo(target, duration, _easeFunc);
         }

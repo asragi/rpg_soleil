@@ -12,17 +12,17 @@ namespace Soleil.Map
         static Vector upperRight = new Vector(Game1.VirtualWindowSizeX, 0);
 
         ImageManager imageManager;
-        int backImageID;
+        Image backImage;
         public MapIndicator()
         {
             imageManager = new ImageManager();
-            backImageID = imageManager.Create(TextureID.IndicatorBack, upperRight + new Vector(-10,0), DepthID.Frame);
-            imageManager.Get(backImageID).Alpha = 0.5f;
+            backImage = imageManager.CreateImg(TextureID.IndicatorBack, upperRight + new Vector(-10,0), DepthID.Frame);
+            backImage.Alpha = 0.5f;
         }
 
         public void Update()
         {
-            imageManager.Get(backImageID).Angle += 0.002f;
+            backImage.Angle += 0.002f;
             imageManager.Update();
         }
 
