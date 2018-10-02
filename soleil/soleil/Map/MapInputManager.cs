@@ -32,8 +32,11 @@ namespace Soleil.Map
         public void SetMenuSystem(MenuSystem m) => menuSystem = m; // 地獄
 
         // 入力を良い感じにする処理用
-        const int InputWait = 8;
+        const int InputWait = 6;
         int waitFrame;
+        const int HeadWait = 20;
+        int headWaitCount;
+        bool inputCheck;
 
         public void Update()
         {
@@ -99,17 +102,28 @@ namespace Soleil.Map
             waitFrame--;
             if (dir.IsContainUp())
             {
+                headWaitCount--;
+                if (headWaitCount > 0 && inputCheck) return Direction.N;
                 if (waitFrame > 0) return Direction.N;
                 waitFrame = InputWait;
+                inputCheck = true;
                 return Direction.U;
             }
             else if (dir.IsContainDown())
             {
+                headWaitCount--;
+                if (headWaitCount > 0 && inputCheck) return Direction.N;
                 if (waitFrame > 0) return Direction.N;
                 waitFrame = InputWait;
+                inputCheck = true;
                 return Direction.D;
             }
-            else { waitFrame = 0; return Direction.N; }
+            else {
+                inputCheck = false;
+                waitFrame = 0;
+                headWaitCount = HeadWait;
+                return Direction.N;
+            }
         }
 
         void UpdateInputKeysDown()
