@@ -11,7 +11,7 @@ namespace Soleil
         public TestEnemyCharacter(BattleField bField, int index) : base(bField, index)
         {
             //てきとう
-            var aScore = new AbilityScore(100, 100, 100, 100, 100, 100);
+            var aScore = new AbilityScore(1000, 100, 100, 100, 100, 100);
             Status = new CharacterStatus(aScore, 10000);
             commandSelect = new DefaultCharacterCommandSelect(bField, charaIndex);
         }

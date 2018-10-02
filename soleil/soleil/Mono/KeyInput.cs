@@ -205,7 +205,7 @@ namespace Soleil
 
         }
 
-        public static void Move()
+        public static void Update()
         {
             gamepadState = gamepad.Select(p=>GamePad.GetState(p)).ToList();
             keyState = Keyboard.GetState();

@@ -27,4 +27,16 @@ public static class IEnumerableEx
     {
         return self.First(c => selector(c).Equals(self.Max(selector)));
     }
+
+    /// <summary>
+    /// ForEachをIEnumeratorに拡張
+    /// </summary>
+    public static void ForEach2<TSource, TResult>
+    (
+        this IEnumerable<TSource> self,
+        Func<TSource, TResult> func
+    )
+    {
+        foreach (var e in self) func(e);
+    }
 }
