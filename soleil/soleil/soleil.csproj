@@ -50,8 +50,10 @@
     <Compile Include="Battle\CharacterStatus.cs" />
     <Compile Include="Battle\Character\TestEnemyCharacter.cs" />
     <Compile Include="Battle\Character\TestPlayableCharacter.cs" />
+    <Compile Include="Battle\BattleQueue.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
+    <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
@@ -103,6 +105,7 @@
     <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
+    <Compile Include="Map\MapChangeObject.cs" />
     <Compile Include="Map\MapCharacter.cs" />
     <Compile Include="Map\MapDirection.cs" />
     <Compile Include="Map\MapEventObject.cs" />
@@ -113,6 +116,9 @@
     <Compile Include="Map\MapManager.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
+    <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
+    <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
+    <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
     <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />

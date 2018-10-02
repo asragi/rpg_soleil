@@ -23,6 +23,9 @@ namespace Soleil.Map
         protected MapData MapData;
         MenuSystem menuSystem;
 
+        protected MapConstruct[] MapConstructs;
+        protected CameraPoint[] CameraPoints;
+
         public MapBase(MapName _name)
         {
             om = new ObjectManager();

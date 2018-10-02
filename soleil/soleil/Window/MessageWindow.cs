@@ -63,8 +63,13 @@ namespace Soleil
 
         public override void DrawContent(Drawing d)
         {
-            d.DrawStaticText(textPos, Resources.GetFont(FontID.Test), messageToDraw, Microsoft.Xna.Framework.Color.White, DepthID.Frame,Vector.One,0,false);
+            d.DrawText(textPos, Resources.GetFont(FontID.Test), messageToDraw, Microsoft.Xna.Framework.Color.White, DepthID.Frame, 1, 0, false);
             base.DrawContent(d);
+        }
+
+        public static Vector GetProperSize(FontID font, string text)
+        {
+            return (Vector)Resources.GetFont(font).MeasureString(text) + new Vector(2 * Spacing, 2* Spacing);
         }
     }
 }

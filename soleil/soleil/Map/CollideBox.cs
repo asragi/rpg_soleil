@@ -12,9 +12,11 @@ namespace Soleil.Map
         Vector localPos;
         Vector parentPos;
         MapObject parent;
-        CollideLayer layer;
+        public CollideLayer Layer;
         List<bool> preCollide, nowCollide;
         bool wallCollide; // 壁に重なっているか
+        public bool IsActive;
+        BoxManager boxManager;
 
         /// <param name="_localPos">相対的な矩形中心位置</param>
         public CollideBox(MapObject _parent, Vector _localPos, Vector _size, CollideLayer _layer, BoxManager bm)
@@ -24,10 +26,12 @@ namespace Soleil.Map
             parentPos = parent.GetPosition();
             localPos = _localPos;
             Size = _size;
-            layer = _layer;
+            Layer = _layer;
             preCollide = new List<bool>();
             nowCollide = new List<bool>();
+            IsActive = true;
             bm.Add(this);
+            boxManager = bm;
         }
 
         public void SetLocalPos(Vector _pos) => localPos = _pos;
@@ -44,7 +48,7 @@ namespace Soleil.Map
 
         private void CollideStateCheck(int i)
         {
-            if (!preCollide[i] & nowCollide[i]) CollideEnter();
+            if (!preCollide[i] & nowCollide[i]) CollideEnter(i);
             if (preCollide[i] & nowCollide[i]) CollideStay();
             if (preCollide[i] & !nowCollide[i]) CollideExit();
             preCollide[i] = nowCollide[i];
@@ -85,9 +89,9 @@ namespace Soleil.Map
             nowCollide[target.ID] = col;
         }
 
-        void CollideEnter()
+        void CollideEnter(int id)
         {
-            parent.OnCollisionEnter();
+            parent.OnCollisionEnter(boxManager.GetBox(id));
         }
 
         void CollideStay()
@@ -99,6 +103,23 @@ namespace Soleil.Map
         {
             parent.OnCollisionExit();
         }
+
+        /// <summary>
+        /// 他のキャラクターと衝突しているかどうか．
+        /// </summary>
+        public bool GetCollideCharacter()
+        {
+            for (int i = 0; i < nowCollide.Count; i++)
+            {
+                // キャラクターレイヤーでないならスキップ
+                if (boxManager.GetBox(i).Layer != CollideLayer.Character) continue;
+                // 判定対象Boxのparentが自身のparentと同一であればスキップ
+                if (boxManager.GetBox(i).parent == parent) continue;
+                if (nowCollide[i]) return true;
+            }
+            return false;
+        }
+
         public Vector WorldPos() => parent.GetPosition() + localPos; // あまりよくない
     }
 }

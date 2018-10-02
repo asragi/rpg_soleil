@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Soleil
 {
@@ -17,6 +18,8 @@ namespace Soleil
         List<Side> sides;
         List<int>[] indexes;
         List<Character> charas;
+        List<bool> alive;
+
         MagicField magicField;
         TurnQueue turnQueue;
 
@@ -24,6 +27,7 @@ namespace Soleil
         /// turnQueueにPushされていない最初のTurn
         /// </summary>
         List<Turn> lastTurn;
+        List<BattleUI> UIList;
 
         public BattleField()
         {
@@ -47,6 +51,8 @@ namespace Soleil
             indexes = new List<int>[(int)Side.Size];
             indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
             indexes[(int)Side.Right] = new List<int> { 0, 1, };
+            alive = new List<bool>(charas.Count);
+            for (int i = 0; i < charas.Count; i++) alive.Add(true);
 
             magicField = new SimpleMagicField();
             turnQueue = new TurnQueue();
@@ -56,6 +62,10 @@ namespace Soleil
                 lastTurn.Add(charas[i].NextTurn());
             while (!turnQueue.IsFulfilled())
                 EnqueueTurn();
+
+            battleQue = new Queue<BattleEvent>();
+
+            UIList = new List<BattleUI>();
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
@@ -77,45 +87,77 @@ namespace Soleil
         }
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
 
-        /// <summary>
-        /// 行動するCharacterのIndex
-        /// </summary>
-
-        bool turnUpdate = true;
-        Turn topTurn;
-        public void Move()
+        public void RemoveCharacter(int index)
         {
-            if(turnUpdate)
-            {
-                topTurn = turnQueue.Top();
-                turnUpdate = false;
-            }
-
-            //Turnが行動実行Turnのとき
-            if (topTurn is ActionTurn actTurn)
-            {
-                //行動を実行
-                var ocrs = actTurn.action.Act(this);
-                foreach(var ocr in ocrs)
-                    ExecOccurence(ocr);
-
-                turnQueue.Pop();
+            var sd = sides[index];
+            indexes[(int)sd].Remove(index);
+            //charas[index] = null;
+            turnQueue.RemoveAll(p => p.CharaIndex == index);
+            alive[index] = false;
+            while (!turnQueue.IsFulfilled())
                 EnqueueTurn();
-                turnUpdate = true;
-            }
-            //Turnが行動選択Turnのとき
-            else
-            {
-                var action = charas[topTurn.CharaIndex].SelectAction();
-                if(action != null)
-                {
-                    turnQueue.Pop();
-                    turnQueue.Push(new ActionTurn(topTurn.WaitPoint + 100, topTurn.SPD, topTurn.Index, action));
-                    turnUpdate = true;
-                }
-            }
         }
 
+        Turn topTurn;
+
+        Queue<BattleEvent> battleQue;
+        BattleEvent beTop;
+        int delayCount = 0;
+        bool executed = true;
+        public void Update()
+        {
+            if (delayCount > 0)
+            {
+                delayCount--;
+            }
+
+            if (battleQue.Count == 0 && executed)
+            {
+                topTurn = turnQueue.Top();
+                turnQueue.Pop();
+
+                //Turnが行動実行Turnのとき
+                if (topTurn is ActionTurn actTurn)
+                {
+                    //行動を実行
+                    var ocrs = actTurn.action.Act(this);
+
+                    //TODO:Occurenceに応じたBattleEventを生成する
+                    ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
+                    EnqueueTurn();
+                }
+                //Turnが行動選択Turnのとき
+                else
+                {
+                    battleQue.Enqueue(new BattleCommandSelect(topTurn.CharaIndex, -1));
+                }
+            }
+
+            if (delayCount == 0)
+            {
+                beTop = battleQue.Dequeue();
+                delayCount = beTop.DequeCount;
+            }
+            switch (beTop)
+            {
+                case BattleMessage bm:
+                    message = bm.Message;
+                    executed = true;
+                    break;
+                case BattleCommandSelect bcs:
+                    executed = false;
+                    var action = charas[topTurn.CharaIndex].SelectAction(topTurn);
+                    if (action)
+                    {
+                        executed = true;
+                        delayCount = 0;
+                    }
+                    break;
+            }
+
+        }
+
+        public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
         void EnqueueTurn()
         {
             /*
@@ -128,26 +170,50 @@ namespace Soleil
                     minIndex = i;
                 }
                 */
-            var minIndex = lastTurn.FindMin(p => p.TurnTime).CharaIndex;
+            var minIndex = lastTurn.Where(p => alive[p.CharaIndex])
+                .FindMin(p => p.TurnTime).CharaIndex;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
         }
 
+        /*
         void ExecOccurence(Occurence ocr)
         {
-            switch (ocr)
-            {
-                case OccurenceForCharacter ocrc:
-                    charas[ocrc.CharaIndex].Damage(ocrc.HPDamage, ocrc.MPDamage);
-                    break;
-                case OccurenceForField ocrf:
-                    break;
-            }
+            ocr.Affect(this);
         }
+        */
 
+        public void AddUI(BattleUI bui) => UIList.Add(bui);
+        public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
+
+        string message = "";
         public void Draw(Drawing sb)
         {
+            //てきとう
+            sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
 
+            /*
+            sb.DrawText(new Vector(100, 400), Resources.GetFont(FontID.Test), "Magic", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 440), Resources.GetFont(FontID.Test), "Skill", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 480), Resources.GetFont(FontID.Test), "Guard", Color.White, DepthID.Message);
+            sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
+            */
+
+            sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.Test), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+            for (int i = 0; i < turnQueue.Count; i++)
+                sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.Test), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+
+
+            for (int i = 0; i < charas.Count; i++)
+            {
+                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
+                //TODO:表示するステータスはchara[i].Statusから分離する
+                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
+            }
+
+            //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);
+
+            UIList.ForEach(e => e.Draw(sb));
         }
     }
 }

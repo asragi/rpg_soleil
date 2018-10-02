@@ -11,7 +11,11 @@ namespace Soleil
         public int CharaIndex = -1;
         protected BattleField BF;
         public CommandSelect(BattleField bf, int charaIndex) => (BF, CharaIndex) = (bf, charaIndex);
-        public abstract Action GetAction();
+        public abstract bool GetAction(Turn turn);
+        protected void EnqueueTurn(Action action, Turn turn)
+        {
+            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + 100, turn.SPD, turn.CharaIndex, action));
+        }
     }
 
     class DefaultCharacterCommandSelect : CommandSelect
@@ -20,55 +24,85 @@ namespace Soleil
         {
         }
 
-        public override Action GetAction()
+        public override bool GetAction(Turn turn)
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target);
+            EnqueueTurn(((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target), turn);
+            return true;
         }
     }
 
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
+        Stack<BattleUI> windows;
+        BattleField bf;
         public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
         {
+            this.bf = bf;
+            windows = new Stack<BattleUI>();
         }
 
+        
+        public override bool GetAction(Turn turn)
+        {
+            System.Action retExec = () =>
+            {
+                windows.ForEach2(e => bf.RemoveUI(e));
+                windows.Clear();
+            };
 
-        bool select = false;
-        enum Command
-        {
-            Attack,
-            Magic,
-            Item,
-            Escape,
-            Size,
-        }
-        Command selectCommand;
-        public override Action GetAction()
-        {
-            if (KeyInput.GetKeyPush(Key.Down))
+            if(windows.Count==0)
             {
-                selectCommand++;
-                if (selectCommand == Command.Size)
-                {
-                    selectCommand = Command.Attack;
-                }
-            }
-            if (KeyInput.GetKeyPush(Key.Up))
-            {
-                if (selectCommand == Command.Attack)
-                {
-                    selectCommand = Command.Size;
-                }
-                selectCommand--;
-            }
-            if (KeyInput.GetKeyPush(Key.A))
-            {
-                return ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(0, 1);
+                var sw = new CommandSelectWindow(new Vector(600, 200));
+                windows.Push(sw);
+                bf.AddUI(sw);
             }
 
-            return null;
+            var top = windows.Peek();
+            switch (top)
+            {
+                case CommandSelectWindow csw:
+                    var cmd = csw.Select();
+                    if (!cmd.HasValue) return false;
+
+                    Action act = null;
+                    //debug なにを選んでも攻撃
+                    switch (cmd.Value)
+                    {
+                        case Command.Magic:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
+                        case Command.Skill:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
+                        case Command.Guard:
+                            act = ((BuffMe)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(CharaIndex);
+                            EnqueueTurn(act, turn);
+                            act = ((BuffMe)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(CharaIndex);
+                            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.WP + 100, turn.SPD, turn.CharaIndex, act));
+                            retExec();
+                            return true;
+                        case Command.Escape:
+                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            EnqueueTurn(act, turn);
+                            retExec();
+                            return true;
+                        default:
+                            break;
+                    }
+
+                    break;
+                default:
+                    throw new Exception("??????");
+            }
+            
+            
+            return false;
         }
     }
 }

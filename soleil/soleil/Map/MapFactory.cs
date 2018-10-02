@@ -18,9 +18,9 @@ namespace Soleil.Map
             switch (mapName)
             {
                 case MapName.Somnia1:
-                    return new TestMap2();
+                    return new Somnia1();
                 case MapName.Somnia2:
-                    return new TestMap();
+                    return new Somnia2();
                 default:
                     throw new ArgumentOutOfRangeException();
             }

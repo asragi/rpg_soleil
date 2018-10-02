@@ -15,7 +15,7 @@ namespace Soleil
             queue = new List<Turn>();
         }
 
-        public void Update()
+        public void Refresh()
         {
             queue.Sort((x,y)=> {
                 if (x.TurnTime > y.TurnTime) return 1;
@@ -33,24 +33,40 @@ namespace Soleil
         {
             var top = queue[0];
             queue.RemoveAt(0);
-            Update();
+            Refresh();
             return top;
         }
 
         public void Push(Turn turn)
         {
             queue.Add(turn);
-            Update();
+            Refresh();
         }
 
         public void PushAll(List<Turn> turns)
         {
             queue.AddRange(turns);
-            Update();
+            Refresh();
         }
+
+        public Turn this[int index]
+        {
+            get
+            {
+                return queue[index];
+            }
+            set
+            {
+                queue[index]=value;
+            }
+        }
+        public int Count => queue.Count;
+        public int RemoveAll(Predicate<Turn> f) => queue.RemoveAll(f);
 
         public bool IsFulfilled() => Length <= queue.Count;
     }
+
+
     class Turn
     {
         public int Index = -1;

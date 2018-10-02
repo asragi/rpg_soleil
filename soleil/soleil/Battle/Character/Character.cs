@@ -23,26 +23,22 @@ namespace Soleil
             SPD = new Reference<int>();
         }
 
-        public Action SelectAction()
+        public bool SelectAction(Turn turn)
         {
-            return commandSelect.GetAction();
+            return commandSelect.GetAction(turn);
         }
 
-        public void Damage(int HP, int MP)
+        public void Damage(int HP = 0, int MP = 0)
         {
             Status.HP -= HP;
             Status.MP -= MP;
         }
-
-        /// <summary>
-        /// デバフ攻撃を受ける
-        /// </summary>
-        public void Debuff()
+        public void Buff(BuffRate rate)
         {
-
-            //SPDを更新
+            Status.Rates = rate;
             SPD.Val = Status.SPD;
         }
+        
 
         //kari
         protected Reference<int> SPD;

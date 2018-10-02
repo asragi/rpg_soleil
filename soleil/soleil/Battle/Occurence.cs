@@ -20,16 +20,36 @@ namespace Soleil
         {
             Message = message;
         }
+        //使わないかも
+        public virtual void Affect(BattleField bf) { }
     }
 
-    class OccurenceForCharacter : Occurence
+    class OccurenceDamageForCharacter : Occurence
     {
         public int CharaIndex { get; private set; }
         public int HPDamage = 0, MPDamage = 0;
-        public OccurenceForCharacter(string message, int charaIndex, int HPDmg = 0, int MPDmg = 0):base(message)
+        public OccurenceDamageForCharacter(string message, int charaIndex, int HPDmg = 0, int MPDmg = 0) : base(message)
         {
             CharaIndex = charaIndex;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
+        }
+        public override void Affect(BattleField bf)
+        {
+        }
+    }
+
+    class OccurenceBuffForCharacter : Occurence
+    {
+        public int CharaIndex { get; private set; }
+        public int STRrate, VITrate, MAGrate, SPDrate;
+        //rate 0...変化なし -1...デバフ 1...バフ?
+        public OccurenceBuffForCharacter(string message, int charaIndex, int STRrate = 0, int VITrate = 0, int MAGrate = 0, int SPDrate = 0) : base(message)
+        {
+            CharaIndex = charaIndex;
+            (this.STRrate, this.VITrate, this.MAGrate, this.SPDrate) = (STRrate, VITrate, MAGrate, SPDrate);
+        }
+        public override void Affect(BattleField bf)
+        {
         }
     }
 
@@ -39,5 +59,6 @@ namespace Soleil
         {
 
         }
+        public override void Affect(BattleField bf) { }
     }
 }
