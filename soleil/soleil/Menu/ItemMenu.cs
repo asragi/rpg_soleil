@@ -12,7 +12,7 @@ namespace Soleil.Menu
         ItemList itemList;
         // 所持しているすべてのアイテムのパネル
         List<ItemPanel> allItemPanels;
-        int initIndex = 2;
+        int initIndex = 0;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
