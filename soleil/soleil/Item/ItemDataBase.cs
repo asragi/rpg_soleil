@@ -17,6 +17,8 @@ namespace Soleil.Item
 
     enum ItemID
     {
+        // Empty（使用不可能アイテム）
+        Empty,
         // 消費アイテム 使いやすいように上の方にソートしたい
         Portion,
         Zarigani,
@@ -25,6 +27,15 @@ namespace Soleil.Item
         // 装備
         TestSword,
 
+        // Debug
+        d0,
+        d1,
+        d2,
+        d3,
+        d4,
+        d5,
+        d6,
+        d7,
         size,
     }
 
@@ -43,6 +54,12 @@ namespace Soleil.Item
             Set("活きのいいザリガニ", ItemID.Zarigani, ItemType.Consumable, true, true, 20, "食べる......？");
             Set("石ころ", ItemID.Stone, ItemType.Unconsumable, 0, "そこら辺の石ころ．");
             Set("デバッグソード", ItemID.TestSword, ItemType.Weapon, 50, "デバッグ用ソード");
+
+            // Debug
+            for (int i = (int)ItemID.d0; i < 1 + (int)ItemID.d7; i++)
+            {
+                Set(((ItemID)i).ToString(), (ItemID)i, ItemType.Unconsumable, 50, "テスト" + i);
+            }
         }
 
         static void Set(String name, ItemID id, ItemType type, bool menu, bool battle, int effectVal, string desc)
@@ -55,5 +72,7 @@ namespace Soleil.Item
         {
             data[(int)id] = new ItemData(id, type, false, false, effectVal, name, desc);
         }
+
+        public static ItemData Get(ItemID id) => data[(int)id];
     }
 }

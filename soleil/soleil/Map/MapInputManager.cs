@@ -100,30 +100,19 @@ namespace Soleil.Map
         private Direction InputSmoother(Direction dir)
         {
             waitFrame--;
-            if (dir.IsContainUp())
+            if (dir != Direction.N)
             {
                 headWaitCount--;
                 if (headWaitCount > 0 && inputCheck) return Direction.N;
                 if (waitFrame > 0) return Direction.N;
                 waitFrame = InputWait;
                 inputCheck = true;
-                return Direction.U;
+                return dir;
             }
-            else if (dir.IsContainDown())
-            {
-                headWaitCount--;
-                if (headWaitCount > 0 && inputCheck) return Direction.N;
-                if (waitFrame > 0) return Direction.N;
-                waitFrame = InputWait;
-                inputCheck = true;
-                return Direction.D;
-            }
-            else {
-                inputCheck = false;
-                waitFrame = 0;
-                headWaitCount = HeadWait;
-                return Direction.N;
-            }
+            inputCheck = false;
+            waitFrame = 0;
+            headWaitCount = HeadWait;
+            return Direction.N;
         }
 
         void UpdateInputKeysDown()

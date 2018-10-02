@@ -38,15 +38,21 @@ namespace Soleil.Menu
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
         MenuDescription menuDescription;
-        int index;
+        public int Index { get; private set; }
         Transition transition;
 
         // MenuChildren
         MenuChild[] menuChildren;
+        // ItemMenu
+        ItemMenu itemMenu;
+        // MagicMenu
+        MagicMenu magicMenu;
+        // Status 表示
+        StatusMenu statusMenu;
 
         // Transition
-        const int FadeSpeed = 23;
-        readonly EFunc func = Easing.OutQuad;
+        public const int FadeSpeed = 23;
+        public static readonly EFunc EaseFunc = Easing.OutQuad;
 
         // Menuの項目の対応用配列
         public static readonly TextureID[] optionTextures =
@@ -67,7 +73,7 @@ namespace Soleil.Menu
 
         public MenuSystem()
         {
-            index = 0;
+            Index = 0;
             // Image初期化
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
             frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
@@ -86,8 +92,14 @@ namespace Soleil.Menu
 
             // MenuDescription
             menuDescription = new MenuDescription(new Vector(125, 35));
-            // MenuChildren
-            menuChildren = new MenuChild[] { new ItemMenu(this) };
+            // Item Menu
+            itemMenu = new ItemMenu(this);
+            // Magic Menu
+            magicMenu = new MagicMenu(this);
+            // Status Menu
+            statusMenu = new StatusMenu(this);
+            // MenuChildren(foreach用. 描画順に．)
+            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
         }
 
         /// <summary>
@@ -99,6 +111,9 @@ namespace Soleil.Menu
             ImageTransition(TransitionMode.FadeOut);
             IsActive = true;
             IsQuit = false;
+
+            // statusMenu召喚
+            statusMenu.FadeIn();
         }
 
         /// <summary>
@@ -111,6 +126,9 @@ namespace Soleil.Menu
             IsQuit = true;
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
+
+            // statusMenu退散
+            statusMenu.FadeOut();
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -119,15 +137,15 @@ namespace Soleil.Menu
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
             // Transition Images
-            backImage.Fade(FadeSpeed, func, isFadeOut);
-            frontImage.Fade(FadeSpeed, func, isFadeOut);
+            backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
+            frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].Fade(FadeSpeed, func, isFadeOut);
+                menuItems[i].Fade(FadeSpeed, EaseFunc, isFadeOut);
             }
-            menuLineLower.Fade(FadeSpeed-3, func, isFadeOut);
-            menuLineUpper.Fade(FadeSpeed-3, func, isFadeOut);
-            menuDescription.Fade(FadeSpeed, func, isFadeOut);
+            menuLineLower.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
+            menuLineUpper.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
+            menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
         }
 
         /// <summary>
@@ -139,10 +157,10 @@ namespace Soleil.Menu
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
-                if (dir == Direction.U) index--;
-                if (dir == Direction.D) index++;
-                index = (index + menuItems.Length) % menuItems.Length;
-                menuDescription.Text = Descriptions[index];
+                if (dir == Direction.U) Index--;
+                if (dir == Direction.D) Index++;
+                Index = (Index + menuItems.Length) % menuItems.Length;
+                menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
                 else if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
                 return;
@@ -155,10 +173,42 @@ namespace Soleil.Menu
             }
         }
 
+        /// <summary>
+        /// 外部から特定のメニューを有効にする．
+        /// </summary>
+        public void CallChild(MenuName name)
+        {
+            if (name == MenuName.Magic) magicMenu.IsActive = true;
+        }
+
         void Decide()
         {
             IsActive = false;
-            menuChildren[index].IsActive = true;
+            var selected = (MenuName)Index;
+            if(selected == MenuName.Items)
+            {
+                itemMenu.IsActive = true;
+                return;
+            }
+            if(selected == MenuName.Magic || selected == MenuName.Equip || selected == MenuName.Status)
+            {
+                statusMenu.IsActive = true;
+                return;
+            }
+            if(selected == MenuName.Option)
+            {
+                // Option設定用ウィンドウ出現
+
+                IsActive = true; // debug
+                return;
+            }
+            if(selected == MenuName.Save)
+            {
+                // Save用ウィンドウ出現
+
+                IsActive = true; // debug
+                return;
+            }
         }
 
         protected override void OnDisable()
@@ -167,7 +217,7 @@ namespace Soleil.Menu
             // Transition Images
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, func);
+                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, EaseFunc);
             }
         }
 
@@ -177,7 +227,7 @@ namespace Soleil.Menu
             // Transition Images
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, func);
+                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, EaseFunc);
             }
         }
 
@@ -194,11 +244,12 @@ namespace Soleil.Menu
             menuLineUpper.Update();
             menuLineLower.Update();
             menuDescription.Update();
+            statusMenu.Update();
 
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {
-                menuItems[i].IsSelected = i == index;
+                menuItems[i].IsSelected = i == Index;
             }
 
             // Update Children
@@ -228,7 +279,6 @@ namespace Soleil.Menu
             {
                 child.Draw(d);
             }
-
             // 前景描画
             frontImage.Draw(d);
         }

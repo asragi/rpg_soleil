@@ -33,6 +33,8 @@ namespace Soleil.Menu
             if (KeyInput.GetKeyPush(Key.B)) { OnInputCancel(); return; }
             if (dir == Direction.U) OnInputUp();
             if (dir == Direction.D) OnInputDown();
+            if (dir == Direction.R) OnInputRight();
+            if (dir == Direction.L) OnInputLeft();
         }
 
         public abstract void OnInputRight();

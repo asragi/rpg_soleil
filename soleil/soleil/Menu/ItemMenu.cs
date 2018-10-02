@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,117 +7,91 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    using EFunc = Func<double, double, double, double, double>;
-    class ItemMenu : MenuChild
+    class ItemMenu : BasicMenu
     {
-        const int FadeSpeed = 35;
-        const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
-        readonly Vector WindowPos = new Vector(330, 100);
-        readonly Vector WindowStartPos = new Vector(830, 100);
-
-        readonly Vector ItemDrawStartPos = new Vector(25, 28);
-        readonly int ItemPanelSpacing = 4;
-        readonly EFunc EaseFunc = Easing.OutCubic;
-
-        Image backImage;
-        ItemPanel[] itemPanels;
-        public Vector Pos { get { return backImage.Pos; } }
-        int index;
+        ItemList itemList;
+        // 所持しているすべてのアイテムのパネル
+        List<ItemPanel> allItemPanels;
+        int initIndex = 0;
         public ItemMenu(MenuComponent parent)
             :base(parent)
         {
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
-
-            // 実際は所持アイテムのデータから生成する
-            itemPanels = new ItemPanel[]{
-                new ItemPanel("ハイポーション", 2, this),
-                new ItemPanel("エーテル", 3, this),
-                new ItemPanel("フェニックスの手羽先", 3, this),
-                new ItemPanel("活きのいいザリガニ", 2, this),
-                new ItemPanel("セミの抜け殻", 1, this),
-                new ItemPanel("きれいな石", 99, this),
-            };
-
-            for (int i = 0; i < itemPanels.Length; ++i)
+            // 実際は他のところでインスタンス生成して参照を受け取る．
+            itemList = new ItemList();
+            // debug
+            itemList.AddItem(ItemID.Portion);
+            itemList.AddItem(ItemID.Zarigani);
+            for (int i = (int)ItemID.d0; i < (int)ItemID.d7+1; i++)
             {
-                itemPanels[i].LocalPos = ItemDrawStartPos + new Vector(0, (itemPanels[i].PanelSize.Y + ItemPanelSpacing) * i);
+                itemList.AddItem((ItemID)i,i);
             }
-
-            index = 0;
+            // 所持しているすべてのアイテムのパネル
+            allItemPanels = new List<ItemPanel>();
+            // 表示用のパネル
+            Panels = new ItemPanel[RowSize];
+            // 所持しているすべてのアイテムの表示用パネルを生成
+            allItemPanels = MakeAllItemPanels();
+            // 描画すべきパネルを決定する．
+            SetPanels();
         }
 
-        protected override void OnDisable()
+        private List<ItemPanel> MakeAllItemPanels()
         {
-            base.OnDisable();
-            // Transition Images
-            backImage.MoveTo(WindowStartPos, FadeSpeed, EaseFunc);
-            backImage.Fade(FadeSpeed, EaseFunc, false);
-
-            foreach (var item in itemPanels)
+            var items = new List<ItemPanel>();
+            for (int i = 0; i < (int)ItemID.size; i++)
             {
-                item.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, EaseFunc);
-                item.Fade(FadeSpeed, EaseFunc, false);
+                if (!itemList.HasItem((ItemID)i)) continue;
+                var data = ItemDataBase.Get((ItemID)i);
+                items.Add(new ItemPanel(data.Name, itemList.GetItemNum((ItemID)i), this));
+            }
+            return items;
+        }
+
+        private void SetPanels()
+        {
+            for (int i = 0; i < RowSize; ++i)
+            {
+                if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
+                {
+                    allItemPanels.Add(new ItemPanel("", -1, this));
+                }
+                if (allItemPanels.Count <= i) return;
+                IndexSize = i + 1;
+                Panels[i] = allItemPanels[initIndex + i];
+                Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);
             }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            // Transition Images
-            backImage.MoveTo(WindowPos, FadeSpeed, EaseFunc);
-            backImage.Fade(FadeSpeed, EaseFunc, true);
-            foreach (var item in itemPanels)
-            {
-                item.MoveTo(WindowPos + item.LocalPos, FadeSpeed, EaseFunc);
-                item.Fade(FadeSpeed, EaseFunc, true);
-            }
-            RefreshSelected();
+            allItemPanels.ForEach(s => s.Fade(FadeSpeed, MenuSystem.EaseFunc, true));
         }
-
-        public override void Update()
-        {
-            base.Update();
-            backImage.Update();
-            foreach (var item in itemPanels)
-            {
-                item.Update();
-            }
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            backImage.Draw(d);
-            foreach (var item in itemPanels)
-            {
-                item.Draw(d);
-            }
-        }
-
-        private void RefreshSelected()
-        {
-            for (int i = 0; i < itemPanels.Length; i++)
-            {
-                itemPanels[i].SetSelectedAndFade(i == index);
-            }
-        }
-
-        // Input
-        public override void OnInputRight() { }
-        public override void OnInputLeft() { }
 
         public override void OnInputUp()
         {
-            index = (index - 1 + itemPanels.Length) % itemPanels.Length;
+            if (Index == 0 && initIndex > 0)
+            {
+                initIndex--;
+                SetPanels();
+                RefreshSelected();
+                return;
+            }
+            Index = (Index - 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }
 
         public override void OnInputDown()
         {
-            index = (index + 1 + itemPanels.Length) % itemPanels.Length;
+            if (Index == RowSize-1 && initIndex < allItemPanels.Count - RowSize)
+            {
+                initIndex++;
+                SetPanels();
+                RefreshSelected();
+                return;
+            }
+            Index = (Index + 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }
-        public override void OnInputSubmit() { }
-        public override void OnInputCancel() { Quit(); }
     }
 }
