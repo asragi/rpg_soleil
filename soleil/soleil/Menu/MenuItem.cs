@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     class MenuItem
     {
         const int StartX = 100; // 0個目の項目のx座標
@@ -38,18 +39,18 @@ namespace Soleil.Menu
             unselectedImg.Update();
         }
 
-        public void Fade(int duration, Func<double, double, double, double, double> easing, bool isFadein)
+        public void Fade(int duration, EFunc easing, bool isFadein)
         {
             selectedImg.Fade(duration, easing, isFadein);
             unselectedImg.Fade(duration, easing, isFadein);
         }
 
-        public void MoveToBack(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public void MoveToBack(Vector target, int duration, EFunc _easeFunc)
         {
             selectedImg.MoveTo(pos - new Vector(50,0), duration, _easeFunc);
             unselectedImg.MoveTo(pos - new Vector(50,0), duration, _easeFunc);
         }
-        public void MoveToDefault(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public void MoveToDefault(Vector target, int duration, EFunc _easeFunc)
         {
             selectedImg.MoveTo(pos, duration, _easeFunc);
             unselectedImg.MoveTo(pos, duration, _easeFunc);

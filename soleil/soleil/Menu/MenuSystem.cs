@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     enum MenuName
     {
         Items = 0,
@@ -45,7 +46,7 @@ namespace Soleil.Menu
 
         // Transition
         const int FadeSpeed = 23;
-        readonly Func<double, double, double, double, double> func = Easing.OutQuad;
+        readonly EFunc func = Easing.OutQuad;
 
         // Menuの項目の対応用配列
         public static readonly TextureID[] optionTextures =

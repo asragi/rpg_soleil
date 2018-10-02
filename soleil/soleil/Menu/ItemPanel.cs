@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
+    using EFunc = Func<double, double, double, double, double>;
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
     /// </summary>
@@ -18,7 +19,7 @@ namespace Soleil.Menu
         /// </summary>
         readonly Vector Spacing = new Vector(8, 4);
         readonly FontID ItemFont = FontID.Test;
-        readonly Func<double, double, double, double, double> func = Easing.OutCubic;
+        readonly EFunc func = Easing.OutCubic;
 
         // Parentに対する相対的な基準座標
         private Vector localPos;
@@ -69,7 +70,7 @@ namespace Soleil.Menu
             LocalPos = Vector.Zero;
         }
 
-        public void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
             itemNameImage.Fade(duration, _easeFunc, isFadeIn);
             itemNumImage.Fade(duration, _easeFunc, isFadeIn);
@@ -77,7 +78,7 @@ namespace Soleil.Menu
             unselectedBack.Fade(duration, _easeFunc, isFadeIn);
         }
 
-        public void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        public void MoveTo(Vector target, int duration, EFunc _easeFunc)
         {
             itemNameImage.MoveTo(target + Spacing, duration, _easeFunc);
             itemNumImage.MoveTo(target + ItemNumPosDiff, duration, _easeFunc);

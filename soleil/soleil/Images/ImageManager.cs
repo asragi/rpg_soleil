@@ -11,50 +11,37 @@ namespace Soleil
     /// </summary>
     class ImageManager
     {
-        List<Image> images;
-        int index;
+        List<ImageBase> images;
         public ImageManager()
         {
-            index = 0;
-            images = new List<Image>();
+            images = new List<ImageBase>();
         }
 
         /// <summary>
         /// Imageを生成する。
         /// </summary>
-        /// <returns>作られたImageのIDを返す。</returns>
-        public int Create(TextureID id, Vector pos, DepthID depth, bool centerOrigin=true, bool isStatic = true)
+        /// <returns>作られたImageを返す。</returns>
+        public Image CreateImg(TextureID texid, Vector pos, DepthID depth, bool centerOrigin=true, bool isStatic = true, int id = 0)
         {
             // Imageを生成
-            Image img = new Image(index,Resources.GetTexture(id),pos,depth,centerOrigin,isStatic);
+            Image img = new Image(id, Resources.GetTexture(texid), pos, depth, centerOrigin, isStatic);
             // Listに登録
             images.Add(img);
-            // IDを返し、ID振り分け用indexを進める
-            return index++;
-        }
-
-        public void Destroy(int id)
-        {
-            Get(id).IsDead = true;
+            return img;
         }
 
         /// <summary>
-        /// 指定したIDのImageをTargetに向けてdurationフレームかけて移動させる。
+        /// 全てのImageをTargetに向けてdurationフレームかけて移動させる。
         /// </summary>
-        public void MoveTo(int id, Vector target, int duration, Func<double,double,double,double,double> easeFunc)
+        public void MoveToAll(Vector target, int duration, Func<double,double,double,double,double> easeFunc)
         {
-            Get(id).MoveTo(target, duration, easeFunc);
+            images.ForEach(img => img.MoveTo(target, duration, easeFunc));
         }
 
-        public void FadeIn(int id, int duration, Func<double,double,double,double,double> easeFunc)
+        public void FadeAll(int duration, Func<double,double,double,double,double> easeFunc, bool isFadein)
         {
-            Get(id).Fade(duration, easeFunc,true);
+            images.ForEach(img => img.Fade(duration, easeFunc, isFadein));
         }
-        public void FadeOut(int id, int duration, Func<double, double, double, double, double> easeFunc)
-        {
-            Get(id).Fade(duration, easeFunc,false);
-        }
-
 
         public void Update()
         {
@@ -66,7 +53,5 @@ namespace Soleil
         {
             images.ForEach(s => s.Draw(d));
         }
-
-        public Image Get(int id) => images.Find(s => s.Id == id);
     }
 }
