@@ -41,8 +41,8 @@ namespace Soleil.Menu
 
             foreach (var item in Panels)
             {
-                item.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
-                item.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+                item?.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
+                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             }
         }
 
@@ -54,8 +54,8 @@ namespace Soleil.Menu
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             foreach (var item in Panels)
             {
-                item.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
-                item.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+                item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
+                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             }
             RefreshSelected();
         }
@@ -66,7 +66,7 @@ namespace Soleil.Menu
             backImage.Update();
             foreach (var item in Panels)
             {
-                item.Update();
+                item?.Update();
             }
         }
 
@@ -76,7 +76,7 @@ namespace Soleil.Menu
             backImage.Draw(d);
             foreach (var item in Panels)
             {
-                item.Draw(d);
+                item?.Draw(d);
             }
         }
 
