@@ -21,11 +21,11 @@ namespace Soleil.Map
             test2 = new TestObject2(om, bm);
             testJump = new TestMapJump(om, bm);
             mapConstructs = new MapConstruct[]{
-                new MapConstruct(TextureID.Somnia6,MapDepth.Ground,om),
-                new AdjustConstruct(TextureID.Somnia4,600,om),
-                new AdjustConstruct(TextureID.Somnia5,850,om),
-                new MapConstruct(TextureID.Somnia1,MapDepth.Top,om),
-                new MapConstruct(TextureID.Somnia2,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia2_6,MapDepth.Ground,om),
+                new AdjustConstruct(TextureID.Somnia2_4,600,om),
+                new AdjustConstruct(TextureID.Somnia2_5,850,om),
+                new MapConstruct(TextureID.Somnia2_1,MapDepth.Top,om),
+                new MapConstruct(TextureID.Somnia2_2,MapDepth.Top,om),
             };
             MapCameraManager.SetMapSize(1505, 1058);
             cameraPoints = new CameraPoint[] {

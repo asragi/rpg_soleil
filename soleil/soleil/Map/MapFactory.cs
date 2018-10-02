@@ -20,7 +20,7 @@ namespace Soleil.Map
                 case MapName.Somnia1:
                     return new Somnia1();
                 case MapName.Somnia2:
-                    return new TestMap();
+                    return new Somnia2();
                 default:
                     throw new ArgumentOutOfRangeException();
             }

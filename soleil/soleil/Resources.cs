@@ -63,12 +63,12 @@ namespace Soleil
         Somnia1_4,
         Somnia1_5,
 
-        Somnia1,
-        Somnia2,
-        Somnia3,
-        Somnia4,
-        Somnia5,
-        Somnia6,
+        Somnia2_1,
+        Somnia2_2,
+        Somnia2_3,
+        Somnia2_4,
+        Somnia2_5,
+        Somnia2_6,
 
         White, Size
     }
@@ -224,12 +224,12 @@ namespace Soleil
             SetPath(TextureID.Somnia1_4, "Map/Back/Somnia/1/somnia1_4");
             SetPath(TextureID.Somnia1_5, "Map/Back/Somnia/1/somnia1_5");
 
-            SetPath(TextureID.Somnia1, "Map/Back/Somnia/back2-1");
-            SetPath(TextureID.Somnia2, "Map/Back/Somnia/back2-2");
-            SetPath(TextureID.Somnia3, "Map/Back/Somnia/back2-3");
-            SetPath(TextureID.Somnia4, "Map/Back/Somnia/back2-4");
-            SetPath(TextureID.Somnia5, "Map/Back/Somnia/back2-5");
-            SetPath(TextureID.Somnia6, "Map/Back/Somnia/back2-6");
+            SetPath(TextureID.Somnia2_1, "Map/Back/Somnia/2/somnia2-1");
+            SetPath(TextureID.Somnia2_2, "Map/Back/Somnia/2/somnia2-2");
+            SetPath(TextureID.Somnia2_3, "Map/Back/Somnia/2/somnia2-3");
+            SetPath(TextureID.Somnia2_4, "Map/Back/Somnia/2/somnia2-4");
+            SetPath(TextureID.Somnia2_5, "Map/Back/Somnia/2/somnia2-5");
+            SetPath(TextureID.Somnia2_6, "Map/Back/Somnia/2/somnia2-6");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
