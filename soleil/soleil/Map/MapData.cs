@@ -22,6 +22,9 @@ namespace Soleil.Map
         {
             switch (mapName)
             {
+                case MapName.Flare1:
+                    flags = CSVIO.GetMapData("flare1", 8090, 2895);
+                    break;
                 case MapName.Somnia1:
                     flags = CSVIO.GetMapData("somnia1", 1881, 1323);
                     break;
