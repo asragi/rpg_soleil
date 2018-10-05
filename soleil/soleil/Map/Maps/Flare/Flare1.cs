@@ -15,9 +15,21 @@ namespace Soleil.Map
             int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2).Width;
             MapConstructs = new MapConstruct[]
             {
+                // Grounds
                 new MapConstruct(TextureID.Flare1_1_1, MapDepth.Ground,om),
                 new MapConstruct(new Vector(width1,0), TextureID.Flare1_1_2, MapDepth.Ground,om),
                 new MapConstruct(new Vector(width2,0), TextureID.Flare1_1_3, MapDepth.Ground,om),
+                // Objects
+                new MapConstruct(new Vector(3214, 2039), TextureID.Flare1_2,MapDepth.Top, om), // 右下の小さな壁
+                new AdjustConstruct(new Vector(2811, 1832), TextureID.Flare1_3, 2000, om),
+                new AdjustConstruct(new Vector(2598, 1615), TextureID.Flare1_4, 1950, om),
+                new AdjustConstruct(new Vector(2065, 1590), TextureID.Flare1_5, 1880, om),
+                new AdjustConstruct(new Vector(3559, 1503), TextureID.Flare1_6, 1850, om),
+                new AdjustConstruct(new Vector(4155, 1455), TextureID.Flare1_7, 1790, om),
+                new AdjustConstruct(new Vector(3239, 1366), TextureID.Flare1_8, 1620, om),
+                new MapConstruct(new Vector(2725, 1220), TextureID.Flare1_9, MapDepth.Top, om),
+                new AdjustConstruct(new Vector(1549, 1501), TextureID.Flare1_10, 1680, om),
+                new AdjustConstruct(new Vector(1296, 1344), TextureID.Flare1_11, 1480, om),
             };
             MapCameraManager.SetMapSize(8090, 2895);
 
