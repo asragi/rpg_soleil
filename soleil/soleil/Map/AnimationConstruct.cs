@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +7,19 @@ using System.Threading.Tasks;
 namespace Soleil.Map
 {
     /// <summary>
-    /// マップの固定オブジェクトのうち，animationするもの．
+    /// マップの固定オブジェクトのうち，animationするもの．Fadeで切り替わり，ループする．
     /// </summary>
     class FadeAnimationConstruct : MapConstruct
     {
         Image[] images;
-        int frame;
-        public FadeAnimationConstruct(Vector _pos, TextureID[] textureIDs, int interval, MapDepth depth, ObjectManager om)
+        int frame, interval;
+        int nowNum, nextNum;
+        public FadeAnimationConstruct(Vector _pos, TextureID[] textureIDs, int _interval, MapDepth depth, ObjectManager om)
             : base(_pos, TextureID.White, depth, om)
         {
+            interval = _interval;
+            nowNum = 0;
+            nextNum = 1;
             images = new Image[textureIDs.Length];
             for (int i = 0; i < textureIDs.Length; i++)
             {
@@ -26,17 +29,26 @@ namespace Soleil.Map
 
         public override void Update()
         {
+            if (images.Length < 2) return;
             frame++;
+            if (frame >= interval)
+            {
+                frame = 0;
+                nowNum = nextNum;
+                nextNum++;
+                nextNum %= images.Length;
+            }
+            images[nowNum].Alpha = 1;
+            images[nextNum].Alpha = (frame % interval) / (float)interval;
             base.Update();
         }
 
         public override void Draw(Drawing d)
         {
             // baseをDrawしない
-            for (int i = 0; i < images.Length; i++)
-            {
-                images[i].Draw(d);
-            }
+            images[nowNum].Draw(d);
+            if (images.Length < 2) return;
+            images[nextNum].Draw(d);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Soleil.Map
             MapConstructs = new MapConstruct[]
             {
                 // Grounds
-                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1 }, 180, MapDepth.Ground, om),
+                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1, TextureID.Flare1_1_2 }, 90, MapDepth.Ground, om),
                 new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2 }, 180, MapDepth.Ground, om),
                 new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3 }, 180, MapDepth.Ground, om),
                 // Objects
