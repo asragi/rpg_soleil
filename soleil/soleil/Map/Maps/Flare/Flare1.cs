@@ -11,14 +11,16 @@ namespace Soleil.Map
         public Flare1()
             : base(MapName.Flare1)
         {
+            // 3分割された背景の位置設定用変数
             int width1 = Resources.GetTexture(TextureID.Flare1_1_1).Width;
             int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2).Width;
+            // マップ上の物体の召喚
             MapConstructs = new MapConstruct[]
             {
                 // Grounds
-                new MapConstruct(TextureID.Flare1_1_1, MapDepth.Ground,om),
-                new MapConstruct(new Vector(width1,0), TextureID.Flare1_1_2, MapDepth.Ground,om),
-                new MapConstruct(new Vector(width2,0), TextureID.Flare1_1_3, MapDepth.Ground,om),
+                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1 }, 180, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2 }, 180, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3 }, 180, MapDepth.Ground, om),
                 // Objects
                 new MapConstruct(new Vector(3214, 2039), TextureID.Flare1_2,MapDepth.Top, om), // 右下の小さな壁
                 new AdjustConstruct(new Vector(2811, 1832), TextureID.Flare1_3, 2000, om),
@@ -31,6 +33,7 @@ namespace Soleil.Map
                 new AdjustConstruct(new Vector(1549, 1501), TextureID.Flare1_10, 1680, om),
                 new AdjustConstruct(new Vector(1296, 1344), TextureID.Flare1_11, 1480, om),
             };
+            // マップサイズの設定
             MapCameraManager.SetMapSize(8090, 2895);
 
             // CameraPointの設定

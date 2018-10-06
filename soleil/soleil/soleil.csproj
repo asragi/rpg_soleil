@@ -96,6 +96,7 @@
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
     <Compile Include="Item\ItemList.cs" />
+    <Compile Include="Map\AnimationConstruct.cs" />
     <Compile Include="Map\CameraPoint.cs" />
     <Compile Include="Map\AdjustConstruct.cs" />
     <Compile Include="Map\BoxManager.cs" />
