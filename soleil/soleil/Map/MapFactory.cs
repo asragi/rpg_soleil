@@ -17,6 +17,8 @@ namespace Soleil.Map
         {
             switch (mapName)
             {
+                case MapName.Flare1:
+                    return new Flare1();
                 case MapName.Somnia1:
                     return new Somnia1();
                 case MapName.Somnia2:

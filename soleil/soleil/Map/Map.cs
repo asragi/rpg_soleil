@@ -10,6 +10,8 @@ namespace Soleil.Map
 {
     enum MapName
     {
+        Flare1,
+        Flare2,
         Somnia1,
         Somnia2,
     }
