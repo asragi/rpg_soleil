@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,18 +26,22 @@ namespace Soleil.Menu
         }
 
         // 当該アイテムの所持数
-        int itemNum;
+        string itemNumText;
         FontImage itemNumImage;
+        private string desc;
+        public override string Desctiption => desc;
 
-        public ItemPanel(String itemName, int num, ItemMenu parent)
-            :base(itemName, parent)
+        public ItemPanel(ItemID id, ItemList itemData, ItemMenu parent)
+            :base(ItemDataBase.Get(id).Name, parent)
         {
+            // Desctiption
+            desc = ItemDataBase.Get(id).Description;
             // itemNum
-            itemNum = num;
+            itemNumText = id != ItemID.Empty ? itemData.GetItemNum(id).ToString() : "";
             itemNumImage = new FontImage(ItemFont, LocalPos+parent.Pos + ItemNumPosDiff, DepthID.Message, true, 0);
             itemNumImage.Color = ColorPalette.DarkBlue;
 
-            itemNumImage.Text = (itemNum >= 0) ? itemNum.ToString() : ""; // Itemnumがおかしな値なら描画しない
+            itemNumImage.Text = itemNumText;
 
             LocalPos = Vector.Zero;
         }

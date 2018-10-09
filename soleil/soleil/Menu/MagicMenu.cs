@@ -8,8 +8,8 @@ namespace Soleil.Menu
 {
     class MagicMenu : BasicMenu
     {
-        public MagicMenu(MenuComponent parent)
-            : base(parent)
+        public MagicMenu(MenuComponent parent, MenuDescription desc)
+            : base(parent, desc)
         {
             // 実際はキャラクターのデータから生成する
             Panels = new MagicMenuPanel[]{

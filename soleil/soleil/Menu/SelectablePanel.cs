@@ -18,6 +18,8 @@ namespace Soleil.Menu
         protected readonly Vector Spacing = new Vector(8, 4);
 
         protected readonly FontID ItemFont = FontID.Test;
+
+        public abstract string Desctiption { get; }
         /// <summary>
         /// 親要素に対する相対的な座標．
         /// </summary>
