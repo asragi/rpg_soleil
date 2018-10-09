@@ -79,7 +79,7 @@ namespace Soleil.Menu
                 }
                 else
                 {
-                    initIndex = allItemPanels.Count - RowSize;
+                    initIndex = Math.Max(0, allItemPanels.Count - RowSize);
                     Index = Math.Min(allItemPanels.Count, Panels.Length) - 1;
                 }
                 SetPanels();
