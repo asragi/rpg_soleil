@@ -24,12 +24,14 @@ namespace Soleil.Menu
         protected int Index;
         protected SelectablePanel[] Panels;
         protected int IndexSize;
+        protected MenuDescription MenuDescription;
 
-        public BasicMenu(MenuComponent parent)
+        public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
             Index = 0;
+            MenuDescription = desc;
         }
 
         protected override void OnDisable()
@@ -86,6 +88,7 @@ namespace Soleil.Menu
             {
                 Panels[i]?.SetSelectedAndFade(i == Index);
             }
+            MenuDescription.Text = Panels[Index].Desctiption;
         }
 
         // Input

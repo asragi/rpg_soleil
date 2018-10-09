@@ -21,7 +21,7 @@ namespace Soleil.Menu
                 costImage.Pos = _LocalPos + Spacing + BasicMenu.Pos + CostPosDiff;
             }
         }
-
+        public override string Desctiption => ItemName;
         // 消費コスト表示
         int costNum;
         FontImage costImage;

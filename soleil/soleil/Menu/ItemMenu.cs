@@ -13,8 +13,8 @@ namespace Soleil.Menu
         // 所持しているすべてのアイテムのパネル
         List<ItemPanel> allItemPanels;
         int initIndex = 0;
-        public ItemMenu(MenuComponent parent)
-            :base(parent)
+        public ItemMenu(MenuComponent parent, MenuDescription desc)
+            :base(parent, desc)
         {
             // 実際は他のところでインスタンス生成して参照を受け取る．
             itemList = new ItemList();
@@ -42,7 +42,7 @@ namespace Soleil.Menu
             {
                 if (!itemList.HasItem((ItemID)i)) continue;
                 var data = ItemDataBase.Get((ItemID)i);
-                items.Add(new ItemPanel(data.Name, itemList.GetItemNum((ItemID)i), this));
+                items.Add(new ItemPanel((ItemID)i, itemList, this));
             }
             return items;
         }
@@ -53,7 +53,7 @@ namespace Soleil.Menu
             {
                 if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
                 {
-                    allItemPanels.Add(new ItemPanel("", -1, this));
+                    allItemPanels.Add(new ItemPanel(ItemID.Empty, itemList, this));
                 }
                 if (allItemPanels.Count <= i) return;
                 IndexSize = i + 1;
