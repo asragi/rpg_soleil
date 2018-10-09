@@ -70,9 +70,18 @@ namespace Soleil.Menu
 
         public override void OnInputUp()
         {
-            if (Index == 0 && initIndex > 0)
+            if (Index == 0)
             {
-                initIndex--;
+                if(initIndex > 0)
+                {
+                    initIndex--;
+                    Index = 0;
+                }
+                else
+                {
+                    initIndex = Math.Max(0, allItemPanels.Count - RowSize);
+                    Index = Math.Min(allItemPanels.Count, Panels.Length) - 1;
+                }
                 SetPanels();
                 RefreshSelected();
                 return;
@@ -83,9 +92,18 @@ namespace Soleil.Menu
 
         public override void OnInputDown()
         {
-            if (Index == RowSize-1 && initIndex < allItemPanels.Count - RowSize)
+            if (Index == RowSize-1)
             {
-                initIndex++;
+                if(initIndex < allItemPanels.Count - RowSize)
+                {
+                    initIndex++;
+                    Index = Math.Min(allItemPanels.Count, Panels.Length) - 1;
+                }
+                else
+                {
+                    initIndex = 0;
+                    Index = 0;
+                }
                 SetPanels();
                 RefreshSelected();
                 return;
