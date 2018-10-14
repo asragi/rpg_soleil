@@ -82,17 +82,25 @@ namespace Soleil
                 using (var fs = new FileStream(fileName, FileMode.Open))
                 using(var sr = new StreamReader(fs))
                 {
+                    int index = 0;
                     var count = 0;
                     while (!sr.EndOfStream)
                     {
                         var tmp = sr.ReadLine();
-                        var tmpData = tmp.ToCharArray();
-                        for (int i = 0; i < width; i++)
+                        if (String.IsNullOrWhiteSpace(tmp))
+                        {
+                            count++;
+                            index = 0;
+                            continue;
+                        }
+                        var tmpData = tmp.Split(',');
+                        int length = int.Parse(tmpData[1]);
+                        for (int i = 0; i < length; i++)
                         {
                             // 0が通行可能らしい
-                            result[i, count] = (tmpData[i] == '1');
+                            result[i + index, count] = (tmpData[0] == "1");
                         }
-                        count++;
+                        index += length;
                     }
 
                 }
