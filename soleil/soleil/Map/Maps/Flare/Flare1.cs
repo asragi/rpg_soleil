@@ -14,13 +14,15 @@ namespace Soleil.Map
             // 3分割された背景の位置設定用変数
             int width1 = Resources.GetTexture(TextureID.Flare1_1_1_1).Width;
             int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2_1).Width;
+            // 波の速さ
+            int waveSpeed = 180;
             // マップ上の物体の召喚
             MapConstructs = new MapConstruct[]
             {
                 // Grounds
-                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1_1}, 90, MapDepth.Ground, om),
-                new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2_1 }, 180, MapDepth.Ground, om),
-                new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3_1 }, 180, MapDepth.Ground, om),
+                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1_1, TextureID.Flare1_1_1_2}, waveSpeed, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2_1, TextureID.Flare1_1_2_2 }, waveSpeed, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3_1, TextureID.Flare1_1_3_2 }, waveSpeed, MapDepth.Ground, om),
                 // Objects
                 new MapConstruct(new Vector(3214, 2039), TextureID.Flare1_2,MapDepth.Top, om), // 右下の小さな壁
                 new AdjustConstruct(new Vector(2811, 1832), TextureID.Flare1_3, 2000, om),
