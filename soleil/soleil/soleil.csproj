@@ -122,6 +122,7 @@
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
+    <Compile Include="Map\Maps\Somnia\Somnia4.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump2.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
     <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />
