@@ -12,6 +12,7 @@ namespace Soleil
         static Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>> attackTable;
         static Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
 
+        static Func<CharacterStatus, CharacterStatus, float, float> physicalAttack, magicalAttack;
 
         /// <summary>
         /// 補正
@@ -28,9 +29,12 @@ namespace Soleil
         }
         static AttackInfo()
         {
+            physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF * 2) / 400 * Revision(); };
+            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500))*((400 - (b.VIT + b.MAG * 2)/ 3 - b.MDEF * 2) / 400) * Revision(); };
+
             attackTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>>();
-            attackTable[ActionName.NormalAttack] = (a, b) => { return Max(a.STR * 4.0f - b.VIT * 2.0f, 5.0f) * Revision(); };
-            attackTable[ActionName.ExampleMagic] = (a, b) => { return Max(a.MAG * 4.0f - (b.VIT + b.MAG), 0.0f) * Revision(); };
+            attackTable[ActionName.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10); };
+            attackTable[ActionName.ExampleMagic] = (a, b) => { return magicalAttack(a, b, 10); };
 
 
             buffTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>>();

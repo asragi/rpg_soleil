@@ -34,6 +34,17 @@ namespace Soleil
         ForAll,
     }
 
+    enum AttackAttribution
+    {
+        None,
+        Beat,
+        Cut,
+        Thrust,
+        Fever,
+        Ice,
+        Electro,
+    }
+
     abstract class Action
     {
         public TargetCoverage target;
@@ -47,10 +58,15 @@ namespace Soleil
 
     abstract class Attack : Action
     {
-        protected AttackFunc attack;
-        public Attack(AttackFunc attack_, TargetCoverage target_) : base(target_)
+        protected AttackFunc AFunc;
+        public AttackAttribution Attr;
+        public MagicFieldName? MField;
+        public Attack(AttackFunc attack_, TargetCoverage target_,  AttackAttribution attr, MagicFieldName? mField) 
+            : base(target_)
         {
-            attack = attack_;
+            AFunc = attack_;
+            Attr = attr;
+            MField = mField;
         }
         
     }
@@ -58,7 +74,9 @@ namespace Soleil
     class AttackForOne : Attack
     {
         int offenceIndex, defenseIndex;
-        public AttackForOne(AttackFunc attack_) : base(attack_, TargetCoverage.OneEnemy)
+        public AttackForOne(AttackFunc attack_,
+            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null) 
+            : base(attack_, TargetCoverage.OneEnemy, attr, mField)
         {
 
         }
@@ -75,7 +93,7 @@ namespace Soleil
         {
             List<Occurence> ocr = new List<Occurence>();
 
-            float dmg = attack(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
+            float dmg = AFunc(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
             int damage = (int)dmg;
 
             if(bf.GetCharacter(defenseIndex).Status.Dead)
