@@ -95,6 +95,7 @@ namespace Soleil
         Somnia4_2,
         Somnia4_3,
         Somnia4_4,
+        Somnia4_5,
 
         White, Size
     }
@@ -269,6 +270,7 @@ namespace Soleil
             SetPath(TextureID.Somnia4_2, "Map/Back/Somnia/4/somnia4-2");
             SetPath(TextureID.Somnia4_3, "Map/Back/Somnia/4/somnia4-3");
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
+            SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
