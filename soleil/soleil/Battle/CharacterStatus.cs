@@ -64,7 +64,7 @@ namespace Soleil
     }
     public class CharacterStatus
     {
-        public AbilityScore abilityScore;
+        public AbilityScore AScore;
         public BuffRate Rates;
 
         int hp, mp;
@@ -85,7 +85,7 @@ namespace Soleil
         {
             get
             {
-                return Fraction(abilityScore.STR * Rates.STRrate);
+                return Fraction(AScore.STR * Rates.STRrate);
             }
         }
         
@@ -93,7 +93,7 @@ namespace Soleil
         {
             get
             {
-                return Fraction(abilityScore.VIT * Rates.VITrate);
+                return Fraction(AScore.VIT * Rates.VITrate);
             }
         }
 
@@ -101,7 +101,7 @@ namespace Soleil
         {
             get
             {
-                return Fraction(abilityScore.MAG * Rates.MAGrate);
+                return Fraction(AScore.MAG * Rates.MAGrate);
             }
         }
         
@@ -109,8 +109,25 @@ namespace Soleil
         {
             get
             {
-                return Fraction(abilityScore.SPD * Rates.SPDrate);
+                return Fraction(AScore.SPD * Rates.SPDrate);
             }
+        }
+
+        public float PATK
+        {
+            get; private set;
+        }
+        public float MATK
+        {
+            get; private set;
+        }
+        public float PDEF
+        {
+            get; private set;
+        }
+        public float MDEF
+        {
+            get; private set;
         }
 
         public int WP = 10000;
@@ -136,15 +153,39 @@ namespace Soleil
         {
             HP = 0;
             MP = 0;
+
+            SetParams();
         }
 
         public CharacterStatus(AbilityScore aScore, int _WP)
         {
-            abilityScore = aScore;
-            HP = abilityScore.HPMAX;
-            MP = abilityScore.MPMAX;
+            AScore = aScore;
+            HP = AScore.HPMAX;
+            MP = AScore.MPMAX;
             WP = _WP;
             Rates = new BuffRate();
+
+            SetParams();
+        }
+
+        void SetParams()
+        {
+            //TODO: 所有武器でmATK等をセットする
+            PATK = 1f;
+            MATK = 1f;
+            PDEF = 1f;
+            MATK = 1f;
+        }
+
+        //TODO
+        public void GetEquipments()
+        {
+
+        }
+
+        public void GetSkills()
+        {
+
         }
     }
 
