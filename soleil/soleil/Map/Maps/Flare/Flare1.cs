@@ -12,15 +12,17 @@ namespace Soleil.Map
             : base(MapName.Flare1)
         {
             // 3分割された背景の位置設定用変数
-            int width1 = Resources.GetTexture(TextureID.Flare1_1_1).Width;
-            int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2).Width;
+            int width1 = Resources.GetTexture(TextureID.Flare1_1_1_1).Width;
+            int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2_1).Width;
+            // 波の速さ
+            int waveSpeed = 180;
             // マップ上の物体の召喚
             MapConstructs = new MapConstruct[]
             {
                 // Grounds
-                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1, TextureID.Flare1_1_2 }, 90, MapDepth.Ground, om),
-                new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2 }, 180, MapDepth.Ground, om),
-                new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3 }, 180, MapDepth.Ground, om),
+                new FadeAnimationConstruct(Vector.Zero, new TextureID[] {TextureID.Flare1_1_1_1, TextureID.Flare1_1_1_2}, waveSpeed, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width1, 0) , new TextureID[] {TextureID.Flare1_1_2_1, TextureID.Flare1_1_2_2 }, waveSpeed, MapDepth.Ground, om),
+                new FadeAnimationConstruct(new Vector(width2, 0) , new TextureID[] {TextureID.Flare1_1_3_1, TextureID.Flare1_1_3_2 }, waveSpeed, MapDepth.Ground, om),
                 // Objects
                 new MapConstruct(new Vector(3214, 2039), TextureID.Flare1_2,MapDepth.Top, om), // 右下の小さな壁
                 new AdjustConstruct(new Vector(2811, 1832), TextureID.Flare1_3, 2000, om),
@@ -32,6 +34,7 @@ namespace Soleil.Map
                 new MapConstruct(new Vector(2725, 1220), TextureID.Flare1_9, MapDepth.Top, om),
                 new AdjustConstruct(new Vector(1549, 1501), TextureID.Flare1_10, 1680, om),
                 new AdjustConstruct(new Vector(1296, 1344), TextureID.Flare1_11, 1480, om),
+                new MapConstruct(new Vector(4725, 471), TextureID.Flare1_12, MapDepth.Top, om),
             };
             // マップサイズの設定
             MapCameraManager.SetMapSize(8090, 2895);

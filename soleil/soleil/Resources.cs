@@ -59,9 +59,12 @@ namespace Soleil
         Rule18,
         Rule19,
 
-        Flare1_1_1,
-        Flare1_1_2,
-        Flare1_1_3,
+        Flare1_1_1_1,
+        Flare1_1_1_2,
+        Flare1_1_2_1,
+        Flare1_1_2_2,
+        Flare1_1_3_1,
+        Flare1_1_3_2,
         Flare1_2,
         Flare1_3,
         Flare1_4,
@@ -72,6 +75,7 @@ namespace Soleil
         Flare1_9,
         Flare1_10,
         Flare1_11,
+        Flare1_12,
 
 
         Somnia1_1,
@@ -235,10 +239,13 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
 
-            SetPath(TextureID.Flare1_1_1, "Map/Back/Flare/1/flare1-1-1");
-            SetPath(TextureID.Flare1_1_2, "Map/Back/Flare/1/flare1-1-2");
-            SetPath(TextureID.Flare1_1_3, "Map/Back/Flare/1/flare1-1-3");
-            for (int i = 0; i < 10; i++) SetPath(TextureID.Flare1_2 + i, "Map/Back/Flare/1/flare1-" + (i + 2));
+            SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
+            SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
+            SetPath(TextureID.Flare1_1_3_1, "Map/Back/Flare/1/flare1-1-3");
+            SetPath(TextureID.Flare1_1_1_2, "Map/Back/Flare/1/flare1-1-1-2");
+            SetPath(TextureID.Flare1_1_2_2, "Map/Back/Flare/1/flare1-1-2-2");
+            SetPath(TextureID.Flare1_1_3_2, "Map/Back/Flare/1/flare1-1-3-2");
+            for (int i = 0; i < 11; i++) SetPath(TextureID.Flare1_2 + i, "Map/Back/Flare/1/flare1-" + (i + 2));
 
             SetPath(TextureID.Somnia1_1, "Map/Back/Somnia/1/somnia1_1");
             SetPath(TextureID.Somnia1_2, "Map/Back/Somnia/1/somnia1_2");
