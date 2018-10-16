@@ -11,6 +11,9 @@ namespace Soleil.Map
         public Somnia4()
             : base(MapName.Somnia4)
         {
+            // 移動イベントたち
+            MapChangeObject mcoRight;
+            MapChangeObject mcoLeft;
             MapConstructs = new MapConstruct[]
             {
                 new MapConstruct(TextureID.Somnia4_1, MapDepth.Ground, om),
@@ -27,6 +30,10 @@ namespace Soleil.Map
                 new CameraPoint(480, 270), // center
             };
             MapCameraManager.SetCameraPoint(CameraPoints);
+
+            // Objects
+            mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm);
+            mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm);
         }
     }
 }

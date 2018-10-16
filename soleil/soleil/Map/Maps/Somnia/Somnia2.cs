@@ -10,6 +10,7 @@ namespace Soleil.Map
     class Somnia2 : MapBase
     {
         MapChangeObject mcoRight;
+        MapChangeObject mcoTop;
         public Somnia2()
             : base(MapName.Somnia2)
         {
@@ -31,6 +32,7 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
+            mcoTop = new MapChangeObject(new Vector(200, 10), new Vector(200, 20), MapName.Somnia4, new Vector(100, 500), Direction.U, om, bm);
             mcoRight = new MapChangeObject(new Vector(970, 553), new Vector(30, 260), MapName.Somnia1, new Vector(100, 500), Direction.R, om, bm);
         }
     }
