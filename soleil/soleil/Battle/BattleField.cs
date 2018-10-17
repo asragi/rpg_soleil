@@ -104,7 +104,7 @@ namespace Soleil
         BattleEvent beTop;
         int delayCount = 0;
         bool executed = true;
-        public void Move()
+        public void Update()
         {
             if (delayCount > 0)
             {
