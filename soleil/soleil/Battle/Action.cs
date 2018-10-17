@@ -37,11 +37,11 @@ namespace Soleil
 
     abstract class Action
     {
-        public AttackRange ARange
+        public Range.AttackRange ARange
         {
             get; protected set;
         }
-        public Action(AttackRange aRange)
+        public Action(Range.AttackRange aRange)
         {
             ARange = aRange;
         }
@@ -66,7 +66,7 @@ namespace Soleil
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
-        public Attack(AttackFunc attack_, AttackRange aRange, 
+        public Attack(AttackFunc attack_, Range.AttackRange aRange, 
             AttackAttribution attr=AttackAttribution.None, MagicFieldName? mField=null) 
             : base(aRange)
         {
@@ -75,7 +75,7 @@ namespace Soleil
             MField = mField;
         }
 
-        public Attack GenerateAttack(AttackRange aRange)
+        public Attack GenerateAttack(Range.AttackRange aRange)
         {
             var tmp = (Attack)MemberwiseClone();
             tmp.ARange = aRange;
@@ -92,7 +92,7 @@ namespace Soleil
         {
             switch (ARange)
             {
-                case OneEnemy aRange:
+                case Range.OneEnemy aRange:
                     DamageF = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
                     break;
             }
@@ -105,7 +105,7 @@ namespace Soleil
                 {
                     switch (act.ARange)
                     {
-                        case OneEnemy aRange:
+                        case Range.OneEnemy aRange:
                             //Todo: actから参照する
                             if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
@@ -157,9 +157,9 @@ namespace Soleil
     class Buff : Action
     {
         protected BuffFunc BFunc;
-        public Buff(BuffFunc bFunc, AttackRange aRange) : base(aRange) => BFunc = bFunc;
+        public Buff(BuffFunc bFunc, Range.AttackRange aRange) : base(aRange) => BFunc = bFunc;
 
-        public Buff GenerateAttack(AttackRange aRange)
+        public Buff GenerateAttack(Range.AttackRange aRange)
         {
             var tmp = (Buff)MemberwiseClone();
             tmp.ARange = aRange;
@@ -171,10 +171,10 @@ namespace Soleil
         {
             switch(ARange)
             {
-                case OneEnemy aRange:
+                case Range.OneEnemy aRange:
                     BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
                     break;
-                case Me aRange:
+                case Range.Me aRange:
                     BRate = BFunc(bf.GetCharacter(aRange.Index).Status, bf.GetCharacter(aRange.Index).Status);
                     break;
             }
@@ -187,7 +187,7 @@ namespace Soleil
                 {
                     switch (act.ARange)
                     {
-                        case OneEnemy aRange:
+                        case Range.OneEnemy aRange:
                             if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
@@ -201,7 +201,7 @@ namespace Soleil
                                 ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
                             }
                             return ocrs;
-                        case Me me:
+                        case Range.Me me:
                             if (bf.GetCharacter(me.Index).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
