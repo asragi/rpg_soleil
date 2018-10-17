@@ -11,7 +11,7 @@ namespace Soleil
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia2));
+            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia4));
             mapIndicator = new MapIndicator();
         }
 

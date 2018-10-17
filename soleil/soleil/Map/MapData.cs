@@ -31,6 +31,9 @@ namespace Soleil.Map
                 case MapName.Somnia2:
                     flags = CSVIO.GetMapData("somnia2", 1054, 741);
                     break;
+                case MapName.Somnia4:
+                    flags = CSVIO.GetMapData("somnia4", 960, 540);
+                    break;
                 default:
                     break;
             }

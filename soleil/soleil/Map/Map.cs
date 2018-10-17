@@ -14,6 +14,7 @@ namespace Soleil.Map
         Flare2,
         Somnia1,
         Somnia2,
+        Somnia4,
     }
     abstract class MapBase
     {
