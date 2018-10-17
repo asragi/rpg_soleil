@@ -83,6 +83,7 @@
     <Compile Include="Function\Global.cs" />
     <Compile Include="Function\IEnumeratorEx.cs" />
     <Compile Include="Function\MathEx.cs" />
+    <Compile Include="Function\PlayerBaggage.cs" />
     <Compile Include="Function\Reference.cs" />
     <Compile Include="Function\Transition.cs" />
     <Compile Include="Function\TryParser.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
     <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />
     <Compile Include="Map\Maps\TestMaps\TestMap.cs" />
+    <Compile Include="Map\MoneyWallet.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />

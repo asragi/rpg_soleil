@@ -76,7 +76,8 @@ namespace Soleil
             base.Initialize();
 
             drawing = new Drawing(spriteBatch, new Drawing3D(GraphicsDevice));
-            
+
+            LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
             new TestScene(sm);
@@ -89,6 +90,22 @@ namespace Soleil
 
 
             drawing.DrawRate = DrawRate;
+
+            void LoadItemData() // Debug 本来はセーブデータのロードやニューゲーム時に行いたい．
+            {
+                var playerBaggage = PlayerBaggage.GetInstance();
+                var item = new Item.ItemList();
+
+                item.AddItem(Item.ItemID.Portion);
+                item.AddItem(Item.ItemID.Zarigani);
+                for (int i = (int)Item.ItemID.d0; i < (int)Item.ItemID.d7 + 1; i++)
+                {
+                    item.AddItem((Item.ItemID)i, i);
+                }
+
+                var wallet = new Map.MoneyWallet(50000);
+                playerBaggage.SetData(item, wallet);
+            }
         }
 
         /// <summary>
