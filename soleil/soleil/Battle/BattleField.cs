@@ -75,7 +75,7 @@ namespace Soleil
 
         //shallow copy
         public SortedSet<ConditionedEffect> GetCopiedCEffects()
-            => (SortedSet<ConditionedEffect>)CEffects.Select(p => p);
+            => new SortedSet<ConditionedEffect>(CEffects);
 
         public Character GetCharacter(int index) => charas[index];
 
@@ -92,6 +92,11 @@ namespace Soleil
             }
         }
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
+        public List<int> AliveIndexes()
+            => alive.Aggregate2(new List<int>(), (list, p, i) => {
+                if (p) list.Add(i);
+                return list;
+            });
 
         public void RemoveCharacter(int index)
         {

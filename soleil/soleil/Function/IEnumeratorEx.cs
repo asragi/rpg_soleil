@@ -39,4 +39,18 @@ public static class IEnumerableEx
     {
         foreach (var e in self) func(e);
     }
+
+    public static TAccumulate Aggregate2<TSource, TAccumulate>
+    (
+        this IEnumerable<TSource> self,
+        TAccumulate seed,
+        Func<TAccumulate, TSource, int, TAccumulate> func
+    )
+    {
+        return self.Select((p, i) => (p, i)).Aggregate(seed, (s, e) =>
+          {
+              var (p, i) = e;
+              return func(s, p, i);
+          });
+    }
 }
