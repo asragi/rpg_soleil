@@ -45,12 +45,14 @@
     <Compile Include="Battle\AbilityScore.cs" />
     <Compile Include="Battle\Action.cs" />
     <Compile Include="Battle\AttackInfo.cs" />
+    <Compile Include="Battle\AttackRange.cs" />
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
     <Compile Include="Battle\Character\TestEnemyCharacter.cs" />
     <Compile Include="Battle\Character\TestPlayableCharacter.cs" />
     <Compile Include="Battle\BattleQueue.cs" />
+    <Compile Include="Battle\ConditionedEffect.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\SelectWindow.cs" />

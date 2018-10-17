@@ -24,16 +24,6 @@ namespace Soleil
         Size,
     }
 
-    enum TargetCoverage
-    {
-        OneEnemy,
-        AllEnemy,
-        Me,
-        Ally,
-        AllAlly,
-        ForAll,
-    }
-
     enum AttackAttribution
     {
         None,
@@ -47,10 +37,13 @@ namespace Soleil
 
     abstract class Action
     {
-        public TargetCoverage target;
-        public Action(TargetCoverage target_)
+        public AttackRange ARange
         {
-            target = target_;
+            get; private set;
+        }
+        public Action(AttackRange aRange)
+        {
+            ARange = aRange;
         }
 
         public abstract List<Occurence> Act(BattleField battle);
@@ -61,8 +54,8 @@ namespace Soleil
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
-        public Attack(AttackFunc attack_, TargetCoverage target_,  AttackAttribution attr, MagicFieldName? mField) 
-            : base(target_)
+        public Attack(AttackFunc attack_, AttackRange aRange,  AttackAttribution attr, MagicFieldName? mField) 
+            : base(aRange)
         {
             AFunc = attack_;
             Attr = attr;
@@ -73,47 +66,51 @@ namespace Soleil
 
     class AttackForOne : Attack
     {
-        int offenceIndex, defenseIndex;
         public AttackForOne(AttackFunc attack_,
             AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null) 
-            : base(attack_, TargetCoverage.OneEnemy, attr, mField)
+            : base(attack_, new OneEnemy(), attr, mField)
         {
 
         }
 
-        public AttackForOne GenerateAttack(int offenceIndex, int defenseIndex)
+        public AttackForOne GenerateAttack(int sourceIndex, int targetIndex)
         {
             var tmp = (AttackForOne)MemberwiseClone();
-            tmp.offenceIndex = offenceIndex;
-            tmp.defenseIndex = defenseIndex;
-            return tmp;
+            if (tmp.ARange is OneEnemy oe)
+            {
+                oe.SourceIndex = sourceIndex;
+                oe.TargetIndex = targetIndex;
+                return tmp;
+            }
+            else throw new Exception("AttackForOne must have OneEnemy");
         }
 
         public override List<Occurence> Act(BattleField bf)
         {
             List<Occurence> ocr = new List<Occurence>();
+            OneEnemy aRange = (OneEnemy)ARange;
 
-            float dmg = AFunc(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
+            float dmg = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
             int damage = (int)dmg;
 
-            if(bf.GetCharacter(defenseIndex).Status.Dead)
+            if(bf.GetCharacter(aRange.TargetIndex).Status.Dead)
             {
-                ocr.Add(new Occurence(defenseIndex.ToString() + "は既に倒している"));
+                ocr.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
                 return ocr;
             }
             else
             {
-                string mes = offenceIndex.ToString() + "が";
-                mes += defenseIndex.ToString() + "に";
+                string mes = aRange.SourceIndex.ToString() + "が";
+                mes += aRange.TargetIndex.ToString() + "に";
                 mes += (damage).ToString() + " ダメージを与えた";
-                ocr.Add(new OccurenceDamageForCharacter(mes, defenseIndex, HPDmg: damage));
+                ocr.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: damage));
             }
 
-            bf.GetCharacter(defenseIndex).Damage(HP:damage);
-            if (bf.GetCharacter(defenseIndex).Status.Dead)
+            bf.GetCharacter(aRange.TargetIndex).Damage(HP:damage);
+            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
             {
-                bf.RemoveCharacter(defenseIndex);
-                ocr.Add(new Occurence(defenseIndex.ToString() + "はやられた"));
+                bf.RemoveCharacter(aRange.TargetIndex);
+                ocr.Add(new Occurence(aRange.TargetIndex.ToString() + "はやられた"));
             }
 
             return ocr;
@@ -124,46 +121,50 @@ namespace Soleil
     abstract class Buff : Action
     {
         protected BuffFunc BFunc;
-        public Buff(BuffFunc bFunc, TargetCoverage target_) : base(target_) => BFunc = bFunc;
+        public Buff(BuffFunc bFunc, AttackRange aRange) : base(aRange) => BFunc = bFunc;
     }
 
     class BuffForOne : Buff
     {
-        int offenceIndex, defenseIndex;
-        public BuffForOne(BuffFunc buff) : base(buff, TargetCoverage.OneEnemy) { }
+        public BuffForOne(BuffFunc buff) : base(buff, new OneEnemy()) { }
 
-        public BuffForOne GenerateAttack(int offenceIndex, int defenseIndex)
+        public BuffForOne GenerateAttack(int sourceIndex, int targetIndex)
         {
             var tmp = (BuffForOne)MemberwiseClone();
-            tmp.offenceIndex = offenceIndex;
-            tmp.defenseIndex = defenseIndex;
-            return tmp;
+            if (tmp.ARange is OneEnemy oe)
+            {
+                oe.SourceIndex = sourceIndex;
+                oe.TargetIndex = targetIndex;
+                return tmp;
+            }
+            else throw new Exception("BuffForOne must have OneEnemy");
         }
 
         public override List<Occurence> Act(BattleField bf)
         {
             List<Occurence> ocr = new List<Occurence>();
+            OneEnemy aRange = (OneEnemy)ARange;
 
-            var rate = BFunc(bf.GetCharacter(offenceIndex).Status, bf.GetCharacter(defenseIndex).Status);
+            var rate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
 
-            if (bf.GetCharacter(defenseIndex).Status.Dead)
+            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
             {
-                ocr.Add(new Occurence(defenseIndex.ToString() + "は既に倒している"));
+                ocr.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
                 return ocr;
             }
             else
             {
-                string mes = offenceIndex.ToString() + "が";
-                mes += defenseIndex.ToString() + "に";
+                string mes = aRange.SourceIndex.ToString() + "が";
+                mes += aRange.TargetIndex.ToString() + "に";
                 mes += "バフを与えた";
-                ocr.Add(new OccurenceBuffForCharacter(mes, defenseIndex));
+                ocr.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
             }
 
-            bf.GetCharacter(defenseIndex).Buff(rate);
-            if (bf.GetCharacter(defenseIndex).Status.Dead)
+            bf.GetCharacter(aRange.TargetIndex).Buff(rate);
+            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
             {
-                bf.RemoveCharacter(defenseIndex);
-                ocr.Add(new Occurence(defenseIndex.ToString() + "はやられた"));
+                bf.RemoveCharacter(aRange.TargetIndex);
+                ocr.Add(new Occurence(aRange.TargetIndex.ToString() + "はやられた"));
             }
 
             return ocr;
@@ -171,30 +172,34 @@ namespace Soleil
     }
     class BuffMe : Buff
     {
-        int index;
-        public BuffMe(BuffFunc buff) : base(buff, TargetCoverage.Me) { }
+        public BuffMe(BuffFunc buff) : base(buff, new Me()) { }
 
         public BuffMe GenerateAttack(int index)
         {
             var tmp = (BuffMe)MemberwiseClone();
-            tmp.index = index;
-            return tmp;
+            if (tmp.ARange is Me me)
+            {
+                me.Index = index;
+                return tmp;
+            }
+            else throw new Exception("BuffMe must have Me");
         }
 
         public override List<Occurence> Act(BattleField bf)
         {
             List<Occurence> ocr = new List<Occurence>();
+            Me me = (Me)ARange;
 
-            var rate = BFunc(bf.GetCharacter(index).Status, bf.GetCharacter(index).Status);
+            var rate = BFunc(bf.GetCharacter(me.Index).Status, bf.GetCharacter(me.Index).Status);
 
-            if (bf.GetCharacter(index).Status.Dead)
+            if (bf.GetCharacter(me.Index).Status.Dead)
             {
-                ocr.Add(new Occurence(index.ToString() + "は既に死んでいる"));
+                ocr.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
                 return ocr;
             }
             else
             {
-                string mes = index.ToString() + "は";
+                string mes = me.Index.ToString() + "は";
                 var cmp = rate.Comp();
                 if (cmp == 1)
                     mes += "能力が上がった";
@@ -202,10 +207,10 @@ namespace Soleil
                     mes += "能力が下がった";
                 else
                     mes += "能力が変動した";
-                ocr.Add(new OccurenceBuffForCharacter(mes, index));
+                ocr.Add(new OccurenceBuffForCharacter(mes, me.Index));
             }
 
-            bf.GetCharacter(index).Buff(rate);
+            bf.GetCharacter(me.Index).Buff(rate);
 
             return ocr;
         }
