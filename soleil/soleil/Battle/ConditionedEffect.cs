@@ -21,6 +21,7 @@ namespace Soleil
 
         public int CompareTo(object obj)
         {
+            if (obj is ConditionedEffect ce) return CompareTo(ce);
             throw new NotImplementedException();
         }
         

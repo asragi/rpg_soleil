@@ -39,7 +39,7 @@ namespace Soleil
     {
         public AttackRange ARange
         {
-            get; private set;
+            get; protected set;
         }
         public Action(AttackRange aRange)
         {
@@ -47,6 +47,8 @@ namespace Soleil
         }
 
         public abstract List<Occurence> Act(BattleField battle);
+
+
         public List<Occurence> AggregateConditionEffects(BattleField bf, IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)
         {
             var ceffects = bf.GetCopiedCEffects();
@@ -59,40 +61,25 @@ namespace Soleil
         }
     }
 
-    abstract class Attack : Action
+    class Attack : Action
     {
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
-        public Attack(AttackFunc attack_, AttackRange aRange,  AttackAttribution attr, MagicFieldName? mField) 
+        public Attack(AttackFunc attack_, AttackRange aRange, 
+            AttackAttribution attr=AttackAttribution.None, MagicFieldName? mField=null) 
             : base(aRange)
         {
             AFunc = attack_;
             Attr = attr;
             MField = mField;
         }
-        
-    }
 
-    class AttackForOne : Attack
-    {
-        public AttackForOne(AttackFunc attack_,
-            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null) 
-            : base(attack_, new OneEnemy(), attr, mField)
+        public Attack GenerateAttack(AttackRange aRange)
         {
-
-        }
-
-        public AttackForOne GenerateAttack(int sourceIndex, int targetIndex)
-        {
-            var tmp = (AttackForOne)MemberwiseClone();
-            if (tmp.ARange is OneEnemy oe)
-            {
-                oe.SourceIndex = sourceIndex;
-                oe.TargetIndex = targetIndex;
-                return tmp;
-            }
-            else throw new Exception("AttackForOne must have OneEnemy");
+            var tmp = (Attack)MemberwiseClone();
+            tmp.ARange = aRange;
+            return tmp;
         }
 
         public float DamageF;
@@ -103,8 +90,12 @@ namespace Soleil
         }
         public override List<Occurence> Act(BattleField bf)
         {
-            OneEnemy aRange = (OneEnemy)ARange;
-            DamageF = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
+            switch (ARange)
+            {
+                case OneEnemy aRange:
+                    DamageF = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
+                    break;
+            }
             HasDamage = true;
 
             var ceffects = new List<ConditionedEffect>();
@@ -112,43 +103,50 @@ namespace Soleil
                 (bfi, act) => true,
                 (bfi, act, ocrs) =>
                 {
-                    //Todo: actから参照する
-                    if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
+                    switch (act.ARange)
                     {
-                        ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
-                        return ocrs;
-                    }
-                    else if(!HasDamage)
-                    {
-                        //効果はないor消されたパターン
-                        string mes = aRange.SourceIndex.ToString() + "が";
-                        mes += aRange.TargetIndex.ToString() + "に";
-                        mes += 0.ToString() + " ダメージを与えた";
-                        ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
-                    }
-                    else
-                    {
-                        bf.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
+                        case OneEnemy aRange:
+                            //Todo: actから参照する
+                            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            {
+                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                                return ocrs;
+                            }
+                            else if (!HasDamage)
+                            {
+                                //効果はないor消されたパターン
+                                string mes = aRange.SourceIndex.ToString() + "が";
+                                mes += aRange.TargetIndex.ToString() + "に";
+                                mes += 0.ToString() + " ダメージを与えた";
+                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
+                            }
+                            else
+                            {
+                                bf.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
 
-                        string mes = aRange.SourceIndex.ToString() + "が";
-                        mes += aRange.TargetIndex.ToString() + "に";
-                        mes += (Damage).ToString() + " ダメージを与えた";
-                        ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
+                                string mes = aRange.SourceIndex.ToString() + "が";
+                                mes += aRange.TargetIndex.ToString() + "に";
+                                mes += (Damage).ToString() + " ダメージを与えた";
+                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
+                            }
+                            return ocrs;
+                        default:
+                            throw new Exception("not implemented");
                     }
-                    return ocrs;
                 },
                 10000));
 
             //もっと根幹に組み込むべき条件な気がする
-            ceffects.Add(new ConditionedEffect(
-                (bfi, act) => bfi.GetCharacter(aRange.TargetIndex).Status.Dead,
+            var alives = bf.AliveIndexes();
+            alives.ForEach(p => ceffects.Add(new ConditionedEffect(
+                (bfi, act) => bfi.GetCharacter(p).Status.Dead,
                 (bfi, act, ocrs) =>
                 {
-                    bf.RemoveCharacter(aRange.TargetIndex);
-                    ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "はやられた"));
+                    bf.RemoveCharacter(p);
+                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
                     return ocrs;
                 },
-                10001));
+                10001)));
 
             var ocr = AggregateConditionEffects(bf, ceffects);
             return ocr;
@@ -156,105 +154,75 @@ namespace Soleil
     }
 
     
-    abstract class Buff : Action
+    class Buff : Action
     {
         protected BuffFunc BFunc;
         public Buff(BuffFunc bFunc, AttackRange aRange) : base(aRange) => BFunc = bFunc;
-    }
 
-    class BuffForOne : Buff
-    {
-        public BuffForOne(BuffFunc buff) : base(buff, new OneEnemy()) { }
-
-        public BuffForOne GenerateAttack(int sourceIndex, int targetIndex)
+        public Buff GenerateAttack(AttackRange aRange)
         {
-            var tmp = (BuffForOne)MemberwiseClone();
-            if (tmp.ARange is OneEnemy oe)
-            {
-                oe.SourceIndex = sourceIndex;
-                oe.TargetIndex = targetIndex;
-                return tmp;
-            }
-            else throw new Exception("BuffForOne must have OneEnemy");
+            var tmp = (Buff)MemberwiseClone();
+            tmp.ARange = aRange;
+            return tmp;
         }
 
         public BuffRate BRate;
         public override List<Occurence> Act(BattleField bf)
         {
-            OneEnemy aRange = (OneEnemy)ARange;
-            BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
-
-            
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
-                (bfi, act) => true,
-                (bfi, act, ocrs) =>
-                {
-                    if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
-                    {
-                        ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
-                    }
-                    else
-                    {
-                        bf.GetCharacter(aRange.TargetIndex).Buff(BRate);
-                        string mes = aRange.SourceIndex.ToString() + "が";
-                        mes += aRange.TargetIndex.ToString() + "に";
-                        mes += "バフを与えた";
-                        ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
-                    }
-                    return ocrs;
-                },
-                10000));
-            
-
-            var ocr = AggregateConditionEffects(bf, ceffects);
-            return ocr;
-        }
-    }
-    class BuffMe : Buff
-    {
-        public BuffMe(BuffFunc buff) : base(buff, new Me()) { }
-
-        public BuffMe GenerateAttack(int index)
-        {
-            var tmp = (BuffMe)MemberwiseClone();
-            if (tmp.ARange is Me me)
+            switch(ARange)
             {
-                me.Index = index;
-                return tmp;
+                case OneEnemy aRange:
+                    BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
+                    break;
+                case Me aRange:
+                    BRate = BFunc(bf.GetCharacter(aRange.Index).Status, bf.GetCharacter(aRange.Index).Status);
+                    break;
             }
-            else throw new Exception("BuffMe must have Me");
-        }
 
-        public BuffRate BRate;
-        public override List<Occurence> Act(BattleField bf)
-        {
-            Me me = (Me)ARange;
-            BRate = BFunc(bf.GetCharacter(me.Index).Status, bf.GetCharacter(me.Index).Status);
 
             var ceffects = new List<ConditionedEffect>();
             ceffects.Add(new ConditionedEffect(
                 (bfi, act) => true,
                 (bfi, act, ocrs) =>
                 {
-                    if (bf.GetCharacter(me.Index).Status.Dead)
+                    switch (act.ARange)
                     {
-                        ocrs.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
+                        case OneEnemy aRange:
+                            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            {
+                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                            }
+                            else
+                            {
+                                bf.GetCharacter(aRange.TargetIndex).Buff(BRate);
+                                string mes = aRange.SourceIndex.ToString() + "が";
+                                mes += aRange.TargetIndex.ToString() + "に";
+                                mes += "バフを与えた";
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
+                            }
+                            return ocrs;
+                        case Me me:
+                            if (bf.GetCharacter(me.Index).Status.Dead)
+                            {
+                                ocrs.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
+                            }
+                            else
+                            {
+                                bf.GetCharacter(me.Index).Buff(BRate);
+                                string mes = me.Index.ToString() + "は";
+                                var cmp = BRate.Comp();
+                                if (cmp == 1)
+                                    mes += "能力が上がった";
+                                else if (cmp == -1)
+                                    mes += "能力が下がった";
+                                else
+                                    mes += "能力が変動した";
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.Index));
+                            }
+                            return ocrs;
+                        default:
+                            throw new Exception("not implemented");
                     }
-                    else
-                    {
-                        bf.GetCharacter(me.Index).Buff(BRate);
-                        string mes = me.Index.ToString() + "は";
-                        var cmp = BRate.Comp();
-                        if (cmp == 1)
-                            mes += "能力が上がった";
-                        else if (cmp == -1)
-                            mes += "能力が下がった";
-                        else
-                            mes += "能力が変動した";
-                        ocrs.Add(new OccurenceBuffForCharacter(mes, me.Index));
-                    }
-                    return ocrs;
                 },
                 10000));
 

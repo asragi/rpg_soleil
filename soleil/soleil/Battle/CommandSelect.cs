@@ -28,7 +28,7 @@ namespace Soleil
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, target), turn);
+            EnqueueTurn(((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
@@ -71,24 +71,24 @@ namespace Soleil
                     switch (cmd.Value)
                     {
                         case Command.Magic:
-                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
                             EnqueueTurn(act, turn);
                             retExec();
                             return true;
                         case Command.Skill:
-                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
                             EnqueueTurn(act, turn);
                             retExec();
                             return true;
                         case Command.Guard:
-                            act = ((BuffMe)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(CharaIndex);
+                            act = ((Buff)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(new Me(CharaIndex));
                             EnqueueTurn(act, turn);
-                            act = ((BuffMe)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(CharaIndex);
+                            act = ((Buff)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(new Me(CharaIndex));
                             BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.WP + 100, turn.SPD, turn.CharaIndex, act));
                             retExec();
                             return true;
                         case Command.Escape:
-                            act = ((AttackForOne)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(CharaIndex, bf.OppositeIndexes(CharaIndex).First());
+                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
                             EnqueueTurn(act, turn);
                             retExec();
                             return true;
