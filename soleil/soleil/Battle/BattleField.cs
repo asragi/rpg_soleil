@@ -29,6 +29,7 @@ namespace Soleil
         List<Turn> lastTurn;
         List<BattleUI> UIList;
 
+        public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
             charas = new List<Character>
@@ -66,10 +67,15 @@ namespace Soleil
             battleQue = new Queue<BattleEvent>();
 
             UIList = new List<BattleUI>();
+            CEffects = new SortedSet<ConditionedEffect>();
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
         public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
+
+        //shallow copy
+        public SortedSet<ConditionedEffect> GetCopiedCEffects()
+            => (SortedSet<ConditionedEffect>)CEffects.Select(p => p);
 
         public Character GetCharacter(int index) => charas[index];
 
