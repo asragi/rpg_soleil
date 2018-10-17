@@ -14,13 +14,17 @@ namespace Soleil
     /// </summary>
     class PlayerBaggage
     {
+        private static PlayerBaggage playerBaggage = new PlayerBaggage();
+        public static PlayerBaggage GetInstance() => playerBaggage;
         public ItemList Items;
         public MoneyWallet MoneyWallet;
 
-        public PlayerBaggage()
+        private PlayerBaggage(){ }
+
+        public void SetData(ItemList itemList, MoneyWallet moneyWallet)
         {
-            Items = new ItemList();
-            MoneyWallet = new MoneyWallet();
+            Items = itemList;
+            MoneyWallet = moneyWallet;
         }
     }
 }

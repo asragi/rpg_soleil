@@ -14,10 +14,9 @@ namespace Soleil.Map
         private int val;
         public int Val { get { return val; } private set { val = value; } }
 
-        public MoneyWallet()
+        public MoneyWallet(int initVal)
         {
-            // Debug
-            val = 50000;
+            val = initVal;
         }
 
         /// <summary>
