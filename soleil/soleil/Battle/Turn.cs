@@ -70,25 +70,24 @@ namespace Soleil
     class Turn
     {
         public int Index = -1;
-        public Side Side;
         public int WaitPoint;
-        public Reference<int> SPD;
+        public CharacterStatus CStatus;
         public int CharaIndex;
         
         /// <summary>
         /// WaitPointが0以下になるのにかかる時間
         /// </summary>
-        public float TurnTime
+        public int TurnTime
         {
-            get { return WaitPoint / SPD.Val; }
+            get { return (WaitPoint - CStatus.WP) / CStatus.SPD; }
         }
 
-        public Turn(int _WaitPoint, Reference<int> _SPD, int _CharaIndex) => (WaitPoint, SPD, CharaIndex) = (_WaitPoint, _SPD, _CharaIndex);
+        public Turn(int _WaitPoint, CharacterStatus _CStatus, int _CharaIndex) => (WaitPoint, CStatus, CharaIndex) = (_WaitPoint, _CStatus, _CharaIndex);
     }
 
     class ActionTurn : Turn
     {
         public Action action;
-        public ActionTurn(int _WaitPoint, Reference<int> _SPD, int _CharaIndex, Action _action) : base(_WaitPoint, _SPD, _CharaIndex) => action = _action;
+        public ActionTurn(int _WaitPoint, CharacterStatus _CStatus, int _CharaIndex, Action _action) : base(_WaitPoint, _CStatus, _CharaIndex) => action = _action;
     }
 }

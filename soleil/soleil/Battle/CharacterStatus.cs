@@ -130,12 +130,14 @@ namespace Soleil
             get; private set;
         }
 
-        public int WP = 10000;
+        public int InitialWP = 10000;
+        public int WP = 0;
+        public int TurnWP = 10000;
 
         int turn = 0;
         public int NextWaitPoint()
         {
-            return WP + 10000 * (turn++);
+            return InitialWP + TurnWP * (turn++);
         }
 
         /// <summary>
@@ -162,7 +164,7 @@ namespace Soleil
             AScore = aScore;
             HP = AScore.HPMAX;
             MP = AScore.MPMAX;
-            WP = _WP;
+            InitialWP = _WP;
             Rates = new BuffRate();
 
             SetParams();

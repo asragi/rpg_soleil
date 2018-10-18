@@ -14,7 +14,7 @@ namespace Soleil
         public abstract bool GetAction(Turn turn);
         protected void EnqueueTurn(Action action, Turn turn)
         {
-            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + 100, turn.SPD, turn.CharaIndex, action));
+            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + 100, turn.CStatus, turn.CharaIndex, action));
         }
     }
 
@@ -84,7 +84,7 @@ namespace Soleil
                             act = ((Buff)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(new Range.Me(CharaIndex));
                             EnqueueTurn(act, turn);
                             act = ((Buff)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(new Range.Me(CharaIndex));
-                            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.WP + 100, turn.SPD, turn.CharaIndex, act));
+                            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP + 100, turn.CStatus, turn.CharaIndex, act));
                             retExec();
                             return true;
                         case Command.Escape:

@@ -124,6 +124,11 @@ namespace Soleil
 
             if (battleQue.Count == 0 && executed)
             {
+                while(turnQueue.Top().TurnTime>0)
+                {
+                    charas.ForEach(e => e.Status.WP += e.Status.SPD);
+                }
+
                 topTurn = turnQueue.Top();
                 turnQueue.Pop();
 
