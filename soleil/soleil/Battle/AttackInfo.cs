@@ -38,9 +38,17 @@ namespace Soleil
 
 
             buffTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>>();
-            buffTable[ActionName.Guard] = (a, b) => { return b.Rates.MultRate(VITrate: 2.0f, MAGrate: 2.0f); };
-            buffTable[ActionName.EndGuard] = (a, b) => { return b.Rates.MultRate(VITrate: 0.5f, MAGrate: 0.5f); };
-            buffTable[ActionName.ExampleDebuff] = (a, b) => { return b.Rates.MultRate(STRrate: 0.5f); };
+            buffTable[ActionName.Guard] = (a, b) => {
+                return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
+                    { { BuffRateName.VITRate, 2.0f }, { BuffRateName.MAGRate, 2.0f } });
+                };
+            buffTable[ActionName.EndGuard] = (a, b) => {
+                return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
+                    { { BuffRateName.VITRate, 0.5f }, { BuffRateName.MAGRate, 0.5f } });
+            };
+            buffTable[ActionName.ExampleDebuff] = (a, b) => {
+                return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
+            };
 
             actions = new List<Action>();
             for (int i = 0; i < (int)ActionName.Size; i++)

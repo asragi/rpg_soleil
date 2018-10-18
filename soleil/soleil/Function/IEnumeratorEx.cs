@@ -31,10 +31,10 @@ public static class IEnumerableEx
     /// <summary>
     /// ForEachをIEnumeratorに拡張
     /// </summary>
-    public static void ForEach2<TSource, TResult>
+    public static void ForEach2<T>
     (
-        this IEnumerable<TSource> self,
-        Func<TSource, TResult> func
+        this IEnumerable<T> self,
+        Action<T> func
     )
     {
         foreach (var e in self) func(e);
