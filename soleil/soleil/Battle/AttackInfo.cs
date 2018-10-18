@@ -45,12 +45,12 @@ namespace Soleil
             actions = new List<Action>();
             for (int i = 0; i < (int)ActionName.Size; i++)
                 actions.Add(null);
-            actions[(int)ActionName.NormalAttack] = new Attack(attackTable[ActionName.NormalAttack], OneEnemy.GetInstance());
-            actions[(int)ActionName.ExampleMagic] = new Attack(attackTable[ActionName.ExampleMagic], OneEnemy.GetInstance());
+            actions[(int)ActionName.NormalAttack] = new Attack(attackTable[ActionName.NormalAttack], Range.OneEnemy.GetInstance());
+            actions[(int)ActionName.ExampleMagic] = new Attack(attackTable[ActionName.ExampleMagic], Range.OneEnemy.GetInstance());
 
-            actions[(int)ActionName.Guard] = new Buff(buffTable[ActionName.Guard], Me.GetInstance());
-            actions[(int)ActionName.EndGuard] = new Buff(buffTable[ActionName.EndGuard], Me.GetInstance());
-            actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], OneEnemy.GetInstance());
+            actions[(int)ActionName.Guard] = new Buff(buffTable[ActionName.Guard], Range.Me.GetInstance());
+            actions[(int)ActionName.EndGuard] = new Buff(buffTable[ActionName.EndGuard], Range.Me.GetInstance());
+            actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], Range.OneEnemy.GetInstance());
         }
 
         public static Action GetAction(ActionName name) => actions[(int)name];
