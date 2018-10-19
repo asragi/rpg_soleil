@@ -43,6 +43,12 @@ namespace Soleil.Item
     {
         public int pAtk;
         public int mAtk;
+        
+        public AttackData(int p, int m)
+        {
+            pAtk = p;
+            mAtk = m;
+        }
     }
 
     /// <summary>
@@ -54,6 +60,14 @@ namespace Soleil.Item
         public int mDef;
         public AttrDef pAttr;
         public AttrDef mAttr;
+
+        public DefData(int p, int m, AttrDef? _pAttr, AttrDef? _mAttr)
+        {
+            pDef = p;
+            mDef = m;
+            pAttr = _pAttr ?? new AttrDef();
+            mAttr = _mAttr ?? new AttrDef();
+        }
     }
 
     /// <summary>
