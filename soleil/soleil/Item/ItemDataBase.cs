@@ -41,38 +41,37 @@ namespace Soleil.Item
 
     static class ItemDataBase
     {
-        static ItemData[] data;
+        static IItem[] data;
         static ItemDataBase()
         {
-            data = new ItemData[(int)ItemID.size];
+            data = new IItem[(int)ItemID.size];
             SetData();
         }
 
         static void SetData()
         {
-            Set("傷薬", ItemID.Portion, ItemType.Consumable, true, true, 30, "味方一人を少量回復．");
-            Set("活きのいいザリガニ", ItemID.Zarigani, ItemType.Consumable, true, true, 20, "食べる......？");
-            Set("石ころ", ItemID.Stone, ItemType.Unconsumable, 0, "そこら辺の石ころ．");
-            Set("デバッグソード", ItemID.TestSword, ItemType.Weapon, 50, "デバッグ用ソード");
+            Set("傷薬", ItemID.Portion, true, true, 30, "味方一人を少量回復．");
+            Set("活きのいいザリガニ", ItemID.Zarigani, , true, true, 20, "食べる......？");
+            Set("石ころ", ItemID.Stone, 0, "そこら辺の石ころ．");
 
             // Debug
             for (int i = (int)ItemID.d0; i < 1 + (int)ItemID.d7; i++)
             {
-                Set(((ItemID)i).ToString(), (ItemID)i, ItemType.Unconsumable, 50, "テスト" + i);
+                Set(((ItemID)i).ToString(), (ItemID)i, 50, "テスト" + i);
             }
         }
 
-        static void Set(String name, ItemID id, ItemType type, bool menu, bool battle, int effectVal, string desc)
+        static void Set(String name, ItemID id, bool menu, bool battle, int effectVal, string desc)
         {
-            data[(int)id] = new ItemData(id, type, menu, battle, effectVal, name, desc);
+            data[(int)id] = new NormalItem(id, menu, battle, effectVal, name, desc);
         }
         
         // 装備など自明に使用不可能なもの用のset
-        static void Set(String name, ItemID id, ItemType type, int effectVal, String desc)
+        static void Set(String name, ItemID id, int effectVal, String desc)
         {
-            data[(int)id] = new ItemData(id, type, false, false, effectVal, name, desc);
+            data[(int)id] = new NormalItem(id, false, false, effectVal, name, desc);
         }
 
-        public static ItemData Get(ItemID id) => data[(int)id];
+        public static IItem Get(ItemID id) => data[(int)id];
     }
 }
