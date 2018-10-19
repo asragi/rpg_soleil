@@ -25,6 +25,7 @@ namespace Soleil.Item
     interface IWearable
     {
         // 上昇・低下するキャラクターステータスのデータなど
+        AbilityScore AbilityScore { get; }
     }
 
     /// <summary>
@@ -33,6 +34,15 @@ namespace Soleil.Item
     interface IArmor : IWearable
     {
         DefData DefData { get; }
+    }
+
+    /// <summary>
+    /// 攻撃力に関するパラメータ．
+    /// </summary>
+    struct AttackData
+    {
+        public int pAtk;
+        public int mAtk;
     }
 
     /// <summary>
@@ -100,6 +110,18 @@ namespace Soleil.Item
         public bool OnBattle { get { return false; } }
         public string Name { get; }
         public string Description { get; }
+
+        public AttackData AttackData { get; }
+        public AbilityScore AbilityScore { get; }
+
+        public WeaponData(ItemID iD, AttackData attk, AbilityScore? score, string name, string description)
+        {
+            ID = iD;
+            Name = name;
+            Description = description;
+            AttackData = attk;
+            AbilityScore = score ?? new AbilityScore(0, 0, 0, 0, 0, 0);
+        }
     }
 
     struct ArmorData : IItem, IArmor
@@ -112,13 +134,15 @@ namespace Soleil.Item
         public string Description { get; }
 
         public DefData DefData { get; }
+        public AbilityScore AbilityScore { get; }
 
-        public ArmorData(ItemID iD, DefData def, string name, string description)
+        public ArmorData(ItemID iD, DefData def, AbilityScore? score, string name, string description)
         {
             ID = iD;
             Name = name;
             Description = description;
             DefData = def;
+            AbilityScore = score ?? new AbilityScore(0, 0, 0, 0, 0, 0);
         }
     }
 
@@ -132,13 +156,15 @@ namespace Soleil.Item
         public string Description { get; }
 
         public DefData DefData { get; }
+        public AbilityScore AbilityScore { get; }
 
-        public AccessaryData (ItemID iD, DefData def, string name, string description)
+        public AccessaryData (ItemID iD, DefData def, AbilityScore? score, string name, string description)
         {
             ID = iD;
             Name = name;
             Description = description;
             DefData = def;
+            AbilityScore = score ?? new AbilityScore(0, 0, 0, 0, 0, 0);
         }
     }
 }
