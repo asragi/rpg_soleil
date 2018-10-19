@@ -41,13 +41,13 @@ namespace Soleil.Item
     /// </summary>
     struct AttackData
     {
-        public int pAtk;
-        public int mAtk;
+        public int Physical;
+        public int Magical;
         
         public AttackData(int p, int m)
         {
-            pAtk = p;
-            mAtk = m;
+            Physical = p;
+            Magical = m;
         }
     }
 
@@ -56,17 +56,17 @@ namespace Soleil.Item
     /// </summary>
     struct DefData
     {
-        public int pDef;
-        public int mDef;
-        public AttrDef pAttr;
-        public AttrDef mAttr;
+        public int Physical;
+        public int Magical;
+        public AttrDef PhysicalAttr;
+        public AttrDef MagicalAttr;
 
         public DefData(int p, int m, AttrDef? _pAttr, AttrDef? _mAttr)
         {
-            pDef = p;
-            mDef = m;
-            pAttr = _pAttr ?? new AttrDef();
-            mAttr = _mAttr ?? new AttrDef();
+            Physical = p;
+            Magical = m;
+            PhysicalAttr = _pAttr ?? new AttrDef();
+            MagicalAttr = _mAttr ?? new AttrDef();
         }
     }
 
