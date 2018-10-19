@@ -7,8 +7,11 @@ using Soleil.Event.Shop;
 
 namespace Soleil.Event
 {
-    class ShopEvent
+    class ShopEvent : EventBase
     {
+        public override void Execute()
+        {
 
+        }
     }
 }
