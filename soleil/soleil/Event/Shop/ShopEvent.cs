@@ -26,5 +26,11 @@ namespace Soleil.Event
             shopSystem.Update();
             if (shopSystem.IsQuit) Next();
         }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            shopSystem.Draw(d);
+        }
     }
 }

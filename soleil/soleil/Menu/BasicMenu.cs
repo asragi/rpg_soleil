@@ -87,7 +87,6 @@ namespace Soleil.Menu
         {
             base.Draw(d);
             backImage.Draw(d);
-            if(this is Event.Shop.ShopItemList) Console.WriteLine("Draw");
             foreach (var item in Panels)
             {
                 item?.Draw(d);

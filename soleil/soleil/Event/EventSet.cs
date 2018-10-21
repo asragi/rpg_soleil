@@ -35,6 +35,7 @@ namespace Soleil.Event
             for (int i = 0; i < events.Count; i++)
             {
                 events[i].SetEventSet(this);
+                events[i].Reset();
             }
         }
 
@@ -68,6 +69,14 @@ namespace Soleil.Event
             {
                 myEventSequence.Next();
                 return;
+            }
+        }
+
+        public void Draw(Drawing d)
+        {
+            for (int i = 0; i < events.Count; i++)
+            {
+                events[i].Draw(d);
             }
         }
     }

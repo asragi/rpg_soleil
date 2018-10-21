@@ -9,7 +9,7 @@
         EventSet myEventSet;
         public EventBase()
         {
-
+            started = false;
         }
 
         public void SetEventSet(EventSet es)
@@ -36,12 +36,13 @@
         protected void Next()
         {
             myEventSet.Next();
-            Refresh();
         }
 
-        public void Refresh()
+        public void Reset()
         {
             started = false;
         }
+
+        public virtual void Draw(Drawing d) { }
     }
 }

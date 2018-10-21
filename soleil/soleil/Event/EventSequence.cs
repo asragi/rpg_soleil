@@ -16,6 +16,7 @@ namespace Soleil.Event
         public EventSequence()
         {
             index = 0;
+            eventSets = new List<EventSet>();
         }
 
         public void SetEventSet(params EventSet[] _eventSets)
@@ -92,5 +93,13 @@ namespace Soleil.Event
         }
 
         public int GetLength() => eventSets.Count;
+
+        public void Draw(Drawing d)
+        {
+            for (int i = 0; i < eventSets.Count; i++)
+            {
+                eventSets[i].Draw(d);
+            }
+        }
     }
 }
