@@ -18,6 +18,11 @@
         }
 
         /// <summary>
+        /// 最初のフレームで実行される関数
+        /// </summary>
+        public virtual void Start() { }
+
+        /// <summary>
         /// 実行時関数. EventManagerのUpdateにより毎フレーム呼び出される.処理が終わったらNextを呼び出すこと.
         /// </summary>
         public abstract void Execute();
