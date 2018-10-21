@@ -34,12 +34,24 @@ namespace Soleil.Menu
             MenuDescription = desc;
         }
 
-        protected override void OnDisable()
+        public virtual void Call()
         {
-            base.OnDisable();
+            // Transition Images
+            backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
+            backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+        }
+
+        public virtual void Quit()
+        {
             // Transition Images
             backImage.MoveTo(WindowStartPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Quit();
 
             foreach (var item in Panels)
             {
@@ -51,9 +63,8 @@ namespace Soleil.Menu
         protected override void OnEnable()
         {
             base.OnEnable();
-            // Transition Images
-            backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
-            backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+            Call();
+
             foreach (var item in Panels)
             {
                 item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
@@ -76,6 +87,7 @@ namespace Soleil.Menu
         {
             base.Draw(d);
             backImage.Draw(d);
+            if(this is Event.Shop.ShopItemList) Console.WriteLine("Draw");
             foreach (var item in Panels)
             {
                 item?.Draw(d);
@@ -107,6 +119,6 @@ namespace Soleil.Menu
             RefreshSelected();
         }
         public override void OnInputSubmit() { }
-        public override void OnInputCancel() { Quit(); }
+        public override void OnInputCancel() { ReturnParent(); }
     }
 }

@@ -108,6 +108,6 @@ namespace Soleil.Menu
             }
         }
 
-        public override void OnInputCancel() { Quit(); }
+        public override void OnInputCancel() { ReturnParent(); }
     }
 }

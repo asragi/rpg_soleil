@@ -20,6 +20,7 @@ namespace Soleil.Map.Maps.Somnia
             EventSequence.SetEventSet(
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
+                    new ShopEvent(),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )
             );

@@ -26,11 +26,25 @@ namespace Soleil.Event.Shop
         public void Call()
         {
             IsQuit = false;
+            shopItemList.Call();
         }
 
         void Quit()
         {
             IsQuit = true;
+            shopItemList.Quit();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            shopItemList.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            shopItemList.Draw(d);
         }
     }
 }

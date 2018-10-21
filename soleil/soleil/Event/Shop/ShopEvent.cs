@@ -23,6 +23,7 @@ namespace Soleil.Event
         public override void Execute()
         {
             base.Execute();
+            shopSystem.Update();
             if (shopSystem.IsQuit) Next();
         }
     }
