@@ -9,9 +9,21 @@ namespace Soleil.Event
 {
     class ShopEvent : EventBase
     {
+        ShopSystem shopSystem;
+        public ShopEvent()
+        {
+            shopSystem = new ShopSystem();
+        }
+
+        public override void Start()
+        {
+            base.Start();
+            shopSystem.Call();
+        }
         public override void Execute()
         {
-
+            base.Execute();
+            if (shopSystem.IsQuit) Next();
         }
     }
 }
