@@ -20,6 +20,7 @@ namespace Soleil.Event.Shop
         public ShopSystem()
         {
             menuDescription = new MenuDescription(DescriptionPos);
+            menuDescription.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, menuDescription);
         }
 
@@ -27,24 +28,29 @@ namespace Soleil.Event.Shop
         {
             IsQuit = false;
             shopItemList.Call();
+            menuDescription.Call();
         }
 
         void Quit()
         {
             IsQuit = true;
             shopItemList.Quit();
+            menuDescription.Quit();
         }
 
         public override void Update()
         {
             base.Update();
             shopItemList.Update();
+            menuDescription.Update();
+            if (KeyInput.GetKeyPush(Key.B)) Quit();
         }
 
         public override void Draw(Drawing d)
         {
             base.Draw(d);
             shopItemList.Draw(d);
+            menuDescription.Draw(d);
         }
     }
 }
