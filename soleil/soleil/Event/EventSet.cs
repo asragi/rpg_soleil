@@ -80,8 +80,5 @@ namespace Soleil.Event
                 return;
             }
         }
-
-
-
     }
 }
