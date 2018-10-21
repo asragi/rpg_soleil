@@ -43,8 +43,6 @@ namespace Soleil.Event
             switch (e)
             {
                 case MessageWindowEvent mwe:
-                    list.Add(new ChangeInputFocusEvent(InputFocus.Window));
-                    list.Add(new MessageUpdateEvent(mwe.Tag));
                     list.Add(new WindowCloseEvent(mwe.Tag));
                     break;
                 case SelectWindowEvent swe:

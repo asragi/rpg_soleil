@@ -36,6 +36,12 @@
         protected void Next()
         {
             myEventSet.Next();
+            Refresh();
+        }
+
+        public void Refresh()
+        {
+            started = false;
         }
     }
 }
