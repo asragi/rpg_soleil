@@ -12,7 +12,16 @@ namespace Soleil.Event.Shop
         public ShopItemList(MenuComponent parent, MenuDescription description)
             : base(parent, description)
         {
-            Panels = new SelectablePanel[0];
+            Panels = new ShopPanel[]
+            {
+                new ShopPanel(Item.ItemID.d0, 2000, this),
+                new ShopPanel(Item.ItemID.Stone, 200, this),
+            };
+        }
+
+        public override void Call()
+        {
+            base.Call();
         }
 
         public override void Update()
