@@ -41,6 +41,7 @@ namespace Soleil.Event
             {
                 if (Wm.GetIsMessageWindowAnimFinished(Tag))
                 {
+                    Wm.Destroy(Tag);
                     Next();
                     return;
                 }
