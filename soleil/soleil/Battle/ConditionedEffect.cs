@@ -13,10 +13,14 @@ namespace Soleil
     using AffectFunc = Func<BattleField, Action, List<Occurence>, List<Occurence>>;
     class ConditionedEffect : IComparable
     {
+        static int counter = 0;
+        int count;
         int priority;
         public int CompareTo(ConditionedEffect ce)
         {
-            return priority.CompareTo(ce.priority) * -1;
+            var p = priority.CompareTo(ce.priority) * -1;
+            if (p != 0) return p;
+            return count.CompareTo(ce.count);
         }
 
         public int CompareTo(object obj)
@@ -27,14 +31,45 @@ namespace Soleil
         
         public Condition Cond;
         public AffectFunc Affect;
+        protected Func<BattleField, bool> disable;
         public ConditionedEffect(Condition cond, AffectFunc affect, int priority_)
         {
+            count = counter;
+            counter++;
+
             Cond = cond;
             Affect = affect;
             priority = priority_;
+            disable = (bf) => false;
+        }
+
+        public ConditionedEffect(Condition cond, AffectFunc affect, int priority_, Func<BattleField, bool> isAvailable)
+        {
+            count = counter;
+            counter++;
+
+            Cond = cond;
+            Affect = affect;
+            priority = priority_;
+            disable = isAvailable;
         }
 
         public List<Occurence> Act(BattleField bf, Action action, List<Occurence> ocrs)
             => Cond(bf, action) ? Affect(bf, action, ocrs) : ocrs;
+
+        public bool Expired(BattleField bf) => disable(bf);
+    }
+
+    class ConditionedEffectWithExpireTime : ConditionedEffect
+    {
+        int expireTime;
+        public ConditionedEffectWithExpireTime(Condition cond, AffectFunc affect, int priority_, int charaIndex, int expireTime_)
+            : base(cond, affect, priority_)
+        {
+            expireTime = expireTime_;
+            disable = (bf) => {
+                return bf.GetCharacter(charaIndex).Status.WP > expireTime;
+            };
+        }
     }
 }

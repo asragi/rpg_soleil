@@ -9,6 +9,7 @@ namespace Soleil.Range
     //typesame enum
     abstract class AttackRange
     {
+        public abstract bool ContainRange(int index, BattleField bf);
     }
 
     class OneEnemy : AttackRange
@@ -20,6 +21,8 @@ namespace Soleil.Range
 
         static OneEnemy singleton = new OneEnemy(-1, -1);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
     }
 
     class AllEnemy : AttackRange
@@ -29,6 +32,8 @@ namespace Soleil.Range
 
         static AllEnemy singleton = new AllEnemy(Side.Size);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
     }
 
     class Me : AttackRange
@@ -38,6 +43,8 @@ namespace Soleil.Range
 
         static Me singleton = new Me(-1);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => index == Index;
     }
 
     class Ally : AttackRange
@@ -49,6 +56,8 @@ namespace Soleil.Range
 
         static Ally singleton = new Ally(-1, -1);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
     }
 
     class AllAlly : AttackRange
@@ -58,6 +67,8 @@ namespace Soleil.Range
 
         static AllAlly singleton = new AllAlly(Side.Size);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
     }
 
     class ForAll : AttackRange
@@ -67,5 +78,7 @@ namespace Soleil.Range
 
         static ForAll singleton = new ForAll(-1);
         public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => true;
     }
 }

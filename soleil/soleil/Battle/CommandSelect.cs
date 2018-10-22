@@ -66,30 +66,38 @@ namespace Soleil
                     var cmd = csw.Select();
                     if (!cmd.HasValue) return false;
 
-                    Action act = null;
+                    Action action = null;
                     //debug なにを選んでも攻撃
                     switch (cmd.Value)
                     {
                         case Command.Magic:
-                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(act, turn);
+                            action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                            EnqueueTurn(action, turn);
                             retExec();
                             return true;
                         case Command.Skill:
-                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(act, turn);
+                            action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                            EnqueueTurn(action, turn);
                             retExec();
                             return true;
                         case Command.Guard:
+                            /*
                             act = ((Buff)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(new Range.Me(CharaIndex));
                             EnqueueTurn(act, turn);
                             act = ((Buff)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(new Range.Me(CharaIndex));
                             BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP + 100, turn.CStatus, turn.CharaIndex, act));
+                            */
+                            bf.AddCEffect(new ConditionedEffectWithExpireTime(
+                                (bf, act) => { if(act is Attack atk) {
+                                        return atk.ARange.ContainRange(CharaIndex, bf); } return false; },
+                                (bf, act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
+                                100000, CharaIndex, turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP
+                                ));
                             retExec();
                             return true;
                         case Command.Escape:
-                            act = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(act, turn);
+                            action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                            EnqueueTurn(action, turn);
                             retExec();
                             return true;
                         default:
