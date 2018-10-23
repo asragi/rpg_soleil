@@ -48,6 +48,8 @@ namespace Soleil.Event.Shop
             menuDescription.Quit();
         }
 
+        public void Input(Direction dir) => shopItemList.Input(dir);
+
         public override void Update()
         {
             base.Update();
