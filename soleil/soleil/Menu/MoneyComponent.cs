@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,29 @@ namespace Soleil.Menu
     /// </summary>
     class MoneyComponent
     {
-        FontImage text;
+        readonly Vector CurrencyPos = new Vector(200, 0);
+        MoneyWallet moneyWallet;
+        FontImage moneyText;
+        FontImage currency;
 
         public MoneyComponent(Vector _pos)
         {
-            text = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
-            text.Color = ColorPalette.DarkBlue;
-            text.EnableShadow = true;
-            text.ShadowPos = new Vector(3, 3);
-            text.ShadowColor = ColorPalette.GlayBlue;
+            moneyText = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
+            moneyText.Color = ColorPalette.DarkBlue;
+            moneyText.EnableShadow = true;
+            moneyText.ShadowPos = new Vector(3, 3);
+            moneyText.ShadowColor = ColorPalette.GlayBlue;
+            currency = new FontImage(FontID.Test, _pos + CurrencyPos, DepthID.Message, true, 0);
+            currency.Color = ColorPalette.DarkBlue;
+            currency.EnableShadow = true;
+            currency.ShadowPos = new Vector(3, 3);
+            currency.ShadowColor = ColorPalette.GlayBlue;
+            moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
+        }
+
+        public void Refresh()
+        {
+            moneyText.Text = moneyWallet.Val.ToString();
         }
 
         public void Call()
@@ -35,12 +50,14 @@ namespace Soleil.Menu
 
         public void Update()
         {
-
+            moneyText.Update();
+            currency.Update();
         }
 
         public void Draw(Drawing d)
         {
-
+            moneyText.Draw(d);
+            currency.Draw(d);
         }
     }
 }

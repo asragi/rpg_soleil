@@ -11,6 +11,7 @@ namespace Soleil.Map
     /// </summary>
     class MoneyWallet
     {
+        public const String Currency = "Ac.";
         private int val;
         public int Val { get { return val; } private set { val = value; } }
 
