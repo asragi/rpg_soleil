@@ -27,15 +27,5 @@ namespace Soleil.Event.Shop
             }
             return tmpPanels.ToArray();
         }
-
-        public override void Call()
-        {
-            base.Call();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-        }
     }
 }

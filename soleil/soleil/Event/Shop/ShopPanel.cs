@@ -30,5 +30,27 @@ namespace Soleil.Event.Shop
 
             valueImage.Text = valueText;
         }
+
+        public void Call()
+        {
+
+        }
+
+        public void Quit()
+        {
+
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            valueImage.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            valueImage.Draw(d);
+        }
     }
 }

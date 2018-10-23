@@ -47,6 +47,12 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+            foreach (var item in Panels)
+            {
+                item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
+                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+            }
+            RefreshSelected();
         }
 
         public virtual void Quit()
@@ -54,6 +60,11 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowStartPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+            foreach (var item in Panels)
+            {
+                item?.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
+                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+            }
         }
 
         protected abstract SelectablePanel[] MakeAllPanels();
@@ -81,25 +92,12 @@ namespace Soleil.Menu
         {
             base.OnDisable();
             Quit();
-
-            foreach (var item in Panels)
-            {
-                item?.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
-                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
-            }
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
             Call();
-
-            foreach (var item in Panels)
-            {
-                item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
-                item?.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
-            }
-            RefreshSelected();
         }
 
         public override void Update()
