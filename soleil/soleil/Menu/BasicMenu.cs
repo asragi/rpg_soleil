@@ -147,8 +147,7 @@ namespace Soleil.Menu
                 else
                 {
                     InitIndex = Math.Max(0, AllPanels.Length - RowSize);
-                    Index = Math.Min(AllPanels.Length, Panels.Length) - 1;
-                    Index = (Index - 1 + IndexSize) % IndexSize;
+                    Index = Math.Max(0,Math.Min(AllPanels.Length, Panels.Length) - 1);
                 }
                 Panels = SetPanels();
                 RefreshSelected();
