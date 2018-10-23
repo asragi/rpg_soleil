@@ -136,6 +136,7 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
+    <Compile Include="Menu\EmptyPanel.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicMenu.cs" />

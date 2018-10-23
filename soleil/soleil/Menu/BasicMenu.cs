@@ -22,6 +22,7 @@ namespace Soleil.Menu
         Image backImage;
         public Vector Pos { get { return backImage.Pos; } }
         protected int Index;
+        protected int InitIndex;
         protected SelectablePanel[] Panels;
         protected SelectablePanel[] AllPanels;
         protected int IndexSize;
@@ -33,6 +34,12 @@ namespace Soleil.Menu
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
             Index = 0;
             MenuDescription = desc;
+        }
+
+        protected void Init()
+        {
+            AllPanels = MakeAllPanels();
+            Panels = SetPanels();
         }
 
         public virtual void Call()
@@ -47,6 +54,27 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowStartPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+        }
+
+        protected abstract SelectablePanel[] MakeAllPanels();
+
+        protected SelectablePanel[] SetPanels()
+        {
+            if (AllPanels.Length <= 0) // アイテムを一つも持っていない
+            {
+                IndexSize = 1;
+                return new[] { new EmptyPanel(this) };
+            }
+            var panelSize = Math.Min(AllPanels.Length, RowSize);
+            IndexSize = panelSize;
+
+            var tmp = new SelectablePanel[panelSize];
+            for (int i = 0; i < panelSize; ++i)
+            {
+                tmp[i] = AllPanels[InitIndex + i];
+                tmp[i].LocalPos = ItemDrawStartPos + new Vector(0, (tmp[i].PanelSize.Y + ItemPanelSpacing) * i);
+            }
+            return tmp;
         }
 
         protected override void OnDisable()
@@ -109,12 +137,44 @@ namespace Soleil.Menu
 
         public override void OnInputUp()
         {
+            if (Index == 0)
+            {
+                if (InitIndex > 0)
+                {
+                    InitIndex--;
+                    Index = 0;
+                }
+                else
+                {
+                    InitIndex = Math.Max(0, AllPanels.Length - RowSize);
+                    Index = Math.Min(AllPanels.Length, Panels.Length) - 1;
+                }
+                Panels = SetPanels();
+                RefreshSelected();
+                return;
+            }
             Index = (Index - 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }
 
         public override void OnInputDown()
         {
+            if (Index == RowSize - 1)
+            {
+                if (InitIndex < AllPanels.Length - RowSize)
+                {
+                    InitIndex++;
+                    Index = Math.Min(AllPanels.Length, Panels.Length) - 1;
+                }
+                else
+                {
+                    InitIndex = 0;
+                    Index = 0;
+                }
+                Panels = SetPanels();
+                RefreshSelected();
+                return;
+            }
             Index = (Index + 1 + IndexSize) % IndexSize;
             RefreshSelected();
         }

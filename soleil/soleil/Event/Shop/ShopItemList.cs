@@ -10,19 +10,22 @@ namespace Soleil.Event.Shop
 {
     class ShopItemList : BasicMenu
     {
-        public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> values)
+        Dictionary<ItemID, int> values;
+        public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> _values)
             : base(parent, description)
         {
-            Panels = SetPanel();
+            values = _values;
+            Init();
+        }
 
-            ShopPanel[] SetPanel(){
-                var tmpPanels = new List<ShopPanel>();
-                foreach (var item in values)
-                {
-                    tmpPanels.Add(new ShopPanel(item.Key, item.Value, this));
-                }
-                return tmpPanels.ToArray();
+        protected override SelectablePanel[] MakeAllPanels()
+        {
+            var tmpPanels = new List<ShopPanel>();
+            foreach (var item in values)
+            {
+                tmpPanels.Add(new ShopPanel(item.Key, item.Value, this));
             }
+            return tmpPanels.ToArray();
         }
 
         public override void Call()
