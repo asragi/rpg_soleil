@@ -74,7 +74,9 @@ namespace Soleil.Menu
             if (AllPanels.Length <= 0) // アイテムを一つも持っていない
             {
                 IndexSize = 1;
-                return new[] { new EmptyPanel(this) };
+                var empty = new EmptyPanel(this);
+                empty.LocalPos = ItemDrawStartPos;
+                return new[] { empty };
             }
             var panelSize = Math.Min(AllPanels.Length, RowSize);
             IndexSize = panelSize;
@@ -146,6 +148,7 @@ namespace Soleil.Menu
                 {
                     InitIndex = Math.Max(0, AllPanels.Length - RowSize);
                     Index = Math.Min(AllPanels.Length, Panels.Length) - 1;
+                    Index = (Index - 1 + IndexSize) % IndexSize;
                 }
                 Panels = SetPanels();
                 RefreshSelected();
