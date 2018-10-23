@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Event.Shop;
+using Soleil.Item;
 
 namespace Soleil.Event
 {
     class ShopEvent : EventBase
     {
         ShopSystem shopSystem;
-        public ShopEvent()
+        public ShopEvent(Dictionary<ItemID, int> values)
         {
-            shopSystem = new ShopSystem();
+            shopSystem = new ShopSystem(values);
         }
 
         public override void Start()

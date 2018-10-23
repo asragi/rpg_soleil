@@ -1,4 +1,6 @@
 ﻿using Soleil.Event;
+using Soleil.Event.Shop;
+using Soleil.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,10 @@ namespace Soleil.Map.Maps.Somnia
     class AccessaryGirl : MapCharacter
     {
         readonly Vector WindowPosDiff = new Vector(-230, -100);
+        readonly Dictionary<ItemID, int> values = new Dictionary<ItemID, int> {
+            {ItemID.Stone, 200 },
+            {ItemID.Zarigani, 1200 }
+        };
         public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
         {
@@ -20,7 +26,7 @@ namespace Soleil.Map.Maps.Somnia
             EventSequence.SetEventSet(
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(),
+                    new ShopEvent(values),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )
             );

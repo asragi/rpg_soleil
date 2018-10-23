@@ -1,4 +1,5 @@
-﻿using Soleil.Menu;
+﻿using Soleil.Item;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,11 +20,11 @@ namespace Soleil.Event.Shop
         MenuDescription menuDescription;
         ShopItemList shopItemList;
 
-        public ShopSystem()
+        public ShopSystem(Dictionary<ItemID, int> values)
         {
             menuDescription = new MenuDescription(DescriptionPos);
             menuDescription.Text = "これはテストメッセージ";
-            shopItemList = new ShopItemList(this, menuDescription);
+            shopItemList = new ShopItemList(this, menuDescription, values);
         }
 
         public void Call()
