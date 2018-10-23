@@ -23,6 +23,7 @@ namespace Soleil.Menu
         public Vector Pos { get { return backImage.Pos; } }
         protected int Index;
         protected SelectablePanel[] Panels;
+        protected SelectablePanel[] AllPanels;
         protected int IndexSize;
         protected MenuDescription MenuDescription;
 
