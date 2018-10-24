@@ -37,6 +37,7 @@ namespace Soleil
     {
         Stack<BattleUI> windows;
         BattleField bf;
+        Action genAkt;
         public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
         {
             this.bf = bf;
@@ -106,16 +107,53 @@ namespace Soleil
 
                     break;
                 case SelectPhase.Magic:
-                    action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                    EnqueueTurn(action, turn);
-                    retExec();
-                    return true;
+                    if (true)
+                    {
+                        genAkt = AttackInfo.GetAction(ActionName.NormalAttack);
+                        var sws = new VerticalSelectWindow(new Vector(750, 350), bf.OppositeIndexes(CharaIndex).Select(p=>p.ToString()).ToList(), SelectPhase.Character);
+                        windows.Push(sws);
+                        bf.AddUI(sws);
+                        break;
+                    }
+                    else
+                    {
+                        action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                        EnqueueTurn(action, turn);
+                        retExec();
+                        return true;
+                    }
                 case SelectPhase.Skill:
-                    action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                    //全体攻撃など選択する必要のないとき
+                    if (true)
+                    {
+                        genAkt = AttackInfo.GetAction(ActionName.ExampleDebuff);
+                        var sws = new VerticalSelectWindow(new Vector(750, 350), bf.OppositeIndexes(CharaIndex).Select(p => p.ToString()).ToList(), SelectPhase.Character);
+                        windows.Push(sws);
+                        bf.AddUI(sws);
+                        break;
+                    }
+                    else
+                    {
+                        action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                        EnqueueTurn(action, turn);
+                        retExec();
+                        return true;
+                    }
+                case SelectPhase.Character:
+                    switch(genAkt)
+                    {
+                        case Attack atk:
+                            action = atk.GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex)[cmd.Value]));
+                            break;
+                        case Buff buf:
+                            action = buf.GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex)[cmd.Value]));
+                            break;
+                        default:
+                            throw new Exception("not implemented");
+                    }
                     EnqueueTurn(action, turn);
                     retExec();
                     return true;
-
                 default:
                     throw new Exception("??????");
             }

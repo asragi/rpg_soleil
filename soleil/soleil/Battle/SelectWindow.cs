@@ -74,6 +74,10 @@ namespace Soleil
         public SelectPhase SPhase;
         public SelectWindow(Vector pos, SelectPhase selectPhase) : base(pos) => SPhase = selectPhase;
         public abstract T? Select();
+        public T GetSelection
+        {
+            get; protected set;
+        }
     }
 
     enum SelectPhase
@@ -124,6 +128,7 @@ namespace Soleil
 
             if (KeyInput.GetKeyPush(Key.A))
             {
+                GetSelection = selectCommand;
                 return selectCommand;
             }
             return null;
