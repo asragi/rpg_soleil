@@ -136,6 +136,7 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
+    <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuLine.cs" />
     <Compile Include="Menu\MenuSystem.cs" />
+    <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Mono\Audio.cs" />
