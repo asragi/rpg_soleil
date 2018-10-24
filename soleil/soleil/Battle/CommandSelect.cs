@@ -124,6 +124,7 @@ namespace Soleil
                     }
                 case SelectPhase.Skill:
                     //全体攻撃など選択する必要のないとき
+                    //TODO: 何を選択するのかをいい感じに記述する
                     if (true)
                     {
                         genAkt = AttackInfo.GetAction(ActionName.ExampleDebuff);
