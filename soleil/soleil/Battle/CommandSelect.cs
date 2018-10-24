@@ -54,33 +54,33 @@ namespace Soleil
 
             if(windows.Count==0)
             {
-                var sw = new CommandSelectWindow(new Vector(600, 200));
+                //var sw = new CommandSelectWindow(new Vector(600, 200));
+                var sw = new VerticalSelectWindow(new Vector(600, 200), new List<string> { "Magic", "Skill", "Guard", "Escape" }, SelectPhase.Initial);
                 windows.Push(sw);
                 bf.AddUI(sw);
             }
 
-            var top = windows.Peek();
-            switch (top)
+            var top = (VerticalSelectWindow)windows.Peek();
+            var cmd = top.Select();
+            if (!cmd.HasValue) return false;
+            Action action = null;
+            switch (top.SPhase)
             {
-                case CommandSelectWindow csw:
-                    var cmd = csw.Select();
-                    if (!cmd.HasValue) return false;
-
-                    Action action = null;
+                case SelectPhase.Initial:
                     //debug なにを選んでも攻撃
                     switch (cmd.Value)
                     {
-                        case Command.Magic:
-                            action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(action, turn);
-                            retExec();
-                            return true;
-                        case Command.Skill:
-                            action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(action, turn);
-                            retExec();
-                            return true;
-                        case Command.Guard:
+                        case 0://Command.Magic:
+                            var swm = new VerticalSelectWindow(new Vector(700, 300), new List<string> { "NormalAttack", "NormalAttack" }, SelectPhase.Magic);
+                            windows.Push(swm);
+                            bf.AddUI(swm);
+                            break;
+                        case 1://Command.Skill:
+                            var sws = new VerticalSelectWindow(new Vector(700, 300), new List<string> { "ExampleDebuff", "ExampleDebuff" }, SelectPhase.Skill);
+                            windows.Push(sws);
+                            bf.AddUI(sws);
+                            break;
+                        case 2://Command.Guard:
                             /*
                             act = ((Buff)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(new Range.Me(CharaIndex));
                             EnqueueTurn(act, turn);
@@ -95,7 +95,7 @@ namespace Soleil
                                 ));
                             retExec();
                             return true;
-                        case Command.Escape:
+                        case 3://Command.Escape:
                             action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
                             EnqueueTurn(action, turn);
                             retExec();
@@ -105,6 +105,17 @@ namespace Soleil
                     }
 
                     break;
+                case SelectPhase.Magic:
+                    action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                    EnqueueTurn(action, turn);
+                    retExec();
+                    return true;
+                case SelectPhase.Skill:
+                    action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                    EnqueueTurn(action, turn);
+                    retExec();
+                    return true;
+
                 default:
                     throw new Exception("??????");
             }
