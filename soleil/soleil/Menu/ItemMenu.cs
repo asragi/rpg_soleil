@@ -10,98 +10,33 @@ namespace Soleil.Menu
     class ItemMenu : BasicMenu
     {
         ItemList itemList;
-        // 所持しているすべてのアイテムのパネル
-        List<ItemPanel> allItemPanels;
-        int initIndex = 0;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
             :base(parent, desc)
         {
             itemList = PlayerBaggage.GetInstance().Items;
-            // 所持しているすべてのアイテムのパネル
-            allItemPanels = new List<ItemPanel>();
-            // 表示用のパネル
-            Panels = new ItemPanel[RowSize];
-            // 所持しているすべてのアイテムの表示用パネルを生成
-            allItemPanels = MakeAllItemPanels();
             // 描画すべきパネルを決定する．
-            SetPanels();
+            Init();
         }
 
-        private List<ItemPanel> MakeAllItemPanels()
+        protected override SelectablePanel[] MakeAllPanels()
         {
-            var items = new List<ItemPanel>();
+            var items = new List<SelectablePanel>();
             for (int i = 0; i < (int)ItemID.size; i++)
             {
                 if (!itemList.HasItem((ItemID)i)) continue;
                 var data = ItemDataBase.Get((ItemID)i);
                 items.Add(new ItemPanel((ItemID)i, itemList, this));
             }
-            return items;
-        }
-
-        private void SetPanels()
-        {
-            for (int i = 0; i < RowSize; ++i)
-            {
-                if (allItemPanels.Count <= 0) // アイテムを一つも持っていない
-                {
-                    allItemPanels.Add(new ItemPanel(ItemID.Empty, itemList, this));
-                }
-                if (allItemPanels.Count <= i) return;
-                IndexSize = i + 1;
-                Panels[i] = allItemPanels[initIndex + i];
-                Panels[i].LocalPos = ItemDrawStartPos + new Vector(0, (Panels[i].PanelSize.Y + ItemPanelSpacing) * i);
-            }
+            return items.ToArray();
         }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-            allItemPanels.ForEach(s => s.Fade(FadeSpeed, MenuSystem.EaseFunc, true));
-        }
-
-        public override void OnInputUp()
-        {
-            if (Index == 0)
+            for (int i = 0; i < AllPanels.Length; i++)
             {
-                if(initIndex > 0)
-                {
-                    initIndex--;
-                    Index = 0;
-                }
-                else
-                {
-                    initIndex = Math.Max(0, allItemPanels.Count - RowSize);
-                    Index = Math.Min(allItemPanels.Count, Panels.Length) - 1;
-                }
-                SetPanels();
-                RefreshSelected();
-                return;
+                AllPanels[i].Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             }
-            Index = (Index - 1 + IndexSize) % IndexSize;
-            RefreshSelected();
-        }
-
-        public override void OnInputDown()
-        {
-            if (Index == RowSize-1)
-            {
-                if(initIndex < allItemPanels.Count - RowSize)
-                {
-                    initIndex++;
-                    Index = Math.Min(allItemPanels.Count, Panels.Length) - 1;
-                }
-                else
-                {
-                    initIndex = 0;
-                    Index = 0;
-                }
-                SetPanels();
-                RefreshSelected();
-                return;
-            }
-            Index = (Index + 1 + IndexSize) % IndexSize;
-            RefreshSelected();
         }
     }
 }

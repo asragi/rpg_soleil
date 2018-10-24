@@ -35,6 +35,7 @@ namespace Soleil.Event
             for (int i = 0; i < events.Count; i++)
             {
                 events[i].SetEventSet(this);
+                events[i].Reset();
             }
         }
 
@@ -42,16 +43,6 @@ namespace Soleil.Event
         {
             switch (e)
             {
-                case MessageWindowEvent mwe:
-                    list.Add(new ChangeInputFocusEvent(InputFocus.Window));
-                    list.Add(new MessageUpdateEvent(mwe.Tag));
-                    list.Add(new WindowCloseEvent(mwe.Tag));
-                    break;
-                case SelectWindowEvent swe:
-                    list.Add(new ChangeInputFocusEvent(InputFocus.Window));
-                    list.Add(new SelectUpdateEvent(swe.Tag));
-                    list.Add(new WindowCloseEvent(swe.Tag));
-                    break;
                 default:
                     break;
             }
@@ -81,7 +72,12 @@ namespace Soleil.Event
             }
         }
 
-
-
+        public void Draw(Drawing d)
+        {
+            for (int i = 0; i < events.Count; i++)
+            {
+                events[i].Draw(d);
+            }
+        }
     }
 }

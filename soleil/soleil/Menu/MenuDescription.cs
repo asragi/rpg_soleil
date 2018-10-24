@@ -14,11 +14,21 @@ namespace Soleil.Menu
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.Test, _pos, DepthID.Message, true, 1);
+            fontImage = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
             fontImage.Color = ColorPalette.DarkBlue;
             fontImage.EnableShadow = false;
             fontImage.ShadowPos = new Vector(3, 3);
             fontImage.ShadowColor = ColorPalette.GlayBlue;
+        }
+
+        public void Call()
+        {
+            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+        }
+
+        public void Quit()
+        {
+            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
         }
 
         public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)

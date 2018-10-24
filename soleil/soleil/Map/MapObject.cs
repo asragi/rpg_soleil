@@ -30,7 +30,7 @@ namespace Soleil.Map
 
         virtual public void Draw(Drawing sb)
         {
-
+            EventSequence.Draw(sb);
         }
 
         public Vector GetPosition()

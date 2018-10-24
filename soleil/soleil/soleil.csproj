@@ -64,13 +64,13 @@
     <Compile Include="Event\FadeInEvent.cs" />
     <Compile Include="Event\FadeOutEvent.cs" />
     <Compile Include="Event\Iterator.cs" />
-    <Compile Include="Event\MessageUpdateEvent.cs" />
     <Compile Include="Event\MessageWindowEvent.cs" />
     <Compile Include="Event\NumEventBranch.cs" />
-    <Compile Include="Event\SelectUpdateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
-    <Compile Include="Event\UpdateEventBase.cs" />
-    <Compile Include="Event\WindowCloseEvent.cs" />
+    <Compile Include="Event\Shop\ShopEvent.cs" />
+    <Compile Include="Event\Shop\ShopItemList.cs" />
+    <Compile Include="Event\Shop\ShopPanel.cs" />
+    <Compile Include="Event\Shop\ShopSystem.cs" />
     <Compile Include="Event\WindowEventBase.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
@@ -120,6 +120,7 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
+    <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
@@ -135,6 +136,8 @@
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
+    <Compile Include="Menu\DescriptionWindow.cs" />
+    <Compile Include="Menu\EmptyPanel.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
@@ -146,6 +149,7 @@
     <Compile Include="Menu\MenuItem.cs" />
     <Compile Include="Menu\MenuLine.cs" />
     <Compile Include="Menu\MenuSystem.cs" />
+    <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Mono\Audio.cs" />

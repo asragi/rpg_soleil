@@ -5,11 +5,11 @@
     /// </summary>
     abstract class EventBase
     {
-        //protected EventManager EventManager;
+        bool started;
         EventSet myEventSet;
         public EventBase()
         {
-
+            started = false;
         }
 
         public void SetEventSet(EventSet es)
@@ -18,9 +18,17 @@
         }
 
         /// <summary>
+        /// 最初のフレームで実行される関数
+        /// </summary>
+        public virtual void Start() => started = true;
+
+        /// <summary>
         /// 実行時関数. EventManagerのUpdateにより毎フレーム呼び出される.処理が終わったらNextを呼び出すこと.
         /// </summary>
-        public abstract void Execute();
+        public virtual void Execute()
+        {
+            if (!started) Start();
+        }
 
         /// <summary>
         /// 現在の処理を終了し次の処理に移る.
@@ -29,5 +37,12 @@
         {
             myEventSet.Next();
         }
+
+        public void Reset()
+        {
+            started = false;
+        }
+
+        public virtual void Draw(Drawing d) { }
     }
 }

@@ -21,7 +21,7 @@ namespace Soleil.Menu
         /// <summary>
         /// ウィンドウを閉じ親にActiveを戻す
         /// </summary>
-        protected virtual void Quit()
+        protected virtual void ReturnParent()
         {
             parent.IsActive = true;
             IsActive = false;

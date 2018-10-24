@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,33 @@ namespace Soleil.Event
             message = _message;
         }
 
-        public override void Execute()
+        public override void Start()
         {
+            base.Start();
             var window = new MessageWindow(Pos, Size, Tag, Wm);
             window.SetMessage(message);
-            Next();
+            // FocusをWindowに設定
+            var mim = MapInputManager.GetInstance();
+            mim.SetFocus(InputFocus.Window);
+        }
+
+        public override void Execute()
+        {
+            base.Execute();
+            if (KeyInput.GetKeyPush(Key.A))
+            {
+                ReactToInput();
+            }
+            void ReactToInput()
+            {
+                if (Wm.GetIsMessageWindowAnimFinished(Tag))
+                {
+                    Wm.Destroy(Tag);
+                    Next();
+                    return;
+                }
+                Wm.FinishMessageWindowAnim(Tag);
+            }
         }
 
     }
