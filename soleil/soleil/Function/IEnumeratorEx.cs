@@ -31,12 +31,26 @@ public static class IEnumerableEx
     /// <summary>
     /// ForEachをIEnumeratorに拡張
     /// </summary>
-    public static void ForEach2<TSource, TResult>
+    public static void ForEach2<T>
     (
-        this IEnumerable<TSource> self,
-        Func<TSource, TResult> func
+        this IEnumerable<T> self,
+        Action<T> func
     )
     {
         foreach (var e in self) func(e);
+    }
+
+    public static TAccumulate Aggregate2<TSource, TAccumulate>
+    (
+        this IEnumerable<TSource> self,
+        TAccumulate seed,
+        Func<TAccumulate, TSource, int, TAccumulate> func
+    )
+    {
+        return self.Select((p, i) => (p, i)).Aggregate(seed, (s, e) =>
+          {
+              var (p, i) = e;
+              return func(s, p, i);
+          });
     }
 }

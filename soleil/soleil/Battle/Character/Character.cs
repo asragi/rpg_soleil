@@ -20,7 +20,6 @@ namespace Soleil
             charaIndex = index;
 
             turns = new List<Turn>();
-            SPD = new Reference<int>();
         }
 
         public bool SelectAction(Turn turn)
@@ -36,16 +35,13 @@ namespace Soleil
         public void Buff(BuffRate rate)
         {
             Status.Rates = rate;
-            SPD.Val = Status.SPD;
         }
         
 
         //kari
-        protected Reference<int> SPD;
         public Turn NextTurn()
         {
-            SPD.Val = Status.SPD;
-            var turn = new Turn(Status.NextWaitPoint(), SPD, charaIndex);
+            var turn = new Turn(Status.NextWaitPoint(), Status, charaIndex);
             turns.Add(turn);
             return turn;
         }

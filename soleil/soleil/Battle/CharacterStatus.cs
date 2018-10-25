@@ -4,58 +4,87 @@ using System.Linq;
 
 namespace Soleil
 {
+    public enum BuffRateName
+    {
+        STRRate = 0,
+        VITRate,
+        MAGRate,
+        SPDRate,
+        pATKRate,
+        mATKRate,
+        pDEFRate,
+        mDEFRate,
+    }
     public class BuffRate
     {
-        public float STRrate;
-        public float VITrate;
-        public float MAGrate;
-        public float SPDrate;
-        public BuffRate(float STRrate = 1.0f, float VITrate = 1.0f, float MAGrate = 1.0f, float SPDrate = 1.0f)
+        public List<float> Rates;
+        public BuffRate()
         {
-            this.STRrate = STRrate;
-            this.VITrate = VITrate;
-            this.MAGrate = MAGrate;
-            this.SPDrate = SPDrate;
+            Rates = Enumerable.Range(0, 8).Select(e => 1.0f).ToList();
         }
         public BuffRate(BuffRate buff)
         {
-            this.STRrate = buff.STRrate;
-            this.VITrate = buff.VITrate;
-            this.MAGrate = buff.MAGrate;
-            this.SPDrate = buff.SPDrate;
+            Rates = new List<float>(buff.Rates);
         }
-        public BuffRate AddRate(float STRrate = 0.0f, float VITrate = 0.0f, float MAGrate = 0.0f, float SPDrate = 0.0f)
+        public float this[BuffRateName brName]
         {
-            var tmp = new BuffRate();
-            tmp.STRrate = this.STRrate + STRrate;
-            tmp.VITrate = this.VITrate + VITrate;
-            tmp.MAGrate = this.MAGrate + MAGrate;
-            tmp.SPDrate = this.SPDrate + SPDrate;
+            get => Rates[(int)brName];
+            set => Rates[(int)brName] = value;
+        }
+
+        public BuffRate AddRate(Dictionary<BuffRateName, float> rates)
+        {
+            var tmp = new BuffRate(this);
+            rates.ForEach2(e => { var (k, v) = (e.Key, e.Value); tmp[k] += v; });
             return tmp;
         }
-        public BuffRate MultRate(float STRrate = 1.0f, float VITrate = 1.0f, float MAGrate = 1.0f, float SPDrate = 1.0f)
+        public BuffRate MultRate(Dictionary<BuffRateName, float> rates)
         {
-            var tmp = new BuffRate();
-            tmp.STRrate = this.STRrate * STRrate;
-            tmp.VITrate = this.VITrate * VITrate;
-            tmp.MAGrate = this.MAGrate * MAGrate;
-            tmp.SPDrate = this.SPDrate * SPDrate;
+            var tmp = new BuffRate(this);
+            rates.ForEach2(e => { var (k, v) = (e.Key, e.Value); tmp[k] *= v; });
             return tmp;
         }
+        public BuffRate IncreaseRate(HashSet<BuffRateName> rates)
+        {
+            var tmp = new BuffRate(this);
+            rates.ForEach2(e =>
+            {
+                //強化、普通、弱化の3つに対応
+                if (tmp[e] < 0.75f)
+                    tmp[e] = 1.0f;
+                else if (tmp[e] < 1.25f)
+                    tmp[e] = 1.5f;
+                else
+                    tmp[e] = 1.5f;
+            });
+            return tmp;
+        }
+        public BuffRate DecreaseRate(HashSet<BuffRateName> rates)
+        {
+            var tmp = new BuffRate(this);
+            rates.ForEach2(e =>
+            {
+                //強化、普通、弱化の3つに対応
+                if (tmp[e] < 0.75f)
+                    tmp[e] = 0.5f;
+                else if (tmp[e] < 1.25f)
+                    tmp[e] = 0.5f;
+                else
+                    tmp[e] = 1.0f;
+            });
+            return tmp;
+        }
+
         public int Comp()
         {
             int up = 0, down = 0;
-            if (STRrate > 1.0f) up++;
-            if (STRrate < 1.0f) down++;
-
-            if (VITrate > 1.0f) up++;
-            if (VITrate < 1.0f) down++;
-
-            if (MAGrate > 1.0f) up++;
-            if (MAGrate < 1.0f) down++;
-
-            if (SPDrate > 1.0f) up++;
-            if (SPDrate < 1.0f) down++;
+            Rates.ForEach(e =>
+            {
+                if (e > 1.0f)
+                    up++;
+                else if (e < 1.0f)
+                    down++;
+            });
 
             if (up > 0 && down == 0) return 1;
             else if (down > 0 && up == 0) return -1;
@@ -64,7 +93,7 @@ namespace Soleil
     }
     public class CharacterStatus
     {
-        public AbilityScore abilityScore;
+        public AbilityScore AScore;
         public BuffRate Rates;
 
         int hp, mp;
@@ -83,42 +112,60 @@ namespace Soleil
 
         public int STR
         {
-            get
-            {
-                return Fraction(abilityScore.STR * Rates.STRrate);
-            }
+            get => Fraction(AScore.STR * Rates[BuffRateName.STRRate]);
         }
         
         public int VIT
         {
-            get
-            {
-                return Fraction(abilityScore.VIT * Rates.VITrate);
-            }
+            get => Fraction(AScore.VIT * Rates[BuffRateName.VITRate]);
         }
 
         public int MAG
         {
-            get
-            {
-                return Fraction(abilityScore.MAG * Rates.MAGrate);
-            }
+            get => Fraction(AScore.MAG * Rates[BuffRateName.MAGRate]);
         }
         
         public int SPD
         {
-            get
-            {
-                return Fraction(abilityScore.SPD * Rates.SPDrate);
-            }
+            get => Fraction(AScore.SPD * Rates[BuffRateName.SPDRate]);
         }
 
-        public int WP = 10000;
+        float pATK;
+        public float PATK
+        {
+            get => Fraction(pATK * Rates[BuffRateName.pATKRate]);
+            private set => pATK = value;
+        }
+
+        float mATK;
+        public float MATK
+        {
+            get => Fraction(mATK * Rates[BuffRateName.mATKRate]);
+            private set => mATK = value;
+        }
+
+        float pDEF;
+        public float PDEF
+        {
+            get => Fraction(pDEF * Rates[BuffRateName.pDEFRate]);
+            private set => pDEF = value;
+        }
+
+        float mDEF;
+        public float MDEF
+        {
+            get => Fraction(mDEF * Rates[BuffRateName.mDEFRate]);
+            private set => mDEF = value;
+        }
+
+        public int InitialWP = 10000;
+        public int WP = 0;
+        public int TurnWP = 10000;
 
         int turn = 0;
         public int NextWaitPoint()
         {
-            return WP + 10000 * (turn++);
+            return InitialWP + TurnWP * (turn++);
         }
 
         /// <summary>
@@ -136,15 +183,39 @@ namespace Soleil
         {
             HP = 0;
             MP = 0;
+
+            SetParams();
         }
 
         public CharacterStatus(AbilityScore aScore, int _WP)
         {
-            abilityScore = aScore;
-            HP = abilityScore.HPMAX;
-            MP = abilityScore.MPMAX;
-            WP = _WP;
+            AScore = aScore;
+            HP = AScore.HPMAX;
+            MP = AScore.MPMAX;
+            InitialWP = _WP;
             Rates = new BuffRate();
+
+            SetParams();
+        }
+
+        void SetParams()
+        {
+            //TODO: 所有武器でmATK等をセットする
+            PATK = 1f;
+            MATK = 1f;
+            PDEF = 1f;
+            MATK = 1f;
+        }
+
+        //TODO
+        public void GetEquipments()
+        {
+
+        }
+
+        public void GetSkills()
+        {
+
         }
     }
 

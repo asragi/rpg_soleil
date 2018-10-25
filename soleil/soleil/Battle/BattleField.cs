@@ -29,6 +29,7 @@ namespace Soleil
         List<Turn> lastTurn;
         List<BattleUI> UIList;
 
+        public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
             charas = new List<Character>
@@ -66,10 +67,16 @@ namespace Soleil
             battleQue = new Queue<BattleEvent>();
 
             UIList = new List<BattleUI>();
+            CEffects = new SortedSet<ConditionedEffect>();
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
         public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
+
+        //shallow copy
+        public SortedSet<ConditionedEffect> GetCopiedCEffects()
+            => new SortedSet<ConditionedEffect>(CEffects);
+        public void AddCEffect(ConditionedEffect cEffect) => CEffects.Add(cEffect);
 
         public Character GetCharacter(int index) => charas[index];
 
@@ -86,6 +93,14 @@ namespace Soleil
             }
         }
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
+        public List<int> OppositeIndexes(Side side) => indexes[(int)OppositeSide(side)];
+        public List<int> SameSideIndexes(int index) => indexes[(int)sides[index]];
+        public List<int> SameSideIndexes(Side side) => indexes[(int)side];
+        public List<int> AliveIndexes()
+            => alive.Aggregate2(new List<int>(), (list, p, i) => {
+                if (p) list.Add(i);
+                return list;
+            });
 
         public void RemoveCharacter(int index)
         {
@@ -113,8 +128,14 @@ namespace Soleil
 
             if (battleQue.Count == 0 && executed)
             {
+                while(turnQueue.Top().TurnTime > 0)
+                {
+                    charas.ForEach(e => e.Status.WP += e.Status.SPD);
+                }
                 topTurn = turnQueue.Top();
                 turnQueue.Pop();
+
+                CEffects.RemoveWhere(e => e.Expired(this));
 
                 //Turnが行動実行Turnのとき
                 if (topTurn is ActionTurn actTurn)
@@ -124,12 +145,12 @@ namespace Soleil
 
                     //TODO:Occurenceに応じたBattleEventを生成する
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
-                    EnqueueTurn();
                 }
                 //Turnが行動選択Turnのとき
                 else
                 {
                     battleQue.Enqueue(new BattleCommandSelect(topTurn.CharaIndex, -1));
+                    EnqueueTurn();
                 }
             }
 
@@ -208,7 +229,7 @@ namespace Soleil
             {
                 sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
-                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.abilityScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
+                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
             }
 
             //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);
