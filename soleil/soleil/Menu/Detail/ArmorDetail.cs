@@ -11,6 +11,37 @@ namespace Soleil.Menu.Detail
     /// </summary>
     class ArmorDetail : DetailComponent
     {
+        readonly String ExplainText = "防御力";
+        readonly Vector InitPos;
 
+        FontImage explainText;
+        FontImage valueText;
+        public ArmorDetail(Vector _pos)
+            :base()
+        {
+            InitPos = _pos;
+            explainText = new FontImage(FontID.Test, InitPos, DepthID.Message, true, 0);
+            valueText = new FontImage(FontID.Test, InitPos, DepthID.Message, true, 0);
+        }
+
+        public void Call()
+        {
+
+        }
+
+        public void Quit()
+        {
+
+        }
+
+        public void Update()
+        {
+
+        }
+
+        public void Draw(Drawing d)
+        {
+
+        }
     }
 }
