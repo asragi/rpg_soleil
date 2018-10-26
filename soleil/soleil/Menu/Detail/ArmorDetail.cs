@@ -46,13 +46,17 @@ namespace Soleil.Menu.Detail
             if(type == ItemType.Accessory || type == ItemType.Armor)
             {
                 defExplain.Enable = true;
+                defExplain.EnableValDisplay = true;
                 defExplain.Val = ((IArmor)data).DefData.Physical;
                 return;
             }
             if(type == ItemType.Weapon)
             {
                 defExplain.Enable = true;
-                defExplain.Val = 0;
+                var val = ((IArmor)data).DefData.Physical;
+                defExplain.Val = val;
+                // 防御力性能を持たないなら非表示
+                defExplain.Enable = val != 0;
                 return;
             }
             // 装備でない
