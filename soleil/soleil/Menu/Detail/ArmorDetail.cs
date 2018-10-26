@@ -12,36 +12,49 @@ namespace Soleil.Menu.Detail
     class ArmorDetail : DetailComponent
     {
         readonly String ExplainText = "防御力";
+        readonly int Space = 100;
         readonly Vector InitPos;
 
-        FontImage explainText;
-        FontImage valueText;
+        TextWithVal defExplain;
         public ArmorDetail(Vector _pos)
             :base()
         {
             InitPos = _pos;
-            explainText = new FontImage(FontID.Test, InitPos, DepthID.Message, true, 0);
-            valueText = new FontImage(FontID.Test, InitPos, DepthID.Message, true, 0);
+            defExplain = new TextWithVal(FontID.Test, _pos, Space, ExplainText);
         }
 
         public void Call()
         {
-
+            defExplain.Call();
         }
 
         public void Quit()
         {
-
+            defExplain.Quit();
         }
 
-        public void Update()
+        private void Refresh(SelectablePanel panel)
         {
-
+            if(panel is ItemPanelBase p)
+            {
+                var data = ItemDataBase.Get(p.ID);
+                var type = ItemDataBase.Get(p.ID).Type;
+                if (type != ItemType.Armor && type != ItemType.Accessory) return;
+                defExplain.Val = ((IArmor)data).DefData.Physical;
+            }
         }
 
-        public void Draw(Drawing d)
+        public void Update(SelectablePanel panel)
         {
+            base.Update();
+            Refresh(panel);
+            defExplain.Update();
+        }
 
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            defExplain.Draw(d);
         }
     }
 }
