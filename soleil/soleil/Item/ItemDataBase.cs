@@ -25,7 +25,7 @@ namespace Soleil.Item
         // 非消費アイテム
         Stone,
         // 装備
-        TestSword,
+        BeadsWork, // ビーズのアクセサリー
 
         // Debug
         d0,
@@ -54,6 +54,9 @@ namespace Soleil.Item
             Set("活きのいいザリガニ", ItemID.Zarigani, true, true, 20, "食べる......？");
             Set("石ころ", ItemID.Stone, 0, "そこら辺の石ころ．");
 
+            // アクセサリー
+            SetAc("ビーズのアクセサリー", ItemID.BeadsWork, new DefData(0, 0, null, null), null, "手作りの可愛いアクセサリー");
+
             // Debug
             for (int i = (int)ItemID.d0; i < 1 + (int)ItemID.d7; i++)
             {
@@ -70,6 +73,11 @@ namespace Soleil.Item
         static void Set(String name, ItemID id, int effectVal, String desc)
         {
             data[(int)id] = new NormalItem(id, false, false, effectVal, name, desc);
+        }
+
+        static void SetAc(String name, ItemID id, DefData def, AbilityScore? score, String desc)
+        {
+            data[(int)id] = new AccessaryData(id, def, score, name, desc);
         }
 
         public static IItem Get(ItemID id) => data[(int)id];
