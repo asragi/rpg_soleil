@@ -17,6 +17,7 @@ namespace Soleil.Menu
         readonly Vector PositionDiff = new Vector(-30, 0);
         readonly Vector CurrencyPos = new Vector(200, 0);
         MoneyWallet moneyWallet;
+        int money;
         FontImage moneyText;
         FontImage currency;
 
@@ -40,7 +41,8 @@ namespace Soleil.Menu
 
         public void Refresh()
         {
-            moneyText.Text = moneyWallet.Val.ToString();
+            money = moneyWallet.Val;
+            moneyText.Text = money.ToString();
         }
 
         public void Call()
@@ -63,6 +65,7 @@ namespace Soleil.Menu
         {
             moneyText.Update();
             currency.Update();
+            if (money != moneyWallet.Val) Refresh();
         }
 
         public void Draw(Drawing d)
