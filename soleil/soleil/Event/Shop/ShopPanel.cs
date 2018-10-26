@@ -13,6 +13,8 @@ namespace Soleil.Event.Shop
         public readonly Vector ValuePosDiff = new Vector(300, 0);
         private string desc;
         public override string Desctiption => desc;
+        public ItemID ID { get; private set; }
+        public int Price { get; private set; }
 
         public override Vector LocalPos
         {
@@ -32,6 +34,8 @@ namespace Soleil.Event.Shop
             :base(ItemDataBase.Get(id).Name, parent)
         {
             desc = ItemDataBase.Get(id).Description;
+            ID = id;
+            Price = value;
 
             // itemNum
             valueText = value.ToString();
