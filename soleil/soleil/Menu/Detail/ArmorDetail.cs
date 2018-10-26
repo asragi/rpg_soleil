@@ -13,25 +13,31 @@ namespace Soleil.Menu.Detail
     /// </summary>
     class ArmorDetail : DetailComponent
     {
+        readonly String AtkExpText = "攻撃力";
         readonly String ExplainText = "防御力";
+        readonly Vector DefExpPos = new Vector(0, 60);
         readonly int Space = 220;
         readonly Vector InitPos;
 
+        TextWithVal atkExplain;
         TextWithVal defExplain;
         public ArmorDetail(Vector _pos)
             :base()
         {
             InitPos = _pos;
-            defExplain = new TextWithVal(FontID.Test, _pos, Space, ExplainText);
+            atkExplain = new TextWithVal(FontID.Test, _pos, Space, AtkExpText);
+            defExplain = new TextWithVal(FontID.Test, _pos+DefExpPos, Space, ExplainText);
         }
 
         public void Call()
         {
+            atkExplain.Call();
             defExplain.Call();
         }
 
         public void Quit()
         {
+            atkExplain.Quit();
             defExplain.Quit();
         }
 
@@ -45,6 +51,10 @@ namespace Soleil.Menu.Detail
 
             if(type == ItemType.Accessory || type == ItemType.Armor)
             {
+                // 攻撃性能を非表示に
+                atkExplain.Enable = false; // 攻撃力が上がる防具......？
+
+                // 防御力表示
                 defExplain.Enable = true;
                 defExplain.EnableValDisplay = true;
                 defExplain.Val = ((IArmor)data).DefData.Physical;
@@ -52,6 +62,12 @@ namespace Soleil.Menu.Detail
             }
             if(type == ItemType.Weapon)
             {
+                // 攻撃力表示設定
+                atkExplain.Enable = true;
+                var aVal = ((WeaponData)data).AttackData.Magical; // 魔法の世界なので "攻撃力" => mATK
+                atkExplain.Val = aVal;
+
+                // 防御力表示
                 defExplain.Enable = true;
                 var val = ((IArmor)data).DefData.Physical;
                 defExplain.Val = val;
@@ -60,6 +76,7 @@ namespace Soleil.Menu.Detail
                 return;
             }
             // 装備でない
+            atkExplain.Enable = false;
             defExplain.Enable = false;            
         }
 
@@ -67,12 +84,14 @@ namespace Soleil.Menu.Detail
         {
             base.Update();
             Refresh(panel);
+            atkExplain.Update();
             defExplain.Update();
         }
 
         public override void Draw(Drawing d)
         {
             base.Draw(d);
+            atkExplain.Draw(d);
             defExplain.Draw(d);
         }
     }
