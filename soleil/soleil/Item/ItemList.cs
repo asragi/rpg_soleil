@@ -12,11 +12,11 @@ namespace Soleil.Item
     class ItemList : INotifier
     {
         Dictionary<ItemID, int> itemPossessMap;
-        List<IListener> listeners;
+        IListener[] listeners; // Listだとメモリリークが怖い
 
         public ItemList()
         {
-            listeners = new List<IListener>();
+            listeners = new IListener[(int)ListenerType.size];
             itemPossessMap = new Dictionary<ItemID, int>();
             for (int i = 0; i < (int)ItemID.size; i++)
             {
@@ -58,14 +58,15 @@ namespace Soleil.Item
             Refresh();
         }
 
-        public void AddListener(IListener listener) => listeners.Add(listener);
+        public void AddListener(IListener listener)
+            => listeners[(int)listener.Type] = listener;
 
         private void Refresh()
         {
             // アイテム所持数の更新を通知
             foreach (var item in listeners)
             {
-                item.OnListen(this);
+                item?.OnListen(this);
             }
         }
     }

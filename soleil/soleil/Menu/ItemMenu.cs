@@ -40,6 +40,8 @@ namespace Soleil.Menu
             }
         }
 
+        // IListener
+        public ListenerType Type { get { return ListenerType.ItemMenu; } }
         public void OnListen(INotifier i)
         {
             if (i is ItemList) Refresh();
