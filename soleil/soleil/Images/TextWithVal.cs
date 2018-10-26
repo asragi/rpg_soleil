@@ -16,6 +16,7 @@ namespace Soleil.Menu
         private FontImage text;
         private FontImage val;
         public Color TextColor { set => text.Color = value; }
+        public Color ValColor { set => val.Color = value; }
         public String Text { get => text.Text; set => text.Text = value; }
         public float Alpha { get => text.Alpha; set { text.Alpha = value; val.Alpha = value; } }
         int spacing;

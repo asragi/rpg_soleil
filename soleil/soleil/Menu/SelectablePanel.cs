@@ -54,6 +54,7 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
             itemNameImage.TextColor = ColorPalette.DarkBlue;
+            itemNameImage.ValColor = ColorPalette.DarkBlue;
             itemNameImage.Text = itemName;
 
             // 選択状態を示すやつ
