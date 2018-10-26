@@ -45,17 +45,18 @@ namespace Soleil.Menu.Detail
 
             if(type == ItemType.Accessory || type == ItemType.Armor)
             {
+                defExplain.Enable = true;
                 defExplain.Val = ((IArmor)data).DefData.Physical;
                 return;
             }
             if(type == ItemType.Weapon)
             {
+                defExplain.Enable = true;
                 defExplain.Val = 0;
                 return;
             }
             // 装備でない
-            defExplain.Val = 0;
-            
+            defExplain.Enable = false;            
         }
 
         public void Update(SelectablePanel panel)
