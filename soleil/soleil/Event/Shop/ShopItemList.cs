@@ -18,6 +18,8 @@ namespace Soleil.Event.Shop
             Init();
         }
 
+        protected override void ReturnParent() { }
+
         protected override SelectablePanel[] MakeAllPanels()
         {
             var tmpPanels = new List<ShopPanel>();
