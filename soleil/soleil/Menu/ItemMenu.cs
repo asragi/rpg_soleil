@@ -40,10 +40,9 @@ namespace Soleil.Menu
             }
         }
 
-        public void OnListen()
+        public void OnListen(INotifier i)
         {
-            Refresh();
-            Console.WriteLine("Listen");
+            if (i is ItemList) Refresh();
         }
     }
 }

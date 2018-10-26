@@ -9,7 +9,7 @@ namespace Soleil.Item
     /// <summary>
     /// プレイヤーが所持するアイテムの個数を管理する．
     /// </summary>
-    class ItemList
+    class ItemList : INotifier
     {
         Dictionary<ItemID, int> itemPossessMap;
         List<IListener> listeners;
@@ -65,7 +65,7 @@ namespace Soleil.Item
             // アイテム所持数の更新を通知
             foreach (var item in listeners)
             {
-                item.OnListen();
+                item.OnListen(this);
             }
         }
     }

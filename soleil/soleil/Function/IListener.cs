@@ -11,6 +11,11 @@ namespace Soleil
     /// </summary>
     interface IListener
     {
-        void OnListen();
+        void OnListen(INotifier i);
     }
+
+    /// <summary>
+    /// 更新通知を与えるインターフェイス
+    /// </summary>
+    interface INotifier { }
 }
