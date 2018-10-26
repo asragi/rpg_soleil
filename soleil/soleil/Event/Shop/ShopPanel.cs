@@ -14,6 +14,16 @@ namespace Soleil.Event.Shop
         private string desc;
         public override string Desctiption => desc;
 
+        public override Vector LocalPos
+        {
+            get => base.LocalPos;
+            set
+            {
+                base.LocalPos = value;
+                valueImage.Pos = _LocalPos + Spacing + BasicMenu.Pos + ValuePosDiff;
+            }
+        }
+
         // 価格表示
         string valueText;
         FontImage valueImage;
@@ -29,6 +39,18 @@ namespace Soleil.Event.Shop
             valueImage.Color = ColorPalette.DarkBlue;
 
             valueImage.Text = valueText;
+        }
+
+        public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        {
+            base.Fade(duration, _easeFunc, isFadeIn);
+            valueImage.Fade(duration, _easeFunc, isFadeIn);
+        }
+
+        public override void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        {
+            base.MoveTo(target, duration, _easeFunc);
+            valueImage.MoveTo(target + ValuePosDiff, duration, _easeFunc);
         }
 
         public void Call()
