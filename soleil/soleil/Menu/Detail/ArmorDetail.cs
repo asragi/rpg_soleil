@@ -37,13 +37,25 @@ namespace Soleil.Menu.Detail
 
         private void Refresh(SelectablePanel panel)
         {
-            if(panel is ItemPanelBase p)
+            if (!(panel is ItemPanelBase)) return;
+            var itemPanel = (ItemPanelBase)panel;
+            
+            var data = ItemDataBase.Get(itemPanel.ID);
+            var type = ItemDataBase.Get(itemPanel.ID).Type;
+
+            if(type == ItemType.Accessory || type == ItemType.Armor)
             {
-                var data = ItemDataBase.Get(p.ID);
-                var type = ItemDataBase.Get(p.ID).Type;
-                if (type != ItemType.Armor && type != ItemType.Accessory) return;
                 defExplain.Val = ((IArmor)data).DefData.Physical;
+                return;
             }
+            if(type == ItemType.Weapon)
+            {
+                defExplain.Val = 0;
+                return;
+            }
+            // 装備でない
+            defExplain.Val = 0;
+            
         }
 
         public void Update(SelectablePanel panel)
