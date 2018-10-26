@@ -12,8 +12,11 @@ namespace Soleil.Item
     class ItemList
     {
         Dictionary<ItemID, int> itemPossessMap;
+        List<IListener> listeners;
+
         public ItemList()
         {
+            listeners = new List<IListener>();
             itemPossessMap = new Dictionary<ItemID, int>();
             for (int i = 0; i < (int)ItemID.size; i++)
             {
@@ -40,6 +43,7 @@ namespace Soleil.Item
             if(itemPossessMap[id] >= num)
             {
                 itemPossessMap[id] -= num;
+                Refresh();
                 return true;
             }
             return false;
@@ -51,6 +55,18 @@ namespace Soleil.Item
         public void AddItem(ItemID id, int num = 1)
         {
             itemPossessMap[id] += num;
+            Refresh();
+        }
+
+        public void AddListener(IListener listener) => listeners.Add(listener);
+
+        private void Refresh()
+        {
+            // アイテム所持数の更新を通知
+            foreach (var item in listeners)
+            {
+                item.OnListen();
+            }
         }
     }
 }
