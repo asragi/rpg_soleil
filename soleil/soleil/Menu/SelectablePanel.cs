@@ -41,7 +41,7 @@ namespace Soleil.Menu
         readonly public String ItemName;
         protected int Val { set => itemNameImage.Val = value; }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
-        public readonly Vector ItemNumPosDiff = new Vector(300, 0);
+        public readonly Vector ItemNumPosDiff = new Vector(360, 0);
 
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;

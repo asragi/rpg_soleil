@@ -30,7 +30,7 @@ namespace Soleil.Menu
             set
             {
                 text.Pos = value;
-                val.Pos = value + new Vector(spacing, 0);
+                val.Pos = RightAlignPos();
             }
         }
 
@@ -39,10 +39,15 @@ namespace Soleil.Menu
             set
             {
                 val.Text = value.ToString();
-                // 右揃えにするために文字の幅を取得．
-                int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(font).MeasureString(value.ToString()).X) : 0;
-                val.Pos = text.Pos + new Vector(spacing - rightAlignDiff, 0);
+                val.Pos = RightAlignPos();
             }
+        }
+
+        // 右揃えにするために文字の幅を取得し，適切な位置を返す．
+        private Vector RightAlignPos()
+        {
+            int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(font).MeasureString(val.Text).X) : 0;
+            return text.Pos + new Vector(spacing - rightAlignDiff, 0);
         }
 
         public TextWithVal(FontID _font, Vector pos, int _space, String _text = "", int _val = 0, DepthID depth = DepthID.Message, bool isStatic = true, bool _rightAlign = true)
