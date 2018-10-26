@@ -23,17 +23,7 @@ namespace Soleil.Menu
         /// <summary>
         /// 親要素に対する相対的な座標．
         /// </summary>
-        protected Vector _LocalPos;
-        public virtual Vector LocalPos
-        {
-            get { return _LocalPos; }
-            set {
-                _LocalPos = value;
-                itemNameImage.Pos = _LocalPos + Spacing + BasicMenu.Pos;
-                selectedBack.Pos = _LocalPos + BasicMenu.Pos;
-            }
-        }
-
+        public virtual Vector LocalPos { get; set; }
         // ウィンドウ
         protected BasicMenu BasicMenu;
         // 項目名の描画
@@ -101,10 +91,12 @@ namespace Soleil.Menu
 
         public virtual void Update()
         {
+
             itemNameImage.Update();
             itemNameImage.Pos = BasicMenu.Pos + Spacing + LocalPos;
             itemNameImage.Alpha = BasicMenu.Alpha;
             selectedBack.Update();
+            selectedBack.Pos = LocalPos + BasicMenu.Pos;
         }
 
         public virtual void Draw(Drawing d)
