@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace Soleil.Menu
     {
         private FontImage text;
         private FontImage val;
+        public Color TextColor { set => text.Color = value; }
         public String Text { get => text.Text; set => text.Text = value; }
         public float Alpha { get => text.Alpha; set { text.Alpha = value; val.Alpha = value; } }
         int spacing;
@@ -21,6 +23,16 @@ namespace Soleil.Menu
         FontID font;
         public bool Enable = true;
         public bool EnableValDisplay = true;
+
+        public Vector Pos
+        {
+            get => text.Pos;
+            set
+            {
+                text.Pos = value;
+                val.Pos = value + new Vector(spacing, 0);
+            }
+        }
 
         public int Val
         {

@@ -37,7 +37,7 @@ namespace Soleil.Menu
         // ウィンドウ
         protected BasicMenu BasicMenu;
         // 項目名の描画
-        FontImage itemNameImage;
+        TextWithVal itemNameImage;
         readonly public String ItemName;
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
@@ -48,8 +48,8 @@ namespace Soleil.Menu
             BasicMenu = parent;
             ItemName = itemName;
             // Set Font Image
-            itemNameImage = new FontImage(ItemFont, LocalPos + parent.Pos, DepthID.Message, true, 0);
-            itemNameImage.Color = ColorPalette.DarkBlue;
+            itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, 200);
+             itemNameImage.TextColor = ColorPalette.DarkBlue;
             itemNameImage.Text = itemName;
 
             // 選択状態を示すやつ
@@ -58,13 +58,11 @@ namespace Soleil.Menu
 
         public virtual void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
         {
-            itemNameImage.Fade(duration, _easeFunc, isFadeIn);
             if (isSelected) selectedBack.Fade(duration, _easeFunc, isFadeIn);
         }
 
         public virtual void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
         {
-            itemNameImage.MoveTo(target + Spacing, duration, _easeFunc);
             selectedBack.MoveTo(target, duration, _easeFunc);
         }
 
@@ -84,7 +82,7 @@ namespace Soleil.Menu
         protected virtual void OnSelected()
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, true);
-            itemNameImage.Color = ColorPalette.AliceBlue;
+            itemNameImage.TextColor = ColorPalette.AliceBlue;
         }
 
         /// <summary>
@@ -93,12 +91,14 @@ namespace Soleil.Menu
         protected virtual void OnUnselected()
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, false);
-            itemNameImage.Color = ColorPalette.DarkBlue;
+            itemNameImage.TextColor = ColorPalette.DarkBlue;
         }
 
         public virtual void Update()
         {
             itemNameImage.Update();
+            itemNameImage.Pos = BasicMenu.Pos + Spacing + LocalPos;
+            itemNameImage.Alpha = BasicMenu.Alpha;
             selectedBack.Update();
         }
 

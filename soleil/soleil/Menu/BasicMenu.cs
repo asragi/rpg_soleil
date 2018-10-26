@@ -21,6 +21,7 @@ namespace Soleil.Menu
 
         Image backImage;
         public Vector Pos { get { return backImage.Pos; } }
+        public float Alpha { get => backImage.Alpha; }
         protected int Index;
         protected int InitIndex;
         protected SelectablePanel[] Panels;
