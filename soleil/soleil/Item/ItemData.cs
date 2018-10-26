@@ -116,7 +116,7 @@ namespace Soleil.Item
         }
     }
 
-    struct WeaponData : IItem, IWearable
+    struct WeaponData : IItem, IArmor
     {
         public ItemID ID { get; }
         public ItemType Type { get { return ItemType.Weapon; } }
@@ -125,15 +125,17 @@ namespace Soleil.Item
         public string Name { get; }
         public string Description { get; }
 
+        public DefData DefData { get; }
         public AttackData AttackData { get; }
         public AbilityScore AbilityScore { get; }
 
-        public WeaponData(ItemID iD, AttackData attk, AbilityScore? score, string name, string description)
+        public WeaponData(ItemID iD, AttackData attk, DefData? def, AbilityScore? score, string name, string description)
         {
             ID = iD;
             Name = name;
             Description = description;
             AttackData = attk;
+            DefData = def ?? new DefData(0, 0, null, null);
             AbilityScore = score ?? new AbilityScore(0, 0, 0, 0, 0, 0);
         }
     }

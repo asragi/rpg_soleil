@@ -82,7 +82,7 @@ namespace Soleil.Item
 
         static void SetWeapon(String name, ItemID id, AttackData attack, DefData? def, AbilityScore? score, String desc)
         {
-            data[(int)id] = new WeaponData(id, attack, score, name, desc);
+            data[(int)id] = new WeaponData(id, attack, def, score, name, desc);
         }
 
         static void SetAc(String name, ItemID id, DefData def, AbilityScore? score, String desc)
