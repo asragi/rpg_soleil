@@ -14,17 +14,20 @@ namespace Soleil.Event.Shop
     class ShopSystem : MenuComponent
     {
         readonly Vector DescriptionPos = new Vector(125, 35);
+        readonly Vector MoneyPos = new Vector(60, 430);
         private bool quitStart;
         int quitCount;
         public bool IsQuit { get; private set; }
         MenuDescription menuDescription;
         ShopItemList shopItemList;
+        MoneyComponent moneyComponent;
 
         public ShopSystem(Dictionary<ItemID, int> values)
         {
             menuDescription = new MenuDescription(DescriptionPos);
             menuDescription.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, menuDescription, values);
+            moneyComponent = new MoneyComponent(MoneyPos);
         }
 
         public void Call()
@@ -32,6 +35,7 @@ namespace Soleil.Event.Shop
             IsQuit = false;
             shopItemList.Call();
             menuDescription.Call();
+            moneyComponent.Call();
             quitCount = 0;
             quitStart = false;
         }
@@ -46,6 +50,7 @@ namespace Soleil.Event.Shop
             quitStart = true;
             shopItemList.Quit();
             menuDescription.Quit();
+            moneyComponent.Quit();
         }
 
         public void Input(Direction dir) => shopItemList.Input(dir);
@@ -55,6 +60,7 @@ namespace Soleil.Event.Shop
             base.Update();
             shopItemList.Update();
             menuDescription.Update();
+            moneyComponent.Update();
             QuitCheck();
             if (KeyInput.GetKeyPush(Key.B) && !quitStart) QuitStart();
 
@@ -74,6 +80,7 @@ namespace Soleil.Event.Shop
             base.Draw(d);
             shopItemList.Draw(d);
             menuDescription.Draw(d);
+            moneyComponent.Draw(d);
         }
     }
 }
