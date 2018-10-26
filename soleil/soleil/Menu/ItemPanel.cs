@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
     /// </summary>
-    class ItemPanel : SelectablePanel
+    class ItemPanel : ItemPanelBase
     {
         public readonly Vector ItemNumPosDiff = new Vector(300, 0);
 
@@ -25,7 +25,6 @@ namespace Soleil.Menu
             }
         }
 
-        public readonly ItemID ID;
         // 当該アイテムの所持数
         string itemNumText;
         FontImage itemNumImage;
@@ -33,10 +32,8 @@ namespace Soleil.Menu
         public override string Desctiption => desc;
 
         public ItemPanel(ItemID id, ItemList itemData, ItemMenu parent)
-            :base(ItemDataBase.Get(id).Name, parent)
+            :base(id, ItemDataBase.Get(id).Name, parent)
         {
-            // ItemID
-            ID = id;
             // Desctiption
             desc = ItemDataBase.Get(id).Description;
             // itemNum

@@ -147,6 +147,7 @@
     <Compile Include="Menu\Detail\DetailWindow.cs" />
     <Compile Include="Menu\Detail\PossessNum.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
+    <Compile Include="Menu\ItemPanelBase.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
