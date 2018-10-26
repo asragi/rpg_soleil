@@ -24,7 +24,6 @@ namespace Soleil.Map
         private MapInputManager()
         {
             wm = WindowManager.GetInstance();
-            menuSystem = new MenuSystem();
             nowFocus = InputFocus.Player;
             inputs = new Dictionary<Key, bool>();
         }
