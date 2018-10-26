@@ -41,6 +41,8 @@ namespace Soleil.Menu
         readonly public String ItemName;
         protected int Val { set => itemNameImage.Val = value; }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
+        public readonly Vector ItemNumPosDiff = new Vector(300, 0);
+
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
         bool isSelected;
@@ -50,8 +52,8 @@ namespace Soleil.Menu
             BasicMenu = parent;
             ItemName = itemName;
             // Set Font Image
-            itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, 300);
-             itemNameImage.TextColor = ColorPalette.DarkBlue;
+            itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
+            itemNameImage.TextColor = ColorPalette.DarkBlue;
             itemNameImage.Text = itemName;
 
             // 選択状態を示すやつ

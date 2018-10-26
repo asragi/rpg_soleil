@@ -13,8 +13,6 @@ namespace Soleil.Menu
     /// </summary>
     class ItemPanel : ItemPanelBase
     {
-        public readonly Vector ItemNumPosDiff = new Vector(300, 0);
-
         private string desc;
         public override string Desctiption => desc;
 
