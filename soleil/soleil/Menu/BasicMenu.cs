@@ -13,7 +13,7 @@ namespace Soleil.Menu
     {
         protected const int FadeSpeed = 16; // アイテムメニューが出現するスピード
         protected const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
-        protected readonly Vector WindowPos = new Vector(330, 100);
+        protected virtual Vector WindowPos => new Vector(330, 100);
         protected readonly Vector WindowPosDiff = new Vector(0, 20);
 
         protected readonly Vector ItemDrawStartPos = new Vector(25, 28);
