@@ -25,6 +25,7 @@ namespace Soleil.Menu
             }
         }
 
+        public readonly ItemID ID;
         // 当該アイテムの所持数
         string itemNumText;
         FontImage itemNumImage;
@@ -34,6 +35,8 @@ namespace Soleil.Menu
         public ItemPanel(ItemID id, ItemList itemData, ItemMenu parent)
             :base(ItemDataBase.Get(id).Name, parent)
         {
+            // ItemID
+            ID = id;
             // Desctiption
             desc = ItemDataBase.Get(id).Description;
             // itemNum

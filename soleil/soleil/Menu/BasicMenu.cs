@@ -27,6 +27,7 @@ namespace Soleil.Menu
         protected SelectablePanel[] AllPanels;
         protected int IndexSize;
         protected MenuDescription MenuDescription;
+        public SelectablePanel SelectedPanel => Panels[Index];
 
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
