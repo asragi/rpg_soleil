@@ -19,6 +19,8 @@ namespace Soleil.Menu
         int spacing;
         bool rightAlign;
         FontID font;
+        public bool Enable = true;
+        public bool EnableValDisplay = true;
 
         public int Val
         {
@@ -63,7 +65,9 @@ namespace Soleil.Menu
 
         public void Draw(Drawing d)
         {
+            if (!Enable) return;
             text.Draw(d);
+            if (!EnableValDisplay) return;
             val.Draw(d);
         }
     }
