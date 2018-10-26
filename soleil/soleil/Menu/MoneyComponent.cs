@@ -13,6 +13,8 @@ namespace Soleil.Menu
     /// </summary>
     class MoneyComponent
     {
+        readonly Vector InitPos;
+        readonly Vector PositionDiff = new Vector(0, 30);
         readonly Vector CurrencyPos = new Vector(200, 0);
         MoneyWallet moneyWallet;
         FontImage moneyText;
@@ -20,6 +22,7 @@ namespace Soleil.Menu
 
         public MoneyComponent(Vector _pos)
         {
+            InitPos = _pos;
             moneyText = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
             moneyText.Color = ColorPalette.DarkBlue;
             moneyText.EnableShadow = true;
@@ -40,12 +43,18 @@ namespace Soleil.Menu
 
         public void Call()
         {
-
+            moneyText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            moneyText.MoveTo(InitPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            currency.MoveTo(InitPos + CurrencyPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
         }
 
         public void Quit()
         {
-
+            moneyText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            moneyText.MoveTo(InitPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            currency.MoveTo(InitPos + CurrencyPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
         }
 
         public void Update()
