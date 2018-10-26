@@ -14,7 +14,7 @@ namespace Soleil.Menu.Detail
     class ArmorDetail : DetailComponent
     {
         readonly String ExplainText = "防御力";
-        readonly int Space = 100;
+        readonly int Space = 220;
         readonly Vector InitPos;
 
         TextWithVal defExplain;
