@@ -14,7 +14,8 @@ namespace Soleil.Map.Maps.Somnia
         readonly Vector WindowPosDiff = new Vector(-230, -100);
         readonly Dictionary<ItemID, int> values = new Dictionary<ItemID, int> {
             {ItemID.Stone, 200 },
-            {ItemID.Zarigani, 1200 }
+            {ItemID.Zarigani, 1200 },
+            {ItemID.BeadsWork, 3000 }
         };
         public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
