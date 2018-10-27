@@ -13,7 +13,7 @@ namespace Soleil
     class Image : ImageBase
     {
         Texture2D tex;
-        Vector origin;
+        bool origin;
         public int Id { get; private set; }
         public Rectangle Rectangle { get; set; }
         public Vector Size { get; set; } = Vector.One;
@@ -27,13 +27,16 @@ namespace Soleil
             Id = id;
             this.tex = tex;
             Rectangle = new Rectangle(0, 0, tex.Width, tex.Height);
-            origin = (centerOrigin) ? Vector.Zero : new Vector(tex.Width, tex.Height) / 2;
+            origin = centerOrigin;
         }
 
         public override void Draw(Drawing d)
         {
-            if (IsStatic) d.DrawUI(Pos + origin, tex, Rectangle, Color.White, DepthID, Size, Alpha, Angle);
-            else d.DrawWithColor(Pos + origin, tex, Rectangle, DepthID, Color.White * Alpha, Size, Angle);
+            var tmp = d.CenterBased;
+            d.CenterBased = origin;
+            if (IsStatic) d.DrawUI(Pos, tex, Rectangle, Color.White, DepthID, Size, Alpha, Angle);
+            else d.DrawWithColor(Pos, tex, Rectangle, DepthID, Color.White * Alpha, Size, Angle);
+            d.CenterBased = tmp;
         }
     }
 }
