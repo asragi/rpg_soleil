@@ -15,6 +15,8 @@ namespace Soleil
         Texture2D tex;
         Vector origin;
         public int Id { get; private set; }
+        public Rectangle Rectangle { get; set; }
+        public Vector Size { get; set; } = Vector.One;
 
         /// <summary>
         /// ImageManagerから作る.
@@ -24,13 +26,14 @@ namespace Soleil
         {
             Id = id;
             this.tex = tex;
+            Rectangle = new Rectangle(0, 0, tex.Width, tex.Height);
             origin = (centerOrigin) ? Vector.Zero : new Vector(tex.Width, tex.Height) / 2;
         }
 
         public override void Draw(Drawing d)
         {
-            if (IsStatic) d.DrawUI(Pos + origin, tex, DepthID, 1, Alpha, Angle);
-            else d.DrawWithColor(Pos + origin, tex, DepthID, Color.White * Alpha, 1, Angle);
+            if (IsStatic) d.DrawUI(Pos + origin, tex, Rectangle, Color.White, DepthID, Size, Alpha, Angle);
+            else d.DrawWithColor(Pos + origin, tex, Rectangle, DepthID, Color.White * Alpha, Size, Angle);
         }
     }
 }
