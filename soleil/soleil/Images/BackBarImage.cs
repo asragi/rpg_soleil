@@ -12,6 +12,7 @@ namespace Soleil.Images
     /// </summary>
     class BackBarImage
     {
+        // 画像の端からの切り出し量
         const int EdgeSize = 36;
         public Vector Pos { get; set; }
         Image[] images;
@@ -25,12 +26,15 @@ namespace Soleil.Images
             {
                 images[i] = new Image(0, tex, Pos, DepthID.Debug, false, true, 1);
             }
+            // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);
             images[1].Rectangle = new Rectangle(EdgeSize, 0, tex.Width - 2 * EdgeSize, tex.Height);
             images[2].Rectangle = new Rectangle(tex.Width - EdgeSize, 0, EdgeSize, tex.Height);
 
+            // 拡大率設定
             var size = (_length - 2 * EdgeSize) / (float)(tex.Width - 2 * EdgeSize);
             images[1].Size = new Vector(size, 1);
+            // 位置設定
             images[0].Pos = Pos;
             images[1].Pos = Pos + new Vector(EdgeSize, 0);
             images[2].Pos = Pos + new Vector(EdgeSize + (_length - 2 * EdgeSize), 0);
