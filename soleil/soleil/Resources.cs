@@ -16,6 +16,7 @@ namespace Soleil
         FrameTest,
         WhiteWindow,
         IndicatorBack,
+        BackBar,
 
         MenuFront,
         MenuBack,
@@ -244,6 +245,7 @@ namespace Soleil
             #region Texture
 
             SetPath(TextureID.White, "white");
+            SetPath(TextureID.BackBar, $"{UIPath}backBar");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
