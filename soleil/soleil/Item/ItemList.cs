@@ -9,11 +9,14 @@ namespace Soleil.Item
     /// <summary>
     /// プレイヤーが所持するアイテムの個数を管理する．
     /// </summary>
-    class ItemList
+    class ItemList : INotifier
     {
         Dictionary<ItemID, int> itemPossessMap;
+        IListener[] listeners; // Listだとメモリリークが怖い
+
         public ItemList()
         {
+            listeners = new IListener[(int)ListenerType.size];
             itemPossessMap = new Dictionary<ItemID, int>();
             for (int i = 0; i < (int)ItemID.size; i++)
             {
@@ -40,6 +43,7 @@ namespace Soleil.Item
             if(itemPossessMap[id] >= num)
             {
                 itemPossessMap[id] -= num;
+                Refresh();
                 return true;
             }
             return false;
@@ -51,6 +55,19 @@ namespace Soleil.Item
         public void AddItem(ItemID id, int num = 1)
         {
             itemPossessMap[id] += num;
+            Refresh();
+        }
+
+        public void AddListener(IListener listener)
+            => listeners[(int)listener.Type] = listener;
+
+        private void Refresh()
+        {
+            // アイテム所持数の更新を通知
+            foreach (var item in listeners)
+            {
+                item?.OnListen(this);
+            }
         }
     }
 }

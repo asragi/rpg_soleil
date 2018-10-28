@@ -51,7 +51,7 @@ namespace Soleil.Item
         static void SetData()
         {
             Set("傷薬", ItemID.Portion, true, true, 30, "味方一人を少量回復．");
-            Set("活きのいいザリガニ", ItemID.Zarigani, , true, true, 20, "食べる......？");
+            Set("活きのいいザリガニ", ItemID.Zarigani, true, true, 20, "食べる......？");
             Set("石ころ", ItemID.Stone, 0, "そこら辺の石ころ．");
 
             // Debug

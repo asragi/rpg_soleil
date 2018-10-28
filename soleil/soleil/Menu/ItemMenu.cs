@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class ItemMenu : BasicMenu
+    class ItemMenu : BasicMenu, IListener
     {
         ItemList itemList;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
             :base(parent, desc)
         {
             itemList = PlayerBaggage.GetInstance().Items;
+            itemList.AddListener(this);
             // 描画すべきパネルを決定する．
             Init();
         }
@@ -37,6 +38,13 @@ namespace Soleil.Menu
             {
                 AllPanels[i].Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             }
+        }
+
+        // IListener
+        public ListenerType Type { get { return ListenerType.ItemMenu; } }
+        public void OnListen(INotifier i)
+        {
+            if (i is ItemList) Refresh();
         }
     }
 }

@@ -42,6 +42,11 @@ namespace Soleil.Menu
             Panels = SetPanels();
         }
 
+        protected void Refresh()
+        {
+            Init();
+        }
+
         public virtual void Call()
         {
             // Transition Images

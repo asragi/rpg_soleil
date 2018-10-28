@@ -1,4 +1,5 @@
 ﻿using Soleil.Item;
+using Soleil.Map;
 using Soleil.Menu;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,14 @@ namespace Soleil.Event.Shop
     class ShopItemList : BasicMenu
     {
         Dictionary<ItemID, int> values;
+        MoneyWallet moneyWallet;
+        ItemList itemList;
         public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> _values)
             : base(parent, description)
         {
+            var p = PlayerBaggage.GetInstance();
+            moneyWallet = p.MoneyWallet;
+            itemList = p.Items;
             values = _values;
             Init();
         }
@@ -27,5 +33,25 @@ namespace Soleil.Event.Shop
             }
             return tmpPanels.ToArray();
         }
+
+        public override void OnInputSubmit()
+        {
+            var decidedPanel = (ShopPanel)Panels[Index];
+            var decidedPrice = decidedPanel.Price;
+            if (moneyWallet.HasEnough(decidedPrice))
+            {
+                // 購入成功
+                Console.WriteLine("購入成功");
+                moneyWallet.Consume(decidedPrice);
+                itemList.AddItem(decidedPanel.ID);
+            }
+            else
+            {
+                // 所持金が足りない
+                Console.WriteLine("所持金が足りない");
+            }
+        }
+
+        public override void OnInputCancel() { }
     }
 }

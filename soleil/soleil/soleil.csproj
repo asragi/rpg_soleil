@@ -86,6 +86,7 @@
     <Compile Include="Function\Effect.cs" />
     <Compile Include="Function\Global.cs" />
     <Compile Include="Function\IEnumeratorEx.cs" />
+    <Compile Include="Function\IListener.cs" />
     <Compile Include="Function\MathEx.cs" />
     <Compile Include="Function\PlayerBaggage.cs" />
     <Compile Include="Function\Reference.cs" />

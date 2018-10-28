@@ -13,6 +13,18 @@ namespace Soleil.Event.Shop
         public readonly Vector ValuePosDiff = new Vector(300, 0);
         private string desc;
         public override string Desctiption => desc;
+        public ItemID ID { get; private set; }
+        public int Price { get; private set; }
+
+        public override Vector LocalPos
+        {
+            get => base.LocalPos;
+            set
+            {
+                base.LocalPos = value;
+                valueImage.Pos = _LocalPos + Spacing + BasicMenu.Pos + ValuePosDiff;
+            }
+        }
 
         // 価格表示
         string valueText;
@@ -22,6 +34,8 @@ namespace Soleil.Event.Shop
             :base(ItemDataBase.Get(id).Name, parent)
         {
             desc = ItemDataBase.Get(id).Description;
+            ID = id;
+            Price = value;
 
             // itemNum
             valueText = value.ToString();
@@ -29,6 +43,18 @@ namespace Soleil.Event.Shop
             valueImage.Color = ColorPalette.DarkBlue;
 
             valueImage.Text = valueText;
+        }
+
+        public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
+        {
+            base.Fade(duration, _easeFunc, isFadeIn);
+            valueImage.Fade(duration, _easeFunc, isFadeIn);
+        }
+
+        public override void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
+        {
+            base.MoveTo(target, duration, _easeFunc);
+            valueImage.MoveTo(target + ValuePosDiff, duration, _easeFunc);
         }
 
         public void Call()
