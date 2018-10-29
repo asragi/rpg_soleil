@@ -7,34 +7,44 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class DescriptionWindow
+    class DescriptionWindow : MenuDescription
     {
         const int Y = 80;
         const int X = 40;
         BackBarImage backBar;
-        MenuDescription description;
-        public String Text { set => description.Text = value; }
 
         /// <summary>
         /// ウィンドウつきMenuDescriptionコンポーネント．
         /// </summary>
         public DescriptionWindow()
+            :base(new Vector(X,Y))
         {
             var barWidth = Game1.VirtualWindowSizeX - 2 * X;
             backBar = new BackBarImage(new Vector(X, Y), barWidth, false);
-            description = new MenuDescription(new Vector(X, Y));
         }
 
-        public void Update()
+        public override void Call()
         {
-            backBar.Update();
-            description.Update();
+            base.Call();
+            backBar.Call();
         }
 
-        public void Draw(Drawing d)
+        public override void Quit()
+        {
+            base.Quit();
+            backBar.Quit();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            backBar.Update();
+        }
+
+        public override void Draw(Drawing d)
         {
             backBar.Draw(d);
-            description.Draw(d);
+            base.Draw(d);
         }
     }
 }

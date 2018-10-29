@@ -9,7 +9,7 @@ namespace Soleil.Menu
     using EFunc = Func<double, double, double, double, double>;
     class MenuDescription
     {
-        FontImage fontImage;
+        protected FontImage fontImage;
         public String Text { set { fontImage.Text = value; } }
 
         public MenuDescription(Vector _pos)
@@ -21,12 +21,12 @@ namespace Soleil.Menu
             fontImage.ShadowColor = ColorPalette.GlayBlue;
         }
 
-        public void Call()
+        public virtual void Call()
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
         }
 
-        public void Quit()
+        public virtual void Quit()
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
         }
@@ -41,12 +41,12 @@ namespace Soleil.Menu
             fontImage.MoveTo(target, duration, _easeFunc);
         }
 
-        public void Update()
+        public virtual void Update()
         {
             fontImage.Update();
         }
 
-        public void Draw(Drawing d)
+        public virtual void Draw(Drawing d)
         {
             fontImage.Draw(d);
         }
