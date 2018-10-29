@@ -19,16 +19,16 @@ namespace Soleil.Event.Shop
         private bool quitStart;
         int quitCount;
         public bool IsQuit { get; private set; }
-        MenuDescription menuDescription;
+        DescriptionWindow descriptionWindow;
         ShopItemList shopItemList;
         MoneyComponent moneyComponent;
         DetailWindow detailWindow;
 
         public ShopSystem(Dictionary<ItemID, int> values)
         {
-            menuDescription = new MenuDescription(DescriptionPos);
-            menuDescription.Text = "これはテストメッセージ";
-            shopItemList = new ShopItemList(this, menuDescription, values);
+            descriptionWindow = new DescriptionWindow();
+            descriptionWindow.Text = "これはテストメッセージ";
+            shopItemList = new ShopItemList(this, descriptionWindow, values);
             moneyComponent = new MoneyComponent(MoneyPos);
             detailWindow = new DetailWindow(DetailWindowPos);
         }
@@ -37,7 +37,7 @@ namespace Soleil.Event.Shop
         {
             IsQuit = false;
             shopItemList.Call();
-            menuDescription.Call();
+            descriptionWindow.Call();
             moneyComponent.Call();
             detailWindow.Call();
             quitCount = 0;
@@ -53,7 +53,7 @@ namespace Soleil.Event.Shop
         {
             quitStart = true;
             shopItemList.Quit();
-            menuDescription.Quit();
+            descriptionWindow.Quit();
             moneyComponent.Quit();
             detailWindow.Quit();
         }
@@ -64,7 +64,7 @@ namespace Soleil.Event.Shop
         {
             base.Update();
             shopItemList.Update();
-            menuDescription.Update();
+            descriptionWindow.Update();
             moneyComponent.Update();
             detailWindow.Update(shopItemList.SelectedPanel);
             QuitCheck();
@@ -85,7 +85,7 @@ namespace Soleil.Event.Shop
         {
             base.Draw(d);
             shopItemList.Draw(d);
-            menuDescription.Draw(d);
+            descriptionWindow.Draw(d);
             moneyComponent.Draw(d);
             detailWindow.Draw(d);
         }

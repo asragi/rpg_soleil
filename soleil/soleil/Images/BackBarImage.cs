@@ -25,7 +25,7 @@ namespace Soleil.Images
             var tex = Resources.GetTexture(TextureID.BackBar);
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new Image(0, tex, Pos, DepthID.MessageBack, false, true, 1);
+                images[i] = new Image(0, tex, Pos, DepthID.MessageBack, false, true, 0);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);
