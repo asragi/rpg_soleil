@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    using EFunc = Func<double, double, double, double, double>;
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
     /// </summary>
