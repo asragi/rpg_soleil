@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Soleil.Images
             var tex = Resources.GetTexture(TextureID.BackBar);
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new Image(0, tex, Pos, DepthID.MessageBack, false, true, 1);
+                images[i] = new Image(0, tex, Pos, DepthID.MessageBack, false, true, 0);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);
@@ -38,6 +39,22 @@ namespace Soleil.Images
             images[0].Pos = Pos;
             images[1].Pos = Pos + new Vector(EdgeSize, 0);
             images[2].Pos = Pos + new Vector(EdgeSize + (_length - 2 * EdgeSize), 0);
+        }
+
+        public void Call()
+        {
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            }
+        }
+
+        public void Quit()
+        {
+            for (int i = 0; i < images.Length; i++)
+            {
+                images[i].Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            }
         }
 
         public void Update()

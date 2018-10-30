@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace Soleil.Menu
     {
         private FontImage text;
         private FontImage val;
+        public Color TextColor { set => text.Color = value; }
+        public Color ValColor { set => val.Color = value; }
         public String Text { get => text.Text; set => text.Text = value; }
         public float Alpha { get => text.Alpha; set { text.Alpha = value; val.Alpha = value; } }
         int spacing;
@@ -22,15 +25,30 @@ namespace Soleil.Menu
         public bool Enable = true;
         public bool EnableValDisplay = true;
 
+        public Vector Pos
+        {
+            get => text.Pos;
+            set
+            {
+                text.Pos = value;
+                val.Pos = RightAlignPos();
+            }
+        }
+
         public int Val
         {
             set
             {
                 val.Text = value.ToString();
-                // 右揃えにするために文字の幅を取得．
-                int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(font).MeasureString(value.ToString()).X) : 0;
-                val.Pos = text.Pos + new Vector(spacing - rightAlignDiff, 0);
+                val.Pos = RightAlignPos();
             }
+        }
+
+        // 右揃えにするために文字の幅を取得し，適切な位置を返す．
+        private Vector RightAlignPos()
+        {
+            int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(font).MeasureString(val.Text).X) : 0;
+            return text.Pos + new Vector(spacing - rightAlignDiff, 0);
         }
 
         public TextWithVal(FontID _font, Vector pos, int _space, String _text = "", int _val = 0, DepthID depth = DepthID.Message, bool isStatic = true, bool _rightAlign = true)

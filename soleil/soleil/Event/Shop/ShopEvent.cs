@@ -32,7 +32,7 @@ namespace Soleil.Event
         int waitFrame;
         bool inputCheck;
         int headWaitCount;
-        const int InputWait = 12;
+        const int InputWait = 6;
         const int HeadWait = 20;
         /// <summary>
         /// MapInputManagerからのコピペ．追々リファクタリングして統合します．

@@ -11,16 +11,17 @@ namespace Soleil.Menu
     /// </summary>
     abstract class BasicMenu : MenuChild
     {
-        protected const int FadeSpeed = 30; // アイテムメニューが出現するスピード
+        protected const int FadeSpeed = 16; // アイテムメニューが出現するスピード
         protected const int RowSize = 8; // 現在のフォントサイズだと8項目がちょうどよい
-        protected readonly Vector WindowPos = new Vector(330, 100);
-        protected readonly Vector WindowStartPos = new Vector(830, 100);
+        protected virtual Vector WindowPos => new Vector(330, 100);
+        protected readonly Vector WindowPosDiff = new Vector(0, 20);
 
         protected readonly Vector ItemDrawStartPos = new Vector(25, 28);
         protected readonly int ItemPanelSpacing = 4;
 
         Image backImage;
         public Vector Pos { get { return backImage.Pos; } }
+        public float Alpha { get => backImage.Alpha; }
         protected int Index;
         protected int InitIndex;
         protected SelectablePanel[] Panels;
@@ -32,7 +33,7 @@ namespace Soleil.Menu
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowStartPos, DepthID.MessageBack, false, true, 0);
+            backImage = new Image(0, Resources.GetTexture(TextureID.MenuModalBack), WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);
             Index = 0;
             MenuDescription = desc;
         }
@@ -64,11 +65,11 @@ namespace Soleil.Menu
         public virtual void Quit()
         {
             // Transition Images
-            backImage.MoveTo(WindowStartPos, FadeSpeed, MenuSystem.EaseFunc);
+            backImage.MoveTo(WindowPos + WindowPosDiff, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             foreach (var item in Panels)
             {
-                item?.MoveTo(WindowStartPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
+                item?.MoveTo(WindowPos + WindowPosDiff + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
                 item?.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             }
         }

@@ -11,6 +11,7 @@ namespace Soleil.Event.Shop
 {
     class ShopItemList : BasicMenu
     {
+        protected override Vector WindowPos => new Vector(440, 100);
         Dictionary<ItemID, int> values;
         MoneyWallet moneyWallet;
         ItemList itemList;
