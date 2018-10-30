@@ -11,7 +11,7 @@ namespace Soleil.Menu
     {
         const int Y = 40;
         const int X = 40;
-        const int MessagePosDiffX = 40;
+        const int MessagePosDiffX = 49;
         const int MessagePosDiffY = -10;
         BackBarImage backBar;
 
