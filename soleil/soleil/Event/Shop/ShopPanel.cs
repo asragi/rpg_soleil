@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event.Shop
 {
-    class ShopPanel : SelectablePanel
+    class ShopPanel : ItemPanelBase
     {
         public readonly Vector ValuePosDiff = new Vector(300, 0);
         private string desc;
@@ -31,7 +31,7 @@ namespace Soleil.Event.Shop
         FontImage valueImage;
 
         public ShopPanel(ItemID id, int value, ShopItemList parent)
-            :base(ItemDataBase.Get(id).Name, parent)
+            :base(id, ItemDataBase.Get(id).Name, parent)
         {
             desc = ItemDataBase.Get(id).Description;
             ID = id;
