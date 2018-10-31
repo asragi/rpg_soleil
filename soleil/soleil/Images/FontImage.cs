@@ -18,6 +18,7 @@ namespace Soleil
         public bool EnableShadow { get; set; }
         public Color ShadowColor { get; set; }
         public Vector ShadowPos { get; set; }
+        public override Vector GetSize => (Vector)Resources.GetFont(font).MeasureString(Text);
 
         /// <summary>
         /// ImageManagerから作る.
