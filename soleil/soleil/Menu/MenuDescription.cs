@@ -14,11 +14,7 @@ namespace Soleil.Menu
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
-            fontImage.Color = ColorPalette.DarkBlue;
-            fontImage.EnableShadow = false;
-            fontImage.ShadowPos = new Vector(3, 3);
-            fontImage.ShadowColor = ColorPalette.GlayBlue;
+            fontImage = new FontImage(FontID.WhiteOutlineGrad, _pos, DepthID.Message, true, 0);
         }
 
         public virtual void Call()
