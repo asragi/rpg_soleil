@@ -54,9 +54,9 @@ namespace Soleil.Menu
         public TextWithVal(FontID _font, Vector pos, int _space, String _text = "", int _val = 0, DepthID depth = DepthID.Message, bool isStatic = true, bool _rightAlign = true)
         {
             spacing = _space;
+            font = _font;
             text = new FontImage(font, pos, depth, isStatic, 0);
             text.Text = _text;
-            font = _font;
             rightAlign = _rightAlign;
             
             val = new FontImage(font, Vector.Zero, depth, isStatic, 0);
