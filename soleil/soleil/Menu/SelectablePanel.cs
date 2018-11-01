@@ -30,6 +30,7 @@ namespace Soleil.Menu
         TextWithVal itemNameImage;
         readonly public String ItemName;
         protected int Val { set => itemNameImage.Val = value; }
+        protected virtual FontID ValFont { set { itemNameImage.ValFont = value; } }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
         public readonly Vector ItemNumPosDiff = new Vector(360, 0);
 
