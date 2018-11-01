@@ -29,6 +29,8 @@ namespace Soleil.Menu
         protected int IndexSize;
         protected MenuDescription MenuDescription;
         public SelectablePanel SelectedPanel => Panels[Index];
+        private bool inputable = false;
+        private int inputCount;
 
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
@@ -60,6 +62,7 @@ namespace Soleil.Menu
                 item?.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             }
             RefreshSelected();
+            inputCount = FadeSpeed;
         }
 
         public virtual void Quit()
@@ -72,6 +75,8 @@ namespace Soleil.Menu
                 item?.MoveTo(WindowPos + WindowPosDiff + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
                 item?.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             }
+            // Input停止
+            inputable = false;
         }
 
         protected abstract SelectablePanel[] MakeAllPanels();
@@ -117,6 +122,12 @@ namespace Soleil.Menu
             {
                 item?.Update();
             }
+
+            if(!inputable && inputCount > 0)
+            {
+                inputCount--;
+                if (inputCount <= 0) inputable = true;
+            }
         }
 
         public override void Draw(Drawing d)
@@ -139,6 +150,12 @@ namespace Soleil.Menu
         }
 
         // Input
+        public override void Input(Direction dir)
+        {
+            if (!inputable) return;
+            base.Input(dir);
+        }
+
         public override void OnInputRight() { }
         public override void OnInputLeft() { }
 
