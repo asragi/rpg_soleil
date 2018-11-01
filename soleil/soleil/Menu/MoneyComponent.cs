@@ -13,9 +13,17 @@ namespace Soleil.Menu
     /// </summary>
     class MoneyComponent
     {
+        // Font設定
+        readonly FontID ValFont = FontID.KkMini;
+        readonly FontID CurrencyFont = FontID.KkGoldMini;
+        // 場所設定
         readonly Vector InitPos;
         readonly Vector PositionDiff = new Vector(-30, 0);
-        readonly Vector CurrencyPos = new Vector(180, 0);
+        // 通貨単位位置設定
+        readonly int CurrencyPosY;
+        readonly Vector CurrencyPos;
+        readonly Vector CurrencyOffset = new Vector(0, -1);
+
         MoneyWallet moneyWallet;
         int money;
         FontImage moneyText;
@@ -28,8 +36,10 @@ namespace Soleil.Menu
         public MoneyComponent(Vector _pos)
         {
             InitPos = _pos;
-            moneyText = new FontImage(FontID.KkMini, _pos - PositionDiff, DepthID.Message, true, 0);
-            currency = new FontImage(FontID.KkMini, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
+            CurrencyPosY = (int)Resources.GetFont(ValFont).MeasureString("0").Y - (int)(Resources.GetFont(CurrencyFont).MeasureString(MoneyWallet.Currency).Y);
+            CurrencyPos = new Vector(180, CurrencyPosY) + CurrencyOffset;
+            moneyText = new FontImage(ValFont, _pos - PositionDiff, DepthID.Message, true, 0);
+            currency = new FontImage(CurrencyFont, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
             currency.Text = MoneyWallet.Currency;
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
             backBar = new BackBarImage(_pos - new Vector(BackBarImage.EdgeSize,0), (int)CurrencyPos.X + 120, false);
