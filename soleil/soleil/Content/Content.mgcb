@@ -1269,3 +1269,26 @@
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
 /build:kkminchoWhiteMini.spritefont
+
+#begin kkminchoGoldMini.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=21,44,63,200
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=240,248,255,255
+/processorParam:GradientEndColor=156,187,199,255
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoGoldMini.spritefont

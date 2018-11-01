@@ -144,6 +144,7 @@ namespace Soleil
         WhiteOutlineGrad,
         KkBlack,
         KkMini,
+        KkGoldMini,
         Test,
         Size,
     }
@@ -368,6 +369,8 @@ namespace Soleil
             SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
             SetPath(FontID.KkBlack, "kkminchoBlack");
             SetPath(FontID.KkMini, "kkminchoWhiteMini");
+            SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
+
             //optionPath = Option.FilePath;
             #endregion 
         }
