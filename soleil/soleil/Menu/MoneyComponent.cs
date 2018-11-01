@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    using EFunc = Func<double, double, double, double, double>;
     /// <summary>
     /// 所持金表示コンポーネント．
     /// </summary>
