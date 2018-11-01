@@ -142,6 +142,7 @@ namespace Soleil
     enum FontID : int
     {
         WhiteOutlineGrad,
+        KkBlack,
         Test,
         Size,
     }
@@ -364,6 +365,7 @@ namespace Soleil
             
             SetPath(FontID.Test, "kkmincho");
             SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
+            SetPath(FontID.KkBlack, "kkminchoBlack");
             //optionPath = Option.FilePath;
             #endregion 
         }
