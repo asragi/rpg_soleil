@@ -145,6 +145,7 @@ namespace Soleil
         KkBlack,
         KkMini,
         KkGoldMini,
+        [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
     }
