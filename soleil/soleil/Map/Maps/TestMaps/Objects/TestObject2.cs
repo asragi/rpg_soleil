@@ -4,15 +4,11 @@ namespace Soleil.Map
 {
     class TestObject2 :MapEventObject
     {
-        CollideBox exi;
         public TestObject2(ObjectManager om, BoxManager bm)
-            : base(om)
+            : base(new Vector(400, 200), null, om, bm)
         {
             Pos = new Vector(400, 200);
-            exi = new CollideBox(this, Vector.Zero, new Vector(30, 30), CollideLayer.Character, bm);
 
-            
-            EventSequence = new EventSequence();
             EventSequence.SetEventSet(
                 new EventSet(
                     new MessageWindowEvent(Pos, 0, "テストメッセージ"),
@@ -38,17 +34,6 @@ namespace Soleil.Map
         {
             EventSequence.StartEvent();
             base.OnCollisionEnter(col);
-        }
-
-        public override void Update()
-        {
-            base.Update();
-        }
-
-
-        public override void OnCollisionExit()
-        {
-            base.OnCollisionExit();
         }
     }
 }

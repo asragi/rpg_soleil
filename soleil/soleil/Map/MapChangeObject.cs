@@ -9,13 +9,11 @@ namespace Soleil.Map
 {
     class MapChangeObject : MapEventObject
     {
-        CollideBox collide;
         public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
             ObjectManager om, BoxManager bm)
-            : base(om)
+            : base(pos, size, om, bm)
         {
             Pos = pos;
-            collide = new CollideBox(this, Vector.Zero, size, CollideLayer.RoadEvent, bm);
             EventSequence.SetEventSet(
                 new EventSet(
                     new FadeOutEvent()

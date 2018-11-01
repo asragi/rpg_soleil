@@ -27,12 +27,18 @@ namespace Soleil.Map
             EventSequence = new EventSequence();
         }
 
+        public override void Update()
+        {
+            base.Update();
+            EventUpdate();
+        }
+
         virtual public void EventUpdate()
         {
             EventSequence.Update();
         }
 
-        virtual public void Draw(Drawing sb)
+        public override void Draw(Drawing sb)
         {
             EventSequence.Draw(sb);
         }
