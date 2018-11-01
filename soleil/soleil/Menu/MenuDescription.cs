@@ -14,7 +14,7 @@ namespace Soleil.Menu
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.WhiteOutlineGrad, _pos, DepthID.Message, true, 0);
+            fontImage = new FontImage(FontID.KkBlack, _pos, DepthID.Message, true, 0);
         }
 
         public virtual void Call()

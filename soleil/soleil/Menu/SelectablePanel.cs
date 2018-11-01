@@ -17,7 +17,7 @@ namespace Soleil.Menu
         /// </summary>
         protected readonly Vector Spacing = new Vector(8, 4);
 
-        protected readonly FontID ItemFont = FontID.WhiteOutlineGrad;
+        protected readonly FontID ItemFont = FontID.KkBlack;
 
         public abstract string Desctiption { get; }
         /// <summary>
