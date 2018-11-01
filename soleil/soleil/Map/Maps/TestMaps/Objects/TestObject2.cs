@@ -2,7 +2,7 @@
 
 namespace Soleil.Map
 {
-    class TestObject2 :MapObject
+    class TestObject2 :MapEventObject
     {
         CollideBox exi;
         public TestObject2(ObjectManager om, BoxManager bm)

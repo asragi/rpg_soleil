@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    class MapChangeObject : MapObject
+    class MapChangeObject : MapEventObject
     {
         CollideBox collide;
         public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
