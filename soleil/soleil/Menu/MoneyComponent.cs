@@ -14,7 +14,7 @@ namespace Soleil.Menu
     {
         readonly Vector InitPos;
         readonly Vector PositionDiff = new Vector(-30, 0);
-        readonly Vector CurrencyPos = new Vector(200, 0);
+        readonly Vector CurrencyPos = new Vector(180, 0);
         MoneyWallet moneyWallet;
         int money;
         FontImage moneyText;
@@ -23,8 +23,8 @@ namespace Soleil.Menu
         public MoneyComponent(Vector _pos)
         {
             InitPos = _pos;
-            moneyText = new FontImage(FontID.WhiteOutlineGrad, _pos - PositionDiff, DepthID.Message, true, 0);
-            currency = new FontImage(FontID.WhiteOutlineGrad, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
+            moneyText = new FontImage(FontID.KkMini, _pos - PositionDiff, DepthID.Message, true, 0);
+            currency = new FontImage(FontID.KkMini, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
             currency.Text = MoneyWallet.Currency;
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
             Refresh();
