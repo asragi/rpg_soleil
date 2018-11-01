@@ -23,12 +23,10 @@ namespace Soleil.Map
         protected MoveState MoveState;
         protected Animation NowAnimation;
         private Animation[] standAnimation;
-        protected PlayerObject Player;
 
         public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
             :base(pos, boxSize, om, bm)
         {
-            Player = om.GetPlayer();
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;
             // n方向のアニメーション

@@ -16,15 +16,17 @@ namespace Soleil.Map
         protected CollideBox ExistanceBox;
         protected virtual CollideLayer CollideLayer { get {return CollideLayer.Character; } }
         protected EventSequence EventSequence;
+        protected PlayerObject Player;
 
         public MapEventObject(Vector _pos, Vector? _boxSize, ObjectManager om, BoxManager bm)
             :base(om)
         {
             Pos = _pos;
+            Player = om.GetPlayer();
             // boxsizeが指定されていなければ既定の値にする。
             var boxSize = _boxSize ?? DefaultBoxSize;
             ExistanceBox = new CollideBox(this, Vector.Zero, boxSize, CollideLayer, bm);
-            EventSequence = new EventSequence();
+            EventSequence = new EventSequence(Player);
         }
 
         public override void Update()
