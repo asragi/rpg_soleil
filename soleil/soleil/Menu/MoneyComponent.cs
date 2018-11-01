@@ -1,4 +1,5 @@
-﻿using Soleil.Map;
+﻿using Soleil.Images;
+using Soleil.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,10 @@ namespace Soleil.Menu
         FontImage moneyText;
         FontImage currency;
 
+        // 背景表示
+        public bool EnableBack = true;
+        BackBarImage backBar;
+
         public MoneyComponent(Vector _pos)
         {
             InitPos = _pos;
@@ -27,6 +32,7 @@ namespace Soleil.Menu
             currency = new FontImage(FontID.KkMini, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
             currency.Text = MoneyWallet.Currency;
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
+            backBar = new BackBarImage(_pos - new Vector(BackBarImage.EdgeSize,0), (int)CurrencyPos.X + 120, false);
             Refresh();
         }
 
@@ -42,6 +48,7 @@ namespace Soleil.Menu
             currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
             moneyText.MoveTo(InitPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
             currency.MoveTo(InitPos + CurrencyPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            backBar.Call();
         }
 
         public void Quit()
@@ -50,12 +57,14 @@ namespace Soleil.Menu
             currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
             moneyText.MoveTo(InitPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
             currency.MoveTo(InitPos + CurrencyPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            backBar.Quit();
         }
 
         public void Update()
         {
             moneyText.Update();
             currency.Update();
+            backBar.Update();
             if (money != moneyWallet.Val) Refresh();
         }
 
@@ -63,6 +72,7 @@ namespace Soleil.Menu
         {
             moneyText.Draw(d);
             currency.Draw(d);
+            if (EnableBack) backBar.Draw(d);
         }
     }
 }
