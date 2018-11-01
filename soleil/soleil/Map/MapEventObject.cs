@@ -40,6 +40,7 @@ namespace Soleil.Map
 
         public override void Draw(Drawing sb)
         {
+            base.Draw(sb);
             EventSequence.Draw(sb);
         }
     }

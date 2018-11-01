@@ -14,6 +14,7 @@ namespace Soleil.Map
             : base(pos, size, om, bm)
         {
             Pos = pos;
+            ExistanceBox.Layer = CollideLayer.RoadEvent;
             EventSequence.SetEventSet(
                 new EventSet(
                     new FadeOutEvent()
