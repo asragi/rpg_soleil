@@ -75,7 +75,7 @@ namespace Soleil.Menu
         protected virtual void OnSelected()
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, true);
-            itemNameImage.TextColor = ColorPalette.AliceBlue;
+            itemNameImage.Font = FontID.WhiteOutlineGrad;
         }
 
         /// <summary>
@@ -83,8 +83,8 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnUnselected()
         {
-            selectedBack.Fade(20, MenuSystem.EaseFunc, false);
-            // itemNameImage.TextColor = ColorPalette.DarkBlue;
+            selectedBack.Fade(5, MenuSystem.EaseFunc, false);
+            itemNameImage.Font = FontID.KkBlack;
         }
 
         public virtual void Update()

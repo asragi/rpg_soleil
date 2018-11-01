@@ -22,6 +22,7 @@ namespace Soleil.Menu
         int spacing;
         bool rightAlign;
         FontID font;
+        public FontID Font { set { font = value; text.Font = font; } }
         public bool Enable = true;
         public bool EnableValDisplay = true;
 
