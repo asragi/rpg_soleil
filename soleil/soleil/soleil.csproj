@@ -132,15 +132,10 @@
     <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia4.cs" />
-    <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump2.cs" />
-    <Compile Include="Map\Maps\TestMaps\Objects\TestMapJump.cs" />
-    <Compile Include="Map\Maps\TestMaps\TestMap2.cs" />
-    <Compile Include="Map\Maps\TestMaps\TestMap.cs" />
     <Compile Include="Map\MoneyWallet.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
-    <Compile Include="Map\Maps\TestMaps\Objects\TestObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
