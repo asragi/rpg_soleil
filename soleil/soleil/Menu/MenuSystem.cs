@@ -24,7 +24,7 @@ namespace Soleil.Menu
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
-        readonly Vector MoneyComponentPos = new Vector(620, 507);
+        readonly Vector MoneyComponentPos = new Vector(680, 507);
         readonly String[] Descriptions = new String[]
         {
             "アイテムを確認・選択して使用します。",
