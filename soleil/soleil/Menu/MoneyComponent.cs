@@ -21,6 +21,7 @@ namespace Soleil.Menu
         readonly Vector PositionDiff = new Vector(-30, 0);
         // 通貨単位位置設定
         readonly int CurrencyPosY;
+        const int CurrencyPosX = 120;
         readonly Vector CurrencyPos;
         readonly Vector CurrencyOffset = new Vector(0, -1);
 
@@ -37,7 +38,7 @@ namespace Soleil.Menu
         {
             InitPos = _pos;
             CurrencyPosY = (int)Resources.GetFont(ValFont).MeasureString("0").Y - (int)(Resources.GetFont(CurrencyFont).MeasureString(MoneyWallet.Currency).Y);
-            CurrencyPos = new Vector(180, CurrencyPosY) + CurrencyOffset;
+            CurrencyPos = new Vector(CurrencyPosX, CurrencyPosY) + CurrencyOffset;
             moneyText = new FontImage(ValFont, _pos - PositionDiff, DepthID.Message, true, 0);
             currency = new FontImage(CurrencyFont, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
             currency.Text = MoneyWallet.Currency;
