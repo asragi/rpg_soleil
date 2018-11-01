@@ -1214,8 +1214,8 @@
 /processorParam:HasGreekLetters=False
 /processorParam:HasCyrillicLetters=False
 /processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=1
-/processorParam:OutlineColor=21,44,63,100
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=21,44,63,200
 /processorParam:FontColor=255,255,255,255
 /processorParam:UseGradient=True
 /processorParam:GradientBeginColor=240,248,255,255
