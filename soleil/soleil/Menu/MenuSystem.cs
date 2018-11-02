@@ -35,7 +35,12 @@ namespace Soleil.Menu
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
-
+        // 選択後にキャラクターの選択に移動するメニュー項目
+        readonly MenuName[] ToCharacterSelect = new[] {
+            MenuName.Magic,
+            MenuName.Skill,
+            MenuName.Equip,
+            MenuName.Status };
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -194,7 +199,7 @@ namespace Soleil.Menu
                 itemMenu.IsActive = true;
                 return;
             }
-            if(selected == MenuName.Magic || selected == MenuName.Equip || selected == MenuName.Status)
+            if(ToCharacterSelect.Contains(selected))
             {
                 statusMenu.IsActive = true;
                 return;
