@@ -101,6 +101,7 @@
     <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Images\TextWithVal.cs" />
+    <Compile Include="Images\UIImage.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
     <Compile Include="Item\ItemList.cs" />
