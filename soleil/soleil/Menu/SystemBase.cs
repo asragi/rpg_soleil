@@ -9,13 +9,13 @@ namespace Soleil.Menu
     /// <summary>
     /// UIシステムの抽象クラス．システムの持つコンポーネントをまとめて管理する．
     /// </summary>
-    abstract class SystemBase : MenuComponent
+    abstract class SystemBase : MenuChild
     {
         protected MenuComponent[] Components;
         protected Image[] Images;
 
-        public SystemBase()
-            : base() { }
+        public SystemBase(MenuComponent parent)
+            : base(parent) { }
 
         public override void Call()
         {
