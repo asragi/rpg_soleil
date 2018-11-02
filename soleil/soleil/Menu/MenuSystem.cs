@@ -109,7 +109,7 @@ namespace Soleil.Menu
         /// <summary>
         /// メニューを呼び出す
         /// </summary>
-        public void CallMenu()
+        public override void Call()
         {
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
@@ -123,14 +123,13 @@ namespace Soleil.Menu
         /// <summary>
         /// メニューを閉じる
         /// </summary>
-        public void QuitMenu()
+        public override void Quit()
         {
             // Set bools
             IsActive = false;
             IsQuit = true;
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
-
             // statusMenu退散
             statusMenu.FadeOut();
         }
@@ -166,7 +165,7 @@ namespace Soleil.Menu
                 Index = (Index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
-                else if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
+                else if (KeyInput.GetKeyPush(Key.B)) Quit();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
