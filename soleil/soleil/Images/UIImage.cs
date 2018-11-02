@@ -20,12 +20,22 @@ namespace Soleil
         public void Call()
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            MoveToDefault();
+        }
+
+        public void MoveToDefault()
+        {
             MoveTo(initPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
         }
 
         public void Quit()
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            MoveToBack();
+        }
+
+        public void MoveToBack()
+        {
             MoveTo(initPos + posDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
         }
     }

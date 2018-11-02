@@ -51,6 +51,18 @@ namespace Soleil.Menu
             selectedImg.Quit();
         }
 
+        public void MoveToDefault()
+        {
+            unselectedImg.MoveToDefault();
+            selectedImg.MoveToDefault();
+        }
+
+        public void MoveToBack()
+        {
+            unselectedImg.MoveToBack();
+            selectedImg.MoveToBack();
+        }
+
         public void Draw(Drawing d)
         {
             if (IsSelected)

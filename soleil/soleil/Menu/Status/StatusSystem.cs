@@ -9,12 +9,12 @@ namespace Soleil.Menu
     class StatusSystem: SystemBase
     {
         // 背景画像
-        Image backImage;
+        UIImage backImage;
         public StatusSystem(MenuComponent parent)
             : base(parent)
         {
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
-            Images = new Image[] { backImage };
+            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MessageBack, false, true, 0);
+            Images = new UIImage[] { backImage };
             Components = new MenuComponent[0];
         }
 

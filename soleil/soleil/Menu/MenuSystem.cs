@@ -218,6 +218,25 @@ namespace Soleil.Menu
                 return;
             }
         }
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            // Transition Images
+            for (int i = 0; i<menuItems.Length; i++)
+            {
+                menuItems[i].MoveToBack();
+            }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            // Transition Images
+            for (int i = 0; i<menuItems.Length; i++)
+            {
+                menuItems[i].MoveToDefault();
+            }
+        }
 
         public override void Update()
         {

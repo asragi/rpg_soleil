@@ -12,7 +12,7 @@ namespace Soleil.Menu
     abstract class SystemBase : MenuChild
     {
         protected MenuComponent[] Components;
-        protected Image[] Images;
+        protected UIImage[] Images;
 
         public SystemBase(MenuComponent parent)
             : base(parent) { }
@@ -26,7 +26,7 @@ namespace Soleil.Menu
             }
             foreach (var item in Images)
             {
-                item.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+                item.Call();
             }
         }
 
@@ -39,7 +39,7 @@ namespace Soleil.Menu
             }
             foreach (var item in Images)
             {
-                item.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+                item.Quit();
             }
         }
 
