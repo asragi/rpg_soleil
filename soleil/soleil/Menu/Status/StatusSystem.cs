@@ -6,43 +6,15 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class StatusSystem: MenuComponent
+    class StatusSystem: SystemBase
     {
-        MenuComponent[] components;
-        Image backImage, frontImage;
-        Image[] images;
+        Image backImage;
         public StatusSystem()
             : base()
         {
             backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
-            frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
-            images = new Image[] { backImage, frontImage };
+            Images = new Image[] { backImage };
+            Components = new MenuComponent[0];
         }
-
-        public override void Call()
-        {
-            base.Call();
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            foreach (var item in components)
-            {
-                item.Update();
-            }
-            foreach (var item in images)
-            {
-                item.Update();
-            }
-        }
-
-
-
     }
 }

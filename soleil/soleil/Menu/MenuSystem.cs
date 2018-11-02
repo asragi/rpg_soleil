@@ -49,6 +49,8 @@ namespace Soleil.Menu
         MagicMenu magicMenu;
         // Status 表示
         StatusMenu statusMenu;
+        // 詳細ステータス
+        StatusSystem statusSystem;
 
         // Transition
         public const int FadeSpeed = 23;
@@ -98,6 +100,8 @@ namespace Soleil.Menu
             magicMenu = new MagicMenu(this, menuDescription);
             // Status Menu
             statusMenu = new StatusMenu(this);
+            // 詳細ステータス
+            statusSystem = new StatusSystem();
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
         }
@@ -179,6 +183,7 @@ namespace Soleil.Menu
         public void CallChild(MenuName name)
         {
             if (name == MenuName.Magic) magicMenu.IsActive = true;
+            if (name == MenuName.Status) statusSystem.Call();
         }
 
         void Decide()
@@ -245,7 +250,7 @@ namespace Soleil.Menu
             menuLineLower.Update();
             menuDescription.Update();
             statusMenu.Update();
-
+            statusSystem.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -279,6 +284,7 @@ namespace Soleil.Menu
             {
                 child.Draw(d);
             }
+            statusSystem.Draw(d);
             // 前景描画
             frontImage.Draw(d);
         }

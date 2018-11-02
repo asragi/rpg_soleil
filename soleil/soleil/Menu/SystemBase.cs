@@ -26,7 +26,7 @@ namespace Soleil.Menu
             }
             foreach (var item in Images)
             {
-                item.Update();
+                item.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
             }
         }
 
@@ -39,7 +39,7 @@ namespace Soleil.Menu
             }
             foreach (var item in Images)
             {
-                item.Update();
+                item.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
             }
         }
 
