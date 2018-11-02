@@ -49,8 +49,9 @@ namespace Soleil.Menu
             Init();
         }
 
-        public virtual void Call()
+        public override void Call()
         {
+            base.Call();
             // Transition Images
             backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
@@ -62,8 +63,9 @@ namespace Soleil.Menu
             RefreshSelected();
         }
 
-        public virtual void Quit()
+        public override void Quit()
         {
+            base.Quit();
             // Transition Images
             backImage.MoveTo(WindowPos + WindowPosDiff, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
@@ -95,18 +97,6 @@ namespace Soleil.Menu
                 tmp[i].LocalPos = ItemDrawStartPos + new Vector(0, (tmp[i].PanelSize.Y + ItemPanelSpacing) * i);
             }
             return tmp;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            Quit();
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            Call();
         }
 
         public override void Update()
@@ -186,6 +176,6 @@ namespace Soleil.Menu
             RefreshSelected();
         }
         public override void OnInputSubmit() { }
-        public override void OnInputCancel() { ReturnParent(); }
+        public override void OnInputCancel() { Quit(); ReturnParent(); }
     }
 }

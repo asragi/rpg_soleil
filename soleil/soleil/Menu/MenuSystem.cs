@@ -192,7 +192,7 @@ namespace Soleil.Menu
             var selected = (MenuName)Index;
             if(selected == MenuName.Items)
             {
-                itemMenu.IsActive = true;
+                itemMenu.Call();
                 return;
             }
             if(selected == MenuName.Magic || selected == MenuName.Equip || selected == MenuName.Status)
