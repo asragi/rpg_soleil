@@ -113,6 +113,10 @@ namespace Soleil.Menu
         {
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Call();
+            }
             IsActive = true;
             IsQuit = false;
 
@@ -130,6 +134,10 @@ namespace Soleil.Menu
             IsQuit = true;
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Quit();
+            }
             // statusMenu退散
             statusMenu.FadeOut();
         }
@@ -142,10 +150,6 @@ namespace Soleil.Menu
             // Transition Images
             backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
             frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].Fade(FadeSpeed, EaseFunc, isFadeOut);
-            }
             menuLineLower.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
             menuLineUpper.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
             menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
@@ -212,26 +216,6 @@ namespace Soleil.Menu
 
                 IsActive = true; // debug
                 return;
-            }
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            // Transition Images
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, EaseFunc);
-            }
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-            // Transition Images
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, EaseFunc);
             }
         }
 
