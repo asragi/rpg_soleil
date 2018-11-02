@@ -30,6 +30,9 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnDisable() { }
 
+        public virtual void Quit() { }
+        public virtual void Call() { }
+
         public virtual void Update() { }
         public virtual void Draw(Drawing d) { }
     }
