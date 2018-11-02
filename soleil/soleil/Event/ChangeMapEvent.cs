@@ -33,7 +33,7 @@ namespace Soleil.Event
             // プレイヤーのポジションを変更する
             map.SetPlayerPos(nextPos);
             // プレイヤーの向きを変更する
-            // player.SetDirection(direction);
+            map.SetPlayerDir(direction);
 
             // 次のイベントへ
             Next();

@@ -58,6 +58,7 @@ namespace Soleil.Map
         }
 
         public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);
+        public void SetPlayerDir(Direction dir) => player.Direction = dir;
 
         virtual public void Draw(Drawing sb)
         {
