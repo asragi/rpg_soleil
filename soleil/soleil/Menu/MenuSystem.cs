@@ -96,10 +96,10 @@ namespace Soleil.Menu
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
             itemMenu = new ItemMenu(this, menuDescription);
-            // Magic Menu
-            magicMenu = new MagicMenu(this, menuDescription);
             // Status Menu
             statusMenu = new StatusMenu(this);
+            // Magic Menu
+            magicMenu = new MagicMenu(statusMenu, menuDescription);
             // 詳細ステータス
             statusSystem = new StatusSystem(statusMenu);
             // MenuChildren(foreach用. 描画順に．)
