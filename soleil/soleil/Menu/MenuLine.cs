@@ -25,7 +25,7 @@ namespace Soleil.Menu
             lines = new UIImage[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, posY), Vector.Zero, DepthID.MessageBack);
+                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, posY), Vector.Zero, DepthID.MenuBottom);
             }
         }
 

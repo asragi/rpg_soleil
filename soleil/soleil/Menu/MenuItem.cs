@@ -29,8 +29,8 @@ namespace Soleil.Menu
 
             TextureID unselectedTexID = MenuSystem.optionTextures[(int)menuName * 2];
             TextureID texID = MenuSystem.optionTextures[(int)menuName * 2 + 1];
-            unselectedImg = new UIImage(unselectedTexID, pos, new Vector(-50,0), DepthID.MessageBack);
-            selectedImg = new UIImage(texID, pos, new Vector(-50, 0), DepthID.MessageBack);
+            unselectedImg = new UIImage(unselectedTexID, pos, new Vector(-50,0), DepthID.MenuBottom);
+            selectedImg = new UIImage(texID, pos, new Vector(-50, 0), DepthID.MenuBottom);
         }
 
         public void Update()

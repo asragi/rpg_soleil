@@ -13,7 +13,7 @@ namespace Soleil.Menu
         public StatusSystem(MenuComponent parent)
             : base(parent)
         {
-            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MessageBack, false, true, 0);
+            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             Images = new UIImage[] { backImage };
             Components = new MenuComponent[0];
         }
