@@ -39,8 +39,8 @@ namespace Soleil.Menu
             InitPos = _pos;
             CurrencyPosY = (int)Resources.GetFont(ValFont).MeasureString("0").Y - (int)(Resources.GetFont(CurrencyFont).MeasureString(MoneyWallet.Currency).Y);
             CurrencyPos = new Vector(CurrencyPosX, CurrencyPosY) + CurrencyOffset;
-            moneyText = new FontImage(ValFont, _pos - PositionDiff, DepthID.Message, true, 0);
-            currency = new FontImage(CurrencyFont, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
+            moneyText = new FontImage(ValFont, _pos - PositionDiff, DepthID.MenuBottom, true, 0);
+            currency = new FontImage(CurrencyFont, _pos + CurrencyPos-PositionDiff, DepthID.MenuBottom, true, 0);
             currency.Text = MoneyWallet.Currency;
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
             backBar = new BackBarImage(_pos - new Vector(BackBarImage.EdgeSize,0), (int)CurrencyPos.X + 120, false);
@@ -81,9 +81,9 @@ namespace Soleil.Menu
 
         public void Draw(Drawing d)
         {
+            if (EnableBack) backBar.Draw(d);
             moneyText.Draw(d);
             currency.Draw(d);
-            if (EnableBack) backBar.Draw(d);
         }
     }
 }
