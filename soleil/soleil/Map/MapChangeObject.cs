@@ -7,15 +7,14 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    class MapChangeObject : MapObject
+    class MapChangeObject : MapEventObject
     {
-        CollideBox collide;
         public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
             ObjectManager om, BoxManager bm)
-            : base(om)
+            : base(pos, size, om, bm)
         {
             Pos = pos;
-            collide = new CollideBox(this, Vector.Zero, size, CollideLayer.RoadEvent, bm);
+            ExistanceBox.Layer = CollideLayer.RoadEvent;
             EventSequence.SetEventSet(
                 new EventSet(
                     new FadeOutEvent()
