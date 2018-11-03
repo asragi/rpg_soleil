@@ -167,8 +167,11 @@
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
+    <Compile Include="Menu\Status\HPMPDisplay.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
+    <Compile Include="Menu\Status\StatusHP.cs" />
     <Compile Include="Menu\Status\StatusMagicCategory.cs" />
+    <Compile Include="Menu\Status\StatusMP.cs" />
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\SystemBase.cs" />

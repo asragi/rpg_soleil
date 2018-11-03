@@ -17,6 +17,10 @@ namespace Soleil.Menu
         // 名前
         CharaName charaName;
         readonly Vector NamePos;
+        // HPMP 表示
+        HPMPDisplay display;
+        readonly Vector HPPos;
+        readonly Vector MPPos;
         // ステータスパラメータ
         StatusParamsDisplay statusParams;
         readonly Vector ParamsPos;
@@ -30,22 +34,26 @@ namespace Soleil.Menu
             : base(parent)
         {
             // const
-            const int namePos = 350;
+            const int namePosX = 350;
+            const int namePosY = 80;
             FacePos = new Vector(60, 80);
-            NamePos = new Vector(namePos, 80);
-            ParamsPos = new Vector(namePos, 240);
+            NamePos = new Vector(namePosX, namePosY);
+            HPPos = new Vector(500, namePosY);
+            MPPos = new Vector(namePosX + 49, namePosY + 40);
+            ParamsPos = new Vector(namePosX, 240);
             CategoryPos = new Vector(700, 80);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImgs = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
             charaName = new CharaName(NamePos, "ルーネ");
+            display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
 
             //
             Images = new [] { backImage, faceImgs };
-            Components = new MenuComponent[] { charaName, statusParams, statusMagicCategory };
+            Components = new MenuComponent[] { charaName, statusParams, display, statusMagicCategory };
             
             //
             lines = _lines;
