@@ -10,12 +10,18 @@ namespace Soleil.Menu
     {
         // 背景画像
         UIImage backImage;
+        // 顔画像
+        UIImage faceImgs;
+        readonly Vector facePos = new Vector(60, 80);
+        // おしゃれ移動用参照
         MenuLine[] lines;
         public StatusSystem(MenuComponent parent, params MenuLine[] _lines)
             : base(parent)
         {
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
-            Images = new UIImage[] { backImage };
+            faceImgs = new UIImage(TextureID.MenuStatusL, facePos, Vector.Zero, DepthID.MenuMiddle);
+            
+            Images = (new UIImage[] { backImage, faceImgs });
             Components = new MenuComponent[0];
             lines = _lines;
         }

@@ -36,6 +36,7 @@ namespace Soleil
         MenuModalBack,
         MenuSelected,
         MenuUnselected,
+        MenuStatusL,
         MenuLune,
         MenuSun,
 
@@ -343,7 +344,7 @@ namespace Soleil
             SetPath(TextureID.MenuUnselected, UIPath + MenuPath + "unselectedBack");
             SetPath(TextureID.MenuLune, UIPath + MenuPath + "menulune");
             SetPath(TextureID.MenuSun, UIPath + MenuPath + "menusun");
-
+            SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
 
 
             for (int i = 0; i < 20; i++)

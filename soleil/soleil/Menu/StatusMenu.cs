@@ -16,8 +16,8 @@ namespace Soleil.Menu
         public StatusMenu(MenuSystem parent)
             :base(parent)
         {
-            index = 0;
             menuSystem = parent;
+            index = 0;
             menuCharacterPanels = new MenuCharacterPanel[2];
             menuCharacterPanels[0] = new MenuCharacterPanel(new Vector(290, 120), TextureID.MenuLune);
             menuCharacterPanels[1] = new MenuCharacterPanel(new Vector(540, 120), TextureID.MenuSun);
