@@ -58,7 +58,11 @@ namespace Soleil.Event.Shop
             detailWindow.Quit();
         }
 
-        public void Input(Direction dir) => shopItemList.Input(dir);
+        public void Input(Direction dir)
+        {
+            if (quitStart) return;
+            shopItemList.Input(dir);
+        }
 
         public override void Update()
         {

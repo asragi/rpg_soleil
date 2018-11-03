@@ -54,7 +54,7 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
-            foreach (var item in Panels)
+            foreach (var item in AllPanels)
             {
                 item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
                 item?.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
