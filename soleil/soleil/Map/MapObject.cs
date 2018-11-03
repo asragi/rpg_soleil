@@ -7,31 +7,20 @@ namespace Soleil.Map
         protected Vector Pos;
         protected bool Dead;
         protected int Frame;
-        protected EventSequence EventSequence;
 
         public MapObject(ObjectManager om)
         {
             Dead = false;
             om.Add(this);
 
-            EventSequence = new EventSequence();
         }
 
         virtual public void Update()
         {
-            EventUpdate();
             Frame++;
         }
 
-        virtual public void EventUpdate()
-        {
-            EventSequence.Update();
-        }
-
-        virtual public void Draw(Drawing sb)
-        {
-            EventSequence.Draw(sb);
-        }
+        virtual public void Draw(Drawing d) { }
 
         public Vector GetPosition()
         {

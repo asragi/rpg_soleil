@@ -14,7 +14,7 @@ namespace Soleil.Images
     class BackBarImage
     {
         // 画像の端からの切り出し量
-        const int EdgeSize = 36;
+        public const int EdgeSize = 36;
         public Vector Pos { get; set; }
         Image[] images;
 
