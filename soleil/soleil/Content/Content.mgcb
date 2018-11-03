@@ -1339,3 +1339,26 @@
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
 /build:kkminchoGoldMini.spritefont
+
+#begin touhaba.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=False
+/processorParam:HasSpecialCharacters=False
+/processorParam:HasHiragana=False
+/processorParam:HasKatakana=False
+/processorParam:HasJisKanjiLevel1=False
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=240,248,255,255
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=41,68,91,255
+/processorParam:GradientEndColor=21,44,63,200
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:touhaba.spritefont
