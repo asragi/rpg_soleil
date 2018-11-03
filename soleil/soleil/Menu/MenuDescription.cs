@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    using EFunc = Func<double, double, double, double, double>;
-    class MenuDescription
+    class MenuDescription : MenuComponent
     {
         protected FontImage fontImage;
         public String Text { set { fontImage.Text = value; } }
@@ -16,37 +15,24 @@ namespace Soleil.Menu
         {
             fontImage = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
             fontImage.Color = ColorPalette.DarkBlue;
-            fontImage.EnableShadow = false;
-            fontImage.ShadowPos = new Vector(3, 3);
-            fontImage.ShadowColor = ColorPalette.GlayBlue;
         }
 
-        public virtual void Call()
+        public override void Call()
         {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            fontImage.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
         }
 
-        public virtual void Quit()
+        public override void Quit()
         {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            fontImage.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
         }
 
-        public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
-        {
-            fontImage.Fade(duration, _easeFunc, isFadeIn);
-        }
-
-        public void MoveTo(Vector target, int duration, EFunc _easeFunc)
-        {
-            fontImage.MoveTo(target, duration, _easeFunc);
-        }
-
-        public virtual void Update()
+        public override void Update()
         {
             fontImage.Update();
         }
 
-        public virtual void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
             fontImage.Draw(d);
         }

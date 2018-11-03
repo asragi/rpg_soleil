@@ -34,7 +34,7 @@ namespace Soleil.Menu
             "ゲームデータのセーブを行います。"
         };
 
-        Image backImage, frontImage;
+        UIImage backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
         MenuDescription menuDescription;
@@ -78,8 +78,10 @@ namespace Soleil.Menu
         {
             Index = 0;
             // Image初期化
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
-            frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
+            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
+            frontImage = new UIImage(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
+
+            // 選択肢たち
             menuItems = new MenuItem[(int)MenuName.size];
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -89,16 +91,6 @@ namespace Soleil.Menu
             // Image line
             menuLineUpper = new MenuLine(70, true);
             menuLineLower = new MenuLine(470, false);
-            Components = new MenuComponent[]
-            {
-                menuLineLower,
-                menuLineUpper,
-            };
-            Images = new UIImage[0];
-            // Transition
-            transition = Transition.GetInstance();
-            IsActive = false;
-
             // MenuDescription
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
@@ -110,7 +102,25 @@ namespace Soleil.Menu
             // 詳細ステータス
             statusSystem = new StatusSystem(statusMenu);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem};
+            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
+
+            Components = new MenuComponent[]
+            {
+                menuLineLower,
+                menuLineUpper,
+                menuDescription,
+            };
+            Images = new UIImage[]
+            {
+                backImage,
+                frontImage,
+            };
+
+            // Transition
+            transition = Transition.GetInstance();
+
+            // 入力処理
+            IsActive = false;
         }
 
         /// <summary>
@@ -156,10 +166,6 @@ namespace Soleil.Menu
             // Transition
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
-            // Transition Images
-            backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
         }
 
         /// <summary>
@@ -249,13 +255,10 @@ namespace Soleil.Menu
         {
             base.Update();
             // ImageUpdate
-            backImage.Update();
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Update();
             }
-            frontImage.Update();
-            menuDescription.Update();
             statusMenu.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
@@ -272,23 +275,17 @@ namespace Soleil.Menu
 
         public override void Draw(Drawing d)
         {
-            // 背景描画
-            backImage.Draw(d);
             base.Draw(d);
             // 選択肢描画
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Draw(d);
             }
-            // 文章描画
-            menuDescription.Draw(d);
             // 子ウィンドウ描画
             foreach (var child in menuChildren)
             {
                 child.Draw(d);
             }
-            // 前景描画
-            frontImage.Draw(d);
         }
     }
 }
