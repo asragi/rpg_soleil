@@ -89,8 +89,8 @@ namespace Soleil.Menu
                 menuItems[i] = new MenuItem((MenuName)i, i == 0);
             }
             // Image line
-            menuLineUpper = new MenuLine(70, true);
-            menuLineLower = new MenuLine(470, false);
+            menuLineUpper = new MenuLine(70, -30, true);
+            menuLineLower = new MenuLine(470, 20, false);
             // MenuDescription
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
@@ -100,7 +100,7 @@ namespace Soleil.Menu
             // Magic Menu
             magicMenu = new MagicMenu(statusMenu, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusMenu);
+            statusSystem = new StatusSystem(statusMenu, menuLineUpper, menuLineLower);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
 
@@ -217,7 +217,6 @@ namespace Soleil.Menu
             if(selected == MenuName.Option)
             {
                 // Option設定用ウィンドウ出現
-
                 IsActive = true; // debug
                 return;
             }

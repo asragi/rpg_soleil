@@ -16,8 +16,16 @@ namespace Soleil.Menu
         UIImage[] lines;
         int texWidth;
         bool moveLeft;
-        public MenuLine(int posY, bool moveToLeft)
+
+        // オシャレアニメ
+        int posY;
+        int diffY;
+        bool isDiff;
+        int easeFrame = 100000;
+        double startY, destinationY;
+        public MenuLine(int _posY, int _diffY, bool moveToLeft)
         {
+            (posY, diffY, startY, destinationY) = (_posY, _diffY, _posY, _posY + _diffY);
             moveLeft = moveToLeft;
             var tex = Resources.GetTexture(TextureID.MenuLine);
             texWidth = tex.Width;
@@ -25,7 +33,7 @@ namespace Soleil.Menu
             lines = new UIImage[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, posY), Vector.Zero, DepthID.MenuBottom);
+                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, _posY), Vector.Zero, DepthID.MenuTop);
             }
         }
 
@@ -50,10 +58,12 @@ namespace Soleil.Menu
         public override void Update()
         {
             base.Update();
+            easeFrame++;
             // Move Lines
             for (int i = 0; i < lines.Length; i++)
             {
                 var tmp = lines[i].Pos;
+                // X
                 if (moveLeft)
                 {
                     tmp.X -= MoveSpeed;
@@ -71,6 +81,9 @@ namespace Soleil.Menu
                 {
                     tmp.X -= (lines.Length - 1) * texWidth;
                 }
+
+                // Y
+                tmp.Y = Ease();
                 lines[i].Pos = tmp;
             }
             // Image Update
@@ -78,6 +91,20 @@ namespace Soleil.Menu
             {
                 lines[i].Update();
             }
+
+            double Ease()
+            {
+                if (easeFrame > MenuSystem.FadeSpeed) return (isDiff)? posY + diffY : posY;
+                return MenuSystem.EaseFunc(easeFrame, MenuSystem.FadeSpeed, destinationY, startY);
+            }
+        }
+
+        public void StartMove(bool _isDiff)
+        {
+            isDiff = _isDiff;
+            easeFrame = 0;
+            startY = lines[0].Pos.Y;
+            destinationY = isDiff ? posY + diffY : posY;
         }
 
         public override void Draw(Drawing d)
