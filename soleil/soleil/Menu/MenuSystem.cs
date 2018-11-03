@@ -104,6 +104,7 @@ namespace Soleil.Menu
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
 
+            // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             Components = new MenuComponent[]
             {
                 menuLineLower,
@@ -135,11 +136,9 @@ namespace Soleil.Menu
             {
                 menuItems[i].Call();
             }
+            statusMenu.Call();
             IsActive = true;
             IsQuit = false;
-
-            // statusMenu召喚
-            statusMenu.FadeIn();
         }
 
         /// <summary>
@@ -151,14 +150,13 @@ namespace Soleil.Menu
             // Set bools
             IsActive = false;
             IsQuit = true;
+            statusMenu.Quit();
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Quit();
             }
-            // statusMenu退散
-            statusMenu.FadeOut();
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -259,7 +257,6 @@ namespace Soleil.Menu
             {
                 menuItems[i].Update();
             }
-            statusMenu.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {

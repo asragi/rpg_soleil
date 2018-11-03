@@ -26,7 +26,7 @@ namespace Soleil.Menu
         /// <summary>
         /// メニューが立ち上がる時の処理
         /// </summary>
-        public void FadeIn()
+        public override void Call()
         {
             foreach (var panel in menuCharacterPanels)
             {
@@ -37,7 +37,7 @@ namespace Soleil.Menu
         /// <summary>
         /// メニューが閉じるときの処理
         /// </summary>
-        public void FadeOut()
+        public override void Quit()
         {
             foreach (var panel in menuCharacterPanels)
             {
@@ -70,16 +70,12 @@ namespace Soleil.Menu
         public override void OnInputRight() {
             index++;
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
-
         }
 
         public override void OnInputLeft() {
             index--;
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
         }
-
-        public override void OnInputUp() { }
-        public override void OnInputDown(){ }
 
         public override void OnInputSubmit() {
             // ステータス選択以前に選ばれていた項目を見る．
