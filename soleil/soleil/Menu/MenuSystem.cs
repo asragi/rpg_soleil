@@ -18,7 +18,7 @@ namespace Soleil.Menu
         Save,
         size,
     }
-    class MenuSystem : SystemBase
+    class MenuSystem : MenuChild
     {
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
@@ -105,15 +105,12 @@ namespace Soleil.Menu
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
-            Components = new MenuComponent[]
+            Components = new IComponent[]
             {
+                backImage,
                 menuLineLower,
                 menuLineUpper,
                 menuDescription,
-            };
-            Images = new UIImage[]
-            {
-                backImage,
                 frontImage,
             };
 

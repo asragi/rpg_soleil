@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class StatusSystem: SystemBase
+    class StatusSystem: MenuChild
     {
         // 背景画像
         UIImage backImage;
         // 顔画像
-        UIImage faceImgs;
+        UIImage faceImg;
         readonly Vector FacePos;
         // 名前
         CharaName charaName;
@@ -45,15 +45,14 @@ namespace Soleil.Menu
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
-            faceImgs = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
+            faceImg = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
             charaName = new CharaName(NamePos, "ルーネ");
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
 
             //
-            Images = new [] { backImage, faceImgs };
-            Components = new MenuComponent[] { charaName, statusParams, display, statusMagicCategory };
+            Components = new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg };
             
             //
             lines = _lines;

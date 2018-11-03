@@ -175,7 +175,6 @@
     <Compile Include="Menu\Status\StatusMP.cs" />
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
-    <Compile Include="Menu\SystemBase.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
