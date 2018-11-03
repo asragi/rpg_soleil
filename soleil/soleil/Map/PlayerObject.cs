@@ -7,7 +7,8 @@
         const int RunSpeed = 8;
         const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
-
+        const int BoxSizeX = 25;
+        const int BoxSizeY = 10;
         protected override CollideLayer CollideLayer => CollideLayer.Player;
         // Variables
         public bool Movable, visible;
@@ -18,7 +19,7 @@
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
-            : base(new Vector(700,400),null,om,bm,false)
+            : base(new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
         {
             Movable = true;
             visible = true;
@@ -28,7 +29,7 @@
             moveBoxes = new CollideBox[MoveBoxNum];
             for (int i = 0; i < MoveBoxNum; i++)
             {
-                moveBoxes[i] = new CollideBox(this, Vector.Zero, DefaultBoxSize, CollideLayer.Player, bm);
+                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.Player, bm);
             }
             decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
             decideBox.IsActive = false;
@@ -37,7 +38,7 @@
 
         private void SetAnimation()
         {
-            var posDiff = new Vector(0, -40);
+            var posDiff = new Vector(0, -50);
             var standAnims = new AnimationData[9];
             var sPeriod = 8;
             standAnims[(int)Direction.R] = new AnimationData(AnimationID.LuneStandR,posDiff, true, sPeriod);
