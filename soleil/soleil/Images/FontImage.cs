@@ -13,11 +13,13 @@ namespace Soleil
     class FontImage : ImageBase
     {
         FontID font;
+        public FontID Font { set => font = value; }
         public String Text { get; set; }
         public Color Color { get; set; }
         public bool EnableShadow { get; set; }
         public Color ShadowColor { get; set; }
         public Vector ShadowPos { get; set; }
+        public override Vector GetSize => (Vector)Resources.GetFont(font).MeasureString(Text);
 
         /// <summary>
         /// ImageManagerから作る.

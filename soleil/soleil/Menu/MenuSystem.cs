@@ -12,6 +12,7 @@ namespace Soleil.Menu
     {
         Items = 0,
         Magic,
+        Skill,
         Equip,
         Status,
         Option,
@@ -24,16 +25,23 @@ namespace Soleil.Menu
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
-        readonly String[] Descriptions = new String[]
+        readonly Vector MoneyComponentPos = new Vector(680, 507);
+        readonly string[] Descriptions = new string[]
         {
             "アイテムを確認・選択して使用します。",
             "魔法を確認・選択して使用します。",
+            "スキルを確認・選択して使用します。",
             "装備を確認・変更します。",
             "ステータスを確認します。",
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
-
+        // 選択後にキャラクターの選択に移動するメニュー項目
+        readonly MenuName[] ToCharacterSelect = new[] {
+            MenuName.Magic,
+            MenuName.Skill,
+            MenuName.Equip,
+            MenuName.Status };
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -49,6 +57,8 @@ namespace Soleil.Menu
         MagicMenu magicMenu;
         // Status 表示
         StatusMenu statusMenu;
+        // 所持金表示
+        MoneyComponent moneyComponent;
 
         // Transition
         public const int FadeSpeed = 23;
@@ -59,6 +69,8 @@ namespace Soleil.Menu
         {
             TextureID.MenuItem1,
             TextureID.MenuItem2,
+            TextureID.MenuMagic1,
+            TextureID.MenuMagic2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
             TextureID.MenuEquip1,
@@ -100,6 +112,8 @@ namespace Soleil.Menu
             statusMenu = new StatusMenu(this);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
+            // Money
+            moneyComponent = new MoneyComponent(MoneyComponentPos);
         }
 
         /// <summary>
@@ -114,6 +128,7 @@ namespace Soleil.Menu
 
             // statusMenu召喚
             statusMenu.FadeIn();
+            moneyComponent.Call();
         }
 
         /// <summary>
@@ -129,6 +144,7 @@ namespace Soleil.Menu
 
             // statusMenu退散
             statusMenu.FadeOut();
+            moneyComponent.Quit();
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -190,7 +206,7 @@ namespace Soleil.Menu
                 itemMenu.IsActive = true;
                 return;
             }
-            if(selected == MenuName.Magic || selected == MenuName.Equip || selected == MenuName.Status)
+            if(ToCharacterSelect.Contains(selected))
             {
                 statusMenu.IsActive = true;
                 return;
@@ -245,7 +261,7 @@ namespace Soleil.Menu
             menuLineLower.Update();
             menuDescription.Update();
             statusMenu.Update();
-
+            moneyComponent.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -279,6 +295,8 @@ namespace Soleil.Menu
             {
                 child.Draw(d);
             }
+            // Money描画
+            moneyComponent.Draw(d);
             // 前景描画
             frontImage.Draw(d);
         }

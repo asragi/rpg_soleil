@@ -13,8 +13,8 @@ namespace Soleil.Menu.Detail
     /// </summary>
     class ArmorDetail : DetailComponent
     {
-        readonly String AtkExpText = "攻撃力";
-        readonly String ExplainText = "防御力";
+        readonly string AtkExpText = "攻撃力";
+        readonly string ExplainText = "防御力";
         readonly Vector DefExpPos = new Vector(0, 60);
         readonly int Space = 220;
         readonly Vector InitPos;
@@ -25,8 +25,8 @@ namespace Soleil.Menu.Detail
             :base()
         {
             InitPos = _pos;
-            atkExplain = new TextWithVal(FontID.Test, _pos, Space, AtkExpText);
-            defExplain = new TextWithVal(FontID.Test, _pos+DefExpPos, Space, ExplainText);
+            atkExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos, Space, AtkExpText);
+            defExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos+DefExpPos, Space, ExplainText);
         }
 
         public void Call()

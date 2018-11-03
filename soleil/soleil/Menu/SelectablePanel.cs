@@ -17,7 +17,7 @@ namespace Soleil.Menu
         /// </summary>
         protected readonly Vector Spacing = new Vector(8, 4);
 
-        protected readonly FontID ItemFont = FontID.Test;
+        protected readonly FontID ItemFont = FontID.KkBlack;
 
         public abstract string Desctiption { get; }
         /// <summary>
@@ -30,8 +30,9 @@ namespace Soleil.Menu
         TextWithVal itemNameImage;
         readonly public String ItemName;
         protected int Val { set => itemNameImage.Val = value; }
+        protected virtual FontID ValFont { set { itemNameImage.ValFont = value; } }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
-        public readonly Vector ItemNumPosDiff = new Vector(360, 0);
+        public virtual Vector ItemNumPosDiff { get => new Vector(360, 0); }
 
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
@@ -43,8 +44,6 @@ namespace Soleil.Menu
             ItemName = itemName;
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
-            itemNameImage.TextColor = ColorPalette.DarkBlue;
-            itemNameImage.ValColor = ColorPalette.DarkBlue;
             itemNameImage.Text = itemName;
 
             // 選択状態を示すやつ
@@ -77,7 +76,7 @@ namespace Soleil.Menu
         protected virtual void OnSelected()
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, true);
-            itemNameImage.TextColor = ColorPalette.AliceBlue;
+            itemNameImage.Font = FontID.WhiteOutlineGrad;
         }
 
         /// <summary>
@@ -85,8 +84,8 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnUnselected()
         {
-            selectedBack.Fade(20, MenuSystem.EaseFunc, false);
-            itemNameImage.TextColor = ColorPalette.DarkBlue;
+            selectedBack.Fade(5, MenuSystem.EaseFunc, false);
+            itemNameImage.Font = FontID.KkBlack;
         }
 
         public virtual void Update()

@@ -7,10 +7,11 @@
         const int RunSpeed = 8;
         const int MoveBoxNum = 11; // 移動先を判定するboxの個数（奇数）
         const int CheckBoxAngle = 15; // 移動先から左右n度刻みに判定用Boxを設置
-
+        const int BoxSizeX = 25;
+        const int BoxSizeY = 10;
         protected override CollideLayer CollideLayer => CollideLayer.Player;
         // Variables
-        bool movable, visible;
+        public bool Movable, visible;
         CollideBox[] moveBoxes; // 移動先が移動可能かどうかを判定するBox
         CollideBox decideBox; // 決定キーを押したときに飛び出す判定
         readonly Vector DecideBoxDist = new Vector(-20, 0);
@@ -18,9 +19,9 @@
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
-            : base(new Vector(700,400),null,om,bm,false)
+            : base(new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
         {
-            movable = true;
+            Movable = true;
             visible = true;
             speed = MoveSpeed;
             om.SetPlayer(this);
@@ -28,7 +29,7 @@
             moveBoxes = new CollideBox[MoveBoxNum];
             for (int i = 0; i < MoveBoxNum; i++)
             {
-                moveBoxes[i] = new CollideBox(this, Vector.Zero, DefaultBoxSize, CollideLayer.Player, bm);
+                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.Player, bm);
             }
             decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
             decideBox.IsActive = false;
@@ -37,7 +38,7 @@
 
         private void SetAnimation()
         {
-            var posDiff = new Vector(0, -40);
+            var posDiff = new Vector(0, -50);
             var standAnims = new AnimationData[9];
             var sPeriod = 8;
             standAnims[(int)Direction.R] = new AnimationData(AnimationID.LuneStandR,posDiff, true, sPeriod);
@@ -81,33 +82,26 @@
             base.Update();
         }
 
-        public void Stand()
-        {
-            MoveState = MoveState.Stand;
-        }
-
         public void Walk()
         {
-            MoveState = MoveState.Walk;
             speed = MoveSpeed;
         }
         public void Run()
         {
-            MoveState = MoveState.Dash;
             speed = RunSpeed;
         }
 
         public void Move(Direction dir)
         {
-            // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
-            Pos += WallCheck();
-            var delta = new Vector(speed, 0);
             switch (dir)
             {
                 case Direction.N:
+                    MoveState = MoveState.Stand;
                     NeutralizeCollideBoxes();
                     break;
                 default:
+                    // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
+                    (Pos, MoveState) = WallCheck(Pos);
                     SetCollideBoxes((int)KeyInput.GetDegreeDirection(1));
                     break;
             }
@@ -119,16 +113,16 @@
         public void SetPosition(Vector _pos) => Pos = _pos;
         protected override void ChangeDepth() => Depth = DepthID.Player;
         #region Box
-        private Vector WallCheck()
+        private (Vector, MoveState) WallCheck(Vector _pos)
         {
             for (int i = 0; i < moveBoxes.Length; i++)
             {
                 // 他キャラクターとの衝突確認
                 if (moveBoxes[i].GetCollideCharacter()) continue;
                 if (moveBoxes[i].GetWallCollide()) continue;
-                return moveBoxes[i].GetLocalPos();
+                return (_pos + moveBoxes[i].GetLocalPos(), (speed == RunSpeed) ? MoveState.Dash : MoveState.Walk);
             }
-            return Vector.Zero; // どこにも移動できなさそうなとき
+            return (_pos, MoveState.Stand); // どこにも移動できなさそうなとき
         }
 
         private void NeutralizeCollideBoxes()
@@ -179,10 +173,5 @@
         }
 
         #endregion
-
-        public override void Draw(Drawing sb)
-        {
-            base.Draw(sb);
-        }
     }
 }

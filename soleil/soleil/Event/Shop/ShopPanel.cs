@@ -10,20 +10,38 @@ namespace Soleil.Event.Shop
 {
     class ShopPanel : ItemPanelBase
     {
-        public readonly Vector ValuePosDiff = new Vector(300, 0);
+        public readonly Vector CurrencyPosDiff = new Vector(5, 12);
         private string desc;
         public override string Desctiption => desc;
-        public ItemID ID { get; private set; }
+        public override Vector ItemNumPosDiff => base.ItemNumPosDiff - new Vector(35,0); // ちゃんと下揃えを計算するべきだが，面倒くさかった．
         public int Price { get; private set; }
+
+        FontImage currency;
 
         public ShopPanel(ItemID id, int value, ShopItemList parent)
             :base(id, ItemDataBase.Get(id).Name, parent)
         {
             desc = ItemDataBase.Get(id).Description;
-            ID = id;
             Price = value;
 
             Val = Price;
+            ValFont = FontID.KkMini;
+            currency = new FontImage(FontID.KkGoldMini, LocalPos + parent.Pos, DepthID.Message, true, 0);
+            currency.Text = Map.MoneyWallet.Currency;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            currency.Alpha = BasicMenu.Alpha;
+            currency.Pos = BasicMenu.Pos + Spacing + LocalPos + ItemNumPosDiff + CurrencyPosDiff;
+            currency.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            currency.Draw(d);
         }
     }
 }
