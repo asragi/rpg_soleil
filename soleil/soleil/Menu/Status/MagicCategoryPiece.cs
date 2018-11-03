@@ -15,34 +15,7 @@ namespace Soleil.Menu.Status
             icon = new UIImage(TextureID.FrameTest, pos, Vector.Zero, DepthID.MenuTop);
             name = new FontImage(FontID.Test, pos, null, DepthID.MenuTop);
             name.Text = "陽術";
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            icon.Call();
-            name.Call();
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            icon.Quit();
-            name.Quit();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            icon.Update();
-            name.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            icon.Draw(d);
-            name.Draw(d);
+            Components = new IComponent[] { icon, name };
         }
     }
 }

@@ -14,34 +14,7 @@ namespace Soleil.Menu.Status
         {
             mp = new StatusMP(mpos, val2, val3);
             hp = new StatusHP(pos, val);
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            mp.Call();
-            hp.Call();
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            mp.Quit();
-            hp.Quit();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            mp.Update();
-            hp.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            mp.Draw(d);
-            hp.Draw(d);
+            Components = new IComponent[] { mp, hp };
         }
     }
 }

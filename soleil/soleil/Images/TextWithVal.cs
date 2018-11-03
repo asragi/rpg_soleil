@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// <summary>
     /// 文字とそれに対応する値を持つクラス．
     /// </summary>
-    class TextWithVal
+    class TextWithVal : IComponent
     {
         private FontImage text;
         private FontImage val;

@@ -45,42 +45,7 @@ namespace Soleil.Menu.Status
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
             }
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            foreach (var item in texts)
-            {
-                item.Call();
-            }
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            foreach (var item in texts)
-            {
-                item.Quit();
-            }
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            foreach (var item in texts)
-            {
-                item.Update();
-            }
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            foreach (var item in texts)
-            {
-                item.Draw(d);
-            }
+            Components = texts;
         }
     }
 }

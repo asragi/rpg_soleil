@@ -15,30 +15,7 @@ namespace Soleil.Menu.Status
             name = new FontImage(FontID.Test, pos, DepthID.MenuTop);
             name.Text = text;
             name.Color = ColorPalette.DarkBlue;
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            name.Call();
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            name.Quit();
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            name.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            name.Draw(d);
+            Components = new IComponent[] { name };
         }
     }
 }

@@ -23,42 +23,8 @@ namespace Soleil.Menu.Status
                 var y = YDiff * (i / 2);
                 pieces[i] = new MagicCategoryPiece(pos + Spacing + new Vector(x,y), i);
             }
-        }
 
-        public override void Call()
-        {
-            base.Call();
-            foreach (var item in pieces)
-            {
-                item.Call();
-            }
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            foreach (var item in pieces)
-            {
-                item.Quit();
-            }
-        }
-
-        public override void Update()
-        {
-            base.Update();
-            foreach (var item in pieces)
-            {
-                item.Update();
-            }
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            foreach (var item in pieces)
-            {
-                item.Draw(d);
-            }
+            Components = pieces;
         }
     }
 }
