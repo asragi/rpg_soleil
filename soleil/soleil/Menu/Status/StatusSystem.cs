@@ -14,6 +14,8 @@ namespace Soleil.Menu
         // 顔画像
         UIImage faceImgs;
         readonly Vector FacePos = new Vector(60, 80);
+        // 名前
+        CharaName charaName;
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos = new Vector(700, 80);
@@ -25,10 +27,11 @@ namespace Soleil.Menu
         {
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImgs = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
+            charaName = new CharaName(new Vector(380, 80), "ルーネ");
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
 
             Images = new [] { backImage, faceImgs };
-            Components = new[] { statusMagicCategory };
+            Components = new MenuComponent[] { charaName, statusMagicCategory };
             lines = _lines;
         }
 
