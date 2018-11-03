@@ -12,6 +12,7 @@ namespace Soleil.Menu
     {
         Items = 0,
         Magic,
+        Skill,
         Equip,
         Status,
         Option,
@@ -25,16 +26,22 @@ namespace Soleil.Menu
         /// </summary>
         public bool IsQuit { get; private set; }
         readonly Vector MoneyComponentPos = new Vector(680, 507);
-        readonly String[] Descriptions = new String[]
+        readonly string[] Descriptions = new string[]
         {
             "アイテムを確認・選択して使用します。",
             "魔法を確認・選択して使用します。",
+            "スキルを確認・選択して使用します。",
             "装備を確認・変更します。",
             "ステータスを確認します。",
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
-
+        // 選択後にキャラクターの選択に移動するメニュー項目
+        readonly MenuName[] ToCharacterSelect = new[] {
+            MenuName.Magic,
+            MenuName.Skill,
+            MenuName.Equip,
+            MenuName.Status };
         Image backImage, frontImage;
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -62,6 +69,8 @@ namespace Soleil.Menu
         {
             TextureID.MenuItem1,
             TextureID.MenuItem2,
+            TextureID.MenuMagic1,
+            TextureID.MenuMagic2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
             TextureID.MenuEquip1,
@@ -197,7 +206,7 @@ namespace Soleil.Menu
                 itemMenu.IsActive = true;
                 return;
             }
-            if(selected == MenuName.Magic || selected == MenuName.Equip || selected == MenuName.Status)
+            if(ToCharacterSelect.Contains(selected))
             {
                 statusMenu.IsActive = true;
                 return;
