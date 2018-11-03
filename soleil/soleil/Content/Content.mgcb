@@ -1345,10 +1345,10 @@
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
 /processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=False
+/processorParam:HasSpecialCharacters=True
 /processorParam:HasHiragana=False
 /processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=False
+/processorParam:HasJisKanjiLevel1=True
 /processorParam:HasJisKanjiLevel2=False
 /processorParam:HasGreekLetters=False
 /processorParam:HasCyrillicLetters=False

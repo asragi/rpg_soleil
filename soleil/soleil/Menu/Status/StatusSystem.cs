@@ -24,6 +24,9 @@ namespace Soleil.Menu
         // ステータスパラメータ
         StatusParamsDisplay statusParams;
         readonly Vector ParamsPos;
+        // 属性
+        AttributeDisplay attribute;
+        readonly Vector AttributePos;
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
@@ -41,6 +44,7 @@ namespace Soleil.Menu
             HPPos = new Vector(500, namePosY);
             MPPos = new Vector(namePosX + 49, namePosY + 40);
             ParamsPos = new Vector(namePosX, 165);
+            AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
             CategoryPos = new Vector(700, 80);
 
             // Component設定
@@ -50,9 +54,10 @@ namespace Soleil.Menu
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
+            attribute = new AttributeDisplay(AttributePos);
 
             //
-            Components = new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg };
+            Components = new IComponent[] {backImage, charaName, statusParams, attribute, display, statusMagicCategory, faceImg };
             
             //
             lines = _lines;

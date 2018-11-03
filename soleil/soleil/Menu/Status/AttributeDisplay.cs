@@ -20,7 +20,7 @@ namespace Soleil.Menu.Status
         };
 
         // 仮置き
-        readonly int[] p = new[] { 15, 25, 55 };
+        readonly int[] p = new[] { -38, 25, 55 };
 
         FontImage[] texts;
         FontImage[] indicates;
@@ -33,7 +33,7 @@ namespace Soleil.Menu.Status
             {
                 texts[i] = new FontImage(FontID.Touhaba, pos + new Vector(0, DiffY * i), null, DepthID.MenuMiddle);
                 texts[i].Text = Words[i];
-                indicates[i] = new FontImage(FontID.Touhaba, pos + new Vector(10, DiffY * i), null, DepthID.MenuMiddle);
+                indicates[i] = new FontImage(FontID.Touhaba, pos + new Vector(50, DiffY * i), null, DepthID.MenuMiddle);
                 indicates[i].Text = SetIndicate(p[i]);
             }
             Components = texts.Concat(indicates).ToArray();
@@ -43,9 +43,9 @@ namespace Soleil.Menu.Status
                 var mark = (val > 0) ? '+' : '-';
                 var abs = Math.Abs(val);
 
-                for (int i = 4; i > 0; i--)
+                for (int i = 5; i > 0; i--)
                 {
-                    if (abs > i * 10) return new string(mark, i);
+                    if (abs > (i-1) * 10) return new string(mark, i);
                 }
                 return "";
             }
