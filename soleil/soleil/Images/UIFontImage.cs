@@ -16,7 +16,7 @@ namespace Soleil
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
-        public UIFontImage(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 1)
+        public UIFontImage(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
             : base(pos, posDiff, depth, false, isStatic, alpha)
         {
             font = fontID;
