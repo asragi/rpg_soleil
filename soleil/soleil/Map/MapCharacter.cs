@@ -19,7 +19,7 @@ namespace Soleil.Map
         readonly DepthID BackDepth = DepthID.PlayerBack;
         protected DepthID Depth;
         protected bool Symmetry; // アニメーションが左右対称かどうか
-        protected Direction Direction = Direction.D;
+        public Direction Direction = Direction.D;
         protected MoveState MoveState;
         protected Animation NowAnimation;
         private Animation[] standAnimation;
