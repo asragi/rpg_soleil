@@ -485,6 +485,13 @@ namespace Soleil
     enum DepthID
     {
         BackGround, Ground, HitBox, PlayerBack, Player, PlayerFront, Item, Attack, Effect, Status,
+
+        // Menu
+        MenuBack,
+        MenuBottom,
+        MenuMiddle,
+        MenuTop,
+
         MessageBack, Message, Pause, Frame, Debug
     }
 }
