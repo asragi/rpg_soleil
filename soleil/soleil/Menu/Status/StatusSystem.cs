@@ -13,25 +13,41 @@ namespace Soleil.Menu
         UIImage backImage;
         // 顔画像
         UIImage faceImgs;
-        readonly Vector FacePos = new Vector(60, 80);
+        readonly Vector FacePos;
         // 名前
         CharaName charaName;
+        readonly Vector NamePos;
+        // ステータスパラメータ
+        StatusParamsDisplay statusParams;
+        readonly Vector ParamsPos;
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
-        readonly Vector CategoryPos = new Vector(700, 80);
+        readonly Vector CategoryPos;
         
         // おしゃれ移動用参照
         MenuLine[] lines;
         public StatusSystem(MenuComponent parent, params MenuLine[] _lines)
             : base(parent)
         {
+            // const
+            const int namePos = 350;
+            FacePos = new Vector(60, 80);
+            NamePos = new Vector(namePos, 80);
+            ParamsPos = new Vector(namePos, 240);
+            CategoryPos = new Vector(700, 80);
+
+            // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImgs = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
-            charaName = new CharaName(new Vector(380, 80), "ルーネ");
+            charaName = new CharaName(NamePos, "ルーネ");
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
+            statusParams = new StatusParamsDisplay(ParamsPos);
 
+            //
             Images = new [] { backImage, faceImgs };
-            Components = new MenuComponent[] { charaName, statusMagicCategory };
+            Components = new MenuComponent[] { charaName, statusParams, statusMagicCategory };
+            
+            //
             lines = _lines;
         }
 

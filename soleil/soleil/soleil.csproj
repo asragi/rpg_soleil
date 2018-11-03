@@ -169,6 +169,7 @@
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
     <Compile Include="Menu\Status\StatusMagicCategory.cs" />
+    <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\SystemBase.cs" />
     <Compile Include="Mono\Audio.cs" />
