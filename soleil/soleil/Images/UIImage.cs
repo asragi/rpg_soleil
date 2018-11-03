@@ -1,4 +1,7 @@
-﻿using Soleil.Menu;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Soleil.Images;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,36 +10,29 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class UIImage : Image
+    class UIImage : UIImageBase
     {
-        readonly Vector initPos;
-        readonly Vector posDiff;
-        public UIImage(TextureID tex, Vector pos, Vector _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
-            : base(0, Resources.GetTexture(tex), pos + _posDiff, dep, centerOrigin, isStatic, alpha)
+        Texture2D tex;
+        bool origin;
+        public int Id { get; private set; }
+        public Rectangle Rectangle { get; set; }
+        public Vector Size { get; set; } = Vector.One;
+
+        public UIImage(TextureID id, Vector pos, Vector? _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
+            : base(pos, _posDiff, dep, centerOrigin, isStatic, alpha)
         {
-            (initPos, posDiff) = (pos, _posDiff);
+            tex = Resources.GetTexture(id);
+            Rectangle = new Rectangle(0, 0, tex.Width, tex.Height);
+            origin = centerOrigin;
         }
 
-        public void Call(bool move = true)
+        public override void Draw(Drawing d)
         {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            if(move) MoveToDefault();
-        }
-
-        public void MoveToDefault()
-        {
-            MoveTo(initPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
-        }
-
-        public void Quit(bool move = true)
-        {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            if(move) MoveToBack();
-        }
-
-        public void MoveToBack()
-        {
-            MoveTo(initPos + posDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            var tmp = d.CenterBased;
+            d.CenterBased = origin;
+            if (IsStatic) d.DrawUI(Pos, tex, Rectangle, Color.White, DepthID, Size, Alpha, Angle);
+            else d.DrawWithColor(Pos, tex, Rectangle, DepthID, Color.White * Alpha, Size, Angle);
+            d.CenterBased = tmp;
         }
     }
 }
