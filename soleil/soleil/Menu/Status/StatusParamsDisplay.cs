@@ -22,6 +22,18 @@ namespace Soleil.Menu.Status
             "M-DEF"
         };
 
+        readonly int[] Para = new[] // 仮置き適当パラメータ
+        {
+            6,
+            12,
+            44,
+            11,
+            12,
+            22,
+            18,
+            21,
+        };
+
         TextWithVal[] texts;
 
         public StatusParamsDisplay(Vector pos)
@@ -29,7 +41,7 @@ namespace Soleil.Menu.Status
             texts = new TextWithVal[8];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new TextWithVal(FontID.Test, pos + new Vector(0,DiffY*i), 200, Words[i]);
+                texts[i] = new TextWithVal(FontID.Test, pos + new Vector(0,DiffY*i), 200, Words[i], Para[i]);
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
             }
