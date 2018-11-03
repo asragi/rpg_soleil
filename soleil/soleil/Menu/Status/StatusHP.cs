@@ -11,9 +11,8 @@ namespace Soleil.Menu.Status
         FontImage valText;
         public StatusHP(Vector pos, int val)
         {
-            valText = new FontImage(FontID.Test, pos, DepthID.MenuTop);
+            valText = new FontImage(FontID.KkBlack, pos, DepthID.MenuTop);
             valText.Text = val.ToString();
-            valText.Color = ColorPalette.DarkBlue;
 
             Components = new IComponent[] { valText };
         }
