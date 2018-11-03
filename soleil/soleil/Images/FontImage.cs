@@ -14,8 +14,10 @@ namespace Soleil
     class FontImage : UIImageBase
     {
         FontID font;
+        public FontID Font { set => font = value; }
         public String Text { get; set; }
         public Color Color { get; set; } = Color.White;
+        public override Vector GetSize => (Vector)Resources.GetFont(font).MeasureString(Text);
 
         /// <summary>
         /// ImageManagerから作る.

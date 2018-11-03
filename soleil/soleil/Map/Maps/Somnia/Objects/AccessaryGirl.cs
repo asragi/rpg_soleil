@@ -21,7 +21,7 @@ namespace Soleil.Map.Maps.Somnia
         public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
         {
-            AnimationData anim = new AnimationData(AnimationID.SomniaMob1, new Vector(-5, -45), true, 8);
+            AnimationData anim = new AnimationData(AnimationID.SomniaAcceU, new Vector(-5, -45), true, 8);
             AnimationData[] standAnim = new[] { anim, anim, anim, anim, anim, anim, anim, anim, anim }; // 最悪
             SetStandAnimation(standAnim);
 

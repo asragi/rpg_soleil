@@ -14,59 +14,47 @@ namespace Soleil.Menu.Detail
     class PossessNum
     {
         readonly String ExplainText = "所持数";
-        readonly Vector NumDiff = new Vector(200, 0);
+        readonly Vector NumDiff = new Vector(220, 0);
         ItemList items = PlayerBaggage.GetInstance().Items;
-        FontImage explainText;
-        FontImage possessText;
+        TextWithVal withVal;
         public PossessNum(Vector _pos)
         {
-            possessText = new FontImage(FontID.Test, _pos + NumDiff, DepthID.Message, true, 0);
-            explainText = new FontImage(FontID.Test, _pos, DepthID.Message, true, 0);
+            withVal = new TextWithVal(FontID.WhiteOutlineGrad, _pos, (int)NumDiff.X);
         }
 
         void Refresh(SelectablePanel panel)
         {
             if(panel is MagicMenuPanel)
             {
-                explainText.Text = "";
-                possessText.Text = "";
+                withVal.Text = "";
                 return;
             }
-            if(panel is ItemPanel i)
+            if(panel is ItemPanelBase i)
             {
-                explainText.Text = ExplainText;
-                possessText.Text = items.GetItemNum(i.ID).ToString();
-            }
-            if (panel is ShopPanel s)
-            {
-                explainText.Text = ExplainText;
-                possessText.Text = items.GetItemNum(s.ID).ToString();
+                withVal.Text = ExplainText;
+                withVal.Val = items.GetItemNum(i.ID);
             }
         }
 
         public void Call()
         {
-            possessText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            explainText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            withVal.Call();
         }
 
         public void Quit()
         {
-            possessText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            explainText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            withVal.Quit();
         }
 
         public void Update(SelectablePanel panel)
         {
             Refresh(panel);
-            possessText.Update();
-            explainText.Update();
+            withVal.Update();
         }
 
         public void Draw(Drawing d)
         {
-            possessText.Draw(d);
-            explainText.Draw(d);
+            withVal.Draw(d);
         }
     }
 }

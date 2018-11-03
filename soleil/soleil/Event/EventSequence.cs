@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,10 +14,12 @@ namespace Soleil.Event
         List<EventSet> eventSets;
         EventSet[] eventSetsDefault; // 引数を保存する。
         int index;
-        public EventSequence()
+        PlayerObject player;
+        public EventSequence(PlayerObject pl)
         {
             index = 0;
             eventSets = new List<EventSet>();
+            player = pl;
         }
 
         public void SetEventSet(params EventSet[] _eventSets)

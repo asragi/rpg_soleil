@@ -125,6 +125,7 @@ namespace Soleil
         LuneWalkD,
 
         SomniaMob1,
+        SomniaAcceU,
 
         Size,
     }
@@ -142,6 +143,11 @@ namespace Soleil
 
     enum FontID : int
     {
+        WhiteOutlineGrad,
+        KkBlack,
+        KkMini,
+        KkGoldMini,
+        [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
     }
@@ -318,6 +324,8 @@ namespace Soleil
             // Somnia
             SetPath(AnimationID.SomniaMob1, "Animation/Map/Character/Mob/somniamob1");
             SetSize(AnimationID.SomniaMob1, 3, 1);
+            SetPath(AnimationID.SomniaAcceU, "Animation/Map/Character/Mob/Somnia/acce");
+            SetSize(AnimationID.SomniaAcceU, 1, 1);
             #endregion
 
             #region UI
@@ -363,7 +371,11 @@ namespace Soleil
 
             
             SetPath(FontID.Test, "kkmincho");
-            
+            SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
+            SetPath(FontID.KkBlack, "kkminchoBlack");
+            SetPath(FontID.KkMini, "kkminchoWhiteMini");
+            SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
+
             //optionPath = Option.FilePath;
             #endregion 
         }

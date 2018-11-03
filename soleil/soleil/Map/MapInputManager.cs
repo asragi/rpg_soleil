@@ -14,7 +14,7 @@ namespace Soleil.Map
     class MapInputManager
     {
         Dictionary<Key, bool> inputs;
-        InputFocus nowFocus;
+        InputFocus nowFocus, nextFocus;
         PlayerObject player;
         WindowManager wm;
         MenuSystem menuSystem;
@@ -24,7 +24,7 @@ namespace Soleil.Map
         private MapInputManager()
         {
             wm = WindowManager.GetInstance();
-            nowFocus = InputFocus.Player;
+            nextFocus = InputFocus.Player;
             inputs = new Dictionary<Key, bool>();
         }
         public void SetPlayer(PlayerObject p) => player = p;
@@ -43,33 +43,33 @@ namespace Soleil.Map
             var inputDir = KeyInput.GetStickInclineDirection(1);
             var smoothInput = InputSmoother(inputDir);
             UpdateInputKeysDown();
+            nowFocus = nextFocus;
             // フォーカスに応じて処理を振り分ける
-            switch (nowFocus)
+            PlayerMove(inputDir, nowFocus);
+            if(nowFocus == InputFocus.Window)
             {
-                case InputFocus.Player:
-                    PlayerMove();
-                    break;
-                case InputFocus.Window:
-                    wm.Input(smoothInput);
-                    break;
-                case InputFocus.Menu:
-                    menuSystem.Input(smoothInput);
-                    // debug
-                    if (menuSystem.IsQuit) nowFocus = InputFocus.Player;
-                    break;
-                default:
-                    break;
+                wm.Input(smoothInput);
+                return;
+            }
+            if(nowFocus == InputFocus.Menu)
+            {
+                menuSystem.Input(smoothInput);
+                if (menuSystem.IsQuit) SetFocus(InputFocus.Player);
             }
         }
 
         public void SetFocus(InputFocus f)
         {
-            nowFocus = f;
+            nextFocus = f;
         }
 
-        private void PlayerMove()
+        private void PlayerMove(Direction _inputDir, InputFocus focus)
         {
-            var inputDir = KeyInput.GetStickInclineDirection(1);
+            var inputDir = focus == InputFocus.Player ? _inputDir : Direction.N;
+            player.Move(inputDir);
+
+            if (focus != InputFocus.Player) return;
+
             if (KeyInput.GetKeyPush(Key.A))
             {
                 player.ProjectHitBox();
@@ -80,17 +80,14 @@ namespace Soleil.Map
                 player.Run();
             }
             else player.Walk();
-            if (inputDir == Direction.N) player.Stand();
 
             // Call Menu
             if (KeyInput.GetKeyPush(Key.B))
             {
                 menuSystem.Call();
-                nowFocus = InputFocus.Menu;
+                SetFocus(InputFocus.Menu);
                 return;
             }
-
-            player.Move(inputDir);
         }
 
         /// <summary>

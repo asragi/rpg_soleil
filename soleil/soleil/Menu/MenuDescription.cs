@@ -13,8 +13,7 @@ namespace Soleil.Menu
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.Test, _pos, DepthID.MenuBottom, true, 0);
-            fontImage.Color = ColorPalette.DarkBlue;
+            fontImage = new FontImage(FontID.KkBlack, _pos, DepthID.MenuBottom);
         }
 
         public override void Call()
