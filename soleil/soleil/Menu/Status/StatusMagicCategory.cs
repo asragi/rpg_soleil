@@ -10,7 +10,7 @@ namespace Soleil.Menu.Status
     {
         // 左上の基準点からの位置関係
         readonly Vector Spacing = new Vector(15, 15);
-        const int XDiff = 100;
+        const int XDiff = 120;
         const int YDiff = 60;
         MagicCategoryPiece[] pieces;
         public StatusMagicCategory(Vector pos)

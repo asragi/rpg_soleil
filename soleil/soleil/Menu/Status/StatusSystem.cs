@@ -16,7 +16,7 @@ namespace Soleil.Menu
         readonly Vector FacePos = new Vector(60, 80);
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
-        readonly Vector CategoryPos = new Vector(650, 80);
+        readonly Vector CategoryPos = new Vector(700, 80);
         
         // おしゃれ移動用参照
         MenuLine[] lines;
