@@ -9,11 +9,11 @@ namespace Soleil.Menu.Status
     class MagicCategoryPiece : MenuComponent
     {
         UIImage icon;
-        UIFontImage name;
+        FontImage name;
         public MagicCategoryPiece(Vector pos, int tag)
         {
             icon = new UIImage(TextureID.FrameTest, pos, Vector.Zero, DepthID.MenuTop);
-            name = new UIFontImage(FontID.Test, pos, null, DepthID.MenuTop);
+            name = new FontImage(FontID.Test, pos, null, DepthID.MenuTop);
             name.Text = "陽術";
         }
 

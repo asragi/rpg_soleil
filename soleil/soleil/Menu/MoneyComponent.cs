@@ -26,15 +26,9 @@ namespace Soleil.Menu
             InitPos = _pos;
             moneyText = new FontImage(FontID.Test, _pos - PositionDiff, DepthID.Message, true, 0);
             moneyText.Color = ColorPalette.DarkBlue;
-            moneyText.EnableShadow = true;
-            moneyText.ShadowPos = new Vector(3, 3);
-            moneyText.ShadowColor = ColorPalette.GlayBlue;
             currency = new FontImage(FontID.Test, _pos + CurrencyPos-PositionDiff, DepthID.Message, true, 0);
             currency.Text = MoneyWallet.Currency;
             currency.Color = ColorPalette.DarkBlue;
-            currency.EnableShadow = true;
-            currency.ShadowPos = new Vector(3, 3);
-            currency.ShadowColor = ColorPalette.GlayBlue;
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
             Refresh();
         }
