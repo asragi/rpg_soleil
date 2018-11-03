@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Menu.Status;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,17 +13,22 @@ namespace Soleil.Menu
         UIImage backImage;
         // 顔画像
         UIImage faceImgs;
-        readonly Vector facePos = new Vector(60, 80);
+        readonly Vector FacePos = new Vector(60, 80);
+        // 既得術系統
+        StatusMagicCategory statusMagicCategory;
+        readonly Vector CategoryPos = new Vector(650, 80);
+        
         // おしゃれ移動用参照
         MenuLine[] lines;
         public StatusSystem(MenuComponent parent, params MenuLine[] _lines)
             : base(parent)
         {
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
-            faceImgs = new UIImage(TextureID.MenuStatusL, facePos, Vector.Zero, DepthID.MenuMiddle);
-            
-            Images = (new UIImage[] { backImage, faceImgs });
-            Components = new MenuComponent[0];
+            faceImgs = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
+            statusMagicCategory = new StatusMagicCategory(CategoryPos);
+
+            Images = new [] { backImage, faceImgs };
+            Components = new[] { statusMagicCategory };
             lines = _lines;
         }
 

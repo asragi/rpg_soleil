@@ -165,6 +165,7 @@
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
+    <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
     <Compile Include="Menu\Status\StatusMagicCategory.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\SystemBase.cs" />
