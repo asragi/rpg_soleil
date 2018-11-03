@@ -8,7 +8,7 @@ namespace Soleil.Menu.Status
 {
     class StatusParamsDisplay : MenuComponent
     {
-        const int DiffY = 24;
+        const int DiffY = 28;
         // もっとちゃんとしたところにおきたい
         readonly string[] Words = new[]
         {
@@ -37,7 +37,7 @@ namespace Soleil.Menu.Status
             texts = new TextWithVal[6];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new TextWithVal(FontID.Touhaba, pos + new Vector(0,DiffY*i), 150, Words[i], Para[i]);
+                texts[i] = new TextWithVal(FontID.Touhaba, pos + new Vector(0,DiffY*i), 130, Words[i], Para[i]);
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
             }

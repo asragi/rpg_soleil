@@ -40,7 +40,7 @@ namespace Soleil.Menu
             NamePos = new Vector(namePosX, namePosY);
             HPPos = new Vector(500, namePosY);
             MPPos = new Vector(namePosX + 49, namePosY + 40);
-            ParamsPos = new Vector(namePosX, 240);
+            ParamsPos = new Vector(namePosX, 165);
             CategoryPos = new Vector(700, 80);
 
             // Component設定
