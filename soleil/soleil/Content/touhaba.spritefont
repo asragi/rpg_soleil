@@ -6,7 +6,7 @@
   <Asset Type="Graphics:FontDescription">
 
 
-<FontName>HGP明朝E</FontName>
+<FontName>Ricty Diminished Discord</FontName>
 
  
 <Size>18</Size>
@@ -16,7 +16,7 @@
 <UseKerning>true</UseKerning>
 
 
-<Style>Regular</Style>
+<Style>Bold</Style>
 
 
 <!-- <DefaultCharacter>*</DefaultCharacter> -->
