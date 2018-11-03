@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Images
 {
-    abstract class UIImageBase : ImageBase
+    abstract class UIImageBase : ImageBase, IComponent
     {
         readonly Vector initPos;
         readonly Vector posDiff;
@@ -16,6 +16,9 @@ namespace Soleil.Images
         {
             (initPos, posDiff) = (pos, (_posDiff ?? Vector.Zero));
         }
+
+        public void Call() => Call(true);
+        public void Quit() => Quit(true);
 
         public void Call(bool move = true)
         {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    abstract class MenuComponent
+    abstract class MenuComponent : IComponent
     {
-        protected MenuComponent[] Components;
+        protected IComponent[] Components;
         bool isActive;
         public bool IsActive
         {
@@ -36,7 +36,7 @@ namespace Soleil.Menu
             {
                 foreach (var item in Components)
                 {
-                    item.Call();
+                    item.Quit();
                 }
             }
         }
