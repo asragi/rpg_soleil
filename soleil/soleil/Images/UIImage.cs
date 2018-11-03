@@ -17,10 +17,10 @@ namespace Soleil
             (initPos, posDiff) = (pos, _posDiff);
         }
 
-        public void Call()
+        public void Call(bool move = true)
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            MoveToDefault();
+            if(move) MoveToDefault();
         }
 
         public void MoveToDefault()
@@ -28,10 +28,10 @@ namespace Soleil
             MoveTo(initPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
         }
 
-        public void Quit()
+        public void Quit(bool move = true)
         {
             Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            MoveToBack();
+            if(move) MoveToBack();
         }
 
         public void MoveToBack()

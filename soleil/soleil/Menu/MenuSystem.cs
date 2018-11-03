@@ -18,7 +18,7 @@ namespace Soleil.Menu
         Save,
         size,
     }
-    class MenuSystem : MenuComponent
+    class MenuSystem : SystemBase
     {
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
@@ -74,6 +74,7 @@ namespace Soleil.Menu
         };
 
         public MenuSystem()
+            :base(null)
         {
             Index = 0;
             // Image初期化
@@ -88,6 +89,12 @@ namespace Soleil.Menu
             // Image line
             menuLineUpper = new MenuLine(70, true);
             menuLineLower = new MenuLine(470, false);
+            Components = new MenuComponent[]
+            {
+                menuLineLower,
+                menuLineUpper,
+            };
+            Images = new UIImage[0];
             // Transition
             transition = Transition.GetInstance();
             IsActive = false;
@@ -111,6 +118,7 @@ namespace Soleil.Menu
         /// </summary>
         public override void Call()
         {
+            base.Call();
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
             for (int i = 0; i < menuItems.Length; i++)
@@ -129,6 +137,7 @@ namespace Soleil.Menu
         /// </summary>
         public override void Quit()
         {
+            base.Quit();
             // Set bools
             IsActive = false;
             IsQuit = true;
@@ -150,8 +159,6 @@ namespace Soleil.Menu
             // Transition Images
             backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
             frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            menuLineLower.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
-            menuLineUpper.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
             menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
         }
 
@@ -248,8 +255,6 @@ namespace Soleil.Menu
                 menuItems[i].Update();
             }
             frontImage.Update();
-            menuLineUpper.Update();
-            menuLineLower.Update();
             menuDescription.Update();
             statusMenu.Update();
             // Update Selected
@@ -267,12 +272,9 @@ namespace Soleil.Menu
 
         public override void Draw(Drawing d)
         {
-            base.Draw(d);
             // 背景描画
             backImage.Draw(d);
-            // Line描画
-            menuLineUpper.Draw(d);
-            menuLineLower.Draw(d);
+            base.Draw(d);
             // 選択肢描画
             for (int i = 0; i < menuItems.Length; i++)
             {

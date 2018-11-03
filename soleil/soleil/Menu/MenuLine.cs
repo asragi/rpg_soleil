@@ -10,10 +10,10 @@ namespace Soleil.Menu
     /// <summary>
     /// メニュー画面等で使う横に動く装飾用の罫線を描画するクラス
     /// </summary>
-    class MenuLine
+    class MenuLine : MenuComponent
     {
         const int MoveSpeed = 1;
-        Image[] lines;
+        UIImage[] lines;
         int texWidth;
         bool moveLeft;
         public MenuLine(int posY, bool moveToLeft)
@@ -22,23 +22,34 @@ namespace Soleil.Menu
             var tex = Resources.GetTexture(TextureID.MenuLine);
             texWidth = tex.Width;
             var texNum = Game1.VirtualWindowSizeX / texWidth + 3;
-            lines = new Image[texNum];
+            lines = new UIImage[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new Image(0, tex, new Vector(i * texWidth, posY), DepthID.MessageBack, false, true, 0);
+                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, posY), Vector.Zero, DepthID.MessageBack);
             }
         }
 
-        public void Fade(int duration, EFunc easing, bool isFadein)
+        public override void Call()
         {
+            base.Call();
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i].Fade(duration, easing, isFadein);
+                lines[i].Call(move:false);
             }
         }
 
-        public void Update()
+        public override void Quit()
         {
+            base.Quit();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i].Quit(move:false);
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
             // Move Lines
             for (int i = 0; i < lines.Length; i++)
             {
@@ -69,8 +80,9 @@ namespace Soleil.Menu
             }
         }
 
-        public void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
+            base.Draw(d);
             for (int i = 0; i < lines.Length; i++)
             {
                 lines[i].Draw(d);
