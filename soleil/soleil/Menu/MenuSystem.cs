@@ -24,6 +24,7 @@ namespace Soleil.Menu
         /// メニューを閉じたかどうかのフラグを伝える
         /// </summary>
         public bool IsQuit { get; private set; }
+        readonly Vector MoneyComponentPos = new Vector(680, 507);
         readonly String[] Descriptions = new String[]
         {
             "アイテムを確認・選択して使用します。",
@@ -49,6 +50,8 @@ namespace Soleil.Menu
         MagicMenu magicMenu;
         // Status 表示
         StatusMenu statusMenu;
+        // 所持金表示
+        MoneyComponent moneyComponent;
 
         // Transition
         public const int FadeSpeed = 23;
@@ -100,6 +103,8 @@ namespace Soleil.Menu
             statusMenu = new StatusMenu(this);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
+            // Money
+            moneyComponent = new MoneyComponent(MoneyComponentPos);
         }
 
         /// <summary>
@@ -114,6 +119,7 @@ namespace Soleil.Menu
 
             // statusMenu召喚
             statusMenu.FadeIn();
+            moneyComponent.Call();
         }
 
         /// <summary>
@@ -129,6 +135,7 @@ namespace Soleil.Menu
 
             // statusMenu退散
             statusMenu.FadeOut();
+            moneyComponent.Quit();
         }
 
         private void ImageTransition(TransitionMode mode)
@@ -245,7 +252,7 @@ namespace Soleil.Menu
             menuLineLower.Update();
             menuDescription.Update();
             statusMenu.Update();
-
+            moneyComponent.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -279,6 +286,8 @@ namespace Soleil.Menu
             {
                 child.Draw(d);
             }
+            // Money描画
+            moneyComponent.Draw(d);
             // 前景描画
             frontImage.Draw(d);
         }

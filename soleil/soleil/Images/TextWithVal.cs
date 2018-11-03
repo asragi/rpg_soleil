@@ -20,8 +20,11 @@ namespace Soleil.Menu
         public String Text { get => text.Text; set => text.Text = value; }
         public float Alpha { get => text.Alpha; set { text.Alpha = value; val.Alpha = value; } }
         int spacing;
-        bool rightAlign;
+        bool rightAlign, underAlign;
         FontID font;
+        public FontID Font { set { font = value; text.Font = font; } }
+        FontID valFont;
+        public FontID ValFont { set { valFont = value; val.Font = valFont; val.Pos = AlignPos(); } }
         public bool Enable = true;
         public bool EnableValDisplay = true;
 
@@ -31,7 +34,7 @@ namespace Soleil.Menu
             set
             {
                 text.Pos = value;
-                val.Pos = RightAlignPos();
+                val.Pos = AlignPos();
             }
         }
 
@@ -40,24 +43,26 @@ namespace Soleil.Menu
             set
             {
                 val.Text = value.ToString();
-                val.Pos = RightAlignPos();
+                val.Pos = AlignPos();
             }
         }
 
         // 右揃えにするために文字の幅を取得し，適切な位置を返す．
-        private Vector RightAlignPos()
+        private Vector AlignPos()
         {
-            int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(font).MeasureString(val.Text).X) : 0;
-            return text.Pos + new Vector(spacing - rightAlignDiff, 0);
+            int rightAlignDiff = rightAlign ? (int)(Resources.GetFont(valFont).MeasureString(val.Text).X) : 0;
+            int underAlignDiff = underAlign ? (int)Resources.GetFont(font).MeasureString(text.Text).Y - (int)(Resources.GetFont(valFont).MeasureString(val.Text).Y) : 0;
+            return text.Pos + new Vector(spacing - rightAlignDiff, underAlignDiff);
         }
 
-        public TextWithVal(FontID _font, Vector pos, int _space, String _text = "", int _val = 0, DepthID depth = DepthID.Message, bool isStatic = true, bool _rightAlign = true)
+        public TextWithVal(FontID _font, Vector pos, int _space, String _text = "", int _val = 0, DepthID depth = DepthID.Message, bool isStatic = true, bool _rightAlign = true, bool _underAlign = true)
         {
             spacing = _space;
+            font = _font;
+            valFont = _font;
             text = new FontImage(font, pos, depth, isStatic, 0);
             text.Text = _text;
-            font = _font;
-            rightAlign = _rightAlign;
+            (rightAlign, underAlign) = (_rightAlign, _underAlign);
             
             val = new FontImage(font, Vector.Zero, depth, isStatic, 0);
             Val = _val;

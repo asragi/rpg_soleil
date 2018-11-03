@@ -141,6 +141,11 @@ namespace Soleil
 
     enum FontID : int
     {
+        WhiteOutlineGrad,
+        KkBlack,
+        KkMini,
+        KkGoldMini,
+        [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
     }
@@ -362,7 +367,11 @@ namespace Soleil
 
             
             SetPath(FontID.Test, "kkmincho");
-            
+            SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
+            SetPath(FontID.KkBlack, "kkminchoBlack");
+            SetPath(FontID.KkMini, "kkminchoWhiteMini");
+            SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
+
             //optionPath = Option.FilePath;
             #endregion 
         }
