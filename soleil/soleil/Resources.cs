@@ -145,6 +145,7 @@ namespace Soleil
     {
         WhiteOutlineGrad,
         KkBlack,
+        KkBlackMini,
         KkMini,
         KkGoldMini,
         [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
@@ -374,6 +375,7 @@ namespace Soleil
             SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
             SetPath(FontID.KkBlack, "kkminchoBlack");
             SetPath(FontID.KkMini, "kkminchoWhiteMini");
+            SetPath(FontID.KkBlackMini, "kkminchoBlackMini");
             SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
 
             //optionPath = Option.FilePath;
