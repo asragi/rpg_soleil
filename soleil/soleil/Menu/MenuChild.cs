@@ -27,6 +27,12 @@ namespace Soleil.Menu
             IsActive = false;
         }
 
+        public override void Call()
+        {
+            base.Call();
+            IsActive = true;
+        }
+
         public void Input(Direction dir)
         {
             if (KeyInput.GetKeyPush(Key.A)) { OnInputSubmit(); return; }
@@ -37,12 +43,12 @@ namespace Soleil.Menu
             if (dir == Direction.L) OnInputLeft();
         }
 
-        public abstract void OnInputRight();
-        public abstract void OnInputLeft();
-        public abstract void OnInputUp();
-        public abstract void OnInputDown();
-        public abstract void OnInputSubmit();
-        public abstract void OnInputCancel();
+        public virtual void OnInputRight() { }
+        public virtual void OnInputLeft() { }
+        public virtual void OnInputUp() { }
+        public virtual void OnInputDown() { }
+        public virtual void OnInputSubmit() { }
+        public virtual void OnInputCancel() { }
 
     }
 }

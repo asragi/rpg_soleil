@@ -10,39 +10,60 @@ namespace Soleil.Menu
     /// <summary>
     /// メニュー画面等で使う横に動く装飾用の罫線を描画するクラス
     /// </summary>
-    class MenuLine
+    class MenuLine : MenuComponent
     {
         const int MoveSpeed = 1;
-        Image[] lines;
+        UIImage[] lines;
         int texWidth;
         bool moveLeft;
-        public MenuLine(int posY, bool moveToLeft)
+
+        // オシャレアニメ
+        int posY;
+        int diffY;
+        bool isDiff;
+        int easeFrame = 100000;
+        double startY, destinationY;
+        public MenuLine(int _posY, int _diffY, bool moveToLeft)
         {
+            (posY, diffY, startY, destinationY) = (_posY, _diffY, _posY, _posY + _diffY);
             moveLeft = moveToLeft;
             var tex = Resources.GetTexture(TextureID.MenuLine);
             texWidth = tex.Width;
             var texNum = Game1.VirtualWindowSizeX / texWidth + 3;
-            lines = new Image[texNum];
+            lines = new UIImage[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new Image(0, tex, new Vector(i * texWidth, posY), DepthID.MessageBack, false, true, 0);
+                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, _posY), Vector.Zero, DepthID.MenuTop);
             }
         }
 
-        public void Fade(int duration, EFunc easing, bool isFadein)
+        public override void Call()
         {
+            base.Call();
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i].Fade(duration, easing, isFadein);
+                lines[i].Call(move:false);
             }
         }
 
-        public void Update()
+        public override void Quit()
         {
+            base.Quit();
+            for (int i = 0; i < lines.Length; i++)
+            {
+                lines[i].Quit(move:false);
+            }
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            easeFrame++;
             // Move Lines
             for (int i = 0; i < lines.Length; i++)
             {
                 var tmp = lines[i].Pos;
+                // X
                 if (moveLeft)
                 {
                     tmp.X -= MoveSpeed;
@@ -60,6 +81,9 @@ namespace Soleil.Menu
                 {
                     tmp.X -= (lines.Length - 1) * texWidth;
                 }
+
+                // Y
+                tmp.Y = Ease();
                 lines[i].Pos = tmp;
             }
             // Image Update
@@ -67,10 +91,25 @@ namespace Soleil.Menu
             {
                 lines[i].Update();
             }
+
+            double Ease()
+            {
+                if (easeFrame > MenuSystem.FadeSpeed) return (isDiff)? posY + diffY : posY;
+                return MenuSystem.EaseFunc(easeFrame, MenuSystem.FadeSpeed, destinationY, startY);
+            }
         }
 
-        public void Draw(Drawing d)
+        public void StartMove(bool _isDiff)
         {
+            isDiff = _isDiff;
+            easeFrame = 0;
+            startY = lines[0].Pos.Y;
+            destinationY = isDiff ? posY + diffY : posY;
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
             for (int i = 0; i < lines.Length; i++)
             {
                 lines[i].Draw(d);

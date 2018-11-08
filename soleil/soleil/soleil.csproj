@@ -101,6 +101,8 @@
     <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\ImageManager.cs" />
     <Compile Include="Images\TextWithVal.cs" />
+    <Compile Include="Images\UIImage.cs" />
+    <Compile Include="Images\UIImageBase.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
     <Compile Include="Item\ItemList.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Menu\Detail\DetailWindow.cs" />
     <Compile Include="Menu\Detail\PossessNum.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
+    <Compile Include="Menu\IComponent.cs" />
     <Compile Include="Menu\ItemPanelBase.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
@@ -159,6 +162,14 @@
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
+    <Compile Include="Menu\Status\CharaName.cs" />
+    <Compile Include="Menu\Status\HPMPDisplay.cs" />
+    <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
+    <Compile Include="Menu\Status\StatusHP.cs" />
+    <Compile Include="Menu\Status\StatusMagicCategory.cs" />
+    <Compile Include="Menu\Status\StatusMP.cs" />
+    <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
+    <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

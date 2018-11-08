@@ -84,7 +84,7 @@ namespace Soleil.Map
             // Call Menu
             if (KeyInput.GetKeyPush(Key.B))
             {
-                menuSystem.CallMenu();
+                menuSystem.Call();
                 SetFocus(InputFocus.Menu);
                 return;
             }

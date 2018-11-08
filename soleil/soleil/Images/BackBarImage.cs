@@ -18,14 +18,14 @@ namespace Soleil.Images
         public Vector Pos { get; set; }
         Image[] images;
 
-        public BackBarImage(Vector _pos, int _length, bool centerBased)
+        public BackBarImage(Vector _pos, int _length, bool centerBased, DepthID depth = DepthID.MenuBottom)
         {
             Pos = _pos;
             images = new Image[3];
             var tex = Resources.GetTexture(TextureID.BackBar);
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new Image(0, tex, Pos, DepthID.MessageBack, false, true, 0);
+                images[i] = new Image(0, tex, Pos, depth, false, true, 0);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);

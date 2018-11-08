@@ -1201,6 +1201,18 @@
 /processorParam:TextureFormat=Color
 /build:UI/backBar.png
 
+#begin UI/Menu/MenuStatusFaceL.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/MenuStatusFaceL.png
+
 #begin Animation/Map/Character/Mob/Somnia/acce.png
 /importer:TextureImporter
 /processor:TextureProcessor

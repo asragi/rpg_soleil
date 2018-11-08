@@ -19,7 +19,7 @@ namespace Soleil.Menu
         Save,
         size,
     }
-    class MenuSystem : MenuComponent
+    class MenuSystem : MenuChild
     {
         /// <summary>
         /// メニューを閉じたかどうかのフラグを伝える
@@ -36,13 +36,15 @@ namespace Soleil.Menu
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
+
+        UIImage backImage, frontImage;
         // 選択後にキャラクターの選択に移動するメニュー項目
         readonly MenuName[] ToCharacterSelect = new[] {
             MenuName.Magic,
             MenuName.Skill,
             MenuName.Equip,
             MenuName.Status };
-        Image backImage, frontImage;
+
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
         MenuDescription menuDescription;
@@ -57,6 +59,8 @@ namespace Soleil.Menu
         MagicMenu magicMenu;
         // Status 表示
         StatusMenu statusMenu;
+        // 詳細ステータス
+        StatusSystem statusSystem;
         // 所持金表示
         MoneyComponent moneyComponent;
 
@@ -84,11 +88,14 @@ namespace Soleil.Menu
         };
 
         public MenuSystem()
+            :base(null)
         {
             Index = 0;
             // Image初期化
-            backImage = new Image(0, Resources.GetTexture(TextureID.MenuBack), Vector.Zero, DepthID.MessageBack, false, true, 0);
-            frontImage = new Image(0, Resources.GetTexture(TextureID.MenuFront), Vector.Zero, DepthID.MessageBack, false, true, 0);
+            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
+            frontImage = new UIImage(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
+
+            // 選択肢たち
             menuItems = new MenuItem[(int)MenuName.size];
             for (int i = 0; i < menuItems.Length; i++)
             {
@@ -96,22 +103,37 @@ namespace Soleil.Menu
                 menuItems[i] = new MenuItem((MenuName)i, i == 0);
             }
             // Image line
-            menuLineUpper = new MenuLine(70, true);
-            menuLineLower = new MenuLine(470, false);
-            // Transition
-            transition = Transition.GetInstance();
-            IsActive = false;
-
+            menuLineUpper = new MenuLine(70, -30, true);
+            menuLineLower = new MenuLine(470, 20, false);
             // MenuDescription
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
             itemMenu = new ItemMenu(this, menuDescription);
-            // Magic Menu
-            magicMenu = new MagicMenu(this, menuDescription);
             // Status Menu
             statusMenu = new StatusMenu(this);
+            // Magic Menu
+            magicMenu = new MagicMenu(statusMenu, menuDescription);
+            // 詳細ステータス
+            statusSystem = new StatusSystem(statusMenu, menuLineUpper, menuLineLower);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu};
+            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
+
+            // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
+            Components = new IComponent[]
+            {
+                backImage,
+                menuLineLower,
+                menuLineUpper,
+                menuDescription,
+                frontImage,
+            };
+
+            // Transition
+            transition = Transition.GetInstance();
+
+            // 入力処理
+            IsActive = false;
+
             // Money
             moneyComponent = new MoneyComponent(MoneyComponentPos);
         }
@@ -119,31 +141,38 @@ namespace Soleil.Menu
         /// <summary>
         /// メニューを呼び出す
         /// </summary>
-        public void CallMenu()
+        public override void Call()
         {
+            base.Call();
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Call();
+            }
+            statusMenu.Call();
             IsActive = true;
             IsQuit = false;
 
-            // statusMenu召喚
-            statusMenu.FadeIn();
             moneyComponent.Call();
         }
 
         /// <summary>
         /// メニューを閉じる
         /// </summary>
-        public void QuitMenu()
+        public override void Quit()
         {
+            base.Quit();
             // Set bools
             IsActive = false;
             IsQuit = true;
+            statusMenu.Quit();
             //transition.SetDepth(DepthID.Debug);
             ImageTransition(TransitionMode.FadeIn);
-
-            // statusMenu退散
-            statusMenu.FadeOut();
+            for (int i = 0; i < menuItems.Length; i++)
+            {
+                menuItems[i].Quit();
+            }
             moneyComponent.Quit();
         }
 
@@ -152,16 +181,6 @@ namespace Soleil.Menu
             // Transition
             transition.SetMode(mode);
             var isFadeOut = mode == TransitionMode.FadeOut;
-            // Transition Images
-            backImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            frontImage.Fade(FadeSpeed, EaseFunc, isFadeOut);
-            for (int i = 0; i < menuItems.Length; i++)
-            {
-                menuItems[i].Fade(FadeSpeed, EaseFunc, isFadeOut);
-            }
-            menuLineLower.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
-            menuLineUpper.Fade(FadeSpeed-3, EaseFunc, isFadeOut);
-            menuDescription.Fade(FadeSpeed, EaseFunc, isFadeOut);
         }
 
         /// <summary>
@@ -178,7 +197,7 @@ namespace Soleil.Menu
                 Index = (Index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
-                else if (KeyInput.GetKeyPush(Key.B)) QuitMenu();
+                else if (KeyInput.GetKeyPush(Key.B)) Quit();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
@@ -194,7 +213,8 @@ namespace Soleil.Menu
         /// </summary>
         public void CallChild(MenuName name)
         {
-            if (name == MenuName.Magic) magicMenu.IsActive = true;
+            if (name == MenuName.Magic) magicMenu.Call();
+            if (name == MenuName.Status) statusSystem.Call();
         }
 
         void Decide()
@@ -203,7 +223,7 @@ namespace Soleil.Menu
             var selected = (MenuName)Index;
             if(selected == MenuName.Items)
             {
-                itemMenu.IsActive = true;
+                itemMenu.Call();
                 return;
             }
             if(ToCharacterSelect.Contains(selected))
@@ -214,7 +234,6 @@ namespace Soleil.Menu
             if(selected == MenuName.Option)
             {
                 // Option設定用ウィンドウ出現
-
                 IsActive = true; // debug
                 return;
             }
@@ -226,14 +245,13 @@ namespace Soleil.Menu
                 return;
             }
         }
-
         protected override void OnDisable()
         {
             base.OnDisable();
             // Transition Images
-            for (int i = 0; i < menuItems.Length; i++)
+            for (int i = 0; i<menuItems.Length; i++)
             {
-                menuItems[i].MoveToBack(Vector.Zero, FadeSpeed, EaseFunc);
+                menuItems[i].MoveToBack();
             }
         }
 
@@ -241,9 +259,9 @@ namespace Soleil.Menu
         {
             base.OnEnable();
             // Transition Images
-            for (int i = 0; i < menuItems.Length; i++)
+            for (int i = 0; i<menuItems.Length; i++)
             {
-                menuItems[i].MoveToDefault(Vector.Zero, FadeSpeed, EaseFunc);
+                menuItems[i].MoveToDefault();
             }
         }
 
@@ -251,16 +269,10 @@ namespace Soleil.Menu
         {
             base.Update();
             // ImageUpdate
-            backImage.Update();
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Update();
             }
-            frontImage.Update();
-            menuLineUpper.Update();
-            menuLineLower.Update();
-            menuDescription.Update();
-            statusMenu.Update();
             moneyComponent.Update();
             // Update Selected
             for (int i = 0; i < menuItems.Length; i++)
@@ -278,18 +290,11 @@ namespace Soleil.Menu
         public override void Draw(Drawing d)
         {
             base.Draw(d);
-            // 背景描画
-            backImage.Draw(d);
-            // Line描画
-            menuLineUpper.Draw(d);
-            menuLineLower.Draw(d);
             // 選択肢描画
             for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].Draw(d);
             }
-            // 文章描画
-            menuDescription.Draw(d);
             // 子ウィンドウ描画
             foreach (var child in menuChildren)
             {
@@ -297,8 +302,6 @@ namespace Soleil.Menu
             }
             // Money描画
             moneyComponent.Draw(d);
-            // 前景描画
-            frontImage.Draw(d);
         }
     }
 }

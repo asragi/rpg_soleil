@@ -16,8 +16,8 @@ namespace Soleil.Menu
         MenuName menuName;
         Vector pos;
         public bool IsSelected { get; set; }
-        Image unselectedImg;
-        Image selectedImg;
+        UIImage unselectedImg;
+        UIImage selectedImg;
 
         public MenuItem(MenuName _menuName, bool select)
         {
@@ -29,8 +29,8 @@ namespace Soleil.Menu
 
             TextureID unselectedTexID = MenuSystem.optionTextures[(int)menuName * 2];
             TextureID texID = MenuSystem.optionTextures[(int)menuName * 2 + 1];
-            unselectedImg = new Image(0, Resources.GetTexture(unselectedTexID), pos, DepthID.MessageBack, false, true, 0);
-            selectedImg = new Image(0, Resources.GetTexture(texID), pos, DepthID.MessageBack, false, true, 0);
+            unselectedImg = new UIImage(unselectedTexID, pos, new Vector(-50,0), DepthID.MenuBottom);
+            selectedImg = new UIImage(texID, pos, new Vector(-50, 0), DepthID.MenuBottom);
         }
 
         public void Update()
@@ -39,23 +39,29 @@ namespace Soleil.Menu
             unselectedImg.Update();
         }
 
-        public void Fade(int duration, EFunc easing, bool isFadein)
+        public void Call()
         {
-            selectedImg.Fade(duration, easing, isFadein);
-            unselectedImg.Fade(duration, easing, isFadein);
+            unselectedImg.Call();
+            selectedImg.Call();
         }
 
-        public void MoveToBack(Vector target, int duration, EFunc _easeFunc)
+        public void Quit()
         {
-            selectedImg.MoveTo(pos - new Vector(50,0), duration, _easeFunc);
-            unselectedImg.MoveTo(pos - new Vector(50,0), duration, _easeFunc);
-        }
-        public void MoveToDefault(Vector target, int duration, EFunc _easeFunc)
-        {
-            selectedImg.MoveTo(pos, duration, _easeFunc);
-            unselectedImg.MoveTo(pos, duration, _easeFunc);
+            unselectedImg.Quit();
+            selectedImg.Quit();
         }
 
+        public void MoveToDefault()
+        {
+            unselectedImg.MoveToDefault();
+            selectedImg.MoveToDefault();
+        }
+
+        public void MoveToBack()
+        {
+            unselectedImg.MoveToBack();
+            selectedImg.MoveToBack();
+        }
 
         public void Draw(Drawing d)
         {

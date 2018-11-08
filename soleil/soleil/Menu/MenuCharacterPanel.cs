@@ -37,18 +37,18 @@ namespace Soleil.Menu
                 mp = 425;
             }
             // Images
-            faceImg = new Image(0, Resources.GetTexture(textureID), pos + FaceImgPos, DepthID.MessageBack, false, true, 0);
+            faceImg = new Image(0, Resources.GetTexture(textureID), pos + FaceImgPos, DepthID.MenuBottom, false, true, 0);
             fontImages = new List<FontImage>();
             // hpmpImg
-            hpText = new FontImage(FontID.Test, pos + HPPos, DepthID.MessageBack, true, 0);
+            hpText = new FontImage(FontID.Test, pos + HPPos, DepthID.MenuBottom, true, 0);
             fontImages.Add(hpText);
-            mpText = new FontImage(FontID.Test, pos + HPPos + new Vector(0, SpaceHPMP), DepthID.MessageBack, true, 0);
+            mpText = new FontImage(FontID.Test, pos + HPPos + new Vector(0, SpaceHPMP), DepthID.MenuBottom, true, 0);
             fontImages.Add(mpText);
             hpText.Text = "HP";
             mpText.Text = "MP";
-            hpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal,0), DepthID.MessageBack, true, 0);
+            hpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal,0), DepthID.MenuBottom, true, 0);
             fontImages.Add(hpNumText);
-            mpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MessageBack, true, 0);
+            mpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
             fontImages.Add(mpNumText);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    abstract class MenuComponent
+    abstract class MenuComponent : IComponent
     {
+        protected IComponent[] Components;
         bool isActive;
         public bool IsActive
         {
@@ -30,7 +31,44 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnDisable() { }
 
-        public virtual void Update() { }
-        public virtual void Draw(Drawing d) { }
+        public virtual void Quit() {
+            if (Components != null)
+            {
+                foreach (var item in Components)
+                {
+                    item.Quit();
+                }
+            }
+        }
+
+        public virtual void Call() {
+            if (Components != null)
+            {
+                foreach (var item in Components)
+                {
+                    item.Call();
+                }
+            }
+        }
+
+        public virtual void Update()
+        {
+            if(Components != null)
+            {
+                foreach (var item in Components)
+                {
+                    item.Update();
+                }
+            }
+        }
+        public virtual void Draw(Drawing d) {
+            if (Components != null)
+            {
+                foreach (var item in Components)
+                {
+                    item.Draw(d);
+                }
+            }
+        }
     }
 }
