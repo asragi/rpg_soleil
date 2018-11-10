@@ -27,6 +27,9 @@ namespace Soleil.Menu
         // 属性
         AttributeDisplay attribute;
         readonly Vector AttributePos;
+        // 装備
+        EquipDisplay equipDisplay;
+        readonly Vector EquipPos;
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
@@ -45,6 +48,7 @@ namespace Soleil.Menu
             MPPos = new Vector(namePosX + 49, namePosY + 40);
             ParamsPos = new Vector(namePosX, 165);
             AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
+            EquipPos = new Vector(500, 280);
             CategoryPos = new Vector(700, 80);
 
             // Component設定
@@ -55,9 +59,10 @@ namespace Soleil.Menu
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
             attribute = new AttributeDisplay(AttributePos);
+            equipDisplay = new EquipDisplay(EquipPos);
 
             //
-            Components = new IComponent[] {backImage, charaName, statusParams, attribute, display, statusMagicCategory, faceImg };
+            Components = new IComponent[] {backImage, charaName, statusParams, attribute, display, equipDisplay, statusMagicCategory, faceImg };
             
             //
             lines = _lines;

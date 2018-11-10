@@ -8,7 +8,7 @@ namespace Soleil.Menu.Status
 {
     class EquipDisplay : MenuComponent
     {
-        const int DiffY = 28;
+        const int DiffY = 40;
         FontImage[] texts;
 
         const string Empty = "------";
