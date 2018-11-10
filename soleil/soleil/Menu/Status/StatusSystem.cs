@@ -49,7 +49,7 @@ namespace Soleil.Menu
             ParamsPos = new Vector(namePosX, 165);
             AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
             EquipPos = new Vector(500, 280);
-            CategoryPos = new Vector(700, 80);
+            CategoryPos = new Vector(570, namePosY);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
