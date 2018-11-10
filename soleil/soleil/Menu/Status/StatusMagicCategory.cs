@@ -8,9 +8,24 @@ namespace Soleil.Menu.Status
 {
     class StatusMagicCategory : MenuComponent
     {
-        const int XDiff = 120;
-        const int YDiff = 60;
+        const int XDiff = 80;
+        const int YDiff = 80;
         MagicCategoryPiece[] pieces;
+
+        readonly string[] names = new[] // debug tmp
+        {
+            "陽術",
+            "陰術",
+            "魔術",
+            "－－",
+            "音術",
+            "忍術",
+            "樹術",
+            "鋼術",
+            "－－",
+            "－－",
+        };
+
         public StatusMagicCategory(Vector pos)
             :base()
         {
@@ -20,6 +35,7 @@ namespace Soleil.Menu.Status
                 var x = XDiff * (i / 2);
                 var y = (i % 2 == 0) ? 0 : YDiff;
                 pieces[i] = new MagicCategoryPiece(pos + new Vector(x,y), i);
+                pieces[i].Name = names[i];
             }
 
             Components = pieces;
