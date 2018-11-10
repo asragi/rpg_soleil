@@ -42,14 +42,15 @@ namespace Soleil.Menu
             // const
             const int namePosX = 350;
             const int namePosY = 80;
+            const int RightX = 560;
             FacePos = new Vector(60, 80);
             NamePos = new Vector(namePosX, namePosY);
-            HPPos = new Vector(500, namePosY);
-            MPPos = new Vector(namePosX + 49, namePosY + 40);
-            ParamsPos = new Vector(namePosX, 165);
+            HPPos = new Vector(namePosX + 130, namePosY);
+            MPPos = new Vector(namePosX + 28, namePosY + 40);
+            ParamsPos = new Vector(namePosX, 175);
             AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
-            EquipPos = new Vector(500, 280);
-            CategoryPos = new Vector(570, namePosY);
+            EquipPos = new Vector(RightX, 300);
+            CategoryPos = new Vector(RightX, namePosY);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
