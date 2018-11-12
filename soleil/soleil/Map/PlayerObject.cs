@@ -19,7 +19,7 @@
         int speed;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
-            : base(new Vector(1000,1500), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
+            : base(new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
         {
             Movable = true;
             visible = true;
