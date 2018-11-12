@@ -45,8 +45,8 @@ namespace Soleil.Menu
             const int RightX = 520;
             FacePos = new Vector(60, 80);
             NamePos = new Vector(namePosX, namePosY);
-            HPPos = new Vector(namePosX + 130, namePosY);
-            MPPos = new Vector(namePosX + 28, namePosY + 40);
+            HPPos = new Vector(namePosX + 76, namePosY+2);
+            MPPos = new Vector(namePosX, namePosY + 40);
             ParamsPos = new Vector(namePosX, 175);
             AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
             EquipPos = new Vector(RightX, 254);
