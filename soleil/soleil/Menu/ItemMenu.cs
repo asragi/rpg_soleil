@@ -9,6 +9,7 @@ namespace Soleil.Menu
 {
     class ItemMenu : BasicMenu, IListener
     {
+        StatusMenu statusMenu;
         ItemList itemList;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
             :base(parent, desc)
@@ -48,8 +49,22 @@ namespace Soleil.Menu
 
             void ItemEffect(ItemID id)
             {
-                var item = ItemDataBase.Get(id);
-                if (!item.OnMenu) return; // Menuで使用可能でないなら終了
+                var tmp = ItemDataBase.Get(id);
+                if (!(tmp is ConsumableItem)) return; // Consumableでないなら終了; 「使用できる武器」みたいなのは必要に応じてまた．
+                if (!tmp.OnMenu) return; // Menuで使用可能でないなら終了
+                var item = (ConsumableItem)tmp;
+
+                if (item.Target == ItemTarget.Nothing)
+                {
+                    Console.WriteLine("Event発生など");
+                }else if (item.Target == ItemTarget.OneAlly)
+                {
+                    // inputをstatusに渡す．
+                }else if (item.Target == ItemTarget.AllAlly)
+                {
+                    // inputをstatusに渡す．
+                    Console.WriteLine("味方全員を対象");
+                }
             }
         }
 
