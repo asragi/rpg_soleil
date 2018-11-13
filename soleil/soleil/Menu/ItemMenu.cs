@@ -40,6 +40,19 @@ namespace Soleil.Menu
             }
         }
 
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            var nowPanel = (ItemPanel)Panels[Index];
+            ItemEffect(nowPanel.ID);
+
+            void ItemEffect(ItemID id)
+            {
+                var item = ItemDataBase.Get(id);
+                if (!item.OnMenu) return; // Menuで使用可能でないなら終了
+            }
+        }
+
         // IListener
         public ListenerType Type { get { return ListenerType.ItemMenu; } }
         public void OnListen(INotifier i)
