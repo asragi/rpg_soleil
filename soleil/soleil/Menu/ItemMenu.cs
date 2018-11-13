@@ -20,6 +20,8 @@ namespace Soleil.Menu
             Init();
         }
 
+        public void SetRefs(StatusMenu _statusMenu) => (statusMenu) = (_statusMenu);
+
         protected override SelectablePanel[] MakeAllPanels()
         {
             var items = new List<SelectablePanel>();
@@ -60,6 +62,8 @@ namespace Soleil.Menu
                 }else if (item.Target == ItemTarget.OneAlly)
                 {
                     // inputをstatusに渡す．
+                    statusMenu.FocusTo(this);
+                    Quit();
                 }else if (item.Target == ItemTarget.AllAlly)
                 {
                     // inputをstatusに渡す．

@@ -118,6 +118,9 @@ namespace Soleil.Menu
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
 
+            // 参照を設定しまくる．
+            itemMenu.SetRefs(statusMenu);
+
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             Components = new IComponent[]
             {
@@ -228,7 +231,7 @@ namespace Soleil.Menu
             }
             if(ToCharacterSelect.Contains(selected))
             {
-                statusMenu.IsActive = true;
+                statusMenu.FocusTo(this);
                 return;
             }
             if(selected == MenuName.Option)

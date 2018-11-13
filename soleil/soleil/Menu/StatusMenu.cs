@@ -8,6 +8,7 @@ namespace Soleil.Menu
 {
     class StatusMenu : MenuChild
     {
+        MenuChild calledFrom;
         MenuCharacterPanel[] menuCharacterPanels;
         readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
         MenuSystem menuSystem;
@@ -66,6 +67,16 @@ namespace Soleil.Menu
             }
         }
 
+        /// <summary>
+        /// MenuSystemの他のウィンドウからFocusを移される場合．
+        /// </summary>
+        public void FocusTo(MenuChild from)
+        {
+            IsActive = true;
+            from.IsActive = false;
+            calledFrom = from;
+        }
+
         // Input
         public override void OnInputRight() {
             index++;
@@ -83,6 +94,16 @@ namespace Soleil.Menu
             IsActive = false;
         }
 
-        public override void OnInputCancel() { ReturnParent(); }
+        public override void OnInputCancel() {
+            if(calledFrom is MenuSystem)
+            {
+                ReturnParent();
+            }
+            else
+            {
+                calledFrom.Call();
+                IsActive = false;
+            }
+        }
     }
 }
