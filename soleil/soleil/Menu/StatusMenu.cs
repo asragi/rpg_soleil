@@ -90,8 +90,15 @@ namespace Soleil.Menu
 
         public override void OnInputSubmit() {
             // ステータス選択以前に選ばれていた項目を見る．
-            menuSystem.CallChild((MenuName)menuSystem.Index);
-            IsActive = false;
+            if (calledFrom is ItemMenu)
+            {
+                Console.WriteLine("USE");
+            }
+            else if(calledFrom is MenuSystem)
+            {
+                menuSystem.CallChild((MenuName)menuSystem.Index);
+                IsActive = false;
+            }
         }
 
         public override void OnInputCancel() {
