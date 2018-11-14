@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// Windowの基本クラス
     /// </summary>
-    class Window
+    class Window : MenuComponent
     {
         // todo:右下にくるくるするやつ
 
@@ -103,6 +104,8 @@ namespace Soleil
 
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
+
+            Components = frameImgs.Concat(new[] { skinImg }).ToArray();
             wm.Add(this);
         }
 
@@ -110,8 +113,9 @@ namespace Soleil
         /// <summary>
         /// 継承後の振る舞いはMove()で記述する.
         /// </summary>
-        public void Update()
+        public override void Update()
         {
+            base.Update();
             // visibleなのにactiveという状態を回避したい
             Active = Visible ? Active : false;
             if (!Active) return;
@@ -125,29 +129,25 @@ namespace Soleil
         /// </summary>
         protected virtual void Move(){}
 
+        public override void Call()
+        {
+            
+        }
+
+        public override void Quit()
+        {
+
+        }
+
         public void Destroy()
         {
             Dead = true;
         }
 
-        public void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
-            DrawSkin(d);
-            DrawFrame(d);
+            base.Draw(d);
             DrawContent(d);
-        }
-
-        private void DrawSkin(Drawing d)
-        {
-            skinImg.Draw(d);
-        }
-
-        private void DrawFrame(Drawing d)
-        {
-            for (int i = 0; i < frameImgs.Length; i++)
-            {
-                frameImgs[i].Draw(d);
-            }
         }
 
         virtual public void DrawContent(Drawing d)
