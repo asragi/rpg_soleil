@@ -125,24 +125,6 @@ namespace Soleil
         /// </summary>
         protected virtual void Move(){}
 
-        /// <summary>
-        /// 演出付きでウィンドウを出現させる(ウィンドウが出現しきったかどうかを返す)
-        /// </summary>
-        public bool PopUpWindow()
-        {
-            if (Visible) return true;
-            return true;
-        }
-
-        /// <summary>
-        /// 演出付きでウィンドウを消滅させる(消滅しきったかどうかを返す)
-        /// </summary>
-        public bool VanishWindow()
-        {
-            if (!Visible) return true;
-            return true;
-        }
-
         public void Destroy()
         {
             Dead = true;
