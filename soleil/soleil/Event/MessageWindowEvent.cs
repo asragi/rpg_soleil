@@ -14,6 +14,8 @@ namespace Soleil.Event
         :WindowEventBase
     {
         string message;
+
+        MessageWindow messageW;
         public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message)
             :base(_pos, MessageWindow.GetProperSize(FontID.Test,_message),_tag)
         {
@@ -23,8 +25,8 @@ namespace Soleil.Event
         public override void Start()
         {
             base.Start();
-            var window = new MessageWindow(Pos, Size, Tag, Wm);
-            window.SetMessage(message);
+            messageW = new MessageWindow(Pos, Size, Tag, Wm);
+            messageW.SetMessage(message);
             // FocusをWindowに設定
             var mim = MapInputManager.GetInstance();
             mim.SetFocus(InputFocus.Window);
@@ -41,7 +43,7 @@ namespace Soleil.Event
             {
                 if (Wm.GetIsMessageWindowAnimFinished(Tag))
                 {
-                    Wm.Destroy(Tag);
+                    messageW.Quit();
                     Next();
                     return;
                 }

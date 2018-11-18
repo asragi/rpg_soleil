@@ -41,7 +41,7 @@ namespace Soleil
         /// </summary>
         public WindowTag Tag { get; private set; }
         protected int frame;
-
+        bool quitStart = false;
         public Window(Vector _pos, Vector _size,WindowTag _tag, WindowManager wm)
         {
             var texID = TextureID.FrameTest;
@@ -116,6 +116,7 @@ namespace Soleil
         public override void Update()
         {
             base.Update();
+            if (quitStart & skinImg.Alpha < 0.1) Destroy();
             // visibleなのにactiveという状態を回避したい
             Active = Visible ? Active : false;
             if (!Active) return;
@@ -136,7 +137,9 @@ namespace Soleil
 
         public override void Quit()
         {
-
+            quitStart = true;
+            skinImg.Quit();
+            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Quit();
         }
 
         public void Destroy()
