@@ -7,6 +7,7 @@ namespace Soleil.Event
     {
         string[] options;
         bool changeFocus;
+        SelectableWindow selectable;
 
         public SelectWindowEvent(Vector pos, WindowTag _tag, params string[] _options)
             :this(pos, _tag, true, _options) { }
@@ -21,7 +22,8 @@ namespace Soleil.Event
         {
             base.Start();
             // SelectWindowを生成する．
-            var SelectWindow = new SelectableWindow(Pos, Size, Tag, Wm, options);
+            selectable = new SelectableWindow(Pos, Size, Tag, Wm, options);
+            selectable.Call();
             if (changeFocus) Wm.SetNowSelectWindow(Tag);
             // FocusをWindowに設定
             var mim = MapInputManager.GetInstance();
@@ -33,7 +35,7 @@ namespace Soleil.Event
             base.Execute();
             // GetDecideIndex()が-1以外を返す（＝選択肢が決定された）とき、次のイベントへ。
             if (Wm.GetDecideIndex() == -1) return;
-            Wm.Destroy(Tag);
+            selectable.Quit();
             Next();
         }
     }

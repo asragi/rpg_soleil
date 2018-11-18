@@ -16,6 +16,7 @@ namespace Soleil
     {
         const int LineSpace = 35;
         string[] options;
+        FontImage[] texts;
         int optionNum;
         protected int index;
         bool decided;
@@ -23,14 +24,17 @@ namespace Soleil
             : base(_pos, _size, tag, wm)
         {
             options = _options;
+            texts = new FontImage[options.Length];
+            for (int i = 0; i < options.Length; i++)
+            {
+                texts[i] = new FontImage(FontID.WhiteOutlineGrad, pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, false);
+                texts[i].FadeSpeed = FadeSpeed;
+                texts[i].Text = options[i];
+            }
             optionNum = options.Length - 1;
             index = 0;
             decided = false;
-        }
-
-        protected override void Move()
-        {
-
+            Components = (Components == null) ? texts : Components.Concat(texts).ToArray();
         }
 
         public void UpCursor()
@@ -64,12 +68,12 @@ namespace Soleil
 
         public override void DrawContent(Drawing d)
         {
-            for (int i = 0; i < options.Length; i++)
+            base.DrawContent(d);
+            for (int i = 0; i < texts.Length; i++)
             {
-                d.DrawText(pos + new Vector(Spacing, Spacing + LineSpace * i), Resources.GetFont(FontID.Test), options[i], Color.White, DepthID.Frame, 1, 0, false);
+                texts[i].Draw(d);
             }
             d.Draw(pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
-            base.DrawContent(d);
         }
 
         /// <summary>

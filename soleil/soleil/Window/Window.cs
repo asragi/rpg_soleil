@@ -51,6 +51,7 @@ namespace Soleil
         {
             var texID = TextureID.FrameTest;
             var depth = DepthID.MessageBack;
+            var center = true;
             frameTexture = Resources.GetTexture(texID);
             pos = _pos;
             size = _size;
@@ -61,21 +62,21 @@ namespace Soleil
             frameImgs = new UIImage[]
             {
                 // 左上
-                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,depth, center, false, 1),
                 // 右上
-                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,depth,center, false, 1),
                 // 左下
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
                 // 右下
-                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
                 // 上部
-                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,depth,center, false, 1),
                 // 左
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,depth,center, false, 1),
                 // 右
-                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,depth,center, false, 1),
                 // 下
-                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,depth,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
             };
             var rects = new[]
             {
@@ -107,7 +108,7 @@ namespace Soleil
                 frameImgs[i].FadeSpeed = FadeSpeed;
             }
 
-            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, DiffPos, depth, true, false, 1);
+            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, DiffPos, depth, center, false, 1);
             skinImg.FadeSpeed = FadeSpeed;
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
@@ -139,12 +140,14 @@ namespace Soleil
 
         public override void Call()
         {
+            base.Call();
             skinImg.Call();
             for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Call();
         }
 
         public override void Quit()
         {
+            base.Quit();
             quitStart = true;
             skinImg.Quit();
             for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Quit();
