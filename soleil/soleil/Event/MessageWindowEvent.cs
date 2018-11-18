@@ -27,6 +27,7 @@ namespace Soleil.Event
             base.Start();
             messageW = new MessageWindow(Pos, Size, Tag, Wm);
             messageW.SetMessage(message);
+            messageW.Call();
             // FocusをWindowに設定
             var mim = MapInputManager.GetInstance();
             mim.SetFocus(InputFocus.Window);

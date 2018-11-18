@@ -24,6 +24,8 @@ namespace Soleil
         /// ウィンドウフレームの幅
         /// </summary>
         const int FrameSize = 10;
+        const int FadeSpeed = 8;
+        readonly Vector DiffPos = new Vector(0, 10);
 
         static Texture2D frameTexture;
         UIImage skinImg;
@@ -55,21 +57,21 @@ namespace Soleil
             frameImgs = new UIImage[]
             {
                 // 左上
-                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 右上
-                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 左下
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 右下
-                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 上部
-                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 左
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 右
-                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,DepthID.Frame,true, false, 1),
                 // 下
-                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), Vector.Zero,DepthID.Frame,true, false, 1),
+                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,DepthID.Frame,true, false, 1),
             };
             var rects = new[]
             {
@@ -98,10 +100,11 @@ namespace Soleil
             {
                 frameImgs[i].Rectangle = rects[i];
                 frameImgs[i].Size = sizes[i];
+                frameImgs[i].FadeSpeed = FadeSpeed;
             }
 
-            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, Vector.Zero, DepthID.Frame, true, false, 1);
-
+            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, DiffPos, DepthID.Frame, true, false, 1);
+            skinImg.FadeSpeed = FadeSpeed;
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
 
@@ -132,7 +135,8 @@ namespace Soleil
 
         public override void Call()
         {
-            
+            skinImg.Call();
+            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Call();
         }
 
         public override void Quit()
