@@ -34,7 +34,7 @@ namespace Soleil
             optionNum = options.Length - 1;
             index = 0;
             decided = false;
-            Components = (Components == null) ? texts : Components.Concat(texts).ToArray();
+            Components = texts;
         }
 
         public void UpCursor()
