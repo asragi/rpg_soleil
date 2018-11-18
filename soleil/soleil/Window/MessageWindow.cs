@@ -23,6 +23,7 @@ namespace Soleil
             fontImage.FadeSpeed = FadeSpeed;
             charIndex = 0;
             textPos = pos + new Vector(Spacing, Spacing);
+            Components = new[] { fontImage };
         }
 
         public void SetMessage(String msg)
@@ -37,21 +38,8 @@ namespace Soleil
 
         protected override void Move()
         {
-            fontImage.Update();
             if (!endAnimation && frame % drawCharPeriod == 0) AddChar();
             base.Move();
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            fontImage.Call();
-        }
-
-        public override void Quit()
-        {
-            base.Quit();
-            fontImage.Quit();
         }
 
         public bool GetAnimIsEnd() => endAnimation;
@@ -78,12 +66,6 @@ namespace Soleil
             messageToDraw += messageArray[charIndex];
             fontImage.Text = messageToDraw;
             charIndex++;
-        }
-
-        public override void DrawContent(Drawing d)
-        {
-            base.DrawContent(d);
-            fontImage.Draw(d);
         }
 
         public static Vector GetProperSize(FontID font, string text)
