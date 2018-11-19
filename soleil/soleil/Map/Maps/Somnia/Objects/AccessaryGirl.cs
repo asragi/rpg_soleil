@@ -21,7 +21,7 @@ namespace Soleil.Map.Maps.Somnia
 
         // Event bool
         BoolSet boolSet;
-        enum BoolName { Sold, size }
+        enum BoolName { First, Sold, size }
 
         public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
@@ -34,17 +34,22 @@ namespace Soleil.Map.Maps.Somnia
             boolSet = new BoolSet((int)BoolName.size);
 
             EventSequence.SetEventSet(
-                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
+                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.First],
                     new EventSet(
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")), 
                     new EventSet(
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして"))),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(values),
-                    new BoolSetEvent(boolSet, (int)BoolName.Sold, true),
-                    new ChangeInputFocusEvent(InputFocus.Player)
-                )
+                    new ShopEvent(values, boolSet, (int)BoolName.Sold),
+                    new BoolSetEvent(boolSet, (int)BoolName.First, true)
+                ),
+                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！")),
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな"))),
+                new EventSet(new ChangeInputFocusEvent(InputFocus.Player))
             );
         }
 
