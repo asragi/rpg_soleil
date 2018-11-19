@@ -34,9 +34,15 @@ namespace Soleil.Map.Maps.Somnia
             boolSet = new BoolSet((int)BoolName.size);
 
             EventSequence.SetEventSet(
+                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")), 
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして"))),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
                     new ShopEvent(values),
+                    new BoolSetEvent(boolSet, (int)BoolName.Sold, true),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )
             );
