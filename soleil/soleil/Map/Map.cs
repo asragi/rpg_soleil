@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
+using Soleil.Event;
 using Soleil.Menu;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,8 @@ namespace Soleil.Map
         protected MapData MapData;
         MenuSystem menuSystem;
 
+        protected EventSequence[] EventSequences;
+
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
 
@@ -46,15 +49,26 @@ namespace Soleil.Map
         virtual public void Update()
         {
             om.Update();
+            EventSequenceUpdate();
             bm.Update();
             menuSystem.Update();
             mapInputManager.Update();
             MapCameraManager.Update();
         }
 
+        /// <summary>
+        /// Map遷移後も前Mapで発動しているEventがあれば
+        /// </summary>
         public void EventUpdate()
         {
             om.EventUpdate();
+            EventSequenceUpdate();
+        }
+
+        private void EventSequenceUpdate()
+        {
+            if (EventSequences == null) return;
+            for (int i = 0; i < EventSequences.Length; i++) EventSequences[i].Update();
         }
 
         public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);

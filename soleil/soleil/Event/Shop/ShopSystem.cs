@@ -23,6 +23,7 @@ namespace Soleil.Event.Shop
         ShopItemList shopItemList;
         MoneyComponent moneyComponent;
         DetailWindow detailWindow;
+        public bool Purchased;
 
         public ShopSystem(Dictionary<ItemID, int> values)
         {
@@ -33,25 +34,29 @@ namespace Soleil.Event.Shop
             detailWindow = new DetailWindow(DetailWindowPos);
         }
 
-        public void Call()
+        public override void Call()
         {
+            base.Call();
             IsQuit = false;
             shopItemList.Call();
             descriptionWindow.Call();
             moneyComponent.Call();
             detailWindow.Call();
             quitCount = 0;
+            Purchased = false;
             quitStart = false;
         }
 
-        void Quit()
+        public override void Quit()
         {
+            base.Quit();
             IsQuit = true;
         }
 
         void QuitStart()
         {
             quitStart = true;
+            Purchased = shopItemList.Purchased;
             shopItemList.Quit();
             descriptionWindow.Quit();
             moneyComponent.Quit();

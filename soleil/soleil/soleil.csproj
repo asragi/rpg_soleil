@@ -60,6 +60,8 @@
     <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
+    <Compile Include="Event\BoolSet.cs" />
+    <Compile Include="Event\BoolSetEvent.cs" />
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\ChangeMapEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
