@@ -23,7 +23,7 @@ namespace Soleil.Menu.Status
             lvNum = new FontImage(FontID.KkMini, pos + Space + LvDiff + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv.";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
-            Components = new IComponent[] { lv, lvNum, name };
+            AddComponents(new IComponent[] { lv, lvNum, name });
         }
     }
 }

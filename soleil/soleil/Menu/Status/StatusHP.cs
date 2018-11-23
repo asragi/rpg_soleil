@@ -16,7 +16,7 @@ namespace Soleil.Menu.Status
             valText.Text = val.ToString();
             hpText = new FontImage(FontID.KkGoldMini, pos + new Vector(0,8), DepthID.MenuTop);
             hpText.Text = "HP";
-            Components = new IComponent[] { hpText,valText };
+            AddComponents(new IComponent[] { hpText,valText });
         }
     }
 }

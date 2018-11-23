@@ -8,7 +8,14 @@ namespace Soleil.Menu
 {
     abstract class MenuComponent : IComponent
     {
-        protected IComponent[] Components;
+        private IComponent[] components;
+
+        protected void AddComponents(IComponent[] comps)
+        {
+            if (components == null) components = comps;
+            else components = components.Concat(comps).ToArray();
+        }
+
         bool isActive;
         public bool IsActive
         {
@@ -32,9 +39,9 @@ namespace Soleil.Menu
         protected virtual void OnDisable() { }
 
         public virtual void Quit() {
-            if (Components != null)
+            if (components != null)
             {
-                foreach (var item in Components)
+                foreach (var item in components)
                 {
                     item.Quit();
                 }
@@ -42,9 +49,9 @@ namespace Soleil.Menu
         }
 
         public virtual void Call() {
-            if (Components != null)
+            if (components != null)
             {
-                foreach (var item in Components)
+                foreach (var item in components)
                 {
                     item.Call();
                 }
@@ -53,18 +60,18 @@ namespace Soleil.Menu
 
         public virtual void Update()
         {
-            if(Components != null)
+            if(components != null)
             {
-                foreach (var item in Components)
+                foreach (var item in components)
                 {
                     item.Update();
                 }
             }
         }
         public virtual void Draw(Drawing d) {
-            if (Components != null)
+            if (components != null)
             {
-                foreach (var item in Components)
+                foreach (var item in components)
                 {
                     item.Draw(d);
                 }

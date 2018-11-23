@@ -38,7 +38,7 @@ namespace Soleil.Menu.Status
                 pieces[i].Name = names[i];
             }
 
-            Components = pieces;
+            AddComponents(pieces);
         }
     }
 }

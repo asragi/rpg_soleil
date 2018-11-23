@@ -39,7 +39,7 @@ namespace Soleil.Menu.Status
             {
                 texts[i] = new TextWithVal(FontID.Touhaba, pos + new Vector(0,DiffY*i), 130, Words[i], Para[i]);
             }
-            Components = texts;
+            AddComponents(texts);
         }
     }
 }

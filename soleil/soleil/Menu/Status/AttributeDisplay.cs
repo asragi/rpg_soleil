@@ -36,7 +36,7 @@ namespace Soleil.Menu.Status
                 indicates[i] = new FontImage(FontID.Touhaba, pos + new Vector(50, DiffY * i), null, DepthID.MenuMiddle);
                 indicates[i].Text = SetIndicate(p[i]);
             }
-            Components = texts.Concat(indicates).ToArray();
+            AddComponents(texts.Concat(indicates).ToArray());
 
             string SetIndicate(int val)
             {

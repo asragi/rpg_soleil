@@ -63,7 +63,7 @@ namespace Soleil.Menu
             equipDisplay = new EquipDisplay(EquipPos);
 
             //
-            Components = new IComponent[] {backImage, charaName, statusParams, attribute, display, equipDisplay, statusMagicCategory, faceImg };
+            AddComponents(new IComponent[] {backImage, charaName, statusParams, attribute, display, equipDisplay, statusMagicCategory, faceImg });
             
             //
             lines = _lines;

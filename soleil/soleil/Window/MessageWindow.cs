@@ -12,14 +12,18 @@ namespace Soleil
         int charIndex; // char配列アクセス用index
         Vector textPos;
         bool endAnimation;
+        FontImage fontImage;
 
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
             : base(_pos,_size,tag,wm)
         {
             endAnimation = false;
             messageToDraw = "";
+            fontImage = new FontImage(FontID.WhiteOutlineGrad, _pos + new Vector(Spacing, Spacing), DiffPos, DepthID.Message, false);
+            fontImage.FadeSpeed = FadeSpeed;
             charIndex = 0;
             textPos = pos + new Vector(Spacing, Spacing);
+            AddComponents(new[] { fontImage });
         }
 
         public void SetMessage(String msg)
@@ -28,6 +32,7 @@ namespace Soleil
             message = msg;
             messageArray = message.ToCharArray();
             messageToDraw = ""; // 表示メッセージを初期化
+            fontImage.Text = "";
             charIndex = 0;
         }
 
@@ -45,6 +50,7 @@ namespace Soleil
         public void FinishAnim()
         {
             messageToDraw = message;
+            fontImage.Text = message;
             charIndex = messageArray.Length;
             endAnimation = true;
         }
@@ -58,13 +64,8 @@ namespace Soleil
                 return;
             }
             messageToDraw += messageArray[charIndex];
+            fontImage.Text = messageToDraw;
             charIndex++;
-        }
-
-        public override void DrawContent(Drawing d)
-        {
-            d.DrawText(textPos, Resources.GetFont(FontID.Test), messageToDraw, Microsoft.Xna.Framework.Color.White, DepthID.Frame, 1, 0, false);
-            base.DrawContent(d);
         }
 
         public static Vector GetProperSize(FontID font, string text)

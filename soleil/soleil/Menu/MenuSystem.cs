@@ -119,14 +119,14 @@ namespace Soleil.Menu
             menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
-            Components = new IComponent[]
+            AddComponents(new IComponent[]
             {
                 backImage,
                 menuLineLower,
                 menuLineUpper,
                 menuDescription,
                 frontImage,
-            };
+            });
 
             // Transition
             transition = Transition.GetInstance();

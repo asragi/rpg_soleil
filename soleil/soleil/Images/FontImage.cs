@@ -35,7 +35,8 @@ namespace Soleil
 
         public override void Draw(Drawing d)
         {
-            d.DrawStaticText(Pos, Resources.GetFont(font), Text, Color * Alpha, DepthID, Vector2.One, Angle, false);
+            if (IsStatic) d.DrawStaticText(Pos, Resources.GetFont(font), Text, Color * Alpha, DepthID, Vector2.One, Angle, false);
+            else d.DrawText(Pos, Resources.GetFont(font), Text, Color * Alpha, DepthID, 1, Angle, false);
         }
     }
 }

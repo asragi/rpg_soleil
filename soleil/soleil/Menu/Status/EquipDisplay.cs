@@ -26,7 +26,7 @@ namespace Soleil.Menu.Status
             }
             equipTitle = new FontImage(FontID.KkGoldMini, pos, DepthID.MenuTop);
             equipTitle.Text = EquipTitle;
-            Components = texts.Concat(new[] { equipTitle }).ToArray();
+            AddComponents(texts.Concat(new[] { equipTitle }).ToArray());
         }
     }
 }

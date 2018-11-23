@@ -14,7 +14,7 @@ namespace Soleil.Menu.Status
         {
             name = new FontImage(FontID.KkBlack, pos, DepthID.MenuTop);
             name.Text = text;
-            Components = new IComponent[] { name };
+            AddComponents(new IComponent[] { name });
         }
     }
 }

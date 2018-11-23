@@ -26,7 +26,7 @@ namespace Soleil.Menu.Status
             slashText.Text = "/";
             maxText = new FontImage(Font, pos + new Vector(ValSpace + SpaceToSlash + SpaceToMax, 0), DepthID.MenuTop);
             maxText.Text = max.ToString();
-            Components = new IComponent[] { mpText, valText, slashText, maxText };
+            AddComponents(new IComponent[] { mpText, valText, slashText, maxText });
         }
     }
 }
