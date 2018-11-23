@@ -8,14 +8,15 @@ namespace Soleil.Menu.Status
 {
     class StatusHP : MenuComponent
     {
-        FontImage valText;
+        FontImage valText, hpText;
+        const int ValSpace = 34;
         public StatusHP(Vector pos, int val)
         {
-            valText = new FontImage(FontID.Test, pos, DepthID.MenuTop);
+            valText = new FontImage(FontID.Touhaba, pos + new Vector(ValSpace,0), DepthID.MenuTop);
             valText.Text = val.ToString();
-            valText.Color = ColorPalette.DarkBlue;
-
-            Components = new IComponent[] { valText };
+            hpText = new FontImage(FontID.KkGoldMini, pos + new Vector(0,8), DepthID.MenuTop);
+            hpText.Text = "HP";
+            Components = new IComponent[] { hpText,valText };
         }
     }
 }

@@ -8,7 +8,7 @@ namespace Soleil.Menu.Status
 {
     class StatusParamsDisplay : MenuComponent
     {
-        const int DiffY = 30;
+        const int DiffY = 28;
         // もっとちゃんとしたところにおきたい
         readonly string[] Words = new[]
         {
@@ -16,10 +16,8 @@ namespace Soleil.Menu.Status
             "VIT",
             "MAG",
             "SPD",
-            "P-ATK",
-            "M-ATK",
-            "P-DEF",
-            "M-DEF"
+            "ATK",
+            "DEF"
         };
 
         readonly int[] Para = new[] // 仮置き適当パラメータ
@@ -28,22 +26,18 @@ namespace Soleil.Menu.Status
             12,
             44,
             11,
-            12,
             22,
             18,
-            21,
         };
 
         TextWithVal[] texts;
 
         public StatusParamsDisplay(Vector pos)
         {
-            texts = new TextWithVal[8];
+            texts = new TextWithVal[6];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new TextWithVal(FontID.Test, pos + new Vector(0,DiffY*i), 200, Words[i], Para[i]);
-                texts[i].TextColor = ColorPalette.DarkBlue;
-                texts[i].ValColor = ColorPalette.DarkBlue;
+                texts[i] = new TextWithVal(FontID.Touhaba, pos + new Vector(0,DiffY*i), 130, Words[i], Para[i]);
             }
             Components = texts;
         }
