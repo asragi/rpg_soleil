@@ -23,7 +23,7 @@ namespace Soleil
             fontImage.FadeSpeed = FadeSpeed;
             charIndex = 0;
             textPos = pos + new Vector(Spacing, Spacing);
-            Components = new[] { fontImage };
+            AddComponents(new[] { fontImage });
         }
 
         public void SetMessage(String msg)

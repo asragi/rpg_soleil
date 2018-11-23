@@ -9,13 +9,11 @@ namespace Soleil.Menu
     abstract class MenuComponent : IComponent
     {
         private IComponent[] components;
-        protected IComponent[] Components
+
+        protected void AddComponents(IComponent[] comps)
         {
-            set
-            {
-                if (components == null) components = value;
-                else components = components.Concat(value).ToArray();
-            }
+            if (components == null) components = comps;
+            else components = components.Concat(comps).ToArray();
         }
 
         bool isActive;

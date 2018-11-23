@@ -45,7 +45,7 @@ namespace Soleil.Menu.Status
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
             }
-            Components = texts;
+            AddComponents(texts);
         }
     }
 }

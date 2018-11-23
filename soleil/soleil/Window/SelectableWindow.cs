@@ -34,7 +34,7 @@ namespace Soleil
             optionNum = options.Length - 1;
             index = 0;
             decided = false;
-            Components = texts;
+            AddComponents(texts);
         }
 
         public void UpCursor()

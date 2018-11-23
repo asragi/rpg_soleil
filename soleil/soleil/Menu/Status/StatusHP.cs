@@ -15,7 +15,7 @@ namespace Soleil.Menu.Status
             valText.Text = val.ToString();
             valText.Color = ColorPalette.DarkBlue;
 
-            Components = new IComponent[] { valText };
+            AddComponents(new IComponent[] { valText });
         }
     }
 }

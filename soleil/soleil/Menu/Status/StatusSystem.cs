@@ -52,7 +52,7 @@ namespace Soleil.Menu
             statusParams = new StatusParamsDisplay(ParamsPos);
 
             //
-            Components = new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg };
+            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg });
             
             //
             lines = _lines;

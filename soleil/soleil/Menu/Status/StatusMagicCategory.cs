@@ -24,7 +24,7 @@ namespace Soleil.Menu.Status
                 pieces[i] = new MagicCategoryPiece(pos + Spacing + new Vector(x,y), i);
             }
 
-            Components = pieces;
+            AddComponents(pieces);
         }
     }
 }

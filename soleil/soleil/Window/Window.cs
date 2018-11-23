@@ -113,7 +113,7 @@ namespace Soleil
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
 
-            Components = frameImgs.Concat(new[] { skinImg }).ToArray();
+            AddComponents(frameImgs.Concat(new[] { skinImg }).ToArray());
             wm.Add(this);
         }
 
