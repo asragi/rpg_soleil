@@ -24,6 +24,12 @@ namespace Soleil.Menu
         // ステータスパラメータ
         StatusParamsDisplay statusParams;
         readonly Vector ParamsPos;
+        // 属性
+        AttributeDisplay attribute;
+        readonly Vector AttributePos;
+        // 装備
+        EquipDisplay equipDisplay;
+        readonly Vector EquipPos;
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
@@ -36,12 +42,15 @@ namespace Soleil.Menu
             // const
             const int namePosX = 350;
             const int namePosY = 80;
+            const int RightX = 520;
             FacePos = new Vector(60, 80);
             NamePos = new Vector(namePosX, namePosY);
-            HPPos = new Vector(500, namePosY);
-            MPPos = new Vector(namePosX + 49, namePosY + 40);
-            ParamsPos = new Vector(namePosX, 240);
-            CategoryPos = new Vector(700, 80);
+            HPPos = new Vector(namePosX + 76, namePosY+2);
+            MPPos = new Vector(namePosX, namePosY + 40);
+            ParamsPos = new Vector(namePosX, 175);
+            AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
+            EquipPos = new Vector(RightX, 254);
+            CategoryPos = new Vector(RightX, namePosY);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
@@ -50,9 +59,11 @@ namespace Soleil.Menu
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
+            attribute = new AttributeDisplay(AttributePos);
+            equipDisplay = new EquipDisplay(EquipPos);
 
             //
-            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg });
+            AddComponents(new IComponent[] {backImage, charaName, statusParams, attribute, display, equipDisplay, statusMagicCategory, faceImg });
             
             //
             lines = _lines;

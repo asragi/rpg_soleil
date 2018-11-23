@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soleil.Event;
 using Soleil.Map.Maps.Somnia;
 
 namespace Soleil.Map

@@ -18,6 +18,11 @@ namespace Soleil.Map.Maps.Somnia
             {ItemID.SilverWand, 73000 },
             {ItemID.BeadsWork, 3000 }
         };
+
+        // Event bool
+        BoolSet boolSet;
+        enum BoolName { First, Sold, size }
+
         public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
         {
@@ -25,12 +30,26 @@ namespace Soleil.Map.Maps.Somnia
             AnimationData[] standAnim = new[] { anim, anim, anim, anim, anim, anim, anim, anim, anim }; // 最悪
             SetStandAnimation(standAnim);
 
+            // Event
+            boolSet = new BoolSet((int)BoolName.size);
+
             EventSequence.SetEventSet(
+                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.First],
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")), 
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして"))),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(values),
-                    new ChangeInputFocusEvent(InputFocus.Player)
-                )
+                    new ShopEvent(values, boolSet, (int)BoolName.Sold),
+                    new BoolSetEvent(boolSet, (int)BoolName.First, true)
+                ),
+                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！")),
+                    new EventSet(
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな"))),
+                new EventSet(new ChangeInputFocusEvent(InputFocus.Player))
             );
         }
 

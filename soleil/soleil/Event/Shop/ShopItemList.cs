@@ -15,6 +15,8 @@ namespace Soleil.Event.Shop
         Dictionary<ItemID, int> values;
         MoneyWallet moneyWallet;
         ItemList itemList;
+        public bool Purchased;
+
         public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> _values)
             : base(parent, description)
         {
@@ -23,6 +25,12 @@ namespace Soleil.Event.Shop
             itemList = p.Items;
             values = _values;
             Init();
+        }
+
+        public override void Call()
+        {
+            base.Call();
+            Purchased = false;
         }
 
         protected override SelectablePanel[] MakeAllPanels()
@@ -43,6 +51,7 @@ namespace Soleil.Event.Shop
             {
                 // 購入成功
                 Console.WriteLine("購入成功");
+                Purchased = true;
                 moneyWallet.Consume(decidedPrice);
                 itemList.AddItem(decidedPanel.ID);
             }

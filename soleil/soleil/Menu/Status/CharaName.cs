@@ -12,9 +12,8 @@ namespace Soleil.Menu.Status
 
         public CharaName(Vector pos, string text)
         {
-            name = new FontImage(FontID.Test, pos, DepthID.MenuTop);
+            name = new FontImage(FontID.KkBlack, pos, DepthID.MenuTop);
             name.Text = text;
-            name.Color = ColorPalette.DarkBlue;
             AddComponents(new IComponent[] { name });
         }
     }
