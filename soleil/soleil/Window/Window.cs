@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// Windowの基本クラス
     /// </summary>
-    class Window
+    class Window : MenuComponent
     {
         // todo:右下にくるくるするやつ
 
@@ -19,16 +20,22 @@ namespace Soleil
         /// Contentの端からの距離
         /// </summary>
         protected const int Spacing = 20;
+        readonly Vector spaceVec = new Vector(Spacing);
         /// <summary>
         /// ウィンドウフレームの幅
         /// </summary>
         const int FrameSize = 10;
+        public const int FadeSpeed = 8;
+        public readonly Vector DiffPos = new Vector(0, 10);
 
-        static Texture2D frameTexture, skinTexture;
+        static Texture2D frameTexture;
+        UIImage skinImg;
+        UIImage[] frameImgs;
         /// <summary>
         /// pos : 左上基準
         /// </summary>
         protected Vector pos;
+        protected Vector ContentPos => frameImgs[0].Pos + spaceVec;
         Vector size;
         public bool Active { get; set; }
         public bool Visible { get; set; }
@@ -37,16 +44,76 @@ namespace Soleil
         /// ウィンドウ識別用変数. 重複可能.
         /// </summary>
         public WindowTag Tag { get; private set; }
+        protected float Alpha => skinImg.Alpha;
         protected int frame;
-
+        bool quitStart = false;
         public Window(Vector _pos, Vector _size,WindowTag _tag, WindowManager wm)
         {
-            frameTexture = frameTexture ?? Resources.GetTexture(TextureID.FrameTest);
+            var texID = TextureID.FrameTest;
+            var depth = DepthID.MessageBack;
+            var center = true;
+            frameTexture = Resources.GetTexture(texID);
             pos = _pos;
             size = _size;
             Tag = _tag;
             Visible = true;
             Active = true;
+
+            frameImgs = new UIImage[]
+            {
+                // 左上
+                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,depth, center, false, 1),
+                // 右上
+                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,depth,center, false, 1),
+                // 左下
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
+                // 右下
+                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
+                // 上部
+                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,depth,center, false, 1),
+                // 左
+                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,depth,center, false, 1),
+                // 右
+                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,depth,center, false, 1),
+                // 下
+                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
+            };
+            var rects = new[]
+            {
+                new Rectangle(0, 0, FrameSize, FrameSize),
+                new Rectangle(frameTexture.Width - FrameSize, 0, FrameSize, FrameSize),
+                new Rectangle(0, frameTexture.Height - FrameSize, FrameSize, FrameSize),
+                new Rectangle(frameTexture.Width - FrameSize, frameTexture.Height - FrameSize, FrameSize, FrameSize),
+                new Rectangle(FrameSize, 0, frameTexture.Width - 2 * FrameSize, FrameSize),
+                new Rectangle(0, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize),
+                new Rectangle(frameTexture.Width - FrameSize, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize),
+                new Rectangle(FrameSize, frameTexture.Height - FrameSize, frameTexture.Width - 2 * FrameSize, FrameSize)
+            };
+            var sizes = new[]
+            {
+                Vector.One,
+                Vector.One,
+                Vector.One,
+                Vector.One,
+                new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1),
+                new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)),
+                new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)),
+                new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1),
+            };
+
+            for (int i = 0; i < frameImgs.Length; i++)
+            {
+                frameImgs[i].Rectangle = rects[i];
+                frameImgs[i].Size = sizes[i];
+                frameImgs[i].FadeSpeed = FadeSpeed;
+            }
+
+            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, DiffPos, depth, center, false, 1);
+            skinImg.FadeSpeed = FadeSpeed;
+            skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
+            skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
+
+            AddComponents(frameImgs.Concat(new[] { skinImg }).ToArray());
             wm.Add(this);
         }
 
@@ -54,8 +121,10 @@ namespace Soleil
         /// <summary>
         /// 継承後の振る舞いはMove()で記述する.
         /// </summary>
-        public void Update()
+        public override void Update()
         {
+            base.Update();
+            if (quitStart & skinImg.Alpha < 0.1) Destroy();
             // visibleなのにactiveという状態を回避したい
             Active = Visible ? Active : false;
             if (!Active) return;
@@ -69,22 +138,19 @@ namespace Soleil
         /// </summary>
         protected virtual void Move(){}
 
-        /// <summary>
-        /// 演出付きでウィンドウを出現させる(ウィンドウが出現しきったかどうかを返す)
-        /// </summary>
-        public bool PopUpWindow()
+        public override void Call()
         {
-            if (Visible) return true;
-            return true;
+            base.Call();
+            skinImg.Call();
+            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Call();
         }
 
-        /// <summary>
-        /// 演出付きでウィンドウを消滅させる(消滅しきったかどうかを返す)
-        /// </summary>
-        public bool VanishWindow()
+        public override void Quit()
         {
-            if (!Visible) return true;
-            return true;
+            base.Quit();
+            quitStart = true;
+            skinImg.Quit();
+            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Quit();
         }
 
         public void Destroy()
@@ -92,39 +158,10 @@ namespace Soleil
             Dead = true;
         }
 
-        public void Draw(Drawing d)
+        public override void Draw(Drawing d)
         {
-            DrawSkin(d);
-            DrawFrame(d);
+            base.Draw(d);
             DrawContent(d);
-        }
-
-        private void DrawSkin(Drawing d)
-        {
-            d.Draw(pos + new Vector(size.X, size.Y) / 2, frameTexture,
-                new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize),
-                DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
-        }
-
-        private void DrawFrame(Drawing d)
-        {
-            // 左上のフレーム角
-            d.Draw(pos + new Vector(FrameSize / 2, FrameSize / 2), frameTexture, new Rectangle(0, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
-            // 右上のフレーム角
-            d.Draw(pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, 0, FrameSize, FrameSize), DepthID.Frame, Vector.One);
-            // 左上のフレーム角
-            d.Draw(pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(0, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
-            // 右下のフレーム角
-            d.Draw(pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, frameTexture.Height - FrameSize, FrameSize, FrameSize), DepthID.Frame, Vector.One);
-
-            // 上部
-            d.Draw(pos + new Vector(size.X / 2, FrameSize / 2), frameTexture, new Rectangle(FrameSize, 0, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
-            // 左
-            d.Draw(pos + new Vector(FrameSize / 2, size.Y / 2), frameTexture, new Rectangle(0, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
-            // 右
-            d.Draw(pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), frameTexture, new Rectangle(frameTexture.Width - FrameSize, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize), DepthID.Frame, new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)));
-            // 下
-            d.Draw(pos + new Vector(size.X / 2, size.Y - FrameSize / 2), frameTexture, new Rectangle(FrameSize, frameTexture.Height - FrameSize, frameTexture.Width - 2 * FrameSize, FrameSize), DepthID.Frame, new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1));
         }
 
         virtual public void DrawContent(Drawing d)

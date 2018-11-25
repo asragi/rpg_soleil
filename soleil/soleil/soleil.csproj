@@ -60,6 +60,8 @@
     <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
+    <Compile Include="Event\BoolSet.cs" />
+    <Compile Include="Event\BoolSetEvent.cs" />
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\ChangeMapEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
@@ -163,7 +165,9 @@
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusController.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
+    <Compile Include="Menu\Status\AttributeDisplay.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
+    <Compile Include="Menu\Status\EquipDisplay.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
     <Compile Include="Menu\Status\StatusHP.cs" />

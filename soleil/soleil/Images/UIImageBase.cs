@@ -11,6 +11,7 @@ namespace Soleil.Images
     {
         readonly Vector initPos;
         readonly Vector posDiff;
+        public int FadeSpeed = MenuSystem.FadeSpeed;
         public UIImageBase(Vector pos, Vector? _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : base(pos + (_posDiff ?? Vector.Zero), dep, centerOrigin, isStatic, alpha)
         {
@@ -28,18 +29,18 @@ namespace Soleil.Images
 
         public void MoveToDefault()
         {
-            MoveTo(initPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            MoveTo(initPos, FadeSpeed, MenuSystem.EaseFunc);
         }
 
         public void Quit(bool move = true)
         {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
+            Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             if (move) MoveToBack();
         }
 
         public void MoveToBack()
         {
-            MoveTo(initPos + posDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
+            MoveTo(initPos + posDiff, FadeSpeed, MenuSystem.EaseFunc);
         }
     }
 }

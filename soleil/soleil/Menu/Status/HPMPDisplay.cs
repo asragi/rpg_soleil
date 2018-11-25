@@ -14,7 +14,7 @@ namespace Soleil.Menu.Status
         {
             mp = new StatusMP(mpos, val2, val3);
             hp = new StatusHP(pos, val);
-            Components = new IComponent[] { mp, hp };
+            AddComponents(new IComponent[] { mp, hp });
         }
     }
 }

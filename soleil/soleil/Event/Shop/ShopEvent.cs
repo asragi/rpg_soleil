@@ -11,6 +11,15 @@ namespace Soleil.Event
     class ShopEvent : EventBase
     {
         ShopSystem shopSystem;
+        BoolSet boolSet;
+        int target;
+
+        public ShopEvent(Dictionary<ItemID, int> values, BoolSet _boolSet, int _target)
+            :this(values)
+        {
+            (boolSet, target) = (_boolSet, _target);
+        }
+
         public ShopEvent(Dictionary<ItemID, int> values)
         {
             shopSystem = new ShopSystem(values);
@@ -26,7 +35,17 @@ namespace Soleil.Event
             base.Execute();
             shopSystem.Input(InputSmoother(KeyInput.GetStickInclineDirection(1)));
             shopSystem.Update();
-            if (shopSystem.IsQuit) Next();
+            if (shopSystem.IsQuit)
+            {
+                ChangeBoolSet();
+                Next();
+            }
+
+            void ChangeBoolSet() // 購入したか否かを見て値を代入．
+            {
+                if (boolSet == null) return;
+                boolSet[target] = shopSystem.Purchased;
+            }
         }
 
         int waitFrame;

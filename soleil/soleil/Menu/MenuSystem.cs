@@ -122,14 +122,14 @@ namespace Soleil.Menu
             itemMenu.SetRefs(statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
-            Components = new IComponent[]
+            AddComponents(new IComponent[]
             {
                 backImage,
                 menuLineLower,
                 menuLineUpper,
                 menuDescription,
                 frontImage,
-            };
+            });
 
             // Transition
             transition = Transition.GetInstance();
