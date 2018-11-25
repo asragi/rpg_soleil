@@ -161,6 +161,7 @@
     <Compile Include="Menu\MenuSystem.cs" />
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
+    <Compile Include="Menu\StatusController.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
