@@ -6,27 +6,34 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event
 {
-    enum BoolEnum
+    enum BoolObject
     {
         // Somnia
-        MeetAccessary, // アクセサリー売りに会ったことがある．
+        Accessary, // アクセサリー売り
         size,
     }
     /// <summary>
     /// 揮発しない，あらゆる場面で共有するboolのリスト．
     /// </summary>
-    class GlobalBoolSet
+    static class GlobalBoolSet
     {
-        BoolSet boolSet;
-        public bool this[BoolEnum i]
+        static BoolSet[] boolSets;
+
+        static GlobalBoolSet()
         {
-            set => boolSet[(int)i] = value;
-            get => boolSet[(int)i];
+            boolSets = new BoolSet[(int)BoolObject.size];
         }
 
-        public GlobalBoolSet()
+        public static BoolSet Get(BoolObject b, int size)
         {
-            boolSet = new BoolSet((int)BoolEnum.size);
+            // 存在するならそのまま返す．
+            if (boolSets[(int)b] != null) return boolSets[(int)b];
+            // 存在しないので作って返す．
+            var sets = new BoolSet(size);
+            boolSets[(int)b] = sets;
+            return sets;
         }
+
+        public static void ResetAll() => boolSets = null;
     }
 }
