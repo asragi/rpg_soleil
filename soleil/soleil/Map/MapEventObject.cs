@@ -17,6 +17,7 @@ namespace Soleil.Map
         protected virtual CollideLayer CollideLayer { get {return CollideLayer.Character; } }
         protected EventSequence EventSequence;
         protected PlayerObject Player;
+        static protected BoolSet PreservedBools;
 
         public MapEventObject(Vector _pos, Vector? _boxSize, ObjectManager om, BoxManager bm)
             :base(om)

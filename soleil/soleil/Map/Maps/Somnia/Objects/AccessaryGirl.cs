@@ -32,9 +32,10 @@ namespace Soleil.Map.Maps.Somnia
 
             // Event
             boolSet = new BoolSet((int)BoolName.size);
+            PreservedBools = PreservedBools ?? new BoolSet((int)BoolName.size);
 
             EventSequence.SetEventSet(
-                new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.First],
+                new BoolEventBranch(EventSequence, () => PreservedBools[(int)BoolName.First],
                     new EventSet(
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")), 
                     new EventSet(
@@ -42,7 +43,7 @@ namespace Soleil.Map.Maps.Somnia
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
                     new ShopEvent(values, boolSet, (int)BoolName.Sold),
-                    new BoolSetEvent(boolSet, (int)BoolName.First, true)
+                    new BoolSetEvent(PreservedBools, (int)BoolName.First, true)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
                     new EventSet(
