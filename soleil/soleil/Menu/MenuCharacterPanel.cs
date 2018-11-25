@@ -9,17 +9,16 @@ namespace Soleil.Menu
     /// <summary>
     /// メニューにおけるキャラクターのステータス表示コンポーネント
     /// </summary>
-    class MenuCharacterPanel
+    class MenuCharacterPanel : MenuComponent
     {
         readonly Vector FaceImgPos = new Vector(0, 0);
         readonly Vector HPPos = new Vector(120, 270);
         const int SpaceHPMP = 40; // HP表示とMP表示のy方向距離
         const int SpaceVal = 100; // "HP"とHPvalueのx方向表示距離
         Vector pos;
-        Image faceImg;
+        UIImage faceImg;
         FontImage hpText, mpText;
         FontImage hpNumText, mpNumText;
-        List<FontImage> fontImages;
 
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Vector _pos, TextureID textureID)
@@ -37,61 +36,18 @@ namespace Soleil.Menu
                 mp = 425;
             }
             // Images
-            faceImg = new Image(0, Resources.GetTexture(textureID), pos + FaceImgPos, DepthID.MenuBottom, false, true, 0);
-            fontImages = new List<FontImage>();
+            faceImg = new UIImage(textureID, pos + FaceImgPos, Vector.Zero, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
-            hpText = new FontImage(FontID.Test, pos + HPPos, DepthID.MenuBottom, true, 0);
-            fontImages.Add(hpText);
-            mpText = new FontImage(FontID.Test, pos + HPPos + new Vector(0, SpaceHPMP), DepthID.MenuBottom, true, 0);
-            fontImages.Add(mpText);
+            var font = FontID.KkBlack;
+            hpText = new FontImage(font, pos + HPPos, DepthID.MenuBottom, true, 0);
+            mpText = new FontImage(font, pos + HPPos + new Vector(0, SpaceHPMP), DepthID.MenuBottom, true, 0);
             hpText.Text = "HP";
             mpText.Text = "MP";
-            hpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal,0), DepthID.MenuBottom, true, 0);
-            fontImages.Add(hpNumText);
-            mpNumText = new FontImage(FontID.Test, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
-            fontImages.Add(mpNumText);
+            hpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal,0), DepthID.MenuBottom, true, 0);
+            mpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
-            foreach (var item in fontImages)
-            {
-                item.Color = ColorPalette.DarkBlue;
-            }
-        }
-
-        public void FadeIn()
-        {
-            faceImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            foreach (var textImg in fontImages)
-            {
-                textImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            }
-        }
-
-        public void FadeOut()
-        {
-            faceImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            foreach (var textImg in fontImages)
-            {
-                textImg.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            }
-        }
-
-        public void Update()
-        {
-            faceImg.Update();
-            foreach (var textImg in fontImages)
-            {
-                textImg.Update();
-            }
-        }
-
-        public void Draw(Drawing d)
-        {
-            faceImg.Draw(d);
-            foreach (var textImg in fontImages)
-            {
-                textImg.Draw(d);
-            }
+            Components = new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText };
         }
     }
 }
