@@ -47,7 +47,7 @@ namespace Soleil.Menu
             mpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
-            Components = new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText };
+            AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText });
         }
     }
 }
