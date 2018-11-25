@@ -26,8 +26,13 @@ namespace Soleil.Event
 
         public static BoolSet Get(BoolObject b, int size)
         {
+            var boolSet = boolSets[(int)b];
             // 存在するならそのまま返す．
-            if (boolSets[(int)b] != null) return boolSets[(int)b];
+            if (boolSet != null)
+            {
+                if (boolSet.Length != size) throw new Exception("BoolSetのsize指定が一致しません．");
+                return boolSets[(int)b];
+            }
             // 存在しないので作って返す．
             var sets = new BoolSet(size);
             boolSets[(int)b] = sets;
