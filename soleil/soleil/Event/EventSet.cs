@@ -39,6 +39,14 @@ namespace Soleil.Event
             }
         }
 
+        public void SetReference(ObjectManager _om)
+        {
+            for (int i = 0; i < eventsDefault.Length; i++)
+            {
+                eventsDefault[i].SetReference(_om);
+            }
+        }
+
         private void AddExtraEvents(List<EventBase> list, EventBase e)
         {
             switch (e)

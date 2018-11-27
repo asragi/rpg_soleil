@@ -26,7 +26,7 @@ namespace Soleil.Map
             // boxsizeが指定されていなければ既定の値にする。
             var boxSize = _boxSize ?? DefaultBoxSize;
             ExistanceBox = new CollideBox(this, Vector.Zero, boxSize, CollideLayer, bm);
-            EventSequence = new EventSequence(Player);
+            EventSequence = new EventSequence(om);
         }
 
         public override void Update()

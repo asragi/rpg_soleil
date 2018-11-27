@@ -1,4 +1,6 @@
-﻿namespace Soleil.Event
+﻿using Soleil.Map;
+
+namespace Soleil.Event
 {
     /// <summary>
     /// Event類の基底クラス
@@ -7,6 +9,7 @@
     {
         bool started;
         EventSet myEventSet;
+        protected ObjectManager ObjectManager;
         public EventBase()
         {
             started = false;
@@ -16,6 +19,8 @@
         {
             myEventSet = es;
         }
+
+        public void SetReference(ObjectManager om) => ObjectManager = om;
 
         /// <summary>
         /// 最初のフレームで実行される関数
