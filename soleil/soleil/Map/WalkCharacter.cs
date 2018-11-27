@@ -24,6 +24,19 @@ namespace Soleil.Map
         }
 
         /// <summary>
+        /// WIP
+        /// </summary>
+        public virtual void Move(Direction dir)
+        {
+            if (dir == Direction.N)
+            {
+                MoveState = MoveState.Stand;
+                return;
+            }
+            Direction = dir;
+        }
+
+        /// <summary>
         /// 基底クラスのUpdateから呼び出される。MoveStateに応じてアニメーションを変更する。
         /// </summary>
         protected override void CheckMoveState()

@@ -91,7 +91,7 @@
             speed = RunSpeed;
         }
 
-        public void Move(Direction dir)
+        public override void Move(Direction dir)
         {
             switch (dir)
             {

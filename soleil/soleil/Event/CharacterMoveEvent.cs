@@ -23,9 +23,8 @@ namespace Soleil.Event
         {
             base.Execute();
             frame++;
-            // target.Move(dir);
+            target.Move(dir);
             if (frame >= duration) Next();
         }
-
     }
 }
