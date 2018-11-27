@@ -102,10 +102,9 @@
                 default:
                     // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
                     (Pos, MoveState) = WallCheck(Pos);
-                    SetCollideBoxes((int)KeyInput.GetDegreeDirection(1));
+                    SetCollideBoxes(dir.Angle());
                     break;
             }
-
             // 向きを変更する
             Direction = (dir == Direction.N)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
         }
