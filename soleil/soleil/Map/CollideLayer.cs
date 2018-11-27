@@ -9,6 +9,7 @@ namespace Soleil.Map
     enum CollideLayer
     {
         Player,
+        PlayerBox,
         PlayerHit, // プレイヤーが決定キーを押したときに出る判定
         Wall,
         Character,

@@ -29,7 +29,7 @@
             moveBoxes = new CollideBox[MoveBoxNum];
             for (int i = 0; i < MoveBoxNum; i++)
             {
-                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.Player, bm);
+                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.PlayerBox, bm);
             }
             decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
             decideBox.IsActive = false;
