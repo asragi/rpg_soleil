@@ -28,6 +28,7 @@ namespace Soleil.Map
         MenuSystem menuSystem;
 
         protected EventSequence[] EventSequences;
+        private bool started;
 
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
@@ -46,8 +47,14 @@ namespace Soleil.Map
             MapCameraManager = new MapCameraManager(player);
         }
 
+        protected virtual void Start()
+        {
+            started = true;
+        }
+
         virtual public void Update()
         {
+            if(!started) Start();
             om.Update();
             EventSequenceUpdate();
             bm.Update();
