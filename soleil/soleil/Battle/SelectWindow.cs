@@ -92,46 +92,72 @@ namespace Soleil
     class VerticalSelectWindow : SelectWindow<int>
     {
         List<string> choiceList;
-        int size;
+        protected int Size;
         public VerticalSelectWindow(Vector pos, List<string> choiceList, SelectPhase selectPhase) : base(pos, selectPhase)
         {
             this.choiceList = choiceList;
-            size = choiceList.Count;
+            Size = choiceList.Count;
         }
         public override void Draw(Drawing sb)
         {
-            for(int i=0;i<size;i++)
+            for(int i=0;i<Size;i++)
                 sb.DrawText(Position + new Vector(80, i*30), Resources.GetFont(FontID.Test), choiceList[i], Color.White, DepthID.Message);
 
-            sb.DrawBox(Position + new Vector(0, (int)selectCommand * 30), new Vector(5, 5), Color.White, DepthID.Message);
+            sb.DrawBox(Position + new Vector(0, (int)SelectCommand * 30), new Vector(5, 5), Color.White, DepthID.Message);
         }
 
-        int selectCommand=0;
+        protected int SelectCommand=0;
         public override int? Select()
         {
             if (KeyInput.GetKeyPush(Key.Down))
             {
-                selectCommand++;
-                if (selectCommand == size)
+                SelectCommand++;
+                if (SelectCommand == Size)
                 {
-                    selectCommand = 0;
+                    SelectCommand = 0;
                 }
             }
             if (KeyInput.GetKeyPush(Key.Up))
             {
-                if (selectCommand == 0)
+                if (SelectCommand == 0)
                 {
-                    selectCommand = size;
+                    SelectCommand = Size;
                 }
-                selectCommand--;
+                SelectCommand--;
             }
 
             if (KeyInput.GetKeyPush(Key.A))
             {
-                GetSelection = selectCommand;
-                return selectCommand;
+                GetSelection = SelectCommand;
+                return SelectCommand;
             }
             return null;
+        }
+    }
+
+
+    class CommandSelectWindow : VerticalSelectWindow
+    {
+        readonly TextureID[] commandTextureID = new TextureID[]
+        {
+            TextureID.BattleCommandUnselectedMagic,
+            TextureID.BattleCommandUnselectedSkill,
+            TextureID.BattleCommandUnselectedGuard,
+            TextureID.BattleCommandUnselectedEscape,
+            TextureID.BattleCommandSelectedMagic,
+            TextureID.BattleCommandSelectedSkill,
+            TextureID.BattleCommandSelectedGuard,
+            TextureID.BattleCommandSelectedEscape,
+        };
+        public CommandSelectWindow(Vector pos, SelectPhase selectPhase)
+            : base(pos, new List<string>{ "Magic", "Skill", "Guard", "Escape" }, selectPhase)
+        {
+        }
+
+        public override void Draw(Drawing sb)
+        {
+            for (int i = 0; i < Size; i++)
+                sb.Draw(Position + new Vector(80, i * 30), Resources.GetTexture(commandTextureID[i+(i==SelectCommand?4:0)]), DepthID.Status);
         }
     }
 }

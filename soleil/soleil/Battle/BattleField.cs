@@ -29,6 +29,8 @@ namespace Soleil
         List<Turn> lastTurn;
         List<BattleUI> UIList;
 
+        List<TextureID> textureIDList;
+
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
@@ -68,6 +70,15 @@ namespace Soleil
 
             UIList = new List<BattleUI>();
             CEffects = new SortedSet<ConditionedEffect>();
+
+            textureIDList = new List<TextureID>
+            {
+                TextureID.BattleTurnQueueFaceLune,
+                TextureID.BattleTurnQueueFaceSun,
+                TextureID.BattleTurnQueueFace1,
+                TextureID.BattleTurnQueueFace2,
+                TextureID.BattleTurnQueueFace3,
+            };
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
@@ -208,8 +219,11 @@ namespace Soleil
         public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
 
         string message = "";
+        const int TurnQueueTextureWidth = 80;
         public void Draw(Drawing sb)
         {
+            sb.Draw(new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY), Resources.GetTexture(TextureID.BattleTemporaryBackground), DepthID.BackGround);
+
             //てきとう
             sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.Test), message, Color.White, DepthID.Message);
 
@@ -219,17 +233,18 @@ namespace Soleil
             sb.DrawText(new Vector(100, 480), Resources.GetFont(FontID.Test), "Guard", Color.White, DepthID.Message);
             sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
             */
+            
 
-            sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.Test), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
-            for (int i = 0; i < turnQueue.Count; i++)
-                sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.Test), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+            sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
+            for (int i=0;i<5;i++)
+                sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
             for (int i = 0; i < charas.Count; i++)
             {
-                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.White, DepthID.Message);
+                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
-                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
+                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
             }
 
             //sb.DrawBox(new Vector(20, 400), new Vector(20,20), Color.White, DepthID.Message);

@@ -56,7 +56,7 @@ namespace Soleil
             if(windows.Count==0)
             {
                 //var sw = new CommandSelectWindow(new Vector(600, 200));
-                var sw = new VerticalSelectWindow(new Vector(600, 200), new List<string> { "Magic", "Skill", "Guard", "Escape" }, SelectPhase.Initial);
+                var sw = new CommandSelectWindow(new Vector(600, 200), SelectPhase.Initial);
                 windows.Push(sw);
                 bf.AddUI(sw);
             }
