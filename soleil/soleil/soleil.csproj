@@ -69,6 +69,7 @@
     <Compile Include="Event\EventSequenceIterator.cs" />
     <Compile Include="Event\FadeInEvent.cs" />
     <Compile Include="Event\FadeOutEvent.cs" />
+    <Compile Include="Event\GlobalBoolSet.cs" />
     <Compile Include="Event\Iterator.cs" />
     <Compile Include="Event\MessageWindowEvent.cs" />
     <Compile Include="Event\NumEventBranch.cs" />

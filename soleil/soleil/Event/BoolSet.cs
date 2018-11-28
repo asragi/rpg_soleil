@@ -9,6 +9,7 @@ namespace Soleil.Event
     class BoolSet
     {
         private bool[] bools;
+        public int Length => bools.Length;
         public bool this[int i]
         {
             set => bools[i] = value;

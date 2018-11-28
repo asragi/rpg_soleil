@@ -1,4 +1,5 @@
-﻿using Soleil.Map.Maps.Somnia;
+﻿using Soleil.Event;
+using Soleil.Map.Maps.Somnia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +10,17 @@ namespace Soleil.Map
 {
     class Somnia4 : MapBase
     {
+        // Object
+        AccessaryGirl accessaryGirl;
+        // 移動イベントたち
+        MapChangeObject mcoRight;
+        MapChangeObject mcoLeft;
+        // Event
+        EventSequence firstEvent;
+
         public Somnia4()
             : base(MapName.Somnia4)
         {
-            // Object
-            AccessaryGirl accessaryGirl;
-            // 移動イベントたち
-            MapChangeObject mcoRight;
-            MapChangeObject mcoLeft;
             MapConstructs = new MapConstruct[]
             {
                 new MapConstruct(TextureID.Somnia4_1, MapDepth.Ground, om),
@@ -25,6 +29,16 @@ namespace Soleil.Map
                 new AdjustConstruct(new Vector(74, 278), TextureID.Somnia4_4,520,om), // 手前の家
                 new AdjustConstruct(TextureID.Somnia4_5, 445,om), // 手前の家
             };
+
+            // Event
+            firstEvent = new EventSequence(om.GetPlayer());
+            firstEvent.SetEventSet(
+                new EventSet(
+                    new MessageWindowEvent(new Vector(100,100),0,"はじめて来た"),
+                    new ChangeInputFocusEvent(InputFocus.Player)
+                )
+            );
+            EventSequences = new EventSequence[] { firstEvent };
 
             // マップサイズの設定
             MapCameraManager.SetMapSize(960, 540);
@@ -38,6 +52,12 @@ namespace Soleil.Map
             accessaryGirl = new AccessaryGirl(new Vector(650, 330), om, bm);
             mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm);
             mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            firstEvent.StartEvent();
         }
     }
 }
