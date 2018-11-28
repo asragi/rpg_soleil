@@ -14,27 +14,18 @@ namespace Soleil.Event
         List<EventSet> eventSets;
         EventSet[] eventSetsDefault; // 引数を保存する。
         int index;
-        ObjectManager objectManager;
-        public EventSequence(ObjectManager om)
+        PlayerObject player;
+        public EventSequence(PlayerObject pl)
         {
             index = 0;
             eventSets = new List<EventSet>();
-            objectManager = om;
+            player = pl;
         }
 
         public void SetEventSet(params EventSet[] _eventSets)
         {
             eventSetsDefault = _eventSets;
-            SetReference(eventSetsDefault);
             SetEventSetsByDefault();
-
-            void SetReference(EventSet[] set)
-            {
-                for (int i = 0; i < set.Length; i++)
-                {
-                    set[i].SetReference(objectManager);
-                }
-            }
         }
 
         private void SetEventSetsByDefault()
