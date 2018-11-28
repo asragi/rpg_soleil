@@ -17,6 +17,7 @@
         readonly Vector DecideBoxDist = new Vector(-20, 0);
         int decideBoxCount;
         int speed;
+        Direction nextMoveDir;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
@@ -78,8 +79,29 @@
 
         public override void Update()
         {
-            DecideBoxCheck();
             base.Update();
+            DecideBoxCheck();
+            UpdatePosition();
+
+            void UpdatePosition()
+            {
+                switch (nextMoveDir)
+                {
+                    case Direction.N:
+                        MoveState = MoveState.Stand;
+                        NeutralizeCollideBoxes();
+                        break;
+                    default:
+                        // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
+                        (Pos, MoveState) = WallCheck(Pos);
+                        SetCollideBoxes(nextMoveDir.Angle());
+                        break;
+                }
+                // 向きを変更する
+                Direction = (nextMoveDir == Direction.N) ? Direction : nextMoveDir;
+                // nextMoveDirをリセットする．
+                nextMoveDir = Direction.N;
+            }
         }
 
         public void Walk()
@@ -93,20 +115,9 @@
 
         public override void Move(Direction dir)
         {
-            switch (dir)
-            {
-                case Direction.N:
-                    MoveState = MoveState.Stand;
-                    NeutralizeCollideBoxes();
-                    break;
-                default:
-                    // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
-                    (Pos, MoveState) = WallCheck(Pos);
-                    SetCollideBoxes(dir.Angle());
-                    break;
-            }
-            // 向きを変更する
-            Direction = (dir == Direction.N)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
+            // 既に入力がある場合，そちらを優先．
+            if (nextMoveDir != Direction.N) return;
+            nextMoveDir = dir;
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;
