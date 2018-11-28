@@ -64,6 +64,7 @@
     <Compile Include="Event\BoolSetEvent.cs" />
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\ChangeMapEvent.cs" />
+    <Compile Include="Event\CharacterMoveEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
     <Compile Include="Event\EventSequenceIterator.cs" />

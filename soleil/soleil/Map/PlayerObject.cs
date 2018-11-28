@@ -17,6 +17,7 @@
         readonly Vector DecideBoxDist = new Vector(-20, 0);
         int decideBoxCount;
         int speed;
+        Direction nextMoveDir;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
             : base(new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
@@ -29,7 +30,7 @@
             moveBoxes = new CollideBox[MoveBoxNum];
             for (int i = 0; i < MoveBoxNum; i++)
             {
-                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.Player, bm);
+                moveBoxes[i] = new CollideBox(this, Vector.Zero, new Vector(BoxSizeX, BoxSizeY), CollideLayer.PlayerBox, bm);
             }
             decideBox = new CollideBox(this, Vector.Zero, new Vector(10, 10), CollideLayer.PlayerHit, bm);
             decideBox.IsActive = false;
@@ -78,8 +79,29 @@
 
         public override void Update()
         {
-            DecideBoxCheck();
             base.Update();
+            DecideBoxCheck();
+            UpdatePosition();
+
+            void UpdatePosition()
+            {
+                switch (nextMoveDir)
+                {
+                    case Direction.N:
+                        MoveState = MoveState.Stand;
+                        NeutralizeCollideBoxes();
+                        break;
+                    default:
+                        // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
+                        (Pos, MoveState) = WallCheck(Pos);
+                        SetCollideBoxes(nextMoveDir.Angle());
+                        break;
+                }
+                // 向きを変更する
+                Direction = (nextMoveDir == Direction.N) ? Direction : nextMoveDir;
+                // nextMoveDirをリセットする．
+                nextMoveDir = Direction.N;
+            }
         }
 
         public void Walk()
@@ -91,23 +113,11 @@
             speed = RunSpeed;
         }
 
-        public void Move(Direction dir)
+        public override void Move(Direction dir)
         {
-            switch (dir)
-            {
-                case Direction.N:
-                    MoveState = MoveState.Stand;
-                    NeutralizeCollideBoxes();
-                    break;
-                default:
-                    // 前のフレームで変更されたmoveBoxの位置に，行けたら行く
-                    (Pos, MoveState) = WallCheck(Pos);
-                    SetCollideBoxes((int)KeyInput.GetDegreeDirection(1));
-                    break;
-            }
-
-            // 向きを変更する
-            Direction = (dir == Direction.N)? Direction : dir; // そもそもdir == None の場合がないようにしたい(TODO)
+            // 既に入力がある場合，そちらを優先．
+            if (nextMoveDir != Direction.N) return;
+            nextMoveDir = dir;
         }
 
         public void SetPosition(Vector _pos) => Pos = _pos;

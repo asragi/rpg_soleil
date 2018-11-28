@@ -17,9 +17,12 @@ namespace Soleil.Map
             ExistanceBox.Layer = CollideLayer.RoadEvent;
             EventSequence.SetEventSet(
                 new EventSet(
-                    new FadeOutEvent()
-                    , new ChangeMapEvent(mapName, destination, dir)
-                    , new FadeInEvent()
+                    new ChangeInputFocusEvent(InputFocus.None),
+                    new CharacterMoveEvent(om.GetPlayer(), dir, 15, false),
+                    new FadeOutEvent(),
+                    new ChangeMapEvent(mapName, destination, dir),
+                    new FadeInEvent(),
+                    new ChangeInputFocusEvent(InputFocus.Player)
                 )
             );
         }
