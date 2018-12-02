@@ -21,7 +21,7 @@ namespace Soleil.Menu
 
         protected override SelectablePanel[] MakeAllPanels()
         {
-            var items = new List<SelectablePanel>();
+            var items = new List<TextSelectablePanel>();
             for (int i = 0; i < (int)ItemID.size; i++)
             {
                 if (!itemList.HasItem((ItemID)i)) continue;
