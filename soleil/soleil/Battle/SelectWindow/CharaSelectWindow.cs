@@ -31,7 +31,7 @@ namespace Soleil
     class CharaSelectWindow : BasicMenu
     {
         Reference<bool> selectCompleted;
-        public int Select { get; private set; }
+        public int SelectIndex { get; private set; }
         List<int> charaIndexList;
         public CharaSelectWindow(MenuComponent parent, MenuDescription desc, List<int> charaIndexList, Reference<bool> selectCompleted)
             : base(parent, desc)
@@ -53,10 +53,11 @@ namespace Soleil
 
         public override void OnInputSubmit()
         {
-            Select = charaIndexList[Index];
+            SelectIndex = charaIndexList[Index];
             selectCompleted.Val = true;
         }
         //public override void OnInputCancel() { Quit(); ReturnParent(); }
+
         public override void Quit()
         {
             if (IsActive)

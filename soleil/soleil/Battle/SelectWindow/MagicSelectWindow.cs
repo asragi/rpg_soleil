@@ -7,38 +7,74 @@ using Soleil.Menu;
 
 namespace Soleil
 {
-    class MagicSelectWindow : MagicMenu
+    /// <summary>
+    /// アイテムメニューのそれぞれの選択パネルのクラス
+    /// </summary>
+    class MagicSelectPanel : TextSelectablePanel
     {
+        public readonly Vector CostPosDiff = new Vector(300, 0);
+        public override string Desctiption => ItemName;
+
+        public MagicSelectPanel(String itemName, int num, MagicSelectWindow parent)
+            : base(itemName, parent)
+        {
+            // itemNum
+            Val = num;
+            LocalPos = Vector.Zero;
+        }
+    }
+
+    class MagicSelectWindow : BasicMenu
+    {
+        protected override Vector WindowPos => new Vector(430, 200);
         Reference<bool> selectCompleted;
-        public ActionName Select { get; private set; }
+        public SelectItems Select;
         List<ActionName> magicList;
         MenuComponent parent;
         MenuDescription desc;
-
+        int charaIndex;
+        BattleField bf;
         /*
          攻撃対象の選択window
          Actionを選択してから実体化する
              */
         CharaSelectWindow csw;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<ActionName> list, Reference<bool> selectCompleted)
+        bool IsQuit;
+        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<ActionName> list, Reference<bool> selectCompleted
+            , int charaIndex, BattleField bf)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
             magicList = list;
             this.parent = parent;
             this.desc = desc;
+            this.charaIndex = charaIndex;
+            this.bf = bf;
+            IsQuit = true;
             Init();
         }
 
         protected override SelectablePanel[] MakeAllPanels() =>
-            magicList.Select(e => new MagicMenuPanel(AttackInfo.GetActionName(e), 1, this)).ToArray();
+            magicList.Select(e => new MagicSelectPanel(AttackInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
             base.Update();
+            csw?.Update();
             if (IsActive)
                 Input(KeyInput.GetStickFlickDirection(1));
-            csw?.Update();
+
+            switch(Select.ARange)
+            {
+                case Range.OneEnemy oe:
+                    if (csw != null)
+                        oe.TargetIndex = csw.SelectIndex;
+                    break;
+                case Range.Ally a:
+                    if (csw != null)
+                        a.TargetIndex = csw.SelectIndex;
+                    break;
+            }
         }
 
         public override void Draw(Drawing d)
@@ -49,23 +85,38 @@ namespace Soleil
 
         public override void OnInputSubmit()
         {
-            Select = magicList[Index];
-            switch (AttackInfo.GetAction(Select).ARange)
+            Select.AName = magicList[Index];
+            switch (AttackInfo.GetAction(Select.AName).ARange)
             {
                 case Range.OneEnemy oe:
-                    csw = new CharaSelectWindow(parent, desc, new List<int> { }, selectCompleted);
+                    csw = new CharaSelectWindow(parent, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
+                case Range.Ally a:
+                    csw = new CharaSelectWindow(parent, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
+                    csw.Call();
+                    break;
+                default:
+                    selectCompleted.Val = true;
+                    break;
             }
-            //Todo: Range選択
-            selectCompleted.Val = true;
+            Select.ARange = AttackInfo.GetAction(Select.AName).ARange.Clone();
+            IsActive = false;
         }
         //public override void OnInputCancel() { Quit(); ReturnParent(); }
+
+        public override void Call()
+        {
+            base.Call();
+            IsQuit = false;
+        }
+
         public override void Quit()
         {
-            if (IsActive)
+            if (!IsQuit)
                 base.Quit();
             csw?.Quit();
+            IsQuit = true;
             IsActive = false;
         }
     }

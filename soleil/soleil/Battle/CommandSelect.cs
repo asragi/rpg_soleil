@@ -48,7 +48,7 @@ namespace Soleil
 
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex, bf);
             bf.AddBasicMenu(commandSelect);
             bf.AddBasicMenu(desc);
         }
@@ -68,19 +68,19 @@ namespace Soleil
             first = true;
             commandSelect.Quit();
             Action action = null;
-            switch (commandSelect.Select)
+            switch (commandSelect.Select.Command)
             {
                 case CommandEnum.Magic:
                 case CommandEnum.Skill:
                     {
-                        genAkt = AttackInfo.GetAction(commandSelect.SelectAction);
+                        genAkt = AttackInfo.GetAction(commandSelect.Select.AName);
                         switch (genAkt)
                         {
                             case Attack atk:
-                                action = atk.GenerateAttack(new Range.OneEnemy(CharaIndex, commandSelect.SelectTarget));
+                                action = atk.GenerateAttack(commandSelect.Select.ARange);
                                 break;
                             case Buff buf:
-                                action = buf.GenerateAttack(new Range.OneEnemy(CharaIndex, commandSelect.SelectTarget));
+                                action = buf.GenerateAttack(commandSelect.Select.ARange);
                                 break;
                             default:
                                 throw new Exception("not implemented");

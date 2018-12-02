@@ -10,6 +10,8 @@ namespace Soleil.Range
     abstract class AttackRange
     {
         public abstract bool ContainRange(int index, BattleField bf);
+        public AttackRange Clone() =>
+            MemberwiseClone() as AttackRange;
     }
 
     class OneEnemy : AttackRange

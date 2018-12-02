@@ -10,25 +10,22 @@ namespace Soleil
     class CommandSelectWindow : BasicMenu
     {
         Reference<bool> selectCompleted;
-        public CommandEnum Select { get; private set; }
-        public ActionName SelectAction { get; private set; }
-        public int SelectTarget { get; private set; }
+        public SelectItems Select;
         MagicSelectWindow msw;//magic
         MagicSelectWindow ssw;//skill
-        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted)
+        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, BattleField bf)
             : base(parent, desc)
         {
             msw = new MagicSelectWindow(this, desc, new List<ActionName>()
                 {
                     ActionName.NormalAttack,
                     ActionName.ExampleMagic,
-                }, selectCompleted);
+                }, selectCompleted, charaIndex, bf);
             ssw = new MagicSelectWindow(this, desc, new List<ActionName>()
                 {
                     ActionName.ExampleDebuff
-                }, selectCompleted);
+                }, selectCompleted, charaIndex, bf);
             this.selectCompleted = selectCompleted;
-            SelectTarget = 2;
             Init();
         }
 
@@ -51,10 +48,16 @@ namespace Soleil
             if (IsActive)
                 Input(KeyInput.GetStickFlickDirection(1));
 
-            if (Select == CommandEnum.Magic)
-                SelectAction = msw.Select;
-            else if (Select == CommandEnum.Skill)
-                SelectAction = ssw.Select;
+            if (Select.Command == CommandEnum.Magic)
+            {
+                Select = msw.Select;
+                Select.Command = CommandEnum.Magic;
+            }
+            else if (Select.Command == CommandEnum.Skill)
+            {
+                Select = ssw.Select;
+                Select.Command = CommandEnum.Skill;
+            }
         }
         public override void Draw(Drawing d)
         {
@@ -71,8 +74,8 @@ namespace Soleil
 
         public override void OnInputSubmit()
         {
-            Select = (CommandEnum)Index;
-            switch (Select)
+            Select.Command = (CommandEnum)Index;
+            switch (Select.Command)
             {
                 case CommandEnum.Magic:
                     msw.Call();
