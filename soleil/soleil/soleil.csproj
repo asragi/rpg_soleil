@@ -57,7 +57,10 @@
     <Compile Include="Battle\ConditionedEffect.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\MagicField.cs" />
-    <Compile Include="Battle\SelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\CharaSelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\CommandPanel.cs" />
+    <Compile Include="Battle\SelectWindow\CommandSelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\MagicSelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\BoolSet.cs" />

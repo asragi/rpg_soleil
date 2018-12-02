@@ -39,7 +39,7 @@ namespace Soleil
         BattleField bf;
         Action genAkt;
 
-        CommandSelectWindow2 commandSelect;
+        CommandSelectWindow commandSelect;
         Menu.MenuDescription desc;
         Reference<bool> doSelect;
         public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
@@ -48,7 +48,7 @@ namespace Soleil
 
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow2(new Menu.MenuDescription(new Vector()), desc, doSelect);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect);
             bf.AddBasicMenu(commandSelect);
             bf.AddBasicMenu(desc);
         }
