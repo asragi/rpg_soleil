@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class EmptyPanel : SelectablePanel
+    class EmptyPanel : TextSelectablePanel
     {
         public override string Desctiption => "";
         public EmptyPanel(BasicMenu parent)
