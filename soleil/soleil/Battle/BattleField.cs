@@ -27,16 +27,14 @@ namespace Soleil
         /// turnQueueにPushされていない最初のTurn
         /// </summary>
         List<Turn> lastTurn;
-        List<BattleUI> UIList;
-        List<Menu.MenuComponent> BasicMenuList;
+        List<Menu.MenuComponent> MenuComponentList;
 
         List<TextureID> textureIDList;
 
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
-            UIList = new List<BattleUI>();
-            BasicMenuList = new List<Menu.MenuComponent>();
+            MenuComponentList = new List<Menu.MenuComponent>();
             charas = new List<Character>
             {
                 new TestPlayableCharacter(this, 0),
@@ -134,7 +132,7 @@ namespace Soleil
         bool executed = true;
         public void Update()
         {
-            BasicMenuList.ForEach(e => e.Update());
+            MenuComponentList.ForEach(e => e.Update());
             if (delayCount > 0)
             {
                 delayCount--;
@@ -217,11 +215,9 @@ namespace Soleil
             ocr.Affect(this);
         }
         */
-
-        public void AddUI(BattleUI bui) => UIList.Add(bui);
-        public bool RemoveUI(BattleUI bui) => UIList.Remove(bui);
-        public void AddBasicMenu(Menu.MenuComponent bui) => BasicMenuList.Add(bui);
-        public bool RemoveBasicMenu(Menu.MenuComponent bui) => BasicMenuList.Remove(bui);
+        
+        public void AddBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Add(bui);
+        public bool RemoveBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Remove(bui);
 
         string message = "";
         const int TurnQueueTextureWidth = 80;
@@ -244,9 +240,8 @@ namespace Soleil
                 sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
             }
 
-
-            UIList.ForEach(e => e.Draw(sb));
-            BasicMenuList.ForEach(e => e.Draw(sb));
+            
+            MenuComponentList.ForEach(e => e.Draw(sb));
         }
     }
 }
