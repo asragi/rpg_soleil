@@ -22,7 +22,7 @@ namespace Soleil.Menu
         protected int Val { set => itemNameImage.Val = value; }
         protected virtual FontID ValFont { set { itemNameImage.ValFont = value; } }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
-        public virtual Vector ItemNumPosDiff { get => new Vector(360, 0); }
+        //public override Vector ItemNumPosDiff { get => new Vector(360, 0); }
 
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
