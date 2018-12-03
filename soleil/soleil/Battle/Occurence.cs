@@ -11,6 +11,7 @@ namespace Soleil
     /// </summary>
     class Occurence
     {
+        protected static readonly BattleField BF = BattleField.GetInstance();
         //Effect
         public string Message;
         public bool Visible { get; set; }
@@ -21,7 +22,7 @@ namespace Soleil
             Message = message;
         }
         //使わないかも
-        public virtual void Affect(BattleField bf) { }
+        public virtual void Affect() { }
     }
 
     class OccurenceDamageForCharacter : Occurence
@@ -33,10 +34,10 @@ namespace Soleil
             CharaIndex = charaIndex;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
             if (CharaIndex < 2)
-                bf.statusUIs[CharaIndex].Damage(HPDamage, MPDamage);
+                BF.statusUIs[CharaIndex].Damage(HPDamage, MPDamage);
         }
     }
 
@@ -50,7 +51,7 @@ namespace Soleil
             CharaIndex = charaIndex;
             (this.STRrate, this.VITrate, this.MAGrate, this.SPDrate) = (STRrate, VITrate, MAGrate, SPDrate);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
         }
     }
@@ -61,6 +62,6 @@ namespace Soleil
         {
 
         }
-        public override void Affect(BattleField bf) { }
+        public override void Affect() { }
     }
 }

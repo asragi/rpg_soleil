@@ -87,15 +87,15 @@ namespace Soleil
                     }
                 case CommandEnum.Guard:
                     BF.AddCEffect(new ConditionedEffectWithExpireTime(
-                        (bf, act) =>
+                        (act) =>
                         {
                             if (act is Attack atk)
                             {
-                                return atk.ARange.ContainRange(CharaIndex, bf);
+                                return atk.ARange.ContainRange(CharaIndex, BattleField.GetInstance());
                             }
                             return false;
                         },
-                        (bf, act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
+                        (act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
                         100000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;

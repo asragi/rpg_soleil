@@ -163,16 +163,16 @@ namespace Soleil
                 topTurn = turnQueue.Top();
                 turnQueue.Pop();
 
-                CEffects.RemoveWhere(e => e.Expired(this));
+                CEffects.RemoveWhere(e => e.Expired());
 
                 //Turnが行動実行Turnのとき
                 if (topTurn is ActionTurn actTurn)
                 {
                     //行動を実行
-                    var ocrs = actTurn.action.Act(this);
+                    var ocrs = actTurn.action.Act();
 
                     //TODO:Occurenceに応じたBattleEventを生成する
-                    ocrs.ForEach(e => e.Affect(this));
+                    ocrs.ForEach(e => e.Affect());
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
                 }
                 //Turnが行動選択Turnのとき
