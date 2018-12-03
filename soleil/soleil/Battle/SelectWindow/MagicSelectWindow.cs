@@ -33,15 +33,14 @@ namespace Soleil
         MenuComponent parent;
         MenuDescription desc;
         int charaIndex;
-        BattleField bf;
+        static readonly BattleField bf = BattleField.GetInstance();
         /*
          攻撃対象の選択window
          Actionを選択してから実体化する
              */
         CharaSelectWindow csw;
         bool IsQuit;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<ActionName> list, Reference<bool> selectCompleted
-            , int charaIndex, BattleField bf)
+        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<ActionName> list, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
@@ -49,7 +48,6 @@ namespace Soleil
             this.parent = parent;
             this.desc = desc;
             this.charaIndex = charaIndex;
-            this.bf = bf;
             IsQuit = true;
             Init();
         }

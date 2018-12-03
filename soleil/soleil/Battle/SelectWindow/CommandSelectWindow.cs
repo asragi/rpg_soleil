@@ -14,18 +14,18 @@ namespace Soleil
         public SelectItems Select;
         MagicSelectWindow msw;//magic
         MagicSelectWindow ssw;//skill
-        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, BattleField bf)
+        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             msw = new MagicSelectWindow(this, desc, new List<ActionName>()
                 {
                     ActionName.NormalAttack,
                     ActionName.ExampleMagic,
-                }, selectCompleted, charaIndex, bf);
+                }, selectCompleted, charaIndex);
             ssw = new MagicSelectWindow(this, desc, new List<ActionName>()
                 {
                     ActionName.ExampleDebuff
-                }, selectCompleted, charaIndex, bf);
+                }, selectCompleted, charaIndex);
             this.selectCompleted = selectCompleted;
             Init();
         }

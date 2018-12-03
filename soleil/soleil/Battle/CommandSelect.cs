@@ -9,8 +9,8 @@ namespace Soleil
     abstract class CommandSelect
     {
         public int CharaIndex = -1;
-        protected BattleField BF;
-        public CommandSelect(BattleField bf, int charaIndex) => (BF, CharaIndex) = (bf, charaIndex);
+        protected static readonly BattleField BF = BattleField.GetInstance();
+        public CommandSelect(int charaIndex) => CharaIndex = charaIndex;
         public abstract bool GetAction(Turn turn);
         protected void EnqueueTurn(Action action, Turn turn)
         {
@@ -20,7 +20,7 @@ namespace Soleil
 
     class DefaultCharacterCommandSelect : CommandSelect
     {
-        public DefaultCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+        public DefaultCharacterCommandSelect(int charaIndex) : base(charaIndex)
         {
         }
 
@@ -36,21 +36,18 @@ namespace Soleil
 
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
-        BattleField bf;
         Action genAkt;
 
         CommandSelectWindow commandSelect;
         Menu.MenuDescription desc;
         Reference<bool> doSelect;
-        public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+        public DefaultPlayableCharacterCommandSelect(int charaIndex) : base(charaIndex)
         {
-            this.bf = bf;
-
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex, bf);
-            bf.AddBasicMenu(commandSelect);
-            bf.AddBasicMenu(desc);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex);
+            BF.AddBasicMenu(commandSelect);
+            BF.AddBasicMenu(desc);
         }
 
         bool first = true;
@@ -89,7 +86,7 @@ namespace Soleil
                         return true;
                     }
                 case CommandEnum.Guard:
-                    bf.AddCEffect(new ConditionedEffectWithExpireTime(
+                    BF.AddCEffect(new ConditionedEffectWithExpireTime(
                         (bf, act) =>
                         {
                             if (act is Attack atk)
@@ -99,11 +96,11 @@ namespace Soleil
                             return false;
                         },
                         (bf, act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
-                        100000, CharaIndex, turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP
+                        100000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;
                 case CommandEnum.Escape:
-                    action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                    action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
                     EnqueueTurn(action, turn);
                     return true;
             }

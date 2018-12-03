@@ -12,7 +12,8 @@ namespace Soleil
         public TestBattleScene(SceneManager sm)
             : base(sm)
         {
-            bf = new BattleField();
+            bf = BattleField.GetInstance();
+            bf.InitBattle();
         }
 
         override public void Update()

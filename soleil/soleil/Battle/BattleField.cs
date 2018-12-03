@@ -15,6 +15,9 @@ namespace Soleil
     }
     class BattleField
     {
+        static readonly BattleField singleton = new BattleField();
+        public static BattleField GetInstance() => singleton;
+
         List<Side> sides;
         List<int>[] indexes;
         List<Character> charas;
@@ -34,16 +37,20 @@ namespace Soleil
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
+        }
+
+        public void InitBattle()
+        {
             MenuComponentList = new List<Menu.MenuComponent>();
+
             charas = new List<Character>
             {
-                new TestPlayableCharacter(this, 0),
-                new TestPlayableCharacter(this, 1),
-                new TestEnemyCharacter(this, 2),
-                new TestEnemyCharacter(this, 3),
-                new TestEnemyCharacter(this, 4),
+                new TestPlayableCharacter(0),
+                new TestPlayableCharacter(1),
+                new TestEnemyCharacter(2),
+                new TestEnemyCharacter(3),
+                new TestEnemyCharacter(4),
             };
-
             sides = new List<Side>
             {
                 Side.Right,
@@ -55,12 +62,13 @@ namespace Soleil
             indexes = new List<int>[(int)Side.Size];
             indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
             indexes[(int)Side.Right] = new List<int> { 0, 1, };
+
             alive = new List<bool>(charas.Count);
             for (int i = 0; i < charas.Count; i++) alive.Add(true);
 
             magicField = new SimpleMagicField();
-            turnQueue = new TurnQueue();
 
+            turnQueue = new TurnQueue();
             lastTurn = new List<Turn>();
             for (int i = 0; i < charas.Count; i++)
                 lastTurn.Add(charas[i].NextTurn());
