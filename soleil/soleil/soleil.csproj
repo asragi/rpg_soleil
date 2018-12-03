@@ -62,6 +62,7 @@
     <Compile Include="Battle\SelectWindow\CommandSelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\MagicSelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\SelectItems.cs" />
+    <Compile Include="Battle\StatusUI.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\BoolSet.cs" />

@@ -35,6 +35,8 @@ namespace Soleil
         }
         public override void Affect(BattleField bf)
         {
+            if (CharaIndex < 2)
+                bf.statusUIs[CharaIndex].Damage(HPDamage, MPDamage);
         }
     }
 

@@ -33,6 +33,8 @@ namespace Soleil
         List<Menu.MenuComponent> MenuComponentList;
 
         List<TextureID> textureIDList;
+        //debugでpublic
+        public List<StatusUI> statusUIs;
 
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
@@ -86,6 +88,12 @@ namespace Soleil
                 TextureID.BattleTurnQueueFace1,
                 TextureID.BattleTurnQueueFace2,
                 TextureID.BattleTurnQueueFace3,
+            };
+
+            statusUIs = new List<StatusUI>()
+            {
+                new StatusUI(charas[0].Status.HP, charas[1].Status.HP, new Vector(550, 450)),
+                new StatusUI(charas[0].Status.HP, charas[1].Status.HP, new Vector(750, 450)),
             };
         }
 
@@ -164,6 +172,7 @@ namespace Soleil
                     var ocrs = actTurn.action.Act(this);
 
                     //TODO:Occurenceに応じたBattleEventを生成する
+                    ocrs.ForEach(e => e.Affect(this));
                     ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
                 }
                 //Turnが行動選択Turnのとき
@@ -196,6 +205,7 @@ namespace Soleil
                     break;
             }
 
+            statusUIs.ForEach(e => e.Update());
         }
 
         public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
@@ -241,11 +251,12 @@ namespace Soleil
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
-            for (int i = 0; i < charas.Count; i++)
+            statusUIs.ForEach(e => e.Draw(sb));
+            for (int i = 2; i < charas.Count; i++)
             {
-                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
+                sb.DrawText(new Vector(100 + (i-2) * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
-                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
+                sb.DrawText(new Vector(100 + (i-2) * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
             }
 
             
