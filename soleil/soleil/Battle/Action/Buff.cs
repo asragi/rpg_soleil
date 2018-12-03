@@ -28,7 +28,7 @@ namespace Soleil
                     BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
                     break;
                 case Range.Me aRange:
-                    BRate = BFunc(bf.GetCharacter(aRange.Index).Status, bf.GetCharacter(aRange.Index).Status);
+                    BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.SourceIndex).Status);
                     break;
             }
 
@@ -55,14 +55,14 @@ namespace Soleil
                             }
                             return ocrs;
                         case Range.Me me:
-                            if (bf.GetCharacter(me.Index).Status.Dead)
+                            if (bf.GetCharacter(me.SourceIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
+                                ocrs.Add(new Occurence(me.SourceIndex.ToString() + "は既に死んでいる"));
                             }
                             else
                             {
-                                bf.GetCharacter(me.Index).Buff(BRate);
-                                string mes = me.Index.ToString() + "は";
+                                bf.GetCharacter(me.SourceIndex).Buff(BRate);
+                                string mes = me.SourceIndex.ToString() + "は";
                                 var cmp = BRate.Comp();
                                 if (cmp == 1)
                                     mes += "能力が上がった";
@@ -70,7 +70,7 @@ namespace Soleil
                                     mes += "能力が下がった";
                                 else
                                     mes += "能力が変動した";
-                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.Index));
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.SourceIndex));
                             }
                             return ocrs;
                         default:

@@ -9,6 +9,7 @@ namespace Soleil
 {
     class CommandSelectWindow : BasicMenu
     {
+        protected override Vector WindowPos => new Vector(750, 200);
         Reference<bool> selectCompleted;
         public SelectItems Select;
         MagicSelectWindow msw;//magic

@@ -26,7 +26,7 @@ namespace Soleil
 
     class MagicSelectWindow : BasicMenu
     {
-        protected override Vector WindowPos => new Vector(430, 200);
+        protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
         public SelectItems Select;
         List<ActionName> magicList;
@@ -86,13 +86,17 @@ namespace Soleil
         public override void OnInputSubmit()
         {
             Select.AName = magicList[Index];
-            switch (AttackInfo.GetAction(Select.AName).ARange)
+            Select.ARange = AttackInfo.GetAction(Select.AName).ARange.Clone();
+            Select.ARange.SourceIndex = charaIndex;
+            switch (Select.ARange)
             {
                 case Range.OneEnemy oe:
+                    oe.SourceIndex = charaIndex;
                     csw = new CharaSelectWindow(parent, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
                 case Range.Ally a:
+                    a.SourceIndex = charaIndex;
                     csw = new CharaSelectWindow(parent, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
@@ -100,7 +104,6 @@ namespace Soleil
                     selectCompleted.Val = true;
                     break;
             }
-            Select.ARange = AttackInfo.GetAction(Select.AName).ARange.Clone();
             IsActive = false;
         }
         //public override void OnInputCancel() { Quit(); ReturnParent(); }

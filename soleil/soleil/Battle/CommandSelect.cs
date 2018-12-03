@@ -85,11 +85,13 @@ namespace Soleil
                             default:
                                 throw new Exception("not implemented");
                         }
+                        EnqueueTurn(action, turn);
                         return true;
                     }
                 case CommandEnum.Guard:
                     bf.AddCEffect(new ConditionedEffectWithExpireTime(
-                        (bf, act) => {
+                        (bf, act) =>
+                        {
                             if (act is Attack atk)
                             {
                                 return atk.ARange.ContainRange(CharaIndex, bf);
@@ -105,7 +107,7 @@ namespace Soleil
                     EnqueueTurn(action, turn);
                     return true;
             }
-            
+
             return false;
         }
     }

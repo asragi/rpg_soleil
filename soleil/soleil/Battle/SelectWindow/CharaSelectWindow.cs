@@ -30,6 +30,7 @@ namespace Soleil
      */
     class CharaSelectWindow : BasicMenu
     {
+        protected override Vector WindowPos => new Vector(350, 150);
         Reference<bool> selectCompleted;
         public int SelectIndex { get; private set; }
         List<int> charaIndexList;
