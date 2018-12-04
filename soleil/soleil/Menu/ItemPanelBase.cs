@@ -10,7 +10,7 @@ namespace Soleil.Menu
     /// <summary>
     /// アイテムに関する情報を取り扱うMenuPanel
     /// </summary>
-    abstract class ItemPanelBase :SelectablePanel
+    abstract class ItemPanelBase :TextSelectablePanel
     {
         public readonly ItemID ID;
 

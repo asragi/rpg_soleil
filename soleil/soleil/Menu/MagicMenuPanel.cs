@@ -9,7 +9,7 @@ namespace Soleil.Menu
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
     /// </summary>
-    class MagicMenuPanel : SelectablePanel
+    class MagicMenuPanel : TextSelectablePanel
     {
         public readonly Vector CostPosDiff = new Vector(300, 0);
         public override string Desctiption => ItemName;
