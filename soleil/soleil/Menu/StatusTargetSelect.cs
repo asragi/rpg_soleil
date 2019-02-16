@@ -8,10 +8,23 @@ namespace Soleil.Menu
 {
     class StatusTargetSelect : StatusTargetSelectBase
     {
+        MenuSystem menuSystem;
         public StatusTargetSelect(MenuSystem parent)
             : base(parent)
         {
+            menuSystem = parent;
+        }
 
+        public override void OnInputSubmit()
+        {
+            int selected = StatusMenu.GetIndex();
+            menuSystem.CallChild(MenuName.Status);
+        }
+
+        public override void OnInputCancel()
+        {
+            IsActive = false;
+            menuSystem.IsActive = true;
         }
     }
 }
