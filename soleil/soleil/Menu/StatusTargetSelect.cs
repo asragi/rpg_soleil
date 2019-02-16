@@ -18,6 +18,7 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             int selected = StatusMenu.GetIndex();
+            IsActive = false;
             menuSystem.CallChild(MenuName.Status);
         }
 

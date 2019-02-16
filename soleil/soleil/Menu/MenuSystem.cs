@@ -118,7 +118,7 @@ namespace Soleil.Menu
             // Magic Menu
             magicMenu = new MagicMenu(statusMenu, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusMenu, menuLineUpper, menuLineLower);
+            statusSystem = new StatusSystem(statusTargetSelect, menuLineUpper, menuLineLower);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] { statusMenu, statusTargetSelect, itemMenu, itemTargetSelect, magicMenu, statusSystem };
 
