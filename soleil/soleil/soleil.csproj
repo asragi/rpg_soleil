@@ -166,6 +166,8 @@
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusController.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
+    <Compile Include="Menu\StatusTargetSelect.cs" />
+    <Compile Include="Menu\StatusTargetSelectBase.cs" />
     <Compile Include="Menu\Status\AttributeDisplay.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\EquipDisplay.cs" />

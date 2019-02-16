@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class ItemTargetSelect : MenuChild
+    class ItemTargetSelect : StatusTargetSelectBase
     {
-        StatusMenu statusMenu;
         ItemMenu itemMenu;
 
         public ItemTargetSelect(ItemMenu _parent)
@@ -17,15 +16,9 @@ namespace Soleil.Menu
             itemMenu = _parent;
         }
 
-        public void SetRefs(StatusMenu sm) => statusMenu = sm;
-
-        public override void OnInputRight() => statusMenu.OnInputRight();
-
-        public override void OnInputLeft() => statusMenu.OnInputLeft();
-
         public override void OnInputSubmit()
         {
-            int selected = statusMenu.GetIndex();
+            int selected = StatusMenu.GetIndex();
             Console.WriteLine(selected);
         }
 
