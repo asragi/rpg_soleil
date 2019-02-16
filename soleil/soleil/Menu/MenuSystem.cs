@@ -153,7 +153,7 @@ namespace Soleil.Menu
             {
                 menuItems[i].Call();
             }
-            statusMenu.Call();
+            statusMenu.Call(false);
             IsActive = true;
             IsQuit = false;
 
