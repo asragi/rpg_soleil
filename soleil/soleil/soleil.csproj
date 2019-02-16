@@ -164,7 +164,6 @@
     <Compile Include="Menu\MenuSystem.cs" />
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
-    <Compile Include="Menu\StatusController.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
     <Compile Include="Menu\StatusTargetSelect.cs" />
     <Compile Include="Menu\StatusTargetSelectBase.cs" />
