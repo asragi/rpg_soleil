@@ -152,11 +152,11 @@
     <Compile Include="Menu\ItemPanelBase.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
-    <Compile Include="Menu\ItemTargetSelect.cs" />
+    <Compile Include="Menu\StatusSelect\ItemTargetSelect.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
     <Compile Include="Menu\MagicMenuPanel.cs" />
-    <Compile Include="Menu\MagicTargetSelect.cs" />
-    <Compile Include="Menu\MagicUserSelect.cs" />
+    <Compile Include="Menu\StatusSelect\MagicTargetSelect.cs" />
+    <Compile Include="Menu\StatusSelect\MagicUserSelect.cs" />
     <Compile Include="Menu\MenuCharacterPanel.cs" />
     <Compile Include="Menu\MenuChild.cs" />
     <Compile Include="Menu\MenuComponent.cs" />
@@ -167,8 +167,8 @@
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
-    <Compile Include="Menu\StatusTargetSelect.cs" />
-    <Compile Include="Menu\StatusTargetSelectBase.cs" />
+    <Compile Include="Menu\StatusSelect\StatusTargetSelect.cs" />
+    <Compile Include="Menu\StatusSelect\StatusTargetSelectBase.cs" />
     <Compile Include="Menu\Status\AttributeDisplay.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\EquipDisplay.cs" />
