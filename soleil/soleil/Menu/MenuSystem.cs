@@ -234,7 +234,7 @@ namespace Soleil.Menu
             }
             if(ToCharacterSelect.Contains(selected))
             {
-                statusMenu.FocusTo(this);
+                // statusMenu.FocusTo(this);
                 return;
             }
             if(selected == MenuName.Option)

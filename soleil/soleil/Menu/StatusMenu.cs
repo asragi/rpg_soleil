@@ -25,16 +25,6 @@ namespace Soleil.Menu
             AddComponents(menuCharacterPanels);
         }
 
-        /// <summary>
-        /// MenuSystemの他のウィンドウからFocusを移される場合．
-        /// </summary>
-        public void FocusTo(MenuChild from)
-        {
-            IsActive = true;
-            from.IsActive = false;
-            calledFrom = from;
-        }
-
         public int GetIndex() => index;
 
         // Input
@@ -46,31 +36,6 @@ namespace Soleil.Menu
         public override void OnInputLeft() {
             index--;
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
-        }
-
-        public override void OnInputSubmit() {
-            // ステータス選択以前に選ばれていた項目を見る．
-            if (calledFrom is ItemMenu)
-            {
-                Console.WriteLine("USE");
-            }
-            else if(calledFrom is MenuSystem)
-            {
-                menuSystem.CallChild((MenuName)menuSystem.Index);
-                IsActive = false;
-            }
-        }
-
-        public override void OnInputCancel() {
-            if(calledFrom is MenuSystem)
-            {
-                ReturnParent();
-            }
-            else
-            {
-                calledFrom.Call();
-                IsActive = false;
-            }
         }
     }
 }
