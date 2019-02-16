@@ -9,9 +9,13 @@ namespace Soleil.Menu
     class ItemTargetSelect : MenuChild
     {
         StatusMenu statusMenu;
+        ItemMenu itemMenu;
 
         public ItemTargetSelect(ItemMenu _parent)
-            :base(_parent){ }
+            :base(_parent)
+        {
+            itemMenu = _parent;
+        }
 
         public void SetRefs(StatusMenu sm) => statusMenu = sm;
 
@@ -27,8 +31,8 @@ namespace Soleil.Menu
 
         public override void OnInputCancel()
         {
-            Console.WriteLine("CANCEL");
-            ReturnParent();
+            IsActive = false;
+            itemMenu.Call();
         }
     }
 }
