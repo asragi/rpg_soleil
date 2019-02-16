@@ -155,6 +155,8 @@
     <Compile Include="Menu\ItemTargetSelect.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
     <Compile Include="Menu\MagicMenuPanel.cs" />
+    <Compile Include="Menu\MagicTargetSelect.cs" />
+    <Compile Include="Menu\MagicUserSelect.cs" />
     <Compile Include="Menu\MenuCharacterPanel.cs" />
     <Compile Include="Menu\MenuChild.cs" />
     <Compile Include="Menu\MenuComponent.cs" />

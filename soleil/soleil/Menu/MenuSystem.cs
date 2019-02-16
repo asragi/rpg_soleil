@@ -38,11 +38,6 @@ namespace Soleil.Menu
         };
 
         UIImage backImage, frontImage;
-        // 選択後にキャラクターの選択に移動するメニュー項目
-        readonly MenuName[] ToCharacterSelect = new[] {
-            MenuName.Magic,
-            MenuName.Equip,
-            MenuName.Status };
 
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -57,6 +52,8 @@ namespace Soleil.Menu
         ItemTargetSelect itemTargetSelect;
         // MagicMenu
         MagicMenu magicMenu;
+        MagicUserSelect magicUserSelect;
+        MagicTargetSelect magicTargetSelect;
         // Status 表示
         StatusTargetSelect statusTargetSelect;
         StatusMenu statusMenu;
@@ -116,15 +113,24 @@ namespace Soleil.Menu
             statusTargetSelect = new StatusTargetSelect(this);
             statusMenu = new StatusMenu(this);
             // Magic Menu
-            magicMenu = new MagicMenu(statusMenu, menuDescription);
+            magicUserSelect = new MagicUserSelect(this);
+            magicMenu = new MagicMenu(magicUserSelect, menuDescription);
+            magicTargetSelect = new MagicTargetSelect(magicMenu);
+
             // 詳細ステータス
             statusSystem = new StatusSystem(statusTargetSelect, menuLineUpper, menuLineLower);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, statusTargetSelect, itemMenu, itemTargetSelect, magicMenu, statusSystem };
+            menuChildren = new MenuChild[] {
+                statusMenu, statusTargetSelect,
+                itemMenu, itemTargetSelect,
+                magicMenu, magicTargetSelect, magicUserSelect,
+                statusSystem };
 
-            // 参照を設定しまくる．
+            // 参照を設定しまくる． // 最悪な状態なのでいい感じにしたい
             itemMenu.SetRefs(itemTargetSelect, statusMenu);
             statusTargetSelect.SetRefs(statusMenu);
+            magicUserSelect.SetRefs(statusMenu);
+            magicTargetSelect.SetRefs(statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
@@ -239,12 +245,12 @@ namespace Soleil.Menu
                 statusTargetSelect.Call();
                 return;
             }
-            if (ToCharacterSelect.Contains(selected))
+            if (selected == MenuName.Magic)
             {
-                // statusMenu.FocusTo(this);
+                magicUserSelect.Call();
                 return;
             }
-            if(selected == MenuName.Option)
+            if (selected == MenuName.Option)
             {
                 // Option設定用ウィンドウ出現
                 IsActive = true; // debug

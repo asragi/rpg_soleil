@@ -6,25 +6,25 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class StatusTargetSelect : StatusTargetSelectBase
+    class MagicTargetSelect: StatusTargetSelectBase
     {
-        MenuSystem menuSystem;
-        public StatusTargetSelect(MenuSystem parent)
-            : base(parent)
+        MagicMenu magicMenu;
+        public MagicTargetSelect(MagicMenu mg)
+            : base(mg)
         {
-            menuSystem = parent;
+            magicMenu = mg;
         }
 
         public override void OnInputSubmit()
         {
             int selected = StatusMenu.GetIndex();
-            IsActive = false;
-            menuSystem.CallChild(MenuName.Status);
+            Console.WriteLine("Use Magic!");
         }
 
         public override void OnInputCancel()
         {
-            ReturnParent();
+            IsActive = false;
+            magicMenu.Call();
         }
     }
 }
