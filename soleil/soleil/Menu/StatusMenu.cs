@@ -35,6 +35,8 @@ namespace Soleil.Menu
             calledFrom = from;
         }
 
+        public int GetIndex() => index;
+
         // Input
         public override void OnInputRight() {
             index++;

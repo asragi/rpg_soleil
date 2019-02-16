@@ -9,7 +9,7 @@ namespace Soleil.Menu
 {
     class ItemMenu : BasicMenu, IListener
     {
-        StatusMenu statusMenu;
+        ItemTargetSelect itemTargetSelect;
         ItemList itemList;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
             :base(parent, desc)
@@ -20,7 +20,11 @@ namespace Soleil.Menu
             Init();
         }
 
-        public void SetRefs(StatusMenu _statusMenu) => (statusMenu) = (_statusMenu);
+        public void SetRefs(ItemTargetSelect its, StatusMenu sm)
+        {
+            itemTargetSelect = its;
+            itemTargetSelect.SetRefs(sm);
+        }
 
         protected override SelectablePanel[] MakeAllPanels()
         {
@@ -62,7 +66,8 @@ namespace Soleil.Menu
                 }else if (item.Target == ItemTarget.OneAlly)
                 {
                     // inputをstatusに渡す．
-                    statusMenu.FocusTo(this);
+                    itemTargetSelect.Call();
+                    IsActive = false;
                     Quit();
                 }else if (item.Target == ItemTarget.AllAlly)
                 {

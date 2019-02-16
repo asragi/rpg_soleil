@@ -55,6 +55,7 @@ namespace Soleil.Menu
         MenuChild[] menuChildren;
         // ItemMenu
         ItemMenu itemMenu;
+        ItemTargetSelect itemTargetSelect;
         // MagicMenu
         MagicMenu magicMenu;
         // Status 表示
@@ -109,6 +110,8 @@ namespace Soleil.Menu
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
             itemMenu = new ItemMenu(this, menuDescription);
+            itemTargetSelect = new ItemTargetSelect(itemMenu);
+            // Item Target Select
             // Status Menu
             statusMenu = new StatusMenu(this);
             // Magic Menu
@@ -116,10 +119,10 @@ namespace Soleil.Menu
             // 詳細ステータス
             statusSystem = new StatusSystem(statusMenu, menuLineUpper, menuLineLower);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
+            menuChildren = new MenuChild[] { statusMenu, itemMenu, itemTargetSelect, magicMenu, statusSystem };
 
             // 参照を設定しまくる．
-            itemMenu.SetRefs(statusMenu);
+            itemMenu.SetRefs(itemTargetSelect, statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
