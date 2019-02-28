@@ -10,6 +10,7 @@ namespace Soleil
     /// <summary>
     /// 動きなど機能を与えたSpriteの基底クラス
     /// </summary>
+    [Obsolete(nameof(UIImage) + "を使おう．")]
     class Image : ImageBase
     {
         Texture2D tex;
