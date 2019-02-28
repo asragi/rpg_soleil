@@ -15,13 +15,13 @@ namespace Soleil
 
         UIImage image;
         UIImage grayImage;
-        UIImage[] images;
 
         public CharacterPicture(TextureID id, Vector pos, Vector? pos_diff, bool isDark)
         {
             IsDark = isDark;
             image = new UIImage(id, pos, pos_diff, Depth);
             grayImage = new UIImage(id, pos, pos_diff, Depth);
+            grayImage.Color = ColorPalette.DarkBlue;
         }
 
         public void Call()
@@ -48,7 +48,5 @@ namespace Soleil
             if (!IsDark) return;
             grayImage.Draw(d);
         }
-
-
     }
 }
