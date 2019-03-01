@@ -21,7 +21,7 @@ namespace Soleil
     class CharacterPictureSet: IComponent
     {
         FaceType faceType;
-        CharaName name;
+        public CharaName Name { get; private set; }
         CharacterPicture[] pictures;
 
         public Vector pos;
@@ -39,12 +39,12 @@ namespace Soleil
 
         public CharacterPictureSet(CharaName _name, Vector _pos)
         {
-            name = _name;
+            Name = _name;
             pictures = new CharacterPicture[(int)FaceType.size];
             for (int i = 0; i < pictures.Length; i++)
             {
                 var face = (FaceType)i;
-                var texID = CharacterPictureMap.GetTexture(name, face);
+                var texID = CharacterPictureMap.GetTexture(Name, face);
                 pictures[i] = new CharacterPicture(texID, _pos, null, false);
             }
             Pos = _pos;
