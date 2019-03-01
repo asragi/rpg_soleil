@@ -12,11 +12,11 @@ namespace Soleil
     class CharacterPictureHolder
     {
         const int PictureNum = 5;
-        CharacterPicture[] pictures;
+        CharacterPictureSet[] pictures;
 
         public CharacterPictureHolder()
         {
-            pictures = new CharacterPicture[PictureNum];
+            pictures = new CharacterPictureSet[PictureNum];
         }
     }
 }

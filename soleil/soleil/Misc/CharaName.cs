@@ -9,6 +9,7 @@ namespace Soleil.Misc
     enum CharaName
     {
         Lune,
-        Sunny
+        Sunny,
+        size
     }
 }

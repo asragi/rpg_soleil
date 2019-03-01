@@ -15,6 +15,15 @@ namespace Soleil
         UIImage image;
         UIImage grayImage;
 
+        public Vector Pos {
+            get => image.Pos;
+            set
+            {
+                image.Pos = value;
+                grayImage.Pos = value;
+            }
+        }
+
         public CharacterPicture(TextureID id, Vector pos, Vector? pos_diff, bool isDark)
         {
             IsDark = isDark;

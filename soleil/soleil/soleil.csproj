@@ -101,6 +101,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="Images\BackBarImage.cs" />
     <Compile Include="Images\CharacterPicture.cs" />
+    <Compile Include="Images\CharacterPictureSet.cs" />
     <Compile Include="Images\ColorPalette.cs" />
     <Compile Include="Images\FontImage.cs" />
     <Compile Include="Images\Image.cs" />
