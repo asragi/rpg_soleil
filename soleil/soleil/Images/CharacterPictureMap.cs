@@ -22,8 +22,14 @@ namespace Soleil
         private static TextureID[,] Set()
         {
             var result = new TextureID[(int)CharaName.size, (int)FaceType.size];
-
-
+            // Lune
+            var t = (int)CharaName.Lune;
+            result[t, (int)FaceType.Normal] = TextureID.MenuLune;
+            result[t, (int)FaceType.Normal] = TextureID.MenuLune;
+            // Sunny
+            t = (int)CharaName.Sunny;
+            result[t, (int)FaceType.Normal] = TextureID.MenuSun;
+            result[t, (int)FaceType.Normal] = TextureID.MenuSun;
             return result;
         }
 
