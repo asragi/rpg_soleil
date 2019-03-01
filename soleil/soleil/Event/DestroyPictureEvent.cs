@@ -8,23 +8,22 @@ using System.Threading.Tasks;
 namespace Soleil.Event
 {
     /// <summary>
-    /// 画面にキャラクターの立ち絵を表示する
+    /// キャラクターを指定して立ち絵を削除する．
     /// </summary>
-    class PictureCreateEvent: EventBase
+    class DestroyPictureEvent: EventBase
     {
         CharaName name;
-        int position;
         CharacterPictureHolder holder;
 
-        public PictureCreateEvent(CharaName _name, int _position, CharacterPictureHolder _holder)
+        public DestroyPictureEvent(CharaName _name, CharacterPictureHolder _holder)
         {
-            (name, position, holder) = (_name, _position, _holder);
+            (name, holder) = (_name, _holder);
         }
 
         public override void Start()
         {
             base.Start();
-            holder.Create(name, position);
+            holder.QuitCharacter(name);
         }
 
         public override void Execute()
