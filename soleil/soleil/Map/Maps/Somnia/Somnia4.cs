@@ -34,7 +34,7 @@ namespace Soleil.Map
             firstEvent = new EventSequence(om.GetPlayer());
             firstEvent.SetEventSet(
                 new EventSet(
-                    new MessageWindowEvent(new Vector(100,100),0,"はじめて来た"),
+                    new PictureCreateEvent(Misc.CharaName.Lune, 2, PictureHolder),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )
             );

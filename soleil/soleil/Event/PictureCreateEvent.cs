@@ -24,6 +24,7 @@ namespace Soleil.Event
         public override void Start()
         {
             base.Start();
+            Console.WriteLine("Do");
             holder.Create(name, position);
         }
 
