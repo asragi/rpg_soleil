@@ -10,7 +10,6 @@ namespace Soleil
     class CharacterPicture: IComponent
     {
         public static DepthID Depth = DepthID.PlayerFront;
-        public bool IsVisible;
         public bool IsDark;
 
         UIImage image;

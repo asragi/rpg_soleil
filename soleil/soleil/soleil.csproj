@@ -65,6 +65,7 @@
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\ChangeMapEvent.cs" />
     <Compile Include="Event\CharacterMoveEvent.cs" />
+    <Compile Include="Event\CharacterPictureHolder.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
     <Compile Include="Event\EventSequenceIterator.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\TextSelectablePanel.cs" />
+    <Compile Include="Misc\CharaName.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
