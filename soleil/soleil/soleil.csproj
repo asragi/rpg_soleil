@@ -65,6 +65,8 @@
     <Compile Include="Event\ChangeInputFocusEvent.cs" />
     <Compile Include="Event\ChangeMapEvent.cs" />
     <Compile Include="Event\CharacterMoveEvent.cs" />
+    <Compile Include="Event\CharacterPictureHolder.cs" />
+    <Compile Include="Event\DestroyPictureEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
     <Compile Include="Event\EventSequenceIterator.cs" />
@@ -74,6 +76,7 @@
     <Compile Include="Event\Iterator.cs" />
     <Compile Include="Event\MessageWindowEvent.cs" />
     <Compile Include="Event\NumEventBranch.cs" />
+    <Compile Include="Event\PictureCreateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
     <Compile Include="Event\Shop\ShopEvent.cs" />
     <Compile Include="Event\Shop\ShopItemList.cs" />
@@ -99,6 +102,9 @@
     <Compile Include="Function\Vector.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Images\BackBarImage.cs" />
+    <Compile Include="Images\CharacterPicture.cs" />
+    <Compile Include="Images\CharacterPictureMap.cs" />
+    <Compile Include="Images\CharacterPictureSet.cs" />
     <Compile Include="Images\ColorPalette.cs" />
     <Compile Include="Images\FontImage.cs" />
     <Compile Include="Images\Image.cs" />
@@ -177,6 +183,7 @@
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\TextSelectablePanel.cs" />
+    <Compile Include="Misc\CharaName.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

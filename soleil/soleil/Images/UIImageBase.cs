@@ -1,4 +1,5 @@
-﻿using Soleil.Menu;
+﻿using Microsoft.Xna.Framework;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Soleil.Images
     {
         readonly Vector initPos;
         readonly Vector posDiff;
+        public Color Color { get; set; } = Color.White;
         public int FadeSpeed = MenuSystem.FadeSpeed;
         public UIImageBase(Vector pos, Vector? _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : base(pos + (_posDiff ?? Vector.Zero), dep, centerOrigin, isStatic, alpha)

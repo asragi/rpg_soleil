@@ -31,8 +31,8 @@ namespace Soleil
         {
             var tmp = d.CenterBased;
             d.CenterBased = origin;
-            if (IsStatic) d.DrawUI(Pos, tex, Rectangle, Color.White, DepthID, Size, Alpha, Angle);
-            else d.DrawWithColor(Pos, tex, Rectangle, DepthID, Color.White * Alpha, Size, Angle);
+            if (IsStatic) d.DrawUI(Pos, tex, Rectangle, Color, DepthID, Size, Alpha, Angle);
+            else d.DrawWithColor(Pos, tex, Rectangle, DepthID, Color * Alpha, Size, Angle);
             d.CenterBased = tmp;
         }
     }

@@ -26,6 +26,7 @@ namespace Soleil.Map
         PlayerObject player;
         protected MapData MapData;
         MenuSystem menuSystem;
+        protected CharacterPictureHolder PictureHolder;
 
         protected EventSequence[] EventSequences;
         private bool started;
@@ -45,6 +46,7 @@ namespace Soleil.Map
             mapInputManager.SetPlayer(player);
             mapInputManager.SetMenuSystem(menuSystem);
             MapCameraManager = new MapCameraManager(player);
+            PictureHolder = new CharacterPictureHolder();
         }
 
         protected virtual void Start()
@@ -61,6 +63,7 @@ namespace Soleil.Map
             menuSystem.Update();
             mapInputManager.Update();
             MapCameraManager.Update();
+            PictureHolder.Update();
         }
 
         /// <summary>
@@ -86,6 +89,7 @@ namespace Soleil.Map
             menuSystem.Draw(sb);
             bm.Draw(sb);
             om.Draw(sb);
+            PictureHolder.Draw(sb);
         }
     }
 }
