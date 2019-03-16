@@ -29,8 +29,13 @@ namespace Soleil.Menu
 
         public override void Call()
         {
+            Call(true);
+        }
+
+        public void Call(bool active)
+        {
             base.Call();
-            IsActive = true;
+            IsActive = active;
         }
 
         public void Input(Direction dir)

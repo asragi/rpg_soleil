@@ -17,14 +17,13 @@ namespace Soleil.Menu
         }
 
         bool isActive;
+        bool nextActive;
         public bool IsActive
         {
             get { return isActive; }
             set
             {
-                isActive = value;
-                if (isActive) OnEnable();
-                else OnDisable();
+                nextActive = value;
             }
         }
 
@@ -60,7 +59,16 @@ namespace Soleil.Menu
 
         public virtual void Update()
         {
-            if(components != null)
+            // Active処理
+            if (isActive != nextActive)
+            {
+                if (nextActive) OnEnable();
+                else OnDisable();
+            }
+            isActive = nextActive;
+
+
+            if (components != null)
             {
                 foreach (var item in components)
                 {

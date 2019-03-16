@@ -116,6 +116,35 @@ namespace Soleil.Item
         }
     }
 
+    /// <summary>
+    /// 使用可能なアイテム
+    /// </summary>
+    struct ConsumableItem : IItem
+    {
+        public ItemID ID { get; }
+        public ItemType Type => ItemType.Consumable;
+        public bool OnMenu { get; }
+        public bool OnBattle { get; }
+        public string Name { get; }
+        public string Description { get; }
+        public ItemTarget Target { get; }
+
+        public ConsumableItem(ItemID id, string name, string description, ItemTarget target, bool onMenu = true, bool onBattle = true)
+        {
+            (ID, Name, Description, Target, OnMenu, OnBattle) = (id, name, description, target, onMenu, onBattle);
+        }
+    }
+
+    /// <summary>
+    /// アイテム使用時の効果対象
+    /// </summary>
+    enum ItemTarget
+    {
+        OneAlly,
+        AllAlly,
+        Nothing,
+    }
+
     struct WeaponData : IItem, IArmor
     {
         public ItemID ID { get; }
