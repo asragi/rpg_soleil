@@ -201,6 +201,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\MessageWindow.cs" />
     <Compile Include="Window\SelectableWindow.cs" />
     <Compile Include="Window\Window.cs" />
