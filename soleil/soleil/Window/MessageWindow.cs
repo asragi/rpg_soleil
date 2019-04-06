@@ -2,8 +2,7 @@
 
 namespace Soleil
 {
-    class MessageWindow
-        :Window
+    class MessageWindow: VariableWindow
     {
         String message;
         char[] messageArray;
@@ -22,7 +21,7 @@ namespace Soleil
             fontImage = new FontImage(FontID.WhiteOutlineGrad, _pos + new Vector(Spacing, Spacing), DiffPos, DepthID.Message, false);
             fontImage.FadeSpeed = FadeSpeed;
             charIndex = 0;
-            textPos = pos + new Vector(Spacing, Spacing);
+            textPos = Pos + new Vector(Spacing, Spacing);
             AddComponents(new[] { fontImage });
         }
 
@@ -38,7 +37,7 @@ namespace Soleil
 
         protected override void Move()
         {
-            if (!endAnimation && frame % drawCharPeriod == 0) AddChar();
+            if (!endAnimation && Frame % drawCharPeriod == 0) AddChar();
             base.Move();
         }
 

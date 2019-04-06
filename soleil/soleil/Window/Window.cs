@@ -1,42 +1,19 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Soleil.Menu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Soleil.Menu;
 
 namespace Soleil
 {
     /// <summary>
     /// Windowの基本クラス
     /// </summary>
-    class Window : MenuComponent
+    abstract class Window : MenuComponent
     {
-        // todo:右下にくるくるするやつ
-
-        /// <summary>
-        /// Contentの端からの距離
-        /// </summary>
-        protected const int Spacing = 20;
-        readonly Vector spaceVec = new Vector(Spacing);
-        /// <summary>
-        /// ウィンドウフレームの幅
-        /// </summary>
-        const int FrameSize = 10;
-        public const int FadeSpeed = 8;
-        public readonly Vector DiffPos = new Vector(0, 10);
-
-        static Texture2D frameTexture;
-        UIImage skinImg;
-        UIImage[] frameImgs;
+        protected abstract float Alpha { get; }
+        protected abstract Vector SpaceVector { get; }
         /// <summary>
         /// pos : 左上基準
         /// </summary>
-        protected Vector pos;
-        protected Vector ContentPos => frameImgs[0].Pos + spaceVec;
-        Vector size;
+        protected Vector Pos;
+        protected Vector ContentPos => Pos + SpaceVector;
         public bool Active { get; set; }
         public bool Visible { get; set; }
         public bool Dead { get; protected set; }
@@ -44,79 +21,16 @@ namespace Soleil
         /// ウィンドウ識別用変数. 重複可能.
         /// </summary>
         public WindowTag Tag { get; private set; }
-        protected float Alpha => skinImg.Alpha;
-        protected int frame;
+        protected int Frame;
         bool quitStart = false;
-        public Window(Vector _pos, Vector _size,WindowTag _tag, WindowManager wm)
+        public Window(Vector _pos, WindowTag _tag, WindowManager wm)
         {
-            var texID = TextureID.FrameTest;
-            var depth = DepthID.MessageBack;
-            var center = true;
-            frameTexture = Resources.GetTexture(texID);
-            pos = _pos;
-            size = _size;
+            Pos = _pos;
             Tag = _tag;
             Visible = true;
             Active = true;
-
-            frameImgs = new UIImage[]
-            {
-                // 左上
-                new UIImage(texID, pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,depth, center, false, 1),
-                // 右上
-                new UIImage(texID, pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,depth,center, false, 1),
-                // 左下
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
-                // 右下
-                new UIImage(texID, pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
-                // 上部
-                new UIImage(texID, pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,depth,center, false, 1),
-                // 左
-                new UIImage(texID, pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,depth,center, false, 1),
-                // 右
-                new UIImage(texID, pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,depth,center, false, 1),
-                // 下
-                new UIImage(texID, pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,depth,center, false, 1),
-            };
-            var rects = new[]
-            {
-                new Rectangle(0, 0, FrameSize, FrameSize),
-                new Rectangle(frameTexture.Width - FrameSize, 0, FrameSize, FrameSize),
-                new Rectangle(0, frameTexture.Height - FrameSize, FrameSize, FrameSize),
-                new Rectangle(frameTexture.Width - FrameSize, frameTexture.Height - FrameSize, FrameSize, FrameSize),
-                new Rectangle(FrameSize, 0, frameTexture.Width - 2 * FrameSize, FrameSize),
-                new Rectangle(0, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize),
-                new Rectangle(frameTexture.Width - FrameSize, FrameSize, FrameSize, frameTexture.Height - 2 * FrameSize),
-                new Rectangle(FrameSize, frameTexture.Height - FrameSize, frameTexture.Width - 2 * FrameSize, FrameSize)
-            };
-            var sizes = new[]
-            {
-                Vector.One,
-                Vector.One,
-                Vector.One,
-                Vector.One,
-                new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1),
-                new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)),
-                new Vector(1, (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize)),
-                new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), 1),
-            };
-
-            for (int i = 0; i < frameImgs.Length; i++)
-            {
-                frameImgs[i].Rectangle = rects[i];
-                frameImgs[i].Size = sizes[i];
-                frameImgs[i].FadeSpeed = FadeSpeed;
-            }
-
-            skinImg = new UIImage(TextureID.FrameTest, pos + new Vector(size.X, size.Y) / 2, DiffPos, depth, center, false, 1);
-            skinImg.FadeSpeed = FadeSpeed;
-            skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTexture.Width - 2 * FrameSize, frameTexture.Height - 2 * FrameSize);
-            skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTexture.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTexture.Height - 2 * FrameSize));
-
-            AddComponents(frameImgs.Concat(new[] { skinImg }).ToArray());
             wm.Add(this);
         }
-
 
         /// <summary>
         /// 継承後の振る舞いはMove()で記述する.
@@ -124,11 +38,11 @@ namespace Soleil
         public override void Update()
         {
             base.Update();
-            if (quitStart & skinImg.Alpha < 0.1) Destroy();
+            if (quitStart & Alpha < 0.1) Destroy();
             // visibleなのにactiveという状態を回避したい
             Active = Visible ? Active : false;
             if (!Active) return;
-            frame++;
+            Frame++;
 
             Move();
         }
@@ -138,25 +52,13 @@ namespace Soleil
         /// </summary>
         protected virtual void Move(){}
 
-        public override void Call()
-        {
-            base.Call();
-            skinImg.Call();
-            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Call();
-        }
-
         public override void Quit()
         {
             base.Quit();
             quitStart = true;
-            skinImg.Quit();
-            for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Quit();
         }
 
-        public void Destroy()
-        {
-            Dead = true;
-        }
+        public void Destroy() => Dead = true;
 
         public override void Draw(Drawing d)
         {
@@ -164,9 +66,6 @@ namespace Soleil
             DrawContent(d);
         }
 
-        virtual public void DrawContent(Drawing d)
-        {
-
-        }
+        protected virtual void DrawContent(Drawing d) { }
     }
 }
