@@ -18,6 +18,8 @@ namespace Soleil
         IndicatorBack,
         BackBar,
 
+        MessageWindow,
+
         MenuFront,
         MenuBack,
         MenuLine,
@@ -332,6 +334,8 @@ namespace Soleil
 
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
+
+            SetPath(TextureID.MessageWindow, UIPath + "yasoba-window");
 
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
