@@ -11,7 +11,6 @@ namespace Soleil
     {
         // ----- Constants
         const TextureID Texture = TextureID.FrameTest;
-        const DepthID Depth = DepthID.MessageBack;
         /// <summary>
         /// Contentの端からの距離
         /// </summary>
@@ -21,10 +20,6 @@ namespace Soleil
         /// </summary>
         const int FrameSize = 10;
         public const int FadeSpeed = 8;
-        /// <summary>
-        /// アニメーション時のズレ量
-        /// </summary>
-        public readonly Vector DiffPos = new Vector(0, 10);
 
         // -----
         protected override float Alpha => skinImg.Alpha;

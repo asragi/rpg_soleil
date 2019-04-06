@@ -9,14 +9,15 @@ namespace Soleil.Event
     /// <summary>
     /// メッセージウィンドウを生成する.
     /// </summary>
-    class ConversationEvent: EventBase
+    class ConversationEvent: WindowEventBase
     {
         string message;
         ConversationWindow window;
         public ConversationEvent(string _message)
+            :base(Vector.Zero, Vector.Zero, 0)
         {
             message = _message;
-            window = new ConversationWindow();
+            window = new ConversationWindow(Tag, Wm);
         }
 
         public override void Start()

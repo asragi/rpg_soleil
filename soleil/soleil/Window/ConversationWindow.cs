@@ -1,14 +1,21 @@
 ﻿namespace Soleil
 {
-    class ConversationWindow: UIImage
+    class ConversationWindow: Window
     {
-        public ConversationWindow()
-            :base(TextureID.MessageWindow,
-                 new Vector(0, 200),
-                 new Vector(0, 50),
-                 DepthID.MessageBack)
-        {
+        const TextureID Texture = TextureID.MessageWindow;
+        const int x = 140;
+        const int y = 300;
 
+        protected override float Alpha => backImg.Alpha;
+        protected override Vector SpaceVector => Vector.One;
+
+        UIImage backImg;
+
+        public ConversationWindow(WindowTag tag, WindowManager wm)
+            : base(new Vector(x, y), tag, wm)
+        {
+            backImg = new UIImage(Texture, Pos, DiffPos, Depth);
+            AddComponents(new[] { backImg });
         }
     }
 }
