@@ -17,8 +17,7 @@ namespace Soleil
         FontImage fontImage;
         int frame;
 
-        public MessageBox(FontID font, Vector _pos, Vector _diffPos, bool isStatic,
-            int fadeSpeed)
+        public MessageBox(FontID font, Vector _pos, Vector _diffPos, bool isStatic, int fadeSpeed)
         {
             endAnimation = false;
             messageToDraw = "";
