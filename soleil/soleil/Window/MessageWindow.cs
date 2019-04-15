@@ -2,7 +2,7 @@
 
 namespace Soleil
 {
-    class MessageWindow: VariableWindow
+    class MessageWindow: VariableWindow, IMessageBox
     {
         MessageBox messageBox;
 

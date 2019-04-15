@@ -2,7 +2,7 @@
 
 namespace Soleil
 {
-    class ConversationWindow: Window
+    class ConversationWindow: Window, IMessageBox
     {
         const TextureID Texture = TextureID.MessageWindow;
         const int x = 140;
@@ -10,7 +10,8 @@ namespace Soleil
         const FontID Font = FontID.KkBlack;
 
         protected override float Alpha => backImg.Alpha;
-        protected override Vector SpaceVector => Vector.One;
+        readonly Vector contentPos = new Vector(75, 60);
+        protected override Vector SpaceVector => contentPos;
 
         UIImage backImg;
         MessageBox messageBox;
@@ -19,8 +20,9 @@ namespace Soleil
             : base(new Vector(x, y), tag, wm)
         {
             backImg = new UIImage(Texture, Pos, DiffPos, Depth);
-            messageBox = new MessageBox(Font, Pos, DiffPos, true, FadeSpeed);
+            messageBox = new MessageBox(Font, ContentPos, DiffPos, true, FadeSpeed);
             AddComponents(new IComponent[] { backImg, messageBox });
+            SetMessage("テストメッセージ！テストメッセージ！\nテストメッセージ！\nテストメッセージ！");
         }
 
         public bool GetAnimIsEnd() => messageBox.GetAnimIsEnd();
