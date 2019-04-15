@@ -23,6 +23,8 @@ namespace Soleil
             AddComponents(new IComponent[] { backImg, messageBox });
         }
 
+        public bool GetAnimIsEnd() => messageBox.GetAnimIsEnd();
+        public void FinishAnim() => messageBox.FinishAnim();
         public void SetMessage(string text) => messageBox.SetMessage(text);
     }
 }
