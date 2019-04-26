@@ -14,8 +14,8 @@ namespace Soleil.ConversationRead
             var _data = File.ReadAllLines(path);
             ActionFromData(_data);
 
-            (object[], object[]) ActionFromData(string[] data){
-                var personList = new List<object>();
+            (ConversationPerson[], object[]) ActionFromData(string[] data){
+                var personList = new List<ConversationPerson>();
                 var happeningList = new List<object>();
                 for (int i = 0; i < data.Length; i++)
                 {
@@ -34,9 +34,12 @@ namespace Soleil.ConversationRead
                 }
                 return (personList.ToArray(), happeningList.ToArray());
 
-                object CreatePersonFromLine(string _line)
+                ConversationPerson CreatePersonFromLine(string _line)
                 {
-                    return new object();
+                    var dataList = _line.Split(' ');
+                    var name = dataList[1];
+                    var position = int.Parse(dataList[2]);
+                    return new ConversationPerson(name, position);
                 }
 
                 object Talk(string line) { return new object(); }
