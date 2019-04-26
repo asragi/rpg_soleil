@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Event;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,10 +15,10 @@ namespace Soleil.ConversationRead
             var _data = File.ReadAllLines(path);
             ActionFromData(_data);
 
-            (ConversationPerson[], object[]) ActionFromData(string[] data){
+            (ConversationPerson[], EventBase[]) ActionFromData(string[] data){
                 var personList = new List<ConversationPerson>();
-                var happeningList = new List<object>();
-                var eventsToPerson = new Dictionary<string, Func<string, string, ConversationPerson, object>>()
+                var happeningList = new List<EventBase>();
+                var eventsToPerson = new Dictionary<string, Func<string, string, ConversationPerson, EventBase>>()
                 {
                     { "t:", Talk }, {"face:", ChangeFace}, {"active:", Activate}
                 };
@@ -49,9 +50,9 @@ namespace Soleil.ConversationRead
                     return new ConversationPerson(name, position);
                 }
 
-                object Talk(string line, string target, ConversationPerson person) { return new object(); }
-                object ChangeFace(string line, string target, ConversationPerson person) { return new object(); }
-                object Activate(string line, string target, ConversationPerson person) { return new object(); }
+                EventBase Talk(string line, string target, ConversationPerson person) { return new EventBase(); }
+                EventBase ChangeFace(string line, string target, ConversationPerson person) { return new EventBase(); }
+                EventBase Activate(string line, string target, ConversationPerson person) { return new EventBase(); }
             }
         }
     }
