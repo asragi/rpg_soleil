@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.ConversationRead;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,9 @@ namespace Soleil.Event.Conversation
 {
     class ConversationChangeFace: EventBase
     {
+        public ConversationChangeFace(ConversationPerson person, string faceName)
+        {
+
+        }
     }
 }

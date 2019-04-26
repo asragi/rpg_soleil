@@ -52,13 +52,13 @@ namespace Soleil.ConversationRead
                 }
 
                 ConversationTalk Talk(string line, string target, ConversationPerson person)
-                    => new ConversationTalk();
+                    => new ConversationTalk(person, line.Remove(0, target.Length));
 
                 ConversationChangeFace ChangeFace(string line, string target, ConversationPerson person)
-                    => new ConversationChangeFace();
+                    => new ConversationChangeFace(person, line.Remove(0, target.Length));
 
                 ConversationActivate Activate(string line, string target, ConversationPerson person) 
-                    => new ConversationActivate();
+                    => new ConversationActivate(person, line.Remove(0, target.Length) == "1");
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.ConversationRead;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Soleil.Event.Conversation
 {
     class ConversationActivate: EventBase
     {
+        public ConversationActivate(ConversationPerson person, bool setBool) { }
     }
 }
