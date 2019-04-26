@@ -1,4 +1,5 @@
 ﻿using Soleil.Event;
+using Soleil.Event.Conversation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -50,9 +51,14 @@ namespace Soleil.ConversationRead
                     return new ConversationPerson(name, position);
                 }
 
-                EventBase Talk(string line, string target, ConversationPerson person) { return new EventBase(); }
-                EventBase ChangeFace(string line, string target, ConversationPerson person) { return new EventBase(); }
-                EventBase Activate(string line, string target, ConversationPerson person) { return new EventBase(); }
+                ConversationTalk Talk(string line, string target, ConversationPerson person)
+                    => new ConversationTalk();
+
+                ConversationChangeFace ChangeFace(string line, string target, ConversationPerson person)
+                    => new ConversationChangeFace();
+
+                ConversationActivate Activate(string line, string target, ConversationPerson person) 
+                    => new ConversationActivate();
             }
         }
     }
