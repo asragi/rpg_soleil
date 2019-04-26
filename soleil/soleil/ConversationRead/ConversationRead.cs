@@ -17,6 +17,10 @@ namespace Soleil.ConversationRead
             (ConversationPerson[], object[]) ActionFromData(string[] data){
                 var personList = new List<ConversationPerson>();
                 var happeningList = new List<object>();
+                var eventsToPerson = new Dictionary<string, Func<string, string, ConversationPerson, object>>()
+                {
+                    { "t:", Talk }, {"face:", ChangeFace}, {"active:", Activate}
+                };
                 for (int i = 0; i < data.Length; i++)
                 {
                     var line = data[i];
@@ -27,9 +31,12 @@ namespace Soleil.ConversationRead
                     {
                         string target = personList[i].ToString() + ":";
                         if (!line.StartsWith(target)) continue;
-                        if (line.StartsWith(target + "t:")) happeningList.Add(Talk(line));
-                        if (line.StartsWith(target + "face:")) happeningList.Add(ChangeFace(line));
-                        if (line.StartsWith(target + "active:")) happeningList.Add(Activate(line));
+
+                        foreach (var key in eventsToPerson.Keys)
+                        {
+                            if (line.StartsWith(target + key))
+                                happeningList.Add(eventsToPerson[key](line, target + key, personList[i]));
+                        }
                     }
                 }
                 return (personList.ToArray(), happeningList.ToArray());
@@ -42,9 +49,9 @@ namespace Soleil.ConversationRead
                     return new ConversationPerson(name, position);
                 }
 
-                object Talk(string line) { return new object(); }
-                object ChangeFace(string line) { return new object(); }
-                object Activate(string line) { return new object(); }
+                object Talk(string line, string target, ConversationPerson person) { return new object(); }
+                object ChangeFace(string line, string target, ConversationPerson person) { return new object(); }
+                object Activate(string line, string target, ConversationPerson person) { return new object(); }
             }
         }
     }
