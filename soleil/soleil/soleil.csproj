@@ -59,6 +59,7 @@
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
+    <Compile Include="ConversationRead\ConversationRead.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\BoolSet.cs" />
     <Compile Include="Event\BoolSetEvent.cs" />
