@@ -14,6 +14,234 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Animation/Map/Character/Lune/Lune_standing_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_1.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_2.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_3.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_4.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_5.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_6.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_7.png
+
+#begin Animation/Map/Character/Lune/Lune_standing_8.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/Lune_standing_8.png
+
+#begin Animation/Map/Character/Lune/standing.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/standing.png
+
+#begin Animation/Map/Character/Lune/walking_down.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_down.png
+
+#begin Animation/Map/Character/Lune/walking_left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_left.png
+
+#begin Animation/Map/Character/Lune/walking_lowerleft.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_lowerleft.png
+
+#begin Animation/Map/Character/Lune/walking_lowerright.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_lowerright.png
+
+#begin Animation/Map/Character/Lune/walking_right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_right.png
+
+#begin Animation/Map/Character/Lune/walking_up.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_up.png
+
+#begin Animation/Map/Character/Lune/walking_upperleft.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_upperleft.png
+
+#begin Animation/Map/Character/Lune/walking_upperright.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Lune/walking_upperright.png
+
+#begin Animation/Map/Character/Mob/Somnia/acce.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Mob/Somnia/acce.png
+
+#begin Animation/Map/Character/Mob/somniamob1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Map/Character/Mob/somniamob1.png
+
 #begin Arrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -25,18 +253,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Arrow.png
-
-#begin white.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:white.png
 
 #begin kkmincho.spritefont
 /importer:FontDescriptionImporter
@@ -61,19 +277,122 @@
 /processorParam:TextureFormat=Auto
 /build:kkmincho.spritefont
 
-#begin UI/window2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/window2.png
+#begin kkminchoBlack.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=240,248,255,255
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=41,68,91,255
+/processorParam:GradientEndColor=21,44,63,200
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoBlack.spritefont
 
-#begin UI/WindowWhite.PNG
+#begin kkminchoBlackMini.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=240,248,255,255
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=41,68,91,255
+/processorParam:GradientEndColor=21,44,63,200
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoBlackMini.spritefont
+
+#begin kkminchoGoldMini.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=False
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=False
+/processorParam:HasKatakana=False
+/processorParam:HasJisKanjiLevel1=False
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=86,77,37,255
+/processorParam:FontColor=202,193,152,255
+/processorParam:UseGradient=False
+/processorParam:GradientBeginColor=202,193,152,255
+/processorParam:GradientEndColor=86,77,37,255
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoGoldMini.spritefont
+
+#begin kkminchoNormal.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=21,44,63,200
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=240,248,255,255
+/processorParam:GradientEndColor=156,187,199,255
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoNormal.spritefont
+
+#begin kkminchoWhiteMini.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=True
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=True
+/processorParam:HasKatakana=True
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=21,44,63,200
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=240,248,255,255
+/processorParam:GradientEndColor=156,187,199,255
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:kkminchoWhiteMini.spritefont
+
+#begin Map/Back/Flare/1/flare1-10.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -83,7 +402,690 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/WindowWhite.PNG
+/build:Map/Back/Flare/1/flare1-10.png
+
+#begin Map/Back/Flare/1/flare1-11.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-11.png
+
+#begin Map/Back/Flare/1/flare1-1-1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-1.png
+
+#begin Map/Back/Flare/1/flare1-1-1-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-1-2.png
+
+#begin Map/Back/Flare/1/flare1-12.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-12.png
+
+#begin Map/Back/Flare/1/flare1-1-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-2.png
+
+#begin Map/Back/Flare/1/flare1-1-2-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-2-2.png
+
+#begin Map/Back/Flare/1/flare1-1-3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-3.png
+
+#begin Map/Back/Flare/1/flare1-1-3-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-1-3-2.png
+
+#begin Map/Back/Flare/1/flare1-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-2.png
+
+#begin Map/Back/Flare/1/flare1-3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-3.png
+
+#begin Map/Back/Flare/1/flare1-4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-4.png
+
+#begin Map/Back/Flare/1/flare1-5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-5.png
+
+#begin Map/Back/Flare/1/flare1-6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-6.png
+
+#begin Map/Back/Flare/1/flare1-7.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-7.png
+
+#begin Map/Back/Flare/1/flare1-8.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-8.png
+
+#begin Map/Back/Flare/1/flare1-9.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Flare/1/flare1-9.png
+
+#begin Map/Back/Somnia/1/somnia1_1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_1.png
+
+#begin Map/Back/Somnia/1/somnia1_2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_2.png
+
+#begin Map/Back/Somnia/1/somnia1_3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_3.png
+
+#begin Map/Back/Somnia/1/somnia1_4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_4.png
+
+#begin Map/Back/Somnia/1/somnia1_5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/1/somnia1_5.png
+
+#begin Map/Back/Somnia/2/somnia2-1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-1.png
+
+#begin Map/Back/Somnia/2/somnia2-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-2.png
+
+#begin Map/Back/Somnia/2/somnia2-3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-3.png
+
+#begin Map/Back/Somnia/2/somnia2-4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-4.png
+
+#begin Map/Back/Somnia/2/somnia2-5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-5.png
+
+#begin Map/Back/Somnia/2/somnia2-6.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/2/somnia2-6.png
+
+#begin Map/Back/Somnia/4/somnia4-1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/4/somnia4-1.png
+
+#begin Map/Back/Somnia/4/somnia4-2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/4/somnia4-2.png
+
+#begin Map/Back/Somnia/4/somnia4-3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/4/somnia4-3.png
+
+#begin Map/Back/Somnia/4/somnia4-4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/4/somnia4-4.png
+
+#begin Map/Back/Somnia/4/somnia4-5.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Somnia/4/somnia4-5.png
+
+#begin touhaba.spritefont
+/importer:FontDescriptionImporter
+/processor:WpfFontDescriptionProcessor
+/processorParam:HasAsciiCharacters=True
+/processorParam:HasZenkakuLatinLetters=False
+/processorParam:HasSpecialCharacters=True
+/processorParam:HasHiragana=False
+/processorParam:HasKatakana=False
+/processorParam:HasJisKanjiLevel1=True
+/processorParam:HasJisKanjiLevel2=False
+/processorParam:HasGreekLetters=False
+/processorParam:HasCyrillicLetters=False
+/processorParam:HasBoxCharacters=False
+/processorParam:OutlineThickness=0.4
+/processorParam:OutlineColor=240,248,255,255
+/processorParam:FontColor=255,255,255,255
+/processorParam:UseGradient=True
+/processorParam:GradientBeginColor=41,68,91,255
+/processorParam:GradientEndColor=21,44,63,200
+/processorParam:GradientAngle=90
+/processorParam:TextureFormat=Auto
+/build:touhaba.spritefont
+
+#begin UI/backBar.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/backBar.png
+
+#begin UI/indicatorTemp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/indicatorTemp.png
+
+#begin UI/Menu/menuback.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuback.png
+
+#begin UI/Menu/menuequip1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuequip1.PNG
+
+#begin UI/Menu/menuequip2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuequip2.PNG
+
+#begin UI/Menu/menufront.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menufront.PNG
+
+#begin UI/Menu/menuitem1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuitem1.PNG
+
+#begin UI/Menu/menuitem2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuitem2.PNG
+
+#begin UI/Menu/menuline.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuline.png
+
+#begin UI/Menu/menulune.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menulune.png
+
+#begin UI/Menu/menumagic1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menumagic1.PNG
+
+#begin UI/Menu/menumagic2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menumagic2.PNG
+
+#begin UI/Menu/menuModalBack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuModalBack.png
+
+#begin UI/Menu/menuoption1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuoption1.PNG
+
+#begin UI/Menu/menuoption2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuoption2.PNG
+
+#begin UI/Menu/menusave1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menusave1.PNG
+
+#begin UI/Menu/menusave2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menusave2.PNG
+
+#begin UI/Menu/menustatus1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menustatus1.PNG
+
+#begin UI/Menu/menustatus2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menustatus2.PNG
+
+#begin UI/Menu/MenuStatusFaceL.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/MenuStatusFaceL.png
+
+#begin UI/Menu/menusun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menusun.png
+
+#begin UI/Menu/selectBack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/selectBack.png
+
+#begin UI/Menu/unselectedBack.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/unselectedBack.png
 
 #begin UI/Rule/0.png
 /importer:TextureImporter
@@ -108,102 +1110,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Rule/1.png
-
-#begin UI/Rule/2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/2.png
-
-#begin UI/Rule/3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/3.png
-
-#begin UI/Rule/4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/4.png
-
-#begin UI/Rule/5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/5.png
-
-#begin UI/Rule/6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/6.png
-
-#begin UI/Rule/7.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/7.png
-
-#begin UI/Rule/8.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/8.png
-
-#begin UI/Rule/9.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Rule/9.png
 
 #begin UI/Rule/10.png
 /importer:TextureImporter
@@ -325,7 +1231,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/Rule/19.png
 
-#begin Animation/Map/Character/Lune/walking_left.png
+#begin UI/Rule/2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -335,9 +1241,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_left.png
+/build:UI/Rule/2.png
 
-#begin Animation/Map/Character/Lune/walking_right.png
+#begin UI/Rule/3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -347,9 +1253,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_right.png
+/build:UI/Rule/3.png
 
-#begin UI/indicatorTemp.png
+#begin UI/Rule/4.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -359,9 +1265,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/indicatorTemp.png
+/build:UI/Rule/4.png
 
-#begin Animation/Map/Character/Lune/walking_lowerleft.png
+#begin UI/Rule/5.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -371,9 +1277,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_lowerleft.png
+/build:UI/Rule/5.png
 
-#begin Animation/Map/Character/Lune/walking_lowerright.png
+#begin UI/Rule/6.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -383,9 +1289,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_lowerright.png
+/build:UI/Rule/6.png
 
-#begin Animation/Map/Character/Lune/standing.png
+#begin UI/Rule/7.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -395,9 +1301,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/standing.png
+/build:UI/Rule/7.png
 
-#begin Animation/Map/Character/Lune/walking_down.png
+#begin UI/Rule/8.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -407,9 +1313,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_down.png
+/build:UI/Rule/8.png
 
-#begin Animation/Map/Character/Lune/walking_upperleft.png
+#begin UI/Rule/9.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -419,9 +1325,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_upperleft.png
+/build:UI/Rule/9.png
 
-#begin Animation/Map/Character/Lune/walking_upperright.png
+#begin UI/window2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -431,9 +1337,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_upperright.png
+/build:UI/window2.png
 
-#begin Animation/Map/Character/Lune/Lune_standing_1.png
+#begin UI/WindowWhite.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -443,9 +1349,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_1.png
+/build:UI/WindowWhite.PNG
 
-#begin Animation/Map/Character/Lune/Lune_standing_2.png
+#begin UI/yasoba-window.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -455,9 +1361,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_2.png
+/build:UI/yasoba-window.png
 
-#begin Animation/Map/Character/Lune/Lune_standing_3.png
+#begin white.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -467,898 +1373,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_3.png
+/build:white.png
 
-#begin Animation/Map/Character/Lune/Lune_standing_4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_4.png
-
-#begin Animation/Map/Character/Lune/Lune_standing_5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_5.png
-
-#begin Animation/Map/Character/Lune/Lune_standing_6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_6.png
-
-#begin Animation/Map/Character/Lune/Lune_standing_7.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_7.png
-
-#begin Animation/Map/Character/Lune/Lune_standing_8.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/Lune_standing_8.png
-
-#begin Animation/Map/Character/Lune/walking_up.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Lune/walking_up.png
-
-#begin UI/Menu/menufront.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menufront.PNG
-
-#begin UI/Menu/menuitem1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuitem1.PNG
-
-#begin UI/Menu/menuequip1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuequip1.PNG
-
-#begin UI/Menu/menuitem2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuitem2.PNG
-
-#begin UI/Menu/menumagic1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menumagic1.PNG
-
-#begin UI/Menu/menuequip2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuequip2.PNG
-
-#begin UI/Menu/menumagic2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menumagic2.PNG
-
-#begin UI/Menu/menuoption2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuoption2.PNG
-
-#begin UI/Menu/menusave1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menusave1.PNG
-
-#begin UI/Menu/menusave2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menusave2.PNG
-
-#begin UI/Menu/menustatus1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menustatus1.PNG
-
-#begin UI/Menu/menuoption1.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuoption1.PNG
-
-#begin UI/Menu/menustatus2.PNG
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menustatus2.PNG
-
-#begin UI/Menu/menuback.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuback.png
-
-#begin UI/Menu/menuline.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuline.png
-
-#begin UI/Menu/menuModalBack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menuModalBack.png
-
-#begin UI/Menu/selectBack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/selectBack.png
-
-#begin Map/Back/Somnia/1/somnia1_1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/1/somnia1_1.png
-
-#begin Map/Back/Somnia/1/somnia1_2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/1/somnia1_2.png
-
-#begin UI/Menu/unselectedBack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/unselectedBack.png
-
-#begin Map/Back/Somnia/1/somnia1_3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/1/somnia1_3.png
-
-#begin UI/Menu/menulune.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menulune.png
-
-#begin Map/Back/Somnia/2/somnia2-1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-1.png
-
-#begin Map/Back/Somnia/1/somnia1_4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/1/somnia1_4.png
-
-#begin UI/Menu/menusun.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menusun.png
-
-#begin Map/Back/Somnia/2/somnia2-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-2.png
-
-#begin Map/Back/Somnia/2/somnia2-3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-3.png
-
-#begin Map/Back/Somnia/2/somnia2-4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-4.png
-
-#begin Map/Back/Somnia/2/somnia2-5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-5.png
-
-#begin Map/Back/Somnia/2/somnia2-6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/2/somnia2-6.png
-
-#begin Map/Back/Somnia/1/somnia1_5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/1/somnia1_5.png
-
-#begin Animation/Map/Character/Mob/somniamob1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Mob/somniamob1.png
-
-#begin Map/Back/Flare/1/flare1-1-1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-1.png
-
-#begin Map/Back/Flare/1/flare1-1-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-2.png
-
-#begin Map/Back/Flare/1/flare1-1-3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-3.png
-
-#begin Map/Back/Flare/1/flare1-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-2.png
-
-#begin Map/Back/Flare/1/flare1-3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-3.png
-
-#begin Map/Back/Flare/1/flare1-4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-4.png
-
-#begin Map/Back/Flare/1/flare1-5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-5.png
-
-#begin Map/Back/Flare/1/flare1-6.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-6.png
-
-#begin Map/Back/Flare/1/flare1-7.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-7.png
-
-#begin Map/Back/Flare/1/flare1-8.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-8.png
-
-#begin Map/Back/Flare/1/flare1-9.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-9.png
-
-#begin Map/Back/Flare/1/flare1-10.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-10.png
-
-#begin Map/Back/Flare/1/flare1-11.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-11.png
-
-#begin Map/Back/Flare/1/flare1-1-1-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-1-2.png
-
-#begin Map/Back/Flare/1/flare1-1-2-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-2-2.png
-
-#begin Map/Back/Flare/1/flare1-1-3-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-1-3-2.png
-
-#begin Map/Back/Flare/1/flare1-12.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Flare/1/flare1-12.png
-
-#begin Map/Back/Somnia/4/somnia4-1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/4/somnia4-1.png
-
-#begin Map/Back/Somnia/4/somnia4-2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/4/somnia4-2.png
-
-#begin Map/Back/Somnia/4/somnia4-3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/4/somnia4-3.png
-
-#begin Map/Back/Somnia/4/somnia4-4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/4/somnia4-4.png
-
-#begin Map/Back/Somnia/4/somnia4-5.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Map/Back/Somnia/4/somnia4-5.png
-
-#begin UI/backBar.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/backBar.png
-
-#begin UI/Menu/MenuStatusFaceL.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/MenuStatusFaceL.png
-
-#begin Animation/Map/Character/Mob/Somnia/acce.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Map/Character/Mob/Somnia/acce.png
-
-#begin kkminchoNormal.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoNormal.spritefont
-
-#begin kkminchoBlack.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlack.spritefont
-
-#begin kkminchoBlackMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlackMini.spritefont
-
-#begin kkminchoWhiteMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoWhiteMini.spritefont
-
-#begin kkminchoGoldMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=False
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=86,77,37,255
-/processorParam:FontColor=202,193,152,255
-/processorParam:UseGradient=False
-/processorParam:GradientBeginColor=202,193,152,255
-/processorParam:GradientEndColor=86,77,37,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoGoldMini.spritefont
-
-#begin touhaba.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:touhaba.spritefont

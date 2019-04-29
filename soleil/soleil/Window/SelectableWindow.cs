@@ -11,8 +11,7 @@ namespace Soleil
     /// <summary>
     /// カーソルを用いた選択を行う機能を持つウィンドウ
     /// </summary>
-    class SelectableWindow
-        :Window
+    class SelectableWindow: VariableWindow
     {
         const int LineSpace = 35;
         string[] options;
@@ -27,7 +26,7 @@ namespace Soleil
             texts = new FontImage[options.Length];
             for (int i = 0; i < options.Length; i++)
             {
-                texts[i] = new FontImage(FontID.WhiteOutlineGrad, pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, false);
+                texts[i] = new FontImage(FontID.WhiteOutlineGrad, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, false);
                 texts[i].FadeSpeed = FadeSpeed;
                 texts[i].Text = options[i];
             }
@@ -66,14 +65,14 @@ namespace Soleil
             return -1;
         }
 
-        public override void DrawContent(Drawing d)
+        protected override void DrawContent(Drawing d)
         {
             base.DrawContent(d);
             for (int i = 0; i < texts.Length; i++)
             {
                 texts[i].Draw(d);
             }
-            d.Draw(pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
+            d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
         }
 
         /// <summary>
