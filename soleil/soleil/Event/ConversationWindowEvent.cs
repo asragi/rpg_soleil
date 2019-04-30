@@ -30,8 +30,13 @@ namespace Soleil.Event
         {
             void ReactToInput()
             {
-                window.Quit();
-                Next();
+                if (Wm.GetIsMessageWindowAnimFinished(Tag))
+                {
+                    window.Quit();
+                    Next();
+                    return;
+                }
+                Wm.FinishMessageWindowAnim(Tag);
             }
 
             base.Execute();

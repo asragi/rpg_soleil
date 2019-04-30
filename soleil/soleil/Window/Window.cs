@@ -7,6 +7,7 @@ namespace Soleil
     /// </summary>
     abstract class Window : MenuComponent
     {
+        public const int FadeSpeed = 8;
         /// <summary>
         /// アニメーション時のズレ量
         /// </summary>

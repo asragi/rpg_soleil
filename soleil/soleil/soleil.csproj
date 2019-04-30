@@ -203,6 +203,7 @@
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
+    <Compile Include="Window\IMessageBox.cs" />
     <Compile Include="Window\MessageBox.cs" />
     <Compile Include="Window\MessageWindow.cs" />
     <Compile Include="Window\SelectableWindow.cs" />

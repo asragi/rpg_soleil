@@ -19,7 +19,6 @@ namespace Soleil
         /// ウィンドウフレームの幅
         /// </summary>
         const int FrameSize = 10;
-        public const int FadeSpeed = 8;
 
         // -----
         protected override float Alpha => skinImg.Alpha;
