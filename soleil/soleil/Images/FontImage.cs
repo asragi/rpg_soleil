@@ -79,25 +79,10 @@ namespace Soleil
                 }
             }
 
-            public void Update()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Call()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Quit()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Draw(Drawing d)
-            {
-                throw new NotImplementedException();
-            }
+            public void Update() => outlineTexts.ForEach2(s => s.Update());
+            public void Call() => outlineTexts.ForEach2(s => s.Call());
+            public void Quit() => outlineTexts.ForEach2(s => s.Quit());
+            public void Draw(Drawing d) => outlineTexts.ForEach2(s => s.Draw(d));
         }
     }
 }
