@@ -20,8 +20,8 @@ namespace Soleil.Images
             (initPos, PosDiff) = (pos, (_posDiff ?? Vector.Zero));
         }
 
-        public void Call() => Call(true);
-        public void Quit() => Quit(true);
+        public virtual void Call() => Call(true);
+        public virtual void Quit() => Quit(true);
 
         public void Call(bool move = true)
         {

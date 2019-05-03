@@ -15,9 +15,10 @@ namespace Soleil
     class FontImage : UIImageBase
     {
         public FontID Font { get; set; }
-        public string Text { get; set; }
+        private string text;
+        public string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
         public override Vector GetSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
-        public Color OutlineColor { get; set; } = Color.White;
+        public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
 
         // Outline
         private Outline outline;
@@ -39,6 +40,7 @@ namespace Soleil
         {
             if (!activate && outline == null) return;
             outline = outline ?? new Outline(this, diff, PosDiff, DepthID, IsStatic);
+            outline.Color = OutlineColor;
             outline.IsVisible = activate;
         }
 
@@ -55,13 +57,26 @@ namespace Soleil
             else d.DrawText(Pos, Resources.GetFont(Font), Text, Color * Alpha, DepthID, 1, Angle, false);
         }
 
+        public override void Call()
+        {
+            base.Call();
+            outline?.Call();
+        }
+
+        public override void Quit()
+        {
+            base.Quit();
+            outline?.Quit();
+        }
+
         /// <summary>
         /// 枠線を外側に表示するためのクラス内クラス
         /// </summary>
         private class Outline: IComponent
         {
-            public Color Color { get; set; }
+            public Color Color { set => outlineTexts.ForEach2(s => s.Color = value); }
             public bool IsVisible;
+            public string Text { set => outlineTexts.ForEach2(s => s.Text = value); }
             readonly FontImage parent;
             readonly Vector[] diffs;
             readonly FontImage[] outlineTexts;
@@ -70,13 +85,14 @@ namespace Soleil
             public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
             {
                 parent = _parent;
-                diffs = SetDiffPosition(normalizedDiffs, parent.Pos, diff);
+                diffs = SetDiffPosition(normalizedDiffs, parent.Pos - positionDiff, diff);
                 outlineTexts = SetFontImages(parent.Font, diffs, positionDiff, depth, isStatic);
 
                 Vector[] SetDiffPosition(Vector[] normalVecs, Vector parentPos, int diffSize)
                 {
-                    var result = new Vector[normalVecs.Length];
-                    for (int i = 0; i < diffs.Length; i++)
+                    var size = normalizedDiffs.Length;
+                    var result = new Vector[size];
+                    for (int i = 0; i < size; i++)
                     {
                         result[i] = parentPos + normalVecs[i] * diffSize;
                     }
@@ -102,6 +118,7 @@ namespace Soleil
             public void Draw(Drawing d)
             {
                 if (IsVisible) outlineTexts.ForEach2(s => s.Draw(d));
+                Console.WriteLine(IsVisible);
             }
         }
     }
