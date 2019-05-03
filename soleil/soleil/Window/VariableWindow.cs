@@ -10,15 +10,15 @@ namespace Soleil
     class VariableWindow : Window
     {
         // ----- Constants
-        const TextureID Texture = TextureID.FrameTest;
+        const TextureID Texture = TextureID.MessageWindow;
         /// <summary>
         /// Contentの端からの距離
         /// </summary>
-        protected const int Spacing = 20;
+        protected const int Spacing = 40;
         /// <summary>
         /// ウィンドウフレームの幅
         /// </summary>
-        const int FrameSize = 10;
+        const int FrameSize = 40;
 
         // -----
         protected override float Alpha => skinImg.Alpha;
@@ -87,7 +87,7 @@ namespace Soleil
                 frameImgs[i].FadeSpeed = FadeSpeed;
             }
 
-            skinImg = new UIImage(TextureID.FrameTest, Pos + new Vector(size.X, size.Y) / 2, DiffPos, Depth, center, false, 1);
+            skinImg = new UIImage(Texture, Pos + new Vector(size.X, size.Y) / 2, DiffPos, Depth, center, false, 1);
             skinImg.FadeSpeed = FadeSpeed;
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTextureForCalc.Width - 2 * FrameSize, frameTextureForCalc.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTextureForCalc.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTextureForCalc.Height - 2 * FrameSize));

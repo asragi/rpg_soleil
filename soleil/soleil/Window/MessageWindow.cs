@@ -10,7 +10,7 @@ namespace Soleil
             : base(_pos, _size, tag, wm)
         {
             var targetPos = _pos + new Vector(Spacing);
-            messageBox = new MessageBox(FontID.WhiteOutlineGrad, targetPos, DiffPos, false, FadeSpeed);
+            messageBox = new MessageBox(FontID.KkBlack, targetPos, DiffPos, false, FadeSpeed);
             AddComponents(new[] { messageBox });
         }
 
