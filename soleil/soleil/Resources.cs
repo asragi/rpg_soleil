@@ -151,6 +151,7 @@ namespace Soleil
         KkMini,
         KkGoldMini,
         Touhaba,
+        Yasashisa,
         [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
@@ -383,6 +384,8 @@ namespace Soleil
             SetPath(FontID.KkBlackMini, "kkminchoBlackMini");
             SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
             SetPath(FontID.Touhaba, "touhaba");
+            SetPath(FontID.Yasashisa, "yasashisa");
+
 
             //optionPath = Option.FilePath;
             #endregion 
