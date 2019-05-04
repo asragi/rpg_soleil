@@ -38,6 +38,7 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
             itemNameImage.Text = itemName;
+            itemNameImage.TextColor = ItemColor;
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
