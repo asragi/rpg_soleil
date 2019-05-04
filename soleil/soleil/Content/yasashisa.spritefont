@@ -6,7 +6,7 @@
   <Asset Type="Graphics:FontDescription">
 
 
-<FontName>07やさしさゴシックボールド</FontName>
+<FontName>Corporate Logo</FontName>
 
  
 <Size>18</Size>
@@ -16,7 +16,7 @@
 <UseKerning>true</UseKerning>
 
 
-<Style>Regular</Style>
+<Style>regular</Style>
 
 
 <!-- <DefaultCharacter>*</DefaultCharacter> -->

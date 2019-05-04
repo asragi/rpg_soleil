@@ -19,7 +19,9 @@ namespace Soleil.Menu
         protected readonly Color ItemColor = ColorPalette.DarkBlue;
         protected readonly FontID SelectedFont = FontID.Yasashisa;
         protected readonly Color SelectedColor = ColorPalette.AliceBlue;
+        protected readonly Color DisableColor = ColorPalette.GlayBlue;
 
+        public bool Active { get; set; }
 
         // 項目名の描画
         TextWithVal itemNameImage;
@@ -38,7 +40,7 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
             itemNameImage.Text = itemName;
-            itemNameImage.TextColor = ItemColor;
+            SetTextColor(ItemColor);
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
@@ -59,7 +61,7 @@ namespace Soleil.Menu
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, true);
             itemNameImage.Font = SelectedFont;
-            itemNameImage.TextColor = SelectedColor;
+            SetTextColor(SelectedColor);
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace Soleil.Menu
         {
             selectedBack.Fade(5, MenuSystem.EaseFunc, false);
             itemNameImage.Font = ItemFont;
-            itemNameImage.TextColor = ItemColor;
+            SetTextColor(ItemColor);
         }
 
         public override void Update()
@@ -85,6 +87,16 @@ namespace Soleil.Menu
         {
             selectedBack.Draw(d);
             itemNameImage.Draw(d);
+        }
+
+        private void SetTextColor(Color col)
+        {
+            if (!Active)
+            {
+                itemNameImage.TextColor = DisableColor;
+                return;
+            }
+            itemNameImage.TextColor = col;
         }
     }
 }
