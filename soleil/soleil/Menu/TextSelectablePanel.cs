@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,11 @@ namespace Soleil.Menu
         /// </summary>
         protected readonly Vector Spacing = new Vector(8, 4);
 
-        protected readonly FontID ItemFont = FontID.KkBlack;
+        protected readonly FontID ItemFont = FontID.Yasashisa;
+        protected readonly Color ItemColor = ColorPalette.DarkBlue;
+        protected readonly FontID SelectedFont = FontID.Yasashisa;
+        protected readonly Color SelectedColor = ColorPalette.AliceBlue;
+
 
         // 項目名の描画
         TextWithVal itemNameImage;
@@ -33,6 +38,7 @@ namespace Soleil.Menu
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
             itemNameImage.Text = itemName;
+            itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
             selectedBack = new Image(0, Resources.GetTexture(TextureID.MenuSelected), LocalPos + parent.Pos, DepthID.Message, false, true, 0);
@@ -51,7 +57,8 @@ namespace Soleil.Menu
         protected override void OnSelected()
         {
             selectedBack.Fade(20, MenuSystem.EaseFunc, true);
-            itemNameImage.Font = FontID.WhiteOutlineGrad;
+            itemNameImage.Font = SelectedFont;
+            itemNameImage.TextColor = SelectedColor;
         }
 
         /// <summary>
@@ -60,7 +67,8 @@ namespace Soleil.Menu
         protected override void OnUnselected()
         {
             selectedBack.Fade(5, MenuSystem.EaseFunc, false);
-            itemNameImage.Font = FontID.KkBlack;
+            itemNameImage.Font = ItemFont;
+            itemNameImage.TextColor = ItemColor;
         }
 
         public override void Update()
