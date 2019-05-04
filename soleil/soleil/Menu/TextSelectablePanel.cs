@@ -34,12 +34,13 @@ namespace Soleil.Menu
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
 
-        public TextSelectablePanel(String itemName, BasicMenu parent) : base(parent)
+        public TextSelectablePanel(String itemName, BasicMenu parent, bool active = true) : base(parent)
         {
             ItemName = itemName;
             // Set Font Image
             itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
             itemNameImage.Text = itemName;
+            Active = active;
             SetTextColor(ItemColor);
             itemNameImage.ValColor = ItemColor;
 

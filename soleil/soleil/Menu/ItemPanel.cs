@@ -15,8 +15,8 @@ namespace Soleil.Menu
         private string desc;
         public override string Desctiption => desc;
 
-        public ItemPanel(ItemID id, ItemList itemData, ItemMenu parent)
-            :base(id, ItemDataBase.Get(id).Name, parent)
+        public ItemPanel(ItemID id, ItemList itemData, ItemMenu parent, bool active = true)
+            :base(id, ItemDataBase.Get(id).Name, parent, active)
         {
             // Desctiption
             desc = ItemDataBase.Get(id).Description;
