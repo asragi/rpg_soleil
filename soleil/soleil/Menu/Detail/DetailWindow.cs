@@ -15,6 +15,7 @@ namespace Soleil.Menu
         readonly Vector DrawStartPos = new Vector(30, 30);
         readonly Vector DetailPos = new Vector(30, 100);
         readonly Vector InitPos;
+        public readonly static FontID Font = FontID.Yasashisa;
         DetailComponent[] details;
         ArmorDetail armorDetail;
         PossessNum possessNum;
