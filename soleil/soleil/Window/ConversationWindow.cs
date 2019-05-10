@@ -4,7 +4,7 @@ namespace Soleil
 {
     class ConversationWindow: Window, IMessageBox
     {
-        const TextureID Texture = TextureID.MessageWindow;
+        const TextureID Texture = TextureID.ConversationWindow;
         const int x = 140;
         const int y = 300;
         const FontID Font = FontID.KkBlack;

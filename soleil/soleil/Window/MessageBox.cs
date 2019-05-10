@@ -23,6 +23,7 @@ namespace Soleil
             messageToDraw = "";
             fontImage = new FontImage(font, _pos, _diffPos, Depth, isStatic);
             fontImage.FadeSpeed = fadeSpeed;
+            fontImage.ActivateOutline(2);
             charIndex = 0;
             AddComponents(new[] { fontImage });
         }
