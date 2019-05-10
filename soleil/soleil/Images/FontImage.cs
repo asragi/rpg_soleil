@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Soleil.Images;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,14 @@ namespace Soleil
     /// </summary>
     class FontImage : UIImageBase
     {
-        FontID font;
-        public FontID Font { set => font = value; }
-        public String Text { get; set; }
-        public override Vector GetSize => (Vector)Resources.GetFont(font).MeasureString(Text);
+        public FontID Font { get; set; }
+        private string text;
+        public string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
+        public override Vector GetSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
+        public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
+
+        // Outline
+        private Outline outline;
 
         /// <summary>
         /// ImageManagerから作る.
@@ -24,18 +29,97 @@ namespace Soleil
         public FontImage(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
             : base(pos, posDiff, depth, false, isStatic, alpha)
         {
-            font = fontID;
+            Font = fontID;
             Text = "";
         }
 
         public FontImage(FontID fontID, Vector pos, DepthID depth, bool isStatic = true, float alpha = 0)
             : this(fontID, pos, null, depth, isStatic, alpha) { }
    
+        public void ActivateOutline(int diff, bool activate = true)
+        {
+            if (!activate && outline == null) return;
+            outline = outline ?? new Outline(this, diff, PosDiff, DepthID, IsStatic);
+            outline.Color = OutlineColor;
+            outline.IsVisible = activate;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            outline?.Update();
+        }
 
         public override void Draw(Drawing d)
         {
-            if (IsStatic) d.DrawStaticText(Pos, Resources.GetFont(font), Text, Color * Alpha, DepthID, Vector2.One, Angle, false);
-            else d.DrawText(Pos, Resources.GetFont(font), Text, Color * Alpha, DepthID, 1, Angle, false);
+            outline?.Draw(d);
+            if (IsStatic) d.DrawStaticText(Pos, Resources.GetFont(Font), Text, Color * Alpha, DepthID, Vector2.One, Angle, false);
+            else d.DrawText(Pos, Resources.GetFont(Font), Text, Color * Alpha, DepthID, 1, Angle, false);
+        }
+
+        public override void Call()
+        {
+            base.Call();
+            outline?.Call();
+        }
+
+        public override void Quit()
+        {
+            base.Quit();
+            outline?.Quit();
+        }
+
+        /// <summary>
+        /// 枠線を外側に表示するためのクラス内クラス
+        /// </summary>
+        private class Outline: IComponent
+        {
+            public Color Color { set => outlineTexts.ForEach2(s => s.Color = value); }
+            public bool IsVisible;
+            public string Text { set => outlineTexts.ForEach2(s => s.Text = value); }
+            readonly FontImage parent;
+            readonly Vector[] diffs;
+            readonly FontImage[] outlineTexts;
+            static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+
+            public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
+            {
+                parent = _parent;
+                diffs = SetDiffPosition(normalizedDiffs, parent.Pos - positionDiff, diff);
+                outlineTexts = SetFontImages(parent.Font, diffs, positionDiff, depth, isStatic);
+
+                Vector[] SetDiffPosition(Vector[] normalVecs, Vector parentPos, int diffSize)
+                {
+                    var size = normalizedDiffs.Length;
+                    var result = new Vector[size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        result[i] = parentPos + normalVecs[i] * diffSize;
+                    }
+                    return result;
+                }
+
+                FontImage[] SetFontImages(FontID font, Vector[] outlineVecs, Vector posDiff,
+                    DepthID _depth, bool _isStatic, float alpha = 0)
+                {
+                    var size = outlineVecs.Length;
+                    var result = new FontImage[size];
+                    for (int i = 0; i < size; i++)
+                    {
+                        result[i] = new FontImage(font, outlineVecs[i], posDiff, _depth, _isStatic, alpha);
+                    }
+                    return result;
+                }
+            }
+
+            public void Update() => outlineTexts.ForEach2(s => s.Update());
+            public void Call() => outlineTexts.ForEach2(s => s.Call());
+            public void Quit() => outlineTexts.ForEach2(s => s.Quit());
+            public void Draw(Drawing d)
+            {
+                if (IsVisible) outlineTexts.ForEach2(s => s.Draw(d));
+                Console.WriteLine(IsVisible);
+            }
         }
     }
 }
