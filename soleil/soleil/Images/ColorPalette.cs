@@ -14,6 +14,6 @@ namespace Soleil
     {
         public static Color AliceBlue = Color.AliceBlue;
         public static Color GlayBlue = new Color(156, 179, 199);
-        public static Color DarkBlue = new Color(33, 68, 99);
+        public static Color DarkBlue = new Color(36, 69, 98);
     }
 }

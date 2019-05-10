@@ -5,12 +5,13 @@ namespace Soleil
     class MessageWindow: VariableWindow, IMessageBox
     {
         MessageBox messageBox;
+        public static FontID DefaultFont = FontID.Yasashisa;
 
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
             : base(_pos, _size, tag, wm)
         {
             var targetPos = _pos + new Vector(Spacing);
-            messageBox = new MessageBox(FontID.KkBlack, targetPos, DiffPos, false, FadeSpeed);
+            messageBox = new MessageBox(DefaultFont, targetPos, DiffPos, false, FadeSpeed);
             AddComponents(new[] { messageBox });
         }
 
