@@ -12,16 +12,19 @@ namespace Soleil.Event.Conversation
         ConversationWindow window;
         string message;
         ConversationPerson person;
-        public ConversationTalk(ConversationPerson _person, string _message, ConversationSystem _cs)
+        string face;
+        public ConversationTalk(ConversationPerson _person, string _message, string _face, ConversationSystem _cs)
             :base(Vector.Zero, Vector.Zero, WindowTag.Conversation)
         {
-            (person, message, window) = (_person, _message, _cs.ConversationWindow);
+            (person, message, face, window) = (_person, _message, _face, _cs.ConversationWindow);
         }
 
         public override void Start()
         {
             base.Start();
             window.SetMessage(message);
+            person.SetFace(face);
+            window.SetName(person.Name);
         }
 
         public override void Execute()

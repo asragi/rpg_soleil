@@ -51,7 +51,7 @@ namespace Soleil.Event.Conversation
                     var talker = personList.Find(s => s.Name == e.person);
                     string face = e.face;
                     string text = e.text;
-                    result.Add(new ConversationTalk(talker, text, cs));
+                    result.Add(new ConversationTalk(talker, text, face, cs));
                     continue;
                 }
                 if (e.eventName == "branch") continue;
