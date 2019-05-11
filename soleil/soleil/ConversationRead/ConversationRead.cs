@@ -12,13 +12,13 @@ using YamlDotNet.Serialization.NamingConventions;
 
 namespace Soleil.ConversationRead
 {
-    class ConversationRead
+    static class ConversationRead
     {
-
+        const string Path = "conversations.yaml";
+        static List<ConversationYaml> conversations;
         public static void YamlRead()
         {
-            var obj = YamlImporter.Deserialize("conversations.yaml");
-            Console.WriteLine(obj[0].place);
+            conversations = Deserialize(Path);
         }
 
         class ConversationYaml
@@ -47,19 +47,35 @@ namespace Soleil.ConversationRead
             }
         }
 
-        class YamlImporter
+        static List<ConversationYaml> Deserialize(string path)
         {
-            public static List<ConversationYaml> Deserialize(string path)
+            StreamReader sr = new StreamReader(path);
+            string text = sr.ReadToEnd();
+            var input = new StringReader(text);
+            var deserializer = new Deserializer();
+            var deserializeObject = deserializer.Deserialize<List<ConversationYaml>>(input);
+            return deserializeObject;
+        }
+        
+        public static EventBase[] ActionFromData(string place, string conversationName)
+        {
+            var convListInPlace = conversations.Find(s => s.place == place);
+            var targetConv = convListInPlace.conversations.Find(s => s.name == conversationName);
+            var events = targetConv.events;
+            var result = new List<EventBase>();
+            foreach (var e in events)
             {
-                StreamReader sr = new StreamReader(path);
-                string text = sr.ReadToEnd();
-                var input = new StringReader(text);
-                var deserializer = new Deserializer();
-                var deserializeObject = deserializer.Deserialize<List<ConversationYaml>>(input);
-                return deserializeObject;
+                if (e.eventName == "talk")
+                {
+                    // result.Add(new ConversationTalk());
+                    continue;
+                }
+                if (e.eventName == "branch") continue;
             }
+            return result.ToArray();
         }
 
+        /*
         public ConversationRead(string path)
         {
             var _data = File.ReadAllLines(path);
@@ -109,6 +125,8 @@ namespace Soleil.ConversationRead
                 ConversationActivate Activate(string line, string target, ConversationPerson person) 
                     => new ConversationActivate(person, line.Remove(0, target.Length) == "1");
             }
+            
         }
+        */
     }
 }
