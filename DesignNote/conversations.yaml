@@ -1,0 +1,43 @@
+- place: somnia
+  conversations:
+    - name: battle
+      events:
+      - event: person
+        person: lune
+      - event: person
+        person: sunny
+      - event: talk
+        person: lune
+        face: normal
+        text: hello!
+      - event: talk
+        person: sunny
+        face: normal
+        text: hello!hello!
+    - name: for-the-first-time
+      events:
+      - event: talk
+        person: sunny
+        face: smile
+        text: goodby!
+      - event: branch
+        branch-key: test
+        onTrue:
+          - event: talk
+            person: lune
+            face: smile
+            text: it is true
+        onFalse:
+          - event: talk
+            person: sunny
+            face: upset
+            text: it is false
+
+- place: flare
+  conversations:
+    - name: battle
+      events:
+      - event: talk
+        person: lune
+        face: normal
+        text: test
