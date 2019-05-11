@@ -6,11 +6,60 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using YamlDotNet.RepresentationModel;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace Soleil.ConversationRead
 {
     class ConversationRead
     {
+
+        public static void YamlRead()
+        {
+            var obj = YamlImporter.Deserialize("conversations.yaml");
+            Console.WriteLine(obj[0].place);
+        }
+
+        class ConversationYaml
+        {
+            public string place { get; set; }
+            [YamlMember(Alias = "conversations")]
+            public List<ConversationSet> conversations { get; set; }
+            public class ConversationSet
+            {
+                public string name { get; set; }
+                [YamlMember(Alias="events")]
+                public List<YamlEvent> events { get; set; }
+
+                public class YamlEvent
+                {
+                    [YamlMember(Alias = "event")]
+                    public string eventName { get; set; }
+                    public string person { get; set; }
+                    public string face { get; set; }
+                    public string text { get; set; }
+                    [YamlMember(Alias = "branch-key")]
+                    public string branchKey { get; set; }
+                    public List<YamlEvent> onTrue { get; set; }
+                    public List<YamlEvent> onFalse { get; set; }
+                }
+            }
+        }
+
+        class YamlImporter
+        {
+            public static List<ConversationYaml> Deserialize(string path)
+            {
+                StreamReader sr = new StreamReader(path);
+                string text = sr.ReadToEnd();
+                var input = new StringReader(text);
+                var deserializer = new Deserializer();
+                var deserializeObject = deserializer.Deserialize<List<ConversationYaml>>(input);
+                return deserializeObject;
+            }
+        }
+
         public ConversationRead(string path)
         {
             var _data = File.ReadAllLines(path);
