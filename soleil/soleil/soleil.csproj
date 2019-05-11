@@ -69,10 +69,12 @@
     <Compile Include="Event\ChangeMapEvent.cs" />
     <Compile Include="Event\CharacterMoveEvent.cs" />
     <Compile Include="Event\CharacterPictureHolder.cs" />
+    <Compile Include="Event\ConversationEndEvent.cs" />
     <Compile Include="Event\Conversation\ConversationActivate.cs" />
     <Compile Include="Event\Conversation\ConversationChangeFace.cs" />
     <Compile Include="Event\Conversation\ConversationTalk.cs" />
-    <Compile Include="Event\ConversationWindowEvent.cs" />
+    <Compile Include="Event\ConversationInitEvent.cs" />
+    <Compile Include="Event\CreateConversationEvent.cs" />
     <Compile Include="Event\DestroyPictureEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />

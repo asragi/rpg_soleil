@@ -1,6 +1,4 @@
-﻿using Soleil.Event;
-using Soleil.Event.Conversation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +8,7 @@ using YamlDotNet.RepresentationModel;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace Soleil.ConversationRead
+namespace Soleil.Event.Conversation
 {
     static class ConversationRead
     {
@@ -31,7 +29,7 @@ namespace Soleil.ConversationRead
             return deserializeObject;
         }
         
-        public static (ConversationPerson[], EventBase[]) ActionFromData(string place, string conversationName)
+        public static (ConversationPerson[], EventBase[]) ActionFromData(string place, string conversationName, ConversationSystem cs)
         {
             // 会話に登場する人物のリスト
             var personList = new List<ConversationPerson>();
@@ -53,7 +51,7 @@ namespace Soleil.ConversationRead
                     var talker = personList.Find(s => s.Name == e.person);
                     string face = e.face;
                     string text = e.text;
-                    result.Add(new ConversationTalk(talker, text));
+                    result.Add(new ConversationTalk(talker, text, cs));
                     continue;
                 }
                 if (e.eventName == "branch") continue;
