@@ -9,11 +9,11 @@ namespace Soleil.ConversationRead
     class ConversationPerson
     {
         public string Name { get; private set; }
-        public int Position { get; private set; }
-
-        public ConversationPerson(string name, int position)
+        // public int Position { get; private set; }
+        public string Face { get; set; }
+        public ConversationPerson(string name /*, int position*/)
         {
-            (Name, Position) = (name, position);
+            Name = name;
         }
     }
 }
