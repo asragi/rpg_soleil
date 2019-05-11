@@ -29,7 +29,7 @@ namespace Soleil.Event.Conversation
             return deserializeObject;
         }
         
-        public static (ConversationPerson[], EventBase[]) ActionFromData(string place, string conversationName, ConversationSystem cs)
+        public static EventBase[] ActionFromData(string place, string conversationName, ConversationSystem cs)
         {
             // 会話に登場する人物のリスト
             var personList = new List<ConversationPerson>();
@@ -56,7 +56,7 @@ namespace Soleil.Event.Conversation
                 }
                 if (e.eventName == "branch") continue;
             }
-            return (personList.ToArray(), result.ToArray());
+            return result.ToArray();
         }
 
         class ConversationYaml

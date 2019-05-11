@@ -12,14 +12,11 @@ namespace Soleil
     /// </summary>
     class ConversationSystem
     {
-        ConversationPerson[] people;
         public readonly ConversationWindow ConversationWindow;
 
         public ConversationSystem(WindowManager wm)
         {
             ConversationWindow = new ConversationWindow(WindowTag.Conversation, wm);
         }
-
-        public void SetPeople(ConversationPerson[] p) => people = p;
     }
 }
