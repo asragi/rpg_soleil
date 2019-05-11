@@ -72,6 +72,7 @@
     <Compile Include="Event\Conversation\ConversationActivate.cs" />
     <Compile Include="Event\Conversation\ConversationChangeFace.cs" />
     <Compile Include="Event\Conversation\ConversationTalk.cs" />
+    <Compile Include="Event\ConversationWindowEvent.cs" />
     <Compile Include="Event\DestroyPictureEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
@@ -207,8 +208,12 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Window\ConversationWindow.cs" />
+    <Compile Include="Window\IMessageBox.cs" />
+    <Compile Include="Window\MessageBox.cs" />
     <Compile Include="Window\MessageWindow.cs" />
     <Compile Include="Window\SelectableWindow.cs" />
+    <Compile Include="Window\VariableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
     <Compile Include="Window\WindowTag.cs" />

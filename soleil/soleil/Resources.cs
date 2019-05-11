@@ -18,6 +18,9 @@ namespace Soleil
         IndicatorBack,
         BackBar,
 
+        MessageWindow,
+        ConversationWindow,
+
         MenuFront,
         MenuBack,
         MenuLine,
@@ -149,6 +152,7 @@ namespace Soleil
         KkMini,
         KkGoldMini,
         Touhaba,
+        Yasashisa,
         [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
@@ -332,6 +336,9 @@ namespace Soleil
 
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
+            SetPath(TextureID.MessageWindow, UIPath + "message");
+
+            SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
@@ -379,6 +386,8 @@ namespace Soleil
             SetPath(FontID.KkBlackMini, "kkminchoBlackMini");
             SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
             SetPath(FontID.Touhaba, "touhaba");
+            SetPath(FontID.Yasashisa, "yasashisa");
+
 
             //optionPath = Option.FilePath;
             #endregion 

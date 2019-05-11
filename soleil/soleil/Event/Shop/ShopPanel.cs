@@ -13,7 +13,7 @@ namespace Soleil.Event.Shop
         public readonly Vector CurrencyPosDiff = new Vector(5, 12);
         private string desc;
         public override string Desctiption => desc;
-        public override Vector ItemNumPosDiff => base.ItemNumPosDiff - new Vector(35,0); // ちゃんと下揃えを計算するべきだが，面倒くさかった．
+        public override Vector ItemNumPosDiff => base.ItemNumPosDiff - new Vector(30,6); // ちゃんと下揃えを計算するべきだが，面倒くさかった．
         public int Price { get; private set; }
 
         FontImage currency;
@@ -25,7 +25,7 @@ namespace Soleil.Event.Shop
             Price = value;
 
             Val = Price;
-            ValFont = FontID.KkMini;
+            ValFont = FontID.Yasashisa;
             currency = new FontImage(FontID.KkGoldMini, LocalPos + parent.Pos, DepthID.Message, true, 0);
             currency.Text = Map.MoneyWallet.Currency;
         }

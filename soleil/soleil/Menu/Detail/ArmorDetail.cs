@@ -25,8 +25,9 @@ namespace Soleil.Menu.Detail
             :base()
         {
             InitPos = _pos;
-            atkExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos, Space, AtkExpText);
-            defExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos+DefExpPos, Space, ExplainText);
+            var font = DetailWindow.Font;
+            atkExplain = new TextWithVal(font, _pos, Space, AtkExpText);
+            defExplain = new TextWithVal(font, _pos+DefExpPos, Space, ExplainText);
         }
 
         public void Call()

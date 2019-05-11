@@ -33,7 +33,8 @@ namespace Soleil.Menu
             {
                 if (!itemList.HasItem((ItemID)i)) continue;
                 var data = ItemDataBase.Get((ItemID)i);
-                items.Add(new ItemPanel((ItemID)i, itemList, this));
+                var panel = new ItemPanel((ItemID)i, itemList, this, data.OnMenu);
+                items.Add(panel);
             }
             return items.ToArray();
         }

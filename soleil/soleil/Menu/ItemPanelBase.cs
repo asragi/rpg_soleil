@@ -14,8 +14,8 @@ namespace Soleil.Menu
     {
         public readonly ItemID ID;
 
-        public ItemPanelBase(ItemID id, String name, BasicMenu parent)
-            :base(name, parent)
+        public ItemPanelBase(ItemID id, String name, BasicMenu parent, bool active = true)
+            : base(name, parent, active)
         {
             ID = id;
         }

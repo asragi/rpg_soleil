@@ -36,7 +36,7 @@ namespace Soleil.Map
                 new EventSet(
                     new MessageWindowEvent(new Vector(200, 200), 0, "テスト"),
                     new PictureCreateEvent(Misc.CharaName.Lune, 2, PictureHolder),
-                    new MessageWindowEvent(new Vector(200, 200), 0, "こんにちは"),
+                    new MessageWindowEvent(new Vector(200, 200), 0, "こんにちはー"),
                     new DestroyPictureEvent(Misc.CharaName.Lune, PictureHolder),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )

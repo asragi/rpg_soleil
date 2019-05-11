@@ -19,7 +19,7 @@ namespace Soleil.Menu.Detail
         TextWithVal withVal;
         public PossessNum(Vector _pos)
         {
-            withVal = new TextWithVal(FontID.WhiteOutlineGrad, _pos, (int)NumDiff.X);
+            withVal = new TextWithVal(DetailWindow.Font, _pos, (int)NumDiff.X);
         }
 
         void Refresh(SelectablePanel panel)
