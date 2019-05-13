@@ -54,7 +54,13 @@ namespace Soleil.Event.Conversation
                     result.Add(new ConversationTalk(talker, text, face, cs));
                     continue;
                 }
-                if (e.eventName == "branch") continue;
+                if (e.eventName == "branch")
+                {
+                    var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, GlobalBoolSet.GlobalBoolSize);
+                    var key = (GlobalBoolKey)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
+                    Func<bool> func = () => boolSet[(int)key];
+                    // result.Add(new BoolEventBranch(null, func, null, null));
+                }
             }
             return result.ToArray();
         }
@@ -77,8 +83,8 @@ namespace Soleil.Event.Conversation
                     public string person { get; set; }
                     public string face { get; set; }
                     public string text { get; set; }
-                    [YamlMember(Alias = "branch-key")]
-                    public string branchKey { get; set; }
+                    [YamlMember(Alias = "bool-key")]
+                    public string boolKey { get; set; }
                     public List<YamlEvent> onTrue { get; set; }
                     public List<YamlEvent> onFalse { get; set; }
                 }

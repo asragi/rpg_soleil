@@ -8,15 +8,26 @@ namespace Soleil.Event
 {
     enum BoolObject
     {
+        Global,
         // Somnia
         Accessary, // アクセサリー売り
         size,
     }
+
+    enum GlobalBoolKey
+    {
+        // Debug
+        Test,
+
+        size,
+    }
+
     /// <summary>
     /// 揮発しない，あらゆる場面で共有するboolのリスト．
     /// </summary>
     static class GlobalBoolSet
     {
+        public const int GlobalBoolSize = 255;
         static BoolSet[] boolSets;
 
         static GlobalBoolSet()
@@ -24,7 +35,7 @@ namespace Soleil.Event
             boolSets = new BoolSet[(int)BoolObject.size];
         }
 
-        public static BoolSet Get(BoolObject b, int size)
+        public static BoolSet GetBoolSet(BoolObject b, int size)
         {
             var boolSet = boolSets[(int)b];
             // 存在するならそのまま返す．
@@ -38,6 +49,8 @@ namespace Soleil.Event
             boolSets[(int)b] = sets;
             return sets;
         }
+
+        public static bool Get(BoolObject obj, int target) => boolSets[(int)obj][target];
 
         public static void ResetAll() => boolSets = null;
     }
