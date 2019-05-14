@@ -29,40 +29,55 @@ namespace Soleil.Event.Conversation
             return deserializeObject;
         }
         
-        public static EventBase[] ActionFromData(string place, string conversationName, ConversationSystem cs)
+        public static EventSet[] ActionFromData(string place, string conversationName, ConversationSystem cs)
         {
             // 会話に登場する人物のリスト
-            var personList = new List<ConversationPerson>();
+            var _personList = new List<ConversationPerson>();
             // YAMLからデータを気合で取り出す
             var convListInPlace = conversations.Find(s => s.place == place);
             var targetConv = convListInPlace.conversations.Find(s => s.name == conversationName);
-            var events = targetConv.events;
-            var result = new List<EventBase>();
-            foreach (var e in events)
+            var _events = targetConv.events;
+            return CreateEventSet(_events, _personList);
+
+            EventSet[] CreateEventSet(
+                List<ConversationYaml.ConversationSet.YamlEvent> events,
+                List<ConversationPerson> personList)
             {
-                if (e.eventName == "person")
+                var tmpEventSets = new List<EventBase>();
+                var result = new List<EventSet>();
+                foreach (var e in events)
                 {
-                    string name = e.person;
-                    // int position = e.position;
-                    personList.Add(new ConversationPerson(name));
+                    if (e.eventName == "person")
+                    {
+                        string name = e.person;
+                        // int position = e.position;
+                        personList.Add(new ConversationPerson(name));
+                    }
+                    if (e.eventName == "talk")
+                    {
+                        var talker = personList.Find(s => s.Name == e.person);
+                        string face = e.face;
+                        string text = e.text;
+                        tmpEventSets.Add(new ConversationTalk(talker, text, face, cs));
+                        continue;
+                    }
+                    if (e.eventName == "branch")
+                    {
+                        var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, GlobalBoolSet.GlobalBoolSize);
+                        var key = (GlobalBoolKey)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
+                        Func<bool> func = () => boolSet[(int)key];
+
+                        // EventSetの作成を終了し，分岐用EventSetを追加．新しいEventSetの作成を始める．
+                        result.Add(new EventSet(tmpEventSets.ToArray()));
+                        var onTrueEvents = CreateEventSet(e.onTrue, personList);
+                        var onFalseEvents = CreateEventSet(e.onFalse, personList);
+                        var branchSet = new BoolEventBranch(null, func, null, null);
+                        tmpEventSets = new List<EventBase>();
+                    }
                 }
-                if (e.eventName == "talk")
-                {
-                    var talker = personList.Find(s => s.Name == e.person);
-                    string face = e.face;
-                    string text = e.text;
-                    result.Add(new ConversationTalk(talker, text, face, cs));
-                    continue;
-                }
-                if (e.eventName == "branch")
-                {
-                    var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, GlobalBoolSet.GlobalBoolSize);
-                    var key = (GlobalBoolKey)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
-                    Func<bool> func = () => boolSet[(int)key];
-                    // result.Add(new BoolEventBranch(null, func, null, null));
-                }
+                if (tmpEventSets.Count > 0) result.Add(new EventSet(tmpEventSets.ToArray()));
+                return result.ToArray();
             }
-            return result.ToArray();
         }
 
         class ConversationYaml
