@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// Event管理用 Eventのまとまりを表すクラス.
     /// </summary>
-    class EventSet
+    class EventSet: EventUnit
     {
         EventSequence myEventSequence;
         EventBase[] eventsDefault;
