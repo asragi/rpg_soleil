@@ -45,8 +45,7 @@ namespace Soleil.Map.Maps.Somnia
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(values, boolSet, (int)BoolName.Sold),
-                    new BoolSetEvent(preservedBools, (int)BoolName.First, true)
+                    new ShopEvent(values, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
                     new EventUnit[] {
@@ -54,9 +53,19 @@ namespace Soleil.Map.Maps.Somnia
                             new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！"))
                     },
                     new EventUnit[] {
-                    new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな")) }),
-                new EventSet(new ChangeInputFocusEvent(InputFocus.Player))
+                        new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
+                        new EventUnit[]
+                        {
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "残念")),
+                        },
+                        new EventUnit[]{
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな")),
+                        })
+                    }),
+                new EventSet(
+                    new ChangeInputFocusEvent(InputFocus.Player),
+                    new BoolSetEvent(preservedBools, (int)BoolName.First, true)
+                )
             );
         }
 
