@@ -38,7 +38,7 @@
             myEventSet.Next();
         }
 
-        public void Reset()
+        public override void Reset()
         {
             started = false;
         }

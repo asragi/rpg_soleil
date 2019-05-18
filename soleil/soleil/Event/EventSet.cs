@@ -23,7 +23,7 @@ namespace Soleil.Event
             Reset();
         }
 
-        public void Reset()
+        public override void Reset()
         {
             index = 0;
             events = new List<EventBase>();

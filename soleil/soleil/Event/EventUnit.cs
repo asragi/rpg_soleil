@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event
 {
-    class EventUnit
+    abstract class EventUnit
     {
+        public abstract void Reset();
     }
 }

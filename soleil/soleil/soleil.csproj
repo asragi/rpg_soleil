@@ -149,7 +149,6 @@
     <Compile Include="Map\MoneyWallet.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
-    <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
