@@ -43,17 +43,19 @@ namespace Soleil.Skill
     {
         public SkillID ID { get; }
         public AttackType AttackType { get; }
+        public MagicCategory Category { get; }
         public bool OnMenu { get; }
         public bool OnBattle { get; }
         public string Name { get; }
         public string Description { get; }
 
         public MagicData(
-            string name, SkillID id, AttackType type, string desc,
+            string name, SkillID id, MagicCategory category, string desc,
             bool onMenu = false, bool onBattle = true)
         {
-            (ID, AttackType, OnMenu, OnBattle, Name, Description) =
-                (id, type, onMenu, onBattle, name, desc);
+            (ID, Category, OnMenu, OnBattle, Name, Description) =
+                (id, category, onMenu, onBattle, name, desc);
+            AttackType = AttackType.Magical;
         }
     }
 }

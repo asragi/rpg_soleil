@@ -31,14 +31,14 @@ namespace Soleil.Skill
 
         static void SetData()
         {
-            SetMagic("サンダーボルト", SkillID.Thunder, AttackType.Magical, "敵単体へ電撃属性のダメージ．");
-            SetMagic("マジカルヒール", SkillID.MagicalHeal, AttackType.Magical, "味方単体を中量回復．");
-            SetMagic("エクスプロード", SkillID.Explode, AttackType.Magical, "敵全体へ突属性のダメージ．");
+            SetMagic("サンダーボルト", SkillID.Thunder, MagicCategory.Magic, "敵単体へ電撃属性のダメージ．");
+            SetMagic("マジカルヒール", SkillID.MagicalHeal, MagicCategory.Magic, "味方単体を中量回復．");
+            SetMagic("エクスプロード", SkillID.Explode, MagicCategory.Magic, "敵全体へ突属性のダメージ．");
         }
 
-        static void SetMagic(string name, SkillID id, AttackType type, string desc, bool onMenu = false, bool onBattle = true)
+        static void SetMagic(string name, SkillID id, MagicCategory category, string desc, bool onMenu = false, bool onBattle = true)
         {
-            data[(int)id] = new MagicData(name, id, type, desc, onMenu, onBattle);
+            data[(int)id] = new MagicData(name, id, category, desc, onMenu, onBattle);
         }
     }
 }
