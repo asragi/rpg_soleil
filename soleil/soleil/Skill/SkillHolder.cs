@@ -19,6 +19,20 @@ namespace Soleil.Skill
 
         public bool HasSkill(SkillID id) => learnedFlags[(int)id];
 
+        public bool HasCategory(MagicCategory c)
+        {
+            for (int i = 0; i < learnedFlags.Length; i++)
+            {
+                if (!learnedFlags[i]) continue;
+                var data = SkillDataBase.Get((SkillID)i);
+                if (data is MagicData md)
+                {
+                    if (md.Category == c) return true;
+                }
+            }
+            return false;
+        }
+
         public void LearnSkill(SkillID id) => learnedFlags[(int)id] = true;
 
         public void ForgetSkill(SkillID id) => learnedFlags[(int)id] = false;

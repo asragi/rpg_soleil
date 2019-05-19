@@ -24,9 +24,34 @@ namespace Soleil.Menu
             Init();
         }
 
-        public void Init(MagicCategory category)
+        public void InputSide(bool isRight)
         {
-            categoryToDisplay = category;
+            int index = (int)categoryToDisplay;
+            int diff = isRight ? 1 : - 1;
+            index += diff;
+            index += (int)MagicCategory.size;
+            index %= (int)MagicCategory.size;
+            categoryToDisplay = (MagicCategory)index;
+            if (holder.HasCategory(categoryToDisplay))
+            {
+                Init();
+                return;
+            }
+            InputSide(isRight);
+        }
+
+        public override void OnInputRight()
+        {
+            base.OnInputRight();
+            InputSide(true);
+            Console.WriteLine((int)categoryToDisplay);
+        }
+
+        public override void OnInputLeft()
+        {
+            base.OnInputLeft();
+            InputSide(false);
+            Console.WriteLine((int)categoryToDisplay);
         }
 
         protected override SelectablePanel[] MakeAllPanels()
