@@ -9,6 +9,7 @@ namespace Soleil.Skill
     enum SkillID
     {
         // Light
+        PointFlare,
         // Shade
         // Magic
         Thunder,
@@ -31,6 +32,7 @@ namespace Soleil.Skill
 
         static void SetData()
         {
+            SetMagic("ポイントフレア", SkillID.PointFlare, MagicCategory.Sun, "敵単体へ熱属性のダメージ．");
             SetMagic("サンダーボルト", SkillID.Thunder, MagicCategory.Magic, "敵単体へ電撃属性のダメージ．");
             SetMagic("マジカルヒール", SkillID.MagicalHeal, MagicCategory.Magic, "味方単体を中量回復．");
             SetMagic("エクスプロード", SkillID.Explode, MagicCategory.Magic, "敵全体へ突属性のダメージ．");

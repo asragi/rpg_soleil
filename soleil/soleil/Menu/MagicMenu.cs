@@ -9,6 +9,7 @@ namespace Soleil.Menu
 {
     class MagicMenu : BasicMenu
     {
+        MagicCategory categoryToDisplay;
         SkillHolder holder;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
@@ -16,7 +17,16 @@ namespace Soleil.Menu
             // Debug
             holder = new SkillHolder();
             holder.LearnSkill(SkillID.MagicalHeal);
+            holder.LearnSkill(SkillID.Explode);
+            holder.LearnSkill(SkillID.PointFlare);
+            categoryToDisplay = MagicCategory.Sun;
+
             Init();
+        }
+
+        public void Init(MagicCategory category)
+        {
+            categoryToDisplay = category;
         }
 
         protected override SelectablePanel[] MakeAllPanels()
@@ -25,9 +35,12 @@ namespace Soleil.Menu
             for (int i = 0; i < (int)SkillID.size; i++)
             {
                 var id = (SkillID)i;
+                var _data = SkillDataBase.Get(id);
+                if (_data.AttackType != AttackType.Magical) continue;
+                var data = (MagicData)_data;
+                if (data.Category != categoryToDisplay) continue;
                 if (holder.HasSkill(id))
                 {
-                    var data = SkillDataBase.Get(id);
                     magList.Add(new MagicMenuPanel(data.Name, i, this));
                 }
             }
