@@ -23,10 +23,12 @@ namespace Soleil.Menu
             categoryToDisplay = MagicCategory.Sun;
 
             // icon
-            icons = new MagicIcon[7];
+            icons = new MagicIcon[10];
             for (int i = 0; i < icons.Length; i++)
             {
-                icons[i] = new MagicIcon(new Vector(60 + 40 * i, 320), false, this);
+                var category = (MagicCategory)i;
+                var disable = !holder.HasCategory(category);
+                icons[i] = new MagicIcon(new Vector(60 + 40 * i, 320), disable, category, this);
             }
             Init();
         }

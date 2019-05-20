@@ -11,8 +11,16 @@ namespace Soleil.Menu
     class MagicIcon
     {
         static Dictionary<MagicCategory, Color> tmpColors = new Dictionary<MagicCategory, Color>() {
-            { MagicCategory.Sun, Color.Yellow },
-            { MagicCategory.Magic, Color.Purple }
+            { MagicCategory.Sun, Color.Gold },
+            { MagicCategory.Shade, Color.RoyalBlue },
+            { MagicCategory.Magic, Color.DarkOrchid },
+            { MagicCategory.Dark, Color.Crimson },
+            { MagicCategory.Wood, Color.OliveDrab },
+            { MagicCategory.Metal, Color.Orange },
+            { MagicCategory.Sound, Color.PaleVioletRed },
+            { MagicCategory.Shinobi, Color.DarkCyan },
+            { MagicCategory.Space, Color.Gray },
+            { MagicCategory.Time, Color.MidnightBlue },
         };
 
         readonly Vector localPos;
@@ -21,7 +29,7 @@ namespace Soleil.Menu
         bool disabled;
         FontImage tmp;
 
-        public MagicIcon(Vector _localPos, bool disable, BasicMenu _parent)
+        public MagicIcon(Vector _localPos, bool disable, MagicCategory c, BasicMenu _parent)
         {
             parent = _parent;
             localPos = _localPos;
@@ -29,7 +37,7 @@ namespace Soleil.Menu
             disabled = disable;
             tmp = new FontImage(FontID.Yasashisa, pos, DepthID.Message);
             tmp.Text = disabled ? "・" : "●";
-            tmp.Color = Color.Yellow;
+            tmp.Color = tmpColors[c];
         }
 
         public void Update()
