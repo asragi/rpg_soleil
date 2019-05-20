@@ -44,14 +44,20 @@ namespace Soleil.Menu
         {
             base.OnInputRight();
             InputSide(true);
-            Console.WriteLine((int)categoryToDisplay);
+            RefreshIndex();
         }
 
         public override void OnInputLeft()
         {
             base.OnInputLeft();
             InputSide(false);
-            Console.WriteLine((int)categoryToDisplay);
+            RefreshIndex();
+        }
+
+        private void RefreshIndex()
+        {
+            Index = MathEx.Clamp(Index, AllPanels.Length - 1, 0);
+            RefreshSelected();
         }
 
         protected override SelectablePanel[] MakeAllPanels()
