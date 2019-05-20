@@ -25,7 +25,7 @@ namespace Soleil.Menu
 
         readonly Vector localPos;
         BasicMenu parent;
-        public bool IsSelected;
+        bool isSelected;
         bool disabled;
         FontImage tmp;
 
@@ -36,8 +36,16 @@ namespace Soleil.Menu
             var pos = localPos + _parent.Pos;
             disabled = disable;
             tmp = new FontImage(FontID.Yasashisa, pos, DepthID.Message);
-            tmp.Text = disabled ? "・" : "●";
+            tmp.Text = disabled ? "・" : "〇";
             tmp.Color = tmpColors[c];
+        }
+
+        public bool IsSelected {
+            set
+            {
+                isSelected = value;
+                if (!disabled) tmp.Text = isSelected ? "●" : "〇";
+            }
         }
 
         public void Update()

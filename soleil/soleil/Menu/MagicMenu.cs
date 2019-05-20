@@ -14,7 +14,7 @@ namespace Soleil.Menu
 
         // index表示
         const int IconXInitial = 50;
-        const int IconXEnd = 360;
+        const int IconXEnd = 350;
         MagicIcon[] icons;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
@@ -24,6 +24,7 @@ namespace Soleil.Menu
             holder.LearnSkill(SkillID.MagicalHeal);
             holder.LearnSkill(SkillID.Explode);
             holder.LearnSkill(SkillID.PointFlare);
+            holder.LearnSkill(SkillID.Sonicboom);
             categoryToDisplay = MagicCategory.Sun;
 
             // icon
@@ -35,7 +36,19 @@ namespace Soleil.Menu
                 var disable = !holder.HasCategory(category);
                 icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), disable, category, this);
             }
+            categoryToDisplay = DecideInitialPosition();
+            ChangeMagicIconState();
             Init();
+
+            MagicCategory DecideInitialPosition()
+            {
+                for (int i = 0; i < (int)MagicCategory.size; i++)
+                {
+                    var c = (MagicCategory)i;
+                    if (holder.HasCategory(c)) return c;
+                }
+                return 0;
+            }
         }
 
         public void InputSide(bool isRight)
@@ -49,9 +62,18 @@ namespace Soleil.Menu
             if (holder.HasCategory(categoryToDisplay))
             {
                 Init();
+                ChangeMagicIconState();
                 return;
             }
             InputSide(isRight);
+        }
+
+        private void ChangeMagicIconState()
+        {
+            for (int i = 0; i < icons.Length; i++)
+            {
+                icons[i].IsSelected = (int)categoryToDisplay == i;
+            }
         }
 
         public override void OnInputRight()
