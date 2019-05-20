@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,15 @@ namespace Soleil.Menu
     class MagicMenuPanel : TextSelectablePanel
     {
         public readonly Vector CostPosDiff = new Vector(300, 0);
-        public override string Desctiption => ItemName;
+        public override string Desctiption => desc;
+        private string desc;
 
-        public MagicMenuPanel(String itemName, int num, MagicMenu parent)
-            : base(itemName, parent)
+        public MagicMenuPanel(ISkill data, MagicMenu parent)
+            : base(data.Name, parent)
         {
             // itemNum
-            Val = num;
+            Val = (int)data.ID;
+            desc = data.Description;
             LocalPos = Vector.Zero;
         }
     }

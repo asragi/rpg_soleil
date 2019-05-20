@@ -14,7 +14,7 @@ namespace Soleil.Menu
 
         // index表示
         const int IconXInitial = 50;
-        const int IconXEnd = 350;
+        const int IconXEnd = 360;
         MagicIcon[] icons;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
@@ -108,7 +108,7 @@ namespace Soleil.Menu
                 if (data.Category != categoryToDisplay) continue;
                 if (holder.HasSkill(id))
                 {
-                    magList.Add(new MagicMenuPanel(data.Name, i, this));
+                    magList.Add(new MagicMenuPanel(data, this));
                 }
             }
             return magList.ToArray();
