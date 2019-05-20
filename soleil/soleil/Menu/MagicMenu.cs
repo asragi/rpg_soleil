@@ -11,6 +11,10 @@ namespace Soleil.Menu
     {
         MagicCategory categoryToDisplay;
         SkillHolder holder;
+
+        // index表示
+        const int IconXInitial = 50;
+        const int IconXEnd = 360;
         MagicIcon[] icons;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
@@ -24,11 +28,12 @@ namespace Soleil.Menu
 
             // icon
             icons = new MagicIcon[10];
+            var iconSpace = (IconXEnd - IconXInitial) / (icons.Length - 1);
             for (int i = 0; i < icons.Length; i++)
             {
                 var category = (MagicCategory)i;
                 var disable = !holder.HasCategory(category);
-                icons[i] = new MagicIcon(new Vector(60 + 40 * i, 320), disable, category, this);
+                icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), disable, category, this);
             }
             Init();
         }
