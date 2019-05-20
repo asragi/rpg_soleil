@@ -11,6 +11,7 @@ namespace Soleil.Menu
     {
         MagicCategory categoryToDisplay;
         SkillHolder holder;
+        MagicIcon[] icons;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
@@ -21,6 +22,12 @@ namespace Soleil.Menu
             holder.LearnSkill(SkillID.PointFlare);
             categoryToDisplay = MagicCategory.Sun;
 
+            // icon
+            icons = new MagicIcon[7];
+            for (int i = 0; i < icons.Length; i++)
+            {
+                icons[i] = new MagicIcon(new Vector(60 + 40 * i, 320), false, this);
+            }
             Init();
         }
 
@@ -76,6 +83,18 @@ namespace Soleil.Menu
                 }
             }
             return magList.ToArray();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            icons.ForEach2(s => s.Update());
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            icons.ForEach2(s => s.Draw(d));
         }
     }
 }
