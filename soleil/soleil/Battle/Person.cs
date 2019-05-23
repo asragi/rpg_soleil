@@ -1,4 +1,5 @@
 ﻿using Soleil.Battle;
+using Soleil.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,13 @@ namespace Soleil
     /// </summary>
     class Person
     {
-        readonly public string Name;
+        readonly public CharaName Name;
         public AbilityScore Score { get; private set; }
         readonly public EquipSet Equip;
 
-        public Person(AbilityScore _score)
+        public Person(CharaName name, AbilityScore _score)
         {
+            Name = name;
             Score = _score;
             Equip = new EquipSet();
         }

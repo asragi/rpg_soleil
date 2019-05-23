@@ -33,15 +33,17 @@ namespace Soleil.Map
 
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
+        protected PersonParty Party;
 
-        public MapBase(MapName _name)
+        public MapBase(MapName _name, PersonParty _party)
         {
             om = new ObjectManager();
             MapData = new MapData(_name);
             MapData.SetMapFlag();
             bm = new BoxManager(MapData, player);
             player = new PlayerObject(om, bm);
-            menuSystem = new MenuSystem();
+            Party = _party;
+            menuSystem = new MenuSystem(_party);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
             mapInputManager.SetMenuSystem(menuSystem);

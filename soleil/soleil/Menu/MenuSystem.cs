@@ -85,7 +85,7 @@ namespace Soleil.Menu
             TextureID.MenuSave2
         };
 
-        public MenuSystem()
+        public MenuSystem(PersonParty party)
             :base(null)
         {
             Index = 0;
