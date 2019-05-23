@@ -56,7 +56,9 @@
     <Compile Include="Battle\BattleQueue.cs" />
     <Compile Include="Battle\ConditionedEffect.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
+    <Compile Include="Battle\EquipSet.cs" />
     <Compile Include="Battle\MagicField.cs" />
+    <Compile Include="Battle\Person.cs" />
     <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
@@ -189,7 +191,9 @@
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\TextSelectablePanel.cs" />
+    <Compile Include="Misc\CharacterData.cs" />
     <Compile Include="Misc\CharaName.cs" />
+    <Compile Include="Misc\PersonParty.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />

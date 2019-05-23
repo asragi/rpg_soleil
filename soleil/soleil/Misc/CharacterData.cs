@@ -8,10 +8,10 @@ namespace Soleil.Misc
 {
     struct CharacterData
     {
-        public string Name;
+        readonly public CharaName Name;
         public AbilityScore InitialScore;
         public int[] GainRate; // パラメータ成長率
-        public CharacterData(string name, AbilityScore init)
+        public CharacterData(CharaName name, AbilityScore init)
         {
             GainRate = new int[4];
             (Name, InitialScore) = (name, init);
@@ -28,8 +28,8 @@ namespace Soleil.Misc
             CharacterData[] SetData()
             {
                 var d = new CharacterData[(int)CharaName.size];
-                d[(int)CharaName.Lune] = new CharacterData("ルーネ", new AbilityScore());
-                d[(int)CharaName.Sunny] = new CharacterData("サニィ", new AbilityScore());
+                d[(int)CharaName.Lune] = new CharacterData(CharaName.Lune, new AbilityScore());
+                d[(int)CharaName.Sunny] = new CharacterData(CharaName.Sunny, new AbilityScore());
                 return d;
             }
         }
