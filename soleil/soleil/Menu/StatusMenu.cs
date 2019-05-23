@@ -14,8 +14,6 @@ namespace Soleil.Menu
         const int PanelY = 120;
 
         MenuCharacterPanel[] menuCharacterPanels;
-        readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
-        PersonParty party;
         readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
             {CharaName.Lune, TextureID.MenuLune }, {CharaName.Sunny, TextureID.MenuSun}
         };
