@@ -16,12 +16,14 @@ namespace Soleil
         readonly public CharaName Name;
         public AbilityScore Score { get; private set; }
         readonly public EquipSet Equip;
+        public bool InParty;
 
         public Person(CharaName name, AbilityScore _score)
         {
             Name = name;
             Score = _score;
             Equip = new EquipSet();
+            InParty = true; // debug
         }
     }
 }

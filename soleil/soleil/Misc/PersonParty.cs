@@ -22,6 +22,23 @@ namespace Soleil
             return allCharacters[(int)name];
         }
 
+        public int GetPartyNum()
+        {
+            return 2;
+        }
+
+        public Person[] GetActiveMembers()
+        {
+            var result = new List<Person>();
+            for (int i = 0; i < allCharacters.Length; i++)
+            {
+                var target = allCharacters[i];
+                if (!target.InParty) continue;
+                result.Add(target);
+            }
+            return result.ToArray();
+        }
+
         public void ReadData()
         {
             // TODO: セーブデータから読み込み
