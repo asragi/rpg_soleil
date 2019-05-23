@@ -35,7 +35,7 @@ namespace Soleil.Menu
                 int space = spaceNum != 0 ? (PanelRight - PanelLeft) / spaceNum : 0;
                 for (int i = 0; i < target.Length; i++)
                 {
-                    panels[i] = new MenuCharacterPanel(new Vector(PanelLeft + space * i, PanelY), texDict[target[i].Name]);
+                    panels[i] = new MenuCharacterPanel(target[i], new Vector(PanelLeft + space * i, PanelY), texDict[target[i].Name]);
                 }
                 return panels;
             }

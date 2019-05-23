@@ -21,20 +21,12 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText;
 
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
-        public MenuCharacterPanel(Vector _pos, TextureID textureID)
+        public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
         {
             pos = _pos;
             int hp, mp;
-            if(textureID == TextureID.MenuLune) // DEBUG
-            {
-                hp = 297;
-                mp = 834;
-            }
-            else
-            {
-                hp = 654;
-                mp = 425;
-            }
+            hp = p.Score.HPMAX;
+            mp = p.Score.MPMAX;
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, Vector.Zero, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
