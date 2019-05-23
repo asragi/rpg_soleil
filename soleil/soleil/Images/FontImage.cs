@@ -42,6 +42,7 @@ namespace Soleil
             outline = outline ?? new Outline(this, diff, PosDiff, DepthID, IsStatic);
             outline.Color = OutlineColor;
             outline.IsVisible = activate;
+            outline.Text = Text;
         }
 
         public override void Update()

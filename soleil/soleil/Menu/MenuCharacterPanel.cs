@@ -17,8 +17,8 @@ namespace Soleil.Menu
         const int SpaceVal = 60; // "HP"とHPvalueのx方向表示距離
         Vector pos;
         UIImage faceImg;
-        FontImage hpText, mpText;
-        FontImage hpNumText, mpNumText;
+        FontImage hpText, mpText, lvText;
+        FontImage hpNumText, mpNumText, lvNumText;
 
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
@@ -33,17 +33,25 @@ namespace Soleil.Menu
             var font = FontID.Yasashisa;
             hpText = new FontImage(font, pos + HPPos, DepthID.MenuBottom, true, 0);
             mpText = new FontImage(font, pos + HPPos + new Vector(0, SpaceHPMP), DepthID.MenuBottom, true, 0);
+            lvText = new FontImage(font, pos + HPPos + new Vector(30, -SpaceHPMP), DepthID.MenuBottom);
             hpText.Text = "HP";
             mpText.Text = "MP";
+            lvText.Text = "Lv";
             hpText.ActivateOutline(1);
             mpText.ActivateOutline(1);
+            lvText.ActivateOutline(1);
             hpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal,0), DepthID.MenuBottom, true, 0);
             mpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
+            lvNumText = new FontImage(font, pos + HPPos + new Vector(80, -SpaceHPMP), DepthID.MenuBottom);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
+            lvNumText.Text = "3";
             hpNumText.Color = ColorPalette.GlayBlue;
             mpNumText.Color = ColorPalette.GlayBlue;
-            AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText });
+            hpNumText.ActivateOutline(1);
+            mpNumText.ActivateOutline(1);
+            lvNumText.ActivateOutline(1);
+            AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
         }
     }
 }
