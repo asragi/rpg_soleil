@@ -12,6 +12,7 @@ namespace Soleil
     /// </summary>
     class Person
     {
+        readonly public string Name;
         public AbilityScore Score { get; private set; }
         readonly public EquipSet Equip;
 
