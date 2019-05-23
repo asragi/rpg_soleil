@@ -75,20 +75,16 @@ namespace Soleil.Item
     /// </summary>
     struct AttrDef
     {
-        public int Heat;
-        public int Thunder;
-        public int Ice;
-        public int Blow;
-        public int Slash;
-        public int Thrust;
+        public int[] Values;
         public AttrDef(int heat=0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
         {
-            Heat = heat;
-            Thunder = thunder;
-            Ice = ice;
-            Blow = blow;
-            Slash = slash;
-            Thrust = thrust;
+            Values = new int[(int)AttackAttribution.size];
+            Values[(int)AttackAttribution.Fever] = heat;
+            Values[(int)AttackAttribution.Electro] = thunder;
+            Values[(int)AttackAttribution.Ice] = ice;
+            Values[(int)AttackAttribution.Beat] = blow;
+            Values[(int)AttackAttribution.Cut] = slash;
+            Values[(int)AttackAttribution.Thrust] = thrust;
         }
     }
 
