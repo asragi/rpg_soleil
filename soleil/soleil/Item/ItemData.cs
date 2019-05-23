@@ -68,6 +68,12 @@ namespace Soleil.Item
             PhysicalAttr = _pAttr ?? new AttrDef();
             MagicalAttr = _mAttr ?? new AttrDef();
         }
+
+        public int GetDefVal(AttackAttribution attr, string t)
+        {
+            if (t == "phisical") return Physical + PhysicalAttr.Values[(int)attr];
+            return Magical + MagicalAttr.Values[(int)attr];
+        }
     }
 
     /// <summary>
