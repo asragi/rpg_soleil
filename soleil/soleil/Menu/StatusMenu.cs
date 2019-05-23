@@ -9,9 +9,9 @@ namespace Soleil.Menu
 {
     class StatusMenu : MenuChild
     {
-        const int PanelLeft = 290;
-        const int PanelRight = 590;
-        const int PanelY = 120;
+        const int PanelLeft = 368;
+        const int PanelRight = 696;
+        const int PanelY = 130;
 
         MenuCharacterPanel[] menuCharacterPanels;
         readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
