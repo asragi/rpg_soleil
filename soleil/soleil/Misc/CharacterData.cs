@@ -30,6 +30,7 @@ namespace Soleil.Misc
                 var d = new CharacterData[(int)CharaName.size];
                 d[(int)CharaName.Lune] = new CharacterData(CharaName.Lune, new AbilityScore());
                 d[(int)CharaName.Sunny] = new CharacterData(CharaName.Sunny, new AbilityScore());
+                d[(int)CharaName.Tella] = new CharacterData(CharaName.Tella, new AbilityScore());
                 return d;
             }
         }

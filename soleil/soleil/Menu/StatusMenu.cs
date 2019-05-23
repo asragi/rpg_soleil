@@ -15,7 +15,8 @@ namespace Soleil.Menu
 
         MenuCharacterPanel[] menuCharacterPanels;
         readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
-            {CharaName.Lune, TextureID.MenuLune }, {CharaName.Sunny, TextureID.MenuSun}
+            {CharaName.Lune, TextureID.MenuLune }, {CharaName.Sunny, TextureID.MenuSun},
+            {CharaName.Tella, TextureID.MenuTella }
         };
 
         int index;

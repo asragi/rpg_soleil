@@ -44,8 +44,10 @@ namespace Soleil
             // TODO: セーブデータから読み込み
             var a = new AbilityScore(70, 180, 5, 5, 44, 5);
             var b = new AbilityScore(220, 120, 22, 18, 22, 20);
+            var c = new AbilityScore(160, 80, 13, 24, 12, 14);
             allCharacters[(int)CharaName.Lune] = new Person(CharaName.Lune, a);
             allCharacters[(int)CharaName.Sunny] = new Person(CharaName.Sunny, b);
+            allCharacters[(int)CharaName.Tella] = new Person(CharaName.Tella, b);
         }
     }
 }

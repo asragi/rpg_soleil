@@ -10,6 +10,7 @@ namespace Soleil.Misc
     {
         Lune,
         Sunny,
+        Tella,
         size
     }
 }
