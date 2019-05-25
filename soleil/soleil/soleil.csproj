@@ -113,6 +113,7 @@
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\ImageManager.cs" />
+    <Compile Include="Images\RightAlignText.cs" />
     <Compile Include="Images\TextWithVal.cs" />
     <Compile Include="Images\UIImage.cs" />
     <Compile Include="Images\UIImageBase.cs" />

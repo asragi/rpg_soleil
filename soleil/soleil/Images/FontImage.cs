@@ -16,12 +16,15 @@ namespace Soleil
     {
         public FontID Font { get; set; }
         private string text;
-        public string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
-        public override Vector GetSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
+        public virtual string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
+        public override Vector ImageSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
         public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
 
         // Outline
         private Outline outline;
+
+        // RightAlign
+        private bool rightAlign;
 
         /// <summary>
         /// ImageManagerから作る.
@@ -43,6 +46,27 @@ namespace Soleil
             outline.Color = OutlineColor;
             outline.IsVisible = activate;
             outline.Text = Text;
+        }
+
+        public void RightAlign(bool activate)
+        {
+            rightAlign = activate;
+            RefreshTextPos();
+        }
+
+        private void RefreshTextPos()
+        {
+            Vector basePos;
+            if (rightAlign)
+            {
+                basePos = InitPos - ImageSize;
+            }
+            else
+            {
+                basePos = InitPos;
+            }
+            basePos += PosDiff;
+            Pos = basePos;
         }
 
         public override void Update()
@@ -69,6 +93,7 @@ namespace Soleil
             base.Quit();
             outline?.Quit();
         }
+
 
         /// <summary>
         /// 枠線を外側に表示するためのクラス内クラス

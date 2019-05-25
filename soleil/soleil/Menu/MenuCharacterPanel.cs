@@ -14,7 +14,7 @@ namespace Soleil.Menu
         readonly Vector FaceImgPos = new Vector(0, 0);
         readonly Vector HPPos = new Vector(18, 260);
         const int SpaceHPMP = 27; // HP表示とMP表示のy方向距離
-        const int SpaceVal = 60; // "HP"とHPvalueのx方向表示距離
+        const int SpaceVal = 105; // "HP"とHPvalueのx方向表示距離
         Vector pos;
         UIImage faceImg;
         FontImage hpText, mpText, lvText;
@@ -40,9 +40,9 @@ namespace Soleil.Menu
             hpText.ActivateOutline(1);
             mpText.ActivateOutline(1);
             lvText.ActivateOutline(1);
-            hpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal,0), DepthID.MenuBottom, true, 0);
-            mpNumText = new FontImage(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), DepthID.MenuBottom, true, 0);
-            lvNumText = new FontImage(font, pos + HPPos + new Vector(80, -SpaceHPMP), DepthID.MenuBottom);
+            hpNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal,0), Vector.Zero, DepthID.MenuBottom);
+            mpNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), Vector.Zero, DepthID.MenuBottom);
+            lvNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, -SpaceHPMP), Vector.Zero, DepthID.MenuBottom);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
             lvNumText.Text = "3";

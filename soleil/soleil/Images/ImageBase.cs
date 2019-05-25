@@ -15,7 +15,7 @@ namespace Soleil
         public float Angle { get; set; }
         protected bool IsStatic;
         public bool IsDead { get; set; }
-        public abstract Vector GetSize { get; }
+        public abstract Vector ImageSize { get; }
         // Alpha
         public float Alpha { get; set; }
         private int alphaFrame;
