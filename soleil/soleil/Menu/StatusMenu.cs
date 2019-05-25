@@ -60,15 +60,36 @@ namespace Soleil.Menu
 
         public int GetIndex() => index;
 
+        public void CallCursor() => cursor.Call();
+        public void QuitCursor() => cursor.Quit();
+
         // Input
         public override void OnInputRight() {
             index++;
-            index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+            AdjustIndex();
         }
 
         public override void OnInputLeft() {
             index--;
+            AdjustIndex();
+        }
+
+        private void AdjustIndex()
+        {
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+            cursor.MoveTo(index);
+        }
+
+        public override void Update()
+        {
+            cursor.Update();
+            base.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            cursor.Draw(d);
+            base.Draw(d);
         }
     }
 }

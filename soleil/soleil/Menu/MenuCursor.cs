@@ -14,12 +14,36 @@ namespace Soleil.Menu
         {
             positions = destinations;
             img = new UIImage(id, destinations[0], Vector.Zero, DepthID.MenuBottom);
-            AddComponents(new[] { img });
         }
 
         public void MoveTo(int index)
         {
-            img.MoveTo(positions[index], img.FadeSpeed, MenuSystem.EaseFunc);
+            //img.MoveTo(positions[index], 15, MenuSystem.EaseFunc);
+            img.Pos = positions[index];
+        }
+
+        public override void Call()
+        {
+            base.Call();
+            img.Call(false);
+        }
+
+        public override void Quit()
+        {
+            base.Quit();
+            img.Quit(false);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            img.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            img.Draw(d);
         }
     }
 }

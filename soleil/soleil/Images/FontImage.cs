@@ -119,7 +119,6 @@ namespace Soleil
             public void Draw(Drawing d)
             {
                 if (IsVisible) outlineTexts.ForEach2(s => s.Draw(d));
-                Console.WriteLine(IsVisible);
             }
         }
     }
