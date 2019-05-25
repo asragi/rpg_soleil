@@ -19,23 +19,40 @@ namespace Soleil.Menu
             {CharaName.Tella, TextureID.MenuTella }
         };
 
+        MenuCursor cursor;
         int index;
+
         public StatusMenu(PersonParty _party, MenuSystem parent)
             :base(parent)
         {
             index = 0;
-            menuCharacterPanels = MakePanels(_party);
+
+            var people = _party.GetActiveMembers();
+            int size = people.Length;
+            Vector[] positions = Positions(size);
+            cursor = new MenuCursor(TextureID.MenuStatusCursor, positions);
+            menuCharacterPanels = MakePanels(people, positions);
             AddComponents(menuCharacterPanels);
 
-            MenuCharacterPanel[] MakePanels(PersonParty party)
+            Vector[] Positions(int num)
             {
-                var target = party.GetActiveMembers();
-                var panels = new MenuCharacterPanel[target.Length];
-                int spaceNum = target.Length - 1;
+                var result = new Vector[num];
+                int spaceNum = num - 1;
                 int space = spaceNum != 0 ? (PanelRight - PanelLeft) / spaceNum : 0;
+                for (int i = 0; i < num; i++)
+                {
+                    result[i] = new Vector(PanelLeft + space * i, PanelY);
+                }
+                return result;
+            }
+
+            MenuCharacterPanel[] MakePanels(Person[] _people, Vector[] pos)
+            {
+                var target = _people;
+                var panels = new MenuCharacterPanel[target.Length];
                 for (int i = 0; i < target.Length; i++)
                 {
-                    panels[i] = new MenuCharacterPanel(target[i], new Vector(PanelLeft + space * i, PanelY), texDict[target[i].Name]);
+                    panels[i] = new MenuCharacterPanel(target[i], pos[i], texDict[target[i].Name]);
                 }
                 return panels;
             }

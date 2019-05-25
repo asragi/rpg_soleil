@@ -163,6 +163,7 @@
     <Compile Include="Menu\ItemPanelBase.cs" />
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
+    <Compile Include="Menu\MenuCursor.cs" />
     <Compile Include="Menu\StatusSelect\ItemTargetSelect.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
     <Compile Include="Menu\MagicMenuPanel.cs" />
