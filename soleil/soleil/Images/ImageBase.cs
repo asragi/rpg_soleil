@@ -24,6 +24,9 @@ namespace Soleil
         bool fadeIn;
 
         // Easing
+        public int FrameWait { private get; set; } = 0;
+        private int alphaFrameWait;
+        private int moveFrameWait;
         private Vector targetPos;
         private Vector startPos;
         private int easeFrame;
@@ -43,6 +46,7 @@ namespace Soleil
         {
             Alpha = (isFadeIn) ? 0 : 1;
             alphaFrame = 0;
+            alphaFrameWait = FrameWait;
             alphaDuration = duration;
             alphaEaseFunc = _easeFunc;
             fadeIn = isFadeIn;
@@ -53,6 +57,7 @@ namespace Soleil
             targetPos = target;
             startPos = Pos;
             easeFrame = 0;
+            moveFrameWait = FrameWait;
             easeDuration = duration;
             easeFunc = _easeFunc;
         }
@@ -68,20 +73,34 @@ namespace Soleil
 
         private void Easing()
         {
+            if (moveFrameWait > 0)
+            {
+                moveFrameWait--;
+                return;
+            }
             if (easeFrame >= easeDuration) return;
             if (easeFunc == null) return;
             var x = easeFunc(easeFrame, easeDuration, targetPos.X, startPos.X);
             var y = easeFunc(easeFrame, easeDuration, targetPos.Y, startPos.Y);
             Pos = new Vector(x, y);
             easeFrame++;
+
+            if (easeFrame >= easeDuration) Pos = targetPos;
         }
 
         private void FadeUpdate()
         {
+            if (alphaFrameWait > 0)
+            {
+                alphaFrameWait--;
+                return;
+            }
             if (alphaFrame >= alphaDuration) return;
             if (alphaEaseFunc == null) return;
             Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
             alphaFrame++;
+
+            if (easeFrame >= easeDuration) Alpha = fadeIn ? 1 : 0;
         }
     }
 }
