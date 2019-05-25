@@ -53,6 +53,7 @@ namespace Soleil.Menu
                 for (int i = 0; i < target.Length; i++)
                 {
                     panels[i] = new MenuCharacterPanel(target[i], pos[i], texDict[target[i].Name]);
+                    panels[i].FrameWait = 5 * i;
                 }
                 return panels;
             }

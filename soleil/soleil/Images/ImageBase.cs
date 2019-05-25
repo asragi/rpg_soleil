@@ -24,7 +24,7 @@ namespace Soleil
         bool fadeIn;
 
         // Easing
-        public int FrameWait { private get; set; } = 0;
+        public virtual int FrameWait { private get; set; } = 0;
         private int alphaFrameWait;
         private int moveFrameWait;
         private Vector targetPos;

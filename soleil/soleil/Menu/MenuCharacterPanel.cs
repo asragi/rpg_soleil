@@ -21,6 +21,18 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText, lvNumText;
         readonly Vector posDiff = new Vector(50, 0);
 
+        public int FrameWait
+        {
+            set
+            {
+                var target = new ImageBase[] { faceImg, hpText, mpText, lvText, hpNumText, mpNumText, lvNumText };
+                foreach (var item in target)
+                {
+                    item.FrameWait = value;
+                }
+            }
+        }
+
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
         {

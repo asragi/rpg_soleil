@@ -26,6 +26,8 @@ namespace Soleil
         // RightAlign
         private bool rightAlign;
 
+        public override int FrameWait { set { base.FrameWait = value; outline?.FrameWait(value); } }
+
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
@@ -107,6 +109,8 @@ namespace Soleil
             readonly Vector[] diffs;
             readonly FontImage[] outlineTexts;
             static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+
+            public void FrameWait(int frame) => outlineTexts.ForEach2(s => s.FrameWait = frame);
 
             public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
             {
