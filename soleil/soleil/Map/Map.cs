@@ -27,6 +27,7 @@ namespace Soleil.Map
         protected MapData MapData;
         MenuSystem menuSystem;
         protected CharacterPictureHolder PictureHolder;
+        protected ConversationSystem ConversationSystem;
 
         protected EventSequence[] EventSequences;
         private bool started;
@@ -36,6 +37,7 @@ namespace Soleil.Map
 
         public MapBase(MapName _name)
         {
+            var wm = WindowManager.GetInstance();
             om = new ObjectManager();
             MapData = new MapData(_name);
             MapData.SetMapFlag();
@@ -47,6 +49,7 @@ namespace Soleil.Map
             mapInputManager.SetMenuSystem(menuSystem);
             MapCameraManager = new MapCameraManager(player);
             PictureHolder = new CharacterPictureHolder();
+            ConversationSystem = new ConversationSystem(wm);
         }
 
         protected virtual void Start()
