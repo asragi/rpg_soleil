@@ -3,7 +3,7 @@
     /// <summary>
     /// Event類の基底クラス
     /// </summary>
-    abstract class EventBase
+    abstract class EventBase: EventUnit
     {
         bool started;
         EventSet myEventSet;
@@ -38,7 +38,7 @@
             myEventSet.Next();
         }
 
-        public void Reset()
+        public override void Reset()
         {
             started = false;
         }

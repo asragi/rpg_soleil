@@ -71,6 +71,7 @@
     <Compile Include="Event\EventBranch.cs" />
     <Compile Include="Event\EventSequence.cs" />
     <Compile Include="Event\EventSequenceIterator.cs" />
+    <Compile Include="Event\EventUnit.cs" />
     <Compile Include="Event\FadeInEvent.cs" />
     <Compile Include="Event\FadeOutEvent.cs" />
     <Compile Include="Event\GlobalBoolSet.cs" />
@@ -148,7 +149,6 @@
     <Compile Include="Map\MoneyWallet.cs" />
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
-    <Compile Include="Map\Maps\TestMaps\Objects\TestObject2.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />

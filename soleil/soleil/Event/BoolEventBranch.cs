@@ -5,9 +5,9 @@ namespace Soleil.Event
     class BoolEventBranch
         :EventBranch
     {
-        EventSet trueSet, falseSet;
+        EventUnit[] trueSet, falseSet;
         Func<bool> condition;
-        public BoolEventBranch(EventSequence es, Func<bool> _condition, EventSet _trueSet, EventSet _falseSet)
+        public BoolEventBranch(EventSequence es, Func<bool> _condition, EventUnit[] _trueSet, EventUnit[] _falseSet)
             :base(es)
         {
             trueSet = _trueSet;
@@ -15,7 +15,7 @@ namespace Soleil.Event
             condition = _condition;
         }
 
-        protected override EventSet DecideEventSet()
+        protected override EventUnit[] DecideEventSet()
         {
             return (condition()) ? trueSet : falseSet;
         }
