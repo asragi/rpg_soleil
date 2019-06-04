@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Soleil.Images;
 using Soleil.Menu;
 using System;
 using System.Collections.Generic;
@@ -11,35 +12,62 @@ namespace Soleil.UI
     class UIGauge: MenuComponent
     {
         public Vector Pos { get; set; }
-        int width, height;
-        double rate;
         bool isRightSideEnd;
 
-        DepthID depth;
+        BarBlock barBlock;
 
-        Vector drawsize;
-
-        public UIGauge(Vector pos, int _width, int _height, bool _isRightRideRnd, double initRate = 1.0)
+        public UIGauge(Vector pos, Vector size, bool _isRightRideRnd, DepthID _depth, double initRate = 1.0)
         {
             Pos = pos;
-            (width, height, isRightSideEnd, rate) = (_width, _height, _isRightRideRnd, initRate);
+            barBlock = new BarBlock(pos, Vector.Zero, size, _depth);
         }
 
-        public void Refresh()
+        public void Refresh(double _rate) => barBlock.Rate = _rate;
+
+        public override void Call()
         {
-            drawsize = new Vector(width * rate, height);
+            base.Call();
+            barBlock.Call();
         }
 
-        public void Refresh(double _rate)
+        public override void Quit()
         {
-            rate = _rate;
-            Refresh();
+            base.Quit();
+            barBlock.Quit();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            barBlock.Update();
         }
 
         public override void Draw(Drawing d)
         {
             base.Draw(d);
-            d.DrawBox(Pos, drawsize, Color.White, depth);
+            barBlock.Draw(d);
+        }
+
+        class BarBlock : UIImageBase
+        {
+            Vector size;
+            double rate;
+            public double Rate { get => rate; set { rate = value; drawsize = new Vector(size.X * rate, size.Y); } }
+            Vector drawsize;
+
+            public BarBlock(Vector pos, Vector posdiff, Vector _size, DepthID depth)
+                :base(pos, posdiff, depth, false, true, 0)
+            {
+                size = _size;
+                Rate = 1;
+            }
+
+            public override Vector GetSize => size;
+
+            public override void Draw(Drawing d)
+            {
+                d.DrawBox(Pos, drawsize, Color.White * Alpha, DepthID);
+            }
         }
     }
 }
