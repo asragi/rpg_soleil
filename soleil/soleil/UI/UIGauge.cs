@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.UI
 {
+    /// <summary>
+    /// 値によって伸び縮みするゲージ状UIのクラス
+    /// </summary>
     class UIGauge: MenuComponent
     {
         public Vector Pos { get; set; }
@@ -20,6 +23,7 @@ namespace Soleil.UI
         {
             Pos = pos;
             barBlock = new BarBlock(pos, Vector.Zero, size, _depth);
+            barBlock.Rate = initRate;
         }
 
         public void Refresh(double _rate) => barBlock.Rate = _rate;
@@ -54,19 +58,23 @@ namespace Soleil.UI
             double rate;
             public double Rate { get => rate; set { rate = value; drawsize = new Vector(size.X * rate, size.Y); } }
             Vector drawsize;
+            bool centerBased;
 
             public BarBlock(Vector pos, Vector posdiff, Vector _size, DepthID depth)
                 :base(pos, posdiff, depth, false, true, 0)
             {
                 size = _size;
-                Rate = 1;
+                centerBased = false;
             }
 
             public override Vector GetSize => size;
 
             public override void Draw(Drawing d)
             {
+                var flag = d.CenterBased;
+                d.CenterBased = centerBased;
                 d.DrawBox(Pos, drawsize, Color.White * Alpha, DepthID);
+                d.CenterBased = flag;
             }
         }
     }
