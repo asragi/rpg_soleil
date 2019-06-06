@@ -213,6 +213,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Scene\WorldMapScene.cs" />
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
