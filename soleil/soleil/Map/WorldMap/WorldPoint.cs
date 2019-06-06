@@ -10,12 +10,13 @@ namespace Soleil.Map.WorldMap
     enum WorldPointKey
     {
         Flare = 1,
-        Somnia,
-        Magistol,
+        Somnia = 2,
+        Magistol = 3,
         Parel = 5,
-        Shimaki,
-        Earthband,
+        Shimaki = 6,
+        Earthband = 7,
         AisenBerz = 8,
+        size,
     }
 
     class WorldPoint

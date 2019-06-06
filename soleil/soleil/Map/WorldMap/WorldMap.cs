@@ -11,9 +11,23 @@ namespace Soleil.Map.WorldMap
         WorldPoint[] points;
         public WorldMap()
         {
-            var length = Enum.GetNames(typeof(WorldPointKey)).Length;
-            points = new WorldPoint[length];
-            points[0] = new WorldPoint(WorldPointKey.Somnia, new Vector(300, 300));
+            points = MakePoints();
+
+            WorldPoint[] MakePoints()
+            {
+                var result = new WorldPoint[(int)WorldPointKey.size];
+                Set(WorldPointKey.Flare, new Vector(400, 300), result);
+                Set(WorldPointKey.Somnia, new Vector(800, 250), result);
+                Set(WorldPointKey.Magistol, new Vector(450, 200), result);
+                Set(WorldPointKey.Parel, new Vector(500, 320), result);
+                Set(WorldPointKey.Shimaki, new Vector(800, 100), result);
+                Set(WorldPointKey.Earthband, new Vector(100, 100), result);
+                Set(WorldPointKey.AisenBerz, new Vector(850, 500), result);
+                return result;
+
+                void Set(WorldPointKey key, Vector pos, WorldPoint[] array)
+                    => array[(int)key] = new WorldPoint(key, pos);
+            }
         }
 
         public void Draw(Drawing d)
