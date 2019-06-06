@@ -9,17 +9,23 @@ namespace Soleil
 {
     class WorldMapScene: Scene
     {
-        WorldMap worldMap;
+        WorldMapMaster worldMapMaster;
         public WorldMapScene(SceneManager sm)
             : base(sm)
         {
-            worldMap = new WorldMap();
+            worldMapMaster = new WorldMapMaster();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            worldMapMaster.Update();
         }
 
         public override void Draw(Drawing sb)
         {
             base.Draw(sb);
-            worldMap.Draw(sb);
+            worldMapMaster.Draw(sb);
         }
     }
 }

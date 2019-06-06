@@ -37,6 +37,12 @@ namespace Soleil
             AddComponents(texts);
         }
 
+        public SelectableWindow(Vector _pos, params string[] options)
+            : this(_pos, ProperSize(MessageWindow.DefaultFont, options), WindowTag.A, WindowManager.GetInstance(), options)
+        {
+
+        }
+
         public void UpCursor()
         {
             if (decided) return;

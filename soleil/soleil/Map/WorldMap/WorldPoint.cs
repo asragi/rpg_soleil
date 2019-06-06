@@ -25,6 +25,9 @@ namespace Soleil.Map.WorldMap
         public readonly Vector Pos; // ワールドマップ上の座標．
         public Dictionary<WorldPointKey, int> edges;
 
+        public bool IsPlayerIn;
+        public bool Selected;
+
         public WorldPoint(WorldPointKey id, Vector position)
         {
             ID = id;
@@ -35,7 +38,8 @@ namespace Soleil.Map.WorldMap
 
         public void Draw(Drawing d)
         {
-            d.DrawBox(Pos, new Vector(30, 30), Color.White, DepthID.HitBox);
+            var color = IsPlayerIn ? Color.Crimson : Color.AliceBlue;
+            d.DrawBox(Pos, new Vector(30, 30), color, DepthID.HitBox);
         }
     }
 }
