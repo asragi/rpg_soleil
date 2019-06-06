@@ -158,6 +158,8 @@
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
+    <Compile Include="Map\WorldMap\WorldMap.cs" />
+    <Compile Include="Map\WorldMap\WorldPoint.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\Detail\ArmorDetail.cs" />
