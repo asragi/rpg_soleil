@@ -17,7 +17,7 @@ namespace Soleil
         string[] options;
         FontImage[] texts;
         int optionNum;
-        protected int index;
+        public int Index { get; protected set; }
         bool decided;
         public SelectableWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic, params string[] _options)
             : base(_pos, _size, tag, wm, isStatic)
@@ -32,7 +32,7 @@ namespace Soleil
                 texts[i].Color = ColorPalette.DarkBlue;
             }
             optionNum = options.Length - 1;
-            index = 0;
+            Index = 0;
             decided = false;
             AddComponents(texts);
         }
@@ -51,15 +51,15 @@ namespace Soleil
         public void UpCursor()
         {
             if (decided) return;
-            index--;
-            if (index < 0) index = optionNum;
+            Index--;
+            if (Index < 0) Index = optionNum;
         }
 
         public void DownCursor()
         {
             if (decided) return;
-            index++;
-            if(index > optionNum) index = 0;
+            Index++;
+            if(Index > optionNum) Index = 0;
         }
 
         public void Decide()
@@ -68,12 +68,12 @@ namespace Soleil
         }
 
         /// <summary>
-        /// 決定後であれば選んだ選択肢のindexを返す. 未選択時は常に-1を返す.
+        /// 決定後であれば選んだ選択肢のIndexを返す. 未選択時は常に-1を返す.
         /// </summary>
         /// <returns></returns>
         public int ReturnIndex()
         {
-            if (decided) return index;
+            if (decided) return Index;
             return -1;
         }
 
@@ -84,7 +84,7 @@ namespace Soleil
             {
                 texts[i].Draw(d);
             }
-            d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
+            d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
         }
 
         /// <summary>

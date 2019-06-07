@@ -8,6 +8,7 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapSelectLayer
     {
+        readonly string TimeUnit = "時間";
         int[] costList;
         SelectableWindow selectableWindow;
         MessageWindow messageWindow;
@@ -28,10 +29,22 @@ namespace Soleil.Map.WorldMap
                 costList[i] = kvp.Value;
                 i++;
             }
-            selectableWindow = new SelectableWindow(Vector.Zero, true, optionsList);
-            messageWindow = new MessageWindow(Vector.Zero, new Vector(200, 100), WindowTag.A, WindowManager.GetInstance());
+            var pos = WorldMapWindowLayer.Position;
+            selectableWindow = new SelectableWindow(pos, true, optionsList);
+            messageWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance());
             selectableWindow.Call();
             messageWindow.Call();
+        }
+
+        public void Update()
+        {
+            SetMessage();
+            void SetMessage()
+            {
+                if (selectableWindow == null) return;
+                var index = selectableWindow.Index;
+                messageWindow.Text = costList[index].ToString() + TimeUnit;
+            }
         }
 
         public void QuitWindow()

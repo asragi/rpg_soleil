@@ -28,6 +28,7 @@ namespace Soleil.Map.WorldMap
         {
             mapInput.Update();
             cursorLayer.Update();
+            mapSelectLayer.Update();
         }
 
         public void Draw(Drawing d)

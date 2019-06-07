@@ -8,6 +8,7 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapWindowLayer
     {
+        public static readonly Vector Position = new Vector(200, 170);
         string[] options = new[]
             {
                 "移動",
@@ -20,7 +21,7 @@ namespace Soleil.Map.WorldMap
 
         public void InitWindow()
         {
-            initWindow = new SelectableWindow(Vector.Zero, true, options);
+            initWindow = new SelectableWindow(Position, true, options);
             initWindow.Call();
             initWindow.Reset();
         }
