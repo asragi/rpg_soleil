@@ -13,13 +13,22 @@ namespace Soleil.Map.WorldMap
         public WorldMapCursorLayer()
         {
             cursor = new UIImage(TextureID.MenuSave1, Vector.One, null, DepthID.Effect);
-            cursor.Call();
         }
 
         public void Move(Direction inputDir)
         {
             if (inputDir == Direction.N) return;
             cursor.Pos += new Vector(- Speed, 0).Rotate(inputDir.Angle());
+        }
+
+        public void Init()
+        {
+            cursor.Call(false);
+        }
+
+        public void Quit()
+        {
+            cursor.Quit(false);
         }
 
         public void Update()

@@ -8,21 +8,19 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapWindowLayer
     {
-        SelectableWindow initWindow;
-
-        public WorldMapWindowLayer()
-        {
-            var options = new[]
+        string[] options = new[]
             {
                 "移動",
                 "マップ",
                 "施設に入る"
             };
-            initWindow = new SelectableWindow(Vector.Zero, true, options);
-        }
+        SelectableWindow initWindow;
+
+        public WorldMapWindowLayer() { }
 
         public void InitWindow()
         {
+            initWindow = new SelectableWindow(Vector.Zero, true, options);
             initWindow.Call();
             initWindow.Reset();
         }

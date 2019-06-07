@@ -60,6 +60,7 @@ namespace Soleil.Map.WorldMap
                 {
                     // マップ探索
                     mode = WorldMapInputMode.MapCursor;
+                    cursorLayer.Init();
                 }
                 if (index == 2)
                 {
@@ -71,6 +72,12 @@ namespace Soleil.Map.WorldMap
             {
                 if (mode != WorldMapInputMode.MapCursor) return;
                 cursorLayer.Move(dir);
+                if (KeyInput.GetKeyPush(Key.B))
+                {
+                    windowLayer.InitWindow();
+                    mode = WorldMapInputMode.InitWindow;
+                    cursorLayer.Quit();
+                }
             }
         }
     }
