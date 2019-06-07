@@ -41,21 +41,21 @@ namespace Soleil
             frameImgs = new UIImage[]
             {
                 // 左上
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,Depth, center, false, 1),
+                new UIImage(Texture, Pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,Depth, center, false),
                 // 右上
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,Depth,center, false),
                 // 左下
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false),
                 // 右下
-                new UIImage(Texture, Pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false),
                 // 上部
-                new UIImage(Texture, Pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,Depth,center, false),
                 // 左
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,Depth,center, false),
                 // 右
-                new UIImage(Texture, Pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,Depth,center, false),
                 // 下
-                new UIImage(Texture, Pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false, 1),
+                new UIImage(Texture, Pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, false),
             };
             var rects = new[]
             {
