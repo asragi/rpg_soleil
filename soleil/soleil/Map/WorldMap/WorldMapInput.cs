@@ -26,6 +26,10 @@ namespace Soleil.Map.WorldMap
             {
                 windowLayer.UpCursor();
             }
+            if (KeyInput.GetKeyPush(Key.Down))
+            {
+                windowLayer.DownCursor();
+            }
         }
     }
 }

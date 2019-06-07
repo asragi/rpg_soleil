@@ -19,8 +19,8 @@ namespace Soleil
         int optionNum;
         protected int index;
         bool decided;
-        public SelectableWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, params string[] _options)
-            : base(_pos, _size, tag, wm)
+        public SelectableWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic, params string[] _options)
+            : base(_pos, _size, tag, wm, isStatic)
         {
             options = _options;
             texts = new FontImage[options.Length];
@@ -37,8 +37,8 @@ namespace Soleil
             AddComponents(texts);
         }
 
-        public SelectableWindow(Vector _pos, params string[] options)
-            : this(_pos, ProperSize(MessageWindow.DefaultFont, options), WindowTag.A, WindowManager.GetInstance(), options)
+        public SelectableWindow(Vector _pos, bool isStatic, params string[] options)
+            : this(_pos, ProperSize(MessageWindow.DefaultFont, options), WindowTag.A, WindowManager.GetInstance(), isStatic, options)
         {
 
         }

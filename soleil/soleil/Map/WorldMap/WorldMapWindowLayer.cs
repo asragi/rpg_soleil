@@ -8,15 +8,9 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapWindowLayer
     {
-        WindowManager wm;
         SelectableWindow initWindow;
 
         public WorldMapWindowLayer()
-        {
-            wm = WindowManager.GetInstance();
-        }
-
-        public void InitWindow()
         {
             var options = new[]
             {
@@ -24,12 +18,22 @@ namespace Soleil.Map.WorldMap
                 "マップ",
                 "施設に入る"
             };
-            initWindow = new SelectableWindow(Vector.Zero, options);
+            initWindow = new SelectableWindow(Vector.Zero, true, options);
+        }
+
+        public void InitWindow()
+        {
+            initWindow.Call();
         }
 
         public void UpCursor()
         {
             initWindow.UpCursor();
+        }
+
+        public void DownCursor()
+        {
+            initWindow.DownCursor();
         }
 
         public void Update()
