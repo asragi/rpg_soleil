@@ -32,6 +32,7 @@ namespace Soleil.Map.WorldMap
         {
             ID = id;
             Pos = position;
+            edges = new Dictionary<WorldPointKey, int>();
         }
 
         public void SetEdge(WorldPointKey key, int cost) => edges.Add(key, cost);
