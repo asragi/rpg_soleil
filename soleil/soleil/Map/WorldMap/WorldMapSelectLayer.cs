@@ -30,6 +30,8 @@ namespace Soleil.Map.WorldMap
             }
             selectableWindow = new SelectableWindow(Vector.Zero, true, optionsList);
             messageWindow = new MessageWindow(Vector.Zero, new Vector(200, 100), WindowTag.A, WindowManager.GetInstance());
+            selectableWindow.Call();
+            messageWindow.Call();
         }
 
         public void QuitWindow()
