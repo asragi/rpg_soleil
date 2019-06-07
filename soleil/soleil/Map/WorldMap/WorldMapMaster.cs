@@ -12,6 +12,7 @@ namespace Soleil.Map.WorldMap
         WorldMapWindowLayer windowLayer;
         WorldMapInput mapInput;
         WorldMapCursorLayer cursorLayer;
+        WorldMapSelectLayer mapSelectLayer;
 
         public WorldMapMaster()
         {
@@ -19,7 +20,8 @@ namespace Soleil.Map.WorldMap
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
             cursorLayer = new WorldMapCursorLayer();
-            mapInput = new WorldMapInput(windowLayer, cursorLayer);
+            mapSelectLayer = new WorldMapSelectLayer(worldMap);
+            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer);
         }
 
         public void Update()

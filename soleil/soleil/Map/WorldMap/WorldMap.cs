@@ -12,6 +12,7 @@ namespace Soleil.Map.WorldMap
         public WorldMap()
         {
             points = MakePoints();
+            SetPlayerPosition(WorldPointKey.Flare);
 
             WorldPoint[] MakePoints()
             {
@@ -42,6 +43,25 @@ namespace Soleil.Map.WorldMap
                     array[(int)b].SetEdge(a, cost);
                 }
             }
+        }
+
+        public void SetPlayerPosition(WorldPointKey position)
+        {
+            foreach (var item in points)
+            {
+                if (item == null) continue;
+                item.IsPlayerIn = item.ID == position;
+            }
+        }
+
+        public WorldPoint GetPlayerPoint()
+        {
+            foreach (var item in points)
+            {
+                if (item == null) continue;
+                if (item.IsPlayerIn) return item;
+            }
+            return null;
         }
 
         public void Draw(Drawing d)

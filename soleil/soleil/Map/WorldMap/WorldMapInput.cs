@@ -19,12 +19,14 @@ namespace Soleil.Map.WorldMap
         WorldMapInputMode mode;
         WorldMapWindowLayer windowLayer;
         WorldMapCursorLayer cursorLayer;
+        WorldMapSelectLayer selectLayer;
 
-        public WorldMapInput(WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor)
+        public WorldMapInput(WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor, WorldMapSelectLayer select)
         {
             mode = WorldMapInputMode.InitWindow;
             windowLayer = wmwl;
             cursorLayer = cursor;
+            selectLayer = select;
         }
 
         public void Update()
@@ -32,6 +34,7 @@ namespace Soleil.Map.WorldMap
             var inputDir = KeyInput.GetStickInclineDirection(1);
             InputWindowLayer(inputDir);
             InputCursor(inputDir);
+            InputSelect(inputDir);
 
             void InputWindowLayer(Direction dir)
             {
@@ -55,6 +58,7 @@ namespace Soleil.Map.WorldMap
                 {
                     // 移動先選択
                     mode = WorldMapInputMode.MapSelect;
+                    selectLayer.InitWindow();
                 }
                 if (index == 1)
                 {
@@ -77,6 +81,17 @@ namespace Soleil.Map.WorldMap
                     windowLayer.InitWindow();
                     mode = WorldMapInputMode.InitWindow;
                     cursorLayer.Quit();
+                }
+            }
+
+            void InputSelect(Direction dir)
+            {
+                if (mode != WorldMapInputMode.MapSelect) return;
+                if (KeyInput.GetKeyPush(Key.B))
+                {
+                    windowLayer.InitWindow();
+                    mode = WorldMapInputMode.InitWindow;
+                    selectLayer.QuitWindow();
                 }
             }
         }

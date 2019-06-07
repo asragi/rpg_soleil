@@ -23,7 +23,7 @@ namespace Soleil.Map.WorldMap
     {
         public readonly WorldPointKey ID; // csvの頂点のIDと一致させる．
         public readonly Vector Pos; // ワールドマップ上の座標．
-        public Dictionary<WorldPointKey, int> edges;
+        public Dictionary<WorldPointKey, int> Edges;
 
         public bool IsPlayerIn;
         public bool Selected;
@@ -32,10 +32,10 @@ namespace Soleil.Map.WorldMap
         {
             ID = id;
             Pos = position;
-            edges = new Dictionary<WorldPointKey, int>();
+            Edges = new Dictionary<WorldPointKey, int>();
         }
 
-        public void SetEdge(WorldPointKey key, int cost) => edges.Add(key, cost);
+        public void SetEdge(WorldPointKey key, int cost) => Edges.Add(key, cost);
 
         public void Draw(Drawing d)
         {
