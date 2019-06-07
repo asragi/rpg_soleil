@@ -1,4 +1,5 @@
 ﻿using Soleil.Menu;
+using Soleil.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,22 +27,19 @@ namespace Soleil.Map
             wm = WindowManager.GetInstance();
             nextFocus = InputFocus.Player;
             inputs = new Dictionary<Key, bool>();
+            inputSmoother = new InputSmoother();
         }
         public void SetPlayer(PlayerObject p) => player = p;
         public void SetMenuSystem(MenuSystem m) => menuSystem = m; // 地獄
 
         // 入力を良い感じにする処理用
-        const int InputWait = 6;
-        int waitFrame;
-        const int HeadWait = 20;
-        int headWaitCount;
-        bool inputCheck;
+        InputSmoother inputSmoother;
 
         public void Update()
         {
             // 入力を受け取る
             var inputDir = KeyInput.GetStickInclineDirection(1);
-            var smoothInput = InputSmoother(inputDir);
+            var smoothInput = inputSmoother.SmoothInput(inputDir);
             UpdateInputKeysDown();
             nowFocus = nextFocus;
             // フォーカスに応じて処理を振り分ける
@@ -88,27 +86,6 @@ namespace Soleil.Map
                 SetFocus(InputFocus.Menu);
                 return;
             }
-        }
-
-        /// <summary>
-        /// 入力押しっぱなしでも毎フレーム移動しないようにする関数
-        /// </summary>
-        private Direction InputSmoother(Direction dir)
-        {
-            waitFrame--;
-            if (dir != Direction.N)
-            {
-                headWaitCount--;
-                if (headWaitCount > 0 && inputCheck) return Direction.N;
-                if (waitFrame > 0) return Direction.N;
-                waitFrame = InputWait;
-                inputCheck = true;
-                return dir;
-            }
-            inputCheck = false;
-            waitFrame = 0;
-            headWaitCount = HeadWait;
-            return Direction.N;
         }
 
         void UpdateInputKeysDown()
