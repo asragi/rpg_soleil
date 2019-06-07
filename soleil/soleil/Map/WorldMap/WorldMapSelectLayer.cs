@@ -12,7 +12,7 @@ namespace Soleil.Map.WorldMap
         WorldPointKey[] keyList;
         int[] costList;
         SelectableWindow selectableWindow;
-        MessageWindow messageWindow;
+        MessageWindow messageWindow, descriptionWindow;
         WorldMap worldMap;
         WorldMapCamera camera;
 
@@ -39,8 +39,10 @@ namespace Soleil.Map.WorldMap
             }
             var pos = WorldMapWindowLayer.Position;
             selectableWindow = new SelectableWindow(pos, true, optionsList);
-            messageWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance(), true);
+            messageWindow = new MessageWindow(pos + new Vector(350, 100), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance(), true);
+            descriptionWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, WorldPoint.Descriptions[WorldPointKey.Magistol]), WindowTag.A, WindowManager.GetInstance(), true);
             selectableWindow.Call();
+            descriptionWindow.Call();
             messageWindow.Call();
             RefreshDestination();
         }
@@ -62,14 +64,15 @@ namespace Soleil.Map.WorldMap
         private void RefreshDestination()
         {
             var _index = selectableWindow.Index;
-            SetMessage(_index);
-            var key = keyList[_index];
-            camera.SetDestination(worldMap.GetPoint(key));
+            var _key = keyList[_index];
+            SetMessage(_index, _key);
+            camera.SetDestination(worldMap.GetPoint(_key));
 
-            void SetMessage(int index)
+            void SetMessage(int index, WorldPointKey key)
             {
                 if (selectableWindow == null) return;
                 messageWindow.Text = costList[index].ToString() + TimeUnit;
+                descriptionWindow.Text = WorldPoint.Descriptions[key];
             }
         }
 
@@ -77,6 +80,8 @@ namespace Soleil.Map.WorldMap
         {
             selectableWindow.Quit();
             messageWindow.Quit();
+            descriptionWindow.Quit();
+            camera.SetDestination(worldMap.GetPlayerPoint());
         }
     }
 }

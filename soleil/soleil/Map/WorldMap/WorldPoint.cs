@@ -21,6 +21,16 @@ namespace Soleil.Map.WorldMap
 
     class WorldPoint
     {
+        public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
+        {
+            {WorldPointKey.Flare, "太陽と潮騒の街\n陽術を習得可能" },
+            {WorldPointKey.Somnia, "影と秘密ある街\n陰術を習得可能" },
+            {WorldPointKey.Magistol, "魔法学校の都市\n魔術を習得可能" },
+            {WorldPointKey.Parel, "芸術と音楽の街\n音術を習得可能" },
+            {WorldPointKey.Shimaki, "忍ぶ者の隠れ処\n忍術を習得可能" },
+            {WorldPointKey.Earthband, "大自然が包む街\n樹術を習得可能" },
+            {WorldPointKey.AisenBerz, "金属と孤独の街\n鋼術を習得可能" },
+        };
         public readonly WorldPointKey ID; // csvの頂点のIDと一致させる．
         public readonly Vector Pos; // ワールドマップ上の座標．
         public Dictionary<WorldPointKey, int> Edges;
