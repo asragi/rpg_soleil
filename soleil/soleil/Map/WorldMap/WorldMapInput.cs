@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace Soleil.Map.WorldMap
         WorldMapWindowLayer windowLayer;
         WorldMapCursorLayer cursorLayer;
         WorldMapSelectLayer selectLayer;
+        InputSmoother inputSmoother;
 
         public WorldMapInput(WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor, WorldMapSelectLayer select)
         {
@@ -27,14 +29,16 @@ namespace Soleil.Map.WorldMap
             windowLayer = wmwl;
             cursorLayer = cursor;
             selectLayer = select;
+            inputSmoother = new InputSmoother();
         }
 
         public void Update()
         {
             var inputDir = KeyInput.GetStickInclineDirection(1);
-            InputWindowLayer(inputDir);
+            var smoothInput = inputSmoother.SmoothInput(inputDir);
+            InputWindowLayer(smoothInput);
             InputCursor(inputDir);
-            InputSelect(inputDir);
+            InputSelect(smoothInput);
 
             void InputWindowLayer(Direction dir)
             {
