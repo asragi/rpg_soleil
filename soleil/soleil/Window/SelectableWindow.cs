@@ -43,6 +43,11 @@ namespace Soleil
 
         }
 
+        public void Reset()
+        {
+            decided = false;
+        }
+
         public void UpCursor()
         {
             if (decided) return;

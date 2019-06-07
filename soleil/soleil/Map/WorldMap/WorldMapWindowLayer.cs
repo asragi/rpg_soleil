@@ -24,24 +24,17 @@ namespace Soleil.Map.WorldMap
         public void InitWindow()
         {
             initWindow.Call();
+            initWindow.Reset();
         }
 
-        public void UpCursor()
+        public void QuitWindow()
         {
-            initWindow.UpCursor();
+            initWindow.Quit();
         }
 
-        public void DownCursor()
-        {
-            initWindow.DownCursor();
-        }
-
-        public void Update()
-        {
-        }
-
-        public void Draw(Drawing d)
-        {
-        }
+        public int GetIndex() => initWindow.ReturnIndex();
+        public void Decide() => initWindow.Decide();
+        public void UpCursor() => initWindow.UpCursor();
+        public void DownCursor() => initWindow.DownCursor();
     }
 }

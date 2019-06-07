@@ -22,14 +22,12 @@ namespace Soleil.Map.WorldMap
 
         public void Update()
         {
-            windowLayer.Update();
             mapInput.Update();
         }
 
         public void Draw(Drawing d)
         {
             worldMap.Draw(d);
-            windowLayer.Draw(d);
         }
     }
 }
