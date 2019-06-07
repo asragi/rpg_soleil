@@ -21,16 +21,15 @@ namespace Soleil.Map.WorldMap
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
             cursorLayer = new WorldMapCursorLayer();
-            mapSelectLayer = new WorldMapSelectLayer(worldMap);
-            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer);
             camera = new WorldMapCamera();
+            mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
+            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer);
         }
 
         public void Update()
         {
             mapInput.Update();
             cursorLayer.Update();
-            mapSelectLayer.Update();
             camera.Update();
         }
 

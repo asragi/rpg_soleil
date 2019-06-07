@@ -54,6 +54,8 @@ namespace Soleil.Map.WorldMap
             }
         }
 
+        public WorldPoint GetPoint(WorldPointKey key) => points[(int)key];
+
         public WorldPoint GetPlayerPoint()
         {
             foreach (var item in points)
