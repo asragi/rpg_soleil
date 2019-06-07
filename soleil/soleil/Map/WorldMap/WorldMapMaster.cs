@@ -13,6 +13,7 @@ namespace Soleil.Map.WorldMap
         WorldMapInput mapInput;
         WorldMapCursorLayer cursorLayer;
         WorldMapSelectLayer mapSelectLayer;
+        WorldMapCamera camera;
 
         public WorldMapMaster()
         {
@@ -22,6 +23,7 @@ namespace Soleil.Map.WorldMap
             cursorLayer = new WorldMapCursorLayer();
             mapSelectLayer = new WorldMapSelectLayer(worldMap);
             mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer);
+            camera = new WorldMapCamera();
         }
 
         public void Update()
@@ -29,6 +31,7 @@ namespace Soleil.Map.WorldMap
             mapInput.Update();
             cursorLayer.Update();
             mapSelectLayer.Update();
+            camera.Update();
         }
 
         public void Draw(Drawing d)
