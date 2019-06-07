@@ -31,7 +31,7 @@ namespace Soleil.Map.WorldMap
             }
             var pos = WorldMapWindowLayer.Position;
             selectableWindow = new SelectableWindow(pos, true, optionsList);
-            messageWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance());
+            messageWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance(), true);
             selectableWindow.Call();
             messageWindow.Call();
         }

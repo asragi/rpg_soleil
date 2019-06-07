@@ -26,7 +26,7 @@ namespace Soleil
             texts = new FontImage[options.Length];
             for (int i = 0; i < options.Length; i++)
             {
-                texts[i] = new FontImage(MessageWindow.DefaultFont, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, false);
+                texts[i] = new FontImage(MessageWindow.DefaultFont, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, isStatic);
                 texts[i].FadeSpeed = FadeSpeed;
                 texts[i].Text = options[i];
                 texts[i].Color = ColorPalette.DarkBlue;
