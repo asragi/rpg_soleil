@@ -87,6 +87,7 @@ namespace Soleil.Map.WorldMap
             void InputSelect(Direction dir)
             {
                 if (mode != WorldMapInputMode.MapSelect) return;
+                selectLayer.MoveInput(dir);
                 if (KeyInput.GetKeyPush(Key.B))
                 {
                     windowLayer.InitWindow();

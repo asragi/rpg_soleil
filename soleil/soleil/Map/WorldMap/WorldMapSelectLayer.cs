@@ -36,6 +36,12 @@ namespace Soleil.Map.WorldMap
             messageWindow.Call();
         }
 
+        public void MoveInput(Direction dir)
+        {
+            if (dir == Direction.U) selectableWindow.UpCursor();
+            if (dir == Direction.D) selectableWindow.DownCursor();
+        }
+
         public void Update()
         {
             SetMessage();
