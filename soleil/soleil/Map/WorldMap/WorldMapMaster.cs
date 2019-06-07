@@ -11,23 +11,27 @@ namespace Soleil.Map.WorldMap
         WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
         WorldMapInput mapInput;
+        WorldMapCursorLayer cursorLayer;
 
         public WorldMapMaster()
         {
             worldMap = new WorldMap();
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
-            mapInput = new WorldMapInput(windowLayer);
+            cursorLayer = new WorldMapCursorLayer();
+            mapInput = new WorldMapInput(windowLayer, cursorLayer);
         }
 
         public void Update()
         {
             mapInput.Update();
+            cursorLayer.Update();
         }
 
         public void Draw(Drawing d)
         {
             worldMap.Draw(d);
+            cursorLayer.Draw(d);
         }
     }
 }

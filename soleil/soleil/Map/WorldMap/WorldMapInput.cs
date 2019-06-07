@@ -18,25 +18,29 @@ namespace Soleil.Map.WorldMap
     {
         WorldMapInputMode mode;
         WorldMapWindowLayer windowLayer;
+        WorldMapCursorLayer cursorLayer;
 
-        public WorldMapInput(WorldMapWindowLayer wmwl)
+        public WorldMapInput(WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor)
         {
             mode = WorldMapInputMode.InitWindow;
             windowLayer = wmwl;
+            cursorLayer = cursor;
         }
 
         public void Update()
         {
-            InputWindowLayer();
+            var inputDir = KeyInput.GetStickInclineDirection(1);
+            InputWindowLayer(inputDir);
+            InputCursor(inputDir);
 
-            void InputWindowLayer()
+            void InputWindowLayer(Direction dir)
             {
                 if (mode != WorldMapInputMode.InitWindow) return;
-                if (KeyInput.GetKeyPush(Key.Up))
+                if (dir == Direction.U)
                 {
                     windowLayer.UpCursor();
                 }
-                if (KeyInput.GetKeyPush(Key.Down))
+                if (dir == Direction.D)
                 {
                     windowLayer.DownCursor();
                 }
@@ -61,6 +65,12 @@ namespace Soleil.Map.WorldMap
                 {
                     // 町・施設に入る
                 }
+            }
+
+            void InputCursor(Direction dir)
+            {
+                if (mode != WorldMapInputMode.MapCursor) return;
+                cursorLayer.Move(dir);
             }
         }
     }
