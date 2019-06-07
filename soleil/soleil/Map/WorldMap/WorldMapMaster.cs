@@ -10,17 +10,20 @@ namespace Soleil.Map.WorldMap
     {
         WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
+        WorldMapInput mapInput;
 
         public WorldMapMaster()
         {
             worldMap = new WorldMap();
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
+            mapInput = new WorldMapInput(windowLayer);
         }
 
         public void Update()
         {
             windowLayer.Update();
+            mapInput.Update();
         }
 
         public void Draw(Drawing d)
