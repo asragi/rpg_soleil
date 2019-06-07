@@ -38,19 +38,22 @@ namespace Soleil.Map.WorldMap
         public bool IsPlayerIn;
         public bool Selected;
 
+        UIImage icon;
+
         public WorldPoint(WorldPointKey id, Vector position)
         {
             ID = id;
             Pos = position;
             Edges = new Dictionary<WorldPointKey, int>();
+            icon = new UIImage(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.HitBox, true, false, 1);
         }
 
         public void SetEdge(WorldPointKey key, int cost) => Edges.Add(key, cost);
 
         public void Draw(Drawing d)
         {
-            var color = IsPlayerIn ? Color.Crimson : Color.AliceBlue;
-            d.DrawBox(Pos, new Vector(30, 30), color, DepthID.HitBox);
+            icon.Color = IsPlayerIn ? Color.Crimson : Color.AliceBlue;
+            icon.Draw(d);
         }
     }
 }
