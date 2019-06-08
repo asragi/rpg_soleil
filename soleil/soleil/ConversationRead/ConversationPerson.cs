@@ -38,6 +38,10 @@ namespace Soleil.Event.Conversation
             }
         }
 
+        public void Init() => Init(faceDictionary.GetFaces(Name)[0]);
+        public void Init(string face) => SetFace(face);
+        public void Quit() => images[Face].Quit();
+
         public void SetFace(string face)
         {
             if (Face != face)

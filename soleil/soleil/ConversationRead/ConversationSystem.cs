@@ -20,6 +20,12 @@ namespace Soleil
             ConversationWindow = new ConversationWindow(WindowTag.Conversation, wm);
         }
 
+        public void Quit()
+        {
+            PersonList?.ForEach(p => p.Quit());
+            ConversationWindow.Quit();
+        }
+
         public void Update()
         {
             PersonList?.ForEach(p => p.Update());
