@@ -16,16 +16,16 @@ namespace Soleil.Event.Conversation
             Set("lune", "normal", TextureID.MenuLune, dict);
             Set("lune", "smile", TextureID.MenuStatusL, dict);
             Set("sunny", "normal", TextureID.MenuSun, dict);
-
             void Set(string name, string faceName, TextureID id, Dictionary<string, Person> _dict)
             {
-                var target = _dict[name] ?? new Person();
+                var target = _dict.ContainsKey(name) ? _dict[name] : new Person();
                 target.Add(faceName, id);
                 _dict[name] = target;
             }
         }
 
         public TextureID Get(string name, string faceName) => dict[name].Get(faceName);
+        public string[] GetFaces(string name) => dict[name].GetFaces();
 
         class Person
         {
@@ -39,6 +39,7 @@ namespace Soleil.Event.Conversation
             }
 
             public TextureID Get(string name) => faceDict[name];
+            public string[] GetFaces() => faceDict.Keys.ToArray();
         }
     }
 }
