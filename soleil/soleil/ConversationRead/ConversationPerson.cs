@@ -12,7 +12,7 @@ namespace Soleil.Event.Conversation
     class ConversationPerson
     {
         static readonly FaceDictionary faceDictionary = new FaceDictionary();
-        readonly int[] xPositionArray = new[] { 100,250,400,550,700 };
+        readonly int[] xPositionArray = new[] { 100,200,350,500,650 };
         const int Y = 100;
 
         public string Name { get; private set; }
@@ -29,7 +29,6 @@ namespace Soleil.Event.Conversation
             // Create Face Images
             images = new Dictionary<string, UIImage>();
             var faces = faceDictionary.GetFaces(name);
-            Face = faces[0];
             foreach (var f in faces)
             {
                 var tex = faceDictionary.Get(Name, f);
@@ -44,7 +43,7 @@ namespace Soleil.Event.Conversation
             if (Face != face)
             {
                 // 表情変化時のトランジション処理
-                images[Face].Quit();
+                if (Face != null) images[Face].Quit();
                 images[face].Call();
             }
             Face = face;
