@@ -11,11 +11,15 @@
       - event: talk
         person: lune
         face: normal
-        text: hello!
+        text: こんにちは
       - event: talk
         person: sunny
         face: normal
-        text: hello!hello!
+        text: こんにちはこんにちは
+      - event: talk
+        person: lune
+        face: smile
+        text: 表情変化テスト
     - name: for-the-first-time
       events:
       - event: talk
