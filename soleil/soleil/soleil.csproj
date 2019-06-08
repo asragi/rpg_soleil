@@ -75,6 +75,7 @@
     <Compile Include="Event\Conversation\ConversationPersonSet.cs" />
     <Compile Include="Event\Conversation\ConversationTalk.cs" />
     <Compile Include="Event\ConversationInitEvent.cs" />
+    <Compile Include="Event\Conversation\FaceDictionary.cs" />
     <Compile Include="Event\CreateConversationEvent.cs" />
     <Compile Include="Event\DestroyPictureEvent.cs" />
     <Compile Include="Event\EventBranch.cs" />

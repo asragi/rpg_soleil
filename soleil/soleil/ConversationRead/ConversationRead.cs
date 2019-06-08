@@ -44,7 +44,7 @@ namespace Soleil.Event.Conversation
                 {
                     string name = e.person;
                     int position = e.position;
-                    personList.Add(new ConversationPerson(name));
+                    personList.Add(new ConversationPerson(name, position));
                 }
                 if (e.eventName == "talk")
                 {
