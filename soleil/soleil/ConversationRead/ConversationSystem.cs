@@ -13,6 +13,7 @@ namespace Soleil
     class ConversationSystem
     {
         public readonly ConversationWindow ConversationWindow;
+        public List<ConversationPerson> PersonList { get; set; }
 
         public ConversationSystem(WindowManager wm)
         {

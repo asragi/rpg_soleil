@@ -56,6 +56,7 @@ namespace Soleil.Event.Conversation
                 }
                 if (e.eventName == "branch") continue;
             }
+            result.Insert(0, new ConversationPersonSet(personList, cs));
             return result.ToArray();
         }
 
