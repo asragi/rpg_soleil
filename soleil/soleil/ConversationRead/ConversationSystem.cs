@@ -19,5 +19,15 @@ namespace Soleil
         {
             ConversationWindow = new ConversationWindow(WindowTag.Conversation, wm);
         }
+
+        public void Update()
+        {
+            PersonList?.ForEach(p => p.Update());
+        }
+
+        public void Draw(Drawing d)
+        {
+            PersonList?.ForEach(p => p.Draw(d));
+        }
     }
 }

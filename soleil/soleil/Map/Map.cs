@@ -67,6 +67,7 @@ namespace Soleil.Map
             mapInputManager.Update();
             MapCameraManager.Update();
             PictureHolder.Update();
+            ConversationSystem.Update();
         }
 
         /// <summary>
@@ -93,6 +94,7 @@ namespace Soleil.Map
             bm.Draw(sb);
             om.Draw(sb);
             PictureHolder.Draw(sb);
+            ConversationSystem.Draw(sb);
         }
     }
 }

@@ -25,5 +25,15 @@ namespace Soleil.Event.Conversation
 
             Face = face;
         }
+
+        public void Update()
+        {
+
+        }
+
+        public void Draw(Drawing d)
+        {
+
+        }
     }
 }
