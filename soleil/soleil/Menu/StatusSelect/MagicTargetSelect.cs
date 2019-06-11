@@ -20,11 +20,5 @@ namespace Soleil.Menu
             int selected = StatusMenu.GetIndex();
             Console.WriteLine("Use Magic!");
         }
-
-        public override void OnInputCancel()
-        {
-            IsActive = false;
-            magicMenu.Call();
-        }
     }
 }

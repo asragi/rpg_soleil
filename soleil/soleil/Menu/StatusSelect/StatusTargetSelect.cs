@@ -21,11 +21,5 @@ namespace Soleil.Menu
             IsActive = false;
             menuSystem.CallChild(MenuName.Status);
         }
-
-        public override void OnInputCancel()
-        {
-            StatusMenu.QuitCursor();
-            ReturnParent();
-        }
     }
 }
