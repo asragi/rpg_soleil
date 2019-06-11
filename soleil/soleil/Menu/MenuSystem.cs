@@ -85,7 +85,7 @@ namespace Soleil.Menu
             TextureID.MenuSave2
         };
 
-        public MenuSystem()
+        public MenuSystem(PersonParty party)
             :base(null)
         {
             Index = 0;
@@ -111,7 +111,7 @@ namespace Soleil.Menu
             // Item Target Select
             // Status Menu
             statusTargetSelect = new StatusTargetSelect(this);
-            statusMenu = new StatusMenu(this);
+            statusMenu = new StatusMenu(party, this);
             // Magic Menu
             magicUserSelect = new MagicUserSelect(this);
             magicMenu = new MagicMenu(magicUserSelect, menuDescription);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Misc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,21 +9,36 @@ namespace Soleil.Menu
 {
     class StatusMenu : MenuChild
     {
-        MenuChild calledFrom;
+        const int PanelLeft = 368;
+        const int PanelRight = 696;
+        const int PanelY = 130;
+
         MenuCharacterPanel[] menuCharacterPanels;
-        readonly Func<double, double, double, double, double> EaseFunc = Easing.OutCubic;
-        MenuSystem menuSystem;
+        readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
+            {CharaName.Lune, TextureID.MenuLune }, {CharaName.Sunny, TextureID.MenuSun},
+            {CharaName.Tella, TextureID.MenuTella }
+        };
 
         int index;
-        public StatusMenu(MenuSystem parent)
+        public StatusMenu(PersonParty _party, MenuSystem parent)
             :base(parent)
         {
-            menuSystem = parent;
             index = 0;
-            menuCharacterPanels = new MenuCharacterPanel[2];
-            menuCharacterPanels[0] = new MenuCharacterPanel(new Vector(290, 120), TextureID.MenuLune);
-            menuCharacterPanels[1] = new MenuCharacterPanel(new Vector(540, 120), TextureID.MenuSun);
+            menuCharacterPanels = MakePanels(_party);
             AddComponents(menuCharacterPanels);
+
+            MenuCharacterPanel[] MakePanels(PersonParty party)
+            {
+                var target = party.GetActiveMembers();
+                var panels = new MenuCharacterPanel[target.Length];
+                int spaceNum = target.Length - 1;
+                int space = spaceNum != 0 ? (PanelRight - PanelLeft) / spaceNum : 0;
+                for (int i = 0; i < target.Length; i++)
+                {
+                    panels[i] = new MenuCharacterPanel(target[i], new Vector(PanelLeft + space * i, PanelY), texDict[target[i].Name]);
+                }
+                return panels;
+            }
         }
 
         public int GetIndex() => index;
