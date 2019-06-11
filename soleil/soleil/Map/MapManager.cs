@@ -7,6 +7,7 @@
 
         MapBase nowMap;
         MapBase previousMap;
+        public PersonParty Party;
 
         public void ChangeMap(MapBase map)
         {

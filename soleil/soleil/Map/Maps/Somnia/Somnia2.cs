@@ -11,8 +11,8 @@ namespace Soleil.Map
     {
         MapChangeObject mcoRight;
         MapChangeObject mcoTop;
-        public Somnia2()
-            : base(MapName.Somnia2)
+        public Somnia2(PersonParty party)
+            : base(MapName.Somnia2, party)
         {
             MapConstructs = new MapConstruct[]{
                 new MapConstruct(TextureID.Somnia2_1,MapDepth.Ground,om),
@@ -32,8 +32,8 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            mcoTop = new MapChangeObject(new Vector(200, 10), new Vector(200, 20), MapName.Somnia4, new Vector(100, 500), Direction.U, om, bm);
-            mcoRight = new MapChangeObject(new Vector(970, 553), new Vector(30, 260), MapName.Somnia1, new Vector(100, 500), Direction.R, om, bm);
+            mcoTop = new MapChangeObject(new Vector(200, 10), new Vector(200, 20), MapName.Somnia4, new Vector(100, 500), Direction.U, om, bm, Party);
+            mcoRight = new MapChangeObject(new Vector(970, 553), new Vector(30, 260), MapName.Somnia1, new Vector(100, 500), Direction.R, om, bm, Party);
         }
     }
 }
