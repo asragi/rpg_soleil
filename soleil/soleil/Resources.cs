@@ -43,6 +43,7 @@ namespace Soleil
         MenuLune,
         MenuSun,
         MenuTella,
+        MenuStatusCursor,
 
         Rule0,
         Rule1,
@@ -366,6 +367,7 @@ namespace Soleil
             SetPath(TextureID.MenuLune, UIPath + MenuPath + "lune_face");
             SetPath(TextureID.MenuSun, UIPath + MenuPath + "sunny_face");
             SetPath(TextureID.MenuTella, UIPath + MenuPath + "tella_face");
+            SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
 
 

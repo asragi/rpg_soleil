@@ -19,23 +19,41 @@ namespace Soleil.Menu
             {CharaName.Tella, TextureID.MenuTella }
         };
 
+        MenuCursor cursor;
         int index;
+
         public StatusMenu(PersonParty _party, MenuSystem parent)
             :base(parent)
         {
             index = 0;
-            menuCharacterPanels = MakePanels(_party);
+
+            var people = _party.GetActiveMembers();
+            int size = people.Length;
+            Vector[] positions = Positions(size);
+            cursor = new MenuCursor(TextureID.MenuStatusCursor, positions);
+            menuCharacterPanels = MakePanels(people, positions);
             AddComponents(menuCharacterPanels);
 
-            MenuCharacterPanel[] MakePanels(PersonParty party)
+            Vector[] Positions(int num)
             {
-                var target = party.GetActiveMembers();
-                var panels = new MenuCharacterPanel[target.Length];
-                int spaceNum = target.Length - 1;
+                var result = new Vector[num];
+                int spaceNum = num - 1;
                 int space = spaceNum != 0 ? (PanelRight - PanelLeft) / spaceNum : 0;
+                for (int i = 0; i < num; i++)
+                {
+                    result[i] = new Vector(PanelLeft + space * i, PanelY);
+                }
+                return result;
+            }
+
+            MenuCharacterPanel[] MakePanels(Person[] _people, Vector[] pos)
+            {
+                var target = _people;
+                var panels = new MenuCharacterPanel[target.Length];
                 for (int i = 0; i < target.Length; i++)
                 {
-                    panels[i] = new MenuCharacterPanel(target[i], new Vector(PanelLeft + space * i, PanelY), texDict[target[i].Name]);
+                    panels[i] = new MenuCharacterPanel(target[i], pos[i], texDict[target[i].Name]);
+                    panels[i].FrameWait = 5 * i;
                 }
                 return panels;
             }
@@ -43,15 +61,36 @@ namespace Soleil.Menu
 
         public int GetIndex() => index;
 
+        public void CallCursor() => cursor.Call();
+        public void QuitCursor() => cursor.Quit();
+
         // Input
         public override void OnInputRight() {
             index++;
-            index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+            AdjustIndex();
         }
 
         public override void OnInputLeft() {
             index--;
+            AdjustIndex();
+        }
+
+        private void AdjustIndex()
+        {
             index = (menuCharacterPanels.Length + index) % menuCharacterPanels.Length;
+            cursor.MoveTo(index);
+        }
+
+        public override void Update()
+        {
+            cursor.Update();
+            base.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            cursor.Draw(d);
+            base.Draw(d);
         }
     }
 }

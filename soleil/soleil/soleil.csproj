@@ -122,6 +122,7 @@
     <Compile Include="Images\Image.cs" />
     <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\ImageManager.cs" />
+    <Compile Include="Images\RightAlignText.cs" />
     <Compile Include="Images\TextWithVal.cs" />
     <Compile Include="Images\UIImage.cs" />
     <Compile Include="Images\UIImageBase.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Menu\ItemMenu.cs" />
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicIcon.cs" />
+    <Compile Include="Menu\MenuCursor.cs" />
     <Compile Include="Menu\StatusSelect\ItemTargetSelect.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
     <Compile Include="Menu\MagicMenuPanel.cs" />
