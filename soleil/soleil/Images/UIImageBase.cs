@@ -10,14 +10,14 @@ namespace Soleil.Images
 {
     abstract class UIImageBase : ImageBase, IComponent
     {
-        readonly Vector initPos;
+        protected Vector InitPos;
         protected readonly Vector PosDiff;
         public Color Color { get; set; } = Color.White;
         public int FadeSpeed = MenuSystem.FadeSpeed;
         public UIImageBase(Vector pos, Vector? _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : base(pos + (_posDiff ?? Vector.Zero), dep, centerOrigin, isStatic, alpha)
         {
-            (initPos, PosDiff) = (pos, (_posDiff ?? Vector.Zero));
+            (InitPos, PosDiff) = (pos, (_posDiff ?? Vector.Zero));
         }
 
         public virtual void Call() => Call(true);
@@ -31,7 +31,7 @@ namespace Soleil.Images
 
         public void MoveToDefault()
         {
-            MoveTo(initPos, FadeSpeed, MenuSystem.EaseFunc);
+            MoveTo(InitPos, FadeSpeed, MenuSystem.EaseFunc);
         }
 
         public void Quit(bool move = true)
@@ -42,7 +42,7 @@ namespace Soleil.Images
 
         public void MoveToBack()
         {
-            MoveTo(initPos + PosDiff, FadeSpeed, MenuSystem.EaseFunc);
+            MoveTo(InitPos + PosDiff, FadeSpeed, MenuSystem.EaseFunc);
         }
     }
 }
