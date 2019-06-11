@@ -18,11 +18,12 @@ namespace Soleil.UI
         bool isRightSideEnd;
 
         BarBlock barBlock;
+        public int FrameWait { set => barBlock.FrameWait = value; }
 
-        public UIGauge(Vector pos, Vector size, bool _isRightRideRnd, DepthID _depth, double initRate = 1.0)
+        public UIGauge(Vector pos, Vector posdiff, Vector size, bool _isRightRideRnd, DepthID _depth, double initRate = 1.0)
         {
             Pos = pos;
-            barBlock = new BarBlock(pos, Vector.Zero, size, _depth);
+            barBlock = new BarBlock(pos, posdiff, size, _depth);
             barBlock.Rate = initRate;
         }
 
