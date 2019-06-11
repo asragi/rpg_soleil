@@ -14,6 +14,7 @@ namespace Soleil
         
         Drawing drawing;
         SceneManager sm;
+        PersonParty party;
 
         //実際の画面サイズ
         public const int VirtualWindowSizeX = 960;
@@ -80,7 +81,8 @@ namespace Soleil
             LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
-            new TestScene(sm);
+            party = new PersonParty();
+            new TestScene(sm, party);
             //new TestBattleScene(sm);
 
             // Camera

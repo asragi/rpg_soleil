@@ -16,12 +16,17 @@ namespace Soleil
     {
         public FontID Font { get; set; }
         private string text;
-        public string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
-        public override Vector GetSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
+        public virtual string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
+        public override Vector ImageSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
         public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
 
         // Outline
         private Outline outline;
+
+        // RightAlign
+        private bool rightAlign;
+
+        public override int FrameWait { set { base.FrameWait = value; outline?.FrameWait(value); } }
 
         /// <summary>
         /// ImageManagerから作る.
@@ -42,6 +47,28 @@ namespace Soleil
             outline = outline ?? new Outline(this, diff, PosDiff, DepthID, IsStatic);
             outline.Color = OutlineColor;
             outline.IsVisible = activate;
+            outline.Text = Text;
+        }
+
+        public void RightAlign(bool activate)
+        {
+            rightAlign = activate;
+            RefreshTextPos();
+        }
+
+        private void RefreshTextPos()
+        {
+            Vector basePos;
+            if (rightAlign)
+            {
+                basePos = InitPos - ImageSize;
+            }
+            else
+            {
+                basePos = InitPos;
+            }
+            basePos += PosDiff;
+            Pos = basePos;
         }
 
         public override void Update()
@@ -69,6 +96,7 @@ namespace Soleil
             outline?.Quit();
         }
 
+
         /// <summary>
         /// 枠線を外側に表示するためのクラス内クラス
         /// </summary>
@@ -81,6 +109,8 @@ namespace Soleil
             readonly Vector[] diffs;
             readonly FontImage[] outlineTexts;
             static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+
+            public void FrameWait(int frame) => outlineTexts.ForEach2(s => s.FrameWait = frame);
 
             public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
             {
@@ -118,7 +148,6 @@ namespace Soleil
             public void Draw(Drawing d)
             {
                 if (IsVisible) outlineTexts.ForEach2(s => s.Draw(d));
-                Console.WriteLine(IsVisible);
             }
         }
     }

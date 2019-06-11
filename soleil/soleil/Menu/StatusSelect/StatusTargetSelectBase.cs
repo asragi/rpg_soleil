@@ -16,6 +16,12 @@ namespace Soleil.Menu
 
         }
 
+        public override void Call()
+        {
+            base.Call();
+            StatusMenu.CallCursor();
+        }
+
         public void SetRefs(StatusMenu sm) => StatusMenu = sm;
 
         public override void OnInputRight() => StatusMenu.OnInputRight();

@@ -50,8 +50,8 @@ namespace Soleil.Event.Conversation
                     if (e.eventName == "person")
                     {
                         string name = e.person;
-                        // int position = e.position;
-                        personList.Add(new ConversationPerson(name));
+                        int position = e.position;
+                        personList.Add(new ConversationPerson(name, position));
                     }
                     if (e.eventName == "talk")
                     {
@@ -75,7 +75,10 @@ namespace Soleil.Event.Conversation
                         tmpEventSets = new List<EventBase>();
                     }
                 }
+                // 余ったイベントを末尾に追加
                 if (tmpEventSets.Count > 0) result.Add(new EventSet(tmpEventSets.ToArray()));
+                // キャラクターを一律に生み出す処理を先頭に追加
+                result.Insert(0, new EventSet(new ConversationPersonSet(personList, cs)));
                 return result.ToArray();
             }
         }
@@ -96,6 +99,7 @@ namespace Soleil.Event.Conversation
                     [YamlMember(Alias = "event")]
                     public string eventName { get; set; }
                     public string person { get; set; }
+                    public int position { get; set; }
                     public string face { get; set; }
                     public string text { get; set; }
                     [YamlMember(Alias = "bool-key")]

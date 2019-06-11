@@ -11,15 +11,15 @@ namespace Soleil.Event
     /// </summary>
     class ConversationEndEvent : EventBase
     {
-        ConversationWindow window;
-        public ConversationEndEvent(ConversationSystem cs)
+        ConversationSystem cs;
+        public ConversationEndEvent(ConversationSystem _cs)
         {
-            window = cs.ConversationWindow;
+            cs = _cs;
         }
 
         public override void Execute()
         {
-            window.Quit();
+            cs.Quit();
             Next();
         }
     }

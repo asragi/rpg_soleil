@@ -18,7 +18,7 @@ namespace Soleil
         public int Id { get; private set; }
         public Rectangle Rectangle { get; set; }
         public Vector Size { get; set; } = Vector.One;
-        public override Vector GetSize => new Vector(tex.Width,tex.Height);
+        public override Vector ImageSize => new Vector(tex.Width,tex.Height);
 
 
         /// <summary>

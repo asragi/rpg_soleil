@@ -24,6 +24,7 @@ namespace Soleil.Menu
 
         public override void OnInputCancel()
         {
+            StatusMenu.QuitCursor();
             ReturnParent();
         }
     }
