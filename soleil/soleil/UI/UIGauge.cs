@@ -67,7 +67,7 @@ namespace Soleil.UI
                 centerBased = false;
             }
 
-            public override Vector GetSize => size;
+            public override Vector ImageSize => size;
 
             public override void Draw(Drawing d)
             {
