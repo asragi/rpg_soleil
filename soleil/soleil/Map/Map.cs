@@ -34,8 +34,9 @@ namespace Soleil.Map
 
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
+        protected PersonParty Party;
 
-        public MapBase(MapName _name)
+        public MapBase(MapName _name, PersonParty _party)
         {
             var wm = WindowManager.GetInstance();
             om = new ObjectManager();
@@ -43,7 +44,8 @@ namespace Soleil.Map
             MapData.SetMapFlag();
             bm = new BoxManager(MapData, player);
             player = new PlayerObject(om, bm);
-            menuSystem = new MenuSystem();
+            Party = _party;
+            menuSystem = new MenuSystem(_party);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
             mapInputManager.SetMenuSystem(menuSystem);
@@ -67,6 +69,7 @@ namespace Soleil.Map
             mapInputManager.Update();
             MapCameraManager.Update();
             PictureHolder.Update();
+            ConversationSystem.Update();
         }
 
         /// <summary>
@@ -93,6 +96,7 @@ namespace Soleil.Map
             bm.Draw(sb);
             om.Draw(sb);
             PictureHolder.Draw(sb);
+            ConversationSystem.Draw(sb);
         }
     }
 }

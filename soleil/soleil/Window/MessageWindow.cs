@@ -6,12 +6,13 @@ namespace Soleil
     {
         MessageBox messageBox;
         public static FontID DefaultFont = FontID.Yasashisa;
+        public string Text { get => messageBox.Message; set => messageBox.Message = value; }
 
-        public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm)
-            : base(_pos, _size, tag, wm)
+        public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic = false)
+            : base(_pos, _size, tag, wm, isStatic)
         {
             var targetPos = _pos + new Vector(Spacing);
-            messageBox = new MessageBox(DefaultFont, targetPos, DiffPos, false, FadeSpeed);
+            messageBox = new MessageBox(DefaultFont, targetPos, DiffPos, isStatic, FadeSpeed);
             AddComponents(new[] { messageBox });
         }
 

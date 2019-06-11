@@ -13,10 +13,27 @@ namespace Soleil
     class ConversationSystem
     {
         public readonly ConversationWindow ConversationWindow;
+        public List<ConversationPerson> PersonList { get; set; }
 
         public ConversationSystem(WindowManager wm)
         {
             ConversationWindow = new ConversationWindow(WindowTag.Conversation, wm);
+        }
+
+        public void Quit()
+        {
+            PersonList?.ForEach(p => p.Quit());
+            ConversationWindow.Quit();
+        }
+
+        public void Update()
+        {
+            PersonList?.ForEach(p => p.Update());
+        }
+
+        public void Draw(Drawing d)
+        {
+            PersonList?.ForEach(p => p.Draw(d));
         }
     }
 }

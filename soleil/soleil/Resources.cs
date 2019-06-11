@@ -42,6 +42,8 @@ namespace Soleil
         MenuStatusL,
         MenuLune,
         MenuSun,
+        MenuTella,
+        MenuStatusCursor,
 
         Rule0,
         Rule1,
@@ -101,6 +103,8 @@ namespace Soleil
         Somnia4_3,
         Somnia4_4,
         Somnia4_5,
+
+        WorldMapIcon,
 
         White, Size
     }
@@ -290,6 +294,7 @@ namespace Soleil
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
             #endregion
 
             #region Animation
@@ -359,8 +364,10 @@ namespace Soleil
             SetPath(TextureID.MenuModalBack, UIPath + MenuPath + "menuModalBack");
             SetPath(TextureID.MenuSelected, UIPath + MenuPath + "selectBack");
             SetPath(TextureID.MenuUnselected, UIPath + MenuPath + "unselectedBack");
-            SetPath(TextureID.MenuLune, UIPath + MenuPath + "menulune");
-            SetPath(TextureID.MenuSun, UIPath + MenuPath + "menusun");
+            SetPath(TextureID.MenuLune, UIPath + MenuPath + "lune_face");
+            SetPath(TextureID.MenuSun, UIPath + MenuPath + "sunny_face");
+            SetPath(TextureID.MenuTella, UIPath + MenuPath + "tella_face");
+            SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
 
 

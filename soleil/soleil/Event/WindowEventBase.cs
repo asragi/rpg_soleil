@@ -11,6 +11,7 @@
         {
             Pos = _pos;
             Size = _size;
+            Tag = tag;
             Wm = WindowManager.GetInstance();
         }
     }

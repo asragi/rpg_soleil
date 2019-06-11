@@ -43,8 +43,8 @@ namespace Soleil.Event.Conversation
                 if (e.eventName == "person")
                 {
                     string name = e.person;
-                    // int position = e.position;
-                    personList.Add(new ConversationPerson(name));
+                    int position = e.position;
+                    personList.Add(new ConversationPerson(name, position));
                 }
                 if (e.eventName == "talk")
                 {
@@ -56,6 +56,7 @@ namespace Soleil.Event.Conversation
                 }
                 if (e.eventName == "branch") continue;
             }
+            result.Insert(0, new ConversationPersonSet(personList, cs));
             return result.ToArray();
         }
 
@@ -75,6 +76,7 @@ namespace Soleil.Event.Conversation
                     [YamlMember(Alias = "event")]
                     public string eventName { get; set; }
                     public string person { get; set; }
+                    public int position { get; set; }
                     public string face { get; set; }
                     public string text { get; set; }
                     [YamlMember(Alias = "branch-key")]

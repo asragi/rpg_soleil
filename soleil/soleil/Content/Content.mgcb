@@ -788,6 +788,18 @@
 /processorParam:TextureFormat=Color
 /build:Map/Back/Somnia/4/somnia4-5.png
 
+#begin Map/WorldMap/yasoba-building-icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/WorldMap/yasoba-building-icon.png
+
 #begin touhaba.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
@@ -834,6 +846,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/indicatorTemp.png
+
+#begin UI/Menu/lune_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/lune_face.png
 
 #begin UI/Menu/menuback.png
 /importer:TextureImporter
@@ -918,18 +942,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Menu/menuline.png
-
-#begin UI/Menu/menulune.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menulune.png
 
 #begin UI/Menu/menumagic1.PNG
 /importer:TextureImporter
@@ -1051,18 +1063,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/MenuStatusFaceL.png
 
-#begin UI/Menu/menusun.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menusun.png
-
 #begin UI/Menu/selectBack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1075,6 +1075,30 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/selectBack.png
 
+#begin UI/Menu/sunny_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/sunny_face.png
+
+#begin UI/Menu/tella_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/tella_face.png
+
 #begin UI/Menu/unselectedBack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1086,6 +1110,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Menu/unselectedBack.png
+
+#begin UI/Menu/yasoba-select.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/yasoba-select.png
 
 #begin UI/message.png
 /importer:TextureImporter
