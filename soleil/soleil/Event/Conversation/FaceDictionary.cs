@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event.Conversation
 {
-    class FaceDictionary
+    static class FaceDictionary
     {
-        Dictionary<string, Person> dict;
+        static Dictionary<string, Person> dict;
 
-        public FaceDictionary()
+        static FaceDictionary()
         {
             dict = new Dictionary<string, Person>();
             Set("lune", "normal", TextureID.MenuLune, dict);
@@ -24,8 +24,8 @@ namespace Soleil.Event.Conversation
             }
         }
 
-        public TextureID Get(string name, string faceName) => dict[name].Get(faceName);
-        public string[] GetFaces(string name) => dict[name].GetFaces();
+        public static TextureID Get(string name, string faceName) => dict[name].Get(faceName);
+        public static string[] GetFaces(string name) => dict[name].GetFaces();
 
         class Person
         {
