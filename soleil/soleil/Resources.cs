@@ -103,6 +103,8 @@ namespace Soleil
         Somnia4_4,
         Somnia4_5,
 
+        WorldMapIcon,
+
         White, Size
     }
 
@@ -291,6 +293,7 @@ namespace Soleil
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
             #endregion
 
             #region Animation

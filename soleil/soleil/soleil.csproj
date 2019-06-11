@@ -160,6 +160,14 @@
     <Compile Include="Map\ObjectManager.cs" />
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
+    <Compile Include="Map\WorldMap\WorldMapCamera.cs" />
+    <Compile Include="Map\WorldMap\WorldMapCursorLayer.cs" />
+    <Compile Include="Map\WorldMap\WorldMapInput.cs" />
+    <Compile Include="Map\WorldMap\WorldMapSelectLayer.cs" />
+    <Compile Include="Map\WorldMap\WorldMapWindowLayer.cs" />
+    <Compile Include="Map\WorldMap\WorldMap.cs" />
+    <Compile Include="Map\WorldMap\WorldMapMaster.cs" />
+    <Compile Include="Map\WorldMap\WorldPoint.cs" />
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\Detail\ArmorDetail.cs" />
@@ -202,6 +210,7 @@
     <Compile Include="Menu\TextSelectablePanel.cs" />
     <Compile Include="Misc\CharacterData.cs" />
     <Compile Include="Misc\CharaName.cs" />
+    <Compile Include="Misc\InputSmoother.cs" />
     <Compile Include="Misc\PersonParty.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
@@ -215,6 +224,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Scene\WorldMapScene.cs" />
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
     <Compile Include="Skill\SkillHolder.cs" />

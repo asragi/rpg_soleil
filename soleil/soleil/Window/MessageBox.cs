@@ -9,7 +9,8 @@ namespace Soleil
     {
         const int drawCharPeriod = 4; // nフレームごとに文字更新
         const DepthID Depth = DepthID.Message;
-        string message;
+        private string message;
+        public string Message { get => message; set { message = value; SetMessage(message); FinishAnim(); } }
         char[] messageArray;
         string messageToDraw; // 表示されるStringを保持する変数
         int charIndex; // char配列アクセス用index
@@ -32,7 +33,7 @@ namespace Soleil
         {
             endAnimation = false;
             message = msg;
-            messageArray = message.ToCharArray();
+            messageArray = Message.ToCharArray();
             messageToDraw = "";
             fontImage.Text = "";
             charIndex = 0;
@@ -52,8 +53,8 @@ namespace Soleil
         /// </summary>
         public void FinishAnim()
         {
-            messageToDraw = message;
-            fontImage.Text = message;
+            messageToDraw = Message;
+            fontImage.Text = Message;
             charIndex = messageArray.Length;
             endAnimation = true;
         }
