@@ -29,7 +29,7 @@ namespace Soleil.Event.Conversation
             return deserializeObject;
         }
         
-        public static EventSet[] ActionFromData(string place, string conversationName, ConversationSystem cs)
+        public static EventSet[] ActionFromData(string place, string conversationName, ConversationSystem cs, EventSequence es)
         {
             // 会話に登場する人物のリスト
             var _personList = new List<ConversationPerson>();
@@ -37,11 +37,12 @@ namespace Soleil.Event.Conversation
             var convListInPlace = conversations.Find(s => s.place == place);
             var targetConv = convListInPlace.conversations.Find(s => s.name == conversationName);
             var _events = targetConv.events;
-            return CreateEventSet(_events, _personList);
+            return CreateEventSet(_events, _personList, es);
 
             EventSet[] CreateEventSet(
                 List<ConversationYaml.ConversationSet.YamlEvent> events,
-                List<ConversationPerson> personList)
+                List<ConversationPerson> personList,
+                EventSequence eventSequence)
             {
                 var tmpEventSets = new List<EventBase>();
                 var result = new List<EventSet>();
@@ -63,15 +64,16 @@ namespace Soleil.Event.Conversation
                     }
                     if (e.eventName == "branch")
                     {
-                        var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, GlobalBoolSet.GlobalBoolSize);
+                        var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, (int)GlobalBoolKey.size);
                         var key = (GlobalBoolKey)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
                         Func<bool> func = () => boolSet[(int)key];
 
                         // EventSetの作成を終了し，分岐用EventSetを追加．新しいEventSetの作成を始める．
                         result.Add(new EventSet(tmpEventSets.ToArray()));
-                        var onTrueEvents = CreateEventSet(e.onTrue, personList);
-                        var onFalseEvents = CreateEventSet(e.onFalse, personList);
-                        var branchSet = new BoolEventBranch(null, func, null, null);
+                        var onTrueEvents = CreateEventSet(e.onTrue, personList, eventSequence);
+                        var onFalseEvents = CreateEventSet(e.onFalse, personList, eventSequence);
+                        var branchSet = new BoolEventBranch(eventSequence, func, onTrueEvents, onFalseEvents);
+                        result.Add(branchSet);
                         tmpEventSets = new List<EventBase>();
                     }
                 }

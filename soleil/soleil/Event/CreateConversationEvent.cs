@@ -13,9 +13,9 @@ namespace Soleil.Event
     /// </summary>
     static class CreateConversationEvent
     {
-        public static EventSet[] Create(string place, string convName, ConversationSystem cs)
+        public static EventSet[] Create(string place, string convName, ConversationSystem cs, EventSequence es)
         {
-            var events = ConversationRead.ActionFromData(place, convName, cs);
+            var events = ConversationRead.ActionFromData(place, convName, cs, es);
             var initEvent = new EventSet(new ChangeInputFocusEvent(InputFocus.Window), new ConversationInitEvent(cs));
             var endEvent = new EventSet(new ConversationEndEvent(cs), new ChangeInputFocusEvent(InputFocus.Player));
 

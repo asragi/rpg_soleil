@@ -27,7 +27,7 @@ namespace Soleil.Event
     /// </summary>
     static class GlobalBoolSet
     {
-        public const int GlobalBoolSize = 255;
+        // public const int GlobalBoolSize = 255;
         static BoolSet[] boolSets;
 
         static GlobalBoolSet()
