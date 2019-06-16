@@ -6,6 +6,9 @@
         public int HPMAX;
         public int MPMAX;
 
+        public int HP { get; set; }
+        public int MP { get; set; }
+
         /// <summary>
         /// 物理攻撃の威力に関係
         /// [1,99]
@@ -34,6 +37,7 @@
         {
             HPMAX = _HPMAX;
             MPMAX = _MPMAX;
+            (HP, MP) = (HPMAX, MPMAX);
             STR = _STR;
             VIT = _VIT;
             MAG = _MAG;
