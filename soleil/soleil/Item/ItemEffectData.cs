@@ -25,11 +25,19 @@ namespace Soleil.Item
 
             bool RecoverByRate(Person target, double hpRate = 0, double mpRate = 0)
             {
-                var hpRecoverRate = target.Score.HPMAX * (hpRate / 100);
-                var mpRecoverRate = target.Score.MPMAX * (mpRate / 100);
+                var targetScore = target.Score;
+                var hpRecoverVal = targetScore.HPMAX * (hpRate / 100);
+                var mpRecoverVal = targetScore.MPMAX * (mpRate / 100);
 
                 // Return false if using item is useless.
-                // ***** WIP *****
+                bool fullHP = targetScore.HP == targetScore.HPMAX;
+                bool fullMP = targetScore.MP == targetScore.MPMAX;
+                bool errorCurable = false; // 状態異常がある && アイテム使用で回復可能
+                if (fullHP && fullMP && !errorCurable) return false;
+                if (fullHP && mpRecoverVal == 0 && !errorCurable) return false;
+                if (fullMP && hpRecoverVal == 0 && !errorCurable) return false;
+
+                // 回復処理
 
                 return true;
             }
