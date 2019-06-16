@@ -26,8 +26,8 @@ namespace Soleil.Item
             bool RecoverByRate(Person target, double hpRate = 0, double mpRate = 0)
             {
                 var targetScore = target.Score;
-                var hpRecoverVal = targetScore.HPMAX * (hpRate / 100);
-                var mpRecoverVal = targetScore.MPMAX * (mpRate / 100);
+                int hpRecoverVal = (int)(targetScore.HPMAX * (hpRate / 100));
+                int mpRecoverVal = (int)(targetScore.MPMAX * (mpRate / 100));
 
                 // Return false if using item is useless.
                 bool fullHP = targetScore.HP == targetScore.HPMAX;
@@ -38,7 +38,8 @@ namespace Soleil.Item
                 if (fullMP && hpRecoverVal == 0 && !errorCurable) return false;
 
                 // 回復処理
-
+                if (hpRecoverVal > 0) target.RecoverHP(hpRecoverVal);
+                if (mpRecoverVal > 0) target.RecoverMP(mpRecoverVal);
                 return true;
             }
         }

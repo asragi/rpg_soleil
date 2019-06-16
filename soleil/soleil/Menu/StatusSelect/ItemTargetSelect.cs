@@ -29,8 +29,18 @@ namespace Soleil.Menu
 
         public override void OnInputSubmit()
         {
-            int selected = StatusMenu.GetIndex();
-            Console.WriteLine(selected);
+            Person selected = StatusMenu.GetSelectedPerson();
+            bool useSuccess = ItemEffectData.UseOnMenu(selected, id);
+            if (useSuccess)
+            {
+                itemList.Consume(id);
+                if (!itemList.HasItem(id)) OnInputCancel();
+                Console.WriteLine("use");
+            }
+            else
+            {
+                // Play buzzer sound to notify that item cannot be used.
+            }
         }
 
         public override void OnInputCancel()
