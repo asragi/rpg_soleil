@@ -28,22 +28,9 @@ namespace Soleil.Menu
             for (int i = 0; i < icons.Length; i++)
             {
                 var category = (MagicCategory)i;
-                var disable = !holder.HasCategory(category);
-                icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), disable, category, this);
+                icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), category, this);
             }
-            categoryToDisplay = DecideInitialPosition();
-            ChangeMagicIconState();
-            Init();
-
-            MagicCategory DecideInitialPosition()
-            {
-                for (int i = 0; i < (int)MagicCategory.size; i++)
-                {
-                    var c = (MagicCategory)i;
-                    if (holder.HasCategory(c)) return c;
-                }
-                return 0;
-            }
+            Init(); // make placeholder
         }
 
         public void InputSide(bool isRight)
@@ -112,7 +99,10 @@ namespace Soleil.Menu
         public void CallWithPerson(Person p)
         {
             holder = p.Skill;
+            SetIcons();
+            categoryToDisplay = DecideInitialPosition(holder);
             Init();
+            ChangeMagicIconState();
             Call();
         }
 
@@ -126,6 +116,22 @@ namespace Soleil.Menu
         {
             base.Draw(d);
             icons.ForEach2(s => s.Draw(d));
+        }
+
+        private void SetIcons()
+        {
+            for (int i = 0; i < icons.Length; i++)
+                icons[i].Disabled = !holder.HasCategory((MagicCategory)i);
+        }
+
+        private MagicCategory DecideInitialPosition(SkillHolder sh)
+        {
+            for (int i = 0; i < (int)MagicCategory.size; i++)
+            {
+                var c = (MagicCategory)i;
+                if (sh.HasCategory(c)) return c;
+            }
+            return 0;
         }
     }
 }
