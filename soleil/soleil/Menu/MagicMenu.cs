@@ -99,6 +99,7 @@ namespace Soleil.Menu
         public void CallWithPerson(Person p)
         {
             holder = p.Skill;
+            Index = 0;
             SetIcons();
             categoryToDisplay = DecideInitialPosition(holder);
             Init();
