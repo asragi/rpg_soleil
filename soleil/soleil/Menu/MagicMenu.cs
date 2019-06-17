@@ -19,12 +19,7 @@ namespace Soleil.Menu
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
-            // Debug
             holder = new SkillHolder();
-            holder.LearnSkill(SkillID.MagicalHeal);
-            holder.LearnSkill(SkillID.Explode);
-            holder.LearnSkill(SkillID.PointFlare);
-            holder.LearnSkill(SkillID.Sonicboom);
             categoryToDisplay = MagicCategory.Sun;
 
             // icon
@@ -112,6 +107,13 @@ namespace Soleil.Menu
                 }
             }
             return magList.ToArray();
+        }
+
+        public void CallWithPerson(Person p)
+        {
+            holder = p.Skill;
+            Init();
+            Call();
         }
 
         public override void Update()

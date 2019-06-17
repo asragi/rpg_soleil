@@ -19,7 +19,7 @@ namespace Soleil.Menu
 
         public void CallWithPerson(Person p)
         {
-            skillHolder = new SkillHolder();
+            skillHolder = p.Skill;
             Init();
             Call();
         }
