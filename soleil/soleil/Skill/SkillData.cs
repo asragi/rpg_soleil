@@ -58,4 +58,20 @@ namespace Soleil.Skill
             AttackType = AttackType.Magical;
         }
     }
+
+    struct SkillData : ISkill
+    {
+        public SkillID ID { get; }
+        public AttackType AttackType { get; }
+        public bool OnMenu { get; }
+        public bool OnBattle { get; }
+        public string Name { get; }
+        public string Description { get; }
+
+        public SkillData(string name, SkillID id, string desc, bool onMenu = false, bool onBattle = true, AttackType aType = AttackType.Physical)
+        {
+            (ID, AttackType, OnMenu, OnBattle, Name, Description) =
+                (id, aType, onMenu, onBattle, name, desc);
+        }
+    }
 }

@@ -19,6 +19,9 @@ namespace Soleil.Skill
         // Sound
         Sonicboom,
 
+        // Skill
+        Headbutt,
+
         size
     }
 
@@ -41,6 +44,13 @@ namespace Soleil.Skill
             SetMagic("エクスプロード", SkillID.Explode, MagicCategory.Magic, "敵全体へ突属性のダメージ．");
 
             SetMagic("ソニックブーム", SkillID.Sonicboom, MagicCategory.Sound, "敵単体へ斬属性のダメージ．");
+
+            SetSkill("ヘッドバット", SkillID.Headbutt, "敵単体に打属性のダメージ．確率で気絶．");
+        }
+
+        static void SetSkill(string name, SkillID id, string desc, bool onMenu = false, bool onBattle = true)
+        {
+            data[(int)id] = new SkillData(name, id, desc, onMenu, onBattle);
         }
 
         static void SetMagic(string name, SkillID id, MagicCategory category, string desc, bool onMenu = false, bool onBattle = true)
