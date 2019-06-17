@@ -19,13 +19,8 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             base.OnInputSubmit();
+            IsActive = false;
             menuSystem.CallChild(MenuName.Skill);
-        }
-
-        public override void OnInputCancel()
-        {
-            base.OnInputCancel();
-            ReturnParent();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Soleil.Menu
         /// <summary>
         /// 親要素に対する相対的な座標．
         /// </summary>
-        public virtual Vector LocalPos { get; set; }
+        public virtual Vector LocalPos { get; set; } = Vector.Zero;
         // ウィンドウ
         protected BasicMenu BasicMenu;
         public virtual Vector ItemNumPosDiff { get => new Vector(360, 0); }
