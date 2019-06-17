@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    /// <summary>
-    /// アイテムメニューのそれぞれの選択パネルのクラス
-    /// </summary>
-    class MagicMenuPanel : TextSelectablePanel
+    class SkillMenuPanel : TextSelectablePanel
     {
         public override string Desctiption => desc;
         private string desc;
 
-        public MagicMenuPanel(ISkill data, MagicMenu parent)
+        public SkillMenuPanel(ISkill data, SkillMenu parent)
             : base(data.Name, parent)
         {
-            // itemNum
             Val = data.Cost;
             desc = data.Description;
             LocalPos = Vector.Zero;

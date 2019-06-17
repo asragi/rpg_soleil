@@ -13,8 +13,22 @@ namespace Soleil.Menu
         public SkillMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
-            skillHolder = new Skill.SkillHolder();
+            skillHolder = new SkillHolder();
+            Init();
+        }
 
+        protected override SelectablePanel[] MakeAllPanels()
+        {
+            var skillList = new List<SkillMenuPanel>();
+            for (int i = 0; i < (int)SkillID.size; i++)
+            {
+                var id = (SkillID)i;
+                var _data = SkillDataBase.Get(id);
+                if (_data.AttackType != AttackType.Physical) continue;
+                if (!skillHolder.HasSkill(id)) continue;
+                skillList.Add(new SkillMenuPanel(_data, this));
+            }
+            return skillList.ToArray();
         }
     }
 }

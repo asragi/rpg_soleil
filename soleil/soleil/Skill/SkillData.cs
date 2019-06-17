@@ -37,6 +37,7 @@ namespace Soleil.Skill
         bool OnBattle { get; }
         string Name { get; }
         string Description { get; }
+        int Cost { get; }
     }
 
     struct MagicData : ISkill
@@ -48,13 +49,14 @@ namespace Soleil.Skill
         public bool OnBattle { get; }
         public string Name { get; }
         public string Description { get; }
+        public int Cost { get; }
 
         public MagicData(
-            string name, SkillID id, MagicCategory category, string desc,
+            string name, SkillID id, MagicCategory category, string desc, int cost,
             bool onMenu = false, bool onBattle = true)
         {
-            (ID, Category, OnMenu, OnBattle, Name, Description) =
-                (id, category, onMenu, onBattle, name, desc);
+            (ID, Category, OnMenu, OnBattle, Name, Description, Cost) =
+                (id, category, onMenu, onBattle, name, desc, cost);
             AttackType = AttackType.Magical;
         }
     }
@@ -67,11 +69,12 @@ namespace Soleil.Skill
         public bool OnBattle { get; }
         public string Name { get; }
         public string Description { get; }
+        public int Cost { get; }
 
-        public SkillData(string name, SkillID id, string desc, bool onMenu = false, bool onBattle = true, AttackType aType = AttackType.Physical)
+        public SkillData(string name, SkillID id, string desc, int cost, bool onMenu = false, bool onBattle = true, AttackType aType = AttackType.Physical)
         {
-            (ID, AttackType, OnMenu, OnBattle, Name, Description) =
-                (id, aType, onMenu, onBattle, name, desc);
+            (ID, AttackType, OnMenu, OnBattle, Name, Description, Cost) =
+                (id, aType, onMenu, onBattle, name, desc, cost);
         }
     }
 }
