@@ -19,12 +19,11 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             int selected = StatusMenu.GetIndex();
-            Console.WriteLine(selected);
         }
 
         public override void OnInputCancel()
         {
-            IsActive = false;
+            base.OnInputCancel();
             itemMenu.Call();
         }
     }

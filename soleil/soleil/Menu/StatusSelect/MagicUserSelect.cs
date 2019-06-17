@@ -21,10 +21,5 @@ namespace Soleil.Menu
             IsActive = false;
             menuSystem.CallChild(MenuName.Magic);
         }
-
-        public override void OnInputCancel()
-        {
-            ReturnParent();
-        }
     }
 }

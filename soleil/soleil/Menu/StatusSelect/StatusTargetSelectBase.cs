@@ -27,5 +27,11 @@ namespace Soleil.Menu
         public override void OnInputRight() => StatusMenu.OnInputRight();
 
         public override void OnInputLeft() => StatusMenu.OnInputLeft();
+
+        public override void OnInputCancel()
+        {
+            StatusMenu.QuitCursor();
+            ReturnParent();
+        }
     }
 }
