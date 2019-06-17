@@ -130,6 +130,7 @@
     <Compile Include="Images\UIImageBase.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
+    <Compile Include="Item\ItemEffectData.cs" />
     <Compile Include="Item\ItemList.cs" />
     <Compile Include="Map\AnimationConstruct.cs" />
     <Compile Include="Map\CameraPoint.cs" />

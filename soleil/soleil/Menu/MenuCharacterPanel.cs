@@ -21,6 +21,11 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText, lvNumText;
         readonly Vector posDiff = new Vector(50, 0);
 
+        Person person;
+
+        // animation
+        int targetHP, targetMP;
+
         public int FrameWait
         {
             set
@@ -36,10 +41,11 @@ namespace Soleil.Menu
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
         {
+            person = p;
             pos = _pos;
             int hp, mp;
-            hp = p.Score.HPMAX;
-            mp = p.Score.MPMAX;
+            hp = p.Score.HP;
+            mp = p.Score.MP;
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
@@ -65,6 +71,29 @@ namespace Soleil.Menu
             mpNumText.ActivateOutline(1);
             lvNumText.ActivateOutline(1);
             AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
+
+            targetHP = hp;
+            targetMP = mp;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            UpdateStatusVal();
+
+            void UpdateStatusVal()
+            {
+                if(person.Score.HP != targetHP)
+                {
+                    targetHP = person.Score.HP;
+                    hpNumText.Text = targetHP.ToString();
+                }
+
+                if(person.Score.MP != targetMP)
+                {
+                    targetMP = person.Score.MP;
+                }
+            }
         }
     }
 }

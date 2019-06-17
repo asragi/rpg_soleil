@@ -16,6 +16,8 @@ namespace Soleil
     {
         public FontID Font { get; set; }
         private string text;
+        public override Vector Pos { get => base.Pos; set { base.Pos = value; if (outline != null) outline.Pos = value; } }
+        public override Vector InitPos { get => base.InitPos; set { base.InitPos = value; if (outline != null) outline.InitPos = value; } }
         public virtual string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
         public override Vector ImageSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
         public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
@@ -107,24 +109,35 @@ namespace Soleil
             public string Text { set => outlineTexts.ForEach2(s => s.Text = value); }
             readonly FontImage parent;
             readonly Vector[] diffs;
+            int diffSize;
             readonly FontImage[] outlineTexts;
             static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+            public Vector Pos
+            {
+                set
+                {
+                    for (int i = 0; i < outlineTexts.Length; i++)
+                        outlineTexts[i].Pos = value + normalizedDiffs[i] * diffSize;
+                }
+            }
+            public Vector InitPos { set => outlineTexts.ForEach2(t => t.InitPos = value); }
 
             public void FrameWait(int frame) => outlineTexts.ForEach2(s => s.FrameWait = frame);
 
             public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
             {
                 parent = _parent;
+                diffSize = diff;
                 diffs = SetDiffPosition(normalizedDiffs, parent.Pos - positionDiff, diff);
                 outlineTexts = SetFontImages(parent.Font, diffs, positionDiff, depth, isStatic);
 
-                Vector[] SetDiffPosition(Vector[] normalVecs, Vector parentPos, int diffSize)
+                Vector[] SetDiffPosition(Vector[] normalVecs, Vector parentPos, int _diffSize)
                 {
                     var size = normalizedDiffs.Length;
                     var result = new Vector[size];
                     for (int i = 0; i < size; i++)
                     {
-                        result[i] = parentPos + normalVecs[i] * diffSize;
+                        result[i] = parentPos + normalVecs[i] * _diffSize;
                     }
                     return result;
                 }
