@@ -19,8 +19,9 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             base.OnInputSubmit();
+            Person selected = StatusMenu.GetSelectedPerson();
             IsActive = false;
-            menuSystem.CallChild(MenuName.Skill);
+            menuSystem.CallChild(MenuName.Skill, selected);
         }
     }
 }

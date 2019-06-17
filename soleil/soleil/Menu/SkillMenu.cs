@@ -17,6 +17,13 @@ namespace Soleil.Menu
             Init();
         }
 
+        public void CallWithPerson(Person p)
+        {
+            skillHolder = new SkillHolder();
+            Init();
+            Call();
+        }
+
         protected override SelectablePanel[] MakeAllPanels()
         {
             var skillList = new List<SkillMenuPanel>();

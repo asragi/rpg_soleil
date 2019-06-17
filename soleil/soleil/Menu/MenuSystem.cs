@@ -232,11 +232,11 @@ namespace Soleil.Menu
         /// <summary>
         /// 外部から特定のメニューを有効にする．
         /// </summary>
-        public void CallChild(MenuName name)
+        public void CallChild(MenuName name, Person p)
         {
             if (name == MenuName.Magic) magicMenu.Call();
             if (name == MenuName.Status) statusSystem.Call();
-            if (name == MenuName.Skill) skillMenu.Call();
+            if (name == MenuName.Skill) skillMenu.CallWithPerson(p);
         }
 
         void Decide()

@@ -17,9 +17,9 @@ namespace Soleil.Menu
 
         public override void OnInputSubmit()
         {
-            int selected = StatusMenu.GetIndex();
+            Person selected = StatusMenu.GetSelectedPerson();
             IsActive = false;
-            menuSystem.CallChild(MenuName.Magic);
+            menuSystem.CallChild(MenuName.Magic, selected);
         }
     }
 }
