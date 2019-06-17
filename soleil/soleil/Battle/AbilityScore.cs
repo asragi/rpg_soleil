@@ -6,8 +6,8 @@
         public int HPMAX;
         public int MPMAX;
 
-        public int HP { get; set; }
-        public int MP { get; set; }
+        public int HP;
+        public int MP;
 
         /// <summary>
         /// 物理攻撃の威力に関係

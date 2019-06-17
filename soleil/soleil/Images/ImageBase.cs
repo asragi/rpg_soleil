@@ -11,7 +11,7 @@ namespace Soleil
     {
         protected DepthID DepthID;
         protected int Frame;
-        public Vector Pos { get; set; }
+        public virtual Vector Pos { get; set; }
         public float Angle { get; set; }
         protected bool IsStatic;
         public bool IsDead { get; set; }

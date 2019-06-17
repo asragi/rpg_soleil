@@ -16,6 +16,8 @@ namespace Soleil
     {
         public FontID Font { get; set; }
         private string text;
+        public override Vector Pos { get => base.Pos; set { base.Pos = value; if (outline != null) outline.Pos = value; } }
+        public override Vector InitPos { get => base.InitPos; set { base.InitPos = value; if (outline != null) outline.InitPos = value; } }
         public virtual string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
         public override Vector ImageSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
         public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
@@ -109,6 +111,8 @@ namespace Soleil
             readonly Vector[] diffs;
             readonly FontImage[] outlineTexts;
             static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+            public Vector Pos { set => outlineTexts.ForEach2(t => t.Pos = value); }
+            public Vector InitPos { set => outlineTexts.ForEach2(t => t.InitPos = value); }
 
             public void FrameWait(int frame) => outlineTexts.ForEach2(s => s.FrameWait = frame);
 
