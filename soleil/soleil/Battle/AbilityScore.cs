@@ -39,7 +39,7 @@
         {
             HPMAX = _HPMAX;
             MPMAX = _MPMAX;
-            (HP, MP) = (HPMAX, MPMAX);
+            (hp, mp) = (HPMAX, MPMAX);
             STR = _STR;
             VIT = _VIT;
             MAG = _MAG;
