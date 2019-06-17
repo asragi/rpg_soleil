@@ -35,7 +35,6 @@ namespace Soleil.Menu
             {
                 itemList.Consume(id);
                 if (!itemList.HasItem(id)) OnInputCancel();
-                Console.WriteLine("use");
             }
             else
             {
