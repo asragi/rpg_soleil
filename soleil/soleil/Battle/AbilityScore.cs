@@ -6,8 +6,10 @@
         public int HPMAX;
         public int MPMAX;
 
-        public int HP;
-        public int MP;
+        private int hp;
+        public int HP { get => hp; set => hp = MathEx.Clamp(value, HPMAX, 0); }
+        private int mp;
+        public int MP { get => mp; set => mp = MathEx.Clamp(value, MPMAX, 0); }
 
         /// <summary>
         /// 物理攻撃の威力に関係
