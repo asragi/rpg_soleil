@@ -27,6 +27,8 @@ namespace Soleil.Item
         // 装備
         // 武器
         SilverWand,
+        // 防具
+        Uniform,
         // アクセサリー
         BeadsWork, // ビーズのアクセサリー
 
@@ -60,6 +62,8 @@ namespace Soleil.Item
             SetUse("活きのいいザリガニ", ItemID.Zarigani, ItemTarget.OneAlly, "食べる......？");
             // 武器
             SetWeapon("シルバーワンド", ItemID.SilverWand, new AttackData(24, 30), null, null, "高級な魔法杖");
+            // 防具
+            SetArmor("ユニフォーム", ItemID.Uniform, new DefData(3, 8, null, new AttrDef(ice: 10, blow: 10)), null, "制服をリメイクしたもの．");
             // アクセサリー
             SetAc("ビーズのアクセサリー", ItemID.BeadsWork, new DefData(1, 5, null, null), null, "手作りの可愛いアクセサリー");
 
@@ -89,12 +93,17 @@ namespace Soleil.Item
             data[(int)id] = new ConsumableItem(id, name, desc, target, onMenu, onBattle);
         }
 
-        static void SetWeapon(String name, ItemID id, AttackData attack, DefData? def, AbilityScore? score, String desc)
+        static void SetWeapon(string name, ItemID id, AttackData attack, DefData? def, AbilityScore? score, String desc)
         {
             data[(int)id] = new WeaponData(id, attack, def, score, name, desc);
         }
 
-        static void SetAc(String name, ItemID id, DefData def, AbilityScore? score, String desc)
+        static void SetArmor(string name, ItemID id, DefData def, AbilityScore? score, string desc)
+        {
+            data[(int)id] = new ArmorData(id, def, score, name, desc);
+        }
+
+        static void SetAc(string name, ItemID id, DefData def, AbilityScore? score, String desc)
         {
             data[(int)id] = new AccessaryData(id, def, score, name, desc);
         }
