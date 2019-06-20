@@ -22,5 +22,41 @@ namespace Soleil.Battle
             var def = Weapon.DefData.GetDefVal(attr, attackType) + Armor.DefData.GetDefVal(attr, attackType);
             return accessaryDef + def;
         }
+
+        /// <summary>
+        /// 武器を交換する．
+        /// </summary>
+        /// <param name="id">装備する武器のItemID</param>
+        /// <returns>今まで装備していて交換によって外れる武器のID</returns>
+        public ItemID ChangeWeapon(ItemID id)
+        {
+            var returnWeapon = Weapon;
+            Weapon = (WeaponData)ItemDataBase.Get(id);
+            return returnWeapon.ID;
+        }
+
+        /// <summary>
+        /// 防具を交換する．
+        /// </summary>
+        /// <param name="id">装備する防具のItemID</param>
+        /// <returns>今まで装備していて交換によって外れる防具のID</returns>
+        public ItemID ChangeArmor(ItemID id)
+        {
+            var returnArmor = Armor;
+            Armor = (ArmorData)ItemDataBase.Get(id);
+            return returnArmor.ID;
+        }
+
+        /// <summary>
+        /// アクセサリを交換する．
+        /// </summary>
+        /// <param name="id">装備するアクセサリのItemID</param>
+        /// <returns>今まで装備していて交換によって外れるアクセサリのID</returns>
+        public ItemID ChangeAccessary(ItemID id)
+        {
+            var returnAccessary = Accessary;
+            Accessary = (AccessaryData)ItemDataBase.Get(id);
+            return returnAccessary.ID;
+        }
     }
 }
