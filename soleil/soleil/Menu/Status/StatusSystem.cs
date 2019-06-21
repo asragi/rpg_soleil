@@ -24,9 +24,6 @@ namespace Soleil.Menu
         // ステータスパラメータ
         StatusParamsDisplay statusParams;
         readonly Vector ParamsPos;
-        // 属性
-        AttributeDisplay attribute;
-        readonly Vector AttributePos;
         // 装備
         EquipDisplay equipDisplay;
         readonly Vector EquipPos;
@@ -34,51 +31,38 @@ namespace Soleil.Menu
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
         
-        // おしゃれ移動用参照
-        MenuLine[] lines;
-        public StatusSystem(MenuComponent parent, params MenuLine[] _lines)
+        public StatusSystem(MenuComponent parent)
             : base(parent)
         {
             // const
-            const int namePosX = 350;
-            const int namePosY = 80;
-            const int RightX = 520;
-            FacePos = new Vector(60, 80);
+            const int namePosX = 282;
+            const int namePosY = 128;
+            const int RightX = 550;
+            FacePos = new Vector(124, 122);
             NamePos = new Vector(namePosX, namePosY);
-            HPPos = new Vector(namePosX + 76, namePosY+2);
-            MPPos = new Vector(namePosX, namePosY + 40);
-            ParamsPos = new Vector(namePosX, 175);
-            AttributePos = new Vector(namePosX, ParamsPos.Y + 200);
-            EquipPos = new Vector(RightX, 254);
-            CategoryPos = new Vector(RightX, namePosY);
+            HPPos = new Vector(namePosX, namePosY + 26);
+            MPPos = new Vector(namePosX, namePosY + 52);
+            ParamsPos = new Vector(namePosX, 207);
+            EquipPos = new Vector(namePosX, 319);
+            CategoryPos = new Vector(RightX, namePosY - 6);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
-            faceImg = new UIImage(TextureID.MenuStatusL, FacePos, Vector.Zero, DepthID.MenuMiddle);
+            faceImg = new UIImage(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
             charaName = new CharaName(NamePos, "ルーネ");
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
-            attribute = new AttributeDisplay(AttributePos);
             equipDisplay = new EquipDisplay(EquipPos);
 
             //
-            AddComponents(new IComponent[] {backImage, charaName, statusParams, attribute, display, equipDisplay, statusMagicCategory, faceImg });
+            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, equipDisplay, statusMagicCategory, faceImg });
             
-            //
-            lines = _lines;
-        }
-
-        public override void Call()
-        {
-            base.Call();
-            foreach (var item in lines) item.StartMove(true);
         }
 
         public override void OnInputCancel()
         {
             base.OnInputCancel();
-            foreach (var item in lines) item.StartMove(false);
             Quit();
             ReturnParent();
         }
