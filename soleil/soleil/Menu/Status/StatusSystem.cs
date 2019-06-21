@@ -42,14 +42,14 @@ namespace Soleil.Menu
             NamePos = new Vector(namePosX, namePosY);
             HPPos = new Vector(namePosX, namePosY + 26);
             MPPos = new Vector(namePosX, namePosY + 52);
-            ParamsPos = new Vector(namePosX, 207);
+            ParamsPos = new Vector(namePosX, 218);
             EquipPos = new Vector(namePosX, 319);
             CategoryPos = new Vector(RightX, namePosY - 6);
 
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImg = new UIImage(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
-            charaName = new CharaName(NamePos, "ルーネ");
+            charaName = new CharaName(NamePos, "ルーネ", 250);
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
