@@ -44,6 +44,7 @@ namespace Soleil
         MenuSun,
         MenuTella,
         MenuStatusCursor,
+        MenuCategory,
 
         Rule0,
         Rule1,
@@ -157,6 +158,7 @@ namespace Soleil
         KkGoldMini,
         Touhaba,
         Yasashisa,
+        CorpMini,
         [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
         Test,
         Size,
@@ -369,7 +371,7 @@ namespace Soleil
             SetPath(TextureID.MenuTella, UIPath + MenuPath + "tella_face");
             SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
-
+            SetPath(TextureID.MenuCategory, UIPath + MenuPath + "yasoba-window-skill-category");
 
             for (int i = 0; i < 20; i++)
             {
@@ -394,6 +396,7 @@ namespace Soleil
             SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
             SetPath(FontID.Touhaba, "touhaba");
             SetPath(FontID.Yasashisa, "yasashisa");
+            SetPath(FontID.CorpMini, "corpmini");
 
 
             //optionPath = Option.FilePath;

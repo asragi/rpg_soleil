@@ -8,17 +8,17 @@ namespace Soleil.Menu.Status
 {
     class MagicCategoryPiece : MenuComponent
     {
-        readonly Vector Space = new Vector(10, 10);
-        readonly Vector LvDiff = new Vector(176, 0);
-        readonly Vector LvNumPosDiff = new Vector(23, 0);
+        const int MiniHeight = 7;
+        readonly Vector LvDiff = new Vector(176, MiniHeight);
+        readonly Vector LvNumPosDiff = new Vector(200, 0);
         FontImage name;
         FontImage lv, lvNum;
         public string Name { set => name.Text = value; }
         public MagicCategoryPiece(Vector pos, int tag)
         {
-            name = new FontImage(FontID.Yasashisa, pos + Space, null, DepthID.MenuTop);
-            lv = new FontImage(FontID.Yasashisa, pos + Space + LvDiff, Vector.Zero, DepthID.MenuTop);
-            lvNum = new FontImage(FontID.Yasashisa, pos + Space + LvDiff + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
+            name = new FontImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), null, DepthID.MenuTop);
+            lv = new FontImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
+            lvNum = new FontImage(FontID.Yasashisa, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
 
