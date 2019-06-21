@@ -13,7 +13,7 @@ namespace Soleil.Menu
         Items = 0,
         Magic,
         Skill,
-        Equip,
+        // Equip,
         Status,
         Option,
         Save,
@@ -32,7 +32,7 @@ namespace Soleil.Menu
             "魔法を確認・選択して使用します。",
             "スキルを確認・選択して使用します。",
             "装備を確認・変更します。",
-            "ステータスを確認します。",
+            // "ステータスを確認します。",
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
@@ -75,8 +75,8 @@ namespace Soleil.Menu
             TextureID.MenuMagic2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
-            TextureID.MenuEquip1,
-            TextureID.MenuEquip2,
+            // TextureID.MenuEquip1,
+            // TextureID.MenuEquip2,
             TextureID.MenuStatus1,
             TextureID.MenuStatus2,
             TextureID.MenuOption1,

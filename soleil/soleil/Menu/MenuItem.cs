@@ -12,7 +12,7 @@ namespace Soleil.Menu
     {
         const int StartX = 100; // 0個目の項目のx座標
         const int StartY = 100; // 0個目の項目のy座標
-        const int SpaceSize = 50; // 項目ごとの感覚
+        const int SpaceSize = 60; // 項目ごとの感覚
         MenuName menuName;
         Vector pos;
         public bool IsSelected { get; set; }
