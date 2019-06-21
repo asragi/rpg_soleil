@@ -8,25 +8,20 @@ namespace Soleil.Menu.Status
 {
     class EquipDisplay : MenuComponent
     {
-        const int TopDiffY = 24;
-        const int DiffY = 40;
+        const int DiffY = 34;
         FontImage[] texts;
-        FontImage equipTitle;
-        const string EquipTitle = "Equips";
-        const string Empty = "------";
-        readonly string[] tmp = new[] {"シルバーワンド", "指定服", "ビーズのアクセサリー", "太陽の髪留め", Empty };
+        readonly string[] tmp = new[] {"シルバーワンド", "指定服", "ビーズのアクセサリー", "太陽の髪留め"};
 
         public EquipDisplay(Vector pos)
         {
-            texts = new FontImage[5];
+            texts = new FontImage[4];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.KkBlack, pos + new Vector(0, TopDiffY + DiffY * i), DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.Yasashisa, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
+                texts[i].Color = ColorPalette.DarkBlue;
                 texts[i].Text = tmp[i];
             }
-            equipTitle = new FontImage(FontID.KkGoldMini, pos, DepthID.MenuTop);
-            equipTitle.Text = EquipTitle;
-            AddComponents(texts.Concat(new[] { equipTitle }).ToArray());
+            AddComponents(texts);
         }
     }
 }
