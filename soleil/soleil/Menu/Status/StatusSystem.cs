@@ -60,6 +60,24 @@ namespace Soleil.Menu
             
         }
 
+        public override void OnInputUp()
+        {
+            base.OnInputUp();
+            equipDisplay.OnInputUp();
+        }
+
+        public override void OnInputDown()
+        {
+            base.OnInputDown();
+            equipDisplay.OnInputDown();
+        }
+
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            equipDisplay.OnInputSubmit();
+        }
+
         public override void OnInputCancel()
         {
             base.OnInputCancel();
