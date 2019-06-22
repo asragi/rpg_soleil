@@ -109,7 +109,7 @@ namespace Soleil
             Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
             alphaFrame++;
 
-            if (easeFrame >= easeDuration) Alpha = fadeIn ? 1 : 0;
+            if (alphaFrame >= alphaDuration) Alpha = fadeIn ? 1 : 0;
         }
     }
 }
