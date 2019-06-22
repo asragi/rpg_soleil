@@ -16,6 +16,13 @@ namespace Soleil.Battle
         public ArmorData Armor { get; set; }
         public AccessaryData Accessary { get; set; }
 
+        public EquipSet()
+        {
+            Weapon = (WeaponData)ItemDataBase.Get(ItemID.OldWand);
+            Armor = (ArmorData)ItemDataBase.Get(ItemID.Uniform);
+            Accessary = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
+        }
+
         public int GetDef(AttackAttribution attr, string attackType)
         {
             var accessaryDef = Accessary.DefData.GetDefVal(attr, attackType);

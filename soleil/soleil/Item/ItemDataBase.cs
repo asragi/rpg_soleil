@@ -26,6 +26,7 @@ namespace Soleil.Item
         Stone,
         // 装備
         // 武器
+        OldWand,
         SilverWand,
         // 防具
         Uniform,
@@ -61,6 +62,7 @@ namespace Soleil.Item
             SetUse("傷薬", ItemID.Portion, ItemTarget.OneAlly, "味方一人を少量回復．", ItemEffectType.Recover);
             SetUse("活きのいいザリガニ", ItemID.Zarigani, ItemTarget.OneAlly, "食べる......？", ItemEffectType.Special);
             // 武器
+            SetWeapon("古びた魔法杖", ItemID.OldWand, new AttackData(6, 12), null, null, "使用感のある古びた杖");
             SetWeapon("シルバーワンド", ItemID.SilverWand, new AttackData(24, 30), null, null, "高級な魔法杖");
             // 防具
             SetArmor("ユニフォーム", ItemID.Uniform, new DefData(3, 8, null, new AttrDef(ice: 10, blow: 10)), null, "制服をリメイクしたもの．");

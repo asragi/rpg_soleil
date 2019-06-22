@@ -11,7 +11,6 @@ namespace Soleil.Menu.Status
     {
         const int DiffY = 34;
         FontImage[] texts;
-        readonly string[] tmp = new[] {"シルバーワンド", "指定服", "ビーズのアクセサリー", "太陽の髪留め"};
 
         Person displayingCharacter;
 
@@ -29,7 +28,6 @@ namespace Soleil.Menu.Status
             {
                 texts[i] = new FontImage(FontID.Yasashisa, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
                 texts[i].Color = ColorPalette.DarkBlue;
-                texts[i].Text = tmp[i];
             }
             index = 0;
             cursor = new UIImage(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
@@ -89,6 +87,7 @@ namespace Soleil.Menu.Status
             texts[2].Text = targetEquip.Accessary.Name;
             texts[3].Text = "----------";
             cursor.Call(false);
+            base.Call();
             Reset();
         }
 

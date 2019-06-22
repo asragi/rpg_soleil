@@ -49,7 +49,6 @@ namespace Soleil
             var a_s = new SkillHolder(SkillID.Thunder, SkillID.Explode, SkillID.MagicalHeal);
             var b_s = new SkillHolder(SkillID.PointFlare, SkillID.Thunder, SkillID.Headbutt);
             var c_s = new SkillHolder(SkillID.Headbutt, SkillID.Sonicboom);
-            b_s.LearnSkill(Skill.SkillID.MagicalHeal);
             allCharacters[(int)CharaName.Lune] = new Person(CharaName.Lune, a, a_s);
             allCharacters[(int)CharaName.Sunny] = new Person(CharaName.Sunny, b, b_s);
             allCharacters[(int)CharaName.Tella] = new Person(CharaName.Tella, c, c_s);

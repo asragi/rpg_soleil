@@ -235,7 +235,7 @@ namespace Soleil.Menu
         public void CallChild(MenuName name, Person p)
         {
             if (name == MenuName.Magic) magicMenu.CallWithPerson(p);
-            if (name == MenuName.Status) statusSystem.Call();
+            if (name == MenuName.Status) statusSystem.CallWithPerson(p);
             if (name == MenuName.Skill) skillMenu.CallWithPerson(p);
         }
 

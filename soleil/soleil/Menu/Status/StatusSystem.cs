@@ -96,5 +96,16 @@ namespace Soleil.Menu
             equipDisplay.Call(p);
         }
 
+        public override void Update()
+        {
+            base.Update();
+            equipDisplay.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            equipDisplay.Draw(d);
+        }
     }
 }

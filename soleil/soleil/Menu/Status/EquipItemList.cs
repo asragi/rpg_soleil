@@ -42,6 +42,7 @@ namespace Soleil.Menu.Status
 
         public void CallWithData(EquipSet set, ItemType item)
         {
+            Active = true;
             equip = set;
             itemType = item;
             Init();
