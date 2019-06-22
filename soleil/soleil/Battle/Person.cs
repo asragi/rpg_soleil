@@ -14,16 +14,20 @@ namespace Soleil
     class Person
     {
         readonly public CharaName Name;
-        public AbilityScore Score { get; private set; }
+        private AbilityScore score;
+        public AbilityScore Score => score;
         readonly public EquipSet Equip;
         public bool InParty;
 
         public Person(CharaName name, AbilityScore _score)
         {
             Name = name;
-            Score = _score;
+            score = _score;
             Equip = new EquipSet();
             InParty = true; // debug
         }
+
+        public void RecoverHP(int val) => score.HP += val;
+        public void RecoverMP(int val) => score.MP += val;
     }
 }

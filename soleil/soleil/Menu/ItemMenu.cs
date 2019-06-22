@@ -68,6 +68,7 @@ namespace Soleil.Menu
                 {
                     // inputをstatusに渡す．
                     itemTargetSelect.Call();
+                    itemTargetSelect.SetWillUsedItem(id, itemList);
                     IsActive = false;
                     Quit();
                 }else if (item.Target == ItemTarget.AllAlly)

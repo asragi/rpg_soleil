@@ -130,10 +130,11 @@ namespace Soleil.Item
         public string Name { get; }
         public string Description { get; }
         public ItemTarget Target { get; }
+        public ItemEffectType EffectType { get; }
 
-        public ConsumableItem(ItemID id, string name, string description, ItemTarget target, bool onMenu = true, bool onBattle = true)
+        public ConsumableItem(ItemID id, string name, string description, ItemTarget target, ItemEffectType effect, bool onMenu = true, bool onBattle = true)
         {
-            (ID, Name, Description, Target, OnMenu, OnBattle) = (id, name, description, target, onMenu, onBattle);
+            (ID, Name, Description, Target, EffectType, OnMenu, OnBattle) = (id, name, description, target, effect, onMenu, onBattle);
         }
     }
 

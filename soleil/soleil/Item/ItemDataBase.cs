@@ -58,8 +58,8 @@ namespace Soleil.Item
             Set("石ころ", ItemID.Stone, 0, "そこら辺の石ころ．");
 
             // 使用可能アイテム
-            SetUse("傷薬", ItemID.Portion, ItemTarget.OneAlly, "味方一人を少量回復．", false);
-            SetUse("活きのいいザリガニ", ItemID.Zarigani, ItemTarget.OneAlly, "食べる......？");
+            SetUse("傷薬", ItemID.Portion, ItemTarget.OneAlly, "味方一人を少量回復．", ItemEffectType.Recover);
+            SetUse("活きのいいザリガニ", ItemID.Zarigani, ItemTarget.OneAlly, "食べる......？", ItemEffectType.Special);
             // 武器
             SetWeapon("シルバーワンド", ItemID.SilverWand, new AttackData(24, 30), null, null, "高級な魔法杖");
             // 防具
@@ -88,9 +88,9 @@ namespace Soleil.Item
         /// <summary>
         /// 使用可能なアイテム．
         /// </summary>
-        static void SetUse(string name, ItemID id, ItemTarget target, string desc, bool onMenu = true, bool onBattle = true)
+        static void SetUse(string name, ItemID id, ItemTarget target, string desc, ItemEffectType effectType, bool onMenu = true, bool onBattle = true)
         {
-            data[(int)id] = new ConsumableItem(id, name, desc, target, onMenu, onBattle);
+            data[(int)id] = new ConsumableItem(id, name, desc, target, effectType, onMenu, onBattle);
         }
 
         static void SetWeapon(string name, ItemID id, AttackData attack, DefData? def, AbilityScore? score, String desc)

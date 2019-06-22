@@ -12,7 +12,7 @@ namespace Soleil
         protected DepthID DepthID;
         protected int Frame;
         private Vector pos;
-        public Vector Pos {
+        public virtual Vector Pos {
             get => pos;
             set {
                 Vector diff = value - Pos;
