@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,8 @@ namespace Soleil.Menu.Status
         const int DiffY = 34;
         FontImage[] texts;
         readonly string[] tmp = new[] {"シルバーワンド", "指定服", "ビーズのアクセサリー", "太陽の髪留め"};
+
+        Person displayingCharacter;
 
         int index;
         UIImage cursor;
@@ -59,7 +62,12 @@ namespace Soleil.Menu.Status
 
         public void OnInputSubmit()
         {
-            equipWindow.Call();
+            ItemType targetItemType;
+            if (index == 0) targetItemType = ItemType.Weapon;
+            else if (index == 1) targetItemType = ItemType.Armor;
+            else targetItemType = ItemType.Accessory;
+            var targetEquip = displayingCharacter.Equip;
+            equipWindow.CallWithData(targetEquip, targetItemType);
         }
 
         public void OnInputCancel()
@@ -72,9 +80,14 @@ namespace Soleil.Menu.Status
             statusSystem.Quit();
         }
 
-        public override void Call()
+        public void Call(Person target)
         {
-            base.Call();
+            displayingCharacter = target;
+            var targetEquip = target.Equip;
+            texts[0].Text = targetEquip.Weapon.Name;
+            texts[1].Text = targetEquip.Armor.Name;
+            texts[2].Text = targetEquip.Accessary.Name;
+            texts[3].Text = "----------";
             cursor.Call(false);
             Reset();
         }

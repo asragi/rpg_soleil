@@ -206,6 +206,7 @@
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\EquipDisplay.cs" />
     <Compile Include="Menu\Status\EquipItemList.cs" />
+    <Compile Include="Menu\Status\EquipPanel.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
     <Compile Include="Menu\Status\StatusHP.cs" />

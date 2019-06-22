@@ -31,7 +31,7 @@ namespace Soleil.Menu
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
         
-        public StatusSystem(MenuComponent parent, MenuDescription desc)
+        public StatusSystem(MenuComponent parent, MenuDescription desc, PersonParty party)
             : base(parent)
         {
             // const
@@ -56,7 +56,7 @@ namespace Soleil.Menu
             equipDisplay = new EquipDisplay(EquipPos, desc, this);
 
             //
-            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, equipDisplay, statusMagicCategory, faceImg });
+            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg });
         }
 
         public override void OnInputUp()
@@ -86,7 +86,14 @@ namespace Soleil.Menu
         public override void Quit()
         {
             base.Quit();
+            equipDisplay.Quit();
             ReturnParent();
+        }
+
+        public void CallWithPerson(Person p)
+        {
+            Call();
+            equipDisplay.Call(p);
         }
 
     }
