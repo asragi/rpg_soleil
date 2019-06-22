@@ -26,17 +26,15 @@ namespace Soleil.Menu
         readonly Vector localPos;
         BasicMenu parent;
         bool isSelected;
-        bool disabled;
+        private bool disabled;
         FontImage tmp;
 
-        public MagicIcon(Vector _localPos, bool disable, MagicCategory c, BasicMenu _parent)
+        public MagicIcon(Vector _localPos, MagicCategory c, BasicMenu _parent)
         {
             parent = _parent;
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
-            disabled = disable;
             tmp = new FontImage(FontID.Yasashisa, pos, DepthID.Message);
-            tmp.Text = disabled ? "・" : "〇";
             tmp.Color = tmpColors[c];
         }
 
@@ -44,7 +42,16 @@ namespace Soleil.Menu
             set
             {
                 isSelected = value;
-                if (!disabled) tmp.Text = isSelected ? "●" : "〇";
+                RefreshIcon();
+            }
+        }
+
+        public bool Disabled {
+            get => disabled;
+            set
+            {
+                disabled = value;
+                RefreshIcon();
             }
         }
 
@@ -58,6 +65,12 @@ namespace Soleil.Menu
         public void Draw(Drawing d)
         {
             tmp.Draw(d);
+        }
+
+        private void RefreshIcon()
+        {
+            if (disabled) tmp.Text = "・";
+            else tmp.Text = isSelected ? "●" : "〇";
         }
     }
 }

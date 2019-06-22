@@ -1,5 +1,6 @@
 ﻿using Soleil.Battle;
 using Soleil.Misc;
+using Soleil.Skill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,13 +18,15 @@ namespace Soleil
         private AbilityScore score;
         public AbilityScore Score => score;
         readonly public EquipSet Equip;
+        readonly public SkillHolder Skill;
         public bool InParty;
 
-        public Person(CharaName name, AbilityScore _score)
+        public Person(CharaName name, AbilityScore _score, SkillHolder skill)
         {
             Name = name;
             score = _score;
             Equip = new EquipSet();
+            Skill = skill;
             InParty = true; // debug
         }
 

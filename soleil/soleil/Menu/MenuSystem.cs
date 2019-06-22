@@ -54,6 +54,9 @@ namespace Soleil.Menu
         MagicMenu magicMenu;
         MagicUserSelect magicUserSelect;
         MagicTargetSelect magicTargetSelect;
+        // SkillMenu
+        SkillUserSelect skillUserSelect;
+        SkillMenu skillMenu;
         // Status 表示
         StatusTargetSelect statusTargetSelect;
         StatusMenu statusMenu;
@@ -116,13 +119,16 @@ namespace Soleil.Menu
             magicUserSelect = new MagicUserSelect(this);
             magicMenu = new MagicMenu(magicUserSelect, menuDescription);
             magicTargetSelect = new MagicTargetSelect(magicMenu);
-
+            // Skill Menu
+            skillUserSelect = new SkillUserSelect(this);
+            skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
             statusSystem = new StatusSystem(statusTargetSelect, menuDescription, party);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] {
                 statusMenu, statusTargetSelect,
                 itemMenu, itemTargetSelect,
+                skillMenu, skillUserSelect,
                 magicMenu, magicTargetSelect, magicUserSelect,
                 statusSystem };
 
@@ -131,6 +137,7 @@ namespace Soleil.Menu
             statusTargetSelect.SetRefs(statusMenu);
             magicUserSelect.SetRefs(statusMenu);
             magicTargetSelect.SetRefs(statusMenu);
+            skillUserSelect.SetRefs(statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
@@ -225,10 +232,11 @@ namespace Soleil.Menu
         /// <summary>
         /// 外部から特定のメニューを有効にする．
         /// </summary>
-        public void CallChild(MenuName name)
+        public void CallChild(MenuName name, Person p)
         {
-            if (name == MenuName.Magic) magicMenu.Call();
+            if (name == MenuName.Magic) magicMenu.CallWithPerson(p);
             if (name == MenuName.Status) statusSystem.Call();
+            if (name == MenuName.Skill) skillMenu.CallWithPerson(p);
         }
 
         void Decide()
@@ -248,6 +256,11 @@ namespace Soleil.Menu
             if (selected == MenuName.Magic)
             {
                 magicUserSelect.Call();
+                return;
+            }
+            if (selected == MenuName.Skill)
+            {
+                skillUserSelect.Call();
                 return;
             }
             if (selected == MenuName.Option)

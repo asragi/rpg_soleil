@@ -17,6 +17,9 @@ namespace Soleil.Skill
             learnedFlags = new bool[(int)SkillID.size];
         }
 
+        public SkillHolder(params SkillID[] skills)
+            : this() => skills.ForEach2(s => LearnSkill(s));
+
         public bool HasSkill(SkillID id) => learnedFlags[(int)id];
 
         public bool HasCategory(MagicCategory c)
