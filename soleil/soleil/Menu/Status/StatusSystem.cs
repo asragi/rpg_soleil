@@ -31,7 +31,7 @@ namespace Soleil.Menu
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
         
-        public StatusSystem(MenuComponent parent)
+        public StatusSystem(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
             // const
@@ -53,11 +53,10 @@ namespace Soleil.Menu
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
-            equipDisplay = new EquipDisplay(EquipPos);
+            equipDisplay = new EquipDisplay(EquipPos, desc, this);
 
             //
             AddComponents(new IComponent[] {backImage, charaName, statusParams, display, equipDisplay, statusMagicCategory, faceImg });
-            
         }
 
         public override void OnInputUp()
@@ -81,7 +80,12 @@ namespace Soleil.Menu
         public override void OnInputCancel()
         {
             base.OnInputCancel();
-            Quit();
+            equipDisplay.OnInputCancel();
+        }
+
+        public override void Quit()
+        {
+            base.Quit();
             ReturnParent();
         }
 

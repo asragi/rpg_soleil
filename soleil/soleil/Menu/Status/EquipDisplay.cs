@@ -15,8 +15,12 @@ namespace Soleil.Menu.Status
         int index;
         UIImage cursor;
 
-        public EquipDisplay(Vector pos)
+        StatusSystem statusSystem;
+        EquipItemList equipWindow;
+
+        public EquipDisplay(Vector pos, MenuDescription desc, StatusSystem ss)
         {
+            statusSystem = ss;
             texts = new FontImage[4];
             for (int i = 0; i < texts.Length; i++)
             {
@@ -26,25 +30,46 @@ namespace Soleil.Menu.Status
             }
             index = 0;
             cursor = new UIImage(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
+            equipWindow = new EquipItemList(this, desc);
             AddComponents(texts);
             SetCursorPosition();
         }
 
         public void OnInputDown()
         {
+            if (equipWindow.Active)
+            {
+                equipWindow.OnInputDown();
+                return;
+            }
             SetIndex(1);
             SetCursorPosition();
         }
 
         public void OnInputUp()
         {
+            if (equipWindow.Active)
+            {
+                equipWindow.OnInputUp();
+                return;
+            }
             SetIndex(-1);
             SetCursorPosition();
         }
 
         public void OnInputSubmit()
         {
-            Console.WriteLine(index);
+            equipWindow.Call();
+        }
+
+        public void OnInputCancel()
+        {
+            if (equipWindow.Active)
+            {
+                equipWindow.OnInputCancel();
+                return;
+            }
+            statusSystem.Quit();
         }
 
         public override void Call()
@@ -64,12 +89,14 @@ namespace Soleil.Menu.Status
         {
             base.Update();
             cursor.Update();
+            equipWindow.Update();
         }
 
         public override void Draw(Drawing d)
         {
             cursor.Draw(d);
             base.Draw(d);
+            equipWindow.Draw(d);
         }
 
         private void SetIndex(int indexDiff)
