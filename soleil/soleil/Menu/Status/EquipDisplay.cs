@@ -89,8 +89,8 @@ namespace Soleil.Menu.Status
             var targetEquip = target.Equip;
             texts[0].Text = targetEquip.Weapon.Name;
             texts[1].Text = targetEquip.Armor.Name;
-            texts[2].Text = targetEquip.Accessary.Name;
-            texts[3].Text = "----------";
+            texts[2].Text = targetEquip.Accessary[0].Name;
+            texts[3].Text = targetEquip.Accessary[1].Name;
             cursor.Call(false);
             base.Call();
             Reset();

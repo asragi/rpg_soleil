@@ -12,20 +12,27 @@ namespace Soleil.Battle
     /// </summary>
     class EquipSet
     {
+        const int AccessarySize = 2;
         public WeaponData Weapon { get; set; }
         public ArmorData Armor { get; set; }
-        public AccessaryData Accessary { get; set; }
+        public AccessaryData[] Accessary { get; set; }
 
         public EquipSet()
         {
             Weapon = (WeaponData)ItemDataBase.Get(ItemID.OldWand);
             Armor = (ArmorData)ItemDataBase.Get(ItemID.Uniform);
-            Accessary = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
+            Accessary = new AccessaryData[AccessarySize];
+            Accessary[0] = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
+            Accessary[1] = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
         }
 
         public int GetDef(AttackAttribution attr, string attackType)
         {
-            var accessaryDef = Accessary.DefData.GetDefVal(attr, attackType);
+            int accessaryDef = 0;
+            for (int i = 0; i < Accessary.Length; i++)
+            {
+                accessaryDef += Accessary[i].DefData.GetDefVal(attr, attackType);
+            }
             var def = Weapon.DefData.GetDefVal(attr, attackType) + Armor.DefData.GetDefVal(attr, attackType);
             return accessaryDef + def;
         }
@@ -59,10 +66,10 @@ namespace Soleil.Battle
         /// </summary>
         /// <param name="id">装備するアクセサリのItemID</param>
         /// <returns>今まで装備していて交換によって外れるアクセサリのID</returns>
-        public ItemID ChangeAccessary(ItemID id)
+        public ItemID ChangeAccessary(ItemID id, int index)
         {
-            var returnAccessary = Accessary;
-            Accessary = (AccessaryData)ItemDataBase.Get(id);
+            var returnAccessary = Accessary[index];
+            Accessary[index] = (AccessaryData)ItemDataBase.Get(id);
             return returnAccessary.ID;
         }
     }

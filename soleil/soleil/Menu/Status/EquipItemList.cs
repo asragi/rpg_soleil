@@ -19,6 +19,7 @@ namespace Soleil.Menu.Status
         // 交換対象としている装備セットとアイテム種類
         private EquipSet equip;
         private ItemType itemType;
+        private int accessaryIndex;
 
         public EquipItemList(MenuComponent parent, MenuDescription desc)
             : base(parent, desc) { Init(); }
@@ -40,11 +41,12 @@ namespace Soleil.Menu.Status
             return result.ToArray();
         }
 
-        public void CallWithData(EquipSet set, ItemType item)
+        public void CallWithData(EquipSet set, ItemType item, int _accessaryindex = 0)
         {
             Active = true;
             equip = set;
             itemType = item;
+            accessaryIndex = _accessaryindex;
             Init();
             Call();
         }
@@ -77,7 +79,7 @@ namespace Soleil.Menu.Status
             }
             if (itemType == ItemType.Accessory)
             {
-                removedItem = equip.ChangeAccessary(equipingID);
+                removedItem = equip.ChangeAccessary(equipingID, accessaryIndex);
             }
             bag.AddItem(removedItem);
             bag.Consume(equipingID);
