@@ -50,7 +50,7 @@ namespace Soleil.Menu
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImg = new UIImage(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
             charaName = new CharaName(NamePos, 250);
-            display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
+            display = new HPMPDisplay(HPPos, MPPos);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
             equipDisplay = new EquipDisplay(EquipPos, desc, this);
@@ -95,6 +95,7 @@ namespace Soleil.Menu
             Call();
             equipDisplay.Call(p);
             charaName.RefreshWithPerson(p);
+            display.RefreshWithPerson(p);
         }
 
         public override void Update()

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class StatusMP : MenuComponent
+    class StatusHPMP : MenuComponent
     {
         readonly FontID Font;
         readonly FontID MpFont;
-        FontImage valText, slashText, maxText, mpText;
-        const int ValSpace = 131;
-        const int SpaceToSlash = 50;
-        const int SpaceToMax = 20;
-        public StatusMP(Vector pos, int val, int max)
+        FontImage  slashText, mpText;
+        RightAlignText valText, maxText;
+        const int ValSpace = 170;
+        const int SpaceToSlash = 10;
+        const int SpaceToMax = 70;
+        public StatusHPMP(Vector pos)
         {
             var color = ColorPalette.DarkBlue;
             Font = FontID.Yasashisa;
@@ -22,16 +23,20 @@ namespace Soleil.Menu.Status
             mpText = new FontImage(MpFont, pos + new Vector(0,7), DepthID.MenuTop);
             mpText.Text = "MP";
             mpText.Color = color;
-            valText = new FontImage(Font, pos + new Vector(ValSpace, 0), DepthID.MenuTop);
-            valText.Text = val.ToString();
+            valText = new RightAlignText(Font, pos + new Vector(ValSpace, 0), Vector.Zero, DepthID.MenuTop);
             valText.Color = color;
             slashText = new FontImage(Font, pos + new Vector(ValSpace + SpaceToSlash,0), DepthID.MenuTop);
             slashText.Text = "/";
             slashText.Color = color;
-            maxText = new FontImage(Font, pos + new Vector(ValSpace + SpaceToSlash + SpaceToMax, 0), DepthID.MenuTop);
-            maxText.Text = max.ToString();
+            maxText = new RightAlignText(Font, pos + new Vector(ValSpace + SpaceToSlash + SpaceToMax, 0), Vector.Zero, DepthID.MenuTop);
             maxText.Color = color;
             AddComponents(new IComponent[] { mpText, valText, slashText, maxText });
+        }
+
+        public void RefreshWithPerson(Person p, bool isHP)
+        {
+            valText.Text = isHP ? p.Score.HP.ToString() : p.Score.MP.ToString();
+            maxText.Text = isHP ? p.Score.HPMAX.ToString() : p.Score.MPMAX.ToString();
         }
     }
 }
