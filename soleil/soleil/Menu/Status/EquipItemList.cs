@@ -16,13 +16,19 @@ namespace Soleil.Menu.Status
         public bool Active;
         protected override Vector WindowPos => new Vector(550, 100);
 
+        EquipDisplay equipDisplay;
+
         // 交換対象としている装備セットとアイテム種類
         private EquipSet equip;
         private ItemType itemType;
         private int accessaryIndex;
 
-        public EquipItemList(MenuComponent parent, MenuDescription desc)
-            : base(parent, desc) { Init(); }
+        public EquipItemList(EquipDisplay parent, MenuDescription desc)
+            : base(parent, desc)
+        {
+            Init();
+            equipDisplay = parent;
+        }
 
         protected override SelectablePanel[] MakeAllPanels()
         {
@@ -83,6 +89,7 @@ namespace Soleil.Menu.Status
             }
             bag.AddItem(removedItem);
             bag.Consume(equipingID);
+            equipDisplay.RefreshEquipText();
             Quit();
         }
     }
