@@ -61,6 +61,7 @@ namespace Soleil.Menu.Status
         {
             base.Quit();
             Active = false;
+            equipDisplay.Refresh();
         }
 
         public override void OnInputSubmit()

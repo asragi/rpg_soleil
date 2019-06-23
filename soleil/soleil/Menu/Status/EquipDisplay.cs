@@ -11,11 +11,13 @@ namespace Soleil.Menu.Status
     {
         const int DiffY = 34;
         FontImage[] texts;
+        IItem[] equips;
 
         Person displayingCharacter;
 
         int index;
         UIImage cursor;
+        MenuDescription description;
 
         StatusSystem statusSystem;
         EquipItemList equipWindow;
@@ -32,6 +34,7 @@ namespace Soleil.Menu.Status
             index = 0;
             cursor = new UIImage(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
             equipWindow = new EquipItemList(this, desc);
+            description = desc;
             AddComponents(texts);
             SetCursorPosition();
         }
@@ -95,13 +98,14 @@ namespace Soleil.Menu.Status
         public void Refresh()
         {
             // 装備リストの更新
-            var targetEquip = displayingCharacter.Equip;
-            texts[0].Text = targetEquip.Weapon.Name;
-            texts[1].Text = targetEquip.Armor.Name;
-            texts[2].Text = targetEquip.Accessary[0].Name;
-            texts[3].Text = targetEquip.Accessary[1].Name;
+            equips = displayingCharacter.Equip.GetEquipDataSet();
+            for (int i = 0; i < equips.Length; i++)
+            {
+                texts[i].Text = equips[i].Name;
+            }
             // Status表示の他要素の更新
             statusSystem.Refresh(displayingCharacter);
+            RefreshDescription();
         }
 
         public override void Quit()
@@ -128,6 +132,7 @@ namespace Soleil.Menu.Status
         {
             int length = texts.Length;
             index = (index + indexDiff + length) % length;
+            RefreshDescription();
         }
 
         private void SetCursorPosition()
@@ -143,6 +148,12 @@ namespace Soleil.Menu.Status
         {
             index = 0;
             SetCursorPosition();
+            Refresh();
+        }
+
+        private void RefreshDescription()
+        {
+            description.Text = equips[index].Description;
         }
     }
 }

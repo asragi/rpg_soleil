@@ -82,5 +82,15 @@ namespace Soleil.Battle
             Accessary[index] = (AccessaryData)ItemDataBase.Get(id);
             return returnAccessary.ID;
         }
+
+        public IItem[] GetEquipDataSet()
+        {
+            var result = new IItem[4];
+            result[0] = Weapon;
+            result[1] = Armor;
+            result[2] = Accessary[0];
+            result[3] = Accessary[1];
+            return result;
+        }
     }
 }
