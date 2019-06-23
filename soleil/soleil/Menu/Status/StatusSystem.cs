@@ -49,7 +49,7 @@ namespace Soleil.Menu
             // Component設定
             backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
             faceImg = new UIImage(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
-            charaName = new CharaName(NamePos, "ルーネ", 250);
+            charaName = new CharaName(NamePos, 250);
             display = new HPMPDisplay(HPPos, 368, MPPos, 642, 765);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);
             statusParams = new StatusParamsDisplay(ParamsPos);
@@ -94,6 +94,7 @@ namespace Soleil.Menu
         {
             Call();
             equipDisplay.Call(p);
+            charaName.RefreshWithPerson(p);
         }
 
         public override void Update()

@@ -211,6 +211,7 @@
     <Compile Include="Menu\Status\EquipItemList.cs" />
     <Compile Include="Menu\Status\EquipPanel.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
+    <Compile Include="Menu\Status\IPersonUpdate.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
     <Compile Include="Menu\Status\StatusHP.cs" />
     <Compile Include="Menu\Status\StatusMagicCategory.cs" />

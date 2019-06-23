@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,23 +8,26 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class CharaName : MenuComponent
+    class CharaName : MenuComponent, IPersonUpdate
     {
-        FontImage name;
+        readonly FontID MainFont = FontID.Yasashisa;
+        readonly FontID SubFont = FontID.CorpMini;
+        readonly Color MainColor = ColorPalette.DarkBlue;
+        readonly DepthID depth = DepthID.MenuTop;
+        RightAlignText name;
         FontImage nameTitle;
 
-        public CharaName(Vector pos, string text, int length)
+        public CharaName(Vector pos, int length)
         {
-            var font = FontID.Yasashisa;
-            var color = ColorPalette.DarkBlue;
-            double nameDiff = Resources.GetFont(font).MeasureString(text).X;
-            name = new FontImage(font, pos + new Vector(length - nameDiff, 0), DepthID.MenuTop);
-            name.Text = text;
-            name.Color = color;
-            nameTitle = new FontImage(FontID.CorpMini, pos + new Vector(0, 7), DepthID.MenuTop);
-            nameTitle.Color = color;
-            nameTitle.Text = "Name";
+            name = new RightAlignText(MainFont, pos + new Vector(length, 0), Vector.Zero, depth);
+            name.Color = MainColor;
+            nameTitle = new FontImage(SubFont, pos + new Vector(0, 7), depth);
             AddComponents(new IComponent[] { nameTitle, name });
+        }
+
+        public void RefreshWithPerson(Person p)
+        {
+            name.Text = p.Name.ToString();
         }
     }
 }
