@@ -38,6 +38,15 @@ namespace Soleil.Battle
             return accessaryDef + def;
         }
 
+        public int GetAttack(AttackType t)
+        {
+            if (t == AttackType.Physical)
+            {
+                return Weapon.AttackData.Physical;
+            }
+            return Weapon.AttackData.Magical;
+        }
+
         /// <summary>
         /// 武器を交換する．
         /// </summary>

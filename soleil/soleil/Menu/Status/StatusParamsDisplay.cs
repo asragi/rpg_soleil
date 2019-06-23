@@ -43,14 +43,16 @@ namespace Soleil.Menu.Status
         public void RefreshWithPerson(Person p)
         {
             var score = p.Score;
+            int phyAttack = p.Equip.GetAttack(AttackType.Physical);
+            int magAttack = p.Equip.GetAttack(AttackType.Magical);
             int phyEquip = p.Equip.GetDef(AttackAttribution.Cut, AttackType.Physical);
             int magEquip = p.Equip.GetDef(AttackAttribution.Cut, AttackType.Magical);
             texts[0].Val = score.STR;
             texts[1].Val = score.VIT;
             texts[2].Val = score.MAG;
             texts[3].Val = score.SPD;
-            texts[4].Val = 40;
-            texts[5].Val = 60;
+            texts[4].Val = phyAttack;
+            texts[5].Val = magAttack;
             texts[6].Val = phyEquip;
             texts[7].Val = magEquip;
         }
