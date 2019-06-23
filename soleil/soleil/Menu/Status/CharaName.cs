@@ -22,6 +22,8 @@ namespace Soleil.Menu.Status
             name = new RightAlignText(MainFont, pos + new Vector(length, 0), Vector.Zero, depth);
             name.Color = MainColor;
             nameTitle = new FontImage(SubFont, pos + new Vector(0, 7), depth);
+            nameTitle.Text = "Name";
+            nameTitle.Color = MainColor;
             AddComponents(new IComponent[] { nameTitle, name });
         }
 
