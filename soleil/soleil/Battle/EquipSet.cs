@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Item;
+using Soleil.Skill;
 
 namespace Soleil.Battle
 {
@@ -26,7 +27,7 @@ namespace Soleil.Battle
             Accessary[1] = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
         }
 
-        public int GetDef(AttackAttribution attr, string attackType)
+        public int GetDef(AttackAttribution attr, AttackType attackType)
         {
             int accessaryDef = 0;
             for (int i = 0; i < Accessary.Length; i++)

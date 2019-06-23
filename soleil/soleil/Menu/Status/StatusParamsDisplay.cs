@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class StatusParamsDisplay : MenuComponent
+    class StatusParamsDisplay : MenuComponent, IPersonUpdate
     {
         const int DiffX = 132;
         const int DiffY = 27;
@@ -23,18 +24,6 @@ namespace Soleil.Menu.Status
             "RES"
         };
 
-        readonly int[] Para = new[] // 仮置き適当パラメータ
-        {
-            6,
-            12,
-            44,
-            11,
-            22,
-            36,
-            18,
-            27,
-        };
-
         TextWithVal[] texts;
 
         public StatusParamsDisplay(Vector pos)
@@ -43,12 +32,27 @@ namespace Soleil.Menu.Status
             for (int i = 0; i < texts.Length; i++)
             {
                 var xDiff = (i >= 4) ? DiffX : 0;
-                texts[i] = new TextWithVal(FontID.CorpMini, pos + new Vector(xDiff, DiffY* (i % 4)), 116, Words[i], Para[i]);
+                texts[i] = new TextWithVal(FontID.CorpMini, pos + new Vector(xDiff, DiffY* (i % 4)), 116, Words[i], 0);
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
                 texts[i].ValFont = FontID.Yasashisa;
             }
             AddComponents(texts);
+        }
+
+        public void RefreshWithPerson(Person p)
+        {
+            var score = p.Score;
+            int phyEquip = p.Equip.GetDef(AttackAttribution.Cut, AttackType.Physical);
+            int magEquip = p.Equip.GetDef(AttackAttribution.Cut, AttackType.Magical);
+            texts[0].Val = score.STR;
+            texts[1].Val = score.VIT;
+            texts[2].Val = score.MAG;
+            texts[3].Val = score.SPD;
+            texts[4].Val = 40;
+            texts[5].Val = 60;
+            texts[6].Val = phyEquip;
+            texts[7].Val = magEquip;
         }
     }
 }

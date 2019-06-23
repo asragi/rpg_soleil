@@ -96,6 +96,7 @@ namespace Soleil.Menu
             equipDisplay.Call(p);
             charaName.RefreshWithPerson(p);
             display.RefreshWithPerson(p);
+            statusParams.RefreshWithPerson(p);
         }
 
         public override void Update()
