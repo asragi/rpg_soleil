@@ -54,5 +54,34 @@ namespace Soleil.Menu.Status
             base.Quit();
             Active = false;
         }
+
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            if (SelectedPanel is EmptyPanel)
+            {
+                // Play buzzer sound
+                return;
+            }
+            // 装備を変更する
+            ItemID equipingID = ((ItemPanelBase)SelectedPanel).ID;
+            ItemID removedItem = 0;
+            var bag = PlayerBaggage.GetInstance().Items;
+            if (itemType == ItemType.Weapon)
+            {
+                removedItem = equip.ChangeWeapon(equipingID);
+            }
+            if (itemType == ItemType.Armor)
+            {
+                removedItem = equip.ChangeArmor(equipingID);
+            }
+            if (itemType == ItemType.Accessory)
+            {
+                removedItem = equip.ChangeAccessary(equipingID);
+            }
+            bag.AddItem(removedItem);
+            bag.Consume(equipingID);
+            Quit();
+        }
     }
 }

@@ -60,6 +60,11 @@ namespace Soleil.Menu.Status
 
         public void OnInputSubmit()
         {
+            if (equipWindow.Active)
+            {
+                equipWindow.OnInputSubmit();
+                return;
+            }
             ItemType targetItemType;
             if (index == 0) targetItemType = ItemType.Weapon;
             else if (index == 1) targetItemType = ItemType.Armor;
