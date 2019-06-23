@@ -86,19 +86,22 @@ namespace Soleil.Menu.Status
         public void Call(Person target)
         {
             displayingCharacter = target;
-            RefreshEquipText();
+            Refresh();
             cursor.Call(false);
             base.Call();
             Reset();
         }
 
-        public void RefreshEquipText()
+        public void Refresh()
         {
+            // 装備リストの更新
             var targetEquip = displayingCharacter.Equip;
             texts[0].Text = targetEquip.Weapon.Name;
             texts[1].Text = targetEquip.Armor.Name;
             texts[2].Text = targetEquip.Accessary[0].Name;
             texts[3].Text = targetEquip.Accessary[1].Name;
+            // Status表示の他要素の更新
+            statusSystem.Refresh(displayingCharacter);
         }
 
         public override void Quit()

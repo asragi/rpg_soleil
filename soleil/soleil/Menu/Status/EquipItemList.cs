@@ -89,7 +89,7 @@ namespace Soleil.Menu.Status
             }
             bag.AddItem(removedItem);
             bag.Consume(equipingID);
-            equipDisplay.RefreshEquipText();
+            equipDisplay.Refresh();
             Quit();
         }
     }

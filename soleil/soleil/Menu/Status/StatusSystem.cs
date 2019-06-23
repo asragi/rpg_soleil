@@ -99,6 +99,11 @@ namespace Soleil.Menu
             statusParams.RefreshWithPerson(p);
         }
 
+        public void Refresh(Person p)
+        {
+            statusParams.RefreshWithPerson(p);
+        }
+
         public override void Update()
         {
             base.Update();
