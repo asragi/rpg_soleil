@@ -48,6 +48,8 @@ namespace Soleil
         IconWand,
         IconArmor,
         IconAccessary,
+        IconPot,
+        IconJewel,
 
         Rule0,
         Rule1,
@@ -378,6 +380,8 @@ namespace Soleil
             SetPath(TextureID.IconWand, UIPath + MenuPath + "icons/" + "icon-wand");
             SetPath(TextureID.IconArmor, UIPath + MenuPath + "icons/" + "icon-clothes");
             SetPath(TextureID.IconAccessary, UIPath + MenuPath + "icons/" + "icon-accessary");
+            SetPath(TextureID.IconPot, UIPath + MenuPath + "icons/" + "icon-pot");
+            SetPath(TextureID.IconJewel, UIPath + MenuPath + "icons/" + "icon-jewel");
 
 
             for (int i = 0; i < 20; i++)
