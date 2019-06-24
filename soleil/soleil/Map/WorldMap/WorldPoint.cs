@@ -19,6 +19,9 @@ namespace Soleil.Map.WorldMap
         size,
     }
 
+    /// <summary>
+    /// 地図上に存在する町などの各施設を表すクラス．
+    /// </summary>
     class WorldPoint
     {
         public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
