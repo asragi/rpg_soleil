@@ -15,7 +15,7 @@ namespace Soleil.Menu
     {
         public readonly ItemID ID;
         UIImage icon;
-        readonly Vector IconSpace = new Vector(8, 10);
+        public static readonly Vector IconSpace = new Vector(8, 10);
 
         public ItemPanelBase(ItemID id, string name, BasicMenu parent, bool active = true)
             : base(name, parent, active)
