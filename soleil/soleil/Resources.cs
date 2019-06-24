@@ -45,6 +45,9 @@ namespace Soleil
         MenuTella,
         MenuStatusCursor,
         MenuCategory,
+        IconWand,
+        IconArmor,
+        IconAccessary,
 
         Rule0,
         Rule1,
@@ -372,6 +375,10 @@ namespace Soleil
             SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
             SetPath(TextureID.MenuCategory, UIPath + MenuPath + "yasoba-window-skill-category");
+            SetPath(TextureID.IconWand, UIPath + MenuPath + "icons/" + "icon-wand");
+            SetPath(TextureID.IconArmor, UIPath + MenuPath + "icons/" + "icon-clothes");
+            SetPath(TextureID.IconAccessary, UIPath + MenuPath + "icons/" + "icon-accessary");
+
 
             for (int i = 0; i < 20; i++)
             {
