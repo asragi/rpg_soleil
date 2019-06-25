@@ -14,14 +14,16 @@ namespace Soleil.Map.WorldMap
         const int MoveDuration = 70;
         readonly static Func<double, double, double, double, double> EaseFunc = Easing.Linear;
         readonly WorldMap worldMap;
+        readonly WorldMapCamera camera;
 
         int frame;
         Vector from, to;
         WorldPointKey destination;
 
-        public WorldMapMove(WorldMap map)
+        public WorldMapMove(WorldMap map, WorldMapCamera cam)
         {
             worldMap = map;
+            camera = cam;
             Vector nowPosition = map.GetPlayerPoint().Pos;
             from = nowPosition;
             to = nowPosition;
@@ -34,6 +36,7 @@ namespace Soleil.Map.WorldMap
             if (mode != WorldMapInputMode.Move) return mode;
             if (frame >= MoveDuration)
             {
+                camera.SetDestination(to);
                 worldMap.SetPlayerPosition(destination);
                 windowLayer.InitWindow();
                 return WorldMapInputMode.InitWindow;
@@ -55,6 +58,7 @@ namespace Soleil.Map.WorldMap
             to = pointTo.Pos;
             destination = pointTo.ID;
             frame = 0;
+            camera.SetDestination((from + to) / 2);
         }
     }
 }

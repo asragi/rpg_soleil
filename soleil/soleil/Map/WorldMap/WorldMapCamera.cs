@@ -40,11 +40,13 @@ namespace Soleil.Map.WorldMap
         const int duration = 60;
         Vector startPos;
         Vector targetPos;
-        public void SetDestination(WorldPoint point)
+        public void SetDestination(WorldPoint point) => SetDestination(point.Pos);
+
+        public void SetDestination(Vector dest)
         {
             frame = 0;
             startPos = camera.GetPosition();
-            targetPos = point.Pos - CameraDiff;
+            targetPos = dest - CameraDiff;
         }
     }
 }

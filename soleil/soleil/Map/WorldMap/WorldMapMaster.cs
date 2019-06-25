@@ -21,11 +21,11 @@ namespace Soleil.Map.WorldMap
         {
             Mode = WorldMapInputMode.InitWindow;
             worldMap = new WorldMap();
-            mapMove = new WorldMapMove(worldMap);
+            camera = new WorldMapCamera();
+            mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
             cursorLayer = new WorldMapCursorLayer();
-            camera = new WorldMapCamera();
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
             mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap);
         }
