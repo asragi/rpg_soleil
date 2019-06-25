@@ -11,14 +11,32 @@ namespace Soleil.Map.WorldMap
     /// </summary>
     class WorldMapMove
     {
-        public void Update()
-        {
+        const int MoveDuration = 70;
+        readonly Func<double, double, double, double, double> EaseFunc = Easing.Linear;
+        int frame;
+        Vector from, to;
 
+        public WorldMapInputMode Update(WorldMapInputMode mode)
+        {
+            frame++;
+            if (mode != WorldMapInputMode.Move) return mode;
+            if (frame >= MoveDuration) return WorldMapInputMode.InitWindow;
+            return WorldMapInputMode.Move;
         }
 
-        public void MoveFromTo()
+        public Vector GetEasingPosition()
         {
+            if (frame >= MoveDuration) return to;
+            var x = EaseFunc(frame, MoveDuration, from.X, to.X);
+            var y = EaseFunc(frame, MoveDuration, from.Y, to.Y);
+            return new Vector(x, y);
+        }
 
+        public void MoveFromTo(WorldPoint pointFrom, WorldPoint pointTo)
+        {
+            from = pointFrom.Pos;
+            to = pointTo.Pos;
+            frame = 0;
         }
     }
 }

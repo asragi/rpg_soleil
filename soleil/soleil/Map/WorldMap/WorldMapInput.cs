@@ -22,16 +22,23 @@ namespace Soleil.Map.WorldMap
     /// </summary>
     class WorldMapInput
     {
+        WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
         WorldMapCursorLayer cursorLayer;
         WorldMapSelectLayer selectLayer;
+        WorldMapMove mapMove;
         InputSmoother inputSmoother;
 
-        public WorldMapInput(WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor, WorldMapSelectLayer select)
+        public WorldMapInput(
+            WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor,
+            WorldMapSelectLayer select, WorldMapMove move,
+            WorldMap map)
         {
             windowLayer = wmwl;
             cursorLayer = cursor;
             selectLayer = select;
+            mapMove = move;
+            worldMap = map;
             inputSmoother = new InputSmoother();
         }
 
@@ -106,7 +113,7 @@ namespace Soleil.Map.WorldMap
                         // 時間がなくて移動ができないなどと表示．
                         return WorldMapInputMode.MapSelect;
                     }
-                    Console.WriteLine(destination);
+                    mapMove.MoveFromTo(worldMap.GetPlayerPoint(), worldMap.GetPoint(destination));
                     return WorldMapInputMode.Move;
                 }
                 if (KeyInput.GetKeyPush(Key.B))
