@@ -21,7 +21,7 @@ namespace Soleil.Map.WorldMap
         {
             Mode = WorldMapInputMode.InitWindow;
             worldMap = new WorldMap();
-            mapMove = new WorldMapMove();
+            mapMove = new WorldMapMove(worldMap);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
             cursorLayer = new WorldMapCursorLayer();
@@ -33,9 +33,10 @@ namespace Soleil.Map.WorldMap
         public void Update()
         {
             Mode = mapInput.Update(Mode);
-            Mode = mapMove.Update(Mode);
+            Mode = mapMove.Update(Mode, windowLayer);
             cursorLayer.Update();
             camera.Update();
+            Console.WriteLine(Mode);
         }
 
         public void Draw(Drawing d)
