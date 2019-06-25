@@ -9,10 +9,13 @@ namespace Soleil.Map.WorldMap
     class WorldMap
     {
         WorldPoint[] points;
+        WorldMapPlayerIcon playerIcon;
+
         public WorldMap()
         {
             points = MakePoints();
             SetPlayerPosition(WorldPointKey.Flare);
+            playerIcon = new WorldMapPlayerIcon(GetPlayerPoint());
 
             WorldPoint[] MakePoints()
             {
@@ -66,8 +69,16 @@ namespace Soleil.Map.WorldMap
             return null;
         }
 
+        public void SetPlayerPos(Vector pos) => playerIcon.Pos = pos;
+
+        public void Update()
+        {
+            playerIcon.Update();
+        }
+
         public void Draw(Drawing d)
         {
+            playerIcon.Draw(d);
             points.ForEach2(p => p?.Draw(d));
         }
     }

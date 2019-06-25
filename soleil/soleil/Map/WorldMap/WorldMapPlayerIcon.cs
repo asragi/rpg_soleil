@@ -12,22 +12,29 @@ namespace Soleil.Map.WorldMap
     class WorldMapPlayerIcon
     {
         public WorldPoint Point { get; set; }
-        public Vector Pos;
         public UIImage iconImg;
+        public Vector Pos
+        {
+            get => iconImg.Pos;
+            set => iconImg.Pos = value;
+        }
 
         public WorldMapPlayerIcon(WorldPoint playerpoint)
         {
             Point = playerpoint;
+            iconImg = new UIImage(TextureID.BackBar, Point.Pos,
+                Vector.Zero, DepthID.Player,
+                true, false, 1);
         }
 
         public void Update()
         {
-
+            iconImg.Update();
         }
 
         public void Draw(Drawing d)
         {
-
+            iconImg.Draw(d);
         }
     }
 }

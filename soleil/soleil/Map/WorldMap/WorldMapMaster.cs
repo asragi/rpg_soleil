@@ -36,7 +36,7 @@ namespace Soleil.Map.WorldMap
             Mode = mapMove.Update(Mode, windowLayer);
             cursorLayer.Update();
             camera.Update();
-            Console.WriteLine(Mode);
+            worldMap.Update();
         }
 
         public void Draw(Drawing d)

@@ -12,8 +12,9 @@ namespace Soleil.Map.WorldMap
     class WorldMapMove
     {
         const int MoveDuration = 70;
-        readonly Func<double, double, double, double, double> EaseFunc = Easing.Linear;
+        readonly static Func<double, double, double, double, double> EaseFunc = Easing.Linear;
         readonly WorldMap worldMap;
+
         int frame;
         Vector from, to;
         WorldPointKey destination;
@@ -21,11 +22,15 @@ namespace Soleil.Map.WorldMap
         public WorldMapMove(WorldMap map)
         {
             worldMap = map;
+            Vector nowPosition = map.GetPlayerPoint().Pos;
+            from = nowPosition;
+            to = nowPosition;
         }
 
         public WorldMapInputMode Update(WorldMapInputMode mode, WorldMapWindowLayer windowLayer)
         {
             frame++;
+            worldMap.SetPlayerPos(GetEasingPosition(frame, MoveDuration, from, to));
             if (mode != WorldMapInputMode.Move) return mode;
             if (frame >= MoveDuration)
             {
@@ -36,11 +41,11 @@ namespace Soleil.Map.WorldMap
             return WorldMapInputMode.Move;
         }
 
-        public Vector GetEasingPosition()
+        private static Vector GetEasingPosition(int _frame, int max, Vector _from, Vector _to)
         {
-            if (frame >= MoveDuration) return to;
-            var x = EaseFunc(frame, MoveDuration, from.X, to.X);
-            var y = EaseFunc(frame, MoveDuration, from.Y, to.Y);
+            if (_frame >= max) return _to;
+            var x = EaseFunc(_frame, max, _to.X, _from.X);
+            var y = EaseFunc(_frame, max, _to.Y, _from.Y);
             return new Vector(x, y);
         }
 
