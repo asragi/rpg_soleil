@@ -8,6 +8,7 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapMaster
     {
+        public WorldMapInputMode Mode { get; private set; }
         WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
         WorldMapInput mapInput;
@@ -17,6 +18,7 @@ namespace Soleil.Map.WorldMap
 
         public WorldMapMaster()
         {
+            Mode = WorldMapInputMode.InitWindow;
             worldMap = new WorldMap();
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
@@ -28,7 +30,7 @@ namespace Soleil.Map.WorldMap
 
         public void Update()
         {
-            mapInput.Update();
+            Mode = mapInput.Update(Mode);
             cursorLayer.Update();
             camera.Update();
         }
