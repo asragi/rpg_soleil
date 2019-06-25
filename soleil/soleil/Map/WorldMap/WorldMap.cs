@@ -11,10 +11,10 @@ namespace Soleil.Map.WorldMap
         WorldPoint[] points;
         WorldMapPlayerIcon playerIcon;
 
-        public WorldMap()
+        public WorldMap(WorldPointKey initialPosition)
         {
             points = MakePoints();
-            SetPlayerPosition(WorldPointKey.Flare);
+            SetPlayerPosition(initialPosition);
             playerIcon = new WorldMapPlayerIcon(GetPlayerPoint());
 
             WorldPoint[] MakePoints()

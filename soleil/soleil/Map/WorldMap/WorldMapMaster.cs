@@ -17,11 +17,12 @@ namespace Soleil.Map.WorldMap
         WorldMapCamera camera;
         WorldMapMove mapMove;
 
-        public WorldMapMaster()
+        public WorldMapMaster(WorldPointKey initialKey)
         {
             Mode = WorldMapInputMode.InitWindow;
-            worldMap = new WorldMap();
+            worldMap = new WorldMap(initialKey);
             camera = new WorldMapCamera();
+            camera.SetPosition(worldMap.GetPoint(initialKey).Pos);
             mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
