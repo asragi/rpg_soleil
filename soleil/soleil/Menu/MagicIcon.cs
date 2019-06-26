@@ -34,7 +34,7 @@ namespace Soleil.Menu
             parent = _parent;
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
-            tmp = new FontImage(FontID.Yasashisa, pos, DepthID.Message);
+            tmp = new FontImage(FontID.CorpM, pos, DepthID.Message);
             tmp.Color = tmpColors[c];
         }
 

@@ -18,9 +18,9 @@ namespace Soleil.Menu.Status
         public MagicCategoryPiece(Vector pos, int tag)
         {
             // icon = new UIImage(TextureID.FrameTest, pos, Vector.Zero, DepthID.MenuTop);
-            name = new FontImage(FontID.KkBlackMini, pos + Space, null, DepthID.MenuTop);
-            lv = new FontImage(FontID.KkGoldMini, pos + Space + LvDiff, Vector.Zero, DepthID.MenuTop);
-            lvNum = new FontImage(FontID.KkMini, pos + Space + LvDiff + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
+            name = new FontImage(FontID.CorpM, pos + Space, null, DepthID.MenuTop);
+            lv = new FontImage(FontID.CorpM, pos + Space + LvDiff, Vector.Zero, DepthID.MenuTop);
+            lvNum = new FontImage(FontID.CorpM, pos + Space + LvDiff + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv.";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
             AddComponents(new IComponent[] { lv, lvNum, name });

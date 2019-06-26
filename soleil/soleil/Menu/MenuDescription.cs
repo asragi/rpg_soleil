@@ -13,7 +13,7 @@ namespace Soleil.Menu
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.Yasashisa, _pos, DepthID.MenuBottom);
+            fontImage = new FontImage(FontID.CorpM, _pos, DepthID.MenuBottom);
             fontImage.Color = ColorPalette.DarkBlue;
         }
 
