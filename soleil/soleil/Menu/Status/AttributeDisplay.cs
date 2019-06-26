@@ -31,9 +31,9 @@ namespace Soleil.Menu.Status
             indicates = new FontImage[texts.Length];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.Touhaba, pos + new Vector(0, DiffY * i), null, DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i), null, DepthID.MenuMiddle);
                 texts[i].Text = Words[i];
-                indicates[i] = new FontImage(FontID.Touhaba, pos + new Vector(50, DiffY * i), null, DepthID.MenuMiddle);
+                indicates[i] = new FontImage(FontID.CorpM, pos + new Vector(50, DiffY * i), null, DepthID.MenuMiddle);
                 indicates[i].Text = SetIndicate(p[i]);
             }
             AddComponents(texts.Concat(indicates).ToArray());

@@ -14,8 +14,8 @@ namespace Soleil.Menu
     class MoneyComponent
     {
         // Font設定
-        readonly FontID ValFont = FontID.KkMini;
-        readonly FontID CurrencyFont = FontID.KkGoldMini;
+        readonly FontID ValFont = FontID.CorpM;
+        readonly FontID CurrencyFont = FontID.CorpM;
         // 場所設定
         readonly Vector InitPos;
         readonly Vector PositionDiff = new Vector(-30, 0);

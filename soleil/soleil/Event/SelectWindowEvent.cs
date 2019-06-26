@@ -12,7 +12,7 @@ namespace Soleil.Event
         public SelectWindowEvent(Vector pos, WindowTag _tag, params string[] _options)
             :this(pos, _tag, true, _options) { }
         public SelectWindowEvent(Vector pos, WindowTag _tag, bool _changeFocus, params string[] _options)
-            : base(pos, SelectableWindow.ProperSize(FontID.Test, _options), _tag)
+            : base(pos, SelectableWindow.ProperSize(FontID.CorpM, _options), _tag)
         {
             changeFocus = _changeFocus;
             options = _options;
