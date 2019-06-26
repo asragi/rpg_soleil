@@ -254,144 +254,6 @@
 /processorParam:TextureFormat=Color
 /build:Arrow.png
 
-#begin kkmincho.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0
-/processorParam:OutlineColor=64,64,64,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=False
-/processorParam:GradientBeginColor=64,128,255,255
-/processorParam:GradientEndColor=0,0,128,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkmincho.spritefont
-
-#begin kkminchoBlack.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlack.spritefont
-
-#begin kkminchoBlackMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlackMini.spritefont
-
-#begin kkminchoGoldMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=False
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=86,77,37,255
-/processorParam:FontColor=202,193,152,255
-/processorParam:UseGradient=False
-/processorParam:GradientBeginColor=202,193,152,255
-/processorParam:GradientEndColor=86,77,37,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoGoldMini.spritefont
-
-#begin kkminchoNormal.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoNormal.spritefont
-
-#begin kkminchoWhiteMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoWhiteMini.spritefont
-
 #begin Map/Back/Flare/1/flare1-10.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -799,29 +661,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/WorldMap/yasoba-building-icon.png
-
-#begin touhaba.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:touhaba.spritefont
 
 #begin UI/backBar.png
 /importer:TextureImporter
@@ -1423,7 +1262,7 @@
 /processorParam:TextureFormat=Color
 /build:white.png
 
-#begin yasashisa.spritefont
+#begin corp.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -1444,5 +1283,5 @@
 /processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:yasashisa.spritefont
+/build:corpm.spritefont;corpm.spritefont
 

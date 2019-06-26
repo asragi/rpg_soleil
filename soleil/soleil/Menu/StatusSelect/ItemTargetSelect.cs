@@ -44,7 +44,7 @@ namespace Soleil.Menu
 
         public override void OnInputCancel()
         {
-            IsActive = false;
+            base.OnInputCancel();
             itemMenu.Call();
         }
     }

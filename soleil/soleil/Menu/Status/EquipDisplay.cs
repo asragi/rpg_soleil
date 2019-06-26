@@ -21,10 +21,10 @@ namespace Soleil.Menu.Status
             texts = new FontImage[5];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.KkBlack, pos + new Vector(0, TopDiffY + DiffY * i), DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, TopDiffY + DiffY * i), DepthID.MenuMiddle);
                 texts[i].Text = tmp[i];
             }
-            equipTitle = new FontImage(FontID.KkGoldMini, pos, DepthID.MenuTop);
+            equipTitle = new FontImage(FontID.CorpM, pos, DepthID.MenuTop);
             equipTitle.Text = EquipTitle;
             AddComponents(texts.Concat(new[] { equipTitle }).ToArray());
         }

@@ -5,7 +5,7 @@ namespace Soleil
     class MessageWindow: VariableWindow, IMessageBox
     {
         MessageBox messageBox;
-        public static FontID DefaultFont = FontID.Yasashisa;
+        public static FontID DefaultFont = FontID.CorpM;
         public string Text { get => messageBox.Message; set => messageBox.Message = value; }
 
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic = false)

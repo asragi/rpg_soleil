@@ -16,8 +16,8 @@ namespace Soleil.Menu.Status
         const int SpaceToMax = 20;
         public StatusMP(Vector pos, int val, int max)
         {
-            Font = FontID.Touhaba;
-            MpFont = FontID.KkGoldMini;
+            Font = FontID.CorpM;
+            MpFont = FontID.CorpM;
             mpText = new FontImage(MpFont, pos + new Vector(0,8), DepthID.MenuTop);
             mpText.Text = "MP";
             valText = new FontImage(Font, pos + new Vector(ValSpace,0), DepthID.MenuTop);

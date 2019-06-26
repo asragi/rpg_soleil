@@ -35,7 +35,7 @@ namespace Soleil.Menu
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
             disabled = disable;
-            tmp = new FontImage(FontID.Yasashisa, pos, DepthID.Message);
+            tmp = new FontImage(FontID.CorpM, pos, DepthID.Message);
             tmp.Text = disabled ? "・" : "〇";
             tmp.Color = tmpColors[c];
         }
