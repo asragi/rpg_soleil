@@ -10,7 +10,7 @@ namespace Soleil.Map
     class MapIndicator
     {
         static Vector upperRight = new Vector(Game1.VirtualWindowSizeX, 0);
-        FontID font = FontID.Yasashisa;
+        FontID font = FontID.CorpM;
         ImageManager imageManager;
         Image backImage;
         public MapIndicator()
