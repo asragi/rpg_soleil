@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,10 @@ namespace Soleil.Menu
 
         // animation
         int targetHP, targetMP;
+        // Gauge
+        readonly Vector GaugeDiff = new Vector(0, 20);
+        readonly Vector GaugeSize = new Vector(105, 6);
+        UIGauge hpGauge, mpGauge;
 
         public int FrameWait
         {
@@ -35,6 +40,8 @@ namespace Soleil.Menu
                 {
                     item.FrameWait = value;
                 }
+                hpGauge.FrameWait = value;
+                mpGauge.FrameWait = value;
             }
         }
 
@@ -43,9 +50,12 @@ namespace Soleil.Menu
         {
             person = p;
             pos = _pos;
-            int hp, mp;
+            int hp, mp, hpMax, mpMax;
             hp = p.Score.HP;
             mp = p.Score.MP;
+            hpMax = p.Score.HPMAX;
+            mpMax = p.Score.MPMAX;
+
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
@@ -70,7 +80,12 @@ namespace Soleil.Menu
             hpNumText.ActivateOutline(1);
             mpNumText.ActivateOutline(1);
             lvNumText.ActivateOutline(1);
-            AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
+            // HP MP bar
+            hpGauge = new UIGauge(pos + HPPos + GaugeDiff, posDiff, GaugeSize, false, DepthID.MenuBottom);
+            mpGauge = new UIGauge(pos + HPPos + GaugeDiff + new Vector(0, SpaceHPMP), posDiff, GaugeSize, false, DepthID.MenuBottom);
+            hpGauge.Refresh((double)hp / hpMax);
+            mpGauge.Refresh((double)mp / mpMax);
+            AddComponents(new IComponent[] { faceImg, hpGauge, mpGauge, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
 
             targetHP = hp;
             targetMP = mp;
@@ -87,11 +102,14 @@ namespace Soleil.Menu
                 {
                     targetHP = person.Score.HP;
                     hpNumText.Text = targetHP.ToString();
+                    hpGauge.Refresh((double)targetHP / person.Score.HPMAX);
                 }
 
                 if(person.Score.MP != targetMP)
                 {
                     targetMP = person.Score.MP;
+                    mpNumText.Text = targetMP.ToString();
+                    hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
                 }
             }
         }
