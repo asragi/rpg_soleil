@@ -82,7 +82,7 @@ namespace Soleil
             // SceneManager
             sm = SceneManager.GetInstance();
             party = new PersonParty();
-            new TestScene(sm, party, Map.MapName.Somnia1);
+            new TestScene(sm, party, Map.MapName.Somnia1, new Vector(400, 400));
             //new TestBattleScene(sm);
 
             // Camera

@@ -7,12 +7,11 @@ namespace Soleil
         //Map testMap;
         MapManager mapManager;
         MapIndicator mapIndicator;
-        public TestScene(SceneManager sm, PersonParty party, MapName map)
+        public TestScene(SceneManager sm, PersonParty party, MapName map, Vector position)
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.Party = party;
-            mapManager.ChangeMap(MapFactory.GetMap(map, party));
+            mapManager.ChangeMap(MapFactory.GetMap(map, party), position);
             mapIndicator = new MapIndicator();
         }
 
