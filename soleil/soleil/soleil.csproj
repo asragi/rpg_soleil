@@ -240,6 +240,7 @@
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
+    <Compile Include="UI\UIGauge.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\IMessageBox.cs" />
     <Compile Include="Window\MessageBox.cs" />

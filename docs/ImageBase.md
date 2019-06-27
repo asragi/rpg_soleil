@@ -15,7 +15,7 @@
 
 ### Alpha
 
-### ImageSize
+### ImageSize{ get; }
 
 ### IsStatic
 カメラ位置に依存するか否かを設定する変数．
@@ -28,3 +28,9 @@ EaseFuncは`Easing`クラスの関数を指定して渡す．
 
 ### MoveTo(Vector target, int duration, EFunc _easeFunc)
 指定したポジションにイージングアニメーションで移動します．
+
+### Call()
+初期ポジションにイージングアニメーションを伴って出現する．
+
+### Quit()
+イージングアニメーションを伴って消失する．
