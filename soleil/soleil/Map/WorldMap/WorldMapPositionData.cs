@@ -16,6 +16,8 @@ namespace Soleil.Map.WorldMap
 
         static WorldMapPositionData()
         {
+            positionDict = new Dictionary<WorldPointKey, Vector>();
+            nameDict = new Dictionary<WorldPointKey, MapName>();
             Set(WorldPointKey.Flare, MapName.Flare1, new Vector(0, 0));
             Set(WorldPointKey.Somnia, MapName.Somnia1, new Vector(600, 600));
 
