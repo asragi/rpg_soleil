@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,11 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText, lvNumText;
         readonly Vector posDiff = new Vector(50, 0);
 
+        // Gauge
+        readonly Vector GaugeDiff = new Vector(0, 20);
+        readonly Vector GaugeSize = new Vector(105, 6);
+        UIGauge hpGauge, mpGauge;
+
         public int FrameWait
         {
             set
@@ -30,6 +36,8 @@ namespace Soleil.Menu
                 {
                     item.FrameWait = value;
                 }
+                hpGauge.FrameWait = value;
+                mpGauge.FrameWait = value;
             }
         }
 
@@ -37,9 +45,11 @@ namespace Soleil.Menu
         public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
         {
             pos = _pos;
-            int hp, mp;
-            hp = p.Score.HPMAX;
+            int hp, mp, hpMax, mpMax;
+            hp = p.Score.HPMAX - 40;
             mp = p.Score.MPMAX;
+            hpMax = p.Score.HPMAX;
+            mpMax = p.Score.MPMAX;
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
@@ -64,7 +74,12 @@ namespace Soleil.Menu
             hpNumText.ActivateOutline(1);
             mpNumText.ActivateOutline(1);
             lvNumText.ActivateOutline(1);
-            AddComponents(new IComponent[] { faceImg, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
+            // HP MP bar
+            hpGauge = new UIGauge(pos + HPPos + GaugeDiff, posDiff, GaugeSize, false, DepthID.MenuBottom);
+            mpGauge = new UIGauge(pos + HPPos + GaugeDiff + new Vector(0, SpaceHPMP), posDiff, GaugeSize, false, DepthID.MenuBottom);
+            hpGauge.Refresh((double)hp / hpMax);
+            mpGauge.Refresh((double)mp / mpMax);
+            AddComponents(new IComponent[] { faceImg, hpGauge, mpGauge, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
         }
     }
 }
