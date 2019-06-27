@@ -12,7 +12,7 @@ namespace Soleil.Map.WorldMap
         UIImage cursor;
         public WorldMapCursorLayer()
         {
-            cursor = new UIImage(TextureID.MenuSave1, Vector.One, null, DepthID.Effect);
+            cursor = new UIImage(TextureID.MenuSave1, Vector.One, DepthID.Effect);
         }
 
         public void Move(Direction inputDir)

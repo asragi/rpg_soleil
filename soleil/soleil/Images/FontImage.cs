@@ -12,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// 動きなど機能を与えたFontSpriteの基底クラス
     /// </summary>
-    class FontImage : UIImageBase
+    class FontImage : ImageBase
     {
         public FontID Font { get; set; }
         private string text;
@@ -25,15 +25,12 @@ namespace Soleil
         // Outline
         private Outline outline;
 
-        // RightAlign
-        private bool rightAlign;
-
         public override int FrameWait { set { base.FrameWait = value; outline?.FrameWait(value); } }
 
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
-        public FontImage(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
+        public FontImage(FontID fontID, Vector pos, Vector posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
             : base(pos, posDiff, depth, false, isStatic, alpha)
         {
             Font = fontID;
@@ -41,7 +38,7 @@ namespace Soleil
         }
 
         public FontImage(FontID fontID, Vector pos, DepthID depth, bool isStatic = true, float alpha = 0)
-            : this(fontID, pos, null, depth, isStatic, alpha) { }
+            : this(fontID, pos, Vector.Zero, depth, isStatic, alpha) { }
    
         public void ActivateOutline(int diff, bool activate = true)
         {
@@ -50,27 +47,6 @@ namespace Soleil
             outline.Color = OutlineColor;
             outline.IsVisible = activate;
             outline.Text = Text;
-        }
-
-        public void RightAlign(bool activate)
-        {
-            rightAlign = activate;
-            RefreshTextPos();
-        }
-
-        private void RefreshTextPos()
-        {
-            Vector basePos;
-            if (rightAlign)
-            {
-                basePos = InitPos - ImageSize;
-            }
-            else
-            {
-                basePos = InitPos;
-            }
-            basePos += PosDiff;
-            Pos = basePos;
         }
 
         public override void Update()

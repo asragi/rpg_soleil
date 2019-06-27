@@ -125,7 +125,6 @@
     <Compile Include="Images\RightAlignText.cs" />
     <Compile Include="Images\TextWithVal.cs" />
     <Compile Include="Images\UIImage.cs" />
-    <Compile Include="Images\UIImageBase.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
     <Compile Include="Item\ItemEffectData.cs" />

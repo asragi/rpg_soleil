@@ -24,7 +24,7 @@ namespace Soleil
             }
         }
 
-        public CharacterPicture(TextureID id, Vector pos, Vector? pos_diff, bool isDark)
+        public CharacterPicture(TextureID id, Vector pos, Vector pos_diff, bool isDark)
         {
             IsDark = isDark;
             image = new UIImage(id, pos, pos_diff, Depth);

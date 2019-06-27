@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class UIImage : UIImageBase
+    class UIImage : ImageBase
     {
         Texture2D tex;
         bool origin;
@@ -22,7 +22,7 @@ namespace Soleil
         public UIImage(TextureID id, Vector pos, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : this(id, pos, Vector.Zero, dep, centerOrigin, isStatic, alpha) { }
 
-        public UIImage(TextureID id, Vector pos, Vector? _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
+        public UIImage(TextureID id, Vector pos, Vector _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : base(pos, _posDiff, dep, centerOrigin, isStatic, alpha)
         {
             tex = Resources.GetTexture(id);

@@ -16,7 +16,7 @@ namespace Soleil.Menu.Status
         public string Name { set => name.Text = value; }
         public MagicCategoryPiece(Vector pos, int tag)
         {
-            name = new FontImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), null, DepthID.MenuTop);
+            name = new FontImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), DepthID.MenuTop);
             lv = new FontImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
             lvNum = new FontImage(FontID.CorpM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv";
