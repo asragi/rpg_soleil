@@ -167,6 +167,8 @@
     <Compile Include="Map\WorldMap\WorldMapCamera.cs" />
     <Compile Include="Map\WorldMap\WorldMapCursorLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMapInput.cs" />
+    <Compile Include="Map\WorldMap\WorldMapMove.cs" />
+    <Compile Include="Map\WorldMap\WorldMapPlayerIcon.cs" />
     <Compile Include="Map\WorldMap\WorldMapSelectLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMapWindowLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMap.cs" />

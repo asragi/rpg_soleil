@@ -19,6 +19,9 @@ namespace Soleil.Map.WorldMap
         size,
     }
 
+    /// <summary>
+    /// 地図上に存在する町などの各施設を表すクラス．
+    /// </summary>
     class WorldPoint
     {
         public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
@@ -45,7 +48,7 @@ namespace Soleil.Map.WorldMap
             ID = id;
             Pos = position;
             Edges = new Dictionary<WorldPointKey, int>();
-            icon = new UIImage(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.HitBox, true, false, 1);
+            icon = new UIImage(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.PlayerBack, true, false, 1);
         }
 
         public void SetEdge(WorldPointKey key, int cost) => Edges.Add(key, cost);

@@ -23,7 +23,7 @@ namespace Soleil.Menu
         {
             var barWidth = Game1.VirtualWindowSizeX - 2 * X;
             backBar = new BackBarImage(new Vector(X, Y), barWidth, false);
-            fontImage.Font = FontID.Yasashisa;
+            fontImage.Font = FontID.CorpM;
             fontImage.Color = ColorPalette.AliceBlue;
         }
 

@@ -28,7 +28,7 @@ namespace Soleil.Menu.Status
             texts = new FontImage[4];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.Yasashisa, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
                 texts[i].Color = ColorPalette.DarkBlue;
             }
             index = 0;

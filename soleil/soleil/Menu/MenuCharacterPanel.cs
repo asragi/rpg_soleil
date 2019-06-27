@@ -49,7 +49,7 @@ namespace Soleil.Menu
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
-            var font = FontID.Yasashisa;
+            var font = FontID.CorpM;
             hpText = new FontImage(font, pos + HPPos, posDiff, DepthID.MenuBottom, true, 0);
             mpText = new FontImage(font, pos + HPPos + new Vector(0, SpaceHPMP), posDiff, DepthID.MenuBottom, true, 0);
             lvText = new FontImage(font, pos + HPPos + new Vector(30, -SpaceHPMP), posDiff, DepthID.MenuBottom);

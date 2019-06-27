@@ -18,7 +18,7 @@ namespace Soleil.Menu.Status
         {
             name = new FontImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), null, DepthID.MenuTop);
             lv = new FontImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
-            lvNum = new FontImage(FontID.Yasashisa, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
+            lvNum = new FontImage(FontID.CormM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
 
