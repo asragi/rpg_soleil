@@ -13,11 +13,10 @@ namespace Soleil
         WorldMapMaster worldMapMaster;
         PersonParty party;
 
-        public WorldMapScene(SceneManager sm, PersonParty _party)
+        public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
         {
-            var initialKey = WorldPointKey.Flare; // 引数で指定できるようにする．
-            worldMapMaster = new WorldMapMaster(initialKey);
+            worldMapMaster = new WorldMapMaster(pointKey, this);
             party = _party;
         }
 
