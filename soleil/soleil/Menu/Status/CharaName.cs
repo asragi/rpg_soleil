@@ -10,7 +10,7 @@ namespace Soleil.Menu.Status
 {
     class CharaName : MenuComponent, IPersonUpdate
     {
-        readonly FontID MainFont = FontID.Yasashisa;
+        readonly FontID MainFont = FontID.CorpM;
         readonly FontID SubFont = FontID.CorpMini;
         readonly Color MainColor = ColorPalette.DarkBlue;
         readonly DepthID depth = DepthID.MenuTop;

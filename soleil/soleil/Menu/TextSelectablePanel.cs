@@ -15,9 +15,9 @@ namespace Soleil.Menu
         /// </summary>
         protected readonly Vector Spacing = new Vector(28, 4);
 
-        protected readonly FontID ItemFont = FontID.Yasashisa;
+        protected readonly FontID ItemFont = FontID.CorpM;
         protected readonly Color ItemColor = ColorPalette.DarkBlue;
-        protected readonly FontID SelectedFont = FontID.Yasashisa;
+        protected readonly FontID SelectedFont = FontID.CorpM;
         protected readonly Color SelectedColor = ColorPalette.AliceBlue;
         protected readonly Color DisableColor = ColorPalette.GlayBlue;
 

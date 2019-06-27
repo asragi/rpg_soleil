@@ -18,7 +18,7 @@ namespace Soleil.Menu.Status
         public StatusHPMP(Vector pos)
         {
             var color = ColorPalette.DarkBlue;
-            Font = FontID.Yasashisa;
+            Font = FontID.CorpM;
             MpFont = FontID.CorpMini;
             mpText = new FontImage(MpFont, pos + new Vector(0,7), DepthID.MenuTop);
             mpText.Text = "MP";

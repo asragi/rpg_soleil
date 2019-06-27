@@ -7,7 +7,7 @@ namespace Soleil
         const TextureID Texture = TextureID.ConversationWindow;
         const int x = 140;
         const int y = 300;
-        const FontID Font = FontID.Yasashisa;
+        const FontID Font = FontID.CorpM;
 
         protected override float Alpha => backImg.Alpha;
         readonly Vector contentPos = new Vector(75, 60);

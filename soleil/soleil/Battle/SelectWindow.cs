@@ -32,10 +32,10 @@ namespace Soleil
         }
         public override void Draw(Drawing sb)
         {
-            sb.DrawText(Position + new Vector(80, 0), Resources.GetFont(FontID.Test), "Magic", Color.White, DepthID.Message);
-            sb.DrawText(Position + new Vector(80, 30), Resources.GetFont(FontID.Test), "Skill", Color.White, DepthID.Message);
-            sb.DrawText(Position + new Vector(80, 60), Resources.GetFont(FontID.Test), "Guard", Color.White, DepthID.Message);
-            sb.DrawText(Position + new Vector(80, 90), Resources.GetFont(FontID.Test), "Escape", Color.White, DepthID.Message);
+            sb.DrawText(Position + new Vector(80, 0), Resources.GetFont(FontID.Yasashisa), "Magic", Color.White, DepthID.Message);
+            sb.DrawText(Position + new Vector(80, 30), Resources.GetFont(FontID.Yasashisa), "Skill", Color.White, DepthID.Message);
+            sb.DrawText(Position + new Vector(80, 60), Resources.GetFont(FontID.Yasashisa), "Guard", Color.White, DepthID.Message);
+            sb.DrawText(Position + new Vector(80, 90), Resources.GetFont(FontID.Yasashisa), "Escape", Color.White, DepthID.Message);
 
             sb.DrawBox(Position + new Vector(0, (int)selectCommand * 30), new Vector(5, 5), Color.White, DepthID.Message);
         }
@@ -101,7 +101,7 @@ namespace Soleil
         public override void Draw(Drawing sb)
         {
             for(int i=0;i<size;i++)
-                sb.DrawText(Position + new Vector(80, i*30), Resources.GetFont(FontID.Test), choiceList[i], Color.White, DepthID.Message);
+                sb.DrawText(Position + new Vector(80, i*30), Resources.GetFont(FontID.CorpM), choiceList[i], Color.White, DepthID.Message);
 
             sb.DrawBox(Position + new Vector(0, (int)selectCommand * 30), new Vector(5, 5), Color.White, DepthID.Message);
         }

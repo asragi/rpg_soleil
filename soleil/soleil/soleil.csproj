@@ -167,6 +167,8 @@
     <Compile Include="Map\WorldMap\WorldMapCamera.cs" />
     <Compile Include="Map\WorldMap\WorldMapCursorLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMapInput.cs" />
+    <Compile Include="Map\WorldMap\WorldMapMove.cs" />
+    <Compile Include="Map\WorldMap\WorldMapPlayerIcon.cs" />
     <Compile Include="Map\WorldMap\WorldMapSelectLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMapWindowLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMap.cs" />
@@ -238,6 +240,7 @@
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
+    <Compile Include="UI\UIGauge.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\IMessageBox.cs" />
     <Compile Include="Window\MessageBox.cs" />

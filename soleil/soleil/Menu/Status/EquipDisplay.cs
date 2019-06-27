@@ -33,7 +33,7 @@ namespace Soleil.Menu.Status
             icons = new UIImage[4];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.Yasashisa, pos + new Vector(0, DiffY * i) + Space, DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i) + Space, DepthID.MenuMiddle);
                 texts[i].Color = ColorPalette.DarkBlue;
                 icons[i] = new UIImage(ids[i], pos + new Vector(0, DiffY * i) + IconSpace, Vector.Zero, DepthID.MenuMiddle);
                 icons[i].Color = ColorPalette.DarkBlue;
