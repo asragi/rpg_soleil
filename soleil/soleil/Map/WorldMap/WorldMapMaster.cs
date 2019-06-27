@@ -8,29 +8,36 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapMaster
     {
+        public WorldMapInputMode Mode { get; private set; }
         WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
         WorldMapInput mapInput;
         WorldMapCursorLayer cursorLayer;
         WorldMapSelectLayer mapSelectLayer;
         WorldMapCamera camera;
+        WorldMapMove mapMove;
 
-        public WorldMapMaster()
+        public WorldMapMaster(WorldPointKey initialKey)
         {
-            worldMap = new WorldMap();
+            Mode = WorldMapInputMode.InitWindow;
+            worldMap = new WorldMap(initialKey);
+            camera = new WorldMapCamera();
+            camera.SetPosition(worldMap.GetPoint(initialKey).Pos);
+            mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
             cursorLayer = new WorldMapCursorLayer();
-            camera = new WorldMapCamera();
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
-            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer);
+            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap);
         }
 
         public void Update()
         {
-            mapInput.Update();
+            Mode = mapInput.Update(Mode);
+            Mode = mapMove.Update(Mode, windowLayer);
             cursorLayer.Update();
             camera.Update();
+            worldMap.Update();
         }
 
         public void Draw(Drawing d)

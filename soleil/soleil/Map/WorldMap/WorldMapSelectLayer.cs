@@ -83,5 +83,16 @@ namespace Soleil.Map.WorldMap
             descriptionWindow.Quit();
             camera.SetDestination(worldMap.GetPlayerPoint());
         }
+
+        /// <summary>
+        /// 目的地を決定した際の処理．距離や時間帯によっては移動ができない．
+        /// </summary>
+        /// <returns>移動の可否と移動先を返す．</returns>
+        public (bool, WorldPointKey) DecideDestination()
+        {
+            WorldPointKey destination = keyList[selectableWindow.Index];
+            QuitWindow();
+            return (true, destination);
+        }
     }
 }
