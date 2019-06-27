@@ -11,7 +11,6 @@ namespace Soleil.Map.WorldMap
     /// </summary>
     class WorldMapTransition
     {
-        bool initTransition = false;
         WorldMapScene scene;
         WorldPointKey keyMoveTo;
         Transition transition;

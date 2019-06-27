@@ -13,6 +13,8 @@ namespace Soleil
             mapManager = MapManager.GetInstance();
             mapManager.ChangeMap(MapFactory.GetMap(map, party), position);
             mapIndicator = new MapIndicator();
+            var transition = Transition.GetInstance();
+            transition.SetMode(TransitionMode.FadeIn);
         }
 
         override public void Update()
