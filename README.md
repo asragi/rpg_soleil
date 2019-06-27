@@ -21,18 +21,30 @@ http://www.monogame.net/
 
 https://logotype.jp/corporate-logo-font-dl.html
 
+Mediam版をインストールしてください．
+
+### ビルドする
+VisualStudioでビルドをします．
+
+### 外部ファイルをビルド先フォルダに移す．
+`/Resource/Misc/`内にあるファイルの全てを`soleil/soleil/bin/Windows/x86/Debug/`に移す．
+
 ### 動作確認
-cloneしたリポジトリをVisualStudioでビルドして実行して動いたら完了です．
+実行して動いたら完了です．
 
 # Document
 
 ## 全体の仕組み
+`Game1.cs`の`Update()`が60fpsで実行され，`Draw()`で描画がなされています．全ての大元はここにあると考えて大丈夫です．
+
+ここに`SceneManager`が設置され，Sceneインスタンス上でシーンに応じた様々な処理が記述されています．
 
 ## 描画
-
+[ImageBase](/docs/ImageBase.md)
 ### 画像の描画
 - [UIImage](/docs/UIImage.md)
 
 ### テキストの描画
 - [FontImage](/docs/FontImage.md)
   - [RightAlignText](/docs/RightAlignText.md)
+  - [TextWithVal](/docs/TextWithVal.md)
