@@ -22,18 +22,18 @@ namespace Soleil.Menu.Status
         // 仮置き
         readonly int[] p = new[] { -38, 25, 55 };
 
-        FontImage[] texts;
-        FontImage[] indicates;
+        TextImage[] texts;
+        TextImage[] indicates;
 
         public AttributeDisplay(Vector pos)
         {
-            texts = new FontImage[3];
-            indicates = new FontImage[texts.Length];
+            texts = new TextImage[3];
+            indicates = new TextImage[texts.Length];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
+                texts[i] = new TextImage(FontID.CorpM, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
                 texts[i].Text = Words[i];
-                indicates[i] = new FontImage(FontID.CorpM, pos + new Vector(50, DiffY * i), DepthID.MenuMiddle);
+                indicates[i] = new TextImage(FontID.CorpM, pos + new Vector(50, DiffY * i), DepthID.MenuMiddle);
                 indicates[i].Text = SetIndicate(p[i]);
             }
             AddComponents(texts.Concat(indicates).ToArray());

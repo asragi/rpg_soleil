@@ -11,10 +11,10 @@ namespace Soleil.Map
     {
         static Vector upperRight = new Vector(Game1.VirtualWindowSizeX, 0);
         FontID font = FontID.CorpM;
-        UIImage backImage;
+        Image backImage;
         public MapIndicator()
         {
-            backImage = new UIImage(TextureID.IndicatorBack, upperRight + new Vector(-10, 0), Vector.Zero, DepthID.Frame, true, alpha: 0.5f);
+            backImage = new Image(TextureID.IndicatorBack, upperRight + new Vector(-10, 0), Vector.Zero, DepthID.Frame, true, alpha: 0.5f);
         }
 
         public void Update()

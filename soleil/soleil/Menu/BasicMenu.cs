@@ -19,7 +19,7 @@ namespace Soleil.Menu
         protected readonly Vector ItemDrawStartPos = new Vector(25, 28);
         protected readonly int ItemPanelSpacing = 4;
 
-        UIImage backImage;
+        Image backImage;
         public Vector Pos { get { return backImage.Pos; } }
         public float Alpha { get => backImage.Alpha; }
         protected int Index;
@@ -33,7 +33,7 @@ namespace Soleil.Menu
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
-            backImage = new UIImage(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);
+            backImage = new Image(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);
             Index = 0;
             MenuDescription = desc;
         }

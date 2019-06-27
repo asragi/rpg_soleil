@@ -27,14 +27,14 @@ namespace Soleil.Menu
         BasicMenu parent;
         bool isSelected;
         private bool disabled;
-        FontImage tmp;
+        TextImage tmp;
 
         public MagicIcon(Vector _localPos, MagicCategory c, BasicMenu _parent)
         {
             parent = _parent;
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
-            tmp = new FontImage(FontID.CorpM, pos, DepthID.Message);
+            tmp = new TextImage(FontID.CorpM, pos, DepthID.Message);
             tmp.Color = tmpColors[c];
         }
 

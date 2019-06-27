@@ -15,7 +15,7 @@ namespace Soleil
     {
         const int LineSpace = 35;
         string[] options;
-        FontImage[] texts;
+        TextImage[] texts;
         int optionNum;
         public int Index { get; protected set; }
         bool decided;
@@ -23,10 +23,10 @@ namespace Soleil
             : base(_pos, _size, tag, wm, isStatic)
         {
             options = _options;
-            texts = new FontImage[options.Length];
+            texts = new TextImage[options.Length];
             for (int i = 0; i < options.Length; i++)
             {
-                texts[i] = new FontImage(MessageWindow.DefaultFont, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, isStatic);
+                texts[i] = new TextImage(MessageWindow.DefaultFont, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, isStatic);
                 texts[i].FadeSpeed = FadeSpeed;
                 texts[i].Text = options[i];
                 texts[i].Color = ColorPalette.DarkBlue;

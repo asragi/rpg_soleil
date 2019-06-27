@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class UIImage : ImageBase
+    class Image : ImageBase
     {
         Texture2D tex;
         bool origin;
@@ -19,10 +19,10 @@ namespace Soleil
         public Vector Size { get; set; } = Vector.One;
         public override Vector ImageSize => new Vector(tex.Width, tex.Height);
 
-        public UIImage(TextureID id, Vector pos, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
+        public Image(TextureID id, Vector pos, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : this(id, pos, Vector.Zero, dep, centerOrigin, isStatic, alpha) { }
 
-        public UIImage(TextureID id, Vector pos, Vector _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
+        public Image(TextureID id, Vector pos, Vector _posDiff, DepthID dep, bool centerOrigin = false, bool isStatic = true, float alpha = 0)
             : base(pos, _posDiff, dep, centerOrigin, isStatic, alpha)
         {
             tex = Resources.GetTexture(id);

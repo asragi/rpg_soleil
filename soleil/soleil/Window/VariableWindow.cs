@@ -26,8 +26,8 @@ namespace Soleil
         protected override Vector SpaceVector => SpacingVec;
         readonly Vector SpaceVec = new Vector(Spacing);
         static Texture2D frameTextureForCalc;
-        readonly UIImage skinImg;
-        readonly UIImage[] frameImgs;
+        readonly Image skinImg;
+        readonly Image[] frameImgs;
 
         Vector size;
 
@@ -38,24 +38,24 @@ namespace Soleil
             frameTextureForCalc = Resources.GetTexture(Texture);
             size = _size;
 
-            frameImgs = new UIImage[]
+            frameImgs = new Image[]
             {
                 // 左上
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,Depth, center, isStatic),
+                new Image(Texture, Pos + new Vector(FrameSize / 2, FrameSize / 2), DiffPos,Depth, center, isStatic),
                 // 右上
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(FrameSize / 2 + size.X - FrameSize, FrameSize / 2), DiffPos,Depth,center, isStatic),
                 // 左下
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
                 // 右下
-                new UIImage(Texture, Pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(size.X - FrameSize / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
                 // 上部
-                new UIImage(Texture, Pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(size.X / 2, FrameSize / 2), DiffPos,Depth,center, isStatic),
                 // 左
-                new UIImage(Texture, Pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(FrameSize / 2, size.Y / 2), DiffPos,Depth,center, isStatic),
                 // 右
-                new UIImage(Texture, Pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(-FrameSize / 2 + size.X, size.Y / 2), DiffPos,Depth,center, isStatic),
                 // 下
-                new UIImage(Texture, Pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
+                new Image(Texture, Pos + new Vector(size.X / 2, size.Y - FrameSize / 2), DiffPos,Depth,center, isStatic),
             };
             var rects = new[]
             {
@@ -87,7 +87,7 @@ namespace Soleil
                 frameImgs[i].FadeSpeed = FadeSpeed;
             }
 
-            skinImg = new UIImage(Texture, Pos + new Vector(size.X, size.Y) / 2, DiffPos, Depth, center, isStatic, 0);
+            skinImg = new Image(Texture, Pos + new Vector(size.X, size.Y) / 2, DiffPos, Depth, center, isStatic, 0);
             skinImg.FadeSpeed = FadeSpeed;
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, frameTextureForCalc.Width - 2 * FrameSize, frameTextureForCalc.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (frameTextureForCalc.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (frameTextureForCalc.Height - 2 * FrameSize));

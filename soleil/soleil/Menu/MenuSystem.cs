@@ -37,7 +37,7 @@ namespace Soleil.Menu
             "ゲームデータのセーブを行います。"
         };
 
-        UIImage backImage, frontImage;
+        Image backImage, frontImage;
 
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -93,8 +93,8 @@ namespace Soleil.Menu
         {
             Index = 0;
             // Image初期化
-            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
-            frontImage = new UIImage(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
+            backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
+            frontImage = new Image(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
 
             // 選択肢たち
             menuItems = new MenuItem[(int)MenuName.size];

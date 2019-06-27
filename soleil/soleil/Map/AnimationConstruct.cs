@@ -11,7 +11,7 @@ namespace Soleil.Map
     /// </summary>
     class FadeAnimationConstruct : MapConstruct
     {
-        UIImage[] images;
+        Image[] images;
         int frame, interval;
         int nowNum, nextNum;
         public FadeAnimationConstruct(Vector _pos, TextureID[] textureIDs, int _interval, MapDepth depth, ObjectManager om)
@@ -20,10 +20,10 @@ namespace Soleil.Map
             interval = _interval;
             nowNum = 0;
             nextNum = 1;
-            images = new UIImage[textureIDs.Length];
+            images = new Image[textureIDs.Length];
             for (int i = 0; i < textureIDs.Length; i++)
             {
-                images[i] = new UIImage(textureIDs[i], _pos, LowerLayer, false, false, (i == 0) ? 1 : 0);
+                images[i] = new Image(textureIDs[i], _pos, LowerLayer, false, false, (i == 0) ? 1 : 0);
             }
         }
 

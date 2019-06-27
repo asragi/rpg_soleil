@@ -16,17 +16,17 @@ namespace Soleil.Images
         // 画像の端からの切り出し量
         public const int EdgeSize = 36;
         public Vector Pos { get; set; }
-        UIImage[] images;
+        Image[] images;
 
         public BackBarImage(Vector _pos, int _length, bool centerBased, DepthID depth = DepthID.MenuBottom)
         {
             Pos = _pos;
-            images = new UIImage[3];
+            images = new Image[3];
             var texID = TextureID.BackBar;
             var tex = Resources.GetTexture(texID);
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new UIImage(texID, Pos, depth, false, true, 0);
+                images[i] = new Image(texID, Pos, depth, false, true, 0);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);

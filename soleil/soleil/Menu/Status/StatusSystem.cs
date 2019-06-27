@@ -10,9 +10,9 @@ namespace Soleil.Menu
     class StatusSystem: MenuChild
     {
         // 背景画像
-        UIImage backImage;
+        Image backImage;
         // 顔画像
-        UIImage faceImg;
+        Image faceImg;
         readonly Vector FacePos;
         // 名前
         CharaName charaName;
@@ -47,8 +47,8 @@ namespace Soleil.Menu
             CategoryPos = new Vector(RightX, namePosY);
 
             // Component設定
-            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
-            faceImg = new UIImage(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
+            backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuMiddle);
+            faceImg = new Image(TextureID.MenuLune, FacePos, Vector.Zero, DepthID.MenuMiddle);
             charaName = new CharaName(NamePos, 250);
             display = new HPMPDisplay(HPPos, MPPos);
             statusMagicCategory = new StatusMagicCategory(CategoryPos);

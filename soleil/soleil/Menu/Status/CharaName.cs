@@ -15,13 +15,13 @@ namespace Soleil.Menu.Status
         readonly Color MainColor = ColorPalette.DarkBlue;
         readonly DepthID depth = DepthID.MenuTop;
         RightAlignText name;
-        FontImage nameTitle;
+        TextImage nameTitle;
 
         public CharaName(Vector pos, int length)
         {
             name = new RightAlignText(MainFont, pos + new Vector(length, 0), Vector.Zero, depth);
             name.Color = MainColor;
-            nameTitle = new FontImage(SubFont, pos + new Vector(0, 7), depth);
+            nameTitle = new TextImage(SubFont, pos + new Vector(0, 7), depth);
             nameTitle.Text = "Name";
             nameTitle.Color = MainColor;
             AddComponents(new IComponent[] { nameTitle, name });

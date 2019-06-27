@@ -11,7 +11,7 @@ namespace Soleil.Menu.Status
         readonly Vector ContentPos = new Vector(36, 9);
         const int YDiff = 27;
         MagicCategoryPiece[] pieces;
-        UIImage backImg;
+        Image backImg;
 
         readonly string[] names = new[] // debug tmp
         {
@@ -30,7 +30,7 @@ namespace Soleil.Menu.Status
         public StatusMagicCategory(Vector pos)
             :base()
         {
-            backImg = new UIImage(TextureID.MenuCategory, pos, Vector.Zero, DepthID.MenuTop);
+            backImg = new Image(TextureID.MenuCategory, pos, Vector.Zero, DepthID.MenuTop);
             pieces = new MagicCategoryPiece[10]; // 術10系統
             for (int i = 0; i < 10; i++)
             {

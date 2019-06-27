@@ -120,11 +120,11 @@
     <Compile Include="Images\CharacterPictureMap.cs" />
     <Compile Include="Images\CharacterPictureSet.cs" />
     <Compile Include="Images\ColorPalette.cs" />
-    <Compile Include="Images\FontImage.cs" />
+    <Compile Include="Images\TextImage.cs" />
     <Compile Include="Images\ImageBase.cs" />
     <Compile Include="Images\RightAlignText.cs" />
     <Compile Include="Images\TextWithVal.cs" />
-    <Compile Include="Images\UIImage.cs" />
+    <Compile Include="Images\Image.cs" />
     <Compile Include="Item\ItemData.cs" />
     <Compile Include="Item\ItemDataBase.cs" />
     <Compile Include="Item\ItemEffectData.cs" />

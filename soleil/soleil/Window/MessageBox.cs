@@ -15,14 +15,14 @@ namespace Soleil
         string messageToDraw; // 表示されるStringを保持する変数
         int charIndex; // char配列アクセス用index
         bool endAnimation;
-        FontImage fontImage;
+        TextImage fontImage;
         int frame;
 
         public MessageBox(FontID font, Vector _pos, Vector _diffPos, bool isStatic, int fadeSpeed)
         {
             endAnimation = false;
             messageToDraw = "";
-            fontImage = new FontImage(font, _pos, _diffPos, Depth, isStatic);
+            fontImage = new TextImage(font, _pos, _diffPos, Depth, isStatic);
             fontImage.FadeSpeed = fadeSpeed;
             fontImage.Color = ColorPalette.DarkBlue;
             charIndex = 0;

@@ -12,7 +12,7 @@ namespace Soleil.Map.WorldMap
     class WorldMapPlayerIcon
     {
         public WorldPoint Point { get; set; }
-        public UIImage iconImg;
+        public Image iconImg;
         public Vector Pos
         {
             get => iconImg.Pos;
@@ -22,7 +22,7 @@ namespace Soleil.Map.WorldMap
         public WorldMapPlayerIcon(WorldPoint playerpoint)
         {
             Point = playerpoint;
-            iconImg = new UIImage(TextureID.BackBar, Point.Pos,
+            iconImg = new Image(TextureID.BackBar, Point.Pos,
                 Vector.Zero, DepthID.Player,
                 true, false, 1);
         }

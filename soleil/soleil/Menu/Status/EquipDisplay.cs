@@ -12,15 +12,15 @@ namespace Soleil.Menu.Status
         readonly Vector Space = new Vector(28, 4);
         readonly Vector IconSpace = ItemPanelBase.IconSpace;
         const int DiffY = 34;
-        FontImage[] texts;
-        UIImage[] icons;
+        TextImage[] texts;
+        Image[] icons;
         readonly TextureID[] ids = new[] { TextureID.IconWand, TextureID.IconArmor, TextureID.IconAccessary, TextureID.IconAccessary };
         IItem[] equips;
 
         Person displayingCharacter;
 
         int index;
-        UIImage cursor;
+        Image cursor;
         MenuDescription description;
 
         StatusSystem statusSystem;
@@ -29,17 +29,17 @@ namespace Soleil.Menu.Status
         public EquipDisplay(Vector pos, MenuDescription desc, StatusSystem ss)
         {
             statusSystem = ss;
-            texts = new FontImage[4];
-            icons = new UIImage[4];
+            texts = new TextImage[4];
+            icons = new Image[4];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i) + Space, DepthID.MenuMiddle);
+                texts[i] = new TextImage(FontID.CorpM, pos + new Vector(0, DiffY * i) + Space, DepthID.MenuMiddle);
                 texts[i].Color = ColorPalette.DarkBlue;
-                icons[i] = new UIImage(ids[i], pos + new Vector(0, DiffY * i) + IconSpace, Vector.Zero, DepthID.MenuMiddle);
+                icons[i] = new Image(ids[i], pos + new Vector(0, DiffY * i) + IconSpace, Vector.Zero, DepthID.MenuMiddle);
                 icons[i].Color = ColorPalette.DarkBlue;
             }
             index = 0;
-            cursor = new UIImage(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
+            cursor = new Image(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
             equipWindow = new EquipItemList(this, desc);
             description = desc;
             AddComponents(texts);

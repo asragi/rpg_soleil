@@ -9,10 +9,10 @@ namespace Soleil.Map.WorldMap
     class WorldMapCursorLayer
     {
         const int Speed = 5;
-        UIImage cursor;
+        Image cursor;
         public WorldMapCursorLayer()
         {
-            cursor = new UIImage(TextureID.MenuSave1, Vector.One, DepthID.Effect);
+            cursor = new Image(TextureID.MenuSave1, Vector.One, DepthID.Effect);
         }
 
         public void Move(Direction inputDir)

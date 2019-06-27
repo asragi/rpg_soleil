@@ -12,8 +12,8 @@ namespace Soleil
         public static DepthID Depth = DepthID.PlayerFront;
         public bool IsDark;
 
-        UIImage image;
-        UIImage grayImage;
+        Image image;
+        Image grayImage;
 
         public Vector Pos {
             get => image.Pos;
@@ -27,8 +27,8 @@ namespace Soleil
         public CharacterPicture(TextureID id, Vector pos, Vector pos_diff, bool isDark)
         {
             IsDark = isDark;
-            image = new UIImage(id, pos, pos_diff, Depth);
-            grayImage = new UIImage(id, pos, pos_diff, Depth);
+            image = new Image(id, pos, pos_diff, Depth);
+            grayImage = new Image(id, pos, pos_diff, Depth);
             grayImage.Color = ColorPalette.DarkBlue;
         }
 

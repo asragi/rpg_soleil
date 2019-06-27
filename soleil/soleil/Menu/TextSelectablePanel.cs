@@ -32,7 +32,7 @@ namespace Soleil.Menu
         public override Vector ItemNumPosDiff { get => new Vector(340, 0); }
 
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
-        UIImage selectedBack;
+        Image selectedBack;
 
         public TextSelectablePanel(String itemName, BasicMenu parent, bool active = true) : base(parent)
         {
@@ -45,7 +45,7 @@ namespace Soleil.Menu
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
-            selectedBack = new UIImage(TextureID.MenuSelected, LocalPos + parent.Pos, DepthID.Message, false, true, 0);
+            selectedBack = new Image(TextureID.MenuSelected, LocalPos + parent.Pos, DepthID.Message, false, true, 0);
         }
 
         public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
