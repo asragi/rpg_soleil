@@ -12,7 +12,7 @@ namespace Soleil.Menu.Status
 
         public CharaName(Vector pos, string text)
         {
-            name = new FontImage(FontID.KkBlack, pos, DepthID.MenuTop);
+            name = new FontImage(FontID.CorpM, pos, DepthID.MenuTop);
             name.Text = text;
             AddComponents(new IComponent[] { name });
         }

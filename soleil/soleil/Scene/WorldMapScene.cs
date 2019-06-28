@@ -13,7 +13,8 @@ namespace Soleil
         public WorldMapScene(SceneManager sm)
             : base(sm)
         {
-            worldMapMaster = new WorldMapMaster();
+            var initialKey = WorldPointKey.Flare; // 引数で指定できるようにする．
+            worldMapMaster = new WorldMapMaster(initialKey);
         }
 
         public override void Update()

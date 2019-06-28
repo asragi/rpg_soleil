@@ -25,8 +25,8 @@ namespace Soleil.Event.Shop
             Price = value;
 
             Val = Price;
-            ValFont = FontID.Yasashisa;
-            currency = new FontImage(FontID.KkGoldMini, LocalPos + parent.Pos, DepthID.Message, true, 0);
+            ValFont = FontID.CorpM;
+            currency = new FontImage(FontID.CorpM, LocalPos + parent.Pos, DepthID.Message, true, 0);
             currency.Text = Map.MoneyWallet.Currency;
         }
 
