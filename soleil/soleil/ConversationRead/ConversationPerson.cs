@@ -39,10 +39,18 @@ namespace Soleil.Event.Conversation
 
         public void Init() => Init(FaceDictionary.GetFaces(Name)[0]);
         public void Init(string face) => SetFace(face);
-        public void Quit() => images[Face].Quit();
+        public void Quit()
+        {
+            if (Face == null) return;
+            images[Face].Quit();
+        }
 
         public void SetFace(string face)
         {
+            if (Face == null)
+            {
+                images[face].Call();
+            }
             if (Face != face)
             {
                 // 表情変化時のトランジション処理
