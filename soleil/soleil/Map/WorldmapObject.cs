@@ -13,7 +13,7 @@ namespace Soleil.Map
 
         public WorldmapObject(
             Vector pos, Vector size, WorldPointKey dest,
-            PersonParty pp, SceneManager sm, ObjectManager om, BoxManager bm
+            PersonParty pp, ObjectManager om, BoxManager bm
             )
             :base (pos, size, om, bm)
         {
@@ -24,13 +24,22 @@ namespace Soleil.Map
                     ),
                 new BoolEventBranch(EventSequence, () => wm.GetDecideIndex() == 0,
                     new EventUnit[]{
-                        new ToWorldMapEvent(sm, pp, dest)
+                        new ToWorldMapEvent(pp, dest)
                     },
                     new EventUnit[]{
                         new ChangeInputFocusEvent(InputFocus.Player)
                     }
                 )
             );
+        }
+
+        public override void OnCollisionEnter(CollideBox col)
+        {
+            if (col.Layer == CollideLayer.PlayerBox)
+            {
+                EventSequence.StartEvent();
+            }
+            base.OnCollisionEnter(col);
         }
     }
 }

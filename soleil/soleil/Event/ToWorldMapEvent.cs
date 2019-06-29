@@ -17,10 +17,10 @@ namespace Soleil.Event
         WorldPointKey destinationKey;
         Transition transition;
 
-        public ToWorldMapEvent(SceneManager sm, PersonParty pp, WorldPointKey dest)
+        public ToWorldMapEvent(PersonParty pp, WorldPointKey dest)
             : base()
         {
-            sceneManager = sm;
+            sceneManager = SceneManager.GetInstance();
             party = pp;
             destinationKey = dest;
             transition = Transition.GetInstance();
