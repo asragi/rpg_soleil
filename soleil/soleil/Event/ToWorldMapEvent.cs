@@ -40,6 +40,7 @@ namespace Soleil.Event
             {
                 sceneManager.KillNowScene();
                 new WorldMapScene(sceneManager, party, destinationKey);
+                Next();
             }
         }
     }

@@ -26,16 +26,17 @@ namespace Soleil.Map
                     new EventUnit[]{
                         new ToWorldMapEvent(pp, dest)
                     },
-                    new EventUnit[]{
-                        new ChangeInputFocusEvent(InputFocus.Player)
-                    }
-                )
+                    new EventUnit[]{ }
+                ),
+                new EventSet(
+                    new ChangeInputFocusEvent(InputFocus.Player)
+                    )
             );
         }
 
         public override void OnCollisionEnter(CollideBox col)
         {
-            if (col.Layer == CollideLayer.PlayerBox)
+            if (col.Layer == CollideLayer.PlayerHit)
             {
                 EventSequence.StartEvent();
             }
