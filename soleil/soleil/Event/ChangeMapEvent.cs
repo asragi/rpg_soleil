@@ -29,9 +29,7 @@ namespace Soleil.Event
         {
             var map = MapFactory.GetMap(nextMap, party);
             // マップを変更する
-            mm.ChangeMap(map);
-            // プレイヤーのポジションを変更する
-            map.SetPlayerPos(nextPos);
+            mm.ChangeMap(map, nextPos);
             // プレイヤーの向きを変更する
             map.SetPlayerDir(direction);
 

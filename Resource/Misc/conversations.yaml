@@ -22,21 +22,41 @@
         text: 表情変化テスト
     - name: for-the-first-time
       events:
+      - event: person
+        person: lune
+        position: 3
+      - event: person
+        person: sunny
+        position: 1
       - event: talk
         person: sunny
-        face: smile
+        face: normal
         text: goodby!
       - event: branch
-        branch-key: test
+        bool-key: Test
         onTrue:
           - event: talk
-            person: lune
-            face: smile
+            person: sunny
+            face: normal
             text: it is true
+          - event: branch
+            bool-key: Test
+            onTrue:
+              - event: talk
+                person: sunny
+                face: normal
+                text: |
+                  ここまでちゃんと出力されたらめでたい
+                  とてもめでたい
+            onFalse:
+              - event: talk
+                person: sunny
+                face: normal
+                text: unreachable
         onFalse:
           - event: talk
             person: sunny
-            face: upset
+            face: normal
             text: it is false
 
 - place: flare

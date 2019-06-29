@@ -21,6 +21,7 @@ namespace Soleil
         const int FrameSize = 40;
 
         // -----
+        protected readonly bool IsStatic;
         protected override float Alpha => skinImg.Alpha;
         readonly Vector SpacingVec = new Vector(Spacing);
         protected override Vector SpaceVector => SpacingVec;
@@ -37,6 +38,7 @@ namespace Soleil
             var center = true;
             frameTextureForCalc = Resources.GetTexture(Texture);
             size = _size;
+            IsStatic = isStatic;
 
             frameImgs = new UIImage[]
             {
