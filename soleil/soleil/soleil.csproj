@@ -158,6 +158,7 @@
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
+    <Compile Include="Map\WorldmapObject.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia4.cs" />
