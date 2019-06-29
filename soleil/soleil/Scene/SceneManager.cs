@@ -11,6 +11,7 @@ namespace Soleil
     {
         private static SceneManager sceneManager = new SceneManager();
         Transition transition;
+        Scene NowScene => scenes.Last();
         List<Scene> scenes;
         private SceneManager()
         {
@@ -25,16 +26,18 @@ namespace Soleil
             scenes.Add(scene);
         }
 
+        public void KillNowScene() => NowScene.Kill();
+
         public void Update()
         {
             scenes.RemoveAll(s => s.IsDead());
-            scenes.First().Update();
+            NowScene.Update();
             transition.Update();
         }
 
         public void Draw(Drawing sb)
         {
-            scenes.Last().Draw(sb); // いい感じにする
+            NowScene.Draw(sb); // いい感じにする
             transition.Draw(sb);
         }
     }

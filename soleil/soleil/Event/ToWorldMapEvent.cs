@@ -37,7 +37,10 @@ namespace Soleil.Event
             base.Execute();
             // Transition終了でシーン切り替え
             if (transition.GetTransitionMode() == TransitionMode.None)
+            {
+                sceneManager.KillNowScene();
                 new WorldMapScene(sceneManager, party, destinationKey);
+            }
         }
     }
 }
