@@ -28,10 +28,7 @@ namespace Soleil
         public void Update()
         {
             scenes.RemoveAll(s => s.IsDead());
-            foreach (var s in scenes)
-            {
-                s.Update();
-            }
+            scenes.First().Update();
             transition.Update();
         }
 

@@ -168,7 +168,9 @@
     <Compile Include="Map\WorldMap\WorldMapInput.cs" />
     <Compile Include="Map\WorldMap\WorldMapMove.cs" />
     <Compile Include="Map\WorldMap\WorldMapPlayerIcon.cs" />
+    <Compile Include="Map\WorldMap\WorldMapPositionData.cs" />
     <Compile Include="Map\WorldMap\WorldMapSelectLayer.cs" />
+    <Compile Include="Map\WorldMap\WorldMapTransition.cs" />
     <Compile Include="Map\WorldMap\WorldMapWindowLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMap.cs" />
     <Compile Include="Map\WorldMap\WorldMapMaster.cs" />

@@ -84,7 +84,10 @@ namespace Soleil
             {
                 texts[i].Draw(d);
             }
-            d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 5);
+            if(IsStatic)
+                d.DrawStatic(Pos + new Vector(0, 20 + Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
+            else
+                d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
         }
 
         /// <summary>
