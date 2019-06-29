@@ -10,7 +10,7 @@ namespace Soleil.Images
 {
     abstract class UIImageBase : ImageBase, IComponent
     {
-        protected Vector InitPos;
+        public virtual Vector InitPos { get; set; }
         protected readonly Vector PosDiff;
         public Color Color { get; set; } = Color.White;
         public int FadeSpeed = MenuSystem.FadeSpeed;

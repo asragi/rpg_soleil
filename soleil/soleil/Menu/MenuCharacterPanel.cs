@@ -22,6 +22,10 @@ namespace Soleil.Menu
         FontImage hpNumText, mpNumText, lvNumText;
         readonly Vector posDiff = new Vector(50, 0);
 
+        Person person;
+
+        // animation
+        int targetHP, targetMP;
         // Gauge
         readonly Vector GaugeDiff = new Vector(0, 20);
         readonly Vector GaugeSize = new Vector(105, 6);
@@ -44,12 +48,14 @@ namespace Soleil.Menu
         // ほんとは引数でキャラクターIDとかを渡してデータを参照する感じにしたいよね．
         public MenuCharacterPanel(Person p, Vector _pos, TextureID textureID)
         {
+            person = p;
             pos = _pos;
             int hp, mp, hpMax, mpMax;
-            hp = p.Score.HPMAX - 40;
-            mp = p.Score.MPMAX;
+            hp = p.Score.HP;
+            mp = p.Score.MP;
             hpMax = p.Score.HPMAX;
             mpMax = p.Score.MPMAX;
+
             // Images
             faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
@@ -80,6 +86,32 @@ namespace Soleil.Menu
             hpGauge.Refresh((double)hp / hpMax);
             mpGauge.Refresh((double)mp / mpMax);
             AddComponents(new IComponent[] { faceImg, hpGauge, mpGauge, hpText, hpNumText, mpText, mpNumText, lvText, lvNumText });
+
+            targetHP = hp;
+            targetMP = mp;
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            UpdateStatusVal();
+
+            void UpdateStatusVal()
+            {
+                if(person.Score.HP != targetHP)
+                {
+                    targetHP = person.Score.HP;
+                    hpNumText.Text = targetHP.ToString();
+                    hpGauge.Refresh((double)targetHP / person.Score.HPMAX);
+                }
+
+                if(person.Score.MP != targetMP)
+                {
+                    targetMP = person.Score.MP;
+                    mpNumText.Text = targetMP.ToString();
+                    hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
+                }
+            }
         }
     }
 }

@@ -19,6 +19,8 @@ namespace Soleil.Menu
             {CharaName.Tella, TextureID.MenuTella }
         };
 
+        PersonParty party;
+
         MenuCursor cursor;
         int index;
 
@@ -26,7 +28,7 @@ namespace Soleil.Menu
             :base(parent)
         {
             index = 0;
-
+            party = _party;
             var people = _party.GetActiveMembers();
             int size = people.Length;
             Vector[] positions = Positions(size);
@@ -60,6 +62,7 @@ namespace Soleil.Menu
         }
 
         public int GetIndex() => index;
+        public Person GetSelectedPerson() => party.GetActiveMembers()[index];
 
         public void CallCursor() => cursor.Call();
         public void QuitCursor() => cursor.Quit();

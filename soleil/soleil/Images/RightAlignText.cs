@@ -29,8 +29,9 @@ namespace Soleil
 
         private void PositionUpdate()
         {
+            var diff = Pos - InitPos;
             InitPos = standardPosition - new Vector(ImageSize.X, 0);
-            Pos = standardPosition + PosDiff - new Vector(ImageSize.X, 0);
+            Pos = standardPosition + diff - new Vector(ImageSize.X, 0);
         }
     }
 }
