@@ -96,6 +96,7 @@
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
     <Compile Include="Event\Shop\ShopSystem.cs" />
+    <Compile Include="Event\ToWorldMapEvent.cs" />
     <Compile Include="Event\WindowEventBase.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
