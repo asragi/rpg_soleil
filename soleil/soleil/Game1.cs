@@ -86,10 +86,6 @@ namespace Soleil
             // new TestBattleScene(sm);
             new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
-            // Camera
-            var camera = Camera.GeInstance();
-            camera.SetDrawing(drawing);
-
 
 
             drawing.DrawRate = DrawRate;

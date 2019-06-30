@@ -100,6 +100,7 @@
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
     <Compile Include="Function\Camera.cs" />
+    <Compile Include="Function\CameraManager.cs" />
     <Compile Include="Function\ColorChanger.cs" />
     <Compile Include="Function\CSVIO.cs" />
     <Compile Include="Function\CutIn.cs" />

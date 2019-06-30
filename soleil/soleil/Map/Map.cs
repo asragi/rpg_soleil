@@ -36,7 +36,7 @@ namespace Soleil.Map
         protected CameraPoint[] CameraPoints;
         protected PersonParty Party;
 
-        public MapBase(MapName _name, PersonParty _party)
+        public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
             var wm = WindowManager.GetInstance();
             om = new ObjectManager();
@@ -49,7 +49,7 @@ namespace Soleil.Map
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
             mapInputManager.SetMenuSystem(menuSystem);
-            MapCameraManager = new MapCameraManager(player);
+            MapCameraManager = new MapCameraManager(player, cam);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
         }

@@ -10,7 +10,7 @@ namespace Soleil.Map
     class MapChangeObject : MapEventObject
     {
         public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
-            ObjectManager om, BoxManager bm, PersonParty party)
+            ObjectManager om, BoxManager bm, PersonParty party, Camera cam)
             : base(pos, size, om, bm)
         {
             Pos = pos;
@@ -20,7 +20,7 @@ namespace Soleil.Map
                     new ChangeInputFocusEvent(InputFocus.None),
                     new CharacterMoveEvent(om.GetPlayer(), dir, 15, false),
                     new FadeOutEvent(),
-                    new ChangeMapEvent(mapName, destination, dir, party),
+                    new ChangeMapEvent(mapName, destination, dir, party, cam),
                     new FadeInEvent(),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )
