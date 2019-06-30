@@ -8,14 +8,16 @@ namespace Soleil.Event
         string[] options;
         bool changeFocus;
         SelectableWindow selectable;
+        MapInputManager inputManager;
 
-        public SelectWindowEvent(Vector pos, WindowTag _tag, params string[] _options)
-            :this(pos, _tag, true, _options) { }
-        public SelectWindowEvent(Vector pos, WindowTag _tag, bool _changeFocus, params string[] _options)
+        public SelectWindowEvent(Vector pos, WindowTag _tag, MapInputManager mim, params string[] _options)
+            :this(pos, _tag, true, mim, _options) { }
+        public SelectWindowEvent(Vector pos, WindowTag _tag, bool _changeFocus, MapInputManager mim, params string[] _options)
             : base(pos, SelectableWindow.ProperSize(FontID.CorpM, _options), _tag)
         {
             changeFocus = _changeFocus;
             options = _options;
+            inputManager = mim;
         }
 
         public override void Start()
@@ -26,8 +28,7 @@ namespace Soleil.Event
             selectable.Call();
             if (changeFocus) Wm.SetNowSelectWindow(Tag);
             // FocusをWindowに設定
-            var mim = MapInputManager.GetInstance();
-            mim.SetFocus(InputFocus.Window);
+            inputManager.SetFocus(InputFocus.Window);
         }
 
         public override void Execute()

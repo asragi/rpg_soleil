@@ -13,11 +13,11 @@ namespace Soleil.Event
     /// </summary>
     static class CreateConversationEvent
     {
-        public static EventSet[] Create(string place, string convName, ConversationSystem cs, EventSequence es)
+        public static EventSet[] Create(string place, string convName, ConversationSystem cs, EventSequence es, MapInputManager mim)
         {
             var events = ConversationRead.ActionFromData(place, convName, cs, es);
-            var initEvent = new EventSet(new ChangeInputFocusEvent(InputFocus.Window), new ConversationInitEvent(cs));
-            var endEvent = new EventSet(new ConversationEndEvent(cs), new ChangeInputFocusEvent(InputFocus.Player));
+            var initEvent = new EventSet(new ChangeInputFocusEvent(InputFocus.Window, mim), new ConversationInitEvent(cs));
+            var endEvent = new EventSet(new ConversationEndEvent(cs), new ChangeInputFocusEvent(InputFocus.Player, mim));
 
             // Add Events before and after
             var result = new EventSet[events.Length + 2];

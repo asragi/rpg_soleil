@@ -24,7 +24,7 @@ namespace Soleil.Map.Maps.Somnia
         BoolSet preservedBools;
         enum BoolName { First, Sold, size }
 
-        public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
+        public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm, MapInputManager mim)
             : base(pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaAcceU, new Vector(-5, -45), true, 8);
@@ -39,31 +39,31 @@ namespace Soleil.Map.Maps.Somnia
                 new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
                     new EventUnit[] {
                     new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")) },
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね", mim)) },
                     new EventUnit[] {
                     new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして", mim)) }),
                 new EventSet(
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
+                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ", mim),
                     new ShopEvent(values, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
                     new EventUnit[] {
                         new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！"))
+                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！", mim))
                     },
                     new EventUnit[] {
                         new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
                         new EventUnit[]
                         {
-                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "残念")),
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "残念", mim)),
                         },
                         new EventUnit[]{
-                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな")),
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな", mim)),
                         })
                     }),
                 new EventSet(
-                    new ChangeInputFocusEvent(InputFocus.Player),
+                    new ChangeInputFocusEvent(InputFocus.Player, mim),
                     new BoolSetEvent(preservedBools, (int)BoolName.First, true)
                 )
             );

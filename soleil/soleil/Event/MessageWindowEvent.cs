@@ -14,12 +14,14 @@ namespace Soleil.Event
         :WindowEventBase
     {
         string message;
+        MapInputManager inputManager;
 
         MessageWindow messageW;
-        public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message)
+        public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message, MapInputManager mapInput)
             :base(_pos, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message),_tag)
         {
             message = _message;
+            inputManager = mapInput;
         }
 
         public override void Start()
@@ -29,8 +31,7 @@ namespace Soleil.Event
             messageW.SetMessage(message);
             messageW.Call();
             // FocusをWindowに設定
-            var mim = MapInputManager.GetInstance();
-            mim.SetFocus(InputFocus.Window);
+            inputManager.SetFocus(InputFocus.Window);
         }
 
         public override void Execute()

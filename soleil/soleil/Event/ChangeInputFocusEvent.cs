@@ -8,11 +8,11 @@ namespace Soleil.Event
     {
         MapInputManager mim;
         InputFocus focus;
-        public ChangeInputFocusEvent(InputFocus _focus)
+        public ChangeInputFocusEvent(InputFocus _focus, MapInputManager _mim)
             : base()
         {
             focus = _focus;
-            mim = MapInputManager.GetInstance();
+            mim = _mim;
         }
 
         public override void Execute()

@@ -32,8 +32,8 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            mcoTop = new MapChangeObject(new Vector(200, 10), new Vector(200, 20), MapName.Somnia4, new Vector(100, 500), Direction.U, om, bm, Party);
-            mcoRight = new MapChangeObject(new Vector(970, 553), new Vector(30, 260), MapName.Somnia1, new Vector(100, 500), Direction.R, om, bm, Party);
+            mcoTop = new MapChangeObject(new Vector(200, 10), new Vector(200, 20), MapName.Somnia4, new Vector(100, 500), Direction.U, om, bm, MapInputManager, Party);
+            mcoRight = new MapChangeObject(new Vector(970, 553), new Vector(30, 260), MapName.Somnia1, new Vector(100, 500), Direction.R, om, bm, MapInputManager, Party);
         }
     }
 }

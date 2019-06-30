@@ -19,7 +19,7 @@ namespace Soleil.Map
     }
     abstract class MapBase
     {
-        MapInputManager mapInputManager;
+        protected MapInputManager MapInputManager;
         protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
         protected BoxManager bm;
@@ -46,9 +46,9 @@ namespace Soleil.Map
             player = new PlayerObject(om, bm);
             Party = _party;
             menuSystem = new MenuSystem(_party);
-            mapInputManager = MapInputManager.GetInstance();
-            mapInputManager.SetPlayer(player);
-            mapInputManager.SetMenuSystem(menuSystem);
+            MapInputManager = new MapInputManager();
+            MapInputManager.SetPlayer(player);
+            MapInputManager.SetMenuSystem(menuSystem);
             MapCameraManager = new MapCameraManager(player);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
@@ -66,7 +66,7 @@ namespace Soleil.Map
             EventSequenceUpdate();
             bm.Update();
             menuSystem.Update();
-            mapInputManager.Update();
+            MapInputManager.Update();
             MapCameraManager.Update();
             PictureHolder.Update();
             ConversationSystem.Update();

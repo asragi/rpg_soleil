@@ -20,9 +20,7 @@ namespace Soleil.Map
         WindowManager wm;
         MenuSystem menuSystem;
 
-        private static MapInputManager mapInputManager = new MapInputManager();
-        public static MapInputManager GetInstance() => mapInputManager;
-        private MapInputManager()
+        public MapInputManager()
         {
             wm = WindowManager.GetInstance();
             nextFocus = InputFocus.Player;

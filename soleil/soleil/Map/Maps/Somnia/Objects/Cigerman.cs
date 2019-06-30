@@ -10,7 +10,7 @@ namespace Soleil.Map.Maps.Somnia
     class Cigerman : MapCharacter
     {
         readonly Vector WindowPosDiff = new Vector(30, -100);
-        public Cigerman(Vector pos, ObjectManager om, BoxManager bm)
+        public Cigerman(Vector pos, ObjectManager om, BoxManager bm, MapInputManager mim)
             : base(pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaMob1, new Vector(-5, -45), true, 8);
@@ -19,24 +19,24 @@ namespace Soleil.Map.Maps.Somnia
 
             EventSequence.SetEventSet(
                 new EventSet(
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "テストメッセージ"),
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型，なかなかだろ？"),
-                    new SelectWindowEvent(Pos + WindowPosDiff, 0, "イケイケじゃん", "ハンバーグみたいだね")
+                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "テストメッセージ", mim),
+                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型，なかなかだろ？", mim),
+                    new SelectWindowEvent(Pos + WindowPosDiff, 0, mim,"イケイケじゃん", "ハンバーグみたいだね")
                 ),
                 new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
                     new EventUnit[]{
                         new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "訊くまでもなかったか")
+                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "訊くまでもなかったか", mim)
                             )
                     },
                     new EventUnit[]{
                         new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型が\nサザエさんみてーだと？？")
+                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型が\nサザエさんみてーだと？？", mim)
                             )
                     }
                 ),
                 new EventSet(
-                    new ChangeInputFocusEvent(InputFocus.Player)
+                    new ChangeInputFocusEvent(InputFocus.Player, mim)
                 )
             );
         }
