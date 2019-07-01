@@ -10,10 +10,12 @@ namespace Soleil
     abstract class Scene
     {
         protected SceneManager SceneManager;
+        public Camera Camera { get; private set; }
         protected WindowManager wm;
         bool active,dead;
         public Scene(SceneManager sm)
         {
+            Camera = new Camera();
             SceneManager = sm;
             wm = WindowManager.GetInstance();
             active = true;

@@ -11,7 +11,7 @@ namespace Soleil
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.ChangeMap(MapFactory.GetMap(map, party), position);
+            mapManager.ChangeMap(MapFactory.GetMap(map, party, Camera), position);
             mapIndicator = new MapIndicator();
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);

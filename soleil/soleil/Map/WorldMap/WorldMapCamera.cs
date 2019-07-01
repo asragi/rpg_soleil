@@ -10,15 +10,13 @@ namespace Soleil.Map.WorldMap
     {
         static Vector CameraDiff = new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY);
         Camera camera;
-        public WorldMapCamera()
+        public WorldMapCamera(Camera cam)
         {
-            camera = Camera.GeInstance();
+            camera = cam;
         }
 
         public void Update()
         {
-            camera.Update();
-
             EasingCamera();
         }
 

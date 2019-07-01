@@ -8,8 +8,8 @@ namespace Soleil.Map
 {
     class Flare1 : MapBase
     {
-        public Flare1(PersonParty party)
-            : base(MapName.Flare1, party)
+        public Flare1(PersonParty party, Camera cam)
+            : base(MapName.Flare1, party, cam)
         {
             // 3分割された背景の位置設定用変数
             int width1 = Resources.GetTexture(TextureID.Flare1_1_1_1).Width;

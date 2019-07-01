@@ -8,23 +8,23 @@ namespace Soleil.Map
 {
     static class MapFactory
     {
-        public static MapBase GetMap(MapName mapName, PersonParty party)
+        public static MapBase GetMap(MapName mapName, PersonParty party, Camera cam)
         {
-            return SwitchMap(mapName, party);
+            return SwitchMap(mapName, party, cam);
         }
 
-        private static MapBase SwitchMap(MapName mapName, PersonParty party)
+        private static MapBase SwitchMap(MapName mapName, PersonParty party, Camera cam)
         {
             switch (mapName)
             {
                 case MapName.Flare1:
-                    return new Flare1(party);
+                    return new Flare1(party, cam);
                 case MapName.Somnia1:
-                    return new Somnia1(party);
+                    return new Somnia1(party, cam);
                 case MapName.Somnia2:
-                    return new Somnia2(party);
+                    return new Somnia2(party, cam);
                 case MapName.Somnia4:
-                    return new Somnia4(party);
+                    return new Somnia4(party, cam);
                 default:
                     throw new ArgumentOutOfRangeException();
             }
