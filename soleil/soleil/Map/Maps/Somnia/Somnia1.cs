@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soleil.Event;
 using Soleil.Map.Maps.Somnia;
+using Soleil.Map.WorldMap;
 
 namespace Soleil.Map
 {
@@ -15,6 +16,7 @@ namespace Soleil.Map
 
         MapChangeObject mcoLeft;
         MapChangeObject mcoTop;
+        WorldmapObject wmoRight;
 
         public Somnia1(PersonParty party, Camera cam)
             : base(MapName.Somnia1, party, cam)
@@ -42,6 +44,7 @@ namespace Soleil.Map
             cigerman = new Cigerman(new Vector(750, 600), om, bm);
             mcoLeft = new MapChangeObject(new Vector(0, 500), new Vector(30, 260), MapName.Somnia2, new Vector(906, 513), Direction.L, om, bm, Party, cam);
             mcoTop = new MapChangeObject(new Vector(900, 10), new Vector(300, 20), MapName.Somnia4, new Vector(896, 500), Direction.U, om, bm, Party, cam);
+            wmoRight = new WorldmapObject(new Vector(1250, 800), new Vector(30, 200), WorldPointKey.Somnia, Party, om, bm);
         }
     }
 }

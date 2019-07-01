@@ -18,6 +18,8 @@ namespace Soleil
         {
             worldMapMaster = new WorldMapMaster(pointKey, this);
             party = _party;
+            var transition = Transition.GetInstance();
+            transition.SetMode(TransitionMode.FadeIn);
         }
 
         public void ChangeSceneToMap(WorldPointKey key)
