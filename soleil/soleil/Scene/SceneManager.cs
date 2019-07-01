@@ -11,7 +11,7 @@ namespace Soleil
     {
         private static SceneManager sceneManager = new SceneManager();
         Transition transition;
-        Scene NowScene => scenes.Last();
+        public Scene NowScene => scenes.Last();
         List<Scene> scenes;
         private SceneManager()
         {

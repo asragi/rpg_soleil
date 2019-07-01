@@ -120,7 +120,7 @@ namespace Soleil
             {
                 return CalcClamp(_pos, _size);
             }
-            var cameraPos = Camera.GeInstance().GetPosition();
+            var cameraPos = CameraManager.GetInstance().NowCamera;
             return CalcClamp(_pos - cameraPos, _size) + cameraPos;
 
             Vector CalcClamp(Vector vec, Vector size)

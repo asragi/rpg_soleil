@@ -18,10 +18,10 @@ namespace Soleil.Map
         CameraPoint[] cameraPoints;
         static Vector CameraDiff = new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY);
 
-        public MapCameraManager(PlayerObject _player)
+        public MapCameraManager(PlayerObject _player, Camera cam)
         {
             player = _player;
-            camera = Camera.GeInstance();
+            camera = cam;
         }
 
         public void SetCameraPoint(CameraPoint[] point) => cameraPoints = point;
@@ -36,7 +36,6 @@ namespace Soleil.Map
 
         public void Update()
         {
-            camera.Update();
             AdjustCamera();
         }
 
