@@ -11,6 +11,6 @@ namespace Soleil.Menu
     {
         public override string Desctiption => "";
         public EmptyPanel(BasicMenu parent)
-            : base("", parent) { }
+            : base("", parent) { EnableVal = false; }
     }
 }

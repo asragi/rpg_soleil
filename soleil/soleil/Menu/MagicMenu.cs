@@ -19,12 +19,7 @@ namespace Soleil.Menu
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
-            // Debug
             holder = new SkillHolder();
-            holder.LearnSkill(SkillID.MagicalHeal);
-            holder.LearnSkill(SkillID.Explode);
-            holder.LearnSkill(SkillID.PointFlare);
-            holder.LearnSkill(SkillID.Sonicboom);
             categoryToDisplay = MagicCategory.Sun;
 
             // icon
@@ -33,22 +28,9 @@ namespace Soleil.Menu
             for (int i = 0; i < icons.Length; i++)
             {
                 var category = (MagicCategory)i;
-                var disable = !holder.HasCategory(category);
-                icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), disable, category, this);
+                icons[i] = new MagicIcon(new Vector(IconXInitial + iconSpace * i, 320), category, this);
             }
-            categoryToDisplay = DecideInitialPosition();
-            ChangeMagicIconState();
-            Init();
-
-            MagicCategory DecideInitialPosition()
-            {
-                for (int i = 0; i < (int)MagicCategory.size; i++)
-                {
-                    var c = (MagicCategory)i;
-                    if (holder.HasCategory(c)) return c;
-                }
-                return 0;
-            }
+            Init(); // make placeholder
         }
 
         public void InputSide(bool isRight)
@@ -114,6 +96,17 @@ namespace Soleil.Menu
             return magList.ToArray();
         }
 
+        public void CallWithPerson(Person p)
+        {
+            holder = p.Skill;
+            Index = 0;
+            SetIcons();
+            categoryToDisplay = DecideInitialPosition(holder);
+            Init();
+            ChangeMagicIconState();
+            Call();
+        }
+
         public override void Update()
         {
             base.Update();
@@ -124,6 +117,22 @@ namespace Soleil.Menu
         {
             base.Draw(d);
             icons.ForEach2(s => s.Draw(d));
+        }
+
+        private void SetIcons()
+        {
+            for (int i = 0; i < icons.Length; i++)
+                icons[i].IsDisabled = !holder.HasCategory((MagicCategory)i);
+        }
+
+        private MagicCategory DecideInitialPosition(SkillHolder sh)
+        {
+            for (int i = 0; i < (int)MagicCategory.size; i++)
+            {
+                var c = (MagicCategory)i;
+                if (sh.HasCategory(c)) return c;
+            }
+            return 0;
         }
     }
 }

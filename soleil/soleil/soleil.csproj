@@ -192,6 +192,8 @@
     <Compile Include="Menu\ItemPanel.cs" />
     <Compile Include="Menu\MagicIcon.cs" />
     <Compile Include="Menu\MenuCursor.cs" />
+    <Compile Include="Menu\SkillMenu.cs" />
+    <Compile Include="Menu\SkillMenuPanel.cs" />
     <Compile Include="Menu\StatusSelect\ItemTargetSelect.cs" />
     <Compile Include="Menu\MagicMenu.cs" />
     <Compile Include="Menu\MagicMenuPanel.cs" />
@@ -207,6 +209,7 @@
     <Compile Include="Menu\MoneyComponent.cs" />
     <Compile Include="Menu\SelectablePanel.cs" />
     <Compile Include="Menu\StatusMenu.cs" />
+    <Compile Include="Menu\StatusSelect\SkillUserSelect.cs" />
     <Compile Include="Menu\StatusSelect\StatusTargetSelect.cs" />
     <Compile Include="Menu\StatusSelect\StatusTargetSelectBase.cs" />
     <Compile Include="Menu\Status\AttributeDisplay.cs" />
