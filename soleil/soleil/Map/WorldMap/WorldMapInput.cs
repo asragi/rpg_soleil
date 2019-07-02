@@ -83,7 +83,7 @@ namespace Soleil.Map.WorldMap
                 if (index == 1)
                 {
                     // マップ探索
-                    cursorLayer.Init();
+                    cursorLayer.Init(worldMap.GetPlayerPoint().Pos);
                     return WorldMapMode.MapCursor;
                 }
                 if (index == 2)
