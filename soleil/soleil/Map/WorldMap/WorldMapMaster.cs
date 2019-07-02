@@ -23,7 +23,7 @@ namespace Soleil.Map.WorldMap
             Mode = WorldMapMode.InitWindow;
             worldMap = new WorldMap(initialKey);
             camera = new WorldMapCamera(scene.Camera);
-            camera.SetPosition(worldMap.GetPoint(initialKey).Pos);
+            camera.SetPosition(worldMap.GetPoint(initialKey).Pos, true);
             mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
