@@ -46,7 +46,7 @@ namespace Soleil.Menu
             }
         }
 
-        public bool Disabled {
+        public bool IsDisabled {
             get => disabled;
             set
             {
