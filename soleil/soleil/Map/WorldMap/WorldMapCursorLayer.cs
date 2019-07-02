@@ -18,7 +18,7 @@ namespace Soleil.Map.WorldMap
         WorldMapCamera camera;
         public WorldMapCursorLayer(WorldMapCamera cam)
         {
-            cursor = new UIImage(TextureID.MenuSave1, Vector.One, null, DepthID.Effect, isStatic: false);
+            cursor = new UIImage(TextureID.WorldMapCursor, Vector.One, null, DepthID.Effect, isStatic: false);
             camera = cam;
         }
 
