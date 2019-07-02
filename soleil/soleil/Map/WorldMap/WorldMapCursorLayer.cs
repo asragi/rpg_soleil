@@ -11,7 +11,9 @@ namespace Soleil.Map.WorldMap
     /// </summary>
     class WorldMapCursorLayer
     {
-        const int Speed = 6;
+        const int Speed = 5;
+        const int DashSpeed = 12;
+        int speed;
         // カーソルが画面端にどれだけ近づいたらカメラの移動を開始するか
         const int LimitDistance = 100;
         UIImage cursor;
@@ -25,7 +27,8 @@ namespace Soleil.Map.WorldMap
         public void Move(Direction inputDir)
         {
             if (inputDir == Direction.N) return;
-            cursor.Pos += new Vector(- Speed, 0).Rotate(inputDir.Angle());
+            cursor.Pos += new Vector(- speed, 0).Rotate(inputDir.Angle());
+            speed = Speed;
             var updatePos = UpdateCameraPos(cursor.Pos, camera.GetPosition(), LimitDistance);
             camera.SetPosition(updatePos);
 
@@ -44,6 +47,11 @@ namespace Soleil.Map.WorldMap
                     return 0;
                 }
             }
+        }
+
+        public void OnInputSubmitDown()
+        {
+            speed = DashSpeed;
         }
 
         public void Init(Vector pos)

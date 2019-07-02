@@ -98,6 +98,10 @@ namespace Soleil.Map.WorldMap
             WorldMapMode InputCursor(Direction dir)
             {
                 cursorLayer.Move(dir);
+                if (KeyInput.GetKeyDown(Key.A))
+                {
+                    cursorLayer.OnInputSubmitDown();
+                }
                 if (KeyInput.GetKeyPush(Key.B))
                 {
                     windowLayer.InitWindow();
