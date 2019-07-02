@@ -1,4 +1,5 @@
-﻿using Soleil.Map.WorldMap;
+﻿using Soleil.Map;
+using Soleil.Map.WorldMap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,24 @@ namespace Soleil
     class WorldMapScene: Scene
     {
         WorldMapMaster worldMapMaster;
-        public WorldMapScene(SceneManager sm)
+        PersonParty party;
+
+        public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
         {
-            var initialKey = WorldPointKey.Flare; // 引数で指定できるようにする．
-            worldMapMaster = new WorldMapMaster(initialKey);
+            worldMapMaster = new WorldMapMaster(pointKey, this);
+            party = _party;
+            var transition = Transition.GetInstance();
+            transition.SetMode(TransitionMode.FadeIn);
+        }
+
+        public void ChangeSceneToMap(WorldPointKey key)
+        {
+            MapName name;
+            Vector position;
+            (name, position) = WorldMapPositionData.Get(key);
+            new TestScene(SceneManager, party, name, position);
+            Kill();
         }
 
         public override void Update()

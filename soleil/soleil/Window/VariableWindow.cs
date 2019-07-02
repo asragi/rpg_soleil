@@ -21,6 +21,7 @@ namespace Soleil
         const int FrameSize = 40;
 
         // -----
+        protected readonly bool IsStatic;
         protected override float Alpha => skinImg.Alpha;
         readonly Vector SpacingVec = new Vector(Spacing);
         protected override Vector SpaceVector => SpacingVec;
@@ -32,11 +33,12 @@ namespace Soleil
         Vector size;
 
         public VariableWindow(Vector _pos, Vector _size, WindowTag _tag, WindowManager wm, bool isStatic = false)
-            :base(_pos, _tag, wm)
+            :base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
         {
             var center = true;
             frameTextureForCalc = Resources.GetTexture(Texture);
             size = _size;
+            IsStatic = isStatic;
 
             frameImgs = new UIImage[]
             {
@@ -107,6 +109,28 @@ namespace Soleil
             base.Quit();
             skinImg.Quit();
             for (int i = 0; i < frameImgs.Length; i++) frameImgs[i].Quit();
+        }
+
+        /// <summary>
+        /// ウィンドウが画面の外にはみ出すのを防止する計算．
+        /// </summary>
+        private static Vector LimitWindowPos(Vector _pos, Vector _size, bool isStatic)
+        {
+            if (isStatic)
+            {
+                return CalcClamp(_pos, _size);
+            }
+            var cameraPos = CameraManager.GetInstance().NowCamera;
+            return CalcClamp(_pos - cameraPos, _size) + cameraPos;
+
+            Vector CalcClamp(Vector vec, Vector size)
+            {
+                int xLim = Game1.VirtualWindowSizeX;
+                int yLim = Game1.VirtualWindowSizeY;
+                double x = MathEx.Clamp(vec.X, (xLim - size.X), 0);
+                double y = MathEx.Clamp(vec.Y, (yLim - size.Y), 0);
+                return new Vector(x, y);
+            }
         }
     }
 }

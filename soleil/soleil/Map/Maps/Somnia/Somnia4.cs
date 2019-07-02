@@ -18,8 +18,8 @@ namespace Soleil.Map
         // Event
         EventSequence firstEvent;
 
-        public Somnia4(PersonParty party)
-            : base(MapName.Somnia4, party)
+        public Somnia4(PersonParty party, Camera cam)
+            : base(MapName.Somnia4, party, cam)
         {
             MapConstructs = new MapConstruct[]
             {
@@ -32,8 +32,10 @@ namespace Soleil.Map
 
             // Event
             firstEvent = new EventSequence(om.GetPlayer());
+            var testboolset = GlobalBoolSet.GetBoolSet(BoolObject.Global, (int)GlobalBoolKey.size);
+            var testevents = new[] { new EventSet(new BoolSetEvent(testboolset, (int)GlobalBoolKey.Test, true)) };
             firstEvent.SetEventSet(
-                CreateConversationEvent.Create("somnia", "battle", ConversationSystem)
+                CreateConversationEvent.Create("somnia", "for-the-first-time", ConversationSystem, firstEvent).Concat(testevents).ToArray()
             );
             EventSequences = new EventSequence[] { firstEvent };
 
@@ -47,8 +49,8 @@ namespace Soleil.Map
 
             // Objects
             accessaryGirl = new AccessaryGirl(new Vector(650, 330), om, bm);
-            mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party);
-            mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party);
+            mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
+            mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
         }
 
         protected override void Start()

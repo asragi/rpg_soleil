@@ -26,7 +26,8 @@ namespace Soleil
         /// <summary>
         /// 描画位置をずらす
         /// </summary>
-        public Vector2 Camera;
+        public Vector2 Camera { get => cameraManager.NowCamera; set => cameraManager.NowCamera = (Vector)value; }
+        private CameraManager cameraManager;
         Vector2 cameraTemp;
         Vector2 beginCamera; //拡大する前の座標の保持
         /// <summary>
@@ -50,6 +51,7 @@ namespace Soleil
         {
             sb = batch;
             D3D = d3d;
+            cameraManager = CameraManager.GetInstance();
         }
         /// <summary>
         /// カメラ無視描画
