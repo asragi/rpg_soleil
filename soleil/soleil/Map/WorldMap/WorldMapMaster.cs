@@ -27,7 +27,7 @@ namespace Soleil.Map.WorldMap
             mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
-            cursorLayer = new WorldMapCursorLayer();
+            cursorLayer = new WorldMapCursorLayer(camera);
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
             mapTransition = new WorldMapTransition(scene);
             mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap, mapTransition);

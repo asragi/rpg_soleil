@@ -101,7 +101,7 @@ namespace Soleil.Map.WorldMap
                 if (KeyInput.GetKeyPush(Key.B))
                 {
                     windowLayer.InitWindow();
-                    cursorLayer.Quit();
+                    cursorLayer.Quit(worldMap.GetPlayerPoint().Pos);
                     return WorldMapMode.InitWindow;
                 }
                 return WorldMapMode.MapCursor;
