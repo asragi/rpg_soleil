@@ -1262,7 +1262,7 @@
 /processorParam:TextureFormat=Color
 /build:white.png
 
-#begin corp.spritefont
+#begin corpm.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -1283,5 +1283,5 @@
 /processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:corpm.spritefont;corpm.spritefont
+/build:corpm.spritefont
 
