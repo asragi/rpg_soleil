@@ -11,7 +11,7 @@ namespace Soleil
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic = false)
             : base(_pos, _size, tag, wm, isStatic)
         {
-            var targetPos = _pos + new Vector(Spacing);
+            var targetPos = Pos + new Vector(Spacing);
             messageBox = new MessageBox(DefaultFont, targetPos, DiffPos, isStatic, FadeSpeed);
             AddComponents(new[] { messageBox });
         }
