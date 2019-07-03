@@ -22,7 +22,7 @@ namespace Soleil.Map.WorldMap
     /// <summary>
     /// 地図上に存在する町などの各施設を表すクラス．
     /// </summary>
-    class WorldPoint
+    class WorldPoint: ICollideObject
     {
         public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
         {
@@ -43,12 +43,15 @@ namespace Soleil.Map.WorldMap
 
         UIImage icon;
 
-        public WorldPoint(WorldPointKey id, Vector position)
+        CollideBox collideBox;
+
+        public WorldPoint(WorldPointKey id, Vector position, BoxManager bm)
         {
             ID = id;
             Pos = position;
             Edges = new Dictionary<WorldPointKey, int>();
             icon = new UIImage(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.PlayerBack, true, false, 1);
+            collideBox = new CollideBox(this, Vector.Zero, new Vector(50, 50), CollideLayer.Character, bm);
         }
 
         public void SetEdge(WorldPointKey key, int cost) => Edges.Add(key, cost);
@@ -58,5 +61,19 @@ namespace Soleil.Map.WorldMap
             icon.Color = IsPlayerIn ? Color.Crimson : Color.AliceBlue;
             icon.Draw(d);
         }
+
+        public void OnCollisionEnter(CollideBox cb)
+        {
+            Console.WriteLine("Enter");
+        }
+
+        public void OnCollisionStay(CollideBox cb) { }
+
+        public void OnCollisionExit(CollideBox cb)
+        {
+            Console.WriteLine("Exit");
+        }
+
+        public Vector GetPosition() => Pos;
     }
 }

@@ -17,17 +17,19 @@ namespace Soleil.Map.WorldMap
         WorldMapCamera camera;
         WorldMapMove mapMove;
         WorldMapTransition mapTransition;
+        BoxManager boxManager;
 
         public WorldMapMaster(WorldPointKey initialKey, WorldMapScene scene)
         {
             Mode = WorldMapMode.InitWindow;
-            worldMap = new WorldMap(initialKey);
+            boxManager = new BoxManager();
+            worldMap = new WorldMap(initialKey, boxManager);
             camera = new WorldMapCamera(scene.Camera);
             camera.SetPosition(worldMap.GetPoint(initialKey).Pos, true);
             mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
-            cursorLayer = new WorldMapCursorLayer(camera);
+            cursorLayer = new WorldMapCursorLayer(camera, boxManager);
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
             mapTransition = new WorldMapTransition(scene);
             mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap, mapTransition);
@@ -41,12 +43,14 @@ namespace Soleil.Map.WorldMap
             camera.Update();
             worldMap.Update();
             mapTransition.Update(Mode);
+            boxManager.Update();
         }
 
         public void Draw(Drawing d)
         {
             worldMap.Draw(d);
             cursorLayer.Draw(d);
+            boxManager.Draw(d);
         }
     }
 }

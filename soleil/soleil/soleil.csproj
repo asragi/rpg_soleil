@@ -170,6 +170,7 @@
     <Compile Include="Map\PlayerObject.cs" />
     <Compile Include="Map\WalkCharacter.cs" />
     <Compile Include="Map\WorldMap\WorldMapCamera.cs" />
+    <Compile Include="Map\WorldMap\WorldMapCursor.cs" />
     <Compile Include="Map\WorldMap\WorldMapCursorLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMapInput.cs" />
     <Compile Include="Map\WorldMap\WorldMapMove.cs" />
