@@ -26,8 +26,16 @@ namespace Soleil.Map.WorldMap
 
         public Vector GetPosition() => Pos;
 
-        public void Call(bool move) => img.Call(move);
-        public void Quit(bool move) => img.Quit(move);
+        public void Call(bool move)
+        {
+            img.Call(move);
+            collideBox.IsActive = true;
+        }
+        public void Quit(bool move)
+        {
+            img.Quit(move);
+            collideBox.IsActive = false;
+        }
         public void Update() => img.Update();
         public void Draw(Drawing d) => img.Draw(d);
 
