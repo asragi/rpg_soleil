@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil.Misc
+namespace Soleil
 {
     enum Weekday
     {
@@ -26,7 +26,7 @@ namespace Soleil.Misc
         /// <summary>
         /// ゲーム開始時からの経過Minutes合計: 実質的なカウンタ．
         /// </summary>
-        public int MinutesSum { get; private set; }
+        public int MinutesSum { get; private set; } = 0;
         /// <summary>
         /// ゲーム開始からの経過Hoursの合計．
         /// </summary>
@@ -44,13 +44,11 @@ namespace Soleil.Misc
         /// <summary>
         /// 昼判定を返す．6-17時: true
         /// </summary>
-        bool IsDaytime => (6 <= NowHour && NowHour <= 17);
+        public bool IsDaytime => (6 <= NowHour && NowHour <= 17);
 
-        public GameDateTime(int day, int hour, int minutes)
-        {
-            if (day < 1) throw new ArgumentOutOfRangeException("day should be over 0");
-            MinutesSum = (day - 1) * 24 * 60 + hour * 60 + minutes;
-        }
+        public static GameDateTime GetInstance() => gameDateTime;
+        private static GameDateTime gameDateTime = new GameDateTime();
+        private GameDateTime() { }
 
         /// <summary>
         /// 時間を経過させる．
