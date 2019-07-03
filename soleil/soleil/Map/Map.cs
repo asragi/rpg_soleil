@@ -42,7 +42,7 @@ namespace Soleil.Map
             om = new ObjectManager();
             MapData = new MapData(_name);
             MapData.SetMapFlag();
-            bm = new BoxManager(MapData, player);
+            bm = new MapBoxManager(MapData);
             player = new PlayerObject(om, bm);
             Party = _party;
             menuSystem = new MenuSystem(_party);
