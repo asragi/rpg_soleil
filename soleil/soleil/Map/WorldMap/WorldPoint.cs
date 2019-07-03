@@ -73,17 +73,21 @@ namespace Soleil.Map.WorldMap
         {
             // 詳細情報表示ウィンドウ
             descriptionWindow = new MessageWindow(isStatic ? DescriptionPos : Pos, MessageWindow.GetProperSize(Font, Descriptions[ID]), WindowTag.A, wm, isStatic);
-            messageWindow = new MessageWindow(isStatic ? TimePos : Pos + new Vector(0, 100), MessageWindow.GetProperSize(Font, "4" + TimeUnit), WindowTag.A, wm, isStatic);
             descriptionWindow.Call();
-            messageWindow.Call();
             descriptionWindow.Text = Descriptions[ID];
+        }
+
+        public void CallRequiredTimeWindow(bool isStatic)
+        {
+            messageWindow = new MessageWindow(isStatic ? TimePos : Pos + new Vector(0, 100), MessageWindow.GetProperSize(Font, "4" + TimeUnit), WindowTag.A, wm, isStatic);
+            messageWindow.Call();
             messageWindow.Text = "4" + TimeUnit;
         }
 
         public void QuitWindow()
         {
             descriptionWindow.Quit();
-            messageWindow.Quit();
+            messageWindow?.Quit();
         }
 
         public void OnCollisionEnter(CollideBox cb)

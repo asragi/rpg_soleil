@@ -13,6 +13,7 @@ namespace Soleil.Map.WorldMap
         SelectableWindow selectableWindow;
         WorldMap worldMap;
         WorldMapCamera camera;
+        WorldPoint selectedPoint;
 
         public WorldMapSelectLayer(WorldMap world, WorldMapCamera cam)
         {
@@ -58,12 +59,17 @@ namespace Soleil.Map.WorldMap
 
         private void RefreshDestination()
         {
-            var _key = keyList[selectableWindow.Index];
-            camera.SetDestination(worldMap.GetPoint(_key));
+            selectedPoint?.QuitWindow();
+            var key = keyList[selectableWindow.Index];
+            camera.SetDestination(worldMap.GetPoint(key));
+            selectedPoint = worldMap.GetPoint(key);
+            selectedPoint.CallWindow(true);
+            selectedPoint.CallRequiredTimeWindow(true);
         }
 
         public void QuitWindow()
         {
+            selectedPoint?.QuitWindow();
             selectableWindow.Quit();
             camera.SetDestination(worldMap.GetPlayerPoint());
         }
