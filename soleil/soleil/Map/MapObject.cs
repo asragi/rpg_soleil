@@ -2,7 +2,7 @@
 
 namespace Soleil.Map
 {
-    abstract class MapObject
+    abstract class MapObject : ICollideObject
     {
         protected Vector Pos;
         protected bool Dead;
@@ -37,12 +37,12 @@ namespace Soleil.Map
 
         }
 
-        virtual public void OnCollisionStay()
+        virtual public void OnCollisionStay(CollideBox collide)
         {
 
         }
 
-        virtual public void OnCollisionExit()
+        virtual public void OnCollisionExit(CollideBox collide)
         {
 
         }
