@@ -24,6 +24,10 @@ namespace Soleil.Map.WorldMap
     /// </summary>
     class WorldPoint: ICollideObject
     {
+        readonly string TimeUnit = "時間";
+        readonly Vector DescriptionPos = WorldMapWindowLayer.Position + new Vector(350, 0);
+        readonly Vector TimePos = WorldMapWindowLayer.Position + new Vector(350, 100);
+        readonly FontID Font = MessageWindow.DefaultFont;
         public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
         {
             {WorldPointKey.Flare, "太陽と潮騒の街\n陽術を習得可能" },
@@ -45,6 +49,9 @@ namespace Soleil.Map.WorldMap
 
         CollideBox collideBox;
 
+        MessageWindow messageWindow, descriptionWindow;
+        WindowManager wm = WindowManager.GetInstance();
+
         public WorldPoint(WorldPointKey id, Vector position, BoxManager bm)
         {
             ID = id;
@@ -62,16 +69,33 @@ namespace Soleil.Map.WorldMap
             icon.Draw(d);
         }
 
+        public void CallWindow(bool isStatic)
+        {
+            // 詳細情報表示ウィンドウ
+            descriptionWindow = new MessageWindow(isStatic ? DescriptionPos : Pos, MessageWindow.GetProperSize(Font, Descriptions[ID]), WindowTag.A, wm, isStatic);
+            messageWindow = new MessageWindow(isStatic ? TimePos : Pos + new Vector(0, 100), MessageWindow.GetProperSize(Font, "4" + TimeUnit), WindowTag.A, wm, isStatic);
+            descriptionWindow.Call();
+            messageWindow.Call();
+            descriptionWindow.Text = Descriptions[ID];
+            messageWindow.Text = "4" + TimeUnit;
+        }
+
+        public void QuitWindow()
+        {
+            descriptionWindow.Quit();
+            messageWindow.Quit();
+        }
+
         public void OnCollisionEnter(CollideBox cb)
         {
-            Console.WriteLine("Enter");
+            CallWindow(false);
         }
 
         public void OnCollisionStay(CollideBox cb) { }
 
         public void OnCollisionExit(CollideBox cb)
         {
-            Console.WriteLine("Exit");
+            QuitWindow();
         }
 
         public Vector GetPosition() => Pos;
