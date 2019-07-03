@@ -64,7 +64,7 @@ namespace Soleil.Map.WorldMap
             camera.SetDestination(worldMap.GetPoint(key));
             selectedPoint = worldMap.GetPoint(key);
             selectedPoint.CallWindow(true);
-            selectedPoint.CallRequiredTimeWindow(true);
+            selectedPoint.CallRequiredTimeWindow(true, costList[selectableWindow.Index]);
         }
 
         public void QuitWindow()

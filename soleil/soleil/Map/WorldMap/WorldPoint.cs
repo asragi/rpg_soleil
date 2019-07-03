@@ -77,11 +77,11 @@ namespace Soleil.Map.WorldMap
             descriptionWindow.Text = Descriptions[ID];
         }
 
-        public void CallRequiredTimeWindow(bool isStatic)
+        public void CallRequiredTimeWindow(bool isStatic, int time)
         {
             messageWindow = new MessageWindow(isStatic ? TimePos : Pos + new Vector(0, 100), MessageWindow.GetProperSize(Font, "4" + TimeUnit), WindowTag.A, wm, isStatic);
             messageWindow.Call();
-            messageWindow.Text = "4" + TimeUnit;
+            messageWindow.Text = time + TimeUnit;
         }
 
         public void QuitWindow()
