@@ -58,6 +58,9 @@
             person: sunny
             face: normal
             text: it is false
+          - event: setbool
+            bool-key: Test
+            flag: true
 
 - place: flare
   conversations:

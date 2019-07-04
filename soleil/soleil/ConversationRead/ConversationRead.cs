@@ -76,6 +76,12 @@ namespace Soleil.Event.Conversation
                         result.Add(branchSet);
                         tmpEventSets = new List<EventBase>();
                     }
+                    if (e.eventName == "setbool")
+                    {
+                        var boolSet = GlobalBoolSet.GetBoolSet(BoolObject.Global, (int)GlobalBoolKey.size);
+                        var key = (int)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
+                        tmpEventSets.Add(new BoolSetEvent(boolSet, key, e.flag));
+                    }
                 }
                 // 余ったイベントを末尾に追加
                 if (tmpEventSets.Count > 0) result.Add(new EventSet(tmpEventSets.ToArray()));
@@ -106,6 +112,7 @@ namespace Soleil.Event.Conversation
                     public string text { get; set; }
                     [YamlMember(Alias = "bool-key")]
                     public string boolKey { get; set; }
+                    public bool flag { get; set; }
                     public List<YamlEvent> onTrue { get; set; }
                     public List<YamlEvent> onFalse { get; set; }
                 }
