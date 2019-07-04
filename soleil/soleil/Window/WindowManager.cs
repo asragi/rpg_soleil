@@ -47,6 +47,7 @@ namespace Soleil
                 else if (key == Key.Down) s.DownCursor();
             }
         }
+
         public void Input(Direction dir)
         {
             if (dir == Direction.U) MoveCursor(Key.Up);

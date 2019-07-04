@@ -14,7 +14,6 @@ namespace Soleil.Map
     /// </summary>
     class MapInputManager
     {
-        Dictionary<Key, bool> inputs;
         InputFocus nowFocus, nextFocus;
         PlayerObject player;
         WindowManager wm;
@@ -26,7 +25,6 @@ namespace Soleil.Map
         {
             wm = WindowManager.GetInstance();
             nextFocus = InputFocus.Player;
-            inputs = new Dictionary<Key, bool>();
             inputSmoother = new InputSmoother();
         }
         public void SetPlayer(PlayerObject p) => player = p;
@@ -40,7 +38,6 @@ namespace Soleil.Map
             // 入力を受け取る
             var inputDir = KeyInput.GetStickInclineDirection(1);
             var smoothInput = inputSmoother.SmoothInput(inputDir);
-            UpdateInputKeysDown();
             nowFocus = nextFocus;
             // フォーカスに応じて処理を振り分ける
             PlayerMove(inputDir, nowFocus);
@@ -86,14 +83,6 @@ namespace Soleil.Map
                 SetFocus(InputFocus.Menu);
                 return;
             }
-        }
-
-        void UpdateInputKeysDown()
-        {
-            inputs[Key.A] = KeyInput.GetKeyPush(Key.A);
-            inputs[Key.B] = KeyInput.GetKeyPush(Key.B);
-            inputs[Key.C] = KeyInput.GetKeyPush(Key.C);
-            inputs[Key.D] = KeyInput.GetKeyPush(Key.D);
         }
     }
 }

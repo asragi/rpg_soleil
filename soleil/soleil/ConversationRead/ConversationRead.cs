@@ -84,7 +84,19 @@ namespace Soleil.Event.Conversation
                     }
                     if (e.eventName == "select")
                     {
-
+                        // 選択肢表示ウィンドウを生成．
+                        tmpEventSets.Add(new ConversationSelect(e.options));
+                        // EventSetの作成を一旦終了し結果に追加．
+                        result.Add(new EventSet(tmpEventSets.ToArray()));
+                        // 分岐先のイベントを生成する．
+                        var eventSets = new EventSet[e.options.Length][];
+                        for (int i = 0; i < e.options.Length; i++)
+                        {
+                            eventSets[i] = CreateEventSet(e.events[i], personList, eventSequence);
+                        }
+                        Func<int> func = () => WindowManager.GetInstance().GetDecideIndex();
+                        result.Add(new NumEventBranch(eventSequence, func, eventSets.ToArray()));
+                        tmpEventSets = new List<EventBase>();
                     }
                 }
                 // 余ったイベントを末尾に追加
