@@ -58,9 +58,12 @@ namespace Soleil.Map.WorldMap
         /// <summary>
         /// 強制的にカメラの位置を設定する．
         /// </summary>
-        public void SetPosition(Vector position)
+        public void SetPosition(Vector position, bool centerOrigin = false)
         {
-            camera.SetPositon(position - CameraDiff);
+            if (centerOrigin) camera.SetPositon(position - CameraDiff);
+            else camera.SetPositon(position);
         }
+
+        public Vector GetPosition() => camera.GetPosition();
     }
 }
