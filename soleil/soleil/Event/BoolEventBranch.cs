@@ -15,6 +15,9 @@ namespace Soleil.Event
             condition = _condition;
         }
 
+        public BoolEventBranch(EventSequence es, Func<bool> _condition, EventUnit _trueSet, EventUnit _falseSet)
+            : this(es, _condition, new[] { _trueSet }, new[] { _falseSet }){ }
+
         protected override EventUnit[] DecideEventSet()
         {
             return (condition()) ? trueSet : falseSet;
