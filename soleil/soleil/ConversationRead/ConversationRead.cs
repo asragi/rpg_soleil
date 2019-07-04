@@ -82,6 +82,10 @@ namespace Soleil.Event.Conversation
                         var key = (int)Enum.Parse(typeof(GlobalBoolKey), e.boolKey);
                         tmpEventSets.Add(new BoolSetEvent(boolSet, key, e.flag));
                     }
+                    if (e.eventName == "select")
+                    {
+
+                    }
                 }
                 // 余ったイベントを末尾に追加
                 if (tmpEventSets.Count > 0) result.Add(new EventSet(tmpEventSets.ToArray()));
@@ -115,6 +119,10 @@ namespace Soleil.Event.Conversation
                     public bool flag { get; set; }
                     public List<YamlEvent> onTrue { get; set; }
                     public List<YamlEvent> onFalse { get; set; }
+
+                    // 選択肢ウィンドウのイベント
+                    public string[] options { get; set; }
+                    public List<YamlEvent>[] events { get; set; }
                 }
             }
         }

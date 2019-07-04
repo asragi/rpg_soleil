@@ -58,6 +58,31 @@
             person: sunny
             face: normal
             text: it is false
+          - event: select
+            options:
+              - test0
+              - test1
+              - test2
+            events:
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 0
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 0 - 1
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 1
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 2
           - event: setbool
             bool-key: Test
             flag: true
