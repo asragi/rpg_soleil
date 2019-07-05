@@ -20,6 +20,9 @@ namespace Soleil.Map.WorldMap
         Vector from, to;
         WorldPointKey destination;
 
+        int moveTimeCostRest, moveTime;
+        GameDateTime gameDate = GameDateTime.GetInstance();
+
         public WorldMapMove(WorldMap map, WorldMapCamera cam)
         {
             worldMap = map;
@@ -34,11 +37,15 @@ namespace Soleil.Map.WorldMap
             frame++;
             worldMap.SetPlayerPos(GetEasingPosition(frame, MoveDuration, from, to));
             if (mode != WorldMapMode.Move) return mode;
+            gameDate.Pass(minute: moveTime);
+            moveTimeCostRest -= moveTime;
             if (frame >= MoveDuration)
             {
                 camera.SetDestination(to);
                 worldMap.SetPlayerPosition(destination);
                 windowLayer.InitWindow();
+
+                gameDate.Pass(minute: moveTimeCostRest);
                 return WorldMapMode.InitWindow;
             }
             return WorldMapMode.Move;
@@ -59,6 +66,9 @@ namespace Soleil.Map.WorldMap
             destination = pointTo.ID;
             frame = 0;
             camera.SetDestination((from + to) / 2);
+            // 移動にかかる時間を設定
+            moveTimeCostRest = pointFrom.Edges[pointTo.ID] * 60;
+            moveTime = moveTimeCostRest / MoveDuration;
         }
     }
 }
