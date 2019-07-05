@@ -57,5 +57,15 @@ namespace Soleil
         {
             MinutesSum += day * 24 * 60 + hour * 60 + minute;
         }
+
+        public string NowTimeStr()
+        {
+            return AddZero(NowHour.ToString()) + ":" + AddZero(NowMinutes.ToString());
+            string AddZero(string num)
+            {
+                if (num.Length > 1) return num;
+                return "0" + num;
+            }
+        }
     }
 }

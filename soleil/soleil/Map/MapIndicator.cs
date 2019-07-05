@@ -35,8 +35,9 @@ namespace Soleil.Map
         {
             imageManager.Draw(d);
             var textPos = upperRight;
-            d.DrawStaticText(textPos + new Vector(-55, 30), Resources.GetFont(font), $"Day {gameDate.NowDay}", Color.AliceBlue, DepthID.Frame, Vector.One);
-            d.DrawStaticText(textPos + new Vector(-30, 65), Resources.GetFont(font), gameDate.IsDaytime ? "昼" : "夜", Color.AliceBlue, DepthID.Frame, Vector.One);
+            d.DrawStaticText(textPos + new Vector(-59, 23), Resources.GetFont(font), $"Day {gameDate.NowDay}", Color.AliceBlue, DepthID.Frame, Vector.One);
+            d.DrawStaticText(textPos + new Vector(-55, 50), Resources.GetFont(font), gameDate.NowTimeStr(), Color.AliceBlue, DepthID.Frame, Vector.One);
+            d.DrawStaticText(textPos + new Vector(-30, 75), Resources.GetFont(font), gameDate.IsDaytime ? "昼" : "夜", Color.AliceBlue, DepthID.Frame, Vector.One);
         }
     }
 }
