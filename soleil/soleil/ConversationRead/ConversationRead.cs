@@ -46,6 +46,8 @@ namespace Soleil.Event.Conversation
             {
                 var tmpEventSets = new List<EventBase>();
                 var result = new List<EventSet>();
+                string cacheName = "";
+                string cacheFace = "";
                 foreach (var e in events)
                 {
                     if (e.eventName == "person")
@@ -56,9 +58,12 @@ namespace Soleil.Event.Conversation
                     }
                     if (e.eventName == "talk")
                     {
-                        var talker = personList.Find(s => s.Name == e.person);
-                        string face = e.face;
+                        string target = e.person ?? cacheName;
+                        var talker = personList.Find(s => s.Name == target);
+                        string face = e.face ?? cacheFace;
                         string text = e.text;
+                        cacheName = target;
+                        cacheFace = face;
                         tmpEventSets.Add(new ConversationTalk(talker, text, face, cs));
                         continue;
                     }

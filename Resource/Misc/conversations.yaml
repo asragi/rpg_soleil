@@ -32,6 +32,8 @@
         person: sunny
         face: normal
         text: goodby!
+      - event: talk
+        text: こんにちはこんにちは
       - event: branch
         bool-key: Test
         onTrue:
