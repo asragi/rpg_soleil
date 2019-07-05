@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
+    /// <summary>
+    /// 画面右上に日付を表示するクラス．
+    /// </summary>
     class MapIndicator
     {
         static Vector upperRight = new Vector(Game1.VirtualWindowSizeX, 0);
