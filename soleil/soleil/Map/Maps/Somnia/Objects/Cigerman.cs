@@ -18,26 +18,14 @@ namespace Soleil.Map.Maps.Somnia
             SetStandAnimation(standAnim);
 
             EventSequence.SetEventSet(
-                new EventSet(
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "テストメッセージ"),
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型，なかなかだろ？"),
-                    new SelectWindowEvent(Pos + WindowPosDiff, 0, "イケイケじゃん", "ハンバーグみたいだね")
-                ),
+                new MessageWindowEvent(Pos + WindowPosDiff, 0, "テストメッセージ"),
+                new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型，なかなかだろ？"),
+                new SelectWindowEvent(Pos + WindowPosDiff, 0, "イケイケじゃん", "ハンバーグみたいだね"),
                 new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
-                    new EventUnit[]{
-                        new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "訊くまでもなかったか")
-                            )
-                    },
-                    new EventUnit[]{
-                        new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型が\nサザエさんみてーだと？？")
-                            )
-                    }
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "訊くまでもなかったか"),
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "俺の髪型が\nサザエさんみてーだと？？")
                 ),
-                new EventSet(
-                    new ChangeInputFocusEvent(InputFocus.Player)
-                )
+                new ChangeInputFocusEvent(InputFocus.Player)
             );
         }
 

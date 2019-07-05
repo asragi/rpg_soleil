@@ -63,6 +63,7 @@
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="ConversationRead\ConversationPerson.cs" />
     <Compile Include="ConversationRead\ConversationRead.cs" />
+    <Compile Include="ConversationRead\ConversationSelect.cs" />
     <Compile Include="ConversationRead\ConversationSystem.cs" />
     <Compile Include="Event\BoolEventBranch.cs" />
     <Compile Include="Event\BoolSet.cs" />
