@@ -37,10 +37,13 @@ namespace Soleil.Map.WorldMap
             Vector UpdateCameraPos(Vector cursorPos, Vector cameraPos, int limitDistance)
             {
                 var diff = cursorPos - cameraPos;
-                return cameraPos + new Vector(
+                Vector cameraPosUpd = cameraPos + new Vector(
                     ModifyValue(diff.X, Game1.VirtualWindowSizeX, limitDistance),
                     ModifyValue(diff.Y, Game1.VirtualWindowSizeY, limitDistance)
                     );
+                return new Vector(
+                    MathEx.Clamp(cameraPosUpd.X, WorldMap.WorldMapSize.X - Game1.VirtualWindowSizeX, 0), 
+                    MathEx.Clamp(cameraPosUpd.Y, WorldMap.WorldMapSize.Y - Game1.VirtualWindowSizeY, 0));
 
                 double ModifyValue(double x, int windowSize, int limitDist)
                 {
