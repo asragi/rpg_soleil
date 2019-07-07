@@ -28,8 +28,7 @@ namespace Soleil.Map.WorldMap
         {
             if (inputDir == Direction.N) return;
             Vector cursorPosUpd = cursor.Pos + new Vector(- speed, 0).Rotate(inputDir.Angle());
-            cursor.Pos = new Vector(MathEx.Clamp(cursorPosUpd.X, WorldMap.WorldMapSize.X, 0), 
-                                    MathEx.Clamp(cursorPosUpd.Y, WorldMap.WorldMapSize.Y, 0));
+            cursor.Pos = Vector.Clamp(cursorPosUpd, WorldMap.WorldMapSize, Vector.Zero);
             speed = Speed;
             var updatePos = UpdateCameraPos(cursor.Pos, camera.GetPosition(), LimitDistance);
             camera.SetPosition(updatePos);
