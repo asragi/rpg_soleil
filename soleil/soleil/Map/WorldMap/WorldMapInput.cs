@@ -71,6 +71,11 @@ namespace Soleil.Map.WorldMap
                 {
                     windowLayer.Decide();
                 }
+                if (KeyInput.GetKeyPush(Key.B))
+                {
+                    windowLayer.QuitWindow();
+                    return EnterTown();
+                }
                 var index = windowLayer.GetIndex();
                 if (index == -1) return WorldMapMode.InitWindow; // 選択肢未決定ならindexに-1が返される．
                 windowLayer.QuitWindow();
@@ -83,25 +88,34 @@ namespace Soleil.Map.WorldMap
                 if (index == 1)
                 {
                     // マップ探索
-                    cursorLayer.Init();
+                    cursorLayer.Init(worldMap.GetPlayerPoint().Pos);
                     return WorldMapMode.MapCursor;
                 }
                 if (index == 2)
+                {
+                    return EnterTown();
+                }
+                return WorldMapMode.InitWindow;
+
+                WorldMapMode EnterTown()
                 {
                     // 町・施設に入る
                     mapTransition.Init(worldMap.GetPlayerPoint().ID);
                     return WorldMapMode.Transition;
                 }
-                return WorldMapMode.InitWindow;
             }
             // カーソルを自由に移動させて地図を眺めるモード．
             WorldMapMode InputCursor(Direction dir)
             {
                 cursorLayer.Move(dir);
+                if (KeyInput.GetKeyDown(Key.A))
+                {
+                    cursorLayer.OnInputSubmitDown();
+                }
                 if (KeyInput.GetKeyPush(Key.B))
                 {
                     windowLayer.InitWindow();
-                    cursorLayer.Quit();
+                    cursorLayer.Quit(worldMap.GetPlayerPoint().Pos);
                     return WorldMapMode.InitWindow;
                 }
                 return WorldMapMode.MapCursor;

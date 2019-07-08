@@ -254,6 +254,7 @@
 /processorParam:TextureFormat=Color
 /build:Arrow.png
 
+
 #begin corpmini.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
@@ -276,6 +277,7 @@
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
 /build:corpmini.spritefont
+
 
 #begin Map/Back/Flare/1/flare1-10.png
 /importer:TextureImporter
@@ -672,6 +674,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Map/Back/Somnia/4/somnia4-5.png
+
+#begin Map/WorldMap/cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/WorldMap/cursor.png
 
 #begin Map/WorldMap/yasoba-building-icon.png
 /importer:TextureImporter
@@ -1297,7 +1311,7 @@
 /processorParam:TextureFormat=Color
 /build:white.png
 
-#begin corp.spritefont
+#begin corpm.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -1318,5 +1332,4 @@
 /processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:corpm.spritefont;corpm.spritefont
-
+/build:corpm.spritefont
