@@ -1,6 +1,5 @@
 # MagicLv
-魔法には10種類の系統([MagicCategory](/docs/battle/MagicCategory))がある．キャラクターはそれぞれの系統ごとにLvを持つ．Lvは[0, 9]の値を取る．
-
+魔法には10種類の系統([MagicCategory](/docs/battle/MagicCategory.md))がある．キャラクターはそれぞれの系統ごとにLvを持つ．Lvは[0, 9]の値を取る．
 
 ## Field
 
