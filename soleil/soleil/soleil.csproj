@@ -143,7 +143,9 @@
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
     <Compile Include="Map\DashCharacter.cs" />
+    <Compile Include="Map\ICollideObject.cs" />
     <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapBoxManager.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapChangeObject.cs" />
     <Compile Include="Map\MapCharacter.cs" />
