@@ -217,11 +217,12 @@
     <Compile Include="Menu\Status\AttributeDisplay.cs" />
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\EquipDisplay.cs" />
+    <Compile Include="Menu\Status\EquipItemList.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
+    <Compile Include="Menu\Status\IPersonUpdate.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
-    <Compile Include="Menu\Status\StatusHP.cs" />
     <Compile Include="Menu\Status\StatusMagicCategory.cs" />
-    <Compile Include="Menu\Status\StatusMP.cs" />
+    <Compile Include="Menu\Status\StatusHPMP.cs" />
     <Compile Include="Menu\Status\StatusParamsDisplay.cs" />
     <Compile Include="Menu\Status\StatusSystem.cs" />
     <Compile Include="Menu\TextSelectablePanel.cs" />

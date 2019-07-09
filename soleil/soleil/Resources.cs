@@ -44,6 +44,7 @@ namespace Soleil
         MenuSun,
         MenuTella,
         MenuStatusCursor,
+        MenuCategory,
 
         Rule0,
         Rule1,
@@ -152,6 +153,7 @@ namespace Soleil
     enum FontID : int
     {
         CorpM,
+        CorpMini,
         Size,
     }
 
@@ -363,7 +365,7 @@ namespace Soleil
             SetPath(TextureID.MenuTella, UIPath + MenuPath + "tella_face");
             SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
-
+            SetPath(TextureID.MenuCategory, UIPath + MenuPath + "yasoba-window-skill-category");
 
             for (int i = 0; i < 20; i++)
             {
@@ -381,6 +383,7 @@ namespace Soleil
 
             
             SetPath(FontID.CorpM, "corpm");
+            SetPath(FontID.CorpMini, "corpmini");
 
 
             //optionPath = Option.FilePath;

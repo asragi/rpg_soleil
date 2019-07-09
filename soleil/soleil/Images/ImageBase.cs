@@ -11,7 +11,16 @@ namespace Soleil
     {
         protected DepthID DepthID;
         protected int Frame;
-        public virtual Vector Pos { get; set; }
+        private Vector pos;
+        public virtual Vector Pos {
+            get => pos;
+            set {
+                Vector diff = value - Pos;
+                startPos += diff;
+                targetPos += diff;
+                pos = value;
+            }
+        }
         public float Angle { get; set; }
         protected bool IsStatic;
         public bool IsDead { get; set; }
@@ -82,10 +91,10 @@ namespace Soleil
             if (easeFunc == null) return;
             var x = easeFunc(easeFrame, easeDuration, targetPos.X, startPos.X);
             var y = easeFunc(easeFrame, easeDuration, targetPos.Y, startPos.Y);
-            Pos = new Vector(x, y);
+            pos = new Vector(x, y);
             easeFrame++;
 
-            if (easeFrame >= easeDuration) Pos = targetPos;
+            if (easeFrame >= easeDuration) pos = targetPos;
         }
 
         private void FadeUpdate()
@@ -100,7 +109,7 @@ namespace Soleil
             Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
             alphaFrame++;
 
-            if (easeFrame >= easeDuration) Alpha = fadeIn ? 1 : 0;
+            if (alphaFrame >= alphaDuration) Alpha = fadeIn ? 1 : 0;
         }
     }
 }
