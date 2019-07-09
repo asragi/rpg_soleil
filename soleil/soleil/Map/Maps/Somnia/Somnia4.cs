@@ -33,9 +33,8 @@ namespace Soleil.Map
             // Event
             firstEvent = new EventSequence(om.GetPlayer());
             var testboolset = GlobalBoolSet.GetBoolSet(BoolObject.Global, (int)GlobalBoolKey.size);
-            var testevents = new[] { new EventSet(new BoolSetEvent(testboolset, (int)GlobalBoolKey.Test, true)) };
             firstEvent.SetEventSet(
-                CreateConversationEvent.Create("somnia", "for-the-first-time", ConversationSystem, firstEvent).Concat(testevents).ToArray()
+                CreateConversationEvent.Create("somnia", "for-the-first-time", ConversationSystem, firstEvent)
             );
             EventSequences = new EventSequence[] { firstEvent };
 
