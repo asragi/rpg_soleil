@@ -71,7 +71,7 @@ namespace Soleil.Map
             }
             if(nextTarget != nowTarget)
             {
-                startPos = (nowTarget == -1)? ClampCameraPos(cameraPoints[nextTarget].GetPos()) : camera.GetPosition() + CameraDiff;
+                startPos = (nowTarget == -1)? ClampCameraPos(player.GetPosition()) : camera.GetPosition() + CameraDiff;
                 nowTarget = nextTarget;
                 targetPos = ClampCameraPos(cameraPoints[nextTarget].GetPos());
                 frame = 0;
