@@ -122,7 +122,7 @@ namespace Soleil.Menu
         private void SetIcons()
         {
             for (int i = 0; i < icons.Length; i++)
-                icons[i].Disabled = !holder.HasCategory((MagicCategory)i);
+                icons[i].IsDisabled = !holder.HasCategory((MagicCategory)i);
         }
 
         private MagicCategory DecideInitialPosition(SkillHolder sh)

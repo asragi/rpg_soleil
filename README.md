@@ -48,3 +48,15 @@ VisualStudioでビルドをします．
 - [FontImage](/docs/FontImage.md)
   - [RightAlignText](/docs/RightAlignText.md)
   - [TextWithVal](/docs/TextWithVal.md)
+
+## Battle
+
+### ステータス
+ - [Person](/docs/Person.md)
+   - キャラクターの能力値や装備をまとめるクラス．
+ - [AbilityScore](/docs/battle/AbilityScore.md)
+   - キャラクターの素の能力値
+ - [CharacterStatus](/docs/battle/CharacterStatus.md)
+   - 戦闘時に参照される補正込みの能力値
+ - [EquipSet](/docs/battle/EquipSet.md)
+ - [MagicLv](/docs/battle/MagicLv.md)

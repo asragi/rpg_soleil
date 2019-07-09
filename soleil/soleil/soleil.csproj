@@ -96,10 +96,12 @@
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
     <Compile Include="Event\Shop\ShopSystem.cs" />
+    <Compile Include="Event\ToWorldMapEvent.cs" />
     <Compile Include="Event\WindowEventBase.cs" />
     <Compile Include="Function\Animation.cs" />
     <Compile Include="Function\AnimationData.cs" />
     <Compile Include="Function\Camera.cs" />
+    <Compile Include="Function\CameraManager.cs" />
     <Compile Include="Function\ColorChanger.cs" />
     <Compile Include="Function\CSVIO.cs" />
     <Compile Include="Function\CutIn.cs" />
@@ -141,7 +143,9 @@
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
     <Compile Include="Map\DashCharacter.cs" />
+    <Compile Include="Map\ICollideObject.cs" />
     <Compile Include="Map\Map.cs" />
+    <Compile Include="Map\MapBoxManager.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
     <Compile Include="Map\MapChangeObject.cs" />
     <Compile Include="Map\MapCharacter.cs" />
@@ -157,6 +161,7 @@
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
+    <Compile Include="Map\WorldmapObject.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia1.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia2.cs" />
     <Compile Include="Map\Maps\Somnia\Somnia4.cs" />
@@ -169,7 +174,9 @@
     <Compile Include="Map\WorldMap\WorldMapInput.cs" />
     <Compile Include="Map\WorldMap\WorldMapMove.cs" />
     <Compile Include="Map\WorldMap\WorldMapPlayerIcon.cs" />
+    <Compile Include="Map\WorldMap\WorldMapPositionData.cs" />
     <Compile Include="Map\WorldMap\WorldMapSelectLayer.cs" />
+    <Compile Include="Map\WorldMap\WorldMapTransition.cs" />
     <Compile Include="Map\WorldMap\WorldMapWindowLayer.cs" />
     <Compile Include="Map\WorldMap\WorldMap.cs" />
     <Compile Include="Map\WorldMap\WorldMapMaster.cs" />
@@ -211,7 +218,6 @@
     <Compile Include="Menu\Status\CharaName.cs" />
     <Compile Include="Menu\Status\EquipDisplay.cs" />
     <Compile Include="Menu\Status\EquipItemList.cs" />
-    <Compile Include="Menu\Status\EquipPanel.cs" />
     <Compile Include="Menu\Status\HPMPDisplay.cs" />
     <Compile Include="Menu\Status\IPersonUpdate.cs" />
     <Compile Include="Menu\Status\MagicCategoryPiece.cs" />
@@ -222,6 +228,7 @@
     <Compile Include="Menu\TextSelectablePanel.cs" />
     <Compile Include="Misc\CharacterData.cs" />
     <Compile Include="Misc\CharaName.cs" />
+    <Compile Include="Misc\GameDateTime.cs" />
     <Compile Include="Misc\InputSmoother.cs" />
     <Compile Include="Misc\PersonParty.cs" />
     <Compile Include="Mono\Audio.cs" />

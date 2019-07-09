@@ -82,12 +82,9 @@ namespace Soleil
             // SceneManager
             sm = SceneManager.GetInstance();
             party = new PersonParty();
-            new TestScene(sm, party);
-            //new TestBattleScene(sm);
-
-            // Camera
-            var camera = Camera.GeInstance();
-            camera.SetDrawing(drawing);
+            //new TestScene(sm, party, Map.MapName.Somnia1, new Vector(400, 400));
+            // new TestBattleScene(sm);
+             new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
 
 
@@ -151,6 +148,7 @@ namespace Soleil
                 Exit();
                 End = false;
             }
+            
 
             // TODO: Add your update logic here
             //Audio.Update();

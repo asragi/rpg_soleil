@@ -12,10 +12,11 @@ namespace Soleil.Event
         Direction direction;
         Vector nextPos;
         PersonParty party;
+        Camera camera;
 
         /// <param name="_pos">移動先のマップ上での位置</param>
         /// <param name="dir">移動後のプレイヤーの向き</param>
-        public ChangeMapEvent(MapName next, Vector _pos, Direction dir, PersonParty _party)
+        public ChangeMapEvent(MapName next, Vector _pos, Direction dir, PersonParty _party, Camera cam)
             : base()
         {
             mm = MapManager.GetInstance();
@@ -23,15 +24,14 @@ namespace Soleil.Event
             nextPos = _pos;
             direction = dir;
             party = _party;
+            camera = cam;
         }
 
         public override void Execute()
         {
-            var map = MapFactory.GetMap(nextMap, party);
+            var map = MapFactory.GetMap(nextMap, party, camera);
             // マップを変更する
-            mm.ChangeMap(map);
-            // プレイヤーのポジションを変更する
-            map.SetPlayerPos(nextPos);
+            mm.ChangeMap(map, nextPos);
             // プレイヤーの向きを変更する
             map.SetPlayerDir(direction);
 

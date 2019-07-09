@@ -10,15 +10,13 @@ namespace Soleil.Map.WorldMap
     {
         static Vector CameraDiff = new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY);
         Camera camera;
-        public WorldMapCamera()
+        public WorldMapCamera(Camera cam)
         {
-            camera = Camera.GeInstance();
+            camera = cam;
         }
 
         public void Update()
         {
-            camera.Update();
-
             EasingCamera();
         }
 
@@ -60,9 +58,12 @@ namespace Soleil.Map.WorldMap
         /// <summary>
         /// 強制的にカメラの位置を設定する．
         /// </summary>
-        public void SetPosition(Vector position)
+        public void SetPosition(Vector position, bool centerOrigin = false)
         {
-            camera.SetPositon(position - CameraDiff);
+            if (centerOrigin) camera.SetPositon(position - CameraDiff);
+            else camera.SetPositon(position);
         }
+
+        public Vector GetPosition() => camera.GetPosition();
     }
 }
