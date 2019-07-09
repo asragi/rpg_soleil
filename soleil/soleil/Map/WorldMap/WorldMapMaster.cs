@@ -8,7 +8,7 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapMaster
     {
-        public WorldMapInputMode Mode { get; private set; }
+        public WorldMapMode Mode { get; private set; }
         WorldMap worldMap;
         WorldMapWindowLayer windowLayer;
         WorldMapInput mapInput;
@@ -16,19 +16,21 @@ namespace Soleil.Map.WorldMap
         WorldMapSelectLayer mapSelectLayer;
         WorldMapCamera camera;
         WorldMapMove mapMove;
+        WorldMapTransition mapTransition;
 
-        public WorldMapMaster(WorldPointKey initialKey)
+        public WorldMapMaster(WorldPointKey initialKey, WorldMapScene scene)
         {
-            Mode = WorldMapInputMode.InitWindow;
+            Mode = WorldMapMode.InitWindow;
             worldMap = new WorldMap(initialKey);
-            camera = new WorldMapCamera();
-            camera.SetPosition(worldMap.GetPoint(initialKey).Pos);
+            camera = new WorldMapCamera(scene.Camera);
+            camera.SetPosition(worldMap.GetPoint(initialKey).Pos, true);
             mapMove = new WorldMapMove(worldMap, camera);
             windowLayer = new WorldMapWindowLayer();
             windowLayer.InitWindow();
-            cursorLayer = new WorldMapCursorLayer();
+            cursorLayer = new WorldMapCursorLayer(camera);
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
-            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap);
+            mapTransition = new WorldMapTransition(scene);
+            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap, mapTransition);
         }
 
         public void Update()
@@ -38,6 +40,7 @@ namespace Soleil.Map.WorldMap
             cursorLayer.Update();
             camera.Update();
             worldMap.Update();
+            mapTransition.Update(Mode);
         }
 
         public void Draw(Drawing d)

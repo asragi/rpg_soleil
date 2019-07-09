@@ -7,13 +7,14 @@ namespace Soleil
         //Map testMap;
         MapManager mapManager;
         MapIndicator mapIndicator;
-        public TestScene(SceneManager sm, PersonParty party)
+        public TestScene(SceneManager sm, PersonParty party, MapName map, Vector position)
             : base(sm)
         {
             mapManager = MapManager.GetInstance();
-            mapManager.Party = party;
-            mapManager.ChangeMap(MapFactory.GetMap(MapName.Somnia4, party));
+            mapManager.ChangeMap(MapFactory.GetMap(map, party, Camera), position);
             mapIndicator = new MapIndicator();
+            var transition = Transition.GetInstance();
+            transition.SetMode(TransitionMode.FadeIn);
         }
 
         override public void Update()
