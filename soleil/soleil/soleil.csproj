@@ -228,6 +228,7 @@
     <Compile Include="Menu\TextSelectablePanel.cs" />
     <Compile Include="Misc\CharacterData.cs" />
     <Compile Include="Misc\CharaName.cs" />
+    <Compile Include="Misc\GameDateTime.cs" />
     <Compile Include="Misc\InputSmoother.cs" />
     <Compile Include="Misc\PersonParty.cs" />
     <Compile Include="Mono\Audio.cs" />

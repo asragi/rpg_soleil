@@ -12,6 +12,7 @@ namespace Soleil
     {
         WorldMapMaster worldMapMaster;
         PersonParty party;
+        MapIndicator mapIndicator;
 
         public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
@@ -20,6 +21,7 @@ namespace Soleil
             party = _party;
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
+            mapIndicator = new MapIndicator();
         }
 
         public void ChangeSceneToMap(WorldPointKey key)
@@ -35,12 +37,14 @@ namespace Soleil
         {
             base.Update();
             worldMapMaster.Update();
+            mapIndicator.Update();
         }
 
         public override void Draw(Drawing sb)
         {
             base.Draw(sb);
             worldMapMaster.Draw(sb);
+            mapIndicator.Draw(sb);
         }
     }
 }
