@@ -22,9 +22,9 @@ namespace Soleil.Event
             player = pl;
         }
 
-        public void SetEventSet(params EventSet[] _eventSets)
+        public void SetEventSet(params EventUnit[] _eventSets)
         {
-            eventSetsDefault = _eventSets;
+            eventSetsDefault = EventUnit.Unit2Set(_eventSets);
             SetEventSetsByDefault();
         }
 

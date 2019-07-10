@@ -72,6 +72,17 @@ namespace Soleil
             return new Vector(X * cos - Y * sin, X * sin + Y * cos);
         }
         /// <summary>
+        /// valueをminとmaxで作れる長方形に収まるようにする
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="max"></param>
+        /// <param name="min"></param>
+        /// <returns></returns>
+        public static Vector Clamp(Vector value, Vector max, Vector min)
+        {
+            return new Vector(MathEx.Clamp(value.X, max.X, min.X), MathEx.Clamp(value.Y, max.Y, min.Y));
+        }
+        /// <summary>
         /// fromからtoへの角度を取得する（度数法）
         /// </summary>
         public static double GetAngle(Vector from, Vector to) => Math.Atan2(to.Y - from.Y, to.X - from.X) * 180 / Math.PI;

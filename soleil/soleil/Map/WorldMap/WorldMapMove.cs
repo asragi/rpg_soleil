@@ -20,6 +20,9 @@ namespace Soleil.Map.WorldMap
         Vector from, to;
         WorldPointKey destination;
 
+        int moveTimeCostRest, moveTime;
+        GameDateTime gameDate = GameDateTime.GetInstance();
+
         public WorldMapMove(WorldMap map, WorldMapCamera cam)
         {
             worldMap = map;
@@ -29,19 +32,23 @@ namespace Soleil.Map.WorldMap
             to = nowPosition;
         }
 
-        public WorldMapInputMode Update(WorldMapInputMode mode, WorldMapWindowLayer windowLayer)
+        public WorldMapMode Update(WorldMapMode mode, WorldMapWindowLayer windowLayer)
         {
             frame++;
             worldMap.SetPlayerPos(GetEasingPosition(frame, MoveDuration, from, to));
-            if (mode != WorldMapInputMode.Move) return mode;
+            if (mode != WorldMapMode.Move) return mode;
+            gameDate.Pass(minute: moveTime);
+            moveTimeCostRest -= moveTime;
             if (frame >= MoveDuration)
             {
                 camera.SetDestination(to);
                 worldMap.SetPlayerPosition(destination);
                 windowLayer.InitWindow();
-                return WorldMapInputMode.InitWindow;
+
+                gameDate.Pass(minute: moveTimeCostRest);
+                return WorldMapMode.InitWindow;
             }
-            return WorldMapInputMode.Move;
+            return WorldMapMode.Move;
         }
 
         private static Vector GetEasingPosition(int _frame, int max, Vector _from, Vector _to)
@@ -59,6 +66,9 @@ namespace Soleil.Map.WorldMap
             destination = pointTo.ID;
             frame = 0;
             camera.SetDestination((from + to) / 2);
+            // 移動にかかる時間を設定
+            moveTimeCostRest = pointFrom.Edges[pointTo.ID] * 60;
+            moveTime = moveTimeCostRest / MoveDuration;
         }
     }
 }

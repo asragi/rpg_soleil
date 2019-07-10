@@ -74,7 +74,7 @@ namespace Soleil.UI
             {
                 var flag = d.CenterBased;
                 d.CenterBased = centerBased;
-                d.DrawBox(Pos, drawsize, Color.White * Alpha, DepthID);
+                d.DrawBoxStatic(Pos, drawsize, Color.White * Alpha, DepthID);
                 d.CenterBased = flag;
             }
         }

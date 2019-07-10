@@ -1,0 +1,99 @@
+- place: somnia
+  conversations:
+    - name: battle
+      events:
+      - event: person
+        person: lune
+        position: 3
+      - event: person
+        person: sunny
+        position: 1
+      - event: talk
+        person: lune
+        face: normal
+        text: こんにちは
+      - event: talk
+        person: sunny
+        face: normal
+        text: こんにちはこんにちは
+      - event: talk
+        person: lune
+        face: smile
+        text: 表情変化テスト
+    - name: for-the-first-time
+      events:
+      - event: person
+        person: lune
+        position: 3
+      - event: person
+        person: sunny
+        position: 1
+      - event: talk
+        person: sunny
+        face: normal
+        text: goodby!
+      - event: talk
+        text: こんにちはこんにちは
+      - event: branch
+        bool-key: Test
+        onTrue:
+          - event: talk
+            person: sunny
+            face: normal
+            text: it is true
+          - event: branch
+            bool-key: Test
+            onTrue:
+              - event: talk
+                person: sunny
+                face: normal
+                text: |
+                  ここまでちゃんと出力されたらめでたい
+                  とてもめでたい
+            onFalse:
+              - event: talk
+                person: sunny
+                face: normal
+                text: unreachable
+        onFalse:
+          - event: talk
+            person: sunny
+            face: normal
+            text: it is false
+          - event: select
+            options:
+              - test0
+              - test1
+              - test2
+            events:
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 0
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 0 - 1
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 1
+              -
+                - event: talk
+                  person: sunny
+                  face: normal
+                  text: choose 2
+          - event: setbool
+            bool-key: Test
+            flag: true
+
+- place: flare
+  conversations:
+    - name: battle
+      events:
+      - event: talk
+        person: lune
+        face: normal
+        text: test

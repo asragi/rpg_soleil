@@ -9,7 +9,7 @@ namespace Soleil.Menu.Status
 {
     class EquipDisplay : MenuComponent
     {
-        readonly Vector Space = new Vector(28, 4);
+        readonly Vector Space = TextSelectablePanel.Spacing;
         readonly Vector IconSpace = ItemPanelBase.IconSpace;
         const int DiffY = 34;
         TextImage[] texts;
@@ -54,7 +54,7 @@ namespace Soleil.Menu.Status
                 equipWindow.OnInputDown();
                 return;
             }
-            SetIndex(1);
+            ChangeIndex(1);
             SetCursorPosition();
         }
 
@@ -65,7 +65,7 @@ namespace Soleil.Menu.Status
                 equipWindow.OnInputUp();
                 return;
             }
-            SetIndex(-1);
+            ChangeIndex(-1);
             SetCursorPosition();
         }
 
@@ -136,7 +136,7 @@ namespace Soleil.Menu.Status
             equipWindow.Draw(d);
         }
 
-        private void SetIndex(int indexDiff)
+        private void ChangeIndex(int indexDiff)
         {
             int length = texts.Length;
             index = (index + indexDiff + length) % length;

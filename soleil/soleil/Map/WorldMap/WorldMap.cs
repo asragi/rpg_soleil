@@ -8,6 +8,7 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMap
     {
+        public readonly static Vector WorldMapSize = new Vector(1920, 1080);
         WorldPoint[] points;
         WorldMapPlayerIcon playerIcon;
 
