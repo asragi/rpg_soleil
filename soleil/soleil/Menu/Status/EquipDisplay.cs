@@ -9,8 +9,12 @@ namespace Soleil.Menu.Status
 {
     class EquipDisplay : MenuComponent
     {
+        readonly Vector Space = TextSelectablePanel.Spacing;
+        readonly Vector IconSpace = ItemPanelBase.IconSpace;
         const int DiffY = 34;
         FontImage[] texts;
+        UIImage[] icons;
+        readonly TextureID[] ids = new[] { TextureID.IconWand, TextureID.IconArmor, TextureID.IconAccessary, TextureID.IconAccessary };
         IItem[] equips;
 
         Person displayingCharacter;
@@ -26,16 +30,20 @@ namespace Soleil.Menu.Status
         {
             statusSystem = ss;
             texts = new FontImage[4];
+            icons = new UIImage[4];
             for (int i = 0; i < texts.Length; i++)
             {
-                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i), DepthID.MenuMiddle);
+                texts[i] = new FontImage(FontID.CorpM, pos + new Vector(0, DiffY * i) + Space, DepthID.MenuMiddle);
                 texts[i].Color = ColorPalette.DarkBlue;
+                icons[i] = new UIImage(ids[i], pos + new Vector(0, DiffY * i) + IconSpace, Vector.Zero, DepthID.MenuMiddle);
+                icons[i].Color = ColorPalette.DarkBlue;
             }
             index = 0;
             cursor = new UIImage(TextureID.MenuSelected, texts[0].Pos, Vector.Zero, DepthID.MenuMiddle);
             equipWindow = new EquipItemList(this, desc);
             description = desc;
             AddComponents(texts);
+            AddComponents(icons);
             SetCursorPosition();
         }
 
@@ -137,10 +145,11 @@ namespace Soleil.Menu.Status
 
         private void SetCursorPosition()
         {
-            cursor.Pos = texts[index].Pos;
+            cursor.Pos = texts[index].Pos - Space;
             for (int i = 0; i < texts.Length; i++)
             {
                 texts[i].Color = (i == index) ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
+                icons[i].Color = (i == index) ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
             }
         }
         

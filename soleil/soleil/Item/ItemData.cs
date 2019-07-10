@@ -101,7 +101,7 @@ namespace Soleil.Item
     struct NormalItem : IItem
     {
         public ItemID ID { get; }
-        public ItemType Type { get { return ItemType.Consumable; } }
+        public ItemType Type { get { return ItemType.Unconsumable; } }
         public bool OnMenu { get; }
         public bool OnBattle { get; }
         public string Name { get; }
