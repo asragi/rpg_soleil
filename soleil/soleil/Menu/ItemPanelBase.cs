@@ -28,29 +28,28 @@ namespace Soleil.Menu
         private UIImage DecideIcon(ItemID id, BasicMenu parent)
         {
             var itemType = ItemDataBase.Get(id).Type;
-            TextureID tex;
-            if (itemType == ItemType.Weapon)
-            {
-                tex = TextureID.IconWand;
-            }
-            else if (itemType == ItemType.Armor)
-            {
-                tex = TextureID.IconArmor;
-            }
-            else if (itemType == ItemType.Accessory)
-            {
-                tex = TextureID.IconAccessary;
-            }
-            else if (itemType == ItemType.Consumable)
-            {
-                tex = TextureID.IconPot;
-            }
-            else if (itemType == ItemType.Unconsumable)
-            {
-                tex = TextureID.IconJewel;
-            }
-            else tex = TextureID.IconAccessary;
+            TextureID tex = DecideTexID(itemType);
+
             return new UIImage(tex, LocalPos + parent.Pos, Vector.Zero, DepthID.Message);
+
+            TextureID DecideTexID(ItemType item)
+            {
+                switch (itemType)
+                {
+                    case ItemType.Consumable:
+                        return TextureID.IconPot;
+                    case ItemType.Unconsumable:
+                        return TextureID.IconJewel;
+                    case ItemType.Weapon:
+                        return TextureID.IconWand;
+                    case ItemType.Armor:
+                        return TextureID.IconArmor;
+                    case ItemType.Accessory:
+                        return TextureID.IconAccessary;
+                    default:
+                        throw new ArgumentOutOfRangeException("ItemIDが不正です．");
+                }
+            }
         }
 
         protected override void OnSelected()
