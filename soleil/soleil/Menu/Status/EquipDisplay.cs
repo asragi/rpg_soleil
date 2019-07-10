@@ -9,7 +9,7 @@ namespace Soleil.Menu.Status
 {
     class EquipDisplay : MenuComponent
     {
-        readonly Vector Space = new Vector(28, 4);
+        readonly Vector Space = TextSelectablePanel.Spacing;
         readonly Vector IconSpace = ItemPanelBase.IconSpace;
         const int DiffY = 34;
         FontImage[] texts;

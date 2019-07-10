@@ -13,7 +13,7 @@ namespace Soleil.Menu
         /// <summary>
         /// パネルの文字描画を左上からどれだけの位置にするか
         /// </summary>
-        protected readonly Vector Spacing = new Vector(28, 4);
+        public static readonly Vector Spacing = new Vector(28, 4);
 
         protected readonly FontID ItemFont = FontID.CorpM;
         protected readonly Color ItemColor = ColorPalette.DarkBlue;
