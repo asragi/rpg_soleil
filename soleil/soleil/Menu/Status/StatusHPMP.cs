@@ -10,7 +10,7 @@ namespace Soleil.Menu.Status
     {
         readonly FontID Font;
         readonly FontID MpFont;
-        FontImage  slashText, mpText;
+        TextImage  slashText, mpText;
         RightAlignText valText, maxText;
         const int ValSpace = 170;
         const int SpaceToSlash = 10;
@@ -20,12 +20,12 @@ namespace Soleil.Menu.Status
             var color = ColorPalette.DarkBlue;
             Font = FontID.CorpM;
             MpFont = FontID.CorpMini;
-            mpText = new FontImage(MpFont, pos + new Vector(0,7), DepthID.MenuTop);
+            mpText = new TextImage(MpFont, pos + new Vector(0,7), DepthID.MenuTop);
             mpText.Text = "MP";
             mpText.Color = color;
             valText = new RightAlignText(Font, pos + new Vector(ValSpace, 0), Vector.Zero, DepthID.MenuTop);
             valText.Color = color;
-            slashText = new FontImage(Font, pos + new Vector(ValSpace + SpaceToSlash,0), DepthID.MenuTop);
+            slashText = new TextImage(Font, pos + new Vector(ValSpace + SpaceToSlash,0), DepthID.MenuTop);
             slashText.Text = "/";
             slashText.Color = color;
             maxText = new RightAlignText(Font, pos + new Vector(ValSpace + SpaceToSlash + SpaceToMax, 0), Vector.Zero, DepthID.MenuTop);

@@ -8,12 +8,12 @@ namespace Soleil.Menu
 {
     class MenuCursor: MenuComponent
     {
-        UIImage img;
+        Image img;
         Vector[] positions;
         public MenuCursor(TextureID id, Vector[] destinations)
         {
             positions = destinations;
-            img = new UIImage(id, destinations[0], Vector.Zero, DepthID.MenuBottom);
+            img = new Image(id, destinations[0], Vector.Zero, DepthID.MenuBottom);
         }
 
         public void MoveTo(int index)

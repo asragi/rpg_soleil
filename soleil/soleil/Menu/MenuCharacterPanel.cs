@@ -17,9 +17,9 @@ namespace Soleil.Menu
         const int SpaceHPMP = 27; // HP表示とMP表示のy方向距離
         const int SpaceVal = 105; // "HP"とHPvalueのx方向表示距離
         Vector pos;
-        UIImage faceImg;
-        FontImage hpText, mpText, lvText;
-        FontImage hpNumText, mpNumText, lvNumText;
+        Image faceImg;
+        TextImage hpText, mpText, lvText;
+        TextImage hpNumText, mpNumText, lvNumText;
         readonly Vector posDiff = new Vector(50, 0);
 
         Person person;
@@ -57,12 +57,12 @@ namespace Soleil.Menu
             mpMax = p.Score.MPMAX;
 
             // Images
-            faceImg = new UIImage(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
+            faceImg = new Image(textureID, pos + FaceImgPos, posDiff, DepthID.MenuBottom, false, true, 0);
             // hpmpImg
             var font = FontID.CorpM;
-            hpText = new FontImage(font, pos + HPPos, posDiff, DepthID.MenuBottom, true, 0);
-            mpText = new FontImage(font, pos + HPPos + new Vector(0, SpaceHPMP), posDiff, DepthID.MenuBottom, true, 0);
-            lvText = new FontImage(font, pos + HPPos + new Vector(30, -SpaceHPMP), posDiff, DepthID.MenuBottom);
+            hpText = new TextImage(font, pos + HPPos, posDiff, DepthID.MenuBottom, true, 0);
+            mpText = new TextImage(font, pos + HPPos + new Vector(0, SpaceHPMP), posDiff, DepthID.MenuBottom, true, 0);
+            lvText = new TextImage(font, pos + HPPos + new Vector(30, -SpaceHPMP), posDiff, DepthID.MenuBottom);
             hpText.Text = "HP";
             mpText.Text = "MP";
             lvText.Text = "Lv";

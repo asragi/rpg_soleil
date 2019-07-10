@@ -23,7 +23,7 @@ namespace Soleil.Map
             images = new Image[textureIDs.Length];
             for (int i = 0; i < textureIDs.Length; i++)
             {
-                images[i] = new Image(0, Resources.GetTexture(textureIDs[i]), _pos, LowerLayer, false, false, (i == 0) ? 1 : 0);
+                images[i] = new Image(textureIDs[i], _pos, LowerLayer, false, false, (i == 0) ? 1 : 0);
             }
         }
 

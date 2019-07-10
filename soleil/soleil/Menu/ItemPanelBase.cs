@@ -14,7 +14,7 @@ namespace Soleil.Menu
     abstract class ItemPanelBase :TextSelectablePanel
     {
         public readonly ItemID ID;
-        UIImage icon;
+        Image icon;
         public static readonly Vector IconSpace = new Vector(8, 10);
 
         public ItemPanelBase(ItemID id, string name, BasicMenu parent, bool active = true)
@@ -25,12 +25,12 @@ namespace Soleil.Menu
             icon.Color = SetColor(ItemColor);
         }
 
-        private UIImage DecideIcon(ItemID id, BasicMenu parent)
+        private Image DecideIcon(ItemID id, BasicMenu parent)
         {
             var itemType = ItemDataBase.Get(id).Type;
             TextureID tex = DecideTexID(itemType);
 
-            return new UIImage(tex, LocalPos + parent.Pos, Vector.Zero, DepthID.Message);
+            return new Image(tex, LocalPos + parent.Pos, Vector.Zero, DepthID.Message);
 
             TextureID DecideTexID(ItemType item)
             {

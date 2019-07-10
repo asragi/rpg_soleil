@@ -18,7 +18,7 @@ namespace Soleil.Event.Conversation
         public int Position { get; private set; }
         public string Face { get; private set; }
 
-        Dictionary<string, UIImage> images;
+        Dictionary<string, Image> images;
 
         public ConversationPerson(string name, int position)
         {
@@ -26,13 +26,13 @@ namespace Soleil.Event.Conversation
             Position = position;
 
             // Create Face Images
-            images = new Dictionary<string, UIImage>();
+            images = new Dictionary<string, Image>();
             var faces = FaceDictionary.GetFaces(name);
             foreach (var f in faces)
             {
                 var tex = FaceDictionary.Get(Name, f);
                 var pos = new Vector(xPositionArray[Position], Y);
-                var image = new UIImage(tex, pos, Vector.Zero, DepthID.PlayerFront);
+                var image = new Image(tex, pos, Vector.Zero, DepthID.PlayerFront);
                 images.Add(f, image);
             }
         }

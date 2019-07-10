@@ -12,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// 動きなど機能を与えたFontSpriteの基底クラス
     /// </summary>
-    class FontImage : UIImageBase
+    class TextImage : ImageBase
     {
         public FontID Font { get; set; }
         private string text;
@@ -25,23 +25,20 @@ namespace Soleil
         // Outline
         private Outline outline;
 
-        // RightAlign
-        private bool rightAlign;
-
         public override int FrameWait { set { base.FrameWait = value; outline?.FrameWait(value); } }
 
         /// <summary>
         /// ImageManagerから作る.
         /// </summary>
-        public FontImage(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
+        public TextImage(FontID fontID, Vector pos, Vector posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
             : base(pos, posDiff, depth, false, isStatic, alpha)
         {
             Font = fontID;
             Text = "";
         }
 
-        public FontImage(FontID fontID, Vector pos, DepthID depth, bool isStatic = true, float alpha = 0)
-            : this(fontID, pos, null, depth, isStatic, alpha) { }
+        public TextImage(FontID fontID, Vector pos, DepthID depth, bool isStatic = true, float alpha = 0)
+            : this(fontID, pos, Vector.Zero, depth, isStatic, alpha) { }
    
         public void ActivateOutline(int diff, bool activate = true)
         {
@@ -50,27 +47,6 @@ namespace Soleil
             outline.Color = OutlineColor;
             outline.IsVisible = activate;
             outline.Text = Text;
-        }
-
-        public void RightAlign(bool activate)
-        {
-            rightAlign = activate;
-            RefreshTextPos();
-        }
-
-        private void RefreshTextPos()
-        {
-            Vector basePos;
-            if (rightAlign)
-            {
-                basePos = InitPos - ImageSize;
-            }
-            else
-            {
-                basePos = InitPos;
-            }
-            basePos += PosDiff;
-            Pos = basePos;
         }
 
         public override void Update()
@@ -107,10 +83,10 @@ namespace Soleil
             public Color Color { set => outlineTexts.ForEach2(s => s.Color = value); }
             public bool IsVisible;
             public string Text { set => outlineTexts.ForEach2(s => s.Text = value); }
-            readonly FontImage parent;
+            readonly TextImage parent;
             readonly Vector[] diffs;
             int diffSize;
-            readonly FontImage[] outlineTexts;
+            readonly TextImage[] outlineTexts;
             static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
             public Vector Pos
             {
@@ -124,7 +100,7 @@ namespace Soleil
 
             public void FrameWait(int frame) => outlineTexts.ForEach2(s => s.FrameWait = frame);
 
-            public Outline(FontImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
+            public Outline(TextImage _parent, int diff, Vector positionDiff, DepthID depth, bool isStatic)
             {
                 parent = _parent;
                 diffSize = diff;
@@ -142,14 +118,14 @@ namespace Soleil
                     return result;
                 }
 
-                FontImage[] SetFontImages(FontID font, Vector[] outlineVecs, Vector posDiff,
+                TextImage[] SetFontImages(FontID font, Vector[] outlineVecs, Vector posDiff,
                     DepthID _depth, bool _isStatic, float alpha = 0)
                 {
                     var size = outlineVecs.Length;
-                    var result = new FontImage[size];
+                    var result = new TextImage[size];
                     for (int i = 0; i < size; i++)
                     {
-                        result[i] = new FontImage(font, outlineVecs[i], posDiff, _depth, _isStatic, alpha);
+                        result[i] = new TextImage(font, outlineVecs[i], posDiff, _depth, _isStatic, alpha);
                     }
                     return result;
                 }

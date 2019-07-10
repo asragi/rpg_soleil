@@ -45,7 +45,7 @@ namespace Soleil.Menu
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
-            selectedBack = new Image(0, Resources.GetTexture(TextureID.MenuSelected), LocalPos + parent.Pos, DepthID.Message, false, true, 0);
+            selectedBack = new Image(TextureID.MenuSelected, LocalPos + parent.Pos, DepthID.Message, false, true, 0);
         }
 
         public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)

@@ -53,7 +53,7 @@ namespace Soleil.UI
             barBlock.Draw(d);
         }
 
-        class BarBlock : UIImageBase
+        class BarBlock : ImageBase
         {
             Vector size;
             double rate;

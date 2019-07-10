@@ -11,14 +11,14 @@ namespace Soleil.Menu.Status
         const int MiniHeight = 7;
         readonly Vector LvDiff = new Vector(176, MiniHeight);
         readonly Vector LvNumPosDiff = new Vector(200, 0);
-        FontImage name;
-        FontImage lv, lvNum;
+        TextImage name;
+        TextImage lv, lvNum;
         public string Name { set => name.Text = value; }
         public MagicCategoryPiece(Vector pos, int tag)
         {
-            name = new FontImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), null, DepthID.MenuTop);
-            lv = new FontImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
-            lvNum = new FontImage(FontID.CorpM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
+            name = new TextImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), DepthID.MenuTop);
+            lv = new TextImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
+            lvNum = new TextImage(FontID.CorpM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
 
