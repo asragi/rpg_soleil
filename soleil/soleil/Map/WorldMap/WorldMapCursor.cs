@@ -16,11 +16,11 @@ namespace Soleil.Map.WorldMap
             get => img.Pos;
             set => img.Pos = value;
         }
-        UIImage img;
+        Image img;
         CollideBox collideBox;
         public WorldMapCursor(BoxManager bm)
         {
-            img = new UIImage(TextureID.WorldMapCursor, Vector.One, null, DepthID.Effect, isStatic: false);
+            img = new Image(TextureID.WorldMapCursor, Vector.Zero, DepthID.Effect, isStatic: false);
             collideBox = new CollideBox(this, Vector.Zero, Vector.One, CollideLayer.Player, bm);
         }
 

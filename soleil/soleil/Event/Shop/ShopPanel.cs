@@ -16,7 +16,7 @@ namespace Soleil.Event.Shop
         public override Vector ItemNumPosDiff => base.ItemNumPosDiff - new Vector(30,6); // ちゃんと下揃えを計算するべきだが，面倒くさかった．
         public int Price { get; private set; }
 
-        FontImage currency;
+        TextImage currency;
 
         public ShopPanel(ItemID id, int value, ShopItemList parent)
             :base(id, ItemDataBase.Get(id).Name, parent)
@@ -26,7 +26,7 @@ namespace Soleil.Event.Shop
 
             Val = Price;
             ValFont = FontID.CorpM;
-            currency = new FontImage(FontID.CorpM, LocalPos + parent.Pos, DepthID.Message, true, 0);
+            currency = new TextImage(FontID.CorpM, LocalPos + parent.Pos, DepthID.Message, true, 0);
             currency.Text = Map.MoneyWallet.Currency;
         }
 

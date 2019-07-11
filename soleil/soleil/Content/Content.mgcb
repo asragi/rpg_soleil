@@ -254,7 +254,8 @@
 /processorParam:TextureFormat=Color
 /build:Arrow.png
 
-#begin corpm.spritefont
+
+#begin corpmini.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -275,7 +276,8 @@
 /processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:corpm.spritefont
+/build:corpmini.spritefont
+
 
 #begin Map/Back/Flare/1/flare1-10.png
 /importer:TextureImporter
@@ -721,6 +723,66 @@
 /processorParam:TextureFormat=Color
 /build:UI/indicatorTemp.png
 
+#begin UI/Menu/icons/icon-accessary.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-accessary.png
+
+#begin UI/Menu/icons/icon-clothes.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-clothes.png
+
+#begin UI/Menu/icons/icon-jewel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-jewel.png
+
+#begin UI/Menu/icons/icon-pot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-pot.png
+
+#begin UI/Menu/icons/icon-wand.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-wand.png
+
 #begin UI/Menu/lune_face.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -996,6 +1058,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Menu/yasoba-select.png
+
+#begin UI/Menu/yasoba-window-skill-category.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/yasoba-window-skill-category.png
 
 #begin UI/message.png
 /importer:TextureImporter

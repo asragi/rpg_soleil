@@ -14,13 +14,11 @@ namespace Soleil.Map
     {
         static Vector upperRight = new Vector(Game1.VirtualWindowSizeX, 0);
         FontID font = FontID.CorpM;
-        ImageManager imageManager;
         Image backImage;
         GameDateTime gameDate;
         public MapIndicator()
         {
-            imageManager = new ImageManager();
-            backImage = imageManager.CreateImg(TextureID.IndicatorBack, upperRight + new Vector(-10,0), DepthID.Frame);
+            backImage = new Image(TextureID.IndicatorBack, upperRight + new Vector(-10, 0), Vector.Zero, DepthID.Frame, true, alpha: 0.5f);
             backImage.Alpha = 0.5f;
             gameDate = GameDateTime.GetInstance();
         }
@@ -28,12 +26,12 @@ namespace Soleil.Map
         public void Update()
         {
             backImage.Angle += 0.002f;
-            imageManager.Update();
+            backImage.Update();
         }
 
         public void Draw(Drawing d)
         {
-            imageManager.Draw(d);
+            backImage.Draw(d);
             var textPos = upperRight;
             d.DrawStaticText(textPos + new Vector(-59, 23), Resources.GetFont(font), $"Day {gameDate.NowDay}", Color.AliceBlue, DepthID.Frame, Vector.One);
             d.DrawStaticText(textPos + new Vector(-55, 50), Resources.GetFont(font), gameDate.NowTimeStr(), Color.AliceBlue, DepthID.Frame, Vector.One);

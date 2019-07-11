@@ -13,7 +13,7 @@ namespace Soleil.Menu
         Items = 0,
         Magic,
         Skill,
-        Equip,
+        // Equip,
         Status,
         Option,
         Save,
@@ -32,12 +32,12 @@ namespace Soleil.Menu
             "魔法を確認・選択して使用します。",
             "スキルを確認・選択して使用します。",
             "装備を確認・変更します。",
-            "ステータスを確認します。",
+            // "ステータスを確認します。",
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
 
-        UIImage backImage, frontImage;
+        Image backImage, frontImage;
 
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -80,8 +80,8 @@ namespace Soleil.Menu
             TextureID.MenuMagic2,
             TextureID.MenuEquip1,
             TextureID.MenuEquip2,
-            TextureID.MenuStatus1,
-            TextureID.MenuStatus2,
+            // TextureID.MenuStatus1,
+            // TextureID.MenuStatus2,
             TextureID.MenuOption1,
             TextureID.MenuOption2,
             TextureID.MenuSave1,
@@ -93,8 +93,8 @@ namespace Soleil.Menu
         {
             Index = 0;
             // Image初期化
-            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
-            frontImage = new UIImage(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
+            backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
+            frontImage = new Image(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
 
             // 選択肢たち
             menuItems = new MenuItem[(int)MenuName.size];
@@ -123,7 +123,7 @@ namespace Soleil.Menu
             skillUserSelect = new SkillUserSelect(this);
             skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusTargetSelect, menuLineUpper, menuLineLower);
+            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, party);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] {
                 statusMenu, statusTargetSelect,
@@ -235,7 +235,7 @@ namespace Soleil.Menu
         public void CallChild(MenuName name, Person p)
         {
             if (name == MenuName.Magic) magicMenu.CallWithPerson(p);
-            if (name == MenuName.Status) statusSystem.Call();
+            if (name == MenuName.Status) statusSystem.CallWithPerson(p);
             if (name == MenuName.Skill) skillMenu.CallWithPerson(p);
         }
 

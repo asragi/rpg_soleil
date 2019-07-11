@@ -42,10 +42,10 @@ VisualStudioでビルドをします．
 ## 描画
 [ImageBase](/docs/ImageBase.md)
 ### 画像の描画
-- [UIImage](/docs/UIImage.md)
+- [Image](/docs/Image.md)
 
 ### テキストの描画
-- [FontImage](/docs/FontImage.md)
+- [TextImage](/docs/TextImage.md)
   - [RightAlignText](/docs/RightAlignText.md)
   - [TextWithVal](/docs/TextWithVal.md)
 

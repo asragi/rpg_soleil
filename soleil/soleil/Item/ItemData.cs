@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,13 +66,13 @@ namespace Soleil.Item
         {
             Physical = p;
             Magical = m;
-            PhysicalAttr = _pAttr ?? new AttrDef();
-            MagicalAttr = _mAttr ?? new AttrDef();
+            PhysicalAttr = _pAttr ?? new AttrDef(0);
+            MagicalAttr = _mAttr ?? new AttrDef(0);
         }
 
-        public int GetDefVal(AttackAttribution attr, string t)
+        public int GetDefVal(AttackAttribution attr, AttackType t)
         {
-            if (t == "phisical") return Physical + PhysicalAttr.Values[(int)attr];
+            if (t == AttackType.Physical) return Physical + PhysicalAttr.Values[(int)attr];
             return Magical + MagicalAttr.Values[(int)attr];
         }
     }
@@ -100,7 +101,7 @@ namespace Soleil.Item
     struct NormalItem : IItem
     {
         public ItemID ID { get; }
-        public ItemType Type { get { return ItemType.Consumable; } }
+        public ItemType Type { get { return ItemType.Unconsumable; } }
         public bool OnMenu { get; }
         public bool OnBattle { get; }
         public string Name { get; }

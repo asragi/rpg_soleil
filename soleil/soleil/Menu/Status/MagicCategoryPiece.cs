@@ -8,21 +8,23 @@ namespace Soleil.Menu.Status
 {
     class MagicCategoryPiece : MenuComponent
     {
-        readonly Vector Space = new Vector(10, 10);
-        readonly Vector LvDiff = new Vector(4, 36);
-        readonly Vector LvNumPosDiff = new Vector(34, -5);
-        UIImage icon;
-        FontImage name;
-        FontImage lv, lvNum;
+        const int MiniHeight = 7;
+        readonly Vector LvDiff = new Vector(176, MiniHeight);
+        readonly Vector LvNumPosDiff = new Vector(200, 0);
+        TextImage name;
+        TextImage lv, lvNum;
         public string Name { set => name.Text = value; }
         public MagicCategoryPiece(Vector pos, int tag)
         {
-            // icon = new UIImage(TextureID.FrameTest, pos, Vector.Zero, DepthID.MenuTop);
-            name = new FontImage(FontID.CorpM, pos + Space, null, DepthID.MenuTop);
-            lv = new FontImage(FontID.CorpM, pos + Space + LvDiff, Vector.Zero, DepthID.MenuTop);
-            lvNum = new FontImage(FontID.CorpM, pos + Space + LvDiff + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
-            lv.Text = "Lv.";
+            name = new TextImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), DepthID.MenuTop);
+            lv = new TextImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
+            lvNum = new TextImage(FontID.CorpM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
+            lv.Text = "Lv";
             lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
+
+            name.Color = ColorPalette.DarkBlue;
+            lv.Color = ColorPalette.DarkBlue;
+            lvNum.Color = ColorPalette.DarkBlue;
             AddComponents(new IComponent[] { lv, lvNum, name });
         }
     }

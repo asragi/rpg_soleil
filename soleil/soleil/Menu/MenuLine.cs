@@ -13,7 +13,7 @@ namespace Soleil.Menu
     class MenuLine : MenuComponent
     {
         const int MoveSpeed = 1;
-        UIImage[] lines;
+        Image[] lines;
         int texWidth;
         bool moveLeft;
 
@@ -30,10 +30,10 @@ namespace Soleil.Menu
             var tex = Resources.GetTexture(TextureID.MenuLine);
             texWidth = tex.Width;
             var texNum = Game1.VirtualWindowSizeX / texWidth + 3;
-            lines = new UIImage[texNum];
+            lines = new Image[texNum];
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i] = new UIImage(TextureID.MenuLine, new Vector(i * texWidth, _posY), Vector.Zero, DepthID.MenuTop);
+                lines[i] = new Image(TextureID.MenuLine, new Vector(i * texWidth, _posY), Vector.Zero, DepthID.MenuTop);
             }
         }
 

@@ -1,7 +1,7 @@
 # TextWithVal
 文字(Text)とそれに対応する値(Val)を表示するコンポーネント．
 
-[FontImage](FontImage.md)と同様に`Update()`，`Draw()`を毎フレーム実行する必要がある．
+[TextImage](TextImage.md)と同様に`Update()`，`Draw()`を毎フレーム実行する必要がある．
 
 ## Field
 

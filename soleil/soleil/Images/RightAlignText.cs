@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class RightAlignText: FontImage
+    class RightAlignText: TextImage
     {
 
         Vector standardPosition;
@@ -20,7 +20,7 @@ namespace Soleil
             }
         }
 
-        public RightAlignText(FontID fontID, Vector pos, Vector? posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
+        public RightAlignText(FontID fontID, Vector pos, Vector posDiff, DepthID depth, bool isStatic = true, float alpha = 0)
             : base(fontID, pos, posDiff, depth, isStatic, alpha)
         {
             standardPosition = pos;

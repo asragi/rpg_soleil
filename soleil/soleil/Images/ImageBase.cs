@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using Soleil.Menu;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,35 +9,67 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     using EFunc = Func<double, double, double, double, double>;
-    abstract class ImageBase
+    /// <summary>
+    /// 画像やテキストの表示に関する抽象クラス
+    /// </summary>
+    abstract class ImageBase: IComponent
     {
-        protected DepthID DepthID;
-        protected int Frame;
-        public virtual Vector Pos { get; set; }
+        /// <summary>
+        /// イージングの基準点となる座標．
+        /// </summary>
+        public virtual Vector InitPos { get; set; }
+        protected DepthID DepthID { get; set; }
+        protected int Frame { get; private set; }
+        public Color Color { get; set; } = Color.White;
+        private Vector pos;
+        public virtual Vector Pos {
+            get => pos;
+            set {
+                Vector diff = value - Pos;
+                startPos += diff;
+                targetPos += diff;
+                pos = value;
+            }
+        }
         public float Angle { get; set; }
         protected bool IsStatic;
-        public bool IsDead { get; set; }
         public abstract Vector ImageSize { get; }
-        // Alpha
         public float Alpha { get; set; }
+
+        // 透明度に関するイージング処理に用いる変数．
         private int alphaFrame;
         private int alphaDuration;
         private EFunc alphaEaseFunc;
         bool fadeIn;
+        public int FadeSpeed { get; set; } = MenuSystem.FadeSpeed;
 
-        // Easing
+        /// <summary>
+        /// イージングアニメーションのウェイト量
+        /// </summary>
         public virtual int FrameWait { private get; set; } = 0;
         private int alphaFrameWait;
         private int moveFrameWait;
+
+        // 位置に関するイージング処理に用いる変数．
         private Vector targetPos;
         private Vector startPos;
         private int easeFrame;
         private int easeDuration;
         private EFunc easeFunc;
 
-        public ImageBase(Vector pos, DepthID _depthID, bool centerOrigin = true, bool isStatic = true, float alpha = 1)
+        /// <summary>
+        /// イージングの位置の移動量
+        /// </summary>
+        protected readonly Vector PosDiff;
+
+        public ImageBase(Vector pos, DepthID id, bool centerOrigin = true, bool isStatic = true, float alpha = 0)
+            : this(pos, Vector.Zero, id, centerOrigin, isStatic, alpha) { }
+
+        public ImageBase(Vector _pos, Vector posDiff, DepthID _depthID, bool centerOrigin = true, bool isStatic = true, float alpha = 0)
         {
-            Pos = pos;
+            pos = _pos + posDiff;
+            InitPos = _pos;
+            PosDiff = posDiff;
             DepthID = _depthID;
             Frame = 0;
             Alpha = alpha;
@@ -71,6 +105,26 @@ namespace Soleil
 
         public abstract void Draw(Drawing d);
 
+        public virtual void Call() => Call(true);
+        public virtual void Quit() => Quit(true);
+
+        public void Call(bool move = true)
+        {
+            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            if (move) MoveToDefault();
+        }
+
+        public void MoveToDefault() => MoveTo(InitPos, FadeSpeed, MenuSystem.EaseFunc);
+        
+
+        public void Quit(bool move = true)
+        {
+            Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+            if (move) MoveToBack();
+        }
+
+        public void MoveToBack() => MoveTo(InitPos + PosDiff, FadeSpeed, MenuSystem.EaseFunc);
+        
         private void Easing()
         {
             if (moveFrameWait > 0)
@@ -82,10 +136,10 @@ namespace Soleil
             if (easeFunc == null) return;
             var x = easeFunc(easeFrame, easeDuration, targetPos.X, startPos.X);
             var y = easeFunc(easeFrame, easeDuration, targetPos.Y, startPos.Y);
-            Pos = new Vector(x, y);
+            pos = new Vector(x, y);
             easeFrame++;
 
-            if (easeFrame >= easeDuration) Pos = targetPos;
+            if (easeFrame >= easeDuration) pos = targetPos;
         }
 
         private void FadeUpdate()
@@ -100,7 +154,7 @@ namespace Soleil
             Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
             alphaFrame++;
 
-            if (easeFrame >= easeDuration) Alpha = fadeIn ? 1 : 0;
+            if (alphaFrame >= alphaDuration) Alpha = fadeIn ? 1 : 0;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace Soleil.Map.WorldMap
         public bool IsPlayerIn;
         public bool Selected;
 
-        UIImage icon;
+        Image icon;
 
         CollideBox collideBox;
 
@@ -57,7 +57,7 @@ namespace Soleil.Map.WorldMap
             ID = id;
             Pos = position;
             Edges = new Dictionary<WorldPointKey, int>();
-            icon = new UIImage(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.PlayerBack, true, false, 1);
+            icon = new Image(TextureID.WorldMapIcon, Pos, DepthID.PlayerBack, true, false, 1);
             collideBox = new CollideBox(this, Vector.Zero, new Vector(50, 50), CollideLayer.Character, bm);
         }
 

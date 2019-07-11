@@ -45,7 +45,7 @@ namespace Soleil
             {
                 var face = (FaceType)i;
                 var texID = CharacterPictureMap.GetTexture(Name, face);
-                pictures[i] = new CharacterPicture(texID, _pos, null, false);
+                pictures[i] = new CharacterPicture(texID, _pos, Vector.Zero, false);
             }
             Pos = _pos;
         }

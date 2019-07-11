@@ -13,7 +13,7 @@ namespace Soleil.Menu
         /// <summary>
         /// パネルの文字描画を左上からどれだけの位置にするか
         /// </summary>
-        protected readonly Vector Spacing = new Vector(8, 4);
+        public static readonly Vector Spacing = new Vector(28, 4);
 
         protected readonly FontID ItemFont = FontID.CorpM;
         protected readonly Color ItemColor = ColorPalette.DarkBlue;
@@ -29,7 +29,7 @@ namespace Soleil.Menu
         protected int Val { set => itemNameImage.Val = value; }
         protected virtual FontID ValFont { set { itemNameImage.ValFont = value; } }
         protected bool EnableVal { set => itemNameImage.EnableValDisplay = value; }
-        public virtual Vector ItemNumPosDiff { get => new Vector(360, 0); }
+        public override Vector ItemNumPosDiff { get => new Vector(340, 0); }
 
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
@@ -45,7 +45,7 @@ namespace Soleil.Menu
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
-            selectedBack = new Image(0, Resources.GetTexture(TextureID.MenuSelected), LocalPos + parent.Pos, DepthID.Message, false, true, 0);
+            selectedBack = new Image(TextureID.MenuSelected, LocalPos + parent.Pos, DepthID.Message, false, true, 0);
         }
 
         public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)

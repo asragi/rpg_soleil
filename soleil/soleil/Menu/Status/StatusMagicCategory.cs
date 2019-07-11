@@ -8,9 +8,10 @@ namespace Soleil.Menu.Status
 {
     class StatusMagicCategory : MenuComponent
     {
-        const int XDiff = 80;
-        const int YDiff = 80;
+        readonly Vector ContentPos = new Vector(36, 9);
+        const int YDiff = 27;
         MagicCategoryPiece[] pieces;
+        Image backImg;
 
         readonly string[] names = new[] // debug tmp
         {
@@ -29,15 +30,15 @@ namespace Soleil.Menu.Status
         public StatusMagicCategory(Vector pos)
             :base()
         {
+            backImg = new Image(TextureID.MenuCategory, pos, Vector.Zero, DepthID.MenuTop);
             pieces = new MagicCategoryPiece[10]; // 術10系統
             for (int i = 0; i < 10; i++)
             {
-                var x = XDiff * (i / 2);
-                var y = (i % 2 == 0) ? 0 : YDiff;
-                pieces[i] = new MagicCategoryPiece(pos + new Vector(x,y), i);
+                pieces[i] = new MagicCategoryPiece(pos + ContentPos + new Vector(0, YDiff * i), i);
                 pieces[i].Name = names[i];
             }
 
+            AddComponents(new[] { backImg });
             AddComponents(pieces);
         }
     }

@@ -22,10 +22,11 @@ namespace Soleil.Images
         {
             Pos = _pos;
             images = new Image[3];
-            var tex = Resources.GetTexture(TextureID.BackBar);
+            var texID = TextureID.BackBar;
+            var tex = Resources.GetTexture(texID);
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new Image(0, tex, Pos, depth, false, true, 0);
+                images[i] = new Image(texID, Pos, depth, false, true, 0);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);

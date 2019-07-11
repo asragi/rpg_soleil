@@ -12,12 +12,12 @@ namespace Soleil.Menu
     {
         const int StartX = 100; // 0個目の項目のx座標
         const int StartY = 100; // 0個目の項目のy座標
-        const int SpaceSize = 50; // 項目ごとの感覚
+        const int SpaceSize = 60; // 項目ごとの感覚
         MenuName menuName;
         Vector pos;
         public bool IsSelected { get; set; }
-        UIImage unselectedImg;
-        UIImage selectedImg;
+        Image unselectedImg;
+        Image selectedImg;
 
         public MenuItem(MenuName _menuName, bool select)
         {
@@ -29,8 +29,8 @@ namespace Soleil.Menu
 
             TextureID unselectedTexID = MenuSystem.optionTextures[(int)menuName * 2];
             TextureID texID = MenuSystem.optionTextures[(int)menuName * 2 + 1];
-            unselectedImg = new UIImage(unselectedTexID, pos, new Vector(-50,0), DepthID.MenuBottom);
-            selectedImg = new UIImage(texID, pos, new Vector(-50, 0), DepthID.MenuBottom);
+            unselectedImg = new Image(unselectedTexID, pos, new Vector(-50,0), DepthID.MenuBottom);
+            selectedImg = new Image(texID, pos, new Vector(-50, 0), DepthID.MenuBottom);
         }
 
         public void Update()
