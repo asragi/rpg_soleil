@@ -16,6 +16,14 @@ namespace Soleil.Skill
         /// </summary>
         private Dictionary<MagicCategory, int> dictMagicExp;
         private SkillHolder skillHolder;
+
+        public MagicLv(SkillHolder _skillHolder)
+        {
+            skillHolder = _skillHolder;
+            dictMagicExp = new Dictionary<MagicCategory, int>();
+            for (int i = 0; i < (int)MagicCategory.size; ++i)
+                dictMagicExp.Add((MagicCategory)i, 0);
+        }
         /// <summary>
         /// MagicCategoryと対応するレベルを返します
         /// </summary>
@@ -43,14 +51,6 @@ namespace Soleil.Skill
                     if (SkillLearn.ExistLearningSkill(category, i))
                         skillHolder.LearnSkill(SkillLearn.GetLearnBy(category, i));
             }
-        }
-
-        public MagicLv(SkillHolder _skillHolder)
-        {
-            skillHolder = _skillHolder;
-            dictMagicExp = new Dictionary<MagicCategory, int>();
-            for (int i = 0; i < (int)MagicCategory.size; ++i)
-                dictMagicExp.Add((MagicCategory)i, 0);
         }
     }
 }

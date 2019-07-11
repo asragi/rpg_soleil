@@ -15,16 +15,6 @@ namespace Soleil.Skill
         /// MagicCategoryのレベルで習得するスキルを保管します
         /// </summary>
         public static readonly Dictionary<MagicCategory, Dictionary<int, SkillID>> skillLearn;
-
-        /// <summary>
-        /// MagicCategoryのレベルで覚えるスキルidを返します
-        /// </summary>
-        public static SkillID GetLearnBy(MagicCategory category, int lv) => skillLearn[category][lv];
-
-        /// <summary>
-        /// MagicCategoryのレベルで覚えるスキルの有無を返します
-        /// </summary>
-        public static bool ExistLearningSkill(MagicCategory category, int lv) => skillLearn[category].ContainsKey(lv);
         static SkillLearn()
         {
             skillLearn = new Dictionary<MagicCategory, Dictionary<int, SkillID>>();
@@ -39,5 +29,14 @@ namespace Soleil.Skill
                 skillLearn[category].Add(lv, skill);
             }
         }
+        /// <summary>
+        /// MagicCategoryのレベルで覚えるスキルidを返します
+        /// </summary>
+        public static SkillID GetLearnBy(MagicCategory category, int lv) => skillLearn[category][lv];
+
+        /// <summary>
+        /// MagicCategoryのレベルで覚えるスキルの有無を返します
+        /// </summary>
+        public static bool ExistLearningSkill(MagicCategory category, int lv) => skillLearn[category].ContainsKey(lv);
     }
 }
