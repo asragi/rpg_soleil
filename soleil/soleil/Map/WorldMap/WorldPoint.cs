@@ -72,14 +72,20 @@ namespace Soleil.Map.WorldMap
         public void CallWindow(bool isStatic)
         {
             // 詳細情報表示ウィンドウ
-            descriptionWindow = new MessageWindow(isStatic ? DescriptionPos : Pos, MessageWindow.GetProperSize(Font, Descriptions[ID]), WindowTag.A, wm, isStatic);
+            descriptionWindow = new MessageWindow(
+                isStatic ? DescriptionPos : Pos,
+                MessageWindow.GetProperSize(Font, Descriptions[ID]),
+                WindowTag.A, wm, isStatic);
             descriptionWindow.Call();
             descriptionWindow.Text = Descriptions[ID];
         }
 
         public void CallRequiredTimeWindow(bool isStatic, int time)
         {
-            messageWindow = new MessageWindow(isStatic ? TimePos : Pos + new Vector(0, 100), MessageWindow.GetProperSize(Font, "4" + TimeUnit), WindowTag.A, wm, isStatic);
+            messageWindow = new MessageWindow(
+                isStatic ? TimePos : Pos + new Vector(0, 100),
+                MessageWindow.GetProperSize(Font, "4" + TimeUnit),
+                WindowTag.A, wm, isStatic);
             messageWindow.Call();
             messageWindow.Text = time + TimeUnit;
         }
