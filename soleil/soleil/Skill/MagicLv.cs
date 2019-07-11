@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Soleil.Skill;
 
-namespace soleil.Skill
+namespace Soleil.Skill
 {
+    /// <summary>
+    /// MagicCategoryと経験値を管理します
+    /// </summary>
     class MagicLv
     {
         /// <summary>
@@ -37,10 +39,16 @@ namespace soleil.Skill
         /// <param name="category">MagicCategory</param>
         public void AddExp(int val, MagicCategory category)
         {
-            //int lv = GetLv(category);
+            int lv = GetLv(category);
             dictMagicExp[category] = dictMagicExp[category] + val;
+            int afterlv = GetLv(category);
             // スキル習得
-            // if (lv != GetLv(category)) skillHolder.LearnSkill(ここにskill id);
+            if (lv != afterlv)
+            {
+                for (int i = lv + 1; i <= afterlv; ++i)
+                    if (SkillLearn.ExistLearningSkill(category, i))
+                        skillHolder.LearnSkill(SkillLearn.GetLearnBy(category, i));
+            }
         }
 
         /// <summary>
