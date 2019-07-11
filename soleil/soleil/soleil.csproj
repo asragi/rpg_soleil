@@ -242,9 +242,11 @@
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
     <Compile Include="Scene\WorldMapScene.cs" />
+    <Compile Include="Skill\MagicLv.cs" />
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
+    <Compile Include="Skill\SkillLearn.cs" />
     <Compile Include="UI\UIGauge.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\IMessageBox.cs" />
