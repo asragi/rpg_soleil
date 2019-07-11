@@ -19,8 +19,6 @@ namespace Soleil.Skill
         /// <summary>
         /// MagicCategoryと対応するレベルを返します
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
         public int GetLv(MagicCategory category)
         {
             return dictMagicExp[category] / 10;
@@ -28,15 +26,11 @@ namespace Soleil.Skill
         /// <summary>
         /// MagicCategoryが習得済みか
         /// </summary>
-        /// <param name="category"></param>
-        /// <returns></returns>
         public bool IsLearned(MagicCategory category) => GetLv(category) != 0;
 
         /// <summary>
         /// MagicCategoryに経験値valを加算
         /// </summary>
-        /// <param name="val"></param>
-        /// <param name="category"></param>
         public void AddExp(int val, MagicCategory category)
         {
             int lv = GetLv(category);
@@ -51,10 +45,6 @@ namespace Soleil.Skill
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="_skillHolder"></param>
         public MagicLv(SkillHolder _skillHolder)
         {
             skillHolder = _skillHolder;

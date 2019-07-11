@@ -19,17 +19,11 @@ namespace Soleil.Skill
         /// <summary>
         /// MagicCategoryのレベルで覚えるスキルidを返します
         /// </summary>
-        /// <param name="category"></param>
-        /// <param name="lv"></param>
-        /// <returns></returns>
         public static SkillID GetLearnBy(MagicCategory category, int lv) => skillLearn[category][lv];
 
         /// <summary>
         /// MagicCategoryのレベルで覚えるスキルの有無を返します
         /// </summary>
-        /// <param name="category"></param>
-        /// <param name="lv"></param>
-        /// <returns></returns>
         public static bool ExistLearningSkill(MagicCategory category, int lv) => skillLearn[category].ContainsKey(lv);
         static SkillLearn()
         {
