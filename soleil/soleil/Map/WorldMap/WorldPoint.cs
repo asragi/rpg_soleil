@@ -22,8 +22,12 @@ namespace Soleil.Map.WorldMap
     /// <summary>
     /// 地図上に存在する町などの各施設を表すクラス．
     /// </summary>
-    class WorldPoint
+    class WorldPoint: ICollideObject
     {
+        readonly string TimeUnit = "時間";
+        readonly Vector DescriptionPos = WorldMapWindowLayer.Position + new Vector(350, 0);
+        readonly Vector TimePos = WorldMapWindowLayer.Position + new Vector(350, 100);
+        readonly FontID Font = MessageWindow.DefaultFont;
         public static readonly Dictionary<WorldPointKey, string> Descriptions = new Dictionary<WorldPointKey, string>()
         {
             {WorldPointKey.Flare, "太陽と潮騒の街\n陽術を習得可能" },
@@ -43,12 +47,18 @@ namespace Soleil.Map.WorldMap
 
         Image icon;
 
-        public WorldPoint(WorldPointKey id, Vector position)
+        CollideBox collideBox;
+
+        MessageWindow messageWindow, descriptionWindow;
+        WindowManager wm = WindowManager.GetInstance();
+
+        public WorldPoint(WorldPointKey id, Vector position, BoxManager bm)
         {
             ID = id;
             Pos = position;
             Edges = new Dictionary<WorldPointKey, int>();
-            icon = new Image(TextureID.WorldMapIcon, Pos, Vector.Zero, DepthID.PlayerBack, true, false, 1);
+            icon = new Image(TextureID.WorldMapIcon, Pos, DepthID.PlayerBack, true, false, 1);
+            collideBox = new CollideBox(this, Vector.Zero, new Vector(50, 50), CollideLayer.Character, bm);
         }
 
         public void SetEdge(WorldPointKey key, int cost) => Edges.Add(key, cost);
@@ -58,5 +68,46 @@ namespace Soleil.Map.WorldMap
             icon.Color = IsPlayerIn ? Color.Crimson : Color.AliceBlue;
             icon.Draw(d);
         }
+
+        public void CallWindow(bool isStatic)
+        {
+            // 詳細情報表示ウィンドウ
+            descriptionWindow = new MessageWindow(
+                isStatic ? DescriptionPos : Pos,
+                MessageWindow.GetProperSize(Font, Descriptions[ID]),
+                WindowTag.A, wm, isStatic);
+            descriptionWindow.Call();
+            descriptionWindow.Text = Descriptions[ID];
+        }
+
+        public void CallRequiredTimeWindow(bool isStatic, int time)
+        {
+            messageWindow = new MessageWindow(
+                isStatic ? TimePos : Pos + new Vector(0, 100),
+                MessageWindow.GetProperSize(Font, "4" + TimeUnit),
+                WindowTag.A, wm, isStatic);
+            messageWindow.Call();
+            messageWindow.Text = time + TimeUnit;
+        }
+
+        public void QuitWindow()
+        {
+            descriptionWindow.Quit();
+            messageWindow?.Quit();
+        }
+
+        public void OnCollisionEnter(CollideBox cb)
+        {
+            CallWindow(false);
+        }
+
+        public void OnCollisionStay(CollideBox cb) { }
+
+        public void OnCollisionExit(CollideBox cb)
+        {
+            QuitWindow();
+        }
+
+        public Vector GetPosition() => Pos;
     }
 }
