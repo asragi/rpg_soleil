@@ -60,3 +60,7 @@ VisualStudioでビルドをします．
    - 戦闘時に参照される補正込みの能力値
  - [EquipSet](/docs/battle/EquipSet.md)
  - [MagicLv](/docs/battle/MagicLv.md)
+
+## Menu
+ - [IComponent](/docs/menu/IComponent.md)
+ - [MenuComponent](/docs/menu/MenuComponent.md)
