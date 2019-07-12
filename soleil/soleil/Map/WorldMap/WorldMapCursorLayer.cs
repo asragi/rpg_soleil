@@ -16,11 +16,11 @@ namespace Soleil.Map.WorldMap
         int speed;
         // カーソルが画面端にどれだけ近づいたらカメラの移動を開始するか
         const int LimitDistance = 100;
-        Image cursor;
+        WorldMapCursor cursor;
         WorldMapCamera camera;
-        public WorldMapCursorLayer(WorldMapCamera cam)
+        public WorldMapCursorLayer(WorldMapCamera cam, BoxManager box)
         {
-            cursor = new Image(TextureID.WorldMapCursor, Vector.One, DepthID.Effect, isStatic: false);
+            cursor = new WorldMapCursor(box);
             camera = cam;
         }
 

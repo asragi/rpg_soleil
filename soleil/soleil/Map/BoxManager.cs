@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Soleil.Map
 {
     /// <summary>
-    /// 衝突判定用Boxの管理・判定計算を行う
+    /// 衝突判定用Boxの管理・判定計算を行う．利用時はUpdate()とDraw()を呼ぶ．
     /// </summary>
     class BoxManager
     {

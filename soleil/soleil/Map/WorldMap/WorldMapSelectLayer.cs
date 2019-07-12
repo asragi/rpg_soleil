@@ -8,13 +8,12 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMapSelectLayer
     {
-        readonly string TimeUnit = "時間";
         WorldPointKey[] keyList;
         int[] costList;
         SelectableWindow selectableWindow;
-        MessageWindow messageWindow, descriptionWindow;
         WorldMap worldMap;
         WorldMapCamera camera;
+        WorldPoint selectedPoint;
 
         public WorldMapSelectLayer(WorldMap world, WorldMapCamera cam)
         {
@@ -39,11 +38,8 @@ namespace Soleil.Map.WorldMap
             }
             var pos = WorldMapWindowLayer.Position;
             selectableWindow = new SelectableWindow(pos, true, optionsList);
-            messageWindow = new MessageWindow(pos + new Vector(350, 100), MessageWindow.GetProperSize(MessageWindow.DefaultFont, "n" + TimeUnit), WindowTag.A, WindowManager.GetInstance(), true);
-            descriptionWindow = new MessageWindow(pos + new Vector(350, 0), MessageWindow.GetProperSize(MessageWindow.DefaultFont, WorldPoint.Descriptions[WorldPointKey.Magistol]), WindowTag.A, WindowManager.GetInstance(), true);
+
             selectableWindow.Call();
-            descriptionWindow.Call();
-            messageWindow.Call();
             RefreshDestination();
         }
 
@@ -63,24 +59,18 @@ namespace Soleil.Map.WorldMap
 
         private void RefreshDestination()
         {
-            var _index = selectableWindow.Index;
-            var _key = keyList[_index];
-            SetMessage(_index, _key);
-            camera.SetDestination(worldMap.GetPoint(_key));
-
-            void SetMessage(int index, WorldPointKey key)
-            {
-                if (selectableWindow == null) return;
-                messageWindow.Text = costList[index].ToString() + TimeUnit;
-                descriptionWindow.Text = WorldPoint.Descriptions[key];
-            }
+            selectedPoint?.QuitWindow();
+            var key = keyList[selectableWindow.Index];
+            camera.SetDestination(worldMap.GetPoint(key));
+            selectedPoint = worldMap.GetPoint(key);
+            selectedPoint.CallWindow(true);
+            selectedPoint.CallRequiredTimeWindow(true, costList[selectableWindow.Index]);
         }
 
         public void QuitWindow()
         {
+            selectedPoint?.QuitWindow();
             selectableWindow.Quit();
-            messageWindow.Quit();
-            descriptionWindow.Quit();
             camera.SetDestination(worldMap.GetPlayerPoint());
         }
 
