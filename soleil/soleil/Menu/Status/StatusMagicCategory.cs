@@ -36,7 +36,7 @@ namespace Soleil.Menu.Status
             for (int i = 0; i < 10; i++)
             {
                 pieces[i] = new MagicCategoryPiece(pos + ContentPos + new Vector(0, YDiff * i), (MagicCategory)i);
-                pieces[i].Name = magicNames[(MagicCategory)i];
+                pieces[i].Name = MagicNames[(MagicCategory)i];
             }
 
             AddComponents(new[] { backImg });
