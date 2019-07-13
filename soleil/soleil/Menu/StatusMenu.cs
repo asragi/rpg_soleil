@@ -14,7 +14,7 @@ namespace Soleil.Menu
         const int PanelY = 130;
 
         MenuCharacterPanel[] menuCharacterPanels;
-        readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
+        static readonly Dictionary<CharaName, TextureID> texDict = new Dictionary<CharaName, TextureID>() {
             {CharaName.Lune, TextureID.MenuLune }, {CharaName.Sunny, TextureID.MenuSun},
             {CharaName.Tella, TextureID.MenuTella }
         };
@@ -94,6 +94,11 @@ namespace Soleil.Menu
         {
             cursor.Draw(d);
             base.Draw(d);
+        }
+
+        public static TextureID GetPersonFaceTexture(CharaName name)
+        {
+            return texDict[name];
         }
     }
 }

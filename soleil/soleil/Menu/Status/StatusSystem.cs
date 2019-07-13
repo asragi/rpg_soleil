@@ -92,7 +92,7 @@ namespace Soleil.Menu
 
         public void CallWithPerson(Person p)
         {
-            faceImg.TexChange(Soleil.Resources.PersonToID(p));
+            faceImg.TexChange(StatusMenu.GetPersonFaceTexture(p.Name));
             Call();
             equipDisplay.Call(p);
             charaName.RefreshWithPerson(p);

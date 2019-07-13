@@ -456,20 +456,5 @@ namespace Soleil
         }
 
         public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
-
-        public static TextureID PersonToID(Person p)
-        {
-            switch (p.Name)
-            {
-                case Soleil.Misc.CharaName.Lune:
-                    return TextureID.MenuLune;
-                case Soleil.Misc.CharaName.Sunny:
-                    return TextureID.MenuSun;
-                case Soleil.Misc.CharaName.Tella:
-                    return TextureID.MenuTella;
-                default:
-                    return TextureID.MenuLune;
-            }
-        }
     }
 }
