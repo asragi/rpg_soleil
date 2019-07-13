@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,13 +15,13 @@ namespace Soleil.Menu.Status
         TextImage name;
         TextImage lv, lvNum;
         public string Name { set => name.Text = value; }
-        public MagicCategoryPiece(Vector pos, int tag)
+        public MagicCategoryPiece(Vector pos, MagicCategory tag)
         {
             name = new TextImage(FontID.CorpMini, pos + new Vector(0, MiniHeight / 2), DepthID.MenuTop);
             lv = new TextImage(FontID.CorpMini, pos + LvDiff, Vector.Zero, DepthID.MenuTop);
             lvNum = new TextImage(FontID.CorpM, pos + LvNumPosDiff, Vector.Zero, DepthID.MenuTop);
             lv.Text = "Lv";
-            lvNum.Text = new Random(tag).Next(1, 5).ToString(); // 適当
+            lvNum.Text = 111.ToString(); // 適当
 
             name.Color = ColorPalette.DarkBlue;
             lv.Color = ColorPalette.DarkBlue;
