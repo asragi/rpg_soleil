@@ -57,6 +57,7 @@ namespace Soleil
 
         public override void Draw(Drawing d)
         {
+            if (!IsVisible) return;
             outline?.Draw(d);
             if (IsStatic) d.DrawStaticText(Pos, Resources.GetFont(Font), Text, Color * Alpha, DepthID, Vector2.One, Angle, false);
             else d.DrawText(Pos, Resources.GetFont(Font), Text, Color * Alpha, DepthID, 1, Angle, false);
