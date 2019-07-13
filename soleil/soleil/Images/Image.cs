@@ -30,6 +30,13 @@ namespace Soleil
             origin = centerOrigin;
         }
 
+        public void TexChange(TextureID id, bool centerOrigin = false)
+        {
+            tex = Resources.GetTexture(id);
+            Rectangle = new Rectangle(0, 0, tex.Width, tex.Height);
+            origin = centerOrigin;
+        }
+
         public override void Draw(Drawing d)
         {
             var tmp = d.CenterBased;
