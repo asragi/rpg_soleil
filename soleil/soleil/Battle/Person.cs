@@ -19,14 +19,16 @@ namespace Soleil
         public AbilityScore Score => score;
         readonly public EquipSet Equip;
         readonly public SkillHolder Skill;
+        public MagicLv Magic;
         public bool InParty;
 
-        public Person(CharaName name, AbilityScore _score, SkillHolder skill)
+        public Person(CharaName name, AbilityScore _score, SkillHolder skill, MagicLv magicLv)
         {
             Name = name;
             score = _score;
             Equip = new EquipSet();
             Skill = skill;
+            Magic = magicLv;
             InParty = true; // debug
         }
 

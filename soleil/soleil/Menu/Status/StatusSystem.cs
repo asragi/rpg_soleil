@@ -98,6 +98,7 @@ namespace Soleil.Menu
             charaName.RefreshWithPerson(p);
             display.RefreshWithPerson(p);
             statusParams.RefreshWithPerson(p);
+            statusMagicCategory.RefreshWithPerson(p);
         }
 
         public void Refresh(Person p)

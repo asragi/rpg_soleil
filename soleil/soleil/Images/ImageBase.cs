@@ -22,6 +22,7 @@ namespace Soleil
         protected int Frame { get; private set; }
         public Color Color { get; set; } = Color.White;
         private Vector pos;
+        public bool IsVisible { get; set; } = true;
         public virtual Vector Pos {
             get => pos;
             set {

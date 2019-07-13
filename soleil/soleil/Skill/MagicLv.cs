@@ -29,7 +29,7 @@ namespace Soleil.Skill
         /// </summary>
         public int GetLv(MagicCategory category)
         {
-            return dictMagicExp[category] / 10;
+            return MathEx.Clamp(dictMagicExp[category] / 10, 9, 0);
         }
         /// <summary>
         /// MagicCategoryが習得済みか

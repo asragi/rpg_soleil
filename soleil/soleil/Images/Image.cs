@@ -39,6 +39,7 @@ namespace Soleil
 
         public override void Draw(Drawing d)
         {
+            if (!IsVisible) return;
             var tmp = d.CenterBased;
             d.CenterBased = origin;
             if (IsStatic) d.DrawUI(Pos, tex, Rectangle, Color, DepthID, Size, Alpha, Angle);
