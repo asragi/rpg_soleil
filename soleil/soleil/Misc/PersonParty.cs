@@ -50,6 +50,7 @@ namespace Soleil
             var b_s = new SkillHolder(SkillID.PointFlare, SkillID.Thunder, SkillID.Headbutt);
             var c_s = new SkillHolder(SkillID.Headbutt, SkillID.Sonicboom);
             var a_m = new MagicLv(a_s);
+            a_m.AddExp(90, MagicCategory.Magic);
             var b_m = new MagicLv(b_s);
             var c_m = new MagicLv(c_s);
             allCharacters[(int)CharaName.Lune] = new Person(CharaName.Lune, a, a_s, a_m);
