@@ -15,7 +15,7 @@ namespace Soleil.Menu.Status
         readonly Vector LvCircleSize = new Vector(15, 0);
         readonly Vector LvDiff = new Vector(176, MiniHeight);
         readonly Vector LvNumPosDiff = new Vector(200, 0);
-        public readonly MagicCategory category = MagicCategory.None;
+        public readonly MagicCategory category;
         TextImage name;
         TextImage lv, lvNum;
         TextImage[] lvCircle;
@@ -52,7 +52,6 @@ namespace Soleil.Menu.Status
                 lvCircle[i] = circle;
             }
             lv.Text = "Lv";
-            lvNum.Text = 0.ToString(); // 適当
 
             name.Color = ColorPalette.DarkBlue;
             lv.Color = ColorPalette.DarkBlue;

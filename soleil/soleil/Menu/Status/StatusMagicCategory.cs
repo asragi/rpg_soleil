@@ -14,7 +14,7 @@ namespace Soleil.Menu.Status
         MagicCategoryPiece[] pieces;
         Image backImg;
 
-        public static readonly Dictionary<MagicCategory, string> magicNames = new Dictionary<MagicCategory, string>()
+        public static readonly Dictionary<MagicCategory, string> MagicNames = new Dictionary<MagicCategory, string>()
         {
             { MagicCategory.Sun, "陽術" },
             { MagicCategory.Shade, "陰術" },
