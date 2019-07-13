@@ -42,5 +42,13 @@ namespace Soleil.Menu.Status
             AddComponents(new[] { backImg });
             AddComponents(pieces);
         }
+
+        public void RefreshWithPerson(Person p)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                pieces[i].Lv = p.Magic.GetLv(pieces[i].category).ToString();
+            }
+        }
     }
 }
