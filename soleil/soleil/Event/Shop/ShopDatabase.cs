@@ -34,6 +34,6 @@ namespace Soleil.Event.Shop
             });
         }
 
-        public static ShopItem[] Get(ShopName name) => dict[name];
+        public static ShopItem[] Get(ShopName name) => (ShopItem[])dict[name].Clone();
     }
 }
