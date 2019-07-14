@@ -28,6 +28,8 @@ namespace Soleil.Event
         /// 登録されている情報を呼び出す．初回はnullを返す．
         /// </summary>
         public ShopStorage Get(ShopName name) => storages[(int)name];
+
+        public void OnNextDay() => storages.ForEach2(storage => storage.OnNextDay());
     }
 
     enum ShopName

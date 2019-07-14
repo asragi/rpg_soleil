@@ -17,5 +17,7 @@ namespace Soleil.Event
         {
             items = _items;
         }
+
+        public void OnNextDay() => items.ForEach2(item => item.OnNextDay());
     }
 }
