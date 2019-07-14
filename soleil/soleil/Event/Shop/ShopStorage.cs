@@ -21,10 +21,12 @@ namespace Soleil.Event
 
         public void OnNextDay() => items.ForEach2(item => item.OnNextDay());
 
-        public void Purchase(ItemID id, int num = 1)
+        public void Purchase(int index, int num = 1)
         {
-            items[(int)id].Perchase(num);
+            items[index].Perchase(num);
         }
+
+        public bool IsSoldOut(int index) => items[index].IsSoldOut;
 
         public Dictionary<ItemID, int> GetDict()
         {
