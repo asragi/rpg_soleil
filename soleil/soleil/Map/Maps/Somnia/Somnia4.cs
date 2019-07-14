@@ -15,8 +15,6 @@ namespace Soleil.Map
         // 移動イベントたち
         MapChangeObject mcoRight;
         MapChangeObject mcoLeft;
-        // Event
-        EventSequence firstEvent;
 
         public Somnia4(PersonParty party, Camera cam)
             : base(MapName.Somnia4, party, cam)
@@ -30,14 +28,6 @@ namespace Soleil.Map
                 new AdjustConstruct(TextureID.Somnia4_5, 445,om), // 手前の家
             };
 
-            // Event
-            firstEvent = new EventSequence(om.GetPlayer());
-            var testboolset = GlobalBoolSet.GetBoolSet(BoolObject.Global, (int)GlobalBoolKey.size);
-            firstEvent.SetEventSet(
-                CreateConversationEvent.Create("somnia", "for-the-first-time", ConversationSystem, firstEvent)
-            );
-            EventSequences = new EventSequence[] { firstEvent };
-
             // マップサイズの設定
             MapCameraManager.SetMapSize(960, 540);
             // CameraPointの設定
@@ -50,12 +40,6 @@ namespace Soleil.Map
             accessaryGirl = new AccessaryGirl(new Vector(650, 330), om, bm);
             mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
             mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-            firstEvent.StartEvent();
         }
     }
 }
