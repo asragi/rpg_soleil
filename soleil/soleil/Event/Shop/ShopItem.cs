@@ -14,7 +14,7 @@ namespace Soleil.Event
     {
         public readonly ItemID ID;
 
-        // 小数で管理することで2日に1個補充されるなどを実現する
+        // 小数で管理することで3日に2個補充されるなどを実現する
         private double netStock;
         private double supplyNum;
         private double itemMax;
