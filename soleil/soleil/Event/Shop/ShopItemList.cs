@@ -64,7 +64,8 @@ namespace Soleil.Event.Shop
                 moneyWallet.Consume(decidedPrice);
                 itemList.AddItem(decidedPanel.ID);
                 storage.Purchase(Index);
-                Refresh();
+                Init();
+                RefreshSelected();
             }
             else
             {
