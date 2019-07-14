@@ -31,10 +31,4 @@ namespace Soleil.Event
 
         public void OnNextDay() => storages.ForEach2(storage => storage.OnNextDay());
     }
-
-    enum ShopName
-    {
-        Accessary,
-        size
-    }
 }

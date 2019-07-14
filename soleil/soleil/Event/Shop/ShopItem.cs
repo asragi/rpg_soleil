@@ -10,18 +10,19 @@ namespace Soleil.Event
     /// <summary>
     /// Shopのアイテムに関して在庫数と補充状況を管理するクラス
     /// </summary>
-    class ShopItem
+    struct ShopItem
     {
         public readonly ItemID ID;
-
+        public readonly int Value;
         // 小数で管理することで3日に2個補充されるなどを実現する
         private double netStock;
         private double supplyNum;
         private double itemMax;
 
-        public ShopItem(ItemID id, double initNum, double supply, double maxNum)
+        public ShopItem(ItemID id, int value, double initNum, double supply, double maxNum)
         {
             ID = id;
+            Value = value;
             netStock = initNum;
             supplyNum = supply;
             itemMax = maxNum;
