@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Event.Shop;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,21 +14,24 @@ namespace Soleil.Event
     {
         private ShopStorage[] storages;
         private static ShopStorageStore instance = new ShopStorageStore();
-        public ShopStorageStore GetInstance() => instance;
+        public static ShopStorageStore GetInstance() => instance;
         private ShopStorageStore()
         {
             storages = new ShopStorage[(int)ShopName.size];
         }
 
-        public void Register(ShopName name, ShopStorage storage)
-        {
-            storages[(int)name] = storage;
-        }
-
         /// <summary>
-        /// 登録されている情報を呼び出す．初回はnullを返す．
+        /// 登録されている情報を呼び出す．
         /// </summary>
-        public ShopStorage Get(ShopName name) => storages[(int)name];
+        public ShopStorage Get(ShopName name)
+        {
+            // 初回呼び出しなど作られてなければ作ってから返す．
+            if (storages[(int)name] == null)
+            {
+                storages[(int)name] = new ShopStorage(ShopDatabase.Get(name));
+            }
+            return storages[(int)name];
+        }
 
         public void OnNextDay() => storages.ForEach2(storage => storage.OnNextDay());
     }

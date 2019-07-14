@@ -25,11 +25,11 @@ namespace Soleil.Event.Shop
         DetailWindow detailWindow;
         public bool Purchased;
 
-        public ShopSystem(Dictionary<ItemID, int> values)
+        public ShopSystem(ShopName name)
         {
             descriptionWindow = new DescriptionWindow();
             descriptionWindow.Text = "これはテストメッセージ";
-            shopItemList = new ShopItemList(this, descriptionWindow, values);
+            shopItemList = new ShopItemList(this, descriptionWindow, name);
             moneyComponent = new MoneyComponent(MoneyPos);
             detailWindow = new DetailWindow(DetailWindowPos);
         }

@@ -12,18 +12,20 @@ namespace Soleil.Event.Shop
     class ShopItemList : BasicMenu
     {
         protected override Vector WindowPos => new Vector(440, 100);
+        ShopStorage storage;
         Dictionary<ItemID, int> values;
         MoneyWallet moneyWallet;
         ItemList itemList;
         public bool Purchased;
 
-        public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> _values)
+        public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
         {
             var p = PlayerBaggage.GetInstance();
             moneyWallet = p.MoneyWallet;
             itemList = p.Items;
-            values = _values;
+            storage = ShopStorageStore.GetInstance().Get(name);
+            values = storage.GetDict();
             Init();
         }
 

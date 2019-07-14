@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,5 +20,14 @@ namespace Soleil.Event
         }
 
         public void OnNextDay() => items.ForEach2(item => item.OnNextDay());
+        public Dictionary<ItemID, int> GetDict()
+        {
+            var result = new Dictionary<ItemID, int>();
+            foreach (var item in items)
+            {
+                result.Add(item.ID, item.Value);
+            }
+            return result;
+        }
     }
 }

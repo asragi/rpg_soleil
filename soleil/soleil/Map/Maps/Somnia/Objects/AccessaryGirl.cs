@@ -12,12 +12,6 @@ namespace Soleil.Map.Maps.Somnia
     class AccessaryGirl : MapCharacter
     {
         readonly Vector WindowPosDiff = new Vector(-230, -100);
-        readonly Dictionary<ItemID, int> values = new Dictionary<ItemID, int> {
-            {ItemID.Stone, 200 },
-            {ItemID.Zarigani, 1200 },
-            {ItemID.SilverWand, 73000 },
-            {ItemID.BeadsWork, 3000 }
-        };
 
         // Event bool
         BoolSet boolSet;
@@ -45,7 +39,7 @@ namespace Soleil.Map.Maps.Somnia
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(values, boolSet, (int)BoolName.Sold)
+                    new ShopEvent(ShopName.Accessary, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
                     new EventUnit[] {
