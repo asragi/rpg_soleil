@@ -56,6 +56,7 @@ namespace Soleil.Event.Shop
                 Purchased = true;
                 moneyWallet.Consume(decidedPrice);
                 itemList.AddItem(decidedPanel.ID);
+                storage.Purchase(decidedPanel.ID);
             }
             else
             {

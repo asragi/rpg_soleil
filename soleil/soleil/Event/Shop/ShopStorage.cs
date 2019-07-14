@@ -20,6 +20,12 @@ namespace Soleil.Event
         }
 
         public void OnNextDay() => items.ForEach2(item => item.OnNextDay());
+
+        public void Purchase(ItemID id, int num = 1)
+        {
+            items[(int)id].Perchase(num);
+        }
+
         public Dictionary<ItemID, int> GetDict()
         {
             var result = new Dictionary<ItemID, int>();
