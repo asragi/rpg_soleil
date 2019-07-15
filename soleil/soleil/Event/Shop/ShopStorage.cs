@@ -23,7 +23,7 @@ namespace Soleil.Event
 
         public void Purchase(int index, int num = 1)
         {
-            items[index].Perchase(num);
+            items[index].Purchase(num);
         }
 
         public bool IsSoldOut(int index) => items[index].IsSoldOut;

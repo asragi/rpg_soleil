@@ -35,6 +35,6 @@ namespace Soleil.Event
         public bool IsSoldOut => netStock < 1;
 
         public void OnNextDay() => netStock = Math.Min(netStock + supplyNum, itemMax);
-        public void Perchase(int num) => netStock = Math.Max(netStock - num, 0);
+        public void Purchase(int num) => netStock = Math.Max(netStock - num, 0);
     }
 }
