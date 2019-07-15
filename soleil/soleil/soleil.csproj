@@ -93,9 +93,13 @@
     <Compile Include="Event\NumEventBranch.cs" />
     <Compile Include="Event\PictureCreateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
+    <Compile Include="Event\Shop\ShopDatabase.cs" />
     <Compile Include="Event\Shop\ShopEvent.cs" />
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
+    <Compile Include="Event\Shop\ShopItem.cs" />
+    <Compile Include="Event\Shop\ShopStorage.cs" />
+    <Compile Include="Event\Shop\ShopStorageStore.cs" />
     <Compile Include="Event\Shop\ShopSystem.cs" />
     <Compile Include="Event\ToWorldMapEvent.cs" />
     <Compile Include="Event\WindowEventBase.cs" />

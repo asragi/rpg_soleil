@@ -18,8 +18,8 @@ namespace Soleil.Event.Shop
 
         TextImage currency;
 
-        public ShopPanel(ItemID id, int value, ShopItemList parent)
-            :base(id, ItemDataBase.Get(id).Name, parent)
+        public ShopPanel(ItemID id, int value, bool active, ShopItemList parent)
+            :base(id, ItemDataBase.Get(id).Name, parent, active)
         {
             desc = ItemDataBase.Get(id).Description;
             Price = value;

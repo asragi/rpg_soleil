@@ -12,18 +12,20 @@ namespace Soleil.Event.Shop
     class ShopItemList : BasicMenu
     {
         protected override Vector WindowPos => new Vector(440, 100);
+        ShopStorage storage;
         Dictionary<ItemID, int> values;
         MoneyWallet moneyWallet;
         ItemList itemList;
         public bool Purchased;
 
-        public ShopItemList(MenuComponent parent, MenuDescription description, Dictionary<ItemID, int> _values)
+        public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
         {
             var p = PlayerBaggage.GetInstance();
             moneyWallet = p.MoneyWallet;
             itemList = p.Items;
-            values = _values;
+            storage = ShopStorageStore.GetInstance().Get(name);
+            values = storage.GetDict();
             Init();
         }
 
@@ -36,9 +38,11 @@ namespace Soleil.Event.Shop
         protected override SelectablePanel[] MakeAllPanels()
         {
             var tmpPanels = new List<ShopPanel>();
+            int index = 0;
             foreach (var item in values)
             {
-                tmpPanels.Add(new ShopPanel(item.Key, item.Value, this));
+                bool isSoldOut = storage.IsSoldOut(index++);
+                tmpPanels.Add(new ShopPanel(item.Key, item.Value, !isSoldOut, this));
             }
             return tmpPanels.ToArray();
         }
@@ -47,6 +51,11 @@ namespace Soleil.Event.Shop
         {
             var decidedPanel = (ShopPanel)Panels[Index];
             var decidedPrice = decidedPanel.Price;
+            if (storage.IsSoldOut(Index))
+            {
+                // 売り切れ
+                return;
+            }
             if (moneyWallet.HasEnough(decidedPrice))
             {
                 // 購入成功
@@ -54,6 +63,9 @@ namespace Soleil.Event.Shop
                 Purchased = true;
                 moneyWallet.Consume(decidedPrice);
                 itemList.AddItem(decidedPanel.ID);
+                storage.Purchase(Index);
+                Init();
+                RefreshSelected();
             }
             else
             {
