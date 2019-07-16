@@ -13,7 +13,6 @@ namespace Soleil.Event
     class MessageWindowEvent
         :WindowEventBase
     {
-        private static readonly Vector CharacterMessagePos = new Vector(-50, -200);
         string message;
 
         MessageWindow messageW;
@@ -21,8 +20,11 @@ namespace Soleil.Event
         /// <summary>
         /// マップ上のオブジェクトを指定してメッセージウィンドウを出す．
         /// </summary>
-        public MessageWindowEvent(MapObject obj, string message)
-            : this(obj.GetPosition() + CharacterMessagePos, WindowTag.A, message) { }
+        public MessageWindowEvent(MapObject obj, string _message)
+            : base(obj, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message))
+        {
+            message = _message;
+        }
 
         /// <summary>
         /// マップ上の座標を指定してメッセージウィンドウを出す．
