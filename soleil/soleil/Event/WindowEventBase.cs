@@ -5,7 +5,7 @@ namespace Soleil.Event
     abstract class WindowEventBase
         :EventBase
     {
-        private static readonly Vector CharacterMessagePos = new Vector(-50, -200);
+        private static readonly Vector CharacterMessagePos = new Vector(-50, -100);
         protected WindowManager Wm = WindowManager.GetInstance();
         protected Vector Size;
         protected Func<Vector> PosFunc;
@@ -13,7 +13,7 @@ namespace Soleil.Event
 
         public WindowEventBase(ICollideObject obj, Vector size)
         {
-            PosFunc = () => obj.GetPosition() + CharacterMessagePos;
+            PosFunc = () => obj.GetPosition() + CharacterMessagePos - new Vector(0, size.Y);
             Size = size;
             Tag = WindowTag.A;
         }
