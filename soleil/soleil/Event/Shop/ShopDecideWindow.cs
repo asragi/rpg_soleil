@@ -18,6 +18,7 @@ namespace Soleil.Event.Shop
         static readonly Vector WindowSize = new Vector(329, 130);
         static readonly Vector ItemNamePos = WindowPos + new Vector(35, 37);
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
+        static readonly Vector PriceSumPos = WindowPos + new Vector(0, 160);
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
         public bool IsFocused { get; private set; }
@@ -25,6 +26,8 @@ namespace Soleil.Event.Shop
         TextImage itemName;
         TextImage price;
         Image currency;
+        int purchaseNum;
+        PriceSum priceSum;
 
         public ShopDecideWindow(ItemID id, int _price) :
             base()
@@ -40,8 +43,10 @@ namespace Soleil.Event.Shop
                 TextureID.Currency,
                 PricePos + new Vector(- Font.GetSize(_price.ToString()).X - 20, 5),
                 PosDiff, Depth);
+
+            priceSum = new PriceSum(PriceSumPos, PosDiff, _price, Font);
             AddComponents(new IComponent[] {
-                itemName, price, currency,
+                itemName, price, currency, priceSum
             });
         }
 
@@ -50,6 +55,7 @@ namespace Soleil.Event.Shop
             base.Call();
             IsFocused = true;
             backWindow.Call();
+            purchaseNum = 1;
         }
 
         public override void Quit()
@@ -71,7 +77,16 @@ namespace Soleil.Event.Shop
         
         public void Input(Direction d)
         {
-
+            if (d == Direction.R)
+            {
+                purchaseNum++;
+            }
+            else if (d == Direction.L)
+            {
+                purchaseNum--;
+            }
+            purchaseNum = MathEx.Clamp(purchaseNum, 99, 1);
+            priceSum.SetPurchaseNum(purchaseNum);
         }
 
         /// <summary>
@@ -79,8 +94,24 @@ namespace Soleil.Event.Shop
         /// </summary>
         class PriceSum: MenuComponent
         {
+            private static readonly DepthID depth = DepthID.Message;
             TextImage priceSum;
             Image currency;
+            int price;
+
+            public PriceSum(Vector pos, Vector posDiff, int _price, FontID font)
+            {
+                price = _price;
+                priceSum = new RightAlignText(font, pos, posDiff, depth);
+                currency = new Image(TextureID.Currency, pos, posDiff, depth);
+
+                AddComponents(new IComponent[] { priceSum, currency });
+            }
+
+            public void SetPurchaseNum(int num)
+            {
+                priceSum.Text = (num * price).ToString();
+            }
         }
 
         /// <summary>
