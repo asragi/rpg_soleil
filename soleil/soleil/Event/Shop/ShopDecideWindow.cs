@@ -1,4 +1,5 @@
-﻿using Soleil.Menu;
+﻿using Soleil.Item;
+using Soleil.Menu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,17 +23,18 @@ namespace Soleil.Event.Shop
         VariableWindow backWindow;
         TextImage itemName;
         TextImage price;
-        Image currencyTop;
+        Image currency;
 
-        public ShopDecideWindow() :
+        public ShopDecideWindow(ItemID id, int _price) :
             base()
         {
             backWindow = new VariableWindow(WindowPos, WindowSize, WindowTag.A, WindowManager.GetInstance(), true);
             itemName = new TextImage(Font, ItemNamePos, PosDiff, Depth);
             price = new RightAlignText(Font, PricePos, PosDiff, Depth);
+            currency = new Image(TextureID.Currency, Font.GetSize(_price.ToString()),Depth);
             AddComponents(new IComponent[] {
                 backWindow, itemName,
-                price, currencyTop, 
+                price, currency, 
             });
         }
 

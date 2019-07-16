@@ -458,5 +458,10 @@ namespace Soleil
         }
 
         public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+
+        public static Vector GetSize(this FontID id, string text)
+        {
+            return (Vector)GetFont(id).MeasureString(text);
+        }
     }
 }
