@@ -11,7 +11,7 @@ namespace Soleil.Event.Shop
     /// <summary>
     /// Shopイベントで用いるウィンドウ等の全体を管理するクラス．
     /// </summary>
-    class ShopSystem : MenuComponent
+    class ShopSystem : EasingComponent
     {
         readonly Vector DescriptionPos = new Vector(125, 35);
         readonly Vector MoneyPos = new Vector(90, 440);

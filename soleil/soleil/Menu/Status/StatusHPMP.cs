@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class StatusHPMP : MenuComponent
+    class StatusHPMP : EasingComponent
     {
         readonly FontID Font;
         readonly FontID MpFont;

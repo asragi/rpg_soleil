@@ -10,7 +10,7 @@ namespace Soleil.Menu
     /// <summary>
     /// メニューにおけるキャラクターのステータス表示コンポーネント
     /// </summary>
-    class MenuCharacterPanel : MenuComponent
+    class MenuCharacterPanel : EasingComponent
     {
         readonly Vector FaceImgPos = new Vector(0, 0);
         readonly Vector HPPos = new Vector(18, 260);

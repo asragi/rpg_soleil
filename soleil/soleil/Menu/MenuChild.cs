@@ -10,10 +10,10 @@ namespace Soleil.Menu
     /// <summary>
     /// メニュー内に存在する入力を受け取る子要素の抽象クラス
     /// </summary>
-    abstract class MenuChild : MenuComponent
+    abstract class MenuChild : EasingComponent
     {
-        MenuComponent parent;
-        public MenuChild(MenuComponent _parent)
+        EasingComponent parent;
+        public MenuChild(EasingComponent _parent)
         {
             parent = _parent;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class StatusMagicCategory : MenuComponent
+    class StatusMagicCategory : EasingComponent
     {
         readonly Vector ContentPos = new Vector(36, 9);
         const int YDiff = 27;

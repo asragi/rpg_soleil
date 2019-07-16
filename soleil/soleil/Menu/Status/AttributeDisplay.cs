@@ -9,7 +9,7 @@ namespace Soleil.Menu.Status
     /// <summary>
     /// 属性に対する耐性表示コンポーネント．Status表示や装備時に．
     /// </summary>
-    class AttributeDisplay : MenuComponent
+    class AttributeDisplay : EasingComponent
     {
         const int DiffY = 28;
 

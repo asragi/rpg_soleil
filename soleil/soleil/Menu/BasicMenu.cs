@@ -30,7 +30,7 @@ namespace Soleil.Menu
         protected MenuDescription MenuDescription;
         public SelectablePanel SelectedPanel => Panels[Index];
 
-        public BasicMenu(MenuComponent parent, MenuDescription desc)
+        public BasicMenu(EasingComponent parent, MenuDescription desc)
             : base(parent)
         {
             backImage = new Image(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);

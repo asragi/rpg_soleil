@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class MagicCategoryPiece : MenuComponent
+    class MagicCategoryPiece : EasingComponent
     {
         const int MiniHeight = 7;
         readonly Vector LvCircleDiff = new Vector(35, 5);

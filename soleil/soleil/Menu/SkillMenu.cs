@@ -10,7 +10,7 @@ namespace Soleil.Menu
     class SkillMenu: BasicMenu
     {
         SkillHolder skillHolder;
-        public SkillMenu(MenuComponent parent, MenuDescription desc)
+        public SkillMenu(EasingComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
             skillHolder = new SkillHolder();

@@ -11,7 +11,7 @@ namespace Soleil.Menu
     {
         ItemTargetSelect itemTargetSelect;
         ItemList itemList;
-        public ItemMenu(MenuComponent parent, MenuDescription desc)
+        public ItemMenu(EasingComponent parent, MenuDescription desc)
             :base(parent, desc)
         {
             itemList = PlayerBaggage.GetInstance().Items;
