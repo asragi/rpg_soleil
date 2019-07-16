@@ -14,12 +14,12 @@ namespace Soleil.Event.Shop
     class ShopDecideWindow: MenuComponent
     {
         static readonly Vector PosDiff = Window.DiffPos;
-        static readonly Vector WindowPos = new Vector(80, 260);
+        static readonly Vector WindowPos = new Vector(80, 280);
         static readonly Vector WindowSize = new Vector(329, 130);
         static readonly Vector ItemNamePos = WindowPos + new Vector(35, 37);
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
-        static readonly Vector PurchaseNumDisplayPos = WindowPos + new Vector(0, 160);
-        static readonly Vector PriceSumPos = PurchaseNumDisplayPos + new Vector(150, 0);
+        static readonly Vector PurchaseNumDisplayPos = WindowPos + new Vector(0, 120);
+        static readonly Vector PriceSumPos = PurchaseNumDisplayPos + new Vector(160, 0);
         static readonly DepthID NumDisplayDepth = DepthID.Message;
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
@@ -106,6 +106,8 @@ namespace Soleil.Event.Shop
         class PriceSum: MenuComponent
         {
             private static readonly DepthID depth = DepthID.Message;
+            private static readonly Vector CurrencyHeight = new Vector(0, 5);
+            private static readonly Vector PriceDistance = new Vector(150, 0);
             TextImage priceSum;
             Image currency;
             int price;
@@ -113,15 +115,15 @@ namespace Soleil.Event.Shop
             public PriceSum(Vector pos, Vector posDiff, int _price, FontID font)
             {
                 price = _price;
-                priceSum = new RightAlignText(font, pos, posDiff, depth);
-                currency = new Image(TextureID.Currency, pos, posDiff, depth);
-
+                priceSum = new RightAlignText(font, pos + PriceDistance, posDiff, depth);
+                currency = new Image(TextureID.Currency, pos + CurrencyHeight, posDiff, depth);
                 AddComponents(new IComponent[] { priceSum, currency });
             }
 
             public void SetPurchaseNum(int num)
             {
-                priceSum.Text = (num * price).ToString();
+                string text = (num * price).ToString();
+                priceSum.Text = text;
             }
         }
 
@@ -130,13 +132,14 @@ namespace Soleil.Event.Shop
         /// </summary>
         class PurchaseNumDisplay: MenuComponent
         {
+            private static readonly Vector NumDistance = new Vector(130, 0);
             private const string PurchaseText = "購入数";
             TextImage purchaseNum;
             TextImage purchaseNumText;
 
             public PurchaseNumDisplay(Vector pos, Vector posDiff, FontID font, DepthID _depth)
             {
-                purchaseNum = new RightAlignText(font, pos, posDiff, _depth);
+                purchaseNum = new RightAlignText(font, pos + NumDistance, posDiff, _depth);
                 purchaseNumText = new TextImage(font, pos, posDiff, _depth);
                 purchaseNumText.Color = ColorPalette.AliceBlue;
                 purchaseNumText.Text = PurchaseText;
