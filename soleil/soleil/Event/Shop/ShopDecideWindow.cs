@@ -18,7 +18,9 @@ namespace Soleil.Event.Shop
         static readonly Vector WindowSize = new Vector(329, 130);
         static readonly Vector ItemNamePos = WindowPos + new Vector(35, 37);
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
-        static readonly Vector PriceSumPos = WindowPos + new Vector(0, 160);
+        static readonly Vector PurchaseNumDisplayPos = WindowPos + new Vector(0, 160);
+        static readonly Vector PriceSumPos = PurchaseNumDisplayPos + new Vector(150, 0);
+        static readonly DepthID NumDisplayDepth = DepthID.Message;
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
         public bool IsFocused { get; private set; }
@@ -28,6 +30,7 @@ namespace Soleil.Event.Shop
         Image currency;
         int purchaseNum;
         PriceSum priceSum;
+        PurchaseNumDisplay numDisplay;
 
         public ShopDecideWindow(ItemID id, int _price) :
             base()
@@ -45,8 +48,9 @@ namespace Soleil.Event.Shop
                 PosDiff, Depth);
 
             priceSum = new PriceSum(PriceSumPos, PosDiff, _price, Font);
+            numDisplay = new PurchaseNumDisplay(PurchaseNumDisplayPos, PosDiff, Font, NumDisplayDepth);
             AddComponents(new IComponent[] {
-                itemName, price, currency, priceSum
+                itemName, price, currency, priceSum, numDisplay
             });
         }
 
@@ -56,6 +60,7 @@ namespace Soleil.Event.Shop
             IsFocused = true;
             backWindow.Call();
             purchaseNum = 1;
+            RefreshPurchaseNum();
         }
 
         public override void Quit()
@@ -86,7 +91,13 @@ namespace Soleil.Event.Shop
                 purchaseNum--;
             }
             purchaseNum = MathEx.Clamp(purchaseNum, 99, 1);
+            RefreshPurchaseNum();
+        }
+
+        private void RefreshPurchaseNum()
+        {
             priceSum.SetPurchaseNum(purchaseNum);
+            numDisplay.SetPurchaseNum(purchaseNum);
         }
 
         /// <summary>
@@ -117,10 +128,25 @@ namespace Soleil.Event.Shop
         /// <summary>
         /// 購入するアイテムの個数表示
         /// </summary>
-        class PurchaseNum: MenuComponent
+        class PurchaseNumDisplay: MenuComponent
         {
+            private const string PurchaseText = "購入数";
             TextImage purchaseNum;
             TextImage purchaseNumText;
+
+            public PurchaseNumDisplay(Vector pos, Vector posDiff, FontID font, DepthID _depth)
+            {
+                purchaseNum = new RightAlignText(font, pos, posDiff, _depth);
+                purchaseNumText = new TextImage(font, pos, posDiff, _depth);
+                purchaseNumText.Color = ColorPalette.AliceBlue;
+                purchaseNumText.Text = PurchaseText;
+                AddComponents(new[] { purchaseNum, purchaseNumText });
+            }
+
+            public void SetPurchaseNum(int num)
+            {
+                purchaseNum.Text = num.ToString();
+            }
         }
     }
 }
