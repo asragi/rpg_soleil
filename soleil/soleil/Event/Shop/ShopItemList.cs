@@ -60,24 +60,28 @@ namespace Soleil.Event.Shop
 
             var decidedPanel = (ShopPanel)Panels[Index];
             var decidedPrice = decidedPanel.Price;
+            if (itemList.GetItemNum(decidedPanel.ID) == 99)
+            {
+                // これ以上アイテムを持てない
+                return;
+            }
             if (storage.IsSoldOut(Index))
             {
                 // 売り切れ
                 return;
             }
-            if (moneyWallet.HasEnough(decidedPrice))
-            {
-                decideWindow = new ShopDecideWindow(
-                    decidedPanel.ID, decidedPrice, Index,
-                    this, storage, itemList, moneyWallet);
-                decideWindow.Call();
-                return;
-            }
-            else
+            if (!moneyWallet.HasEnough(decidedPrice))
             {
                 // 所持金が足りない
                 Console.WriteLine("所持金が足りない");
+                return;
             }
+
+            decideWindow = new ShopDecideWindow(
+                decidedPanel.ID, decidedPrice, Index,
+                this, storage, itemList, moneyWallet);
+            decideWindow.Call();
+            return;
 
             void InputToDecideWindow()
             {
