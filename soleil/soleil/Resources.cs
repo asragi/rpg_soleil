@@ -17,6 +17,7 @@ namespace Soleil
         WhiteWindow,
         IndicatorBack,
         BackBar,
+        Currency,
 
         MessageWindow,
         ConversationWindow,
@@ -263,6 +264,7 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
             SetPath(TextureID.BackBar, $"{UIPath}backBar");
+            SetPath(TextureID.Currency, $"{UIPath}currency");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
