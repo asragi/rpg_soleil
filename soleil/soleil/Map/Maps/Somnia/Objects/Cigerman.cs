@@ -11,7 +11,7 @@ namespace Soleil.Map.Maps.Somnia
     {
         readonly Vector WindowPosDiff = new Vector(30, -100);
         public Cigerman(Vector pos, ObjectManager om, BoxManager bm)
-            : base(pos, null, om, bm)
+            : base("ciger", pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaMob1, new Vector(-5, -45), true, 8);
             AnimationData[] standAnim = new []{anim, anim, anim, anim, anim, anim, anim, anim, anim}; // 最悪
