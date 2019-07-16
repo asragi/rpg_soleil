@@ -17,6 +17,8 @@ namespace Soleil.Event.Shop
         MoneyWallet moneyWallet;
         ItemList itemList;
         public bool Purchased;
+        ShopDecideWindow decideWindow;
+        public bool ReadyForEnd { get; private set; } = false;
 
         public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
@@ -33,6 +35,7 @@ namespace Soleil.Event.Shop
         {
             base.Call();
             Purchased = false;
+            ReadyForEnd = false;
         }
 
         protected override SelectablePanel[] MakeAllPanels()
@@ -49,6 +52,12 @@ namespace Soleil.Event.Shop
 
         public override void OnInputSubmit()
         {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+
             var decidedPanel = (ShopPanel)Panels[Index];
             var decidedPrice = decidedPanel.Price;
             if (storage.IsSoldOut(Index))
@@ -58,6 +67,9 @@ namespace Soleil.Event.Shop
             }
             if (moneyWallet.HasEnough(decidedPrice))
             {
+                decideWindow = new ShopDecideWindow(decidedPanel.ID, decidedPrice);
+                decideWindow.Call();
+                return;
                 // 購入成功
                 Console.WriteLine("購入成功");
                 Purchased = true;
@@ -72,8 +84,47 @@ namespace Soleil.Event.Shop
                 // 所持金が足りない
                 Console.WriteLine("所持金が足りない");
             }
+
+            void InputToDecideWindow()
+            {
+                decideWindow.OnInputSubmit();
+            }
         }
 
-        public override void OnInputCancel() { }
+        public override void OnInputCancel() {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+            ReadyForEnd = true;
+
+            void InputToDecideWindow()
+            {
+                decideWindow.OnInputCancel();
+            }
+        }
+
+        public override void Input(Direction dir)
+        {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                decideWindow.Input(dir);
+                return;
+            }
+            base.Input(dir);
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            decideWindow?.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            decideWindow?.Draw(d);
+        }
     }
 }

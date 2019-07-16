@@ -94,6 +94,7 @@
     <Compile Include="Event\PictureCreateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
     <Compile Include="Event\Shop\ShopDatabase.cs" />
+    <Compile Include="Event\Shop\ShopDecideWindow.cs" />
     <Compile Include="Event\Shop\ShopEvent.cs" />
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
