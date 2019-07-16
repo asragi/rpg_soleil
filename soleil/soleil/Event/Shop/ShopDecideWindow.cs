@@ -68,7 +68,11 @@ namespace Soleil.Event.Shop
         {
             Quit();
         }
+        
+        public void Input(Direction d)
+        {
 
+        }
 
         /// <summary>
         /// 購入するアイテムの合計価格表示

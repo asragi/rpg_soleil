@@ -103,6 +103,7 @@ namespace Soleil.Event.Shop
         private void OnInputCancel()
         {
             if (quitStart) return;
+            shopItemList.OnInputCancel();
             if (shopItemList.ReadyForEnd) QuitStart();
         }
     }

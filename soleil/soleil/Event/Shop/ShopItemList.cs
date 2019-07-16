@@ -105,6 +105,16 @@ namespace Soleil.Event.Shop
             }
         }
 
+        public override void Input(Direction dir)
+        {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                decideWindow.Input(dir);
+                return;
+            }
+            base.Input(dir);
+        }
+
         public override void Update()
         {
             base.Update();
