@@ -20,7 +20,7 @@ namespace Soleil.Map.Maps.Somnia
             EventSequence.SetEventSet(
                 new MessageWindowEvent(om.GetPlayer(), "テストメッセージ"),
                 new MessageWindowEvent(this, "俺の髪型，なかなかだろ？"),
-                new SelectWindowEvent(Pos + WindowPosDiff, 0, "イケイケじゃん", "ハンバーグみたいだね"),
+                new SelectWindowEvent(om.GetPlayer(), "イケイケじゃん", "ハンバーグみたいだね"),
                 new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
                         new MessageWindowEvent(this, "訊くまでもなかったか"),
                         new MessageWindowEvent(this, "俺の髪型が\nサザエさんみてーだと？？")

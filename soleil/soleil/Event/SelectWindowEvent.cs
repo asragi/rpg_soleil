@@ -5,9 +5,20 @@ namespace Soleil.Event
     class SelectWindowEvent
         :WindowEventBase
     {
+        private const FontID Font = FontID.CorpM;
         string[] options;
         bool changeFocus;
         SelectableWindow selectable;
+
+        /// <summary>
+        /// オブジェクトを指定してウィンドウを出す．
+        /// </summary>
+        public SelectWindowEvent(ICollideObject obj, params string[] _options)
+            :base(obj, SelectableWindow.ProperSize(Font, _options))
+        {
+            changeFocus = true;
+            options = _options;
+        }
 
         public SelectWindowEvent(Vector pos, WindowTag _tag, params string[] _options)
             :this(pos, _tag, true, _options) { }
