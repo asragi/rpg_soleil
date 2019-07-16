@@ -20,6 +20,7 @@ namespace Soleil.Event.Shop
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
+        public bool IsFocused { get; private set; }
         VariableWindow backWindow;
         TextImage itemName;
         TextImage price;
@@ -47,13 +48,20 @@ namespace Soleil.Event.Shop
         public override void Call()
         {
             base.Call();
+            IsFocused = true;
             backWindow.Call();
         }
 
         public override void Quit()
         {
             base.Quit();
+            IsFocused = false;
             backWindow.Quit();
+        }
+
+        public void OnInputSubmit()
+        {
+
         }
 
 

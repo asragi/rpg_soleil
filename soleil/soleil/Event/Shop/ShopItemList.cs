@@ -50,6 +50,12 @@ namespace Soleil.Event.Shop
 
         public override void OnInputSubmit()
         {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+
             var decidedPanel = (ShopPanel)Panels[Index];
             var decidedPrice = decidedPanel.Price;
             if (storage.IsSoldOut(Index))
@@ -75,6 +81,11 @@ namespace Soleil.Event.Shop
             {
                 // 所持金が足りない
                 Console.WriteLine("所持金が足りない");
+            }
+
+            void InputToDecideWindow()
+            {
+                decideWindow.OnInputSubmit();
             }
         }
         public override void Update()
