@@ -17,6 +17,7 @@ namespace Soleil.Event.Shop
         MoneyWallet moneyWallet;
         ItemList itemList;
         public bool Purchased;
+        ShopDecideWindow decideWindow;
 
         public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
@@ -58,6 +59,9 @@ namespace Soleil.Event.Shop
             }
             if (moneyWallet.HasEnough(decidedPrice))
             {
+                decideWindow = new ShopDecideWindow(decidedPanel.ID, decidedPrice);
+                decideWindow.Call();
+                return;
                 // 購入成功
                 Console.WriteLine("購入成功");
                 Purchased = true;
@@ -73,7 +77,17 @@ namespace Soleil.Event.Shop
                 Console.WriteLine("所持金が足りない");
             }
         }
+        public override void Update()
+        {
+            base.Update();
+            decideWindow?.Update();
+        }
 
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            decideWindow?.Draw(d);
+        }
         public override void OnInputCancel() { }
     }
 }
