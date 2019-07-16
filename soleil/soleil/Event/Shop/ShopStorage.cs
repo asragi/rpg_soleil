@@ -27,6 +27,7 @@ namespace Soleil.Event
         }
 
         public bool IsSoldOut(int index) => items[index].IsSoldOut;
+        public int GetStockNum(int index) => items[index].Stock;
 
         public Dictionary<ItemID, int> GetDict()
         {

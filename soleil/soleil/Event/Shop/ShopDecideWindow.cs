@@ -1,4 +1,5 @@
 ﻿using Soleil.Item;
+using Soleil.Map;
 using Soleil.Menu;
 using System;
 using System.Collections.Generic;
@@ -24,23 +25,39 @@ namespace Soleil.Event.Shop
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
         public bool IsFocused { get; private set; }
+        // 参照
         ShopItemList shopList;
+        // -- 購入上限を監視するための参照たち
+        ShopStorage storage;
+        ItemList itembag;
+        MoneyWallet moneyWallet;
+        int selectedIndex;
+        // UIコンポーネント
         VariableWindow backWindow;
         TextImage itemName;
         TextImage priceImg;
         Image currency;
+        PriceSum priceSum;
+        PurchaseNumDisplay numDisplay;
+        // 購入状態管理変数
         int purchaseNum;
         int price;
         ItemID target;
-        PriceSum priceSum;
-        PurchaseNumDisplay numDisplay;
 
-        public ShopDecideWindow(ItemID id, int _price, ShopItemList itemList) :
+        public ShopDecideWindow(ItemID id, int _price, int index,
+            ShopItemList itemList, ShopStorage str, ItemList bag, MoneyWallet wallet) :
             base()
         {
+            // 代入及び参照
             price = _price;
             target = id;
             shopList = itemList;
+            storage = str;
+            itembag = bag;
+            moneyWallet = wallet;
+            selectedIndex = index;
+
+            // 表示コンポーネントのインスタンス生成
             backWindow = new VariableWindow(WindowPos, WindowSize, WindowTag.A, WindowManager.GetInstance(), true);
             itemName = new TextImage(Font, ItemNamePos, PosDiff, Depth);
             itemName.Text = ItemDataBase.Get(id).Name;
@@ -97,7 +114,7 @@ namespace Soleil.Event.Shop
             {
                 purchaseNum--;
             }
-            purchaseNum = MathEx.Clamp(purchaseNum, 99, 1);
+            purchaseNum = MathEx.Clamp(purchaseNum, GetPurchaseMax(), 1);
             RefreshPurchaseNum();
 
             if (KeyInput.GetKeyPush(Key.A)) OnInputSubmit();
@@ -107,6 +124,17 @@ namespace Soleil.Event.Shop
         {
             priceSum.SetPurchaseNum(purchaseNum);
             numDisplay.SetPurchaseNum(purchaseNum);
+        }
+
+        private int GetPurchaseMax()
+        {
+            // 所持金による上限
+            int moneyLimit = moneyWallet.Val / price;
+            // アイテム所持数による上限
+            int bagLimit = 99 - itembag.GetItemNum(target);
+            // お店の在庫による上限
+            int storageLimit = storage.GetStockNum(selectedIndex);
+            return Math.Min(moneyLimit, Math.Min(bagLimit, storageLimit));
         }
 
         /// <summary>

@@ -67,7 +67,9 @@ namespace Soleil.Event.Shop
             }
             if (moneyWallet.HasEnough(decidedPrice))
             {
-                decideWindow = new ShopDecideWindow(decidedPanel.ID, decidedPrice, this);
+                decideWindow = new ShopDecideWindow(
+                    decidedPanel.ID, decidedPrice, Index,
+                    this, storage, itemList, moneyWallet);
                 decideWindow.Call();
                 return;
             }
