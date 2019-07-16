@@ -67,17 +67,9 @@ namespace Soleil.Event.Shop
             }
             if (moneyWallet.HasEnough(decidedPrice))
             {
-                decideWindow = new ShopDecideWindow(decidedPanel.ID, decidedPrice);
+                decideWindow = new ShopDecideWindow(decidedPanel.ID, decidedPrice, this);
                 decideWindow.Call();
                 return;
-                // 購入成功
-                Console.WriteLine("購入成功");
-                Purchased = true;
-                moneyWallet.Consume(decidedPrice);
-                itemList.AddItem(decidedPanel.ID);
-                storage.Purchase(Index);
-                Init();
-                RefreshSelected();
             }
             else
             {
@@ -113,6 +105,18 @@ namespace Soleil.Event.Shop
                 return;
             }
             base.Input(dir);
+        }
+
+        public void Purchase(int num, int price, ItemID target)
+        {
+            // 購入成功
+            Console.WriteLine("購入成功");
+            Purchased = true;
+            moneyWallet.Consume(price * num);
+            itemList.AddItem(target, num);
+            storage.Purchase(Index, num);
+            Init();
+            RefreshSelected();
         }
 
         public override void Update()

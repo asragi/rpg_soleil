@@ -24,24 +24,30 @@ namespace Soleil.Event.Shop
         static readonly FontID Font = FontID.CorpM;
         static readonly DepthID Depth = DepthID.Debug;
         public bool IsFocused { get; private set; }
+        ShopItemList shopList;
         VariableWindow backWindow;
         TextImage itemName;
-        TextImage price;
+        TextImage priceImg;
         Image currency;
         int purchaseNum;
+        int price;
+        ItemID target;
         PriceSum priceSum;
         PurchaseNumDisplay numDisplay;
 
-        public ShopDecideWindow(ItemID id, int _price) :
+        public ShopDecideWindow(ItemID id, int _price, ShopItemList itemList) :
             base()
         {
+            price = _price;
+            target = id;
+            shopList = itemList;
             backWindow = new VariableWindow(WindowPos, WindowSize, WindowTag.A, WindowManager.GetInstance(), true);
             itemName = new TextImage(Font, ItemNamePos, PosDiff, Depth);
             itemName.Text = ItemDataBase.Get(id).Name;
             itemName.Color = ColorPalette.DarkBlue;
-            price = new RightAlignText(Font, PricePos, PosDiff, Depth);
-            price.Text = _price.ToString();
-            price.Color = ColorPalette.DarkBlue;
+            priceImg = new RightAlignText(Font, PricePos, PosDiff, Depth);
+            priceImg.Text = _price.ToString();
+            priceImg.Color = ColorPalette.DarkBlue;
             currency = new Image(
                 TextureID.Currency,
                 PricePos + new Vector(- Font.GetSize(_price.ToString()).X - 20, 5),
@@ -50,7 +56,7 @@ namespace Soleil.Event.Shop
             priceSum = new PriceSum(PriceSumPos, PosDiff, _price, Font);
             numDisplay = new PurchaseNumDisplay(PurchaseNumDisplayPos, PosDiff, Font, NumDisplayDepth);
             AddComponents(new IComponent[] {
-                itemName, price, currency, priceSum, numDisplay
+                itemName, priceImg, currency, priceSum, numDisplay
             });
         }
 
@@ -72,7 +78,8 @@ namespace Soleil.Event.Shop
 
         public void OnInputSubmit()
         {
-            Console.WriteLine("ボタンが押されている");
+            shopList.Purchase(purchaseNum, price, target);
+            Quit();
         }
 
         public void OnInputCancel()
@@ -92,6 +99,8 @@ namespace Soleil.Event.Shop
             }
             purchaseNum = MathEx.Clamp(purchaseNum, 99, 1);
             RefreshPurchaseNum();
+
+            if (KeyInput.GetKeyPush(Key.A)) OnInputSubmit();
         }
 
         private void RefreshPurchaseNum()
