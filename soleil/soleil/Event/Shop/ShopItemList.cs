@@ -101,7 +101,7 @@ namespace Soleil.Event.Shop
 
             void InputToDecideWindow()
             {
-
+                decideWindow.OnInputCancel();
             }
         }
 

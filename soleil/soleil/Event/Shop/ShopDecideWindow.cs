@@ -61,7 +61,12 @@ namespace Soleil.Event.Shop
 
         public void OnInputSubmit()
         {
+            Console.WriteLine("ボタンが押されている");
+        }
 
+        public void OnInputCancel()
+        {
+            Quit();
         }
 
 
