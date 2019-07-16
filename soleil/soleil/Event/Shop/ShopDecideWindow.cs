@@ -14,7 +14,7 @@ namespace Soleil.Event.Shop
     class ShopDecideWindow: MenuComponent
     {
         static readonly Vector PosDiff = Window.DiffPos;
-        static readonly Vector WindowPos = new Vector(312, 202);
+        static readonly Vector WindowPos = new Vector(80, 260);
         static readonly Vector WindowSize = new Vector(329, 130);
         static readonly Vector ItemNamePos = WindowPos + new Vector(35, 37);
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
