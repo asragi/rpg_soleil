@@ -77,7 +77,7 @@ namespace Soleil.Event.Shop
             moneyComponent.Update();
             detailWindow.Update(shopItemList.SelectedPanel);
             QuitCheck();
-            if (KeyInput.GetKeyPush(Key.B) && !quitStart) QuitStart();
+            if (KeyInput.GetKeyPush(Key.B) && !quitStart) OnInputCancel();
 
             void QuitCheck()
             {
@@ -97,6 +97,13 @@ namespace Soleil.Event.Shop
             descriptionWindow.Draw(d);
             moneyComponent.Draw(d);
             detailWindow.Draw(d);
+        }
+
+
+        private void OnInputCancel()
+        {
+            shopItemList.OnInputCancel();
+            if (shopItemList.ReadyForEnd) QuitStart();
         }
     }
 }

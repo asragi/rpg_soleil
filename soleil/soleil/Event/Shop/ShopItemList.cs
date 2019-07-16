@@ -18,6 +18,7 @@ namespace Soleil.Event.Shop
         ItemList itemList;
         public bool Purchased;
         ShopDecideWindow decideWindow;
+        public bool ReadyForEnd { get; private set; } = false;
 
         public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
@@ -34,6 +35,7 @@ namespace Soleil.Event.Shop
         {
             base.Call();
             Purchased = false;
+            ReadyForEnd = false;
         }
 
         protected override SelectablePanel[] MakeAllPanels()
@@ -88,6 +90,21 @@ namespace Soleil.Event.Shop
                 decideWindow.OnInputSubmit();
             }
         }
+
+        public override void OnInputCancel() {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+            ReadyForEnd = true;
+
+            void InputToDecideWindow()
+            {
+
+            }
+        }
+
         public override void Update()
         {
             base.Update();
@@ -99,6 +116,5 @@ namespace Soleil.Event.Shop
             base.Draw(d);
             decideWindow?.Draw(d);
         }
-        public override void OnInputCancel() { }
     }
 }
