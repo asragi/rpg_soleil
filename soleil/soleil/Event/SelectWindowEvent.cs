@@ -22,7 +22,7 @@ namespace Soleil.Event
         {
             base.Start();
             // SelectWindowを生成する．
-            selectable = new SelectableWindow(Pos, Size, Tag, Wm, false, options);
+            selectable = new SelectableWindow(PosFunc(), Size, Tag, Wm, false, options);
             selectable.Call();
             if (changeFocus) Wm.SetNowSelectWindow(Tag);
             // FocusをWindowに設定
