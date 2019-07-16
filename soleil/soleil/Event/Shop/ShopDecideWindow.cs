@@ -39,7 +39,7 @@ namespace Soleil.Event.Shop
             currency = new Image(
                 TextureID.Currency,
                 PricePos + new Vector(- Font.GetSize(_price.ToString()).X - 20, 5),
-                Depth);
+                PosDiff, Depth);
             AddComponents(new IComponent[] {
                 itemName, price, currency,
             });
