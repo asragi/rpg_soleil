@@ -12,16 +12,13 @@ namespace Soleil.Menu
     /// </summary>
     class DetailWindow: MenuComponent
     {
-        readonly Vector DrawStartPos = new Vector(30, 30);
-        readonly Vector DetailPos = new Vector(30, 100);
         readonly Vector InitPos;
         public readonly static FontID Font = FontID.CorpM;
         ArmorDetail armorDetail;
 
         public DetailWindow(Vector pos)
         {
-            InitPos = pos;
-            armorDetail = new ArmorDetail(DetailPos + InitPos);
+            armorDetail = new ArmorDetail(pos);
             AddComponents(new IComponent[] { armorDetail });
         }
 

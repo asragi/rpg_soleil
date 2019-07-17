@@ -16,7 +16,7 @@ namespace Soleil.Event.Shop
     {
         private readonly static Vector PossessPos = new Vector(80, 440);
         readonly Vector MoneyPos = PossessPos + new Vector(172, 0);
-        readonly Vector DetailWindowPos = new Vector(60, 100);
+        readonly Vector DetailWindowPos = new Vector(100, 163);
         private bool quitStart;
         int quitCount;
         public bool IsQuit { get; private set; }

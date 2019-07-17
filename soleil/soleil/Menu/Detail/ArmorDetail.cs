@@ -15,8 +15,9 @@ namespace Soleil.Menu.Detail
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
-        readonly Vector DefExpPos = new Vector(0, 60);
-        readonly int Space = 220;
+        private static readonly Vector ExplainPos = new Vector(32, 32);
+        readonly Vector DefExpPos = new Vector(0, 53);
+        readonly int Space = 118;
         readonly Vector InitPos;
 
         TextWithVal atkExplain;
@@ -26,8 +27,8 @@ namespace Soleil.Menu.Detail
         {
             InitPos = _pos;
             var font = DetailWindow.Font;
-            atkExplain = new TextWithVal(font, _pos, Space, AtkExpText);
-            defExplain = new TextWithVal(font, _pos+DefExpPos, Space, ExplainText);
+            atkExplain = new TextWithVal(font, _pos + ExplainPos, Space, AtkExpText);
+            defExplain = new TextWithVal(font, _pos + ExplainPos + DefExpPos, Space, ExplainText);
             AddComponents(new[] { atkExplain, defExplain });
         }
 
