@@ -52,6 +52,7 @@ namespace Soleil.Menu
             EquipSet equip;
             Image faceImg;
             TextImage upImg, downImg;
+            bool quit;
             public EquipEffectImg(Vector pos, TextureID faceTex, Person p)
             {
                 equip = p.Equip;
@@ -69,6 +70,7 @@ namespace Soleil.Menu
 
             public void Refresh(ItemPanelBase itemPanel)
             {
+                if (quit) return;
                 var data = ItemDataBase.Get(itemPanel.ID);
                 int diff = GetDiff(data, equip);
 
@@ -101,10 +103,17 @@ namespace Soleil.Menu
                 }
             }
 
+            public override void Call()
+            {
+                base.Call();
+                quit = false;
+            }
+
             public override void Quit()
             {
                 base.Quit();
                 DeleteEffect();
+                quit = true;
             }
 
             public override void Update()

@@ -15,11 +15,11 @@ namespace Soleil.Event.Shop
     class ShopDecideWindow: MenuComponent
     {
         static readonly Vector PosDiff = Window.DiffPos;
-        static readonly Vector WindowPos = new Vector(80, 280);
-        static readonly Vector WindowSize = new Vector(329, 130);
+        static readonly Vector WindowPos = new Vector(102, 303);
+        static readonly Vector WindowSize = new Vector(309, 130);
         static readonly Vector ItemNamePos = WindowPos + new Vector(35, 37);
         static readonly Vector PricePos = WindowPos + new Vector(277, 70);
-        static readonly Vector PurchaseNumDisplayPos = WindowPos + new Vector(0, 120);
+        static readonly Vector PurchaseNumDisplayPos = WindowPos + new Vector(0, 113);
         static readonly Vector PriceSumPos = PurchaseNumDisplayPos + new Vector(160, 0);
         static readonly DepthID NumDisplayDepth = DepthID.Message;
         static readonly FontID Font = FontID.CorpM;
