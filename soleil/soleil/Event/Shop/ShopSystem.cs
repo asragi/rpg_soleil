@@ -13,8 +13,7 @@ namespace Soleil.Event.Shop
     /// </summary>
     class ShopSystem : MenuComponent
     {
-        readonly Vector DescriptionPos = new Vector(125, 35);
-        readonly Vector MoneyPos = new Vector(90, 440);
+        readonly Vector MoneyPos = new Vector(252, 440);
         readonly Vector DetailWindowPos = new Vector(60, 100);
         private bool quitStart;
         int quitCount;
@@ -30,7 +29,7 @@ namespace Soleil.Event.Shop
             descriptionWindow = new DescriptionWindow();
             descriptionWindow.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, descriptionWindow, name);
-            moneyComponent = new MoneyComponent(MoneyPos);
+            moneyComponent = new MoneyComponent(MoneyPos, Vector.Zero);
             detailWindow = new DetailWindow(DetailWindowPos);
         }
 
