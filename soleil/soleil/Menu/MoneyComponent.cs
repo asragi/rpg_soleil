@@ -16,9 +16,9 @@ namespace Soleil.Menu
         // Font設定
         readonly FontID ValFont = FontID.CorpM;
         // 場所設定
-        readonly Vector MoneyPos = new Vector(150, 0);
+        public static readonly Vector MoneyPos = new Vector(150, 0);
         // 通貨単位位置設定
-        private readonly static Vector CurrencyPos = new Vector(0, 5);
+        public readonly static Vector CurrencyPos = new Vector(0, 5);
 
         MoneyWallet moneyWallet;
         int money;

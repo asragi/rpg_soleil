@@ -14,9 +14,9 @@ namespace Soleil.Event.Shop
     /// </summary>
     class ShopSystem : MenuComponent
     {
-        private readonly static Vector PossessPos = new Vector(80, 440);
-        readonly Vector MoneyPos = PossessPos + new Vector(172, 0);
-        readonly Vector DetailWindowPos = new Vector(100, 163);
+        private readonly static Vector PossessPos = new Vector(102, 453);
+        readonly Vector MoneyPos = PossessPos + new Vector(150, 0);
+        readonly Vector DetailWindowPos = new Vector(102, 163);
         private bool quitStart;
         int quitCount;
         public bool IsQuit { get; private set; }

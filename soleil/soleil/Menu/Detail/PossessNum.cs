@@ -14,7 +14,7 @@ namespace Soleil.Menu.Detail
     class PossessNum: MenuComponent
     {
         readonly String ExplainText = "所持数";
-        readonly Vector NumDiff = new Vector(120, 0);
+        public static readonly Vector NumDiff = new Vector(120, 0);
         ItemList items = PlayerBaggage.GetInstance().Items;
         TextWithVal withVal;
         public PossessNum(Vector _pos)
