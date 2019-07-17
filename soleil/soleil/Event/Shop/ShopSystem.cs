@@ -1,5 +1,6 @@
 ﻿using Soleil.Item;
 using Soleil.Menu;
+using Soleil.Menu.Detail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace Soleil.Event.Shop
     /// </summary>
     class ShopSystem : MenuComponent
     {
-        readonly Vector MoneyPos = new Vector(252, 440);
+        private readonly static Vector PossessPos = new Vector(80, 440);
+        readonly Vector MoneyPos = PossessPos + new Vector(172, 0);
         readonly Vector DetailWindowPos = new Vector(60, 100);
         private bool quitStart;
         int quitCount;
@@ -21,6 +23,7 @@ namespace Soleil.Event.Shop
         DescriptionWindow descriptionWindow;
         ShopItemList shopItemList;
         MoneyComponent moneyComponent;
+        PossessNum possessNum;
         DetailWindow detailWindow;
         public bool Purchased;
 
@@ -30,6 +33,7 @@ namespace Soleil.Event.Shop
             descriptionWindow.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, descriptionWindow, name);
             moneyComponent = new MoneyComponent(MoneyPos, Vector.Zero);
+            possessNum = new PossessNum(PossessPos);
             detailWindow = new DetailWindow(DetailWindowPos);
         }
 
@@ -41,6 +45,7 @@ namespace Soleil.Event.Shop
             descriptionWindow.Call();
             moneyComponent.Call();
             detailWindow.Call();
+            possessNum.Call();
             quitCount = 0;
             Purchased = false;
             quitStart = false;
@@ -60,6 +65,7 @@ namespace Soleil.Event.Shop
             descriptionWindow.Quit();
             moneyComponent.Quit();
             detailWindow.Quit();
+            possessNum.Quit();
         }
 
         public void Input(Direction dir)
@@ -74,6 +80,8 @@ namespace Soleil.Event.Shop
             shopItemList.Update();
             descriptionWindow.Update();
             moneyComponent.Update();
+            possessNum.Refresh(shopItemList.SelectedPanel);
+            possessNum.Update();
             detailWindow.Refresh(shopItemList.SelectedPanel);
             detailWindow.Update();
             QuitCheck();
@@ -94,6 +102,7 @@ namespace Soleil.Event.Shop
         {
             base.Draw(d);
             shopItemList.Draw(d);
+            possessNum.Draw(d);
             descriptionWindow.Draw(d);
             moneyComponent.Draw(d);
             detailWindow.Draw(d);

@@ -17,20 +17,17 @@ namespace Soleil.Menu
         readonly Vector InitPos;
         public readonly static FontID Font = FontID.CorpM;
         ArmorDetail armorDetail;
-        PossessNum possessNum;
 
         public DetailWindow(Vector pos)
         {
             InitPos = pos;
             armorDetail = new ArmorDetail(DetailPos + InitPos);
-            possessNum = new PossessNum(DrawStartPos + InitPos);
-            AddComponents(new IComponent[] { armorDetail, possessNum });
+            AddComponents(new IComponent[] { armorDetail });
         }
 
         public void Refresh(SelectablePanel selectedPanel)
         {
             armorDetail.Refresh(selectedPanel);
-            possessNum.Refresh(selectedPanel);
         }
     }
 }
