@@ -27,14 +27,14 @@ namespace Soleil.Event.Shop
         DetailWindow detailWindow;
         public bool Purchased;
 
-        public ShopSystem(ShopName name)
+        public ShopSystem(ShopName name, PersonParty party)
         {
             descriptionWindow = new DescriptionWindow();
             descriptionWindow.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, descriptionWindow, name);
             moneyComponent = new MoneyComponent(MoneyPos, Vector.Zero);
             possessNum = new PossessNum(PossessPos);
-            detailWindow = new DetailWindow(DetailWindowPos);
+            detailWindow = new DetailWindow(DetailWindowPos, party);
         }
 
         public override void Call()
@@ -82,7 +82,7 @@ namespace Soleil.Event.Shop
             moneyComponent.Update();
             possessNum.Refresh(shopItemList.SelectedPanel);
             possessNum.Update();
-            detailWindow.Refresh(shopItemList.SelectedPanel);
+            detailWindow.Refresh((ItemPanelBase)shopItemList.SelectedPanel);
             detailWindow.Update();
             QuitCheck();
             if (KeyInput.GetKeyPush(Key.B) && !quitStart) OnInputCancel();
