@@ -10,13 +10,12 @@ namespace Soleil.Menu
     /// <summary>
     /// 選ばれているものの詳細を表示するウィンドウ
     /// </summary>
-    class DetailWindow
+    class DetailWindow: MenuComponent
     {
         readonly Vector DrawStartPos = new Vector(30, 30);
         readonly Vector DetailPos = new Vector(30, 100);
         readonly Vector InitPos;
         public readonly static FontID Font = FontID.CorpM;
-        DetailComponent[] details;
         ArmorDetail armorDetail;
         PossessNum possessNum;
 
@@ -24,35 +23,14 @@ namespace Soleil.Menu
         {
             InitPos = pos;
             armorDetail = new ArmorDetail(DetailPos + InitPos);
-            details = new DetailComponent[]
-            {
-                armorDetail
-            };
             possessNum = new PossessNum(DrawStartPos + InitPos);
+            AddComponents(new IComponent[] { armorDetail, possessNum });
         }
 
-        public void Call()
+        public void Refresh(SelectablePanel selectedPanel)
         {
-            armorDetail.Call();
-            possessNum.Call();
-        }
-
-        public void Quit()
-        {
-            armorDetail.Quit();
-            possessNum.Quit();
-        }
-
-        public void Update(SelectablePanel selectedPanel)
-        {
-            armorDetail.Update(selectedPanel);
-            possessNum.Update(selectedPanel);
-        }
-
-        public void Draw(Drawing d)
-        {
-            armorDetail.Draw(d);
-            possessNum.Draw(d);
+            armorDetail.Refresh(selectedPanel);
+            possessNum.Refresh(selectedPanel);
         }
     }
 }

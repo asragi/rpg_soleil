@@ -11,7 +11,7 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 防具の詳細性能表示クラス．
     /// </summary>
-    class ArmorDetail : DetailComponent
+    class ArmorDetail: MenuComponent
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
@@ -28,21 +28,10 @@ namespace Soleil.Menu.Detail
             var font = DetailWindow.Font;
             atkExplain = new TextWithVal(font, _pos, Space, AtkExpText);
             defExplain = new TextWithVal(font, _pos+DefExpPos, Space, ExplainText);
+            AddComponents(new[] { atkExplain, defExplain });
         }
 
-        public void Call()
-        {
-            atkExplain.Call();
-            defExplain.Call();
-        }
-
-        public void Quit()
-        {
-            atkExplain.Quit();
-            defExplain.Quit();
-        }
-
-        private void Refresh(SelectablePanel panel)
+        public void Refresh(SelectablePanel panel)
         {
             if (!(panel is ItemPanelBase)) return;
             var itemPanel = (ItemPanelBase)panel;
@@ -79,21 +68,6 @@ namespace Soleil.Menu.Detail
             // 装備でない
             atkExplain.Enable = false;
             defExplain.Enable = false;            
-        }
-
-        public void Update(SelectablePanel panel)
-        {
-            base.Update();
-            Refresh(panel);
-            atkExplain.Update();
-            defExplain.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            atkExplain.Draw(d);
-            defExplain.Draw(d);
         }
     }
 }

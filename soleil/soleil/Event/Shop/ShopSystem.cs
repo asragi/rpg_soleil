@@ -74,7 +74,8 @@ namespace Soleil.Event.Shop
             shopItemList.Update();
             descriptionWindow.Update();
             moneyComponent.Update();
-            detailWindow.Update(shopItemList.SelectedPanel);
+            detailWindow.Refresh(shopItemList.SelectedPanel);
+            detailWindow.Update();
             QuitCheck();
             if (KeyInput.GetKeyPush(Key.B) && !quitStart) OnInputCancel();
 
