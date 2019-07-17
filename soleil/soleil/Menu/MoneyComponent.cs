@@ -11,39 +11,31 @@ namespace Soleil.Menu
     /// <summary>
     /// 所持金表示コンポーネント．
     /// </summary>
-    class MoneyComponent
+    class MoneyComponent: MenuComponent
     {
         // Font設定
         readonly FontID ValFont = FontID.CorpM;
-        readonly FontID CurrencyFont = FontID.CorpM;
         // 場所設定
-        readonly Vector InitPos;
-        readonly Vector PositionDiff = new Vector(-30, 0);
+        readonly Vector MoneyPos = new Vector(150, 0);
+        private readonly static Vector PosDiff = new Vector(30, 0);
         // 通貨単位位置設定
-        readonly int CurrencyPosY;
-        const int CurrencyPosX = 120;
-        readonly Vector CurrencyPos;
-        readonly Vector CurrencyOffset = new Vector(0, -1);
+        private readonly static Vector CurrencyPos = new Vector(0, 5);
 
         MoneyWallet moneyWallet;
         int money;
         TextImage moneyText;
-        TextImage currency;
+        Image currency;
 
         // 背景表示
-        public bool EnableBack = true;
         BackBarImage backBar;
 
         public MoneyComponent(Vector _pos)
         {
-            InitPos = _pos;
-            CurrencyPosY = (int)Resources.GetFont(ValFont).MeasureString("0").Y - (int)(Resources.GetFont(CurrencyFont).MeasureString(MoneyWallet.Currency).Y);
-            CurrencyPos = new Vector(CurrencyPosX, CurrencyPosY) + CurrencyOffset;
-            moneyText = new TextImage(ValFont, _pos - PositionDiff, DepthID.MenuBottom, true, 0);
-            currency = new TextImage(CurrencyFont, _pos + CurrencyPos-PositionDiff, DepthID.MenuBottom, true, 0);
-            currency.Text = MoneyWallet.Currency;
+            moneyText = new RightAlignText(ValFont, _pos + MoneyPos, PosDiff, DepthID.MenuBottom);
+            currency = new Image(TextureID.Currency, _pos + CurrencyPos, PosDiff, DepthID.MenuBottom);
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
-            backBar = new BackBarImage(_pos - new Vector(BackBarImage.EdgeSize,0), (int)CurrencyPos.X + 120, false);
+            backBar = new BackBarImage(_pos + new Vector(- BackBarImage.EdgeSize, 0), PosDiff, 220, false);
+            AddComponents(new IComponent[] { backBar, moneyText, currency });
             Refresh();
         }
 
@@ -53,37 +45,10 @@ namespace Soleil.Menu
             moneyText.Text = money.ToString();
         }
 
-        public void Call()
+        public override void Update()
         {
-            moneyText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            moneyText.MoveTo(InitPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
-            currency.MoveTo(InitPos + CurrencyPos, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
-            backBar.Call();
-        }
-
-        public void Quit()
-        {
-            moneyText.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            currency.Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            moneyText.MoveTo(InitPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
-            currency.MoveTo(InitPos + CurrencyPos - PositionDiff, MenuSystem.FadeSpeed, MenuSystem.EaseFunc);
-            backBar.Quit();
-        }
-
-        public void Update()
-        {
-            moneyText.Update();
-            currency.Update();
-            backBar.Update();
+            base.Update();
             if (money != moneyWallet.Val) Refresh();
-        }
-
-        public void Draw(Drawing d)
-        {
-            if (EnableBack) backBar.Draw(d);
-            moneyText.Draw(d);
-            currency.Draw(d);
         }
     }
 }
