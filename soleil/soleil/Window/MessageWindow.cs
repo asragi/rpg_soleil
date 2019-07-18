@@ -17,7 +17,6 @@ namespace Soleil
         }
 
         public void SetMessage(string msg) => messageBox.SetMessage(msg);
-        protected override void Move() => messageBox.Update();
         public bool GetAnimIsEnd() => messageBox.GetAnimIsEnd();
         public void FinishAnim() => messageBox.FinishAnim();
 
