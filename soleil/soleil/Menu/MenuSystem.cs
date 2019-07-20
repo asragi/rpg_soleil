@@ -156,7 +156,7 @@ namespace Soleil.Menu
             IsActive = false;
 
             // Money
-            moneyComponent = new MoneyComponent(MoneyComponentPos);
+            moneyComponent = new MoneyComponent(MoneyComponentPos, new Vector(30, 0));
         }
 
         /// <summary>

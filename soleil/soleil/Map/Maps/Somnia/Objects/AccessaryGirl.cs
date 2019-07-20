@@ -18,7 +18,7 @@ namespace Soleil.Map.Maps.Somnia
         BoolSet preservedBools;
         enum BoolName { First, Sold, size }
 
-        public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
+        public AccessaryGirl(Vector pos, PersonParty party, ObjectManager om, BoxManager bm)
             : base(pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaAcceU, new Vector(-5, -45), true, 8);
@@ -39,7 +39,7 @@ namespace Soleil.Map.Maps.Somnia
                         new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(ShopName.Accessary, boolSet, (int)BoolName.Sold)
+                    new ShopEvent(ShopName.Accessary, party, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
                     new EventUnit[] {

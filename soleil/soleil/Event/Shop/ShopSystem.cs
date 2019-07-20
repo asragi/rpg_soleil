@@ -1,5 +1,6 @@
 ﻿using Soleil.Item;
 using Soleil.Menu;
+using Soleil.Menu.Detail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,25 +14,27 @@ namespace Soleil.Event.Shop
     /// </summary>
     class ShopSystem : MenuComponent
     {
-        readonly Vector DescriptionPos = new Vector(125, 35);
-        readonly Vector MoneyPos = new Vector(90, 440);
-        readonly Vector DetailWindowPos = new Vector(60, 100);
+        private readonly static Vector PossessPos = new Vector(102, 453);
+        readonly Vector MoneyPos = PossessPos + new Vector(150, 0);
+        readonly Vector DetailWindowPos = new Vector(102, 163);
         private bool quitStart;
         int quitCount;
         public bool IsQuit { get; private set; }
         DescriptionWindow descriptionWindow;
         ShopItemList shopItemList;
         MoneyComponent moneyComponent;
+        PossessNum possessNum;
         DetailWindow detailWindow;
         public bool Purchased;
 
-        public ShopSystem(ShopName name)
+        public ShopSystem(ShopName name, PersonParty party)
         {
             descriptionWindow = new DescriptionWindow();
             descriptionWindow.Text = "これはテストメッセージ";
             shopItemList = new ShopItemList(this, descriptionWindow, name);
-            moneyComponent = new MoneyComponent(MoneyPos);
-            detailWindow = new DetailWindow(DetailWindowPos);
+            moneyComponent = new MoneyComponent(MoneyPos, Vector.Zero);
+            possessNum = new PossessNum(PossessPos);
+            detailWindow = new DetailWindow(DetailWindowPos, party);
         }
 
         public override void Call()
@@ -42,6 +45,7 @@ namespace Soleil.Event.Shop
             descriptionWindow.Call();
             moneyComponent.Call();
             detailWindow.Call();
+            possessNum.Call();
             quitCount = 0;
             Purchased = false;
             quitStart = false;
@@ -61,6 +65,7 @@ namespace Soleil.Event.Shop
             descriptionWindow.Quit();
             moneyComponent.Quit();
             detailWindow.Quit();
+            possessNum.Quit();
         }
 
         public void Input(Direction dir)
@@ -75,7 +80,10 @@ namespace Soleil.Event.Shop
             shopItemList.Update();
             descriptionWindow.Update();
             moneyComponent.Update();
-            detailWindow.Update(shopItemList.SelectedPanel);
+            possessNum.Refresh(shopItemList.SelectedPanel);
+            possessNum.Update();
+            detailWindow.Refresh((ItemPanelBase)shopItemList.SelectedPanel);
+            detailWindow.Update();
             QuitCheck();
             if (KeyInput.GetKeyPush(Key.B) && !quitStart) OnInputCancel();
 
@@ -94,6 +102,7 @@ namespace Soleil.Event.Shop
         {
             base.Draw(d);
             shopItemList.Draw(d);
+            possessNum.Draw(d);
             descriptionWindow.Draw(d);
             moneyComponent.Draw(d);
             detailWindow.Draw(d);

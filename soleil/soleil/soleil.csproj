@@ -188,7 +188,6 @@
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\Detail\ArmorDetail.cs" />
-    <Compile Include="Menu\Detail\DetailComponent.cs" />
     <Compile Include="Menu\Detail\DetailWindow.cs" />
     <Compile Include="Menu\Detail\PossessNum.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
