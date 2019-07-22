@@ -13,19 +13,6 @@ namespace Soleil.Menu
     /// </summary>
     class MagicIcon
     {
-        private readonly static Dictionary<MagicCategory, Color> tmpColors = new Dictionary<MagicCategory, Color>() {
-            { MagicCategory.Sun, Color.Gold },
-            { MagicCategory.Shade, Color.RoyalBlue },
-            { MagicCategory.Magic, Color.DarkOrchid },
-            { MagicCategory.Dark, Color.Crimson },
-            { MagicCategory.Wood, Color.OliveDrab },
-            { MagicCategory.Metal, Color.Orange },
-            { MagicCategory.Sound, Color.PaleVioletRed },
-            { MagicCategory.Shinobi, Color.DarkCyan },
-            { MagicCategory.Space, Color.Gray },
-            { MagicCategory.Time, Color.MidnightBlue },
-        };
-
         public readonly static Dictionary<MagicCategory, TextureID> IconMap = new Dictionary<MagicCategory, TextureID>() {
             { MagicCategory.Sun, TextureID.MagicSun },
             { MagicCategory.Shade, TextureID.MagicShade },
@@ -54,7 +41,7 @@ namespace Soleil.Menu
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
             iconImg = new Image(IconMap[c], pos, DepthID.Message);
-            iconColor = tmpColors[c];
+            iconColor = ColorPalette.MagicColors[c];
             disableIcon = new TextImage(FontID.CorpM, pos, DepthID.Message);
             disableIcon.Text = "・";
         }
