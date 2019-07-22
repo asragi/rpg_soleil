@@ -14,6 +14,7 @@ namespace Soleil.Menu
     class MagicMenuPanel : TextSelectablePanel
     {
         private static readonly Vector IconSpace = new Vector(5, 9);
+        private readonly Color MagicColor;
         public override string Desctiption => desc;
         private string desc;
 
@@ -27,8 +28,9 @@ namespace Soleil.Menu
             desc = data.Description;
             LocalPos = Vector.Zero;
             MagicData magicData = (MagicData)data;
+            MagicColor = ColorPalette.MagicColors[magicData.Category];
             icon = new Image(MagicIcon.IconMap[magicData.Category], LocalPos + parent.Pos, DepthID.Message);
-            icon.Color = SetColor(ItemColor);
+            icon.Color = SetColor(MagicColor);
         }
 
         protected override void OnSelected()
@@ -40,7 +42,7 @@ namespace Soleil.Menu
         protected override void OnUnselected()
         {
             base.OnUnselected();
-            icon.Color = SetColor(ItemColor);
+            icon.Color = SetColor(MagicColor);
         }
 
         public override void Update()
