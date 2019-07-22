@@ -39,7 +39,9 @@ namespace Soleil.Menu
             { MagicCategory.Time, TextureID.MagicTime },
         };
 
+        private readonly static Color DefaultColor = ColorPalette.GlayBlue;
         readonly Vector localPos;
+        readonly Color iconColor;
         BasicMenu parent;
         bool isSelected;
         private bool disabled;
@@ -52,7 +54,7 @@ namespace Soleil.Menu
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
             iconImg = new Image(IconMap[c], pos, DepthID.Message);
-            iconImg.Color = tmpColors[c];
+            iconColor = tmpColors[c];
             disableIcon = new TextImage(FontID.CorpM, pos, DepthID.Message);
             disableIcon.Text = "・";
         }
@@ -94,7 +96,7 @@ namespace Soleil.Menu
         private void RefreshIcon()
         {
             if (disabled) return;
-            // else iconImg.Color = tmpColors[c];
+            else iconImg.Color = isSelected ? iconColor : DefaultColor;
         }
     }
 }
