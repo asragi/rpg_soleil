@@ -35,12 +35,19 @@ namespace Soleil.Skill
         // Wood
         Relax,
         Fragrance,
+        AlomaDrop,
         // Metal
         Alchem,
+        PileBunker,
+        MetalCoat,
         // Space
         Teleport,
+        DimensionKill,
+        SeaventhHeaven,
         // Time
         Delay,
+        Haste,
+        HeavensDrive,
         // Skill
         Headbutt,
 
@@ -87,12 +94,19 @@ namespace Soleil.Skill
             // wood
             SetMagic("リラクシード", SkillID.Relax, MagicCategory.Wood, "味方単体に毎ターン微量回復効果を付与．", 14);
             SetMagic("フレグランス", SkillID.Fragrance, MagicCategory.Wood, "味方全体を回復．", 76);
+            SetMagic("アロマドロップ", SkillID.AlomaDrop, MagicCategory.Wood, "味方単体を全回復．", 55);
             // metal
             SetMagic("アルケム", SkillID.Alchem, MagicCategory.Metal, "一部のアイテムを変換する．", 8);
+            SetMagic("パイルバンカー", SkillID.PileBunker, MagicCategory.Metal, "敵単体に突属性ダメージ．", 15);
+            SetMagic("メタルコート", SkillID.MetalCoat, MagicCategory.Metal, "味方全体の防御力上昇．", 25);
             // space
             SetMagic("テレポート", SkillID.Teleport, MagicCategory.Space, "ワールドマップで時間経過なく移動できる．", 20, onBattle: false);
+            SetMagic("ディメンジョンキル", SkillID.DimensionKill, MagicCategory.Space, "敵全体に無属性ダメージ．", 88);
+            SetMagic("セヴンスヘヴン", SkillID.SeaventhHeaven, MagicCategory.Space, "味方全体の全能力上昇．", 82);
             // time
-            SetMagic("ディレイ", SkillID.Delay, MagicCategory.Time, "敵単体のSPDを低下．", 12);
+            SetMagic("ディレイ", SkillID.Delay, MagicCategory.Time, "敵単体の行動速度低下．", 12);
+            SetMagic("アクセラレート", SkillID.Haste, MagicCategory.Time, "味方単体の行動速度上昇．", 40);
+            SetMagic("ヘヴンズドライヴ", SkillID.HeavensDrive, MagicCategory.Time, "魔力に応じた連続行動．", 99);
 
             // skill
             SetSkill("ヘッドバット", SkillID.Headbutt, "敵単体に打属性のダメージ．確率で気絶．", 12);
