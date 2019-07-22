@@ -18,16 +18,16 @@ namespace Soleil
         public static Color DarkBlue = new Color(36, 69, 98);
 
         public readonly static Dictionary<MagicCategory, Color> MagicColors = new Dictionary<MagicCategory, Color>() {
-            { MagicCategory.Sun, Color.PaleGoldenrod },
+            { MagicCategory.Sun, Color.Gold },
             { MagicCategory.Shade, Color.SteelBlue },
-            { MagicCategory.Magic, Color.Plum },
-            { MagicCategory.Dark, Color.Crimson },
+            { MagicCategory.Magic, Color.MediumOrchid },
+            { MagicCategory.Dark, Color.Firebrick },
             { MagicCategory.Wood, Color.OliveDrab },
             { MagicCategory.Metal, Color.Orange },
-            { MagicCategory.Sound, Color.PaleVioletRed },
+            { MagicCategory.Sound, Color.Plum },
             { MagicCategory.Shinobi, Color.DarkCyan },
             { MagicCategory.Space, Color.Gray },
-            { MagicCategory.Time, Color.MidnightBlue },
+            { MagicCategory.Time, Color.DarkSlateGray },
         };
     }
 }

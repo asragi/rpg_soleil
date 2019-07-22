@@ -27,6 +27,7 @@ namespace Soleil.Menu
         };
 
         private readonly static Color DefaultColor = ColorPalette.GlayBlue;
+        private readonly static Vector AdjustPos = new Vector(-4, -5);
         readonly Vector localPos;
         readonly Color iconColor;
         BasicMenu parent;
@@ -42,7 +43,7 @@ namespace Soleil.Menu
             var pos = localPos + _parent.Pos;
             iconImg = new Image(IconMap[c], pos, DepthID.Message);
             iconColor = ColorPalette.MagicColors[c];
-            disableIcon = new TextImage(FontID.CorpM, pos, DepthID.Message);
+            disableIcon = new TextImage(FontID.CorpM, pos + AdjustPos, DepthID.Message);
             disableIcon.Text = "・";
         }
 
@@ -69,7 +70,7 @@ namespace Soleil.Menu
             iconImg.Alpha = parent.Alpha;
             iconImg.Update();
 
-            disableIcon.Pos = localPos + parent.Pos;
+            disableIcon.Pos = localPos + AdjustPos + parent.Pos;
             disableIcon.Alpha = parent.Alpha;
             disableIcon.Update();
         }
