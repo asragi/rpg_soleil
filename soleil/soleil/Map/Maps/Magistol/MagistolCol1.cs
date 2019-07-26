@@ -30,6 +30,7 @@ namespace Soleil.Map
                 new AdjustConstruct(ChairPos[1], TextureID.Magistol2_chair, (int)ChairPos[1].Y + ChairDiff, om),
                 new AdjustConstruct(ChairPos[2], TextureID.Magistol2_chair, (int)ChairPos[2].Y + ChairDiff, om),
                 new AdjustConstruct(ChairPos[3], TextureID.Magistol2_chair, (int)ChairPos[3].Y + ChairDiff, om),
+                new AdjustConstruct(new Vector(440, 250), TextureID.Magistol2_shelf, 435, om),
                 new AdjustConstruct(new Vector(1341, 1070), TextureID.Magistol2_plant, 1200, om),
                 new AdjustConstruct(new Vector(87, 96), TextureID.Magistol2_stair, 414, om),
                 new AdjustConstruct(new Vector(97, 308), TextureID.Magistol2_plant, 438, om),

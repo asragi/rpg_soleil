@@ -131,6 +131,7 @@ namespace Soleil
         Magistol2_plant,
         Magistol2_wall,
         Magistol2_stair,
+        Magistol2_shelf,
 
         Magistol3_back,
         Magistol3_chair,
@@ -336,6 +337,7 @@ namespace Soleil
             SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
             SetPath(TextureID.Magistol2_wall, mag + "col1/wall");
             SetPath(TextureID.Magistol2_stair, mag + "col1/stair");
+            SetPath(TextureID.Magistol2_shelf, mag + "col1/shelf");
 
             SetPath(TextureID.Magistol3_back, mag + "shop/back");
             SetPath(TextureID.Magistol3_chair, mag + "shop/chair");

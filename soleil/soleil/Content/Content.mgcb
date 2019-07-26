@@ -540,6 +540,18 @@
 /processorParam:TextureFormat=Color
 /build:Map/Back/Magistol/col1/plant.png
 
+#begin Map/Back/Magistol/col1/shelf.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/shelf.png
+
 #begin Map/Back/Magistol/col1/stair.png
 /importer:TextureImporter
 /processor:TextureProcessor
