@@ -25,6 +25,10 @@ namespace Soleil.Map
                     return new Somnia2(party, cam);
                 case MapName.Somnia4:
                     return new Somnia4(party, cam);
+                case MapName.MagistolRoom:
+                    return new MagistolRoom(party, cam);
+                case MapName.MagistolCol1:
+                    return new MagistolCol1(party, cam);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

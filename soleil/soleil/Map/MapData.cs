@@ -34,6 +34,12 @@ namespace Soleil.Map
                 case MapName.Somnia4:
                     flags = CSVIO.GetMapData("somnia4", 960, 540);
                     break;
+                case MapName.MagistolRoom:
+                    flags = CSVIO.GetMapData("magistol1", 960, 540);
+                    break;
+                case MapName.MagistolCol1:
+                    flags = CSVIO.GetMapData("magistol2", 1500, 1500);
+                    break;
                 default:
                     break;
             }
