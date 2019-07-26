@@ -25,11 +25,14 @@ namespace Soleil.Map
             MapConstructs = new MapConstruct[]
             {
                 new MapConstruct(TextureID.Magistol2_back, MapDepth.Ground, om),
+                new AdjustConstruct(new Vector(822, 406), TextureID.Magistol2_wall, 710, om),
                 new AdjustConstruct(ChairPos[0], TextureID.Magistol2_chair, (int)ChairPos[0].Y + ChairDiff, om),
                 new AdjustConstruct(ChairPos[1], TextureID.Magistol2_chair, (int)ChairPos[1].Y + ChairDiff, om),
                 new AdjustConstruct(ChairPos[2], TextureID.Magistol2_chair, (int)ChairPos[2].Y + ChairDiff, om),
                 new AdjustConstruct(ChairPos[3], TextureID.Magistol2_chair, (int)ChairPos[3].Y + ChairDiff, om),
                 new AdjustConstruct(new Vector(1341, 1070), TextureID.Magistol2_plant, 1200, om),
+                new AdjustConstruct(new Vector(87, 96), TextureID.Magistol2_stair, 414, om),
+                new AdjustConstruct(new Vector(97, 308), TextureID.Magistol2_plant, 438, om),
             };
 
             // マップサイズの設定
