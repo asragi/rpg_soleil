@@ -20,6 +20,7 @@ namespace Soleil.Map.WorldMap
             nameDict = new Dictionary<WorldPointKey, MapName>();
             Set(WorldPointKey.Flare, MapName.Flare1, new Vector(5593, 1336));
             Set(WorldPointKey.Somnia, MapName.Somnia1, new Vector(1183, 860));
+            Set(WorldPointKey.Magistol, MapName.MagistolCol1, new Vector(777, 567));
 
             void Set(WorldPointKey key, MapName name, Vector pos)
             {
