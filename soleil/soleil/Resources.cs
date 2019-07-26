@@ -121,6 +121,14 @@ namespace Soleil
         Somnia4_4,
         Somnia4_5,
 
+        Magistol1_back,
+        Magistol1_wall,
+        Magistol1_cloth,
+
+        Magistol2_back,
+        Magistol2_chair,
+        Magistol2_plant,
+
         WorldMapIcon,
         WorldMapCursor,
 
@@ -302,6 +310,16 @@ namespace Soleil
             SetPath(TextureID.Somnia4_3, "Map/Back/Somnia/4/somnia4-3");
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
             SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
+
+            string mag = "Map/Back/Magistol/";
+
+            SetPath(TextureID.Magistol1_back, mag + "room/1");
+            SetPath(TextureID.Magistol1_wall, mag + "room/2");
+            SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+
+            SetPath(TextureID.Magistol2_back, mag + "col1/col");
+            SetPath(TextureID.Magistol2_chair, mag + "col1/chair");
+            SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
