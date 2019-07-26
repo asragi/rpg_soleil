@@ -51,6 +51,16 @@ namespace Soleil
         IconAccessary,
         IconPot,
         IconJewel,
+        MagicSun,
+        MagicShade,
+        MagicMagic,
+        MagicDark,
+        MagicSound,
+        MagicNinja,
+        MagicWood,
+        MagicMetal,
+        MagicSpace,
+        MagicTime,
 
         Rule0,
         Rule1,
@@ -379,6 +389,17 @@ namespace Soleil
             SetPath(TextureID.IconPot, UIPath + MenuPath + "icons/" + "icon-pot");
             SetPath(TextureID.IconJewel, UIPath + MenuPath + "icons/" + "icon-jewel");
 
+            string mIcon = UIPath + MenuPath + "magicicon/";
+            SetPath(TextureID.MagicSun, mIcon + "micon-sun");
+            SetPath(TextureID.MagicShade, mIcon + "micon-moon");
+            SetPath(TextureID.MagicMagic, mIcon + "micon-magic");
+            SetPath(TextureID.MagicDark, mIcon + "micon-dark");
+            SetPath(TextureID.MagicSound, mIcon + "micon-sound");
+            SetPath(TextureID.MagicNinja, mIcon + "micon-ninja");
+            SetPath(TextureID.MagicWood, mIcon + "micon-leaf");
+            SetPath(TextureID.MagicMetal, mIcon + "micon-gear");
+            SetPath(TextureID.MagicSpace, mIcon + "micon-space");
+            SetPath(TextureID.MagicTime, mIcon + "micon-time");
 
             for (int i = 0; i < 20; i++)
             {
