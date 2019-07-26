@@ -122,6 +122,7 @@ namespace Soleil
         Somnia4_5,
 
         Magistol1_back,
+        Magistol1_dark,
         Magistol1_wall,
         Magistol1_cloth,
 
@@ -324,8 +325,9 @@ namespace Soleil
             string mag = "Map/Back/Magistol/";
 
             SetPath(TextureID.Magistol1_back, mag + "room/1");
-            SetPath(TextureID.Magistol1_wall, mag + "room/2");
+            SetPath(TextureID.Magistol1_dark, mag + "room/2");
             SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+            SetPath(TextureID.Magistol1_wall, mag + "room/wall");
 
             SetPath(TextureID.Magistol2_back, mag + "col1/col");
             SetPath(TextureID.Magistol2_chair, mag + "col1/chair");

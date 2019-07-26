@@ -17,8 +17,9 @@ namespace Soleil.Map
             MapConstructs = new MapConstruct[]
             {
                 new MapConstruct(TextureID.Magistol1_back, MapDepth.Ground, om),
-                new MapConstruct(new Vector(175, 131), TextureID.Magistol1_wall, MapDepth.Top, om), // 自販機
-                new MapConstruct(new Vector(495, 408), TextureID.Magistol1_cloth, MapDepth.Top, om), // 右側の錆びた柵
+                new AdjustConstruct(new Vector(314, 72), TextureID.Magistol1_wall, 362, om),
+                new MapConstruct(new Vector(175, 131), TextureID.Magistol1_dark, MapDepth.Top, om),
+                new MapConstruct(new Vector(495, 408), TextureID.Magistol1_cloth, MapDepth.Top, om),
             };
 
             // マップサイズの設定
