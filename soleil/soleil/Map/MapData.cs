@@ -40,6 +40,9 @@ namespace Soleil.Map
                 case MapName.MagistolCol1:
                     flags = CSVIO.GetMapData("magistol2", 1500, 1500);
                     break;
+                case MapName.MagistolShop:
+                    flags = CSVIO.GetMapData("magistol3", 1000, 1000);
+                    break;
                 default:
                     break;
             }

@@ -18,6 +18,7 @@ namespace Soleil.Map
         Somnia4,
         MagistolRoom,
         MagistolCol1,
+        MagistolShop,
     }
     abstract class MapBase
     {
