@@ -163,6 +163,7 @@
     <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
     <Compile Include="Map\Maps\Magistol\MagistolCol1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol3.cs" />
     <Compile Include="Map\Maps\Magistol\MagistolRoom.cs" />
     <Compile Include="Map\Maps\Magistol\MagistolShop.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />

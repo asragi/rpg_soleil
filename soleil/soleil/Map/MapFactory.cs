@@ -31,6 +31,8 @@ namespace Soleil.Map
                     return new MagistolCol1(party, cam);
                 case MapName.MagistolShop:
                     return new MagistolShop(party, cam);
+                case MapName.MagistolCol3:
+                    return new MagistolCol3(party, cam);
                 default:
                     throw new ArgumentOutOfRangeException();
             }

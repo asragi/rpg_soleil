@@ -20,31 +20,30 @@ namespace Soleil.Map
         /// </summary>
         public void SetMapFlag()
         {
-            switch (mapName)
+            flags = GetFlag(mapName);
+            bool[,] GetFlag(MapName name)
             {
-                case MapName.Flare1:
-                    flags = CSVIO.GetMapData("flare1", 8090, 2895);
-                    break;
-                case MapName.Somnia1:
-                    flags = CSVIO.GetMapData("somnia1", 1881, 1323);
-                    break;
-                case MapName.Somnia2:
-                    flags = CSVIO.GetMapData("somnia2", 1054, 741);
-                    break;
-                case MapName.Somnia4:
-                    flags = CSVIO.GetMapData("somnia4", 960, 540);
-                    break;
-                case MapName.MagistolRoom:
-                    flags = CSVIO.GetMapData("magistol1", 960, 540);
-                    break;
-                case MapName.MagistolCol1:
-                    flags = CSVIO.GetMapData("magistol2", 1500, 1500);
-                    break;
-                case MapName.MagistolShop:
-                    flags = CSVIO.GetMapData("magistol3", 1000, 1000);
-                    break;
-                default:
-                    break;
+                switch (name)
+                {
+                    case MapName.Flare1:
+                        return CSVIO.GetMapData("flare1", 8090, 2895);
+                    case MapName.Somnia1:
+                        return CSVIO.GetMapData("somnia1", 1881, 1323);
+                    case MapName.Somnia2:
+                        return CSVIO.GetMapData("somnia2", 1054, 741);
+                    case MapName.Somnia4:
+                        return CSVIO.GetMapData("somnia4", 960, 540);
+                    case MapName.MagistolRoom:
+                        return CSVIO.GetMapData("magistol1", 960, 540);
+                    case MapName.MagistolCol1:
+                        return CSVIO.GetMapData("magistol2", 1500, 1500);
+                    case MapName.MagistolShop:
+                        return CSVIO.GetMapData("magistol3", 1000, 1000);
+                    case MapName.MagistolCol3:
+                        return CSVIO.GetMapData("magistol4", 2000, 1777);
+                    default:
+                        throw new System.ArgumentOutOfRangeException();
+                }
             }
         }
 

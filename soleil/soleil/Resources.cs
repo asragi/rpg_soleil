@@ -133,6 +133,12 @@ namespace Soleil
         Magistol3_chair,
         Magistol3_wall,
 
+        Magistol4_back,
+        Magistol4_chair1,
+        Magistol4_chair2,
+        Magistol4_wall,
+        Magistol4_plant,
+
         WorldMapIcon,
         WorldMapCursor,
 
@@ -328,6 +334,12 @@ namespace Soleil
             SetPath(TextureID.Magistol3_back, mag + "shop/back");
             SetPath(TextureID.Magistol3_chair, mag + "shop/chair");
             SetPath(TextureID.Magistol3_wall, mag + "shop/wall");
+
+            SetPath(TextureID.Magistol4_back, mag + "col3/back");
+            SetPath(TextureID.Magistol4_chair1, mag + "col3/chair1");
+            SetPath(TextureID.Magistol4_chair2, mag + "col3/chair2");
+            SetPath(TextureID.Magistol4_wall, mag + "col3/wall");
+            SetPath(TextureID.Magistol4_plant, mag + "col3/plant");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");

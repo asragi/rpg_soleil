@@ -82,7 +82,7 @@ namespace Soleil
             // SceneManager
             sm = SceneManager.GetInstance();
             party = new PersonParty();
-            new MapScene(sm, party, Map.MapName.MagistolShop, new Vector(500, 500));
+            new MapScene(sm, party, Map.MapName.MagistolCol3, new Vector(1000, 1000));
             // new TestBattleScene(sm);
             // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
