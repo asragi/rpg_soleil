@@ -121,6 +121,28 @@ namespace Soleil
         Somnia4_4,
         Somnia4_5,
 
+        Magistol1_back,
+        Magistol1_dark,
+        Magistol1_wall,
+        Magistol1_cloth,
+
+        Magistol2_back,
+        Magistol2_chair,
+        Magistol2_plant,
+        Magistol2_wall,
+        Magistol2_stair,
+        Magistol2_shelf,
+
+        Magistol3_back,
+        Magistol3_chair,
+        Magistol3_wall,
+
+        Magistol4_back,
+        Magistol4_chair1,
+        Magistol4_chair2,
+        Magistol4_wall,
+        Magistol4_plant,
+
         WorldMapIcon,
         WorldMapCursor,
 
@@ -302,6 +324,30 @@ namespace Soleil
             SetPath(TextureID.Somnia4_3, "Map/Back/Somnia/4/somnia4-3");
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
             SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
+
+            string mag = "Map/Back/Magistol/";
+
+            SetPath(TextureID.Magistol1_back, mag + "room/1");
+            SetPath(TextureID.Magistol1_dark, mag + "room/2");
+            SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+            SetPath(TextureID.Magistol1_wall, mag + "room/wall");
+
+            SetPath(TextureID.Magistol2_back, mag + "col1/col");
+            SetPath(TextureID.Magistol2_chair, mag + "col1/chair");
+            SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
+            SetPath(TextureID.Magistol2_wall, mag + "col1/wall");
+            SetPath(TextureID.Magistol2_stair, mag + "col1/stair");
+            SetPath(TextureID.Magistol2_shelf, mag + "col1/shelf");
+
+            SetPath(TextureID.Magistol3_back, mag + "shop/back");
+            SetPath(TextureID.Magistol3_chair, mag + "shop/chair");
+            SetPath(TextureID.Magistol3_wall, mag + "shop/wall");
+
+            SetPath(TextureID.Magistol4_back, mag + "col3/back");
+            SetPath(TextureID.Magistol4_chair1, mag + "col3/chair1");
+            SetPath(TextureID.Magistol4_chair2, mag + "col3/chair2");
+            SetPath(TextureID.Magistol4_wall, mag + "col3/wall");
+            SetPath(TextureID.Magistol4_plant, mag + "col3/plant");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");

@@ -162,6 +162,10 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol3.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolRoom.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolShop.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
     <Compile Include="Map\WorldmapObject.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Scene\MapScene.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
