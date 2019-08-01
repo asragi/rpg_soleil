@@ -12,15 +12,17 @@ namespace Soleil.Map
     /// </summary>
     abstract class MapEventObject : MapObject
     {
+        public readonly string Name;
         public static Vector DefaultBoxSize = new Vector(30, 30);
         protected CollideBox ExistanceBox;
         protected virtual CollideLayer CollideLayer { get {return CollideLayer.Character; } }
         protected EventSequence EventSequence;
         protected PlayerObject Player;
 
-        public MapEventObject(Vector _pos, Vector? _boxSize, ObjectManager om, BoxManager bm)
+        public MapEventObject(string name, Vector _pos, Vector? _boxSize, ObjectManager om, BoxManager bm)
             :base(om)
         {
+            Name = name;
             Pos = _pos;
             Player = om.GetPlayer();
             // boxsizeが指定されていなければ既定の値にする。

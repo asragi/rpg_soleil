@@ -8,6 +8,9 @@ namespace Soleil
         public static FontID DefaultFont = FontID.CorpM;
         public string Text { get => messageBox.Message; set => messageBox.Message = value; }
 
+        public MessageWindow(Vector pos, Vector size, bool isStatic = false)
+            : this(pos, size, WindowTag.A, WindowManager.GetInstance(), isStatic) { }
+
         public MessageWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic = false)
             : base(_pos, _size, tag, wm, isStatic)
         {

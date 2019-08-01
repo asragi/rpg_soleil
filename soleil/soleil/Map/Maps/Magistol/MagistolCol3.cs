@@ -41,7 +41,7 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            new MapChangeObject(new Vector(175, 1465), new Vector(60, 60), MapName.MagistolShop, new Vector(650, 500), Direction.LD, om, bm, party, cam);
+            new MapChangeObject("mco", new Vector(175, 1465), new Vector(60, 60), MapName.MagistolShop, new Vector(650, 500), Direction.LD, om, bm, party, cam);
         }
     }
 }

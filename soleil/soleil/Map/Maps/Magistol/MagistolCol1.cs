@@ -48,9 +48,9 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            new MapChangeObject(new Vector(240, 300), new Vector(140, 10), MapName.MagistolShop, new Vector(665, 690), Direction.LU, om, bm, party, cam);
-            new MapChangeObject(new Vector(1294, 1291), new Vector(60, 10), MapName.MagistolRoom, new Vector(338, 400), Direction.RD, om, bm, party, cam);
-            new WorldmapObject(new Vector(853, 400), new Vector(30, 30), WorldMap.WorldPointKey.Magistol, party, om, bm);
+            new MapChangeObject("mcoleft", new Vector(240, 300), new Vector(140, 10), MapName.MagistolShop, new Vector(665, 690), Direction.LU, om, bm, party, cam);
+            new MapChangeObject("mcoroom", new Vector(1294, 1291), new Vector(60, 10), MapName.MagistolRoom, new Vector(338, 400), Direction.RD, om, bm, party, cam);
+            new WorldmapObject("tmp", new Vector(853, 400), new Vector(30, 30), WorldMap.WorldPointKey.Magistol, party, om, bm);
         }
     }
 }

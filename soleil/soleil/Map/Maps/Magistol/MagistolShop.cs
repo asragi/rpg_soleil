@@ -38,9 +38,9 @@ namespace Soleil.Map
 
             // Objects
             // To Col3: Front of Principal room
-            new MapChangeObject(new Vector(697, 465), new Vector(10, 60), MapName.MagistolCol3, new Vector(257, 1416), Direction.RU, om, bm, party, cam);
+            new MapChangeObject("mco_principal", new Vector(697, 465), new Vector(10, 60), MapName.MagistolCol3, new Vector(257, 1416), Direction.RU, om, bm, party, cam);
             // To Col1: West Side of corridor
-            new MapChangeObject(new Vector(710, 730), new Vector(40, 40), MapName.MagistolCol1, new Vector(300, 417), Direction.RD, om, bm, party, cam);
+            new MapChangeObject("mco_col", new Vector(710, 730), new Vector(40, 40), MapName.MagistolCol1, new Vector(300, 417), Direction.RD, om, bm, party, cam);
         }
     }
 }

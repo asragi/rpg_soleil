@@ -12,10 +12,11 @@ namespace Soleil.Map
         };
 
         public WorldmapObject(
+            string name,
             Vector pos, Vector size, WorldPointKey dest,
             PersonParty pp, ObjectManager om, BoxManager bm
             )
-            :base (pos, size, om, bm)
+            :base (name, pos, size, om, bm)
         {
             var wm = WindowManager.GetInstance();
             EventSequence.SetEventSet(

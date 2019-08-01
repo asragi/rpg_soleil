@@ -31,6 +31,8 @@ namespace Soleil
         MenuItem2,
         MenuMagic1,
         MenuMagic2,
+        MenuSkill1,
+        MenuSkill2,
         MenuOption1,
         MenuOption2,
         MenuStatus1,
@@ -410,6 +412,8 @@ namespace Soleil
             SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
             SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
             SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuSkill1, UIPath + MenuPath + "menuskill1");
+            SetPath(TextureID.MenuSkill2, UIPath + MenuPath + "menuskill2");
             SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
             SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
             SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");

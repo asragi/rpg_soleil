@@ -42,9 +42,9 @@ namespace Soleil.Map
 
             // Objects
             cigerman = new Cigerman(new Vector(750, 600), om, bm);
-            mcoLeft = new MapChangeObject(new Vector(0, 500), new Vector(30, 260), MapName.Somnia2, new Vector(906, 513), Direction.L, om, bm, Party, cam);
-            mcoTop = new MapChangeObject(new Vector(900, 10), new Vector(300, 20), MapName.Somnia4, new Vector(896, 500), Direction.U, om, bm, Party, cam);
-            wmoRight = new WorldmapObject(new Vector(1250, 800), new Vector(30, 200), WorldPointKey.Somnia, Party, om, bm);
+            mcoLeft = new MapChangeObject("mcl", new Vector(0, 500), new Vector(30, 260), MapName.Somnia2, new Vector(906, 513), Direction.L, om, bm, Party, cam);
+            mcoTop = new MapChangeObject("mct", new Vector(900, 10), new Vector(300, 20), MapName.Somnia4, new Vector(896, 500), Direction.U, om, bm, Party, cam);
+            wmoRight = new WorldmapObject("wmc", new Vector(1250, 800), new Vector(30, 200), WorldPointKey.Somnia, Party, om, bm);
         }
     }
 }

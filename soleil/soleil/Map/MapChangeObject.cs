@@ -9,9 +9,9 @@ namespace Soleil.Map
 {
     class MapChangeObject : MapEventObject
     {
-        public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
+        public MapChangeObject(string name, Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
             ObjectManager om, BoxManager bm, PersonParty party, Camera cam)
-            : base(pos, size, om, bm)
+            : base(name, pos, size, om, bm)
         {
             Pos = pos;
             ExistanceBox.Layer = CollideLayer.RoadEvent;

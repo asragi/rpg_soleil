@@ -19,7 +19,7 @@ namespace Soleil.Map.Maps.Somnia
         enum BoolName { First, Sold, size }
 
         public AccessaryGirl(Vector pos, PersonParty party, ObjectManager om, BoxManager bm)
-            : base(pos, null, om, bm)
+            : base("accessary", pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaAcceU, new Vector(-5, -45), true, 8);
             AnimationData[] standAnim = new[] { anim, anim, anim, anim, anim, anim, anim, anim, anim }; // 最悪
