@@ -24,9 +24,10 @@ namespace Soleil.Skill
                 // skillLeanにデータ追加
             }
             // skillLearnへのデータ追加に使用します
-            void Set(MagicCategory category, int lv, SkillID skill)
+            void Set(int lv, SkillID skill)
             {
-                skillLearn[category].Add(lv, skill);
+                var data = (MagicData)SkillDataBase.Get(skill);
+                skillLearn[data.Category].Add(lv, skill);
             }
         }
         /// <summary>
