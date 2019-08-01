@@ -11,12 +11,14 @@ namespace Soleil.Event.Shop
 {
     class ShopItemList : BasicMenu
     {
-        protected override Vector WindowPos => new Vector(440, 100);
+        protected override Vector WindowPos => new Vector(440, 110);
         ShopStorage storage;
         Dictionary<ItemID, int> values;
         MoneyWallet moneyWallet;
         ItemList itemList;
         public bool Purchased;
+        ShopDecideWindow decideWindow;
+        public bool ReadyForEnd { get; private set; } = false;
 
         public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
@@ -33,6 +35,7 @@ namespace Soleil.Event.Shop
         {
             base.Call();
             Purchased = false;
+            ReadyForEnd = false;
         }
 
         protected override SelectablePanel[] MakeAllPanels()
@@ -49,31 +52,89 @@ namespace Soleil.Event.Shop
 
         public override void OnInputSubmit()
         {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+
             var decidedPanel = (ShopPanel)Panels[Index];
             var decidedPrice = decidedPanel.Price;
+            if (itemList.GetItemNum(decidedPanel.ID) == 99)
+            {
+                // これ以上アイテムを持てない
+                return;
+            }
             if (storage.IsSoldOut(Index))
             {
                 // 売り切れ
                 return;
             }
-            if (moneyWallet.HasEnough(decidedPrice))
-            {
-                // 購入成功
-                Console.WriteLine("購入成功");
-                Purchased = true;
-                moneyWallet.Consume(decidedPrice);
-                itemList.AddItem(decidedPanel.ID);
-                storage.Purchase(Index);
-                Init();
-                RefreshSelected();
-            }
-            else
+            if (!moneyWallet.HasEnough(decidedPrice))
             {
                 // 所持金が足りない
                 Console.WriteLine("所持金が足りない");
+                return;
+            }
+
+            decideWindow = new ShopDecideWindow(
+                decidedPanel.ID, decidedPrice, Index,
+                this, storage, itemList, moneyWallet);
+            decideWindow.Call();
+            return;
+
+            void InputToDecideWindow()
+            {
+                decideWindow.OnInputSubmit();
             }
         }
 
-        public override void OnInputCancel() { }
+        public override void OnInputCancel() {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                InputToDecideWindow();
+                return;
+            }
+            ReadyForEnd = true;
+
+            void InputToDecideWindow()
+            {
+                decideWindow.OnInputCancel();
+            }
+        }
+
+        public override void Input(Direction dir)
+        {
+            if (decideWindow != null && decideWindow.IsFocused)
+            {
+                decideWindow.Input(dir);
+                return;
+            }
+            base.Input(dir);
+        }
+
+        public void Purchase(int num, int price, ItemID target)
+        {
+            // 購入成功
+            Console.WriteLine("購入成功");
+            Purchased = true;
+            moneyWallet.Consume(price * num);
+            itemList.AddItem(target, num);
+            storage.Purchase(Index, num);
+            Init();
+            RefreshSelected();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            decideWindow?.Update();
+        }
+
+        public override void Draw(Drawing d)
+        {
+            base.Draw(d);
+            decideWindow?.Draw(d);
+        }
     }
 }

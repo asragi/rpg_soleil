@@ -7,11 +7,11 @@ namespace Soleil
     /// </summary>
     abstract class Window : MenuComponent
     {
-        public const int FadeSpeed = 8;
+        public const int FadeSpeed = MenuSystem.FadeSpeed;
         /// <summary>
         /// アニメーション時のズレ量
         /// </summary>
-        public readonly Vector DiffPos = new Vector(0, 10);
+        public readonly static Vector DiffPos = new Vector(0, 10);
         protected const DepthID Depth = DepthID.MessageBack;
         protected abstract float Alpha { get; }
         protected abstract Vector SpaceVector { get; }

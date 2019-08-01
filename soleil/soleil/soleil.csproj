@@ -94,6 +94,7 @@
     <Compile Include="Event\PictureCreateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
     <Compile Include="Event\Shop\ShopDatabase.cs" />
+    <Compile Include="Event\Shop\ShopDecideWindow.cs" />
     <Compile Include="Event\Shop\ShopEvent.cs" />
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
@@ -161,6 +162,10 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol3.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolRoom.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolShop.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
     <Compile Include="Map\WorldmapObject.cs" />
@@ -187,7 +192,6 @@
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\Detail\ArmorDetail.cs" />
-    <Compile Include="Menu\Detail\DetailComponent.cs" />
     <Compile Include="Menu\Detail\DetailWindow.cs" />
     <Compile Include="Menu\Detail\PossessNum.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
@@ -242,6 +246,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Scene\MapScene.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />

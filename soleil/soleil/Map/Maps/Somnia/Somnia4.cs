@@ -37,7 +37,7 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            accessaryGirl = new AccessaryGirl(new Vector(650, 330), om, bm);
+            accessaryGirl = new AccessaryGirl(new Vector(650, 330), party, om, bm);
             mcoLeft = new MapChangeObject("mcl", new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
             mcoRight = new MapChangeObject("mcr", new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
         }

@@ -17,6 +17,7 @@ namespace Soleil
         WhiteWindow,
         IndicatorBack,
         BackBar,
+        Currency,
 
         MessageWindow,
         ConversationWindow,
@@ -30,6 +31,8 @@ namespace Soleil
         MenuItem2,
         MenuMagic1,
         MenuMagic2,
+        MenuSkill1,
+        MenuSkill2,
         MenuOption1,
         MenuOption2,
         MenuStatus1,
@@ -50,6 +53,16 @@ namespace Soleil
         IconAccessary,
         IconPot,
         IconJewel,
+        MagicSun,
+        MagicShade,
+        MagicMagic,
+        MagicDark,
+        MagicSound,
+        MagicNinja,
+        MagicWood,
+        MagicMetal,
+        MagicSpace,
+        MagicTime,
 
         Rule0,
         Rule1,
@@ -109,6 +122,28 @@ namespace Soleil
         Somnia4_3,
         Somnia4_4,
         Somnia4_5,
+
+        Magistol1_back,
+        Magistol1_dark,
+        Magistol1_wall,
+        Magistol1_cloth,
+
+        Magistol2_back,
+        Magistol2_chair,
+        Magistol2_plant,
+        Magistol2_wall,
+        Magistol2_stair,
+        Magistol2_shelf,
+
+        Magistol3_back,
+        Magistol3_chair,
+        Magistol3_wall,
+
+        Magistol4_back,
+        Magistol4_chair1,
+        Magistol4_chair2,
+        Magistol4_wall,
+        Magistol4_plant,
 
         WorldMapIcon,
         WorldMapCursor,
@@ -263,6 +298,7 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
             SetPath(TextureID.BackBar, $"{UIPath}backBar");
+            SetPath(TextureID.Currency, $"{UIPath}currency");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
@@ -290,6 +326,30 @@ namespace Soleil
             SetPath(TextureID.Somnia4_3, "Map/Back/Somnia/4/somnia4-3");
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
             SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
+
+            string mag = "Map/Back/Magistol/";
+
+            SetPath(TextureID.Magistol1_back, mag + "room/1");
+            SetPath(TextureID.Magistol1_dark, mag + "room/2");
+            SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+            SetPath(TextureID.Magistol1_wall, mag + "room/wall");
+
+            SetPath(TextureID.Magistol2_back, mag + "col1/col");
+            SetPath(TextureID.Magistol2_chair, mag + "col1/chair");
+            SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
+            SetPath(TextureID.Magistol2_wall, mag + "col1/wall");
+            SetPath(TextureID.Magistol2_stair, mag + "col1/stair");
+            SetPath(TextureID.Magistol2_shelf, mag + "col1/shelf");
+
+            SetPath(TextureID.Magistol3_back, mag + "shop/back");
+            SetPath(TextureID.Magistol3_chair, mag + "shop/chair");
+            SetPath(TextureID.Magistol3_wall, mag + "shop/wall");
+
+            SetPath(TextureID.Magistol4_back, mag + "col3/back");
+            SetPath(TextureID.Magistol4_chair1, mag + "col3/chair1");
+            SetPath(TextureID.Magistol4_chair2, mag + "col3/chair2");
+            SetPath(TextureID.Magistol4_wall, mag + "col3/wall");
+            SetPath(TextureID.Magistol4_plant, mag + "col3/plant");
 
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
@@ -352,6 +412,8 @@ namespace Soleil
             SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
             SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
             SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuSkill1, UIPath + MenuPath + "menuskill1");
+            SetPath(TextureID.MenuSkill2, UIPath + MenuPath + "menuskill2");
             SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
             SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
             SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");
@@ -377,6 +439,17 @@ namespace Soleil
             SetPath(TextureID.IconPot, UIPath + MenuPath + "icons/" + "icon-pot");
             SetPath(TextureID.IconJewel, UIPath + MenuPath + "icons/" + "icon-jewel");
 
+            string mIcon = UIPath + MenuPath + "magicicon/";
+            SetPath(TextureID.MagicSun, mIcon + "micon-sun");
+            SetPath(TextureID.MagicShade, mIcon + "micon-moon");
+            SetPath(TextureID.MagicMagic, mIcon + "micon-magic");
+            SetPath(TextureID.MagicDark, mIcon + "micon-dark");
+            SetPath(TextureID.MagicSound, mIcon + "micon-sound");
+            SetPath(TextureID.MagicNinja, mIcon + "micon-ninja");
+            SetPath(TextureID.MagicWood, mIcon + "micon-leaf");
+            SetPath(TextureID.MagicMetal, mIcon + "micon-gear");
+            SetPath(TextureID.MagicSpace, mIcon + "micon-space");
+            SetPath(TextureID.MagicTime, mIcon + "micon-time");
 
             for (int i = 0; i < 20; i++)
             {
@@ -456,5 +529,10 @@ namespace Soleil
         }
 
         public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+
+        public static Vector GetSize(this FontID id, string text)
+        {
+            return (Vector)GetFont(id).MeasureString(text);
+        }
     }
 }

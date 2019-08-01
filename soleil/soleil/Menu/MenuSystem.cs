@@ -13,7 +13,6 @@ namespace Soleil.Menu
         Items = 0,
         Magic,
         Skill,
-        // Equip,
         Status,
         Option,
         Save,
@@ -76,12 +75,10 @@ namespace Soleil.Menu
             TextureID.MenuItem2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
-            TextureID.MenuMagic1,
-            TextureID.MenuMagic2,
+            TextureID.MenuSkill1,
+            TextureID.MenuSkill2,
             TextureID.MenuEquip1,
             TextureID.MenuEquip2,
-            // TextureID.MenuStatus1,
-            // TextureID.MenuStatus2,
             TextureID.MenuOption1,
             TextureID.MenuOption2,
             TextureID.MenuSave1,
@@ -156,7 +153,7 @@ namespace Soleil.Menu
             IsActive = false;
 
             // Money
-            moneyComponent = new MoneyComponent(MoneyComponentPos);
+            moneyComponent = new MoneyComponent(MoneyComponentPos, new Vector(30, 0));
         }
 
         /// <summary>
