@@ -25,8 +25,10 @@ namespace Soleil.Menu.Status
             set
             {
                 lvNum.Text = value.ToString();
-                for (int i = value; i < 9; ++i)
-                    lvCircle[i].IsVisible = false;
+                for (int i = 0; i < 9; ++i)
+                {
+                    lvCircle[i].IsVisible = value > i;
+                }
             }
         }
         public Color Color
