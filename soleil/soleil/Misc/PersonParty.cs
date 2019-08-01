@@ -47,13 +47,13 @@ namespace Soleil
             var b = new AbilityScore(228, 121, 22, 18, 22, 20);
             var c = new AbilityScore(164, 82, 13, 24, 12, 14);
             var a_s = new SkillHolder();
-            for (int i = 0; i < (int)SkillID.size; i++)
-            {
-                a_s.LearnSkill((SkillID)i);
-            }
             var b_s = new SkillHolder(SkillID.PointFlare, SkillID.Thunder, SkillID.Headbutt);
             var c_s = new SkillHolder(SkillID.Headbutt, SkillID.Sonicboom);
             var a_m = new MagicLv(a_s);
+            for (int i = 0; i < (int)MagicCategory.size; i++)
+            {
+                a_m.AddExp(100 - i * 10, (MagicCategory)i);
+            }
             var b_m = new MagicLv(b_s);
             var c_m = new MagicLv(c_s);
             allCharacters[(int)CharaName.Lune] = new Person(CharaName.Lune, a, a_s, a_m);
