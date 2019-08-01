@@ -11,7 +11,7 @@ namespace Soleil.Menu.Status
     class MagicCategoryPiece : MenuComponent
     {
         const int MiniHeight = 7;
-        readonly Vector LvCircleDiff = new Vector(35, 5);
+        readonly Vector LvCircleDiff = new Vector(35, 3);
         readonly Vector LvCircleSize = new Vector(15, 0);
         readonly Vector LvDiff = new Vector(176, MiniHeight);
         readonly Vector LvNumPosDiff = new Vector(200, 0);
@@ -49,7 +49,7 @@ namespace Soleil.Menu.Status
                     new TextImage(FontID.CorpMini, lvcpos + LvCircleSize * i, Vector.Zero, DepthID.MenuTop)
                     {
                         Text = "〇",
-                        Color = ColorPalette.DarkBlue
+                        Color = ColorPalette.MagicColors[tag]
                     };
                 lvCircle[i] = circle;
             }
