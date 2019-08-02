@@ -9,10 +9,20 @@ namespace Soleil.Menu
     class MagicUserSelect: StatusTargetSelectBase
     {
         MenuSystem menuSystem;
-        public MagicUserSelect(MenuSystem _menuSystem)
+        MenuDescription menuDescription;
+        string description;
+        public MagicUserSelect(MenuSystem _menuSystem, MenuDescription desc, string description)
             :base(_menuSystem)
         {
             menuSystem = _menuSystem;
+            menuDescription = desc;
+            this.description = description;
+        }
+
+        protected override void OnEnable()
+        {
+            menuDescription.Text = description;
+            base.OnEnable();
         }
 
         public override void OnInputSubmit()
