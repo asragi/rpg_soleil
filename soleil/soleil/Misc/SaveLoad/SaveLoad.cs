@@ -19,7 +19,7 @@ namespace Soleil
 
         public static void Save(PersonParty party)
         {
-            var save = new Misc.SaveData(party);
+            var save = new SaveData(party);
             string path = FilePath;
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
@@ -37,6 +37,11 @@ namespace Soleil
                 var bf = new BinaryFormatter();
                 data = (SaveData)bf.Deserialize(fs);
             }
+        }
+
+        public static bool FileExist()
+        {
+            return File.Exists(FilePath);
         }
 
         // 以下Load用

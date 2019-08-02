@@ -20,9 +20,6 @@ namespace Soleil
             mapIndicator = new MapIndicator();
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
-
-            SaveLoad.Save(party);
-            SaveLoad.Load();
         }
 
         override public void Update()
