@@ -29,11 +29,16 @@ namespace Soleil.Menu
 
         public override void Call()
         {
-            base.Call();
-            IsActive = true;
+            Call(true);
         }
 
-        public void Input(Direction dir)
+        public void Call(bool active)
+        {
+            base.Call();
+            IsActive = active;
+        }
+
+        public virtual void Input(Direction dir)
         {
             if (KeyInput.GetKeyPush(Key.A)) { OnInputSubmit(); return; }
             if (KeyInput.GetKeyPush(Key.B)) { OnInputCancel(); return; }

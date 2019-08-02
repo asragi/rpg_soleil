@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,8 +66,14 @@ namespace Soleil.Item
         {
             Physical = p;
             Magical = m;
-            PhysicalAttr = _pAttr ?? new AttrDef();
-            MagicalAttr = _mAttr ?? new AttrDef();
+            PhysicalAttr = _pAttr ?? new AttrDef(0);
+            MagicalAttr = _mAttr ?? new AttrDef(0);
+        }
+
+        public int GetDefVal(AttackAttribution attr, AttackType t)
+        {
+            if (t == AttackType.Physical) return Physical + PhysicalAttr.Values[(int)attr];
+            return Magical + MagicalAttr.Values[(int)attr];
         }
     }
 
@@ -75,20 +82,16 @@ namespace Soleil.Item
     /// </summary>
     struct AttrDef
     {
-        public int Heat;
-        public int Thunder;
-        public int Ice;
-        public int Blow;
-        public int Slash;
-        public int Thrust;
+        public int[] Values;
         public AttrDef(int heat=0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
         {
-            Heat = heat;
-            Thunder = thunder;
-            Ice = ice;
-            Blow = blow;
-            Slash = slash;
-            Thrust = thrust;
+            Values = new int[(int)AttackAttribution.size];
+            Values[(int)AttackAttribution.Fever] = heat;
+            Values[(int)AttackAttribution.Electro] = thunder;
+            Values[(int)AttackAttribution.Ice] = ice;
+            Values[(int)AttackAttribution.Beat] = blow;
+            Values[(int)AttackAttribution.Cut] = slash;
+            Values[(int)AttackAttribution.Thrust] = thrust;
         }
     }
 
@@ -98,7 +101,7 @@ namespace Soleil.Item
     struct NormalItem : IItem
     {
         public ItemID ID { get; }
-        public ItemType Type { get { return ItemType.Consumable; } }
+        public ItemType Type { get { return ItemType.Unconsumable; } }
         public bool OnMenu { get; }
         public bool OnBattle { get; }
         public string Name { get; }
@@ -114,6 +117,36 @@ namespace Soleil.Item
             Name = name;
             Description = description;
         }
+    }
+
+    /// <summary>
+    /// 使用可能なアイテム
+    /// </summary>
+    struct ConsumableItem : IItem
+    {
+        public ItemID ID { get; }
+        public ItemType Type => ItemType.Consumable;
+        public bool OnMenu { get; }
+        public bool OnBattle { get; }
+        public string Name { get; }
+        public string Description { get; }
+        public ItemTarget Target { get; }
+        public ItemEffectType EffectType { get; }
+
+        public ConsumableItem(ItemID id, string name, string description, ItemTarget target, ItemEffectType effect, bool onMenu = true, bool onBattle = true)
+        {
+            (ID, Name, Description, Target, EffectType, OnMenu, OnBattle) = (id, name, description, target, effect, onMenu, onBattle);
+        }
+    }
+
+    /// <summary>
+    /// アイテム使用時の効果対象
+    /// </summary>
+    enum ItemTarget
+    {
+        OneAlly,
+        AllAlly,
+        Nothing,
     }
 
     struct WeaponData : IItem, IArmor

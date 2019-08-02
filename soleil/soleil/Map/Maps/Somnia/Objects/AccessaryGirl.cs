@@ -12,20 +12,14 @@ namespace Soleil.Map.Maps.Somnia
     class AccessaryGirl : MapCharacter
     {
         readonly Vector WindowPosDiff = new Vector(-230, -100);
-        readonly Dictionary<ItemID, int> values = new Dictionary<ItemID, int> {
-            {ItemID.Stone, 200 },
-            {ItemID.Zarigani, 1200 },
-            {ItemID.SilverWand, 73000 },
-            {ItemID.BeadsWork, 3000 }
-        };
 
         // Event bool
         BoolSet boolSet;
         BoolSet preservedBools;
         enum BoolName { First, Sold, size }
 
-        public AccessaryGirl(Vector pos, ObjectManager om, BoxManager bm)
-            : base(pos, null, om, bm)
+        public AccessaryGirl(Vector pos, PersonParty party, ObjectManager om, BoxManager bm)
+            : base("accessary", pos, null, om, bm)
         {
             AnimationData anim = new AnimationData(AnimationID.SomniaAcceU, new Vector(-5, -45), true, 8);
             AnimationData[] standAnim = new[] { anim, anim, anim, anim, anim, anim, anim, anim, anim }; // 最悪
@@ -33,25 +27,39 @@ namespace Soleil.Map.Maps.Somnia
 
             // Event
             boolSet = new BoolSet((int)BoolName.size);
-            preservedBools = GlobalBoolSet.Get(BoolObject.Accessary,(int)BoolName.size);
+            preservedBools = GlobalBoolSet.GetBoolSet(BoolObject.Accessary,(int)BoolName.size);
 
             EventSequence.SetEventSet(
                 new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
+                    new EventUnit[] {
                     new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")), 
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")) },
+                    new EventUnit[] {
                     new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして"))),
+                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
                 new EventSet(
                     new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
-                    new ShopEvent(values, boolSet, (int)BoolName.Sold),
-                    new BoolSetEvent(preservedBools, (int)BoolName.First, true)
+                    new ShopEvent(ShopName.Accessary, party, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
-                    new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！")),
-                    new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな"))),
-                new EventSet(new ChangeInputFocusEvent(InputFocus.Player))
+                    new EventUnit[] {
+                        new EventSet(
+                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！"))
+                    },
+                    new EventUnit[] {
+                        new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
+                        new EventUnit[]
+                        {
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "残念")),
+                        },
+                        new EventUnit[]{
+                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな")),
+                        })
+                    }),
+                new EventSet(
+                    new ChangeInputFocusEvent(InputFocus.Player),
+                    new BoolSetEvent(preservedBools, (int)BoolName.First, true)
+                )
             );
         }
 

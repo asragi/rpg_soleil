@@ -13,8 +13,8 @@ namespace Soleil.Menu
     /// </summary>
     class TextWithVal : IComponent
     {
-        private FontImage text;
-        private FontImage val;
+        private TextImage text;
+        private TextImage val;
         public Color TextColor { set => text.Color = value; }
         public Color ValColor { set => val.Color = value; }
         public String Text { get => text.Text; set => text.Text = value; }
@@ -60,11 +60,11 @@ namespace Soleil.Menu
             spacing = _space;
             font = _font;
             valFont = _font;
-            text = new FontImage(font, pos, depth, isStatic, 0);
+            text = new TextImage(font, pos, depth, isStatic, 0);
             text.Text = _text;
             (rightAlign, underAlign) = (_rightAlign, _underAlign);
             
-            val = new FontImage(font, Vector.Zero, depth, isStatic, 0);
+            val = new TextImage(font, Vector.Zero, depth, isStatic, 0);
             Val = _val;
         }
 

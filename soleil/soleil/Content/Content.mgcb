@@ -254,7 +254,7 @@
 /processorParam:TextureFormat=Color
 /build:Arrow.png
 
-#begin kkmincho.spritefont
+#begin corpm.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -267,17 +267,17 @@
 /processorParam:HasGreekLetters=False
 /processorParam:HasCyrillicLetters=False
 /processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0
-/processorParam:OutlineColor=64,64,64,255
+/processorParam:OutlineThickness=0.1
+/processorParam:OutlineColor=64,64,64,0
 /processorParam:FontColor=255,255,255,255
 /processorParam:UseGradient=False
 /processorParam:GradientBeginColor=64,128,255,255
 /processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:kkmincho.spritefont
+/build:corpm.spritefont
 
-#begin kkminchoBlack.spritefont
+#begin corpmini.spritefont
 /importer:FontDescriptionImporter
 /processor:WpfFontDescriptionProcessor
 /processorParam:HasAsciiCharacters=True
@@ -290,107 +290,15 @@
 /processorParam:HasGreekLetters=False
 /processorParam:HasCyrillicLetters=False
 /processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
+/processorParam:OutlineThickness=0.1
+/processorParam:OutlineColor=64,64,64,0
 /processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlack.spritefont
-
-#begin kkminchoBlackMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoBlackMini.spritefont
-
-#begin kkminchoGoldMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=False
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=86,77,37,255
-/processorParam:FontColor=202,193,152,255
 /processorParam:UseGradient=False
-/processorParam:GradientBeginColor=202,193,152,255
-/processorParam:GradientEndColor=86,77,37,255
+/processorParam:GradientBeginColor=64,128,255,255
+/processorParam:GradientEndColor=0,0,128,255
 /processorParam:GradientAngle=90
 /processorParam:TextureFormat=Auto
-/build:kkminchoGoldMini.spritefont
-
-#begin kkminchoNormal.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoNormal.spritefont
-
-#begin kkminchoWhiteMini.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=True
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=True
-/processorParam:HasKatakana=True
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=21,44,63,200
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=240,248,255,255
-/processorParam:GradientEndColor=156,187,199,255
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:kkminchoWhiteMini.spritefont
+/build:corpmini.spritefont
 
 #begin Map/Back/Flare/1/flare1-10.png
 /importer:TextureImporter
@@ -596,6 +504,222 @@
 /processorParam:TextureFormat=Color
 /build:Map/Back/Flare/1/flare1-9.png
 
+#begin Map/Back/Magistol/col1/chair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/chair.png
+
+#begin Map/Back/Magistol/col1/col.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/col.png
+
+#begin Map/Back/Magistol/col1/plant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/plant.png
+
+#begin Map/Back/Magistol/col1/shelf.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/shelf.png
+
+#begin Map/Back/Magistol/col1/stair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/stair.png
+
+#begin Map/Back/Magistol/col1/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col1/wall.png
+
+#begin Map/Back/Magistol/col3/back.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col3/back.png
+
+#begin Map/Back/Magistol/col3/chair1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col3/chair1.png
+
+#begin Map/Back/Magistol/col3/chair2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col3/chair2.png
+
+#begin Map/Back/Magistol/col3/plant.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col3/plant.png
+
+#begin Map/Back/Magistol/col3/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/col3/wall.png
+
+#begin Map/Back/Magistol/room/1.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/room/1.png
+
+#begin Map/Back/Magistol/room/2.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/room/2.png
+
+#begin Map/Back/Magistol/room/3.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/room/3.png
+
+#begin Map/Back/Magistol/room/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/room/wall.png
+
+#begin Map/Back/Magistol/shop/back.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/shop/back.png
+
+#begin Map/Back/Magistol/shop/chair.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/shop/chair.png
+
+#begin Map/Back/Magistol/shop/wall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/Back/Magistol/shop/wall.png
+
 #begin Map/Back/Somnia/1/somnia1_1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -788,28 +912,29 @@
 /processorParam:TextureFormat=Color
 /build:Map/Back/Somnia/4/somnia4-5.png
 
-#begin touhaba.spritefont
-/importer:FontDescriptionImporter
-/processor:WpfFontDescriptionProcessor
-/processorParam:HasAsciiCharacters=True
-/processorParam:HasZenkakuLatinLetters=False
-/processorParam:HasSpecialCharacters=True
-/processorParam:HasHiragana=False
-/processorParam:HasKatakana=False
-/processorParam:HasJisKanjiLevel1=True
-/processorParam:HasJisKanjiLevel2=False
-/processorParam:HasGreekLetters=False
-/processorParam:HasCyrillicLetters=False
-/processorParam:HasBoxCharacters=False
-/processorParam:OutlineThickness=0.4
-/processorParam:OutlineColor=240,248,255,255
-/processorParam:FontColor=255,255,255,255
-/processorParam:UseGradient=True
-/processorParam:GradientBeginColor=41,68,91,255
-/processorParam:GradientEndColor=21,44,63,200
-/processorParam:GradientAngle=90
-/processorParam:TextureFormat=Auto
-/build:touhaba.spritefont
+#begin Map/WorldMap/cursor.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/WorldMap/cursor.png
+
+#begin Map/WorldMap/yasoba-building-icon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Map/WorldMap/yasoba-building-icon.png
 
 #begin UI/backBar.png
 /importer:TextureImporter
@@ -823,7 +948,7 @@
 /processorParam:TextureFormat=Color
 /build:UI/backBar.png
 
-#begin UI/Battle/escapeSelected.png
+#begin UI/currency.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -833,175 +958,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:UI/Battle/escapeSelected.png
-
-#begin UI/Battle/escapeUnselect.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/escapeUnselect.png
-
-#begin UI/Battle/face1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/face1.png
-
-#begin UI/Battle/face2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/face2.png
-
-#begin UI/Battle/face3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/face3.png
-
-#begin UI/Battle/face4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/face4.png
-
-#begin UI/Battle/faceLune.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/faceLune.png
-
-#begin UI/Battle/faceSun.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/faceSun.png
-
-#begin UI/Battle/guardSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/guardSelected.png
-
-#begin UI/Battle/guardUnselect.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/guardUnselect.png
-
-#begin UI/Battle/magicSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/magicSelected.png
-
-#begin UI/Battle/magicUnselect.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/magicUnselect.png
-
-#begin UI/Battle/skillSelected.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/skillSelected.png
-
-#begin UI/Battle/skillUnselect.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/skillUnselect.png
-
-#begin UI/Battle/tempBack.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Battle/tempBack.png
+/build:UI/currency.png
 
 #begin UI/indicatorTemp.png
 /importer:TextureImporter
@@ -1014,6 +971,198 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/indicatorTemp.png
+
+#begin UI/Menu/icons/icon-accessary.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-accessary.png
+
+#begin UI/Menu/icons/icon-clothes.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-clothes.png
+
+#begin UI/Menu/icons/icon-jewel.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-jewel.png
+
+#begin UI/Menu/icons/icon-pot.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-pot.png
+
+#begin UI/Menu/icons/icon-wand.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/icons/icon-wand.png
+
+#begin UI/Menu/lune_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/lune_face.png
+
+#begin UI/Menu/magicicon/micon-dark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-dark.png
+
+#begin UI/Menu/magicicon/micon-gear.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-gear.png
+
+#begin UI/Menu/magicicon/micon-leaf.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-leaf.png
+
+#begin UI/Menu/magicicon/micon-magic.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-magic.png
+
+#begin UI/Menu/magicicon/micon-moon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-moon.png
+
+#begin UI/Menu/magicicon/micon-ninja.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-ninja.png
+
+#begin UI/Menu/magicicon/micon-sound.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-sound.png
+
+#begin UI/Menu/magicicon/micon-space.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-space.png
+
+#begin UI/Menu/magicicon/micon-sun.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-sun.png
+
+#begin UI/Menu/magicicon/micon-time.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/magicicon/micon-time.png
 
 #begin UI/Menu/menuback.png
 /importer:TextureImporter
@@ -1099,18 +1248,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/menuline.png
 
-#begin UI/Menu/menulune.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menulune.png
-
 #begin UI/Menu/menumagic1.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1195,6 +1332,30 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/menusave2.PNG
 
+#begin UI/Menu/menuskill1.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuskill1.PNG
+
+#begin UI/Menu/menuskill2.PNG
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/menuskill2.PNG
+
 #begin UI/Menu/menustatus1.PNG
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1231,18 +1392,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/MenuStatusFaceL.png
 
-#begin UI/Menu/menusun.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:UI/Menu/menusun.png
-
 #begin UI/Menu/selectBack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1255,6 +1404,30 @@
 /processorParam:TextureFormat=Color
 /build:UI/Menu/selectBack.png
 
+#begin UI/Menu/sunny_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/sunny_face.png
+
+#begin UI/Menu/tella_face.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/tella_face.png
+
 #begin UI/Menu/unselectedBack.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1266,6 +1439,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/Menu/unselectedBack.png
+
+#begin UI/Menu/yasoba-select.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/yasoba-select.png
+
+#begin UI/Menu/yasoba-window-skill-category.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/Menu/yasoba-window-skill-category.png
+
+#begin UI/message.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/message.png
 
 #begin UI/Rule/0.png
 /importer:TextureImporter
@@ -1530,6 +1739,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:UI/WindowWhite.PNG
+
+#begin UI/yasoba-window.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:UI/yasoba-window.png
 
 #begin white.png
 /importer:TextureImporter

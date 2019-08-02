@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,37 +9,48 @@ namespace Soleil.Menu.Status
 {
     class StatusMagicCategory : MenuComponent
     {
-        const int XDiff = 80;
-        const int YDiff = 80;
+        readonly Vector ContentPos = new Vector(36, 9);
+        const int YDiff = 27;
         MagicCategoryPiece[] pieces;
+        Image backImg;
 
-        readonly string[] names = new[] // debug tmp
+        public static readonly Dictionary<MagicCategory, string> MagicNames = new Dictionary<MagicCategory, string>()
         {
-            "陽術",
-            "陰術",
-            "魔術",
-            "－－",
-            "音術",
-            "忍術",
-            "樹術",
-            "鋼術",
-            "－－",
-            "－－",
+            { MagicCategory.Sun, "陽術" },
+            { MagicCategory.Shade, "陰術" },
+            { MagicCategory.Magic, "魔術" },
+            { MagicCategory.Dark ,"邪術" },
+            { MagicCategory.Sound, "音術" },
+            { MagicCategory.Shinobi, "忍術" },
+            { MagicCategory.Wood, "樹術" },
+            { MagicCategory.Metal, "鋼術" },
+            { MagicCategory.Space, "空術" },
+            { MagicCategory.Time, "時術" },
         };
 
         public StatusMagicCategory(Vector pos)
-            :base()
+            : base()
         {
+            backImg = new Image(TextureID.MenuCategory, pos, Vector.Zero, DepthID.MenuTop);
             pieces = new MagicCategoryPiece[10]; // 術10系統
             for (int i = 0; i < 10; i++)
             {
-                var x = XDiff * (i / 2);
-                var y = (i % 2 == 0) ? 0 : YDiff;
-                pieces[i] = new MagicCategoryPiece(pos + new Vector(x,y), i);
-                pieces[i].Name = names[i];
+                pieces[i] = new MagicCategoryPiece(pos + ContentPos + new Vector(0, YDiff * i), (MagicCategory)i);
+                pieces[i].Name = MagicNames[(MagicCategory)i];
             }
 
+            AddComponents(new[] { backImg });
             AddComponents(pieces);
+        }
+
+        public void RefreshWithPerson(Person p)
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                int lv = p.Magic.GetLv(pieces[i].category);
+                pieces[i].Lv = lv;
+                pieces[i].Color = lv==0 ? ColorPalette.GlayBlue : ColorPalette.DarkBlue;
+            }
         }
     }
 }

@@ -11,21 +11,28 @@ namespace Soleil.Images
     /// <summary>
     /// 長さの変わる文字背景用の汎用Image．
     /// </summary>
-    class BackBarImage
+    class BackBarImage: MenuComponent
     {
         // 画像の端からの切り出し量
         public const int EdgeSize = 36;
         public Vector Pos { get; set; }
         Image[] images;
 
-        public BackBarImage(Vector _pos, int _length, bool centerBased, DepthID depth = DepthID.MenuBottom)
+        public BackBarImage(Vector _pos, Vector posDiff, int _length, bool centerBased, DepthID depth = DepthID.MenuBottom)
         {
             Pos = _pos;
             images = new Image[3];
-            var tex = Resources.GetTexture(TextureID.BackBar);
+            var texID = TextureID.BackBar;
+            var tex = Resources.GetTexture(texID);
+            // 位置設定
+            var vecs = new Vector[3];
+            vecs[0] = Pos;
+            vecs[1] = Pos + new Vector(EdgeSize, 0);
+            vecs[2] = Pos + new Vector(EdgeSize + (_length - 2 * EdgeSize), 0);
+
             for (int i = 0; i < images.Length; i++)
             {
-                images[i] = new Image(0, tex, Pos, depth, false, true, 0);
+                images[i] = new Image(texID, vecs[i], posDiff, depth);
             }
             // 画像切り出し設定
             images[0].Rectangle = new Rectangle(0, 0, EdgeSize, tex.Height);
@@ -35,42 +42,8 @@ namespace Soleil.Images
             // 拡大率設定
             var size = (_length - 2 * EdgeSize) / (float)(tex.Width - 2 * EdgeSize);
             images[1].Size = new Vector(size, 1);
-            // 位置設定
-            images[0].Pos = Pos;
-            images[1].Pos = Pos + new Vector(EdgeSize, 0);
-            images[2].Pos = Pos + new Vector(EdgeSize + (_length - 2 * EdgeSize), 0);
-        }
 
-        public void Call()
-        {
-            for (int i = 0; i < images.Length; i++)
-            {
-                images[i].Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
-            }
-        }
-
-        public void Quit()
-        {
-            for (int i = 0; i < images.Length; i++)
-            {
-                images[i].Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, false);
-            }
-        }
-
-        public void Update()
-        {
-            for (int i = 0; i < images.Length; i++)
-            {
-                images[i].Update();
-            }
-        }
-
-        public void Draw(Drawing d)
-        {
-            for (int i = 0; i < images.Length; i++)
-            {
-                images[i].Draw(d);
-            }
+            AddComponents(images);
         }
     }
 }

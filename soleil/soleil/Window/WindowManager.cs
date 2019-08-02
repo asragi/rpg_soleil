@@ -47,6 +47,7 @@ namespace Soleil
                 else if (key == Key.Down) s.DownCursor();
             }
         }
+
         public void Input(Direction dir)
         {
             if (dir == Direction.U) MoveCursor(Key.Up);
@@ -85,8 +86,8 @@ namespace Soleil
 
         public void FinishMessageWindowAnim(WindowTag tag)
         {
-            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
-                .ConvertAll<MessageWindow>(s=>(MessageWindow)s);
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is IMessageBox)
+                .ConvertAll(s=>(IMessageBox)s);
             messageWindows.ForEach(mw => mw.FinishAnim());
         }
 
@@ -96,8 +97,8 @@ namespace Soleil
         public bool GetIsMessageWindowAnimFinished(WindowTag tag)
         {
             var flag = true;
-            var messageWindows = windows.FindAll(s => s.Tag == tag && s is MessageWindow)
-                .ConvertAll<MessageWindow>(s => (MessageWindow)s);
+            var messageWindows = windows.FindAll(s => s.Tag == tag && s is IMessageBox)
+                .ConvertAll(s => (IMessageBox)s);
             messageWindows.ForEach(mw => flag = flag && mw.GetAnimIsEnd()); // 一つでもfalseのものがあればfalse
             return flag;
         }

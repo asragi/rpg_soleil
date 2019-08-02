@@ -8,10 +8,11 @@
         MapBase nowMap;
         MapBase previousMap;
 
-        public void ChangeMap(MapBase map)
+        public void ChangeMap(MapBase map, Vector position)
         {
             previousMap = nowMap;
             nowMap = map;
+            nowMap.SetPlayerPos(position);
         }
 
         public void Update()

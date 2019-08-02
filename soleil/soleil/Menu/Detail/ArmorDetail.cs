@@ -11,12 +11,13 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 防具の詳細性能表示クラス．
     /// </summary>
-    class ArmorDetail : DetailComponent
+    class ArmorDetail: MenuComponent
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
-        readonly Vector DefExpPos = new Vector(0, 60);
-        readonly int Space = 220;
+        private static readonly Vector ExplainPos = new Vector(32, 32);
+        readonly Vector DefExpPos = new Vector(0, 53);
+        readonly int Space = 118;
         readonly Vector InitPos;
 
         TextWithVal atkExplain;
@@ -25,23 +26,13 @@ namespace Soleil.Menu.Detail
             :base()
         {
             InitPos = _pos;
-            atkExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos, Space, AtkExpText);
-            defExplain = new TextWithVal(FontID.WhiteOutlineGrad, _pos+DefExpPos, Space, ExplainText);
+            var font = DetailWindow.Font;
+            atkExplain = new TextWithVal(font, _pos + ExplainPos, Space, AtkExpText);
+            defExplain = new TextWithVal(font, _pos + ExplainPos + DefExpPos, Space, ExplainText);
+            AddComponents(new[] { atkExplain, defExplain });
         }
 
-        public void Call()
-        {
-            atkExplain.Call();
-            defExplain.Call();
-        }
-
-        public void Quit()
-        {
-            atkExplain.Quit();
-            defExplain.Quit();
-        }
-
-        private void Refresh(SelectablePanel panel)
+        public void Refresh(SelectablePanel panel)
         {
             if (!(panel is ItemPanelBase)) return;
             var itemPanel = (ItemPanelBase)panel;
@@ -78,21 +69,6 @@ namespace Soleil.Menu.Detail
             // 装備でない
             atkExplain.Enable = false;
             defExplain.Enable = false;            
-        }
-
-        public void Update(SelectablePanel panel)
-        {
-            base.Update();
-            Refresh(panel);
-            atkExplain.Update();
-            defExplain.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            atkExplain.Draw(d);
-            defExplain.Draw(d);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace Soleil.Map
 {
     class MapChangeObject : MapEventObject
     {
-        public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
-            ObjectManager om, BoxManager bm)
-            : base(pos, size, om, bm)
+        public MapChangeObject(string name, Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
+            ObjectManager om, BoxManager bm, PersonParty party, Camera cam)
+            : base(name, pos, size, om, bm)
         {
             Pos = pos;
             ExistanceBox.Layer = CollideLayer.RoadEvent;
@@ -20,7 +20,7 @@ namespace Soleil.Map
                     new ChangeInputFocusEvent(InputFocus.None),
                     new CharacterMoveEvent(om.GetPlayer(), dir, 15, false),
                     new FadeOutEvent(),
-                    new ChangeMapEvent(mapName, destination, dir),
+                    new ChangeMapEvent(mapName, destination, dir, party, cam),
                     new FadeInEvent(),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 )

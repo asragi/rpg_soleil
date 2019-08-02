@@ -13,7 +13,6 @@ namespace Soleil.Menu
         Items = 0,
         Magic,
         Skill,
-        Equip,
         Status,
         Option,
         Save,
@@ -32,18 +31,12 @@ namespace Soleil.Menu
             "魔法を確認・選択して使用します。",
             "スキルを確認・選択して使用します。",
             "装備を確認・変更します。",
-            "ステータスを確認します。",
+            // "ステータスを確認します。",
             "音量などの設定を行います。",
             "ゲームデータのセーブを行います。"
         };
 
-        UIImage backImage, frontImage;
-        // 選択後にキャラクターの選択に移動するメニュー項目
-        readonly MenuName[] ToCharacterSelect = new[] {
-            MenuName.Magic,
-            MenuName.Skill,
-            MenuName.Equip,
-            MenuName.Status };
+        Image backImage, frontImage;
 
         MenuItem[] menuItems;
         MenuLine menuLineUpper, menuLineLower;
@@ -55,9 +48,16 @@ namespace Soleil.Menu
         MenuChild[] menuChildren;
         // ItemMenu
         ItemMenu itemMenu;
+        ItemTargetSelect itemTargetSelect;
         // MagicMenu
         MagicMenu magicMenu;
+        MagicUserSelect magicUserSelect;
+        MagicTargetSelect magicTargetSelect;
+        // SkillMenu
+        SkillUserSelect skillUserSelect;
+        SkillMenu skillMenu;
         // Status 表示
+        StatusTargetSelect statusTargetSelect;
         StatusMenu statusMenu;
         // 詳細ステータス
         StatusSystem statusSystem;
@@ -75,25 +75,23 @@ namespace Soleil.Menu
             TextureID.MenuItem2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
-            TextureID.MenuMagic1,
-            TextureID.MenuMagic2,
+            TextureID.MenuSkill1,
+            TextureID.MenuSkill2,
             TextureID.MenuEquip1,
             TextureID.MenuEquip2,
-            TextureID.MenuStatus1,
-            TextureID.MenuStatus2,
             TextureID.MenuOption1,
             TextureID.MenuOption2,
             TextureID.MenuSave1,
             TextureID.MenuSave2
         };
 
-        public MenuSystem()
+        public MenuSystem(PersonParty party)
             :base(null)
         {
             Index = 0;
             // Image初期化
-            backImage = new UIImage(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
-            frontImage = new UIImage(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
+            backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
+            frontImage = new Image(TextureID.MenuFront, Vector.Zero, Vector.Zero, DepthID.MenuTop);
 
             // 選択肢たち
             menuItems = new MenuItem[(int)MenuName.size];
@@ -109,14 +107,34 @@ namespace Soleil.Menu
             menuDescription = new MenuDescription(new Vector(125, 35));
             // Item Menu
             itemMenu = new ItemMenu(this, menuDescription);
+            itemTargetSelect = new ItemTargetSelect(itemMenu);
+            // Item Target Select
             // Status Menu
-            statusMenu = new StatusMenu(this);
+            statusTargetSelect = new StatusTargetSelect(this);
+            statusMenu = new StatusMenu(party, this);
             // Magic Menu
-            magicMenu = new MagicMenu(statusMenu, menuDescription);
+            magicUserSelect = new MagicUserSelect(this);
+            magicMenu = new MagicMenu(magicUserSelect, menuDescription);
+            magicTargetSelect = new MagicTargetSelect(magicMenu);
+            // Skill Menu
+            skillUserSelect = new SkillUserSelect(this);
+            skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusMenu, menuLineUpper, menuLineLower);
+            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, party);
             // MenuChildren(foreach用. 描画順に．)
-            menuChildren = new MenuChild[] { statusMenu, itemMenu, magicMenu, statusSystem };
+            menuChildren = new MenuChild[] {
+                statusMenu, statusTargetSelect,
+                itemMenu, itemTargetSelect,
+                skillMenu, skillUserSelect,
+                magicMenu, magicTargetSelect, magicUserSelect,
+                statusSystem };
+
+            // 参照を設定しまくる． // 最悪な状態なのでいい感じにしたい
+            itemMenu.SetRefs(itemTargetSelect, statusMenu);
+            statusTargetSelect.SetRefs(statusMenu);
+            magicUserSelect.SetRefs(statusMenu);
+            magicTargetSelect.SetRefs(statusMenu);
+            skillUserSelect.SetRefs(statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
@@ -135,7 +153,7 @@ namespace Soleil.Menu
             IsActive = false;
 
             // Money
-            moneyComponent = new MoneyComponent(MoneyComponentPos);
+            moneyComponent = new MoneyComponent(MoneyComponentPos, new Vector(30, 0));
         }
 
         /// <summary>
@@ -150,7 +168,7 @@ namespace Soleil.Menu
             {
                 menuItems[i].Call();
             }
-            statusMenu.Call();
+            statusMenu.Call(false);
             IsActive = true;
             IsQuit = false;
 
@@ -211,10 +229,11 @@ namespace Soleil.Menu
         /// <summary>
         /// 外部から特定のメニューを有効にする．
         /// </summary>
-        public void CallChild(MenuName name)
+        public void CallChild(MenuName name, Person p)
         {
-            if (name == MenuName.Magic) magicMenu.Call();
-            if (name == MenuName.Status) statusSystem.Call();
+            if (name == MenuName.Magic) magicMenu.CallWithPerson(p);
+            if (name == MenuName.Status) statusSystem.CallWithPerson(p);
+            if (name == MenuName.Skill) skillMenu.CallWithPerson(p);
         }
 
         void Decide()
@@ -226,12 +245,22 @@ namespace Soleil.Menu
                 itemMenu.Call();
                 return;
             }
-            if(ToCharacterSelect.Contains(selected))
+            if (selected == MenuName.Status)
             {
-                statusMenu.IsActive = true;
+                statusTargetSelect.Call();
                 return;
             }
-            if(selected == MenuName.Option)
+            if (selected == MenuName.Magic)
+            {
+                magicUserSelect.Call();
+                return;
+            }
+            if (selected == MenuName.Skill)
+            {
+                skillUserSelect.Call();
+                return;
+            }
+            if (selected == MenuName.Option)
             {
                 // Option設定用ウィンドウ出現
                 IsActive = true; // debug

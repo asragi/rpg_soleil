@@ -22,8 +22,9 @@ namespace Soleil.Menu
             :base(new Vector(X + MessagePosDiffX, Y + MessagePosDiffY))
         {
             var barWidth = Game1.VirtualWindowSizeX - 2 * X;
-            backBar = new BackBarImage(new Vector(X, Y), barWidth, false);
-            fontImage.Font = FontID.WhiteOutlineGrad;
+            backBar = new BackBarImage(new Vector(X, Y), Vector.Zero, barWidth, false);
+            fontImage.Font = FontID.CorpM;
+            fontImage.Color = ColorPalette.AliceBlue;
         }
 
         public override void Call()

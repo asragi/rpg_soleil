@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Soleil.Skill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,19 @@ namespace Soleil
     {
         public static Color AliceBlue = Color.AliceBlue;
         public static Color GlayBlue = new Color(156, 179, 199);
-        public static Color DarkBlue = new Color(33, 68, 99);
+        public static Color DarkBlue = new Color(36, 69, 98);
+
+        public readonly static Dictionary<MagicCategory, Color> MagicColors = new Dictionary<MagicCategory, Color>() {
+            { MagicCategory.Sun, Color.DarkKhaki },
+            { MagicCategory.Shade, Color.SteelBlue },
+            { MagicCategory.Magic, Color.SlateBlue },
+            { MagicCategory.Dark, Color.Brown },
+            { MagicCategory.Wood, Color.MediumSeaGreen },
+            { MagicCategory.Metal, Color.Peru },
+            { MagicCategory.Sound, Color.Plum },
+            { MagicCategory.Shinobi, Color.DarkCyan },
+            { MagicCategory.Space, Color.Gray },
+            { MagicCategory.Time, Color.DarkSlateGray },
+        };
     }
 }

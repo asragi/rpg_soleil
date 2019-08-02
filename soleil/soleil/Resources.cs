@@ -17,6 +17,10 @@ namespace Soleil
         WhiteWindow,
         IndicatorBack,
         BackBar,
+        Currency,
+
+        MessageWindow,
+        ConversationWindow,
 
         MenuFront,
         MenuBack,
@@ -27,6 +31,8 @@ namespace Soleil
         MenuItem2,
         MenuMagic1,
         MenuMagic2,
+        MenuSkill1,
+        MenuSkill2,
         MenuOption1,
         MenuOption2,
         MenuStatus1,
@@ -39,6 +45,24 @@ namespace Soleil
         MenuStatusL,
         MenuLune,
         MenuSun,
+        MenuTella,
+        MenuStatusCursor,
+        MenuCategory,
+        IconWand,
+        IconArmor,
+        IconAccessary,
+        IconPot,
+        IconJewel,
+        MagicSun,
+        MagicShade,
+        MagicMagic,
+        MagicDark,
+        MagicSound,
+        MagicNinja,
+        MagicWood,
+        MagicMetal,
+        MagicSpace,
+        MagicTime,
 
         Rule0,
         Rule1,
@@ -98,6 +122,31 @@ namespace Soleil
         Somnia4_3,
         Somnia4_4,
         Somnia4_5,
+
+        Magistol1_back,
+        Magistol1_dark,
+        Magistol1_wall,
+        Magistol1_cloth,
+
+        Magistol2_back,
+        Magistol2_chair,
+        Magistol2_plant,
+        Magistol2_wall,
+        Magistol2_stair,
+        Magistol2_shelf,
+
+        Magistol3_back,
+        Magistol3_chair,
+        Magistol3_wall,
+
+        Magistol4_back,
+        Magistol4_chair1,
+        Magistol4_chair2,
+        Magistol4_wall,
+        Magistol4_plant,
+
+        WorldMapIcon,
+        WorldMapCursor,
 
         BattleTemporaryBackground,
         BattleCommandSelectedMagic,
@@ -159,14 +208,8 @@ namespace Soleil
 
     enum FontID : int
     {
-        WhiteOutlineGrad,
-        KkBlack,
-        KkBlackMini,
-        KkMini,
-        KkGoldMini,
-        Touhaba,
-        [Obsolete("フォントを追加したので最終的に廃止したい．"+ nameof(WhiteOutlineGrad)+"を使用してどうぞ．")]
-        Test,
+        CorpM,
+        CorpMini,
         Size,
     }
 
@@ -271,6 +314,7 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
             SetPath(TextureID.BackBar, $"{UIPath}backBar");
+            SetPath(TextureID.Currency, $"{UIPath}currency");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
@@ -299,9 +343,35 @@ namespace Soleil
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
             SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
 
+            string mag = "Map/Back/Magistol/";
+
+            SetPath(TextureID.Magistol1_back, mag + "room/1");
+            SetPath(TextureID.Magistol1_dark, mag + "room/2");
+            SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+            SetPath(TextureID.Magistol1_wall, mag + "room/wall");
+
+            SetPath(TextureID.Magistol2_back, mag + "col1/col");
+            SetPath(TextureID.Magistol2_chair, mag + "col1/chair");
+            SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
+            SetPath(TextureID.Magistol2_wall, mag + "col1/wall");
+            SetPath(TextureID.Magistol2_stair, mag + "col1/stair");
+            SetPath(TextureID.Magistol2_shelf, mag + "col1/shelf");
+
+            SetPath(TextureID.Magistol3_back, mag + "shop/back");
+            SetPath(TextureID.Magistol3_chair, mag + "shop/chair");
+            SetPath(TextureID.Magistol3_wall, mag + "shop/wall");
+
+            SetPath(TextureID.Magistol4_back, mag + "col3/back");
+            SetPath(TextureID.Magistol4_chair1, mag + "col3/chair1");
+            SetPath(TextureID.Magistol4_chair2, mag + "col3/chair2");
+            SetPath(TextureID.Magistol4_wall, mag + "col3/wall");
+            SetPath(TextureID.Magistol4_plant, mag + "col3/plant");
+
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
+            SetPath(TextureID.WorldMapCursor, "Map/WorldMap/cursor");
             #endregion
 
             #region Animation
@@ -348,6 +418,9 @@ namespace Soleil
 
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
+            SetPath(TextureID.MessageWindow, UIPath + "message");
+
+            SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
@@ -355,6 +428,8 @@ namespace Soleil
             SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
             SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
             SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuSkill1, UIPath + MenuPath + "menuskill1");
+            SetPath(TextureID.MenuSkill2, UIPath + MenuPath + "menuskill2");
             SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
             SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
             SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");
@@ -368,10 +443,29 @@ namespace Soleil
             SetPath(TextureID.MenuModalBack, UIPath + MenuPath + "menuModalBack");
             SetPath(TextureID.MenuSelected, UIPath + MenuPath + "selectBack");
             SetPath(TextureID.MenuUnselected, UIPath + MenuPath + "unselectedBack");
-            SetPath(TextureID.MenuLune, UIPath + MenuPath + "menulune");
-            SetPath(TextureID.MenuSun, UIPath + MenuPath + "menusun");
+            SetPath(TextureID.MenuLune, UIPath + MenuPath + "lune_face");
+            SetPath(TextureID.MenuSun, UIPath + MenuPath + "sunny_face");
+            SetPath(TextureID.MenuTella, UIPath + MenuPath + "tella_face");
+            SetPath(TextureID.MenuStatusCursor, UIPath + MenuPath + "yasoba-select");
             SetPath(TextureID.MenuStatusL, UIPath + MenuPath + "MenuStatusFaceL");
+            SetPath(TextureID.MenuCategory, UIPath + MenuPath + "yasoba-window-skill-category");
+            SetPath(TextureID.IconWand, UIPath + MenuPath + "icons/" + "icon-wand");
+            SetPath(TextureID.IconArmor, UIPath + MenuPath + "icons/" + "icon-clothes");
+            SetPath(TextureID.IconAccessary, UIPath + MenuPath + "icons/" + "icon-accessary");
+            SetPath(TextureID.IconPot, UIPath + MenuPath + "icons/" + "icon-pot");
+            SetPath(TextureID.IconJewel, UIPath + MenuPath + "icons/" + "icon-jewel");
 
+            string mIcon = UIPath + MenuPath + "magicicon/";
+            SetPath(TextureID.MagicSun, mIcon + "micon-sun");
+            SetPath(TextureID.MagicShade, mIcon + "micon-moon");
+            SetPath(TextureID.MagicMagic, mIcon + "micon-magic");
+            SetPath(TextureID.MagicDark, mIcon + "micon-dark");
+            SetPath(TextureID.MagicSound, mIcon + "micon-sound");
+            SetPath(TextureID.MagicNinja, mIcon + "micon-ninja");
+            SetPath(TextureID.MagicWood, mIcon + "micon-leaf");
+            SetPath(TextureID.MagicMetal, mIcon + "micon-gear");
+            SetPath(TextureID.MagicSpace, mIcon + "micon-space");
+            SetPath(TextureID.MagicTime, mIcon + "micon-time");
 
             SetPath(TextureID.BattleTemporaryBackground, UIPath + BattlePath + "tempBack");
             SetPath(TextureID.BattleCommandSelectedMagic, UIPath + BattlePath + "magicSelected");
@@ -405,13 +499,9 @@ namespace Soleil
             #endregion
 
             
-            SetPath(FontID.Test, "kkmincho");
-            SetPath(FontID.WhiteOutlineGrad, "kkminchoNormal");
-            SetPath(FontID.KkBlack, "kkminchoBlack");
-            SetPath(FontID.KkMini, "kkminchoWhiteMini");
-            SetPath(FontID.KkBlackMini, "kkminchoBlackMini");
-            SetPath(FontID.KkGoldMini, "kkminchoGoldMini");
-            SetPath(FontID.Touhaba, "touhaba");
+            SetPath(FontID.CorpM, "corpm");
+            SetPath(FontID.CorpMini, "corpmini");
+
 
             //optionPath = Option.FilePath;
             #endregion 
@@ -472,5 +562,10 @@ namespace Soleil
         }
 
         public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+
+        public static Vector GetSize(this FontID id, string text)
+        {
+            return (Vector)GetFont(id).MeasureString(text);
+        }
     }
 }

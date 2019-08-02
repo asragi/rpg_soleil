@@ -9,6 +9,7 @@ namespace Soleil.Menu
 {
     class ItemMenu : BasicMenu, IListener
     {
+        ItemTargetSelect itemTargetSelect;
         ItemList itemList;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
             :base(parent, desc)
@@ -19,6 +20,12 @@ namespace Soleil.Menu
             Init();
         }
 
+        public void SetRefs(ItemTargetSelect its, StatusMenu sm)
+        {
+            itemTargetSelect = its;
+            itemTargetSelect.SetRefs(sm);
+        }
+
         protected override SelectablePanel[] MakeAllPanels()
         {
             var items = new List<TextSelectablePanel>();
@@ -26,7 +33,8 @@ namespace Soleil.Menu
             {
                 if (!itemList.HasItem((ItemID)i)) continue;
                 var data = ItemDataBase.Get((ItemID)i);
-                items.Add(new ItemPanel((ItemID)i, itemList, this));
+                var panel = new ItemPanel((ItemID)i, itemList, this, data.OnMenu);
+                items.Add(panel);
             }
             return items.ToArray();
         }
@@ -37,6 +45,37 @@ namespace Soleil.Menu
             for (int i = 0; i < AllPanels.Length; i++)
             {
                 AllPanels[i].Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+            }
+        }
+
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            var nowPanel = (ItemPanel)Panels[Index];
+            ItemEffect(nowPanel.ID);
+
+            void ItemEffect(ItemID id)
+            {
+                var tmp = ItemDataBase.Get(id);
+                if (!(tmp is ConsumableItem)) return; // Consumableでないなら終了; 「使用できる武器」みたいなのは必要に応じてまた．
+                if (!tmp.OnMenu) return; // Menuで使用可能でないなら終了
+                var item = (ConsumableItem)tmp;
+
+                if (item.Target == ItemTarget.Nothing)
+                {
+                    Console.WriteLine("Event発生など");
+                }else if (item.Target == ItemTarget.OneAlly)
+                {
+                    // inputをstatusに渡す．
+                    itemTargetSelect.Call();
+                    itemTargetSelect.SetWillUsedItem(id, itemList);
+                    IsActive = false;
+                    Quit();
+                }else if (item.Target == ItemTarget.AllAlly)
+                {
+                    // inputをstatusに渡す．
+                    Console.WriteLine("味方全員を対象");
+                }
             }
         }
 

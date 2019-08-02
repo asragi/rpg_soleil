@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// Event管理用 Eventのまとまりを表すクラス.
     /// </summary>
-    class EventSet
+    class EventSet: EventUnit
     {
         EventSequence myEventSequence;
         EventBase[] eventsDefault;
@@ -23,7 +23,7 @@ namespace Soleil.Event
             Reset();
         }
 
-        public void Reset()
+        public override void Reset()
         {
             index = 0;
             events = new List<EventBase>();

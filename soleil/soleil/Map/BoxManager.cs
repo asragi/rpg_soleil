@@ -8,74 +8,39 @@ using System.Threading.Tasks;
 namespace Soleil.Map
 {
     /// <summary>
-    /// 衝突判定用Boxの管理・判定計算を行う
+    /// 衝突判定用Boxの管理・判定計算を行う．利用時はUpdate()とDraw()を呼ぶ．
     /// </summary>
     class BoxManager
     {
-        List<CollideBox> boxList;
+        protected readonly List<CollideBox> BoxList;
         int indexNum;
         bool visible = true; // for debug
-        MapData mapData;
-        PlayerObject player;
 
-        public BoxManager(MapData data, PlayerObject pl)
+        public BoxManager()
         {
             indexNum = 0;
-            boxList = new List<CollideBox>();
-            mapData = data;
-            player = pl;
+            BoxList = new List<CollideBox>();
         }
 
         public void Add(CollideBox box)
         {
-            boxList.ForEach(b => b.ExtendBoolTable());
+            BoxList.ForEach(b => b.ExtendBoolTable());
             box.ID = indexNum++;
             box.SetBoolTable(indexNum);
-            boxList.Add(box);
+            BoxList.Add(box);
         }
 
-        public void Update()
+        public virtual void Update()
         {
             CheckCollide();
-            CheckWallCollide();
-            boxList.ForEach(b => b.Update());
-        }
-
-        void CheckWallCollide()
-        {
-            for (int i = 0; i < boxList.Count; i++)
-            {
-                double xi = boxList[i].WorldPos().X,
-                    yi = boxList[i].WorldPos().Y,
-                    wi = boxList[i].Size.X,
-                    hi = boxList[i].Size.Y;
-                bool col = false;
-                for (int j = 0; j < wi; j++)
-                {
-                    for (int k = 0; k < hi; k++)
-                    {
-                        col = col || CalcWallCollide(xi, yi, wi, hi, j, k); // 一つでもtrueならtrue
-                    }
-                }
-                boxList[i].SetWallCollide(col);
-            }
-        }
-
-        private bool CalcWallCollide(double xi, double yi, double wi, double hi, int j, int k)
-        {
-            int checkX = (int)(xi - wi / 2 + j);
-            int checkY = (int)(yi - hi / 2 + k);
-            // マップ外は壁ではないとする.
-            if (checkX >= mapData.GetFlagLengthX() || checkX < 0) return false;
-            if (checkY >= mapData.GetFlagLengthY() || checkY < 0) return false;
-            return mapData.GetFlagData(checkX, checkY);
+            BoxList.ForEach(b => b.Update());
         }
 
         void CheckCollide()
         {
-            for (int i = 0; i < boxList.Count; i++)
+            for (int i = 0; i < BoxList.Count; i++)
             {
-                for (int j = i + 1; j < boxList.Count; j++)
+                for (int j = i + 1; j < BoxList.Count; j++)
                 {
                     CalcCollide(i, j);
                 }
@@ -84,36 +49,36 @@ namespace Soleil.Map
 
         private void CalcCollide(int i, int j)
         {
-            if(!boxList[i].IsActive || !boxList[j].IsActive)
+            if(!BoxList[i].IsActive || !BoxList[j].IsActive)
             {
                 // どちらかが非アクティブであれば衝突しない
-                boxList[j].Collide(boxList[i], false);
-                boxList[i].Collide(boxList[j], false);
+                BoxList[j].Collide(BoxList[i], false);
+                BoxList[i].Collide(BoxList[j], false);
                 return;
             }
-            double xi = boxList[i].WorldPos().X, 
-                yi = boxList[i].WorldPos().Y, 
-                wi = boxList[i].Size.X, 
-                hi = boxList[i].Size.Y;
-            double xj = boxList[j].WorldPos().X, 
-                yj = boxList[j].WorldPos().Y,
-                wj = boxList[j].Size.X,
-                hj = boxList[j].Size.Y;
+            double xi = BoxList[i].WorldPos().X, 
+                yi = BoxList[i].WorldPos().Y, 
+                wi = BoxList[i].Size.X, 
+                hi = BoxList[i].Size.Y;
+            double xj = BoxList[j].WorldPos().X, 
+                yj = BoxList[j].WorldPos().Y,
+                wj = BoxList[j].Size.X,
+                hj = BoxList[j].Size.Y;
 
             bool col = xi + wi/2 > xj - wj/2 && xi - wi/2 < xj + wj/2 &&
                 yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
 
             // 双方のboxに衝突相手の情報を渡す
-            boxList[j].Collide(boxList[i],col);
-            boxList[i].Collide(boxList[j],col);
+            BoxList[j].Collide(BoxList[i],col);
+            BoxList[i].Collide(BoxList[j],col);
         }
 
-        public CollideBox GetBox(int id) => boxList.Find(box => box.ID == id);
+        public CollideBox GetBox(int id) => BoxList.Find(box => box.ID == id);
 
         public void Draw(Drawing d)
         {
             if (!visible) return;
-            foreach (var item in boxList)
+            foreach (var item in BoxList)
             {
                 d.DrawBox(item.WorldPos(), item.Size, Color.Red, DepthID.Player);
             }

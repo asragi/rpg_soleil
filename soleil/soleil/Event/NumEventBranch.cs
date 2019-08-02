@@ -5,16 +5,16 @@ namespace Soleil.Event
     class NumEventBranch
         : EventBranch
     {
-        EventSet[] eventSets;
+        EventUnit[][] eventSets;
         Func<int> index;
-        public NumEventBranch(EventSequence es, Func<int> _index, params EventSet[] _eventSets)
+        public NumEventBranch(EventSequence es, Func<int> _index, params EventUnit[][] _eventSets)
             : base(es)
         {
             index = _index;
             eventSets = _eventSets;
         }
 
-        protected override EventSet DecideEventSet()
+        protected override EventUnit[] DecideEventSet()
         {
             return eventSets[index()];
         }

@@ -15,11 +15,9 @@ namespace Soleil.Map
         // 移動イベントたち
         MapChangeObject mcoRight;
         MapChangeObject mcoLeft;
-        // Event
-        EventSequence firstEvent;
 
-        public Somnia4()
-            : base(MapName.Somnia4)
+        public Somnia4(PersonParty party, Camera cam)
+            : base(MapName.Somnia4, party, cam)
         {
             MapConstructs = new MapConstruct[]
             {
@@ -30,16 +28,6 @@ namespace Soleil.Map
                 new AdjustConstruct(TextureID.Somnia4_5, 445,om), // 手前の家
             };
 
-            // Event
-            firstEvent = new EventSequence(om.GetPlayer());
-            firstEvent.SetEventSet(
-                new EventSet(
-                    new MessageWindowEvent(new Vector(100,100),0,"はじめて来た"),
-                    new ChangeInputFocusEvent(InputFocus.Player)
-                )
-            );
-            EventSequences = new EventSequence[] { firstEvent };
-
             // マップサイズの設定
             MapCameraManager.SetMapSize(960, 540);
             // CameraPointの設定
@@ -49,15 +37,9 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            accessaryGirl = new AccessaryGirl(new Vector(650, 330), om, bm);
-            mcoLeft = new MapChangeObject(new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm);
-            mcoRight = new MapChangeObject(new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm);
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-            firstEvent.StartEvent();
+            accessaryGirl = new AccessaryGirl(new Vector(650, 330), party, om, bm);
+            mcoLeft = new MapChangeObject("mcl", new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
+            mcoRight = new MapChangeObject("mcr", new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
         }
     }
 }

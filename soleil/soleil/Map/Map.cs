@@ -16,6 +16,10 @@ namespace Soleil.Map
         Somnia1,
         Somnia2,
         Somnia4,
+        MagistolRoom,
+        MagistolCol1,
+        MagistolCol3,
+        MagistolShop,
     }
     abstract class MapBase
     {
@@ -26,25 +30,32 @@ namespace Soleil.Map
         PlayerObject player;
         protected MapData MapData;
         MenuSystem menuSystem;
+        protected CharacterPictureHolder PictureHolder;
+        protected ConversationSystem ConversationSystem;
 
         protected EventSequence[] EventSequences;
         private bool started;
 
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
+        protected PersonParty Party;
 
-        public MapBase(MapName _name)
+        public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
+            var wm = WindowManager.GetInstance();
             om = new ObjectManager();
             MapData = new MapData(_name);
             MapData.SetMapFlag();
-            bm = new BoxManager(MapData, player);
+            bm = new MapBoxManager(MapData);
             player = new PlayerObject(om, bm);
-            menuSystem = new MenuSystem();
+            Party = _party;
+            menuSystem = new MenuSystem(_party);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
             mapInputManager.SetMenuSystem(menuSystem);
-            MapCameraManager = new MapCameraManager(player);
+            MapCameraManager = new MapCameraManager(player, cam);
+            PictureHolder = new CharacterPictureHolder();
+            ConversationSystem = new ConversationSystem(wm);
         }
 
         protected virtual void Start()
@@ -61,6 +72,8 @@ namespace Soleil.Map
             menuSystem.Update();
             mapInputManager.Update();
             MapCameraManager.Update();
+            PictureHolder.Update();
+            ConversationSystem.Update();
         }
 
         /// <summary>
@@ -86,6 +99,8 @@ namespace Soleil.Map
             menuSystem.Draw(sb);
             bm.Draw(sb);
             om.Draw(sb);
+            PictureHolder.Draw(sb);
+            ConversationSystem.Draw(sb);
         }
     }
 }

@@ -8,12 +8,13 @@ namespace Soleil.Menu
 {
     class MenuDescription : MenuComponent
     {
-        protected FontImage fontImage;
-        public String Text { set { fontImage.Text = value; } }
+        protected TextImage fontImage;
+        public string Text { set { fontImage.Text = value; } }
 
         public MenuDescription(Vector _pos)
         {
-            fontImage = new FontImage(FontID.KkBlack, _pos, DepthID.MenuBottom);
+            fontImage = new TextImage(FontID.CorpM, _pos, DepthID.MenuTop);
+            fontImage.Color = ColorPalette.DarkBlue;
         }
 
         public override void Call()

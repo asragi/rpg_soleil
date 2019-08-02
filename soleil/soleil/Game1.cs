@@ -14,6 +14,7 @@ namespace Soleil
         
         Drawing drawing;
         SceneManager sm;
+        PersonParty party;
 
         //実際の画面サイズ
         public const int VirtualWindowSizeX = 960;
@@ -80,12 +81,10 @@ namespace Soleil
             LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
-            //new TestScene(sm);
-            new TestBattleScene(sm);
-
-            // Camera
-            var camera = Camera.GeInstance();
-            camera.SetDrawing(drawing);
+            party = new PersonParty();
+            new MapScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
+            // new TestBattleScene(sm);
+            // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
 
 
@@ -149,6 +148,7 @@ namespace Soleil
                 Exit();
                 End = false;
             }
+            
 
             // TODO: Add your update logic here
             //Audio.Update();

@@ -24,8 +24,8 @@ namespace Soleil.Map
         protected Animation NowAnimation;
         private Animation[] standAnimation;
 
-        public MapCharacter(Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
-            :base(pos, boxSize, om, bm)
+        public MapCharacter(string name, Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
+            :base(name, pos, boxSize, om, bm)
         {
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;

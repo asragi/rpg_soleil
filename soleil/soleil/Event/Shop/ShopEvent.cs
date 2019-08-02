@@ -14,15 +14,15 @@ namespace Soleil.Event
         BoolSet boolSet;
         int target;
 
-        public ShopEvent(Dictionary<ItemID, int> values, BoolSet _boolSet, int _target)
-            :this(values)
+        public ShopEvent(ShopName name, PersonParty party, BoolSet _boolSet, int _target)
+            :this(name, party)
         {
             (boolSet, target) = (_boolSet, _target);
         }
 
-        public ShopEvent(Dictionary<ItemID, int> values)
+        public ShopEvent(ShopName name, PersonParty party)
         {
-            shopSystem = new ShopSystem(values);
+            shopSystem = new ShopSystem(name, party);
         }
 
         public override void Start()

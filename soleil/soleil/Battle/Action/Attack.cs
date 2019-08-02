@@ -9,13 +9,14 @@ namespace Soleil
     using AttackFunc = Func<CharacterStatus, CharacterStatus, float>;
     enum AttackAttribution
     {
-        None,
+        None = -1,
         Beat,
         Cut,
         Thrust,
         Fever,
         Ice,
         Electro,
+        size,
     }
 
     static class ExtendAttackAttribution
