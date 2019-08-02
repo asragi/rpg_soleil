@@ -36,6 +36,7 @@ namespace Soleil.Menu
             "ゲームデータのセーブを行います。"
         };
 
+        PersonParty party;
         Image backImage, frontImage;
 
         MenuItem[] menuItems;
@@ -85,9 +86,10 @@ namespace Soleil.Menu
             TextureID.MenuSave2
         };
 
-        public MenuSystem(PersonParty party)
+        public MenuSystem(PersonParty _party)
             :base(null)
         {
+            party = _party;
             Index = 0;
             // Image初期化
             backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
@@ -111,7 +113,7 @@ namespace Soleil.Menu
             // Item Target Select
             // Status Menu
             statusTargetSelect = new StatusTargetSelect(this, menuDescription, Descriptions[(int)MenuName.Status]);
-            statusMenu = new StatusMenu(party, this);
+            statusMenu = new StatusMenu(_party, this);
             // Magic Menu
             magicUserSelect = new MagicUserSelect(this, menuDescription, Descriptions[(int)MenuName.Magic]);
             magicMenu = new MagicMenu(magicUserSelect, menuDescription);
@@ -120,7 +122,7 @@ namespace Soleil.Menu
             skillUserSelect = new SkillUserSelect(this, menuDescription, Descriptions[(int)MenuName.Skill]);
             skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, party);
+            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, _party);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] {
                 statusMenu, statusTargetSelect,
@@ -269,7 +271,8 @@ namespace Soleil.Menu
             if(selected == MenuName.Save)
             {
                 // Save用ウィンドウ出現
-
+                SaveLoad.Save(party);
+                Console.WriteLine("SAVE");
                 IsActive = true; // debug
                 return;
             }

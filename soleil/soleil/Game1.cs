@@ -81,8 +81,12 @@ namespace Soleil
             LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
-            party = new PersonParty();
-            new MapScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
+            // !debug! Save
+            bool saveExist = SaveLoad.FileExist();
+            if(saveExist) SaveLoad.Load();
+            party = SaveLoad.GetParty(isNew: !saveExist);
+
+            new TestScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
             // new TestBattleScene(sm);
             // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
@@ -102,7 +106,7 @@ namespace Soleil
                     item.AddItem((Item.ItemID)i, i);
                 }
 
-                var wallet = new Map.MoneyWallet(50000);
+                var wallet = new Map.MoneyWallet(500000);
                 playerBaggage.SetData(item, wallet);
             }
         }
