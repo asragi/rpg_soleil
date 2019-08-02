@@ -9,10 +9,20 @@ namespace Soleil.Menu
     class StatusTargetSelect : StatusTargetSelectBase
     {
         MenuSystem menuSystem;
-        public StatusTargetSelect(MenuSystem parent)
+        MenuDescription menuDescription;
+        string description;
+        public StatusTargetSelect(MenuSystem parent, MenuDescription desc, string description)
             : base(parent)
         {
             menuSystem = parent;
+            menuDescription = desc;
+            this.description = description;
+        }
+
+        protected override void OnEnable()
+        {
+            menuDescription.Text = description;
+            base.OnEnable();
         }
 
         public override void OnInputSubmit()

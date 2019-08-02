@@ -112,14 +112,14 @@ namespace Soleil.Menu
             itemTargetSelect = new ItemTargetSelect(itemMenu);
             // Item Target Select
             // Status Menu
-            statusTargetSelect = new StatusTargetSelect(this);
+            statusTargetSelect = new StatusTargetSelect(this, menuDescription, Descriptions[(int)MenuName.Status]);
             statusMenu = new StatusMenu(_party, this);
             // Magic Menu
-            magicUserSelect = new MagicUserSelect(this);
+            magicUserSelect = new MagicUserSelect(this, menuDescription, Descriptions[(int)MenuName.Magic]);
             magicMenu = new MagicMenu(magicUserSelect, menuDescription);
             magicTargetSelect = new MagicTargetSelect(magicMenu);
             // Skill Menu
-            skillUserSelect = new SkillUserSelect(this);
+            skillUserSelect = new SkillUserSelect(this, menuDescription, Descriptions[(int)MenuName.Skill]);
             skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
             statusSystem = new StatusSystem(statusTargetSelect, menuDescription, _party);
