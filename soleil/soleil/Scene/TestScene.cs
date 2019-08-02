@@ -21,14 +21,8 @@ namespace Soleil
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
 
-            // test
-            var save = new Misc.SaveData(party);
-            string path = "./test_save_data";
-            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
-            {
-                var bf = new BinaryFormatter();
-                bf.Serialize(fs, save);
-            }
+            SaveLoad.Save(party);
+            SaveLoad.Load();
         }
 
         override public void Update()

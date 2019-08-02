@@ -238,7 +238,8 @@
     <Compile Include="Misc\GameDateTime.cs" />
     <Compile Include="Misc\InputSmoother.cs" />
     <Compile Include="Misc\PersonParty.cs" />
-    <Compile Include="Misc\SaveData.cs" />
+    <Compile Include="Misc\SaveLoad\SaveData.cs" />
+    <Compile Include="Misc\SaveLoad\SaveLoad.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
