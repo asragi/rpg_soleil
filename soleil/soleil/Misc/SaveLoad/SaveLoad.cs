@@ -40,9 +40,11 @@ namespace Soleil
         }
 
         // 以下Load用
-        public static PersonParty GetParty()
+        public static PersonParty GetParty(bool isNew)
         {
-            throw new NotImplementedException();
+            // New Game
+            if (isNew) return new PersonParty();
+            return data.GetParty();
         }
     }
 }

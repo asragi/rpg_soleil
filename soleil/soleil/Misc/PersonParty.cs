@@ -1,4 +1,5 @@
-﻿using Soleil.Misc;
+﻿using Soleil.Battle;
+using Soleil.Misc;
 using Soleil.Skill;
 using System;
 using System.Collections.Generic;
@@ -35,9 +36,12 @@ namespace Soleil
                 }
                 var b_m = new MagicLv(b_s);
                 var c_m = new MagicLv(c_s);
-                result[(int)CharaName.Lune] = new Person(CharaName.Lune, a, a_s, a_m);
-                result[(int)CharaName.Sunny] = new Person(CharaName.Sunny, b, b_s, b_m);
-                result[(int)CharaName.Tella] = new Person(CharaName.Tella, c, c_s, c_m);
+                var a_eq = new EquipSet();
+                var b_eq = new EquipSet();
+                var c_eq = new EquipSet();
+                result[(int)CharaName.Lune] = new Person(CharaName.Lune, a, a_s, a_m, a_eq);
+                result[(int)CharaName.Sunny] = new Person(CharaName.Sunny, b, b_s, b_m, b_eq);
+                result[(int)CharaName.Tella] = new Person(CharaName.Tella, c, c_s, c_m, c_eq);
                 return result;
             }
         }
@@ -45,10 +49,9 @@ namespace Soleil
         /// <summary>
         /// CreateFromSaveData
         /// </summary>
-        /// <param name="people"></param>
         public PersonParty(Person[] people)
         {
-
+            allCharacters = people;
         }
 
         public Person Get(CharaName name)

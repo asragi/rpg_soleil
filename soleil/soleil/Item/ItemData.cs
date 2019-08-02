@@ -171,6 +171,11 @@ namespace Soleil.Item
             DefData = def ?? new DefData(0, 0, null, null);
             AbilityScore = score ?? new AbilityScore(0, 0, 0, 0, 0, 0);
         }
+
+        public static implicit operator WeaponData(int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     struct ArmorData : IItem, IArmor
