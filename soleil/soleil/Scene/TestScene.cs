@@ -1,4 +1,9 @@
-﻿using Soleil.Map;
+﻿using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+using Soleil.Map;
+
 
 namespace Soleil
 {
@@ -15,6 +20,15 @@ namespace Soleil
             mapIndicator = new MapIndicator();
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
+
+            // test
+            var save = new Misc.SaveData(party);
+            string path = "./test_save_data";
+            using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
+            {
+                var bf = new BinaryFormatter();
+                bf.Serialize(fs, save);
+            }
         }
 
         override public void Update()

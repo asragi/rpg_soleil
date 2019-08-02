@@ -31,6 +31,7 @@ namespace Soleil.Misc
             }
         }
 
+        [Serializable]
         struct CharacterData
         {
             EquipData Equip { get; set; }
@@ -42,6 +43,7 @@ namespace Soleil.Misc
                 Param = new Parameter(_score);
             }
 
+            [Serializable]
             struct EquipData
             {
                 public int WeaponID { get; set; }
@@ -56,6 +58,7 @@ namespace Soleil.Misc
                 }
             }
 
+            [Serializable]
             struct Parameter
             {
                 public int HPMAX { get; set; }
