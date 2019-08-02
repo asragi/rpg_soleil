@@ -48,6 +48,10 @@ namespace Soleil
         public override void Update()
         {
             base.Update();
+        }
+
+        public void UpdateInput()
+        {
             if (IsActive)
                 Input(KeyInput.GetStickFlickDirection(1));
         }
@@ -57,7 +61,7 @@ namespace Soleil
             SelectIndex = charaIndexList[Index];
             selectCompleted.Val = true;
         }
-        //public override void OnInputCancel() { Quit(); ReturnParent(); }
+        public override void OnInputCancel() { Quit(); ReturnParent(); }
 
         public override void Quit()
         {

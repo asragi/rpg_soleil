@@ -80,8 +80,8 @@ namespace Soleil
             LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
-            new TestScene(sm);
-            //new TestBattleScene(sm);
+            //new TestScene(sm);
+            new TestBattleScene(sm);
 
             // Camera
             var camera = Camera.GeInstance();

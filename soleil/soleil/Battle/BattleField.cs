@@ -192,8 +192,8 @@ namespace Soleil
             {
                 case BattleMessage bm:
                     message = bm.Message;
-                    executed = true;
-                    break;
+                    executed = delayCount <= 1;
+                        break;
                 case BattleCommandSelect bcs:
                     executed = false;
                     var action = charas[topTurn.CharaIndex].SelectAction(topTurn);

@@ -61,8 +61,12 @@ namespace Soleil
             csw?.Update();
             if (IsActive)
                 Input(KeyInput.GetStickFlickDirection(1));
+            else
+                csw?.UpdateInput();
+            
 
-            switch(Select.ARange)
+
+            switch (Select.ARange)
             {
                 case Range.OneEnemy oe:
                     if (csw != null)
@@ -90,12 +94,12 @@ namespace Soleil
             {
                 case Range.OneEnemy oe:
                     oe.SourceIndex = charaIndex;
-                    csw = new CharaSelectWindow(parent, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
+                    csw = new CharaSelectWindow(this, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
                 case Range.Ally a:
                     a.SourceIndex = charaIndex;
-                    csw = new CharaSelectWindow(parent, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
+                    csw = new CharaSelectWindow(this, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
                 default:
@@ -104,7 +108,7 @@ namespace Soleil
             }
             IsActive = false;
         }
-        //public override void OnInputCancel() { Quit(); ReturnParent(); }
+        public override void OnInputCancel() { Quit(); ReturnParent(); }
 
         public override void Call()
         {
@@ -114,11 +118,11 @@ namespace Soleil
 
         public override void Quit()
         {
-            if (!IsQuit)
-                base.Quit();
             csw?.Quit();
+            base.Quit();
             IsQuit = true;
             IsActive = false;
+
         }
     }
 }
