@@ -265,10 +265,10 @@ namespace Soleil
             for (int i = 2; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
-                sb.DrawText(new Vector(100 + (i-2) * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
+                //sb.DrawText(new Vector(100 + (i-2) * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
                 sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
-                sb.DrawText(new Vector(100 + (i-2) * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
+                //sb.DrawText(new Vector(100 + (i-2) * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
             }
 
             

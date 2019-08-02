@@ -18,7 +18,7 @@ namespace Soleil
     {
         public override string Desctiption => "a";
         readonly CommandEnum command;
-        UIImage selected, unselected;
+        Image selected, unselected;
         public CommandPanel(CommandEnum command, BasicMenu parent) : base(parent)
         {
             this.command = command;
@@ -41,8 +41,8 @@ namespace Soleil
                     (selectedID, unselectedID) = (0, 0);
                     break;
             }
-            selected = new UIImage(selectedID, LocalPos + parent.Pos, ItemNumPosDiff, DepthID.Status);
-            unselected = new UIImage(unselectedID, LocalPos + parent.Pos, ItemNumPosDiff, DepthID.Status);
+            selected = new Image(selectedID, LocalPos + parent.Pos, ItemNumPosDiff, DepthID.Status);
+            unselected = new Image(unselectedID, LocalPos + parent.Pos, ItemNumPosDiff, DepthID.Status);
         }
 
         public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)

@@ -12,11 +12,11 @@ namespace Soleil
         int maxHP, maxMP;
         int HP, MP;
         int drawingHP, drawingMP;
-        FontImage HPImage, MPImage;
-        FontImage maxHPImage, maxMPImage;
+        TextImage HPImage, MPImage;
+        TextImage maxHPImage, maxMPImage;
 
         //画像が用意されそう
-        FontImage HPText, MPText;
+        TextImage HPText, MPText;
 
         /// <summary>
         /// HPとMPの表示Y座標の中央からの差
@@ -43,14 +43,14 @@ namespace Soleil
         {
             (this.maxHP, this.maxMP) = (maxHP, maxMP);
             (HP, MP) = (maxHP, maxMP);
-            HPImage = new FontImage(FontID.KkBlack, pos + new Vector(NumberPosX, -LineDiff), DepthID.Status, alpha: 1);
-            MPImage = new FontImage(FontID.KkBlack, pos + new Vector(NumberPosX, LineDiff), DepthID.Status, alpha: 1);
-            maxHPImage = new FontImage(FontID.KkBlack, pos + new Vector(NumberPosX + MaxDiff, -LineDiff + MaxDiff), DepthID.Status, alpha: 0.5f);
-            maxMPImage = new FontImage(FontID.KkBlack, pos + new Vector(NumberPosX + MaxDiff, LineDiff + MaxDiff), DepthID.Status, alpha: 0.5f);
+            HPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX, -LineDiff), DepthID.Status, alpha: 1);
+            MPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX, LineDiff), DepthID.Status, alpha: 1);
+            maxHPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX + MaxDiff, -LineDiff + MaxDiff), DepthID.Status, alpha: 0.5f);
+            maxMPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX + MaxDiff, LineDiff + MaxDiff), DepthID.Status, alpha: 0.5f);
             maxHPImage.Text = maxHP.ToString();
             maxMPImage.Text = maxMP.ToString();
-            HPText = new FontImage(FontID.KkBlack, pos + new Vector(LetterPosX, -LineDiff), DepthID.Status, alpha: 1);
-            MPText = new FontImage(FontID.KkBlack, pos + new Vector(LetterPosX, LineDiff), DepthID.Status, alpha: 1);
+            HPText = new TextImage(FontID.CorpM, pos + new Vector(LetterPosX, -LineDiff), DepthID.Status, alpha: 1);
+            MPText = new TextImage(FontID.CorpM, pos + new Vector(LetterPosX, LineDiff), DepthID.Status, alpha: 1);
             HPText.Text = "HP : ";
             MPText.Text = "MP : ";
         }
