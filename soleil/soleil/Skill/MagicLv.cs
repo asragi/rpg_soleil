@@ -45,6 +45,7 @@ namespace Soleil.Skill
         {
             for (int i = 0; i < 9; i++)
             {
+                // 次のLvまで(30*Lv)の経験値が必要 -> 累積が15*Lv*(Lv+1)以上になる．
                 int thresh = 15 * i * (i + 1);
                 if (dictMagicExp[category] <= thresh) return i;
             }

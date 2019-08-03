@@ -4,6 +4,9 @@ using Soleil.Skill;
 
 namespace Soleil
 {
+    /// <summary>
+    /// キャラクター毎の能力値・初期装備・成長などの設定．
+    /// </summary>
     struct PersonData
     {
         public GrowthType[] Growth;
