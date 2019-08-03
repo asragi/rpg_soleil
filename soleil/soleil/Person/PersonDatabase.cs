@@ -23,13 +23,13 @@ namespace Soleil
             data = new Dictionary<CharaName, PersonData>();
             Set(CharaName.Lune,
                 new[] {GrowthType.Normal, GrowthType.Pre, GrowthType.Late, GrowthType.Normal, GrowthType.Pre, GrowthType.Normal },
-                new AbilityScore(72, 156, 3, 5, 30, 8), new AbilityScore(666, 999, 40, 40, 99, 60),
+                new AbilityScore(72, 156, 3, 5, 30, 8), new AbilityScore(666, 999, 30, 30, 99, 60),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 0, 0, 100, 0, 0, 0, 0, 0, 0, 0 },
                 new SkillID[] { }
                 );
             Set(CharaName.Sunny,
-                new[] { GrowthType.Pre, GrowthType.Normal, GrowthType.Pre, GrowthType.Pre, GrowthType.Late, GrowthType.Normal },
+                new[] { GrowthType.Pre, GrowthType.Normal, GrowthType.Pre, GrowthType.Pre, GrowthType.Normal, GrowthType.Normal },
                 new AbilityScore(120, 90, 21, 18, 20, 21), new AbilityScore(990, 950, 99, 99, 95, 99),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 10, 0, 50, 0, 0, 0, 0, 0, 0, 0 },

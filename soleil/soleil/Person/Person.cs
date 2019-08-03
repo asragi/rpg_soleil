@@ -62,11 +62,19 @@ namespace Soleil
             Skill = new SkillHolder(data.InitSkill);
             Magic = new MagicLv(data.InitMagicExp, Skill);
             InParty = true; // debug
+            LvUp(57); // debug
         }
 
-        public void OnLvUp()
+        public void LvUp(int plus)
         {
-            score = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
+            Lv = Math.Min(99, Lv + plus);
+            // HP MP shouldn't recover
+            int hp = score.HP;
+            int mp = score.MP;
+            var tmp = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
+            tmp.HP = hp;
+            tmp.MP = mp;
+            score = tmp;
         }
 
         public void RecoverHP(int val) => score.HP += val;

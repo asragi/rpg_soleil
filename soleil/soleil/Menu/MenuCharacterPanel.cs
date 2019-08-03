@@ -111,6 +111,7 @@ namespace Soleil.Menu
                     mpNumText.Text = targetMP.ToString();
                     hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
                 }
+                lvNumText.Text = person.Lv.ToString();
             }
         }
     }
