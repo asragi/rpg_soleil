@@ -6,14 +6,20 @@ namespace Soleil
 {
     struct PersonData
     {
+        public GrowthType[] Growth;
         public AbilityScore InitScore;
+        public AbilityScore LastScore;
         public ItemID[] InitEquip;
         public int[] InitMagicExp;
         public SkillID[] InitSkill;
 
-        public PersonData(AbilityScore score, ItemID[] eq, int[] mgExp, SkillID[] sk)
+        public PersonData(
+            GrowthType[] growth, AbilityScore init, AbilityScore last,
+            ItemID[] eq, int[] mgExp, SkillID[] sk)
         {
-            InitScore = score;
+            Growth = growth;
+            InitScore = init;
+            LastScore = last;
             InitEquip = eq;
             InitMagicExp = mgExp;
             InitSkill = sk;

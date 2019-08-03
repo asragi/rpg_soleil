@@ -28,7 +28,7 @@ namespace Soleil.Misc
                 {
                     var person = party.Get((CharaName)i);
                     result[i] = new CharacterData(
-                        person.Name, person.Equip, person.Score,
+                        person.Name, person.Lv, person.Equip, person.Score,
                         person.Skill, person.Magic
                     );
                 }
@@ -54,23 +54,25 @@ namespace Soleil.Misc
             EquipData Equip { get; set; }
             Parameter Param { get; set; }
             SkillFlag Skill { get; set; }
+            int Lv { get; set; }
             MagicExp Magic { get; set; }
 
             public CharacterData(
-                CharaName name, EquipSet _equip, AbilityScore _score,
+                CharaName name, int lv, EquipSet _equip, AbilityScore _score,
                 SkillHolder skill, MagicLv magic)
             {
                 Name = name;
                 Equip = new EquipData(_equip);
                 Param = new Parameter(_score);
                 Skill = new SkillFlag(skill);
+                Lv = lv;
                 Magic = new MagicExp(magic);
             }
 
             public Person Get()
             {
                 var skill = Skill.Get();
-                return new Person(Name, Param.Get(), skill, Magic.Get(skill), Equip.Get());
+                return new Person(Name, Lv, Param.Get(), skill, Magic.Get(skill), Equip.Get());
             }
 
             [Serializable]

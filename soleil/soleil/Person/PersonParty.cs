@@ -23,9 +23,9 @@ namespace Soleil
             Person[] CreateNewParty()
             {
                 Person[] result = new Person[(int)CharaName.size];
-                result[(int)CharaName.Lune] = PersonDatabase.GetPersonData(CharaName.Lune);
-                result[(int)CharaName.Sunny] = PersonDatabase.GetPersonData(CharaName.Sunny);
-                result[(int)CharaName.Tella] = PersonDatabase.GetPersonData(CharaName.Tella);
+                result[(int)CharaName.Lune] = new Person(CharaName.Lune);
+                result[(int)CharaName.Sunny] = new Person(CharaName.Sunny);
+                result[(int)CharaName.Tella] = new Person(CharaName.Tella);
                 return result;
             }
         }

@@ -15,24 +15,58 @@ namespace Soleil
     class Person
     {
         readonly public CharaName Name;
+        private readonly AbilityScore initScore; // Lv1のパラメータ
+        private readonly AbilityScore lastScore; // Lv99のパラメータ
         private AbilityScore score;
-        public AbilityScore Score => score;
+        private readonly GrowthType[] growthTypes;
+        public AbilityScore Score 
+            => score;
         public int Lv { get; private set; }
         readonly public EquipSet Equip;
         readonly public SkillHolder Skill;
         public MagicLv Magic;
         public bool InParty;
 
+        /// <summary>
+        /// HPMP情報を含めてセーブデータから復元する場合のコンストラクタ．
+        /// </summary>
         public Person(
-            CharaName name, AbilityScore _score, SkillHolder skill, MagicLv magicLv,
+            CharaName name, int lv, AbilityScore _score, SkillHolder skill, MagicLv magicLv,
             EquipSet equip)
         {
             Name = name;
+            Lv = lv;
+            var data = PersonDatabase.Get(name);
+            initScore = data.InitScore;
+            lastScore = data.LastScore;
             score = _score;
             Equip = equip;
             Skill = skill;
             Magic = magicLv;
             InParty = true; // debug
+        }
+
+        /// <summary>
+        /// 新規セーブデータでのコンストラクタ．
+        /// </summary>
+        public Person(CharaName name)
+        {
+            Name = name;
+            Lv = 1;
+            var data = PersonDatabase.Get(name);
+            initScore = data.InitScore;
+            lastScore = data.LastScore;
+            growthTypes = data.Growth;
+            score = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
+            Equip = new EquipSet();
+            Skill = new SkillHolder(data.InitSkill);
+            Magic = new MagicLv(data.InitMagicExp, Skill);
+            InParty = true; // debug
+        }
+
+        public void OnLvUp()
+        {
+            score = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
         }
 
         public void RecoverHP(int val) => score.HP += val;

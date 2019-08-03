@@ -21,37 +21,38 @@ namespace Soleil
         static PersonDatabase()
         {
             data = new Dictionary<CharaName, PersonData>();
-            Set(CharaName.Lune, new AbilityScore(72, 156, 3, 5, 30, 8),
+            Set(CharaName.Lune,
+                new[] {GrowthType.Normal, GrowthType.Pre, GrowthType.Late, GrowthType.Normal, GrowthType.Pre, GrowthType.Normal },
+                new AbilityScore(72, 156, 3, 5, 30, 8), new AbilityScore(666, 999, 40, 40, 99, 60),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 0, 0, 100, 0, 0, 0, 0, 0, 0, 0 },
                 new SkillID[] { }
                 );
-            Set(CharaName.Sunny, new AbilityScore(120, 90, 21, 18, 20, 21),
+            Set(CharaName.Sunny,
+                new[] { GrowthType.Pre, GrowthType.Normal, GrowthType.Pre, GrowthType.Pre, GrowthType.Late, GrowthType.Normal },
+                new AbilityScore(120, 90, 21, 18, 20, 21), new AbilityScore(990, 950, 99, 99, 95, 99),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 10, 0, 50, 0, 0, 0, 0, 0, 0, 0 },
                 new SkillID[] { SkillID.Headbutt }
                 );
-            Set(CharaName.Tella, new AbilityScore(96, 60, 9, 14, 13, 17),
+            Set(CharaName.Tella,
+                new[] {GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal },
+                new AbilityScore(96, 60, 9, 14, 13, 17), new AbilityScore(720, 770, 65, 80, 70, 80),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 0, 500, 0, 0, 0, 0, 0, 200, 0, 0 },
                 new SkillID[] { SkillID.Barrage }
                 );
 
-            void Set(CharaName name, AbilityScore score, ItemID[] eq, int[] mgExp, SkillID[] sk)
+            void Set(CharaName name, GrowthType[] growth, 
+                AbilityScore init, AbilityScore last,
+                ItemID[] eq, int[] mgExp, SkillID[] sk)
             {
                 Debug.Assert(eq.Length == 4);
                 Debug.Assert(mgExp.Length == 10);
-                data.Add(name, new PersonData(score, eq, mgExp, sk));
+                data.Add(name, new PersonData(growth, init, last, eq, mgExp, sk));
             }
         }
 
-        public static Person GetPersonData(CharaName name)
-        {
-            var targetData = data[name];
-            var equip = new EquipSet();
-            var skill = new SkillHolder(targetData.InitSkill);
-            var magic = new MagicLv(targetData.InitMagicExp, skill);
-            return new Person(name, targetData.InitScore, skill, magic, equip);
-        }
+        public static PersonData Get(CharaName name) => data[name];
     }
 }
