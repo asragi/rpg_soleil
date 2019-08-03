@@ -10,7 +10,7 @@ namespace Soleil.Map
     /// <summary>
     /// 接触用の矩形をもちイベントを起こすもの
     /// </summary>
-    abstract class MapEventObject : MapObject
+    abstract class MapEventObject : MapObject, IEventer
     {
         public readonly string Name;
         public static Vector DefaultBoxSize = new Vector(30, 30);

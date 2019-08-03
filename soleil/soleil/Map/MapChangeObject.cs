@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    class MapChangeObject : MapObject
+    class MapChangeObject : MapObject, IEventer
     {
         protected EventSequence EventSequence;
         public MapChangeObject((Vector, Vector) pos, MapName mapName, Vector destination, Direction dir,
