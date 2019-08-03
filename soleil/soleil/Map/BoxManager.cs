@@ -92,8 +92,8 @@ namespace Soleil.Map
                 var target = line.WorldPos;
                 if (target.X <= box.WorldPos.X + box.Size.X / 2
                     && target.X >= box.WorldPos.X - box.Size.X / 2
-                    && target.X <= box.WorldPos.X + box.Size.X / 2
-                    && target.X <= box.WorldPos.X + box.Size.X / 2)
+                    && target.Y <= box.WorldPos.Y + box.Size.Y / 2
+                    && target.Y >= box.WorldPos.Y - box.Size.Y / 2)
                     return true;
 
                 // 矩形の4辺どれかと線分が交差していればtrue

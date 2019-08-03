@@ -14,10 +14,10 @@ namespace Soleil.Map
     {
         public (Vector, Vector) Edges { get; private set; }
 
-        public CollideLine(ICollideObject parent, Vector edge1, Vector edge2, CollideLayer layer, BoxManager bm)
-            :base(parent, (edge1 + edge2) / 2, layer, bm)
+        public CollideLine(ICollideObject parent, (Vector, Vector) edge, CollideLayer layer, BoxManager bm)
+            :base(parent, (edge.Item1 + edge.Item2) / 2, layer, bm)
         {
-            Edges = ( edge1, edge2 );
+            Edges = edge;
         }
 
         public override void Draw(Drawing d) 
