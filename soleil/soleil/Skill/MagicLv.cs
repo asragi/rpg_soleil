@@ -27,7 +27,7 @@ namespace Soleil.Skill
         {
             for (int i = 0; i < exps.Length; i++)
             {
-                dictMagicExp[(MagicCategory)i] = exps[i];
+                AddExp(exps[i], (MagicCategory)i);
             }
         }
 
@@ -43,7 +43,12 @@ namespace Soleil.Skill
         /// </summary>
         public int GetLv(MagicCategory category)
         {
-            return MathEx.Clamp(dictMagicExp[category] / 10, 9, 0);
+            for (int i = 0; i < 9; i++)
+            {
+                int thresh = 15 * i * (i + 1);
+                if (dictMagicExp[category] <= thresh) return i;
+            }
+            return 9;
         }
         /// <summary>
         /// MagicCategoryが習得済みか

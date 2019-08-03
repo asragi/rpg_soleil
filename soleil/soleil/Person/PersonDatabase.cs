@@ -20,20 +20,21 @@ namespace Soleil
 
         static PersonDatabase()
         {
+            data = new Dictionary<CharaName, PersonData>();
             Set(CharaName.Lune, new AbilityScore(72, 156, 3, 5, 30, 8),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
-                new[] { 0, 0, 450, 0, 0, 0, 0, 0, 0, 0 },
+                new[] { 0, 0, 100, 0, 0, 0, 0, 0, 0, 0 },
                 new SkillID[] { }
                 );
             Set(CharaName.Sunny, new AbilityScore(120, 90, 21, 18, 20, 21),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
-                new[] { 100, 0, 200, 0, 0, 0, 0, 0, 0, 0 },
+                new[] { 10, 0, 50, 0, 0, 0, 0, 0, 0, 0 },
                 new SkillID[] { SkillID.Headbutt }
                 );
             Set(CharaName.Tella, new AbilityScore(96, 60, 9, 14, 13, 17),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
-                new[] { 0, 500, 0, 0, 0, 200, 0, 0, 0, 0 },
-                new SkillID[] { }
+                new[] { 0, 500, 0, 0, 0, 0, 0, 200, 0, 0 },
+                new SkillID[] { SkillID.Barrage }
                 );
 
             void Set(CharaName name, AbilityScore score, ItemID[] eq, int[] mgExp, SkillID[] sk)
