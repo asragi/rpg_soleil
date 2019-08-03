@@ -12,17 +12,17 @@ namespace Soleil.Map
     /// </summary>
     class BoxManager
     {
-        protected readonly List<CollideBox> BoxList;
+        protected readonly List<CollideObject> BoxList;
         int indexNum;
         bool visible = true; // for debug
 
         public BoxManager()
         {
             indexNum = 0;
-            BoxList = new List<CollideBox>();
+            BoxList = new List<CollideObject>();
         }
 
-        public void Add(CollideBox box)
+        public void Add(CollideObject box)
         {
             BoxList.ForEach(b => b.ExtendBoolTable());
             box.ID = indexNum++;
@@ -56,31 +56,35 @@ namespace Soleil.Map
                 BoxList[i].Collide(BoxList[j], false);
                 return;
             }
-            double xi = BoxList[i].WorldPos().X, 
-                yi = BoxList[i].WorldPos().Y, 
-                wi = BoxList[i].Size.X, 
-                hi = BoxList[i].Size.Y;
-            double xj = BoxList[j].WorldPos().X, 
-                yj = BoxList[j].WorldPos().Y,
-                wj = BoxList[j].Size.X,
-                hj = BoxList[j].Size.Y;
 
-            bool col = xi + wi/2 > xj - wj/2 && xi - wi/2 < xj + wj/2 &&
-                yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
+            bool col = false;
+            if (BoxList[i] is CollideBox boxA && BoxList[j] is CollideBox boxB)
+            {
+                double xi = boxA.WorldPos.X,
+                    yi = boxA.WorldPos.Y,
+                    wi = boxA.Size.X,
+                    hi = boxA.Size.Y;
+                double xj = boxB.WorldPos.X,
+                    yj = boxB.WorldPos.Y,
+                    wj = boxB.Size.X,
+                    hj = boxB.Size.Y;
 
+                col = xi + wi / 2 > xj - wj / 2 && xi - wi / 2 < xj + wj / 2 &&
+                    yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
+            }
             // 双方のboxに衝突相手の情報を渡す
             BoxList[j].Collide(BoxList[i],col);
             BoxList[i].Collide(BoxList[j],col);
         }
 
-        public CollideBox GetBox(int id) => BoxList.Find(box => box.ID == id);
+        public CollideObject GetBox(int id) => BoxList.Find(box => box.ID == id);
 
         public void Draw(Drawing d)
         {
             if (!visible) return;
             foreach (var item in BoxList)
             {
-                d.DrawBox(item.WorldPos(), item.Size, Color.Red, DepthID.Player);
+                item.Draw(d);
             }
         }
     }

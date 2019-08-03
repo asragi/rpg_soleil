@@ -35,7 +35,7 @@ namespace Soleil.Map
             );
         }
 
-        public override void OnCollisionEnter(CollideBox col)
+        public override void OnCollisionEnter(CollideObject col)
         {
             if (col.Layer == CollideLayer.PlayerHit)
             {

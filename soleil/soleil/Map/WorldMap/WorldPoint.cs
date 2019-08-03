@@ -96,14 +96,14 @@ namespace Soleil.Map.WorldMap
             messageWindow?.Quit();
         }
 
-        public void OnCollisionEnter(CollideBox cb)
+        public void OnCollisionEnter(CollideObject cb)
         {
             CallWindow(false);
         }
 
-        public void OnCollisionStay(CollideBox cb) { }
+        public void OnCollisionStay(CollideObject cb) { }
 
-        public void OnCollisionExit(CollideBox cb)
+        public void OnCollisionExit(CollideObject cb)
         {
             QuitWindow();
         }
