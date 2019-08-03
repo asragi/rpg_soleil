@@ -17,6 +17,7 @@ namespace Soleil
         readonly public CharaName Name;
         private AbilityScore score;
         public AbilityScore Score => score;
+        public int Lv { get; private set; }
         readonly public EquipSet Equip;
         readonly public SkillHolder Skill;
         public MagicLv Magic;
