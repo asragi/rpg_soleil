@@ -74,7 +74,7 @@ namespace Soleil.Menu
             lvNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, -SpaceHPMP), posDiff, DepthID.MenuBottom);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
-            lvNumText.Text = "3";
+            lvNumText.Text = p.Lv.ToString();
             hpNumText.Color = ColorPalette.GlayBlue;
             mpNumText.Color = ColorPalette.GlayBlue;
             hpNumText.ActivateOutline(1);
