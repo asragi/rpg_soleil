@@ -86,7 +86,53 @@ namespace Soleil.Map
 
             bool LineCollide(CollideLine line, CollideBox box)
             {
+                // BoxのWorldPosは矩形中心．LineのWorldPosは線分中点．
+                // 線分の中点がBoxの内側にあれば衝突しているといえる．
+                // 線分が完全に箱の内側に入り込む場合，後述の計算で衝突が取れない．
+                var target = line.WorldPos;
+                if (target.X <= box.WorldPos.X + box.Size.X / 2
+                    && target.X >= box.WorldPos.X - box.Size.X / 2
+                    && target.X <= box.WorldPos.X + box.Size.X / 2
+                    && target.X <= box.WorldPos.X + box.Size.X / 2)
+                    return true;
+
+                // 矩形の4辺どれかと線分が交差していればtrue
+                Vector wPos = box.WorldPos, half = box.Size / 2;
+                var points = new[]
+                {
+                    wPos + new Vector(half.X, half.Y),
+                    wPos + new Vector(half.X, -half.Y),
+                    wPos + new Vector(-half.X, -half.Y),
+                    wPos + new Vector(-half.X, half.Y)
+                };
+                var sides = new (Vector, Vector)[4];
+                for (int k = 0; k < sides.Length; k++)
+                {
+                    sides[k] = (points[k], points[(k + 1) % 4]);
+                }
+
+                for (int k = 0; k < sides.Length; k++)
+                {
+                    if (Line2LineCheck(line.Edges, sides[k]))
+                        return true;
+                }
                 return false;
+
+                // 線分と線分の交差判定
+                bool Line2LineCheck((Vector, Vector) a, (Vector, Vector) b)
+                {
+                    Vector a1 = a.Item1, a2 = a.Item2, b1 = b.Item1, b2 = b.Item2;
+                    // 直線aと線分bが交差
+                    Func<double, double, double> funcA // 直線aの式
+                        = (x, y) => (a1.X - a2.X) * (y - a1.Y) + (a1.Y - a2.Y) * (a1.X - x);
+                    // -- b2の両端点について直線aの式に代入した値が同符号 -> 交差していない
+                    if (funcA(b1.X, b1.Y) * funcA(b2.X, b2.Y) > 0) return false;
+                    // 直線bと線分aが交差
+                    Func<double, double, double> funcB // 直線bの式
+                        = (x, y) => (b1.X - b2.X) * (y - b1.Y) + (b1.Y - b2.Y) * (b1.X - x);
+                    if (funcB(a1.X, a1.Y) * funcB(a2.X, a2.Y) > 0) return false;
+                    return true;
+                }
             }
         }
 

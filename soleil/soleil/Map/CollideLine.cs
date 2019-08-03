@@ -12,15 +12,15 @@ namespace Soleil.Map
     /// </summary>
     class CollideLine : CollideObject
     {
-        public Vector[] Edges { get; private set; }
+        public (Vector, Vector) Edges { get; private set; }
 
         public CollideLine(ICollideObject parent, Vector edge1, Vector edge2, CollideLayer layer, BoxManager bm)
             :base(parent, (edge1 + edge2) / 2, layer, bm)
         {
-            Edges = new[] { edge1, edge2 };
+            Edges = ( edge1, edge2 );
         }
 
         public override void Draw(Drawing d) 
-            => d.DrawLine(Edges[0], Edges[1], 1, Color.Red, DepthID.Player);
+            => d.DrawLine(Edges.Item1, Edges.Item2, 1, Color.Red, DepthID.Player);
     }
 }
