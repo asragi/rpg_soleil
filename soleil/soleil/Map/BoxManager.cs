@@ -58,6 +58,7 @@ namespace Soleil.Map
             }
 
             bool col = false;
+            // 矩形と矩形のぶつかり
             if (BoxList[i] is CollideBox boxA && BoxList[j] is CollideBox boxB)
             {
                 double xi = boxA.WorldPos.X,
@@ -72,9 +73,21 @@ namespace Soleil.Map
                 col = xi + wi / 2 > xj - wj / 2 && xi - wi / 2 < xj + wj / 2 &&
                     yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
             }
+            // 矩形vs線分
+            if (BoxList[i] is CollideLine _line1 && BoxList[j] is CollideBox _box1)
+                col = LineCollide(_line1, _box1);
+            if (BoxList[i] is CollideBox _box2 && BoxList[j] is CollideLine _line2)
+                col = LineCollide(_line2, _box2);
+            // note: 線分を動かす予定はないので線分vs線分は計算しない（常にfalse）
+
             // 双方のboxに衝突相手の情報を渡す
             BoxList[j].Collide(BoxList[i],col);
             BoxList[i].Collide(BoxList[j],col);
+
+            bool LineCollide(CollideLine line, CollideBox box)
+            {
+                return false;
+            }
         }
 
         public CollideObject GetBox(int id) => BoxList.Find(box => box.ID == id);
