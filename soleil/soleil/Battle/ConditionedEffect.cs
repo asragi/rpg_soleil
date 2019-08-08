@@ -9,10 +9,11 @@ namespace Soleil
     /// <summary>
     /// 条件付きで戦闘中などに効果を発動するもの
     /// </summary>
-    using Condition = Func<BattleField, Action, bool>;
-    using AffectFunc = Func<BattleField, Action, List<Occurence>, List<Occurence>>;
+    using Condition = Func<Action, bool>;
+    using AffectFunc = Func<Action, List<Occurence>, List<Occurence>>;
     class ConditionedEffect : IComparable
     {
+        protected static readonly BattleField BF = BattleField.GetInstance();
         static int counter = 0;
         int count;
         int priority;
@@ -31,7 +32,7 @@ namespace Soleil
         
         public Condition Cond;
         public AffectFunc Affect;
-        protected Func<BattleField, bool> disable;
+        protected Func<bool> disable;
         public ConditionedEffect(Condition cond, AffectFunc affect, int priority_)
         {
             count = counter;
@@ -40,10 +41,10 @@ namespace Soleil
             Cond = cond;
             Affect = affect;
             priority = priority_;
-            disable = (bf) => false;
+            disable = () => false;
         }
 
-        public ConditionedEffect(Condition cond, AffectFunc affect, int priority_, Func<BattleField, bool> isAvailable)
+        public ConditionedEffect(Condition cond, AffectFunc affect, int priority_, Func<bool> isAvailable)
         {
             count = counter;
             counter++;
@@ -54,12 +55,16 @@ namespace Soleil
             disable = isAvailable;
         }
 
-        public List<Occurence> Act(BattleField bf, Action action, List<Occurence> ocrs)
-            => Cond(bf, action) ? Affect(bf, action, ocrs) : ocrs;
+        public List<Occurence> Act(Action action, List<Occurence> ocrs)
+            => Cond(action) ? Affect(action, ocrs) : ocrs;
 
-        public bool Expired(BattleField bf) => disable(bf);
+        public bool Expired() => disable();
     }
 
+    /// <summary>
+    /// 条件付きで戦闘中などに効果を発動するもので、
+    /// 一定時間で効果時間が切れるもの
+    /// </summary>
     class ConditionedEffectWithExpireTime : ConditionedEffect
     {
         int expireTime;
@@ -67,8 +72,8 @@ namespace Soleil
             : base(cond, affect, priority_)
         {
             expireTime = expireTime_;
-            disable = (bf) => {
-                return bf.GetCharacter(charaIndex).Status.WP > expireTime;
+            disable = () => {
+                return BF.GetCharacter(charaIndex).Status.WP > expireTime;
             };
         }
     }

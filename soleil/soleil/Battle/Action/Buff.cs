@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     using BuffFunc = Func<CharacterStatus, CharacterStatus, BuffRate>;
+    /// <summary>
+    /// バフ・デバフを表す行動
+    /// </summary>
     class Buff : Action
     {
         protected BuffFunc BFunc;
@@ -20,34 +23,34 @@ namespace Soleil
         }
 
         public BuffRate BRate;
-        public override List<Occurence> Act(BattleField bf)
+        public override List<Occurence> Act()
         {
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
-                    BRate = BFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
+                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
                     break;
                 case Range.Me aRange:
-                    BRate = BFunc(bf.GetCharacter(aRange.Index).Status, bf.GetCharacter(aRange.Index).Status);
+                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
                     break;
             }
 
 
             var ceffects = new List<ConditionedEffect>();
             ceffects.Add(new ConditionedEffect(
-                (bfi, act) => true,
-                (bfi, act, ocrs) =>
+                (act) => true,
+                (act, ocrs) =>
                 {
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
-                            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
                             }
                             else
                             {
-                                bf.GetCharacter(aRange.TargetIndex).Buff(BRate);
+                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
                                 string mes = aRange.SourceIndex.ToString() + "が";
                                 mes += aRange.TargetIndex.ToString() + "に";
                                 mes += "バフを与えた";
@@ -55,14 +58,14 @@ namespace Soleil
                             }
                             return ocrs;
                         case Range.Me me:
-                            if (bf.GetCharacter(me.Index).Status.Dead)
+                            if (BF.GetCharacter(me.SourceIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(me.Index.ToString() + "は既に死んでいる"));
+                                ocrs.Add(new Occurence(me.SourceIndex.ToString() + "は既に死んでいる"));
                             }
                             else
                             {
-                                bf.GetCharacter(me.Index).Buff(BRate);
-                                string mes = me.Index.ToString() + "は";
+                                BF.GetCharacter(me.SourceIndex).Buff(BRate);
+                                string mes = me.SourceIndex.ToString() + "は";
                                 var cmp = BRate.Comp();
                                 if (cmp == 1)
                                     mes += "能力が上がった";
@@ -70,7 +73,7 @@ namespace Soleil
                                     mes += "能力が下がった";
                                 else
                                     mes += "能力が変動した";
-                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.Index));
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.SourceIndex));
                             }
                             return ocrs;
                         default:
@@ -80,7 +83,7 @@ namespace Soleil
                 10000));
 
 
-            var ocr = AggregateConditionEffects(bf, ceffects);
+            var ocr = AggregateConditionEffects(ceffects);
             return ocr;
         }
     }

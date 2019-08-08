@@ -10,15 +10,13 @@ namespace Soleil
     {
         public CharacterStatus Status;
         protected List<Turn> turns;
-        protected BattleField bf;
+        protected static readonly BattleField BF = BattleField.GetInstance();
         protected CommandSelect commandSelect;
 
         protected int charaIndex;
-        public Character(BattleField bField, int index)
+        public Character(int index)
         {
-            bf = bField;
             charaIndex = index;
-
             turns = new List<Turn>();
         }
 
