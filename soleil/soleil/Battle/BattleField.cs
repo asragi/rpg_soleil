@@ -64,7 +64,7 @@ namespace Soleil
                 charas.Add(new PlayableCharacter(charaIndex, partylist[i].Score));
                 sides.Add(Side.Right);
                 indexes[(int)Side.Right].Add(charaIndex);
-                statusUIs.Add(new StatusUI(partylist[i].Score.HP, partylist[i].Score.MP, new Vector(750- (partylist.Length-i-1) * 200, 450)));
+                statusUIs.Add(new StatusUI(partylist[i].Score.HPMAX, partylist[i].Score.MPMAX, new Vector(750- (partylist.Length-i-1) * 200, 450)));
                 charaIndex++;
             }
 

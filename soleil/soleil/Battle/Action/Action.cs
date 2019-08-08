@@ -33,9 +33,11 @@ namespace Soleil
         {
             get; protected set;
         }
-        public Action(Range.AttackRange aRange)
+        protected int MP;
+        public Action(Range.AttackRange aRange, int mp = 0)
         {
             ARange = aRange;
+            MP = mp;
         }
 
         public abstract List<Occurence> Act();
