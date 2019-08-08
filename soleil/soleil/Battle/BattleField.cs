@@ -20,6 +20,7 @@ namespace Soleil
 
         List<Side> sides;
         List<int>[] indexes;
+        int charaIndex;
         List<Character> charas;
         List<bool> alive;
 
@@ -41,29 +42,42 @@ namespace Soleil
         {
         }
 
-        public void InitBattle()
+        public void InitBattle(PersonParty party)
         {
             MenuComponentList = new List<Menu.MenuComponent>();
 
-            charas = new List<Character>
+            var partylist = party.GetActiveMembers();
+
+            charaIndex = 0;
+            charas = new List<Character>();
+            sides = new List<Side>();
+            indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
+            statusUIs = new List<StatusUI>();
+            textureIDList = new List<TextureID> //とりあえず
             {
-                new TestPlayableCharacter(0),
-                new TestPlayableCharacter(1),
-                new TestEnemyCharacter(2),
-                new TestEnemyCharacter(3),
-                new TestEnemyCharacter(4),
+                TextureID.BattleTurnQueueFaceLune,
+                TextureID.BattleTurnQueueFaceSun,
+                TextureID.BattleTurnQueueFaceSun,
             };
-            sides = new List<Side>
+            for (int i = 0; i < partylist.Length; i++)
             {
-                Side.Right,
-                Side.Right,
-                Side.Left,
-                Side.Left,
-                Side.Left,
-            };
-            indexes = new List<int>[(int)Side.Size];
-            indexes[(int)Side.Left] = new List<int> { 2, 3, 4, };
-            indexes[(int)Side.Right] = new List<int> { 0, 1, };
+                charas.Add(new PlayableCharacter(charaIndex, partylist[i].Score));
+                sides.Add(Side.Right);
+                indexes[(int)Side.Right].Add(charaIndex);
+                statusUIs.Add(new StatusUI(partylist[i].Score.HP, partylist[i].Score.MP, new Vector(750- (partylist.Length-i-1) * 200, 450)));
+                charaIndex++;
+            }
+
+            const int EnemyCnt = 3;
+            for(int i=0;i<EnemyCnt; i++)
+            {
+                charas.Add(new TestEnemyCharacter(charaIndex));
+                sides.Add(Side.Left);
+                indexes[(int)Side.Left].Add(charaIndex);
+                textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
+                charaIndex++;
+            }
+            
 
             alive = new List<bool>(charas.Count);
             for (int i = 0; i < charas.Count; i++) alive.Add(true);
@@ -80,21 +94,8 @@ namespace Soleil
             battleQue = new Queue<BattleEvent>();
 
             CEffects = new SortedSet<ConditionedEffect>();
+            
 
-            textureIDList = new List<TextureID>
-            {
-                TextureID.BattleTurnQueueFaceLune,
-                TextureID.BattleTurnQueueFaceSun,
-                TextureID.BattleTurnQueueFace1,
-                TextureID.BattleTurnQueueFace2,
-                TextureID.BattleTurnQueueFace3,
-            };
-
-            statusUIs = new List<StatusUI>()
-            {
-                new StatusUI(charas[0].Status.HP, charas[1].Status.HP, new Vector(550, 450)),
-                new StatusUI(charas[0].Status.HP, charas[1].Status.HP, new Vector(750, 450)),
-            };
         }
 
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
@@ -261,11 +262,11 @@ namespace Soleil
 
 
             statusUIs.ForEach(e => e.Draw(sb));
-            for (int i = 2; i < charas.Count; i++)
+            for (int i = 3; i < charas.Count; i++)
             {
-                sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
+                sb.DrawText(new Vector(100 + (i-3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
-                sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
+                sb.DrawText(new Vector(100 + (i-3) * 180, 390), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
             }
 
             

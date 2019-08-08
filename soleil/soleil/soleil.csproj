@@ -51,6 +51,7 @@
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
+    <Compile Include="Battle\Character\PlayableCharacter.cs" />
     <Compile Include="Battle\Character\TestEnemyCharacter.cs" />
     <Compile Include="Battle\Character\TestPlayableCharacter.cs" />
     <Compile Include="Battle\BattleQueue.cs" />
