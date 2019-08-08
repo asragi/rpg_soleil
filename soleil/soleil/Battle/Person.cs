@@ -22,11 +22,13 @@ namespace Soleil
         public MagicLv Magic;
         public bool InParty;
 
-        public Person(CharaName name, AbilityScore _score, SkillHolder skill, MagicLv magicLv)
+        public Person(
+            CharaName name, AbilityScore _score, SkillHolder skill, MagicLv magicLv,
+            EquipSet equip)
         {
             Name = name;
             score = _score;
-            Equip = new EquipSet();
+            Equip = equip;
             Skill = skill;
             Magic = magicLv;
             InParty = true; // debug

@@ -17,6 +17,12 @@ namespace Soleil.Skill
             learnedFlags = new bool[(int)SkillID.size];
         }
 
+        public SkillHolder(bool[] flags)
+        {
+            if (flags.Length != (int)SkillID.size) throw new Exception("Skill Array Size is invalid.");
+            learnedFlags = flags;
+        }
+
         public SkillHolder(params SkillID[] skills)
             : this() => skills.ForEach2(s => LearnSkill(s));
 
@@ -39,5 +45,7 @@ namespace Soleil.Skill
         public void LearnSkill(SkillID id) => learnedFlags[(int)id] = true;
 
         public void ForgetSkill(SkillID id) => learnedFlags[(int)id] = false;
+
+        public bool[] GetArray() => learnedFlags;
     }
 }

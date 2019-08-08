@@ -17,6 +17,20 @@ namespace Soleil.Skill
         private Dictionary<MagicCategory, int> dictMagicExp;
         private SkillHolder skillHolder;
 
+        public int this[MagicCategory cat]
+        {
+            get => dictMagicExp[cat];
+        }
+
+        public MagicLv(int[] exps, SkillHolder _skillHolder)
+            : this(_skillHolder)
+        {
+            for (int i = 0; i < exps.Length; i++)
+            {
+                dictMagicExp[(MagicCategory)i] = exps[i];
+            }
+        }
+
         public MagicLv(SkillHolder _skillHolder)
         {
             skillHolder = _skillHolder;
