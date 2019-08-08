@@ -58,7 +58,9 @@
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\EquipSet.cs" />
     <Compile Include="Battle\MagicField.cs" />
-    <Compile Include="Battle\Person.cs" />
+    <Compile Include="Person\GrowthType.cs" />
+    <Compile Include="Person\Person.cs" />
+    <Compile Include="Battle\SelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\CharaSelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\CommandPanel.cs" />
     <Compile Include="Battle\SelectWindow\CommandSelectWindow.cs" />
@@ -242,7 +244,9 @@
     <Compile Include="Misc\CharaName.cs" />
     <Compile Include="Misc\GameDateTime.cs" />
     <Compile Include="Misc\InputSmoother.cs" />
-    <Compile Include="Misc\PersonParty.cs" />
+    <Compile Include="Person\PersonData.cs" />
+    <Compile Include="Person\PersonDatabase.cs" />
+    <Compile Include="Person\PersonParty.cs" />
     <Compile Include="Misc\SaveLoad\SaveData.cs" />
     <Compile Include="Misc\SaveLoad\SaveLoad.cs" />
     <Compile Include="Mono\Audio.cs" />

@@ -74,7 +74,7 @@ namespace Soleil.Menu
             lvNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, -SpaceHPMP), posDiff, DepthID.MenuBottom);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
-            lvNumText.Text = "3";
+            lvNumText.Text = p.Lv.ToString();
             hpNumText.Color = ColorPalette.GlayBlue;
             mpNumText.Color = ColorPalette.GlayBlue;
             hpNumText.ActivateOutline(1);
@@ -111,6 +111,7 @@ namespace Soleil.Menu
                     mpNumText.Text = targetMP.ToString();
                     hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
                 }
+                lvNumText.Text = person.Lv.ToString();
             }
         }
     }

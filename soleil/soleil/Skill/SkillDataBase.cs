@@ -49,7 +49,10 @@ namespace Soleil.Skill
         Haste,
         HeavensDrive,
         // Skill
+        // -- Sunny
         Headbutt,
+        // -- Tella
+        Barrage,
 
         size
     }
@@ -110,6 +113,7 @@ namespace Soleil.Skill
 
             // skill
             SetSkill("ヘッドバット", SkillID.Headbutt, "敵単体に打属性のダメージ．確率で気絶．", 12);
+            SetSkill("集中砲火", SkillID.Barrage, "敵単体に突属性のダメージ．", 15);
         }
 
         static void SetSkill(string name, SkillID id, string desc, int cost, bool onMenu = false, bool onBattle = true)
