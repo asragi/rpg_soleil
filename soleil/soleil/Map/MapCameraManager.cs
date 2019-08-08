@@ -69,9 +69,9 @@ namespace Soleil.Map
                     nextTarget = i;
                 }
             }
-            if(nextTarget != nowTarget)
+            if (nextTarget != nowTarget)
             {
-                startPos = (nowTarget == -1)? ClampCameraPos(player.GetPosition()) : camera.GetPosition() + CameraDiff;
+                startPos = (nowTarget == -1) ? ClampCameraPos(player.GetPosition()) : camera.GetPosition() + CameraDiff;
                 nowTarget = nextTarget;
                 targetPos = ClampCameraPos(cameraPoints[nextTarget].GetPos());
                 frame = 0;

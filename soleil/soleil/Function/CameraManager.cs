@@ -21,7 +21,7 @@ namespace Soleil
         public static CameraManager GetInstance() => cameraManager;
         SceneManager sceneManager;
 
-        private CameraManager() => 
+        private CameraManager() =>
             sceneManager = SceneManager.GetInstance();
     }
 }

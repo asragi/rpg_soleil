@@ -11,7 +11,7 @@ namespace Soleil.Menu.Status
     /// <summary>
     /// 装備交換時に表示されるウィンドウのクラス．
     /// </summary>
-    class EquipItemList: BasicMenu
+    class EquipItemList : BasicMenu
     {
         public bool Active;
         protected override Vector WindowPos => new Vector(550, 100);

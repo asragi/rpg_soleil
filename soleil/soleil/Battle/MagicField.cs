@@ -24,7 +24,7 @@ namespace Soleil
         public MagicField()
         {
         }
-        
+
         public abstract float GetMagicRate(MagicFieldName field);
 
         public abstract void Fluctuate(MagicFieldName field, float power);
@@ -138,7 +138,7 @@ namespace Soleil
             y += (float)MathEx.Sin(rad1) * factor / (r1 * r1);
             y += (float)MathEx.Sin(rad2) * factor / (r2 * r2);
 
-            if(Distance(x,y,0,0) > radius)
+            if (Distance(x, y, 0, 0) > radius)
             {
                 var r = Math.Atan2(y, x);
                 x = (float)(Math.Cos(r) * radius);

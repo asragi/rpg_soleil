@@ -80,7 +80,7 @@ namespace Soleil.Item
         {
             data[(int)id] = new NormalItem(id, menu, battle, effectVal, name, desc);
         }
-        
+
         // 装備など自明に使用不可能なもの用のset
         static void Set(String name, ItemID id, int effectVal, String desc)
         {

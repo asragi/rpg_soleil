@@ -2,7 +2,7 @@
 
 namespace Soleil
 {
-    class MapScene: Scene
+    class MapScene : Scene
     {
         MapManager mapManager;
         MapIndicator mapIndicator;

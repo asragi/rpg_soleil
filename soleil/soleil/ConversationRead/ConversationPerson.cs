@@ -11,7 +11,7 @@ namespace Soleil.Event.Conversation
     /// </summary>
     class ConversationPerson
     {
-        readonly int[] xPositionArray = new[] { 100,200,350,500,650 };
+        readonly int[] xPositionArray = new[] { 100, 200, 350, 500, 650 };
         const int Y = 100;
 
         public string Name { get; private set; }

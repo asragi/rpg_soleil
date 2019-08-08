@@ -20,7 +20,8 @@ namespace Soleil
 
         public void Refresh()
         {
-            queue.Sort((x,y)=> {
+            queue.Sort((x, y) =>
+            {
                 if (x.TurnTime > y.TurnTime) return 1;
                 else if (x.TurnTime < y.TurnTime) return -1;
                 else return 0;
@@ -60,7 +61,7 @@ namespace Soleil
             }
             set
             {
-                queue[index]=value;
+                queue[index] = value;
             }
         }
         public int Count => queue.Count;
@@ -76,7 +77,7 @@ namespace Soleil
         public int WaitPoint;
         public CharacterStatus CStatus;
         public int CharaIndex;
-        
+
         /// <summary>
         /// WaitPointが0以下になるのにかかる時間
         /// </summary>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class StatusSystem: MenuChild
+    class StatusSystem : MenuChild
     {
         // 背景画像
         Image backImage;
@@ -30,7 +30,7 @@ namespace Soleil.Menu
         // 既得術系統
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
-        
+
         public StatusSystem(MenuComponent parent, MenuDescription desc, PersonParty party)
             : base(parent)
         {
@@ -56,7 +56,7 @@ namespace Soleil.Menu
             equipDisplay = new EquipDisplay(EquipPos, desc, this);
 
             //
-            AddComponents(new IComponent[] {backImage, charaName, statusParams, display, statusMagicCategory, faceImg });
+            AddComponents(new IComponent[] { backImage, charaName, statusParams, display, statusMagicCategory, faceImg });
         }
 
         public override void OnInputUp()

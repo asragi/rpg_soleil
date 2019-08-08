@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    class MagistolShop: MapBase
+    class MagistolShop : MapBase
     {
         private const int ChairDiff = 60;
         private static readonly Vector[] ChairPos = new[]

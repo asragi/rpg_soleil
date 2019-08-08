@@ -49,28 +49,28 @@ namespace Soleil.Map
 
         private void CalcCollide(int i, int j)
         {
-            if(!BoxList[i].IsActive || !BoxList[j].IsActive)
+            if (!BoxList[i].IsActive || !BoxList[j].IsActive)
             {
                 // どちらかが非アクティブであれば衝突しない
                 BoxList[j].Collide(BoxList[i], false);
                 BoxList[i].Collide(BoxList[j], false);
                 return;
             }
-            double xi = BoxList[i].WorldPos().X, 
-                yi = BoxList[i].WorldPos().Y, 
-                wi = BoxList[i].Size.X, 
+            double xi = BoxList[i].WorldPos().X,
+                yi = BoxList[i].WorldPos().Y,
+                wi = BoxList[i].Size.X,
                 hi = BoxList[i].Size.Y;
-            double xj = BoxList[j].WorldPos().X, 
+            double xj = BoxList[j].WorldPos().X,
                 yj = BoxList[j].WorldPos().Y,
                 wj = BoxList[j].Size.X,
                 hj = BoxList[j].Size.Y;
 
-            bool col = xi + wi/2 > xj - wj/2 && xi - wi/2 < xj + wj/2 &&
+            bool col = xi + wi / 2 > xj - wj / 2 && xi - wi / 2 < xj + wj / 2 &&
                 yi + hi / 2 > yj - hj / 2 && yi - hi / 2 < yj + hj / 2;
 
             // 双方のboxに衝突相手の情報を渡す
-            BoxList[j].Collide(BoxList[i],col);
-            BoxList[i].Collide(BoxList[j],col);
+            BoxList[j].Collide(BoxList[i], col);
+            BoxList[i].Collide(BoxList[j], col);
         }
 
         public CollideBox GetBox(int id) => BoxList.Find(box => box.ID == id);

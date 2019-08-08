@@ -64,3 +64,4 @@ monodroid*.msi
 
 #NuGet Packages
 /soleil/[Pp]ackages/
+/soleil/soleil/ClassDiagram1.cd

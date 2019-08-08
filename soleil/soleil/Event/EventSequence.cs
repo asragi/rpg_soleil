@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Soleil.Event
 {
     class EventSequence
-        :IAggregate
+        : IAggregate
     {
         bool startEvent;
         List<EventSet> eventSets;
@@ -58,7 +58,7 @@ namespace Soleil.Event
         /// </summary>
         public void Next()
         {
-            if(++index >= eventSets.Count)
+            if (++index >= eventSets.Count)
             {
                 EndEvent();
                 return;
@@ -77,7 +77,7 @@ namespace Soleil.Event
 
         public int GetNowIndex() => index;
 
-        public void InsertEventSet(int index,EventSet item)
+        public void InsertEventSet(int index, EventSet item)
         {
             item.SetEventSequence(this);
             eventSets.Insert(index, item);

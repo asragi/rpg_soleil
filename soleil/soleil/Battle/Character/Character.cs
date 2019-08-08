@@ -34,7 +34,7 @@ namespace Soleil
         {
             Status.Rates = rate;
         }
-        
+
 
         //kari
         public Turn NextTurn()

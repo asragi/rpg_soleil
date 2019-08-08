@@ -65,7 +65,7 @@ namespace Soleil.Map
 
         virtual public void Update()
         {
-            if(!started) Start();
+            if (!started) Start();
             om.Update();
             EventSequenceUpdate();
             bm.Update();

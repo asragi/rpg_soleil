@@ -25,7 +25,7 @@ namespace Soleil.Menu
         int index;
 
         public StatusMenu(PersonParty _party, MenuSystem parent)
-            :base(parent)
+            : base(parent)
         {
             index = 0;
             party = _party;
@@ -68,12 +68,14 @@ namespace Soleil.Menu
         public void QuitCursor() => cursor.Quit();
 
         // Input
-        public override void OnInputRight() {
+        public override void OnInputRight()
+        {
             index++;
             AdjustIndex();
         }
 
-        public override void OnInputLeft() {
+        public override void OnInputLeft()
+        {
             index--;
             AdjustIndex();
         }

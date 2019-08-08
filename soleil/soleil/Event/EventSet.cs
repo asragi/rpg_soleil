@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// Event管理用 Eventのまとまりを表すクラス.
     /// </summary>
-    class EventSet: EventUnit
+    class EventSet : EventUnit
     {
         EventSequence myEventSequence;
         EventBase[] eventsDefault;
@@ -65,7 +65,7 @@ namespace Soleil.Event
         /// </summary>
         public void Next()
         {
-            if(++index >= events.Count)
+            if (++index >= events.Count)
             {
                 myEventSequence.Next();
                 return;
