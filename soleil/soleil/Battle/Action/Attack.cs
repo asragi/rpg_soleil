@@ -112,10 +112,10 @@ namespace Soleil
             //もっと根幹に組み込むべき条件な気がする
             var alives = BF.AliveIndexes();
             alives.ForEach(p => ceffects.Add(new ConditionedEffect(
-                (act) => BattleField.GetInstance().GetCharacter(p).Status.Dead,
+                (act) => BF.GetCharacter(p).Status.Dead,
                 (act, ocrs) =>
                 {
-                    BattleField.GetInstance().RemoveCharacter(p);
+                    BF.RemoveCharacter(p);
                     ocrs.Add(new Occurence(p.ToString() + "はやられた"));
                     return ocrs;
                 },

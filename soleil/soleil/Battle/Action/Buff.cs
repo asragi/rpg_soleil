@@ -41,13 +41,13 @@ namespace Soleil
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
-                            if (BattleField.GetInstance().GetCharacter(aRange.TargetIndex).Status.Dead)
+                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
                             }
                             else
                             {
-                                BattleField.GetInstance().GetCharacter(aRange.TargetIndex).Buff(BRate);
+                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
                                 string mes = aRange.SourceIndex.ToString() + "が";
                                 mes += aRange.TargetIndex.ToString() + "に";
                                 mes += "バフを与えた";
@@ -55,13 +55,13 @@ namespace Soleil
                             }
                             return ocrs;
                         case Range.Me me:
-                            if (BattleField.GetInstance().GetCharacter(me.SourceIndex).Status.Dead)
+                            if (BF.GetCharacter(me.SourceIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(me.SourceIndex.ToString() + "は既に死んでいる"));
                             }
                             else
                             {
-                                BattleField.GetInstance().GetCharacter(me.SourceIndex).Buff(BRate);
+                                BF.GetCharacter(me.SourceIndex).Buff(BRate);
                                 string mes = me.SourceIndex.ToString() + "は";
                                 var cmp = BRate.Comp();
                                 if (cmp == 1)
