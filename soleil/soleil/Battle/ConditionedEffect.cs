@@ -61,6 +61,10 @@ namespace Soleil
         public bool Expired() => disable();
     }
 
+    /// <summary>
+    /// 条件付きで戦闘中などに効果を発動するもので、
+    /// 一定時間で効果時間が切れるもの
+    /// </summary>
     class ConditionedEffectWithExpireTime : ConditionedEffect
     {
         int expireTime;

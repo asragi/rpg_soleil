@@ -18,6 +18,9 @@ namespace Soleil
         }
     }
 
+    /// <summary>
+    /// 暫定的な敵のコマンドセレクトアルゴリズム
+    /// </summary>
     class DefaultCharacterCommandSelect : CommandSelect
     {
         public DefaultCharacterCommandSelect(int charaIndex) : base(charaIndex)
@@ -34,6 +37,9 @@ namespace Soleil
     }
 
 
+    /// <summary>
+    /// 自機のコマンドセレクトアルゴリズム
+    /// </summary>
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
         Action genAkt;

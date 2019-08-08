@@ -123,12 +123,18 @@ namespace Soleil
         public List<int> OppositeIndexes(Side side) => indexes[(int)OppositeSide(side)];
         public List<int> SameSideIndexes(int index) => indexes[(int)sides[index]];
         public List<int> SameSideIndexes(Side side) => indexes[(int)side];
+        /// <summary>
+        /// 生きているcharasのindexをすべて取得
+        /// </summary>
         public List<int> AliveIndexes()
             => alive.Aggregate2(new List<int>(), (list, p, i) => {
                 if (p) list.Add(i);
                 return list;
             });
 
+        /// <summary>
+        /// charas[index]がやられたときなどに戦場から取り除く
+        /// </summary>
         public void RemoveCharacter(int index)
         {
             var sd = sides[index];
@@ -246,13 +252,6 @@ namespace Soleil
             //てきとう
             sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.CorpM), message, Color.White, DepthID.Message);
 
-            /*
-            sb.DrawText(new Vector(100, 400), Resources.GetFont(FontID.Yasashisa), "Magic", Color.White, DepthID.Message);
-            sb.DrawText(new Vector(100, 440), Resources.GetFont(FontID.Yasashisa), "Skill", Color.White, DepthID.Message);
-            sb.DrawText(new Vector(100, 480), Resources.GetFont(FontID.Yasashisa), "Guard", Color.White, DepthID.Message);
-            sb.DrawText(new Vector(100, 520), Resources.GetFont(FontID.Yasashisa), "Escape", Color.White, DepthID.Message);
-            */
-
             sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.CorpM), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
@@ -265,10 +264,8 @@ namespace Soleil
             for (int i = 2; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + i * 180, 400), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
-                //sb.DrawText(new Vector(100 + (i-2) * 180, 400), Resources.GetFont(FontID.Test), i.ToString() + ":", Color.Black, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
                 sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
-                //sb.DrawText(new Vector(100 + (i-2) * 180, 440), Resources.GetFont(FontID.Test), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.Black, DepthID.Message, 0.75f);
             }
 
             

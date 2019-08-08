@@ -34,6 +34,9 @@ namespace Soleil
         public static String Name(this AttackAttribution att) => dict[att];
     }
 
+    /// <summary>
+    /// ターンでの攻撃行動
+    /// </summary>
     class Attack : Action
     {
         protected AttackFunc AFunc;

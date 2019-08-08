@@ -23,6 +23,10 @@ namespace Soleil
     }
 
 
+    /// <summary>
+    /// ターンでの行動の基底
+    /// AttackとBuffの基底
+    /// </summary>
     abstract class Action
     {
         public Range.AttackRange ARange

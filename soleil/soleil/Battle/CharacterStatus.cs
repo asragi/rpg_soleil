@@ -91,6 +91,10 @@ namespace Soleil
             else return 0;
         }
     }
+
+    /// <summary>
+    /// 戦闘中におけるcharaの状態
+    /// </summary>
     public class CharacterStatus
     {
         public AbilityScore AScore;

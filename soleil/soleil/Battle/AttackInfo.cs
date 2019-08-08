@@ -5,7 +5,10 @@ using System.Linq;
 using static System.Math;
 namespace Soleil
 {
-
+    /// <summary>
+    /// 行動のデータベース
+    /// </summary>
+    /// AttackじゃなくてActionInfoじゃね？
     static class AttackInfo
     {
         static readonly List<Action> actions;

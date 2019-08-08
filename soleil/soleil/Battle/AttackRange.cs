@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Soleil.Range
 {
     //typesame enum
+    /// <summary>
+    /// 攻撃などの効果範囲を表すclassの基底
+    /// </summary>
     abstract class AttackRange
     {
         public int SourceIndex;
@@ -16,6 +19,9 @@ namespace Soleil.Range
             MemberwiseClone() as AttackRange;
     }
 
+    /// <summary>
+    /// 効果範囲:敵一体
+    /// </summary>
     class OneEnemy : AttackRange
     {
         public int TargetIndex;
@@ -28,6 +34,9 @@ namespace Soleil.Range
         public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
     }
 
+    /// <summary>
+    /// 効果範囲:敵全員
+    /// </summary>
     class AllEnemy : AttackRange
     {
         public Side TargetSide;
@@ -39,6 +48,9 @@ namespace Soleil.Range
         public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
     }
 
+    /// <summary>
+    /// 効果範囲:自身
+    /// </summary>
     class Me : AttackRange
     {
         public Me(int index) : base(index) { }
@@ -49,6 +61,9 @@ namespace Soleil.Range
         public override bool ContainRange(int index, BattleField bf) => index == SourceIndex;
     }
 
+    /// <summary>
+    /// 効果範囲:味方一体
+    /// </summary>
     class Ally : AttackRange
     {
         public int TargetIndex;
@@ -61,6 +76,9 @@ namespace Soleil.Range
         public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
     }
 
+    /// <summary>
+    /// 効果範囲:味方全員(自分含む)
+    /// </summary>
     class AllAlly : AttackRange
     {
         public Side TargetSide;
@@ -72,6 +90,9 @@ namespace Soleil.Range
         public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
     }
 
+    /// <summary>
+    /// 効果範囲:敵味方全員(自分含む)
+    /// </summary>
     class ForAll : AttackRange
     {
         public ForAll(int sourceIndex) : base(sourceIndex) { }

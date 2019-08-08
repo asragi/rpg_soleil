@@ -7,6 +7,9 @@ using Soleil.Menu;
 
 namespace Soleil
 {
+    /// <summary>
+    /// CommandEnumを選択できるwindow
+    /// </summary>
     class CommandSelectWindow : BasicMenu
     {
         protected override Vector WindowPos => new Vector(750, 200);

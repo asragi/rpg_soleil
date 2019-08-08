@@ -9,7 +9,7 @@ using Soleil.Menu;
 namespace Soleil
 {
     /// <summary>
-    /// CharaIndexWindwosで使う
+    /// CharaIndexWindowsで使うpanel
     /// </summary>
     class CharaIndexPanel : TextSelectablePanel
     {
@@ -24,10 +24,11 @@ namespace Soleil
             LocalPos = Vector.Zero;
         }
     }
-    /*
-     * 暫定実装
-     * 多分矢印で選択とかになるのでは
-     */
+
+    ///<summary>
+    /// 攻撃対象を選択するwindow 暫定実装
+    /// 多分矢印で選択とかになるのでは
+    ///</summary>
     class CharaSelectWindow : BasicMenu
     {
         protected override Vector WindowPos => new Vector(350, 150);

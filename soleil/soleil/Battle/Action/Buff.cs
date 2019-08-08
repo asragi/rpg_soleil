@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     using BuffFunc = Func<CharacterStatus, CharacterStatus, BuffRate>;
+    /// <summary>
+    /// バフ・デバフを表す行動
+    /// </summary>
     class Buff : Action
     {
         protected BuffFunc BFunc;
