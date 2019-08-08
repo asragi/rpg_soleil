@@ -262,6 +262,7 @@
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Scene\TitleScene.cs" />
     <Compile Include="Scene\WorldMapScene.cs" />
     <Compile Include="Skill\MagicLv.cs" />
     <Compile Include="Skill\SkillData.cs" />
