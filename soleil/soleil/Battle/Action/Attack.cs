@@ -34,6 +34,9 @@ namespace Soleil
         public static String Name(this AttackAttribution att) => dict[att];
     }
 
+    /// <summary>
+    /// ターンでの攻撃行動
+    /// </summary>
     class Attack : Action
     {
         protected AttackFunc AFunc;
@@ -61,26 +64,26 @@ namespace Soleil
         {
             get { return (int)DamageF; }
         }
-        public override List<Occurence> Act(BattleField bf)
+        public override List<Occurence> Act()
         {
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
-                    DamageF = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
+                    DamageF = AFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
                     break;
             }
             HasDamage = true;
 
             var ceffects = new List<ConditionedEffect>();
             ceffects.Add(new ConditionedEffect(
-                (bfi, act) => true,
-                (bfi, act, ocrs) =>
+                (act) => true,
+                (act, ocrs) =>
                 {
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
                             //Todo: actから参照する
-                            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
                                 return ocrs;
@@ -95,7 +98,7 @@ namespace Soleil
                             }
                             else
                             {
-                                bf.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
+                                BF.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
 
                                 string mes = aRange.SourceIndex.ToString() + "が";
                                 mes += aRange.TargetIndex.ToString() + "に";
@@ -110,18 +113,18 @@ namespace Soleil
                 10000));
 
             //もっと根幹に組み込むべき条件な気がする
-            var alives = bf.AliveIndexes();
+            var alives = BF.AliveIndexes();
             alives.ForEach(p => ceffects.Add(new ConditionedEffect(
-                (bfi, act) => bfi.GetCharacter(p).Status.Dead,
-                (bfi, act, ocrs) =>
+                (act) => BF.GetCharacter(p).Status.Dead,
+                (act, ocrs) =>
                 {
-                    bf.RemoveCharacter(p);
+                    BF.RemoveCharacter(p);
                     ocrs.Add(new Occurence(p.ToString() + "はやられた"));
                     return ocrs;
                 },
                 10001)));
 
-            var ocr = AggregateConditionEffects(bf, ceffects);
+            var ocr = AggregateConditionEffects(ceffects);
             return ocr;
         }
     }

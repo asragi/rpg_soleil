@@ -5,14 +5,18 @@ using System.Linq;
 using static System.Math;
 namespace Soleil
 {
-
+    /// <summary>
+    /// 行動のデータベース
+    /// </summary>
+    /// AttackじゃなくてActionInfoじゃね？
     static class AttackInfo
     {
-        static List<Action> actions;
-        static Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>> attackTable;
-        static Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
+        static readonly List<Action> actions;
+        static readonly List<string> actionString;
+        static readonly Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>> attackTable;
+        static readonly Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
 
-        static Func<CharacterStatus, CharacterStatus, float, float> physicalAttack, magicalAttack;
+        static readonly Func<CharacterStatus, CharacterStatus, float, float> physicalAttack, magicalAttack;
 
         /// <summary>
         /// 補正
@@ -59,9 +63,18 @@ namespace Soleil
             actions[(int)ActionName.Guard] = new Buff(buffTable[ActionName.Guard], Range.Me.GetInstance());
             actions[(int)ActionName.EndGuard] = new Buff(buffTable[ActionName.EndGuard], Range.Me.GetInstance());
             actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], Range.OneEnemy.GetInstance());
+
+            actionString = new List<String>();
+            for (int i = 0; i < (int)ActionName.Size; i++)
+                actionString.Add("");
+            actionString[(int)ActionName.NormalAttack] = "通常攻撃";
+            actionString[(int)ActionName.ExampleMagic] = "魔法攻撃";
+
+            actionString[(int)ActionName.ExampleDebuff] = "なきごえ";
         }
 
         public static Action GetAction(ActionName name) => actions[(int)name];
+        public static string GetActionName(ActionName name) => actionString[(int)name];
     }
 
 }

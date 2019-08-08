@@ -23,6 +23,10 @@ namespace Soleil
     }
 
 
+    /// <summary>
+    /// ターンでの行動の基底
+    /// AttackとBuffの基底
+    /// </summary>
     abstract class Action
     {
         public Range.AttackRange ARange
@@ -34,18 +38,19 @@ namespace Soleil
             ARange = aRange;
         }
 
-        public abstract List<Occurence> Act(BattleField battle);
+        public abstract List<Occurence> Act();
+        protected static readonly BattleField BF = BattleField.GetInstance();
 
 
-        public List<Occurence> AggregateConditionEffects(BattleField bf, IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)
+        public List<Occurence> AggregateConditionEffects(IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)
         {
-            var ceffects = bf.GetCopiedCEffects();
+            var ceffects = BF.GetCopiedCEffects();
             ceffects.UnionWith(additionals);
-            return ceffects.Aggregate(ocr, (ocrs, ce) => ce.Act(bf, this, ocrs));
+            return ceffects.Aggregate(ocr, (ocrs, ce) => ce.Act(this, ocrs));
         }
-        public List<Occurence> AggregateConditionEffects(BattleField bf, IEnumerable<ConditionedEffect> additionals)
+        public List<Occurence> AggregateConditionEffects(IEnumerable<ConditionedEffect> additionals)
         {
-            return AggregateConditionEffects(bf, additionals, new List<Occurence>());
+            return AggregateConditionEffects(additionals, new List<Occurence>());
         }
     }
 

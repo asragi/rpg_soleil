@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
+    /// <summary>
+    /// Turnの順序を管理する
+    /// </summary>
     class TurnQueue
     {
         public const int Length = 7;
@@ -85,6 +88,9 @@ namespace Soleil
         public Turn(int _WaitPoint, CharacterStatus _CStatus, int _CharaIndex) => (WaitPoint, CStatus, CharaIndex) = (_WaitPoint, _CStatus, _CharaIndex);
     }
 
+    /// <summary>
+    /// 行動をするTurn
+    /// </summary>
     class ActionTurn : Turn
     {
         public Action action;

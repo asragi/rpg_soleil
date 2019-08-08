@@ -148,6 +148,22 @@ namespace Soleil
         WorldMapIcon,
         WorldMapCursor,
 
+        BattleTemporaryBackground,
+        BattleCommandSelectedMagic,
+        BattleCommandUnselectedMagic,
+        BattleCommandSelectedSkill,
+        BattleCommandUnselectedSkill,
+        BattleCommandSelectedGuard,
+        BattleCommandUnselectedGuard,
+        BattleCommandSelectedEscape,
+        BattleCommandUnselectedEscape,
+        BattleTurnQueueFace1,
+        BattleTurnQueueFace2,
+        BattleTurnQueueFace3,
+        BattleTurnQueueFace4,
+        BattleTurnQueueFaceSun,
+        BattleTurnQueueFaceLune,
+
         White, Size
     }
 
@@ -234,9 +250,9 @@ namespace Soleil
         const string UIPath = "UI/";
         const string TitlePath = "Title/";
         const string MenuPath = "Menu/";
+        const string BattlePath = "Battle/";
         const string StagePath = "Stage/";
         const string CharacterSelectPath = "CharacterSelect/";
-        const string BattlePath = "Battle/";
         const string AkaPath = "Aka/";
         const string EffectPath = "Effect/";
         const string MusicPath = "Music/";
@@ -450,6 +466,23 @@ namespace Soleil
             SetPath(TextureID.MagicMetal, mIcon + "micon-gear");
             SetPath(TextureID.MagicSpace, mIcon + "micon-space");
             SetPath(TextureID.MagicTime, mIcon + "micon-time");
+
+            SetPath(TextureID.BattleTemporaryBackground, UIPath + BattlePath + "tempBack");
+            SetPath(TextureID.BattleCommandSelectedMagic, UIPath + BattlePath + "magicSelected");
+            SetPath(TextureID.BattleCommandUnselectedMagic, UIPath + BattlePath + "magicUnselect");
+            SetPath(TextureID.BattleCommandSelectedSkill, UIPath + BattlePath + "skillSelected");
+            SetPath(TextureID.BattleCommandUnselectedSkill, UIPath + BattlePath + "skillUnselect");
+            SetPath(TextureID.BattleCommandSelectedGuard, UIPath + BattlePath + "guardSelected");
+            SetPath(TextureID.BattleCommandUnselectedGuard, UIPath + BattlePath + "guardUnselect");
+            SetPath(TextureID.BattleCommandSelectedEscape, UIPath + BattlePath + "escapeSelected");
+            SetPath(TextureID.BattleCommandUnselectedEscape, UIPath + BattlePath + "escapeUnselect");
+            SetPath(TextureID.BattleTurnQueueFace1, UIPath + BattlePath + "face1");
+            SetPath(TextureID.BattleTurnQueueFace2, UIPath + BattlePath + "face2");
+            SetPath(TextureID.BattleTurnQueueFace3, UIPath + BattlePath + "face3");
+            SetPath(TextureID.BattleTurnQueueFace4, UIPath + BattlePath + "face4");
+            SetPath(TextureID.BattleTurnQueueFaceSun, UIPath + BattlePath + "faceSun");
+            SetPath(TextureID.BattleTurnQueueFaceLune, UIPath + BattlePath + "faceLune");
+            
 
             for (int i = 0; i < 20; i++)
             {
