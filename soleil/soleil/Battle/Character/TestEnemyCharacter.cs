@@ -11,7 +11,7 @@ namespace Soleil
         public TestEnemyCharacter(int index) : base(index)
         {
             //てきとう
-            var aScore = new AbilityScore(1000, 100, 100, 100, 100, 100);
+            var aScore = new AbilityScore(50, 5, 5, 5, 5, 5);
             Status = new CharacterStatus(aScore, 10000);
             commandSelect = new DefaultCharacterCommandSelect(charaIndex);
         }
