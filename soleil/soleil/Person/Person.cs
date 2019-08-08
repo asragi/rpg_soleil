@@ -15,8 +15,6 @@ namespace Soleil
     class Person
     {
         readonly public CharaName Name;
-        private readonly AbilityScore initScore; // Lv1のパラメータ
-        private readonly AbilityScore lastScore; // Lv99のパラメータ
         private AbilityScore score;
         private readonly GrowthType[] growthTypes;
         public AbilityScore Score 
@@ -36,9 +34,6 @@ namespace Soleil
         {
             Name = name;
             Lv = lv;
-            var data = PersonDatabase.Get(name);
-            initScore = data.InitScore;
-            lastScore = data.LastScore;
             score = _score;
             Equip = equip;
             Skill = skill;
@@ -54,8 +49,8 @@ namespace Soleil
             Name = name;
             Lv = 1;
             var data = PersonDatabase.Get(name);
-            initScore = data.InitScore;
-            lastScore = data.LastScore;
+            var initScore = data.InitScore;
+            var lastScore = data.LastScore;
             growthTypes = data.Growth;
             score = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
             Equip = new EquipSet();
@@ -71,6 +66,8 @@ namespace Soleil
             // HP MP shouldn't recover
             int hp = score.HP;
             int mp = score.MP;
+            var initScore = PersonDatabase.Get(Name).InitScore;
+            var lastScore = PersonDatabase.Get(Name).LastScore;
             var tmp = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
             tmp.HP = hp;
             tmp.MP = mp;
