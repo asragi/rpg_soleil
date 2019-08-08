@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Soleil.Title;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,7 @@ namespace Soleil
 {
     class TitleScene: Scene
     {
-        private static readonly Vector WindowPos = new Vector(128, 186);
-        private static readonly string[] Commands = new[]
-        {
-            "Load Game", "New Game", "Options", "Exit"
-        };
-
-        SelectableWindow selectWindow;
+        TitleMaster master;
         Image background;
 
         public TitleScene(SceneManager sm)
@@ -23,8 +18,8 @@ namespace Soleil
         {
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
-            selectWindow = new SelectableWindow(WindowPos, true, Commands);
-            selectWindow.Call();
+
+            master = new TitleMaster();
 
             // Graphics
             background = new Image(TextureID.WhiteWindow, Vector.Zero, DepthID.BackGround, alpha: 1) { Color = ColorPalette.GlayBlue };
@@ -34,12 +29,14 @@ namespace Soleil
         {
             base.Update();
             background.Update();
+            master.Update();
         }
 
         public override void Draw(Drawing sb)
         {
             base.Draw(sb);
             background.Draw(sb);
+            master.Draw(sb);
         }
     }
 }
