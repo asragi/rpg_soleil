@@ -7,7 +7,7 @@ namespace Soleil
 
     class Transition
     {
-        const int TransitionTime = 20; // リソースの枚数と対応するため変更時注意
+        public const int TransitionTime = 20; // リソースの枚数と対応するため変更時注意
         TransitionMode mode;
         Texture2D[] white;
         int index;

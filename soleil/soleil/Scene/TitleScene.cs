@@ -19,7 +19,7 @@ namespace Soleil
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
 
-            master = new TitleMaster();
+            master = new TitleMaster(sm);
 
             // Graphics
             background = new Image(TextureID.WhiteWindow, Vector.Zero, DepthID.BackGround, alpha: 1) { Color = ColorPalette.GlayBlue };
