@@ -39,26 +39,9 @@ namespace Soleil.Title
         {
             input.Update();
 
-            switch (Mode)
-            {
-                case TitleMode.None:
-                    break;
-                case TitleMode.FirstWindow:
-                    break;
-                case TitleMode.SelectSave:
-                    break;
-                case TitleMode.Load:
-                    break;
-                case TitleMode.NewGame:
-                    newGame.TransitionUpdate();
-                    break;
-                case TitleMode.OptionSelect:
-                    break;
-                case TitleMode.Exit:
-                    break;
-                default:
-                    break;
-            }
+            if (Mode == TitleMode.NewGame) newGame.TransitionUpdate();
+            if (Mode == TitleMode.Load) return;
+            if (Mode == TitleMode.Exit) return;
         }
 
         public void Draw(Drawing d)
