@@ -10,6 +10,11 @@ namespace Soleil.Title
     {
         None,
         FirstWindow,
+        SelectSave,
+        Load,
+        NewGame,
+        OptionSelect,
+        Exit,
     }
 
     /// <summary>

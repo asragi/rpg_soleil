@@ -19,10 +19,12 @@ namespace Soleil.Title
 
         SelectableWindow selectWindow;
 
+        bool saveExists;
+
         public FirstWindow()
         {
-            selectWindow = new SelectableWindow(WindowPos, true, Commands);
-            selectWindow.Call();
+            saveExists = SaveLoad.FileExist();
+            CallWindow();
         }
 
         public void OnInputUp()
@@ -33,6 +35,57 @@ namespace Soleil.Title
         public void OnInputDown()
         {
             selectWindow.DownCursor();
+        }
+
+        public void OnInputSubmit()
+        {
+            switch (selectWindow.Index)
+            {
+                case 0:
+                    SelectLoad();
+                    return;
+                case 1:
+                    SelectNew();
+                    return;
+                case 2:
+                    return;
+                case 3:
+                    return;
+                default:
+                    throw new Exception();
+            }
+        }
+
+        private void SelectLoad()
+        {
+            if (!saveExists) return;
+            QuitWindow();
+        }
+
+        private void SelectNew()
+        {
+
+        }
+
+        private void SelectOption()
+        {
+
+        }
+
+        private void SelectExit()
+        {
+
+        }
+
+        private void CallWindow()
+        {
+            selectWindow = new SelectableWindow(WindowPos, true, Commands);
+            selectWindow.Call();
+        }
+
+        private void QuitWindow()
+        {
+            selectWindow.Quit();
         }
     }
 }
