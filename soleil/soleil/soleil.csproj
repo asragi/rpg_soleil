@@ -48,6 +48,8 @@
     <Compile Include="Battle\Action\Buff.cs" />
     <Compile Include="Battle\AttackInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
+    <Compile Include="Battle\BattleCharaAnimation.cs" />
+    <Compile Include="Battle\BattleCharaGraphics.cs" />
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
