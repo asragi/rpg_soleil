@@ -34,8 +34,8 @@ namespace Soleil
         List<Menu.MenuComponent> MenuComponentList;
 
         List<TextureID> textureIDList;
-        //debugでpublic
-        public List<StatusUI> statusUIs;
+
+        public List<BattleCharaGraphics> bcgraphicsList;
 
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
@@ -52,7 +52,7 @@ namespace Soleil
             charas = new List<Character>();
             sides = new List<Side>();
             indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
-            statusUIs = new List<StatusUI>();
+            bcgraphicsList = new List<BattleCharaGraphics>();
             textureIDList = new List<TextureID> //とりあえず
             {
                 TextureID.BattleTurnQueueFaceLune,
@@ -64,12 +64,12 @@ namespace Soleil
                 charas.Add(new PlayableCharacter(charaIndex, partylist[i].Score));
                 sides.Add(Side.Right);
                 indexes[(int)Side.Right].Add(charaIndex);
-                statusUIs.Add(new StatusUI(partylist[i].Score.HPMAX, partylist[i].Score.MPMAX, new Vector(750- (partylist.Length-i-1) * 200, 450)));
+                bcgraphicsList.Add(new BattleCharaGraphics(charas.Last(), new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100)));
                 charaIndex++;
             }
 
             const int EnemyCnt = 3;
-            for(int i=0;i<EnemyCnt; i++)
+            for (int i = 0; i < EnemyCnt; i++)
             {
                 charas.Add(new TestEnemyCharacter(charaIndex));
                 sides.Add(Side.Left);
@@ -77,7 +77,7 @@ namespace Soleil
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
                 charaIndex++;
             }
-            
+
 
             alive = new List<bool>(charas.Count);
             for (int i = 0; i < charas.Count; i++) alive.Add(true);
@@ -94,7 +94,7 @@ namespace Soleil
             battleQue = new Queue<BattleEvent>();
 
             CEffects = new SortedSet<ConditionedEffect>();
-            
+
 
         }
 
@@ -128,7 +128,8 @@ namespace Soleil
         /// 生きているcharasのindexをすべて取得
         /// </summary>
         public List<int> AliveIndexes()
-            => alive.Aggregate2(new List<int>(), (list, p, i) => {
+            => alive.Aggregate2(new List<int>(), (list, p, i) =>
+            {
                 if (p) list.Add(i);
                 return list;
             });
@@ -163,7 +164,7 @@ namespace Soleil
 
             if (battleQue.Count == 0 && executed)
             {
-                while(turnQueue.Top().TurnTime > 0)
+                while (turnQueue.Top().TurnTime > 0)
                 {
                     charas.ForEach(e => e.Status.WP += e.Status.SPD);
                 }
@@ -200,7 +201,7 @@ namespace Soleil
                 case BattleMessage bm:
                     message = bm.Message;
                     executed = delayCount <= 1;
-                        break;
+                    break;
                 case BattleCommandSelect bcs:
                     executed = false;
                     var action = charas[topTurn.CharaIndex].SelectAction(topTurn);
@@ -212,7 +213,7 @@ namespace Soleil
                     break;
             }
 
-            statusUIs.ForEach(e => e.Update());
+            bcgraphicsList.ForEach(e => e.Update());
         }
 
         public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
@@ -240,7 +241,7 @@ namespace Soleil
             ocr.Affect(this);
         }
         */
-        
+
         public void AddBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Add(bui);
         public bool RemoveBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Remove(bui);
 
@@ -257,19 +258,19 @@ namespace Soleil
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
-            for (int i=0;i<5;i++)
+            for (int i = 0; i < 5; i++)
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
-            statusUIs.ForEach(e => e.Draw(sb));
+            bcgraphicsList.ForEach(e => e.Draw(sb));
             for (int i = 3; i < charas.Count; i++)
             {
-                sb.DrawText(new Vector(100 + (i-3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
+                sb.DrawText(new Vector(100 + (i - 3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
-                sb.DrawText(new Vector(100 + (i-3) * 180, 390), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
+                sb.DrawText(new Vector(100 + (i - 3) * 180, 390), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
             }
 
-            
+
             MenuComponentList.ForEach(e => e.Draw(sb));
         }
     }

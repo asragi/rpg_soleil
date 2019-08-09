@@ -37,7 +37,7 @@ namespace Soleil
         public override void Affect()
         {
             if (CharaIndex < 2)
-                BF.statusUIs[CharaIndex].Damage(HPDamage, MPDamage);
+                BF.bcgraphicsList[CharaIndex].Damage(HPDamage, MPDamage);
         }
     }
 
