@@ -52,8 +52,10 @@ namespace Soleil.Title
                     SelectNew();
                     return;
                 case 2:
+                    SelectOption();
                     return;
                 case 3:
+                    SelectExit();
                     return;
                 default:
                     throw new Exception();
@@ -80,7 +82,8 @@ namespace Soleil.Title
 
         private void SelectExit()
         {
-
+            master.Mode = TitleMode.Exit;
+            QuitWindow();
         }
 
         private void CallWindow()

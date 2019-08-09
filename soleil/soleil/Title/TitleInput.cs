@@ -32,17 +32,13 @@ namespace Soleil.Title
 
             switch (master.Mode)
             {
-                case TitleMode.None:
-                    return;
                 case TitleMode.FirstWindow:
                     FirstWindowUpdate(smoothInput);
-                    return;
-                case TitleMode.NewGame:
                     return;
                 case TitleMode.SelectSave:
                     return;
                 default:
-                    throw new Exception();
+                    return;
             }
         }
 

@@ -25,12 +25,16 @@ namespace Soleil.Title
         TitleInput input;
         FirstWindow firstWindow;
         NewGameTransition newGame;
+        LoadGameTransition loadGame;
+        ExitTransition exitTransition;
 
         public TitleMaster(SceneManager sm)
         {
             firstWindow = new FirstWindow(this);
             input = new TitleInput(this, firstWindow);
             newGame = new NewGameTransition(sm);
+            loadGame = new LoadGameTransition(sm);
+            exitTransition = new ExitTransition();
         }
 
         public TitleMode Mode { get; set; } = TitleMode.FirstWindow;
@@ -40,8 +44,8 @@ namespace Soleil.Title
             input.Update();
 
             if (Mode == TitleMode.NewGame) newGame.TransitionUpdate();
-            if (Mode == TitleMode.Load) return;
-            if (Mode == TitleMode.Exit) return;
+            if (Mode == TitleMode.Load) loadGame.TransitionUpdate();
+            if (Mode == TitleMode.Exit) exitTransition.TransitionUpdate();
         }
 
         public void Draw(Drawing d)
