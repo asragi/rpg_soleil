@@ -169,6 +169,7 @@ namespace Soleil
         BattleTurnQueueFaceSun,
         BattleTurnQueueFaceLune,
 
+
         White, Size
     }
 
@@ -196,6 +197,9 @@ namespace Soleil
 
         SomniaMob1,
         SomniaAcceU,
+
+
+        BattleLuneStanding,
 
         Size,
     }
@@ -419,6 +423,11 @@ namespace Soleil
             SetSize(AnimationID.SomniaMob1, 3, 1);
             SetPath(AnimationID.SomniaAcceU, "Animation/Map/Character/Mob/Somnia/acce");
             SetSize(AnimationID.SomniaAcceU, 1, 1);
+
+            //Battle
+            SetPath(AnimationID.BattleLuneStanding, "Animation/Battle/Lune_battle_n");
+            SetSize(AnimationID.BattleLuneStanding, 4, 1);
+
             #endregion
 
             #region UI
