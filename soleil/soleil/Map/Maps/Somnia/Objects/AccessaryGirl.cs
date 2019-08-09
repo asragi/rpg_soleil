@@ -27,7 +27,7 @@ namespace Soleil.Map.Maps.Somnia
 
             // Event
             boolSet = new BoolSet((int)BoolName.size);
-            preservedBools = GlobalBoolSet.GetBoolSet(BoolObject.Accessary,(int)BoolName.size);
+            preservedBools = GlobalBoolSet.GetBoolSet(BoolObject.Accessary, (int)BoolName.size);
 
             EventSequence.SetEventSet(
                 new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],

@@ -9,7 +9,7 @@ namespace Soleil.Map
     /// <summary>
     /// Map上での衝突判定を行うクラス
     /// </summary>
-    class MapBoxManager: BoxManager
+    class MapBoxManager : BoxManager
     {
         MapData mapData;
         public MapBoxManager(MapData data) : base()

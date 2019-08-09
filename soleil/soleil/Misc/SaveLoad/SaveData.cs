@@ -21,7 +21,8 @@ namespace Soleil.Misc
         {
             CharacterDatas = MakePartyData(_party);
 
-            CharacterData[] MakePartyData(PersonParty party) {
+            CharacterData[] MakePartyData(PersonParty party)
+            {
                 int length = (int)CharaName.size;
                 var result = new CharacterData[length];
                 for (int i = 0; i < length; i++)
@@ -79,7 +80,7 @@ namespace Soleil.Misc
             struct EquipData
             {
                 public int WeaponID { get; set; }
-                public int ArmorID { get; set;  }
+                public int ArmorID { get; set; }
                 public int[] Accessaries { get; set; }
 
                 public EquipData(EquipSet _equip)

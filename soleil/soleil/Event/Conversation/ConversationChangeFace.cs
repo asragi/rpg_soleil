@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event.Conversation
 {
-    class ConversationChangeFace: EventBase
+    class ConversationChangeFace : EventBase
     {
         public ConversationChangeFace(ConversationPerson person, string faceName)
         {

@@ -123,6 +123,6 @@ namespace Soleil
 
         public Vector XAxialInversion() => new Vector(X, -Y);
         public Vector YAxialInversion() => new Vector(-X, Y);
-        
+
     }
 }

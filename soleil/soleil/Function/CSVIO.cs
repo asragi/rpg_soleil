@@ -63,9 +63,9 @@ namespace Soleil
                 using (FileStream fs = new FileStream(fileName, FileMode.Create))
                 using (StreamWriter sr = new StreamWriter(fs))
                 {
-                    data.ForEach(p => 
+                    data.ForEach(p =>
                     {
-                        string s="";
+                        string s = "";
                         p.ForEach(q => s += q + ", ");
                         sr.WriteLine(s);
                     });
@@ -76,11 +76,11 @@ namespace Soleil
 
         public static bool[,] GetMapData(string fileName, int width, int height)
         {
-            var result = new bool[width,height];
+            var result = new bool[width, height];
             try
             {
                 using (var fs = new FileStream(fileName, FileMode.Open))
-                using(var sr = new StreamReader(fs))
+                using (var sr = new StreamReader(fs))
                 {
                     int index = 0;
                     var count = 0;

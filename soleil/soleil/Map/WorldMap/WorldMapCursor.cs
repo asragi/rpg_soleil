@@ -9,7 +9,7 @@ namespace Soleil.Map.WorldMap
     /// <summary>
     /// ワールドマップを閲覧するためにプレイヤーが操作するカーソル．
     /// </summary>
-    class WorldMapCursor: ICollideObject
+    class WorldMapCursor : ICollideObject
     {
         public Vector Pos
         {
@@ -40,7 +40,7 @@ namespace Soleil.Map.WorldMap
         public void Draw(Drawing d) => img.Draw(d);
 
         public void OnCollisionEnter(CollideBox cb) { }
-        public void OnCollisionExit(CollideBox cb)  { }
+        public void OnCollisionExit(CollideBox cb) { }
         public void OnCollisionStay(CollideBox cb) { }
     }
 }

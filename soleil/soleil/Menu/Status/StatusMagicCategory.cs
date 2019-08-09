@@ -49,7 +49,7 @@ namespace Soleil.Menu.Status
             {
                 int lv = p.Magic.GetLv(pieces[i].category);
                 pieces[i].Lv = lv;
-                pieces[i].Color = lv==0 ? ColorPalette.GlayBlue : ColorPalette.DarkBlue;
+                pieces[i].Color = lv == 0 ? ColorPalette.GlayBlue : ColorPalette.DarkBlue;
             }
         }
     }

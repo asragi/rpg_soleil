@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event.Conversation
 {
-    class ConversationTalk: WindowEventBase
+    class ConversationTalk : WindowEventBase
     {
         ConversationWindow window;
         string message;
         ConversationPerson person;
         string face;
         public ConversationTalk(ConversationPerson _person, string _message, string _face, ConversationSystem _cs)
-            :base(Vector.Zero, Vector.Zero, WindowTag.Conversation)
+            : base(Vector.Zero, Vector.Zero, WindowTag.Conversation)
         {
             (person, message, face, window) = (_person, _message, _face, _cs.ConversationWindow);
         }

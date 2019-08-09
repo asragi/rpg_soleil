@@ -45,7 +45,7 @@ namespace Soleil.Menu.Status
 
                 for (int i = 5; i > 0; i--)
                 {
-                    if (abs > (i-1) * 10) return new string(mark, i);
+                    if (abs > (i - 1) * 10) return new string(mark, i);
                 }
                 return "";
             }

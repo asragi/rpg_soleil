@@ -12,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// 画像やテキストの表示に関する抽象クラス
     /// </summary>
-    abstract class ImageBase: IComponent
+    abstract class ImageBase : IComponent
     {
         /// <summary>
         /// イージングの基準点となる座標．
@@ -23,9 +23,11 @@ namespace Soleil
         public Color Color { get; set; } = Color.White;
         private Vector pos;
         public bool IsVisible { get; set; } = true;
-        public virtual Vector Pos {
+        public virtual Vector Pos
+        {
             get => pos;
-            set {
+            set
+            {
                 Vector diff = value - Pos;
                 startPos += diff;
                 targetPos += diff;
@@ -116,7 +118,7 @@ namespace Soleil
         }
 
         public void MoveToDefault() => MoveTo(InitPos, FadeSpeed, MenuSystem.EaseFunc);
-        
+
 
         public void Quit(bool move = true)
         {
@@ -125,7 +127,7 @@ namespace Soleil
         }
 
         public void MoveToBack() => MoveTo(InitPos + PosDiff, FadeSpeed, MenuSystem.EaseFunc);
-        
+
         private void Easing()
         {
             if (moveFrameWait > 0)

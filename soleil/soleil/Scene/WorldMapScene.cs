@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class WorldMapScene: Scene
+    class WorldMapScene : Scene
     {
         WorldMapMaster worldMapMaster;
         PersonParty party;

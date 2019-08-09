@@ -37,7 +37,8 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnDisable() { }
 
-        public virtual void Quit() {
+        public virtual void Quit()
+        {
             if (components != null)
             {
                 foreach (var item in components)
@@ -47,7 +48,8 @@ namespace Soleil.Menu
             }
         }
 
-        public virtual void Call() {
+        public virtual void Call()
+        {
             if (components != null)
             {
                 foreach (var item in components)
@@ -76,7 +78,8 @@ namespace Soleil.Menu
                 }
             }
         }
-        public virtual void Draw(Drawing d) {
+        public virtual void Draw(Drawing d)
+        {
             if (components != null)
             {
                 foreach (var item in components)

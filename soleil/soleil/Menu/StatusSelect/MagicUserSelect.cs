@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class MagicUserSelect: StatusTargetSelectBase
+    class MagicUserSelect : StatusTargetSelectBase
     {
         MenuSystem menuSystem;
         MenuDescription menuDescription;
         string description;
         public MagicUserSelect(MenuSystem _menuSystem, MenuDescription desc, string description)
-            :base(_menuSystem)
+            : base(_menuSystem)
         {
             menuSystem = _menuSystem;
             menuDescription = desc;

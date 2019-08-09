@@ -22,7 +22,7 @@ namespace Soleil
         {
             data = new Dictionary<CharaName, PersonData>();
             Set(CharaName.Lune,
-                new[] {GrowthType.Normal, GrowthType.Pre, GrowthType.Late, GrowthType.Normal, GrowthType.Pre, GrowthType.Normal },
+                new[] { GrowthType.Normal, GrowthType.Pre, GrowthType.Late, GrowthType.Normal, GrowthType.Pre, GrowthType.Normal },
                 new AbilityScore(72, 156, 3, 5, 30, 8), new AbilityScore(666, 999, 30, 30, 99, 60),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 0, 0, 100, 0, 0, 0, 0, 0, 0, 0 },
@@ -36,14 +36,14 @@ namespace Soleil
                 new SkillID[] { SkillID.Headbutt }
                 );
             Set(CharaName.Tella,
-                new[] {GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal },
+                new[] { GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal, GrowthType.Normal },
                 new AbilityScore(96, 60, 9, 14, 13, 17), new AbilityScore(720, 770, 65, 80, 70, 80),
                 new[] { ItemID.OldWand, ItemID.Uniform, ItemID.BeadsWork, ItemID.BeadsWork },
                 new[] { 0, 500, 0, 0, 0, 0, 0, 200, 0, 0 },
                 new SkillID[] { SkillID.Barrage }
                 );
 
-            void Set(CharaName name, GrowthType[] growth, 
+            void Set(CharaName name, GrowthType[] growth,
                 AbilityScore init, AbilityScore last,
                 ItemID[] eq, int[] mgExp, SkillID[] sk)
             {

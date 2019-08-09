@@ -29,7 +29,7 @@ namespace Soleil
             if (obj is ConditionedEffect ce) return CompareTo(ce);
             throw new NotImplementedException();
         }
-        
+
         public Condition Cond;
         public AffectFunc Affect;
         protected Func<bool> disable;
@@ -72,7 +72,8 @@ namespace Soleil
             : base(cond, affect, priority_)
         {
             expireTime = expireTime_;
-            disable = () => {
+            disable = () =>
+            {
                 return BF.GetCharacter(charaIndex).Status.WP > expireTime;
             };
         }

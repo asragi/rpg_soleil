@@ -12,7 +12,7 @@ namespace Soleil
     /// </summary>
     class WindowManager
     {
-        private static WindowManager windowManager = new WindowManager(); 
+        private static WindowManager windowManager = new WindowManager();
         List<Window> windows;
         SelectableWindow nowSelectWindow;
         private WindowManager()
@@ -61,7 +61,7 @@ namespace Soleil
         public void SetNowSelectWindow(WindowTag tag)
         {
             var selectWindows = windows.FindAll(s => s.Active && s is SelectableWindow)
-                .ConvertAll<SelectableWindow>(t=>(SelectableWindow)t);
+                .ConvertAll<SelectableWindow>(t => (SelectableWindow)t);
             nowSelectWindow = selectWindows.FindLast(s => s.Tag == tag);
         }
 
@@ -87,7 +87,7 @@ namespace Soleil
         public void FinishMessageWindowAnim(WindowTag tag)
         {
             var messageWindows = windows.FindAll(s => s.Tag == tag && s is IMessageBox)
-                .ConvertAll(s=>(IMessageBox)s);
+                .ConvertAll(s => (IMessageBox)s);
             messageWindows.ForEach(mw => mw.FinishAnim());
         }
 
