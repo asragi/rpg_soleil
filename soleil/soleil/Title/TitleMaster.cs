@@ -27,7 +27,7 @@ namespace Soleil.Title
 
         public TitleMaster()
         {
-            firstWindow = new FirstWindow();
+            firstWindow = new FirstWindow(this);
             input = new TitleInput(this, firstWindow);
         }
 

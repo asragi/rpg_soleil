@@ -37,6 +37,10 @@ namespace Soleil.Title
                 case TitleMode.FirstWindow:
                     FirstWindowUpdate(smoothInput);
                     return;
+                case TitleMode.NewGame:
+                    return;
+                case TitleMode.SelectSave:
+                    return;
                 default:
                     throw new Exception();
             }
@@ -46,6 +50,7 @@ namespace Soleil.Title
         {
             if (dir == Direction.U) firstWindow.OnInputUp();
             if (dir == Direction.D) firstWindow.OnInputDown();
+            if (KeyInput.GetKeyPush(Key.A)) firstWindow.OnInputSubmit();
         }
     }
 }

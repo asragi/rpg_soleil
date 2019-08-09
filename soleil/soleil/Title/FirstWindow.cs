@@ -17,12 +17,16 @@ namespace Soleil.Title
             "Load Game", "New Game", "Options", "Exit"
         };
 
+        // Ref
+        TitleMaster master;
+        // Window
         SelectableWindow selectWindow;
-
+        // Field
         bool saveExists;
 
-        public FirstWindow()
+        public FirstWindow(TitleMaster _master)
         {
+            master = _master;
             saveExists = SaveLoad.FileExist();
             CallWindow();
         }
@@ -59,12 +63,14 @@ namespace Soleil.Title
         private void SelectLoad()
         {
             if (!saveExists) return;
+            master.Mode = TitleMode.SelectSave;
             QuitWindow();
         }
 
         private void SelectNew()
         {
-
+            master.Mode = TitleMode.NewGame;
+            QuitWindow();
         }
 
         private void SelectOption()
