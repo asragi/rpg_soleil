@@ -3,7 +3,7 @@
 namespace Soleil.Event
 {
     abstract class WindowEventBase
-        :EventBase
+        : EventBase
     {
         private static readonly Vector CharacterMessagePos = new Vector(-50, -100);
         protected WindowManager Wm = WindowManager.GetInstance();

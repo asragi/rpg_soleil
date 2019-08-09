@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class SkillUserSelect: StatusTargetSelectBase
+    class SkillUserSelect : StatusTargetSelectBase
     {
         MenuSystem menuSystem;
         MenuDescription menuDescription;

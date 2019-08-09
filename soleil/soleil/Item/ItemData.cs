@@ -44,7 +44,7 @@ namespace Soleil.Item
     {
         public int Physical;
         public int Magical;
-        
+
         public AttackData(int p, int m)
         {
             Physical = p;
@@ -83,7 +83,7 @@ namespace Soleil.Item
     struct AttrDef
     {
         public int[] Values;
-        public AttrDef(int heat=0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
+        public AttrDef(int heat = 0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
         {
             Values = new int[(int)AttackAttribution.size];
             Values[(int)AttackAttribution.Fever] = heat;
@@ -207,7 +207,7 @@ namespace Soleil.Item
         public DefData DefData { get; }
         public AbilityScore AbilityScore { get; }
 
-        public AccessaryData (ItemID iD, DefData def, AbilityScore? score, string name, string description)
+        public AccessaryData(ItemID iD, DefData def, AbilityScore? score, string name, string description)
         {
             ID = iD;
             Name = name;

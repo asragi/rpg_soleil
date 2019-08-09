@@ -17,7 +17,7 @@ namespace Soleil
         readonly public CharaName Name;
         private AbilityScore score;
         private readonly GrowthType[] growthTypes;
-        public AbilityScore Score 
+        public AbilityScore Score
             => score;
         public int Lv { get; private set; }
         readonly public EquipSet Equip;

@@ -14,7 +14,7 @@ namespace Soleil
         public int ownPlayerNumber;
         protected int Frame;
         protected int limitFrame;
-        public CutIn(int limitFrame,int ownPlayerNumber, List<Effect> effects)
+        public CutIn(int limitFrame, int ownPlayerNumber, List<Effect> effects)
         {
             this.limitFrame = limitFrame;
             this.ownPlayerNumber = ownPlayerNumber;
@@ -34,7 +34,7 @@ namespace Soleil
     {
         const float Alpha = 0.3f;
         public Blackout(int limitFrame, int ownPlayerNumber, List<Effect> effects)
-            :base(limitFrame, ownPlayerNumber, effects)
+            : base(limitFrame, ownPlayerNumber, effects)
         {
 
         }
@@ -42,8 +42,8 @@ namespace Soleil
         public override bool Move()
         {
             if (Frame == 0)
-                effects.Add(new BoxAbsoluteEffect(new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY), 
-                    new Vector(Game1.VirtualWindowSizeX, Game1.VirtualWindowSizeY), limitFrame, effects, Color.Black*Alpha));
+                effects.Add(new BoxAbsoluteEffect(new Vector(Game1.VirtualCenterX, Game1.VirtualCenterY),
+                    new Vector(Game1.VirtualWindowSizeX, Game1.VirtualWindowSizeY), limitFrame, effects, Color.Black * Alpha));
 
             return base.Move();
         }

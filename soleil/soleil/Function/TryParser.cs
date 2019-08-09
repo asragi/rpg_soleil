@@ -23,7 +23,7 @@ namespace Soleil
 
     static class TryGetter
     {
-        public static S TryGet<T,S>(Dictionary<T,S> dict, T key)
+        public static S TryGet<T, S>(Dictionary<T, S> dict, T key)
         {
             S tmp;
             dict.TryGetValue(key, out tmp);

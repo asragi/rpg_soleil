@@ -9,7 +9,7 @@ namespace Soleil.Map
     /// <summary>
     /// 開始位置．ルーネの部屋
     /// </summary>
-    class MagistolRoom: MapBase
+    class MagistolRoom : MapBase
     {
         public MagistolRoom(PersonParty party, Camera cam)
            : base(MapName.MagistolRoom, party, cam)

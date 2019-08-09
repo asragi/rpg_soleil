@@ -32,7 +32,7 @@ namespace Soleil.Menu.Status
             for (int i = 0; i < texts.Length; i++)
             {
                 var xDiff = (i >= 4) ? DiffX : 0;
-                texts[i] = new TextWithVal(FontID.CorpMini, pos + new Vector(xDiff, DiffY* (i % 4)), 116, Words[i], 0);
+                texts[i] = new TextWithVal(FontID.CorpMini, pos + new Vector(xDiff, DiffY * (i % 4)), 116, Words[i], 0);
                 texts[i].TextColor = ColorPalette.DarkBlue;
                 texts[i].ValColor = ColorPalette.DarkBlue;
                 texts[i].ValFont = FontID.CorpM;

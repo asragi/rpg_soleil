@@ -47,7 +47,8 @@ namespace Soleil.Menu
             disableIcon.Text = "・";
         }
 
-        public bool IsSelected {
+        public bool IsSelected
+        {
             set
             {
                 isSelected = value;
@@ -55,7 +56,8 @@ namespace Soleil.Menu
             }
         }
 
-        public bool IsDisabled {
+        public bool IsDisabled
+        {
             get => disabled;
             set
             {

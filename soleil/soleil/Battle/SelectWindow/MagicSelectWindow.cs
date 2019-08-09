@@ -63,7 +63,7 @@ namespace Soleil
                 Input(KeyInput.GetStickFlickDirection(1));
             else
                 csw?.UpdateInput();
-            
+
 
 
             switch (Select.ARange)

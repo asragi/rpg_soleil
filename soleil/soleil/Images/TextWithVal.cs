@@ -63,7 +63,7 @@ namespace Soleil.Menu
             text = new TextImage(font, pos, depth, isStatic, 0);
             text.Text = _text;
             (rightAlign, underAlign) = (_rightAlign, _underAlign);
-            
+
             val = new TextImage(font, Vector.Zero, depth, isStatic, 0);
             Val = _val;
         }

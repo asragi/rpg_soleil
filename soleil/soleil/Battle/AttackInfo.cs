@@ -34,7 +34,7 @@ namespace Soleil
         static AttackInfo()
         {
             physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF * 2) / 400 * Revision(); };
-            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500))*((400 - (b.VIT + b.MAG * 2)/ 3 - b.MDEF * 2) / 400) * Revision(); };
+            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF * 2) / 400) * Revision(); };
 
             attackTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>>();
             attackTable[ActionName.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10); };
@@ -42,15 +42,18 @@ namespace Soleil
 
 
             buffTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>>();
-            buffTable[ActionName.Guard] = (a, b) => {
+            buffTable[ActionName.Guard] = (a, b) =>
+            {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 2.0f }, { BuffRateName.MAGRate, 2.0f } });
-                };
-            buffTable[ActionName.EndGuard] = (a, b) => {
+            };
+            buffTable[ActionName.EndGuard] = (a, b) =>
+            {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 0.5f }, { BuffRateName.MAGRate, 0.5f } });
             };
-            buffTable[ActionName.ExampleDebuff] = (a, b) => {
+            buffTable[ActionName.ExampleDebuff] = (a, b) =>
+            {
                 return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
             };
 

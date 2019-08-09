@@ -52,7 +52,7 @@ namespace Soleil.Map
 
         public bool GetFlagData(int x, int y)
         {
-            return flags[x,y];
+            return flags[x, y];
         }
 
     }

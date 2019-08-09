@@ -19,7 +19,7 @@ namespace Soleil.Menu
         /// ウィンドウつきMenuDescriptionコンポーネント．
         /// </summary>
         public DescriptionWindow()
-            :base(new Vector(X + MessagePosDiffX, Y + MessagePosDiffY))
+            : base(new Vector(X + MessagePosDiffX, Y + MessagePosDiffY))
         {
             var barWidth = Game1.VirtualWindowSizeX - 2 * X;
             backBar = new BackBarImage(new Vector(X, Y), Vector.Zero, barWidth, false);

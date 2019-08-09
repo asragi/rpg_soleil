@@ -12,7 +12,7 @@ namespace Soleil
         protected SceneManager SceneManager;
         public Camera Camera { get; private set; }
         protected WindowManager Wm;
-        bool active,dead;
+        bool active, dead;
         public Scene(SceneManager sm)
         {
             Camera = new Camera();

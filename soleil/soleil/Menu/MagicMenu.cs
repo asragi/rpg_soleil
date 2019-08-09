@@ -36,7 +36,7 @@ namespace Soleil.Menu
         public void InputSide(bool isRight)
         {
             int index = (int)categoryToDisplay;
-            int diff = isRight ? 1 : - 1;
+            int diff = isRight ? 1 : -1;
             index += diff;
             index += (int)MagicCategory.size;
             index %= (int)MagicCategory.size;

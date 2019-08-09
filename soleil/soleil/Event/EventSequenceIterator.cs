@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Soleil.Event
 {
     class EventSequenceIterator
-        :IIterator
+        : IIterator
     {
         private EventSequence eventSequence;
         private int index;

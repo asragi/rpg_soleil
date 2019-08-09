@@ -56,7 +56,7 @@ namespace Soleil
         /// <summary>
         /// 継承先でのUpdate()記述用関数.
         /// </summary>
-        protected virtual void Move(){}
+        protected virtual void Move() { }
 
         public override void Quit()
         {

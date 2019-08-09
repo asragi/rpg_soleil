@@ -118,7 +118,7 @@ namespace Soleil
         {
             get => Fraction(AScore.STR * Rates[BuffRateName.STRRate]);
         }
-        
+
         public int VIT
         {
             get => Fraction(AScore.VIT * Rates[BuffRateName.VITRate]);
@@ -128,7 +128,7 @@ namespace Soleil
         {
             get => Fraction(AScore.MAG * Rates[BuffRateName.MAGRate]);
         }
-        
+
         public int SPD
         {
             get => Fraction(AScore.SPD * Rates[BuffRateName.SPDRate]);

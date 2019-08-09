@@ -2,7 +2,7 @@
 
 namespace Soleil
 {
-    class MessageWindow: VariableWindow, IMessageBox
+    class MessageWindow : VariableWindow, IMessageBox
     {
         MessageBox messageBox;
         public static FontID DefaultFont = FontID.CorpM;
@@ -25,7 +25,7 @@ namespace Soleil
 
         public static Vector GetProperSize(FontID font, string text)
         {
-            return MessageBox.GetSize(font, text) + new Vector(2 * Spacing, 2* Spacing);
+            return MessageBox.GetSize(font, text) + new Vector(2 * Spacing, 2 * Spacing);
         }
     }
 }

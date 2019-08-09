@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    public enum InputFocus { None, Player, Window, Menu,}
+    public enum InputFocus { None, Player, Window, Menu, }
     /// <summary>
     /// MapSceneでのInputの受付を管理するクラス
     /// </summary>
@@ -41,12 +41,12 @@ namespace Soleil.Map
             nowFocus = nextFocus;
             // フォーカスに応じて処理を振り分ける
             PlayerMove(inputDir, nowFocus);
-            if(nowFocus == InputFocus.Window)
+            if (nowFocus == InputFocus.Window)
             {
                 wm.Input(smoothInput);
                 return;
             }
-            if(nowFocus == InputFocus.Menu)
+            if (nowFocus == InputFocus.Menu)
             {
                 menuSystem.Input(smoothInput);
                 if (menuSystem.IsQuit) SetFocus(InputFocus.Player);
