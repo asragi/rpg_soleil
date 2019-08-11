@@ -13,6 +13,7 @@ namespace Soleil.Title
         private const int Space = 40;
         private const int FrameWait = 8;
         private const DepthID Depth = DepthID.MessageBack;
+        private static readonly Vector PosDiff = new Vector(-30, 0);
         TitleCommand[] commands;
         private int index;
 
@@ -22,7 +23,7 @@ namespace Soleil.Title
             commands = new TitleCommand[length];
             for (int i = 0; i < length; i++)
             {
-                commands[i] = new TitleCommand(options[i], new Vector(pos.X, pos.Y + Space * i), Depth)
+                commands[i] = new TitleCommand(options[i], new Vector(pos.X, pos.Y + Space * i), PosDiff, Depth)
                 {
                     Selected = i == 0,
                     FrameWait = i * FrameWait,
@@ -65,11 +66,11 @@ namespace Soleil.Title
             bool disabled, selected;
             ImageBase[] components;
 
-            public TitleCommand(string _text, Vector pos, DepthID depth, bool isStatic = true)
+            public TitleCommand(string _text, Vector pos, Vector posDiff, DepthID depth, bool isStatic = true)
             {
-                selectedImg = new Image(TextureID.TitleLabelSelected, pos, depth, isStatic: isStatic);
-                unselectedImg = new Image(TextureID.TitleLabelUnselected, pos, depth, isStatic: isStatic);
-                textImg = new TextImage(Font, pos + TextDiff, depth, isStatic);
+                selectedImg = new Image(TextureID.TitleLabelSelected, pos, posDiff, depth, isStatic: isStatic);
+                unselectedImg = new Image(TextureID.TitleLabelUnselected, pos, posDiff, depth, isStatic: isStatic);
+                textImg = new TextImage(Font, pos + TextDiff, PosDiff, depth, isStatic);
                 textImg.Text = _text;
                 components = new ImageBase[] { unselectedImg, selectedImg, textImg };
             }
