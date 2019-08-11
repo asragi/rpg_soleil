@@ -26,8 +26,9 @@ namespace Soleil.Title
             master = _master;
 
             sequence = new Dictionary<int, System.Action>();
-            sequence.Add(60, PopUpTitle);
-            sequence.Add(120, End);
+            sequence.Add(60, PopUpBackground);
+            sequence.Add(120, PopUpTitle);
+            sequence.Add(180, End);
         }
 
         public void TransitionUpdate()
@@ -36,6 +37,7 @@ namespace Soleil.Title
             if (sequence.ContainsKey(frame)) sequence[frame]();
         }
 
+        private void PopUpBackground() => graphics.CallBackImage();
         private void PopUpTitle() => graphics.CallLogo();
         public void End() => master.Mode = TitleMode.FirstWindow;
     }

@@ -22,6 +22,11 @@ namespace Soleil
         MessageWindow,
         ConversationWindow,
 
+        TitleBack,
+        TitleLabelSelected,
+        TitleLabelUnselected,
+        TitleLogo,
+
         MenuFront,
         MenuBack,
         MenuLine,
@@ -422,6 +427,11 @@ namespace Soleil
 
             SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
+            string title = UIPath + "Title/";
+            SetPath(TextureID.TitleBack, title + "back");
+            SetPath(TextureID.TitleLabelSelected, title + "label");
+            SetPath(TextureID.TitleLabelUnselected, title + "label-un");
+            SetPath(TextureID.TitleLogo, title + "logo");
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
             SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
