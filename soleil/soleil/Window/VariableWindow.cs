@@ -11,6 +11,8 @@ namespace Soleil
     {
         // ----- Constants
         const TextureID Texture = TextureID.MessageWindow;
+        const TextureID BackTexture = TextureID.MessageWindowBack;
+        private static readonly Vector BackDiff = new Vector(4, 4);
         /// <summary>
         /// Contentの端からの距離
         /// </summary>
@@ -18,17 +20,19 @@ namespace Soleil
         private static readonly Vector SpacingVec = new Vector(Spacing);
 
         protected bool IsStatic;
-        VariableRectangle variableRectangle;
+        VariableRectangle windowTexture;
+        VariableRectangle backTexture;
 
         public VariableWindow(Vector _pos, Vector _size, WindowTag _tag, WindowManager wm, bool isStatic = false)
             : base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
         {
             IsStatic = isStatic;
-            variableRectangle = new VariableRectangle(Texture, _pos, DiffPos, _size, Depth, isStatic);
-            AddComponents(new[] { variableRectangle });
+            windowTexture = new VariableRectangle(Texture, _pos, DiffPos, _size, Depth, isStatic);
+            backTexture = new VariableRectangle(BackTexture, _pos + BackDiff, DiffPos, _size, Depth, isStatic);
+            AddComponents(new[] { backTexture, windowTexture });
         }
 
-        protected override float Alpha => variableRectangle.Alpha;
+        protected override float Alpha => windowTexture.Alpha;
         protected override Vector SpaceVector => SpacingVec;
 
         /// <summary>
