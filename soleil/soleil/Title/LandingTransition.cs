@@ -28,6 +28,7 @@ namespace Soleil.Title
             sequence = new Dictionary<int, System.Action>();
             sequence.Add(60, PopUpBackground);
             sequence.Add(120, PopUpTitle);
+            sequence.Add(150, PopUpBar);
             sequence.Add(180, End);
         }
 
@@ -39,6 +40,7 @@ namespace Soleil.Title
 
         private void PopUpBackground() => graphics.CallBackImage();
         private void PopUpTitle() => graphics.CallLogo();
+        private void PopUpBar() => graphics.CallBar();
         public void End() => master.Mode = TitleMode.FirstWindow;
     }
 }
