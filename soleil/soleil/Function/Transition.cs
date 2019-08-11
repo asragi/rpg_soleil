@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Soleil
 {
-    public enum TransitionMode { None,FadeIn,FadeOut}
+    public enum TransitionMode { None, FadeIn, FadeOut }
 
     class Transition
     {
@@ -23,7 +23,7 @@ namespace Soleil
             {
                 white[i] = Resources.GetTexture(TextureID.Rule0 + i);
             }
-            index = TransitionTime-1;
+            index = TransitionTime - 1;
             stop = true;
             mode = TransitionMode.None;
         }

@@ -42,7 +42,7 @@ namespace Soleil
     {
         int frameLimit;
         Vector size;
-        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effect) 
+        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effect)
             : base(position, effect)
         {
             frameLimit = frame;
@@ -65,7 +65,7 @@ namespace Soleil
         public override void Draw(Drawing d)
         {
             base.Draw(d);
-                d.DrawBoxStatic(Position, size, Color, DepthID.Effect);
+            d.DrawBoxStatic(Position, size, Color, DepthID.Effect);
         }
     }
 
@@ -74,7 +74,7 @@ namespace Soleil
         Texture2D texture;
         int frameLimit;
         bool flip;
-        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect) 
+        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect)
             : base(position, effect)
         {
             this.texture = texture;
@@ -118,7 +118,7 @@ namespace Soleil
             frameLimit = frame;
             this.flip = flip;
         }
-        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect,Color color)
+        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect, Color color)
             : base(position, effect, color)
         {
             this.texture = texture;
@@ -143,7 +143,7 @@ namespace Soleil
         }
     }
 
-    class AnimationEffect:Effect
+    class AnimationEffect : Effect
     {
         Animation animation;
         bool flip;
@@ -153,7 +153,7 @@ namespace Soleil
             animation = new Animation(animationData);
             this.flip = flip;
         }
-        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effect,Color color)
+        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effect, Color color)
             : base(position, effect, color)
         {
             animation = new Animation(animationData);
@@ -177,7 +177,7 @@ namespace Soleil
                 animation.Draw(d, Position);
         }
     }
-    
+
 
     class ShakeWindowEffect : Effect
     {
@@ -190,7 +190,7 @@ namespace Soleil
             this.camera = camera;
             limitFrame = frame;
         }
-        public ShakeWindowEffect(Vector position, int frame, List<Effect> effect) 
+        public ShakeWindowEffect(Vector position, int frame, List<Effect> effect)
             : base(position, effect)
         {
             limitFrame = frame;

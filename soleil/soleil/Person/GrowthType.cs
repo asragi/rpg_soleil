@@ -39,7 +39,7 @@ namespace Soleil
             switch (growth)
             {
                 case GrowthType.Pre: // 上に凸で(lv, val) = (1, init), (99, last)を通る2次式
-                    return (int)(- ((last - init) / Math.Pow(lvMax - 1, 2)) * Math.Pow(lv - lvMax, 2) + last);
+                    return (int)(-((last - init) / Math.Pow(lvMax - 1, 2)) * Math.Pow(lv - lvMax, 2) + last);
                 case GrowthType.Normal: // Linear
                     return (int)(((last - init) / (lvMax - 1)) * (lv - 1) + init);
                 case GrowthType.Late: // 下に凸で(lv, val) = (1, init), (99, last)を通る2次式

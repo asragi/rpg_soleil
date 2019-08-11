@@ -13,7 +13,7 @@ namespace Soleil.Event.Shop
     /// <summary>
     /// 購入数を選択して購入を決定するウィンドウ
     /// </summary>
-    class ShopDecideWindow: MenuComponent
+    class ShopDecideWindow : MenuComponent
     {
         static readonly Vector PosDiff = Window.DiffPos;
         static readonly Vector WindowPos = new Vector(102, 303);
@@ -68,7 +68,7 @@ namespace Soleil.Event.Shop
             priceImg.Color = ColorPalette.DarkBlue;
             currency = new Image(
                 TextureID.Currency,
-                PricePos + new Vector(- Font.GetSize(_price.ToString()).X - 20, 5),
+                PricePos + new Vector(-Font.GetSize(_price.ToString()).X - 20, 5),
                 PosDiff, Depth);
 
             priceSum = new PriceSum(PriceSumPos, PosDiff, _price, Font);
@@ -104,7 +104,7 @@ namespace Soleil.Event.Shop
         {
             Quit();
         }
-        
+
         public void Input(Direction d)
         {
             if (d == Direction.R)
@@ -141,7 +141,7 @@ namespace Soleil.Event.Shop
         /// <summary>
         /// 購入するアイテムの合計価格表示
         /// </summary>
-        class PriceSum: MenuComponent
+        class PriceSum : MenuComponent
         {
             private static readonly DepthID depth = DepthID.Message;
             private static readonly Vector CurrencyHeight = MoneyComponent.CurrencyPos;
@@ -168,7 +168,7 @@ namespace Soleil.Event.Shop
         /// <summary>
         /// 購入するアイテムの個数表示
         /// </summary>
-        class PurchaseNumDisplay: MenuComponent
+        class PurchaseNumDisplay : MenuComponent
         {
             private static readonly Vector NumDistance = PossessNum.NumDiff;
             private const string PurchaseText = "購入数";

@@ -11,7 +11,7 @@ namespace Soleil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         Drawing drawing;
         SceneManager sm;
         PersonParty party;
@@ -83,7 +83,7 @@ namespace Soleil
             sm = SceneManager.GetInstance();
             // !debug! Save
             bool saveExist = SaveLoad.FileExist();
-            if(saveExist) SaveLoad.Load();
+            if (saveExist) SaveLoad.Load();
             party = SaveLoad.GetParty(isNew: !saveExist);
 
             new TestScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
@@ -152,7 +152,7 @@ namespace Soleil
                 Exit();
                 End = false;
             }
-            
+
 
             // TODO: Add your update logic here
             //Audio.Update();

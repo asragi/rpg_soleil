@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// ワールドマップに移動するイベントのクラス
     /// </summary>
-    class ToWorldMapEvent: EventBase
+    class ToWorldMapEvent : EventBase
     {
         SceneManager sceneManager;
         PersonParty party;

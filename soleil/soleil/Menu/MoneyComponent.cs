@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// <summary>
     /// 所持金表示コンポーネント．
     /// </summary>
-    class MoneyComponent: MenuComponent
+    class MoneyComponent : MenuComponent
     {
         // Font設定
         readonly FontID ValFont = FontID.CorpM;
@@ -33,7 +33,7 @@ namespace Soleil.Menu
             moneyText = new RightAlignText(ValFont, _pos + MoneyPos, posDiff, DepthID.MenuBottom);
             currency = new Image(TextureID.Currency, _pos + CurrencyPos, posDiff, DepthID.MenuBottom);
             moneyWallet = PlayerBaggage.GetInstance().MoneyWallet;
-            backBar = new BackBarImage(_pos + new Vector(- BackBarImage.EdgeSize, 0), posDiff, 220, false);
+            backBar = new BackBarImage(_pos + new Vector(-BackBarImage.EdgeSize, 0), posDiff, 220, false);
             AddComponents(new IComponent[] { backBar, moneyText, currency });
             Refresh();
         }

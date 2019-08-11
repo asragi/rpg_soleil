@@ -17,9 +17,9 @@ namespace Soleil
         N, L, LU, U, RU, R, RD, D, LD,
         CL, CLU, CU, CRU, CR, CRD, CD, CLD, //溜め技用 多分使わない
     }
-    enum Controller:int //操縦者
+    enum Controller : int //操縦者
     {
-        KeyBoard=0, Computer, Training,
+        KeyBoard = 0, Computer, Training,
     }
 
     static class KeyInput
@@ -150,12 +150,12 @@ namespace Soleil
                 pads.RemoveAt(pads.Count - 1);
 
             gamepad = new List<PlayerIndex>();
-            if(pads.Count==0)
+            if (pads.Count == 0)
             {
                 gamepad.Add(0);
                 gamepad.Add(0);
             }
-            else if (pads.Count==1)
+            else if (pads.Count == 1)
             {
                 gamepad.Add(0);
                 gamepad.Add(pads[0]);
@@ -171,7 +171,7 @@ namespace Soleil
             for (int i = 0; i < pads.Count; i++)
             {
                 //Gamepadは2P優先
-                UseGamepad[PlayerCount-1-i] = true;
+                UseGamepad[PlayerCount - 1 - i] = true;
             }
 
 
@@ -207,7 +207,7 @@ namespace Soleil
 
         public static void Update()
         {
-            gamepadState = gamepad.Select(p=>GamePad.GetState(p)).ToList();
+            gamepadState = gamepad.Select(p => GamePad.GetState(p)).ToList();
             keyState = Keyboard.GetState();
 
             for (int i = 0; i < PlayerCount; i++)
@@ -247,7 +247,7 @@ namespace Soleil
         {
             var inclined = GetInputFromGamePadStick(player);
             for (int i = 0; i < (int)Key.TotalKeys; i++)
-                if (gamepadState[player].IsButtonDown(gamepadButtons[player, i]) 
+                if (gamepadState[player].IsButtonDown(gamepadButtons[player, i])
                     || (i < ArrowKey.Count() && inclined[i]))   //スティックの傾きでも十字入力ができる
                     input[i, player]++;
                 else
@@ -289,14 +289,14 @@ namespace Soleil
             preDirection[player] = currentDirection[player];
             currentDirection[player] = GetStickInput(player + 1);
         }
-        
+
         public static bool IsKeysDown(Keys keys) => keyState.IsKeyDown(keys);
 
         public static int GetKeyState(Key key, int player)
         {
             return input[(int)key, player - 1];
         }
-        
+
         //If One of Players Push
         public static bool GetKeyPush(Key key)
         {
@@ -433,7 +433,7 @@ namespace Soleil
             }
         }
 
-        
+
 
 
         //Degree Measure Of Stick Direction

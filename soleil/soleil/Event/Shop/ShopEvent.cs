@@ -15,7 +15,7 @@ namespace Soleil.Event
         int target;
 
         public ShopEvent(ShopName name, PersonParty party, BoolSet _boolSet, int _target)
-            :this(name, party)
+            : this(name, party)
         {
             (boolSet, target) = (_boolSet, _target);
         }

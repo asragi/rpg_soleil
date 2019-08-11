@@ -127,7 +127,8 @@ namespace Soleil
         /// 生きているcharasのindexをすべて取得
         /// </summary>
         public List<int> AliveIndexes()
-            => alive.Aggregate2(new List<int>(), (list, p, i) => {
+            => alive.Aggregate2(new List<int>(), (list, p, i) =>
+            {
                 if (p) list.Add(i);
                 return list;
             });
@@ -162,7 +163,7 @@ namespace Soleil
 
             if (battleQue.Count == 0 && executed)
             {
-                while(turnQueue.Top().TurnTime > 0)
+                while (turnQueue.Top().TurnTime > 0)
                 {
                     charas.ForEach(e => e.Status.WP += e.Status.SPD);
                 }
@@ -199,7 +200,7 @@ namespace Soleil
                 case BattleMessage bm:
                     message = bm.Message;
                     executed = delayCount <= 1;
-                        break;
+                    break;
                 case BattleCommandSelect bcs:
                     executed = false;
                     var action = charas[topTurn.CharaIndex].SelectAction(topTurn);
@@ -239,7 +240,7 @@ namespace Soleil
             ocr.Affect(this);
         }
         */
-        
+
         public void AddBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Add(bui);
         public bool RemoveBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Remove(bui);
 
@@ -256,7 +257,7 @@ namespace Soleil
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
-            for (int i=0;i<5;i++)
+            for (int i = 0; i < 5; i++)
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
@@ -268,7 +269,7 @@ namespace Soleil
                 sb.DrawText(new Vector(100 + i * 180, 440), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
             }
 
-            
+
             MenuComponentList.ForEach(e => e.Draw(sb));
         }
     }

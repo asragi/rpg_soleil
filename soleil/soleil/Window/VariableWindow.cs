@@ -33,7 +33,7 @@ namespace Soleil
         Vector size;
 
         public VariableWindow(Vector _pos, Vector _size, WindowTag _tag, WindowManager wm, bool isStatic = false)
-            :base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
+            : base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
         {
             var center = true;
             frameTextureForCalc = Resources.GetTexture(Texture);

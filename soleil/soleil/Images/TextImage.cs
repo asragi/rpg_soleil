@@ -18,7 +18,7 @@ namespace Soleil
         private string text;
         public override Vector Pos { get => base.Pos; set { base.Pos = value; if (outline != null) outline.Pos = value; } }
         public override Vector InitPos { get => base.InitPos; set { base.InitPos = value; if (outline != null) outline.InitPos = value; } }
-        public virtual string Text { get => text; set { text = value; if(outline != null) outline.Text = text; } }
+        public virtual string Text { get => text; set { text = value; if (outline != null) outline.Text = text; } }
         public override Vector ImageSize => (Vector)Resources.GetFont(Font).MeasureString(Text);
         public Color OutlineColor { get; set; } = ColorPalette.DarkBlue;
 
@@ -39,7 +39,7 @@ namespace Soleil
 
         public TextImage(FontID fontID, Vector pos, DepthID depth, bool isStatic = true, float alpha = 0)
             : this(fontID, pos, Vector.Zero, depth, isStatic, alpha) { }
-   
+
         public void ActivateOutline(int diff, bool activate = true)
         {
             if (!activate && outline == null) return;
@@ -79,7 +79,7 @@ namespace Soleil
         /// <summary>
         /// 枠線を外側に表示するためのクラス内クラス
         /// </summary>
-        private class Outline: IComponent
+        private class Outline : IComponent
         {
             public Color Color { set => outlineTexts.ForEach2(s => s.Color = value); }
             public bool IsVisible;
@@ -88,7 +88,7 @@ namespace Soleil
             readonly Vector[] diffs;
             int diffSize;
             readonly TextImage[] outlineTexts;
-            static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1)};
+            static Vector[] normalizedDiffs = new[] { new Vector(1, 0), new Vector(0, -1), new Vector(-1, 0), new Vector(0, 1) };
             public Vector Pos
             {
                 set

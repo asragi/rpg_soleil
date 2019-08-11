@@ -106,8 +106,8 @@ namespace Soleil
         {
             sb.Draw(tex, (pos - Camera) * DrawRate, rect, Color, angle, CenterBased ? new Vector2(rect.Width, rect.Height) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
         }
-        
-        public void DrawWithColor(Vector2 pos, Texture2D tex, Depth depth, Color color, float size =1, float angle = 0)
+
+        public void DrawWithColor(Vector2 pos, Texture2D tex, Depth depth, Color color, float size = 1, float angle = 0)
         {
             sb.Draw(tex, (pos - Camera) * DrawRate, null, color, angle, CenterBased ? new Vector2(tex.Width, tex.Height) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
         }
@@ -264,7 +264,7 @@ namespace Soleil
         /// <param name="color">色</param>
         /// <param name="size">文字の拡大ベクトル</param>
         /// <param name="depth">文字の表示優先度（小さいほうが優先される）</param>
-        public void DrawStaticText(Vector2 pos, SpriteFont font, string text, Color color, Depth depth, Vector2 size, float angle = 0, bool center=true)
+        public void DrawStaticText(Vector2 pos, SpriteFont font, string text, Color color, Depth depth, Vector2 size, float angle = 0, bool center = true)
         {
             sb.DrawString(font, text, pos * DrawRate, color, angle, center ? font.MeasureString(text) / 2 : Vector2.Zero, size * DrawRate, Flip, depth.Value);
         }

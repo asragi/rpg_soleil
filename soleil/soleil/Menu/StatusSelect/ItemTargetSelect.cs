@@ -16,7 +16,7 @@ namespace Soleil.Menu
         ItemList itemList;
 
         public ItemTargetSelect(ItemMenu _parent)
-            :base(_parent)
+            : base(_parent)
         {
             itemMenu = _parent;
         }

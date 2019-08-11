@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// キャラクターを指定して立ち絵を削除する．
     /// </summary>
-    class DestroyPictureEvent: EventBase
+    class DestroyPictureEvent : EventBase
     {
         CharaName name;
         CharacterPictureHolder holder;

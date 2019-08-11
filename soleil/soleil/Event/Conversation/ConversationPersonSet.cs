@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Event.Conversation
 {
-    class ConversationPersonSet: EventBase
+    class ConversationPersonSet : EventBase
     {
         List<ConversationPerson> people;
         ConversationSystem cs;

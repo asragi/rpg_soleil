@@ -28,7 +28,7 @@ namespace Soleil.Event
                 var target = decidedSet[i];
                 if (target is EventSet eSet)
                 {
-                    if(createdSet.Count > 0)
+                    if (createdSet.Count > 0)
                     {
                         MySequence.InsertEventSet(index + 1, new EventSet(createdSet.ToArray()));
                         createdSet = new List<EventBase>();

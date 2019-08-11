@@ -288,10 +288,10 @@ namespace Soleil
                 SEs[i] = Content.Load<SoundEffect>(sePath[i]);
 
 
-            
+
             for (int i = 0; i < (int)ColorDictionaryID.Size; i++)
                 ColorDictionary[i] = ReadDictionary(colorDataPath[i]);
-            
+
         }
 
         public static void ReadWindowSize()
@@ -492,7 +492,7 @@ namespace Soleil
             SetPath(TextureID.BattleTurnQueueFace4, UIPath + BattlePath + "face4");
             SetPath(TextureID.BattleTurnQueueFaceSun, UIPath + BattlePath + "faceSun");
             SetPath(TextureID.BattleTurnQueueFaceLune, UIPath + BattlePath + "faceLune");
-            
+
 
             for (int i = 0; i < 20; i++)
             {
@@ -508,7 +508,7 @@ namespace Soleil
 
             #endregion
 
-            
+
             SetPath(FontID.CorpM, "corpm");
             SetPath(FontID.CorpMini, "corpmini");
 
@@ -536,7 +536,7 @@ namespace Soleil
             EffectAnimeSplit[(int)id, 0] = xNum;
             EffectAnimeSplit[(int)id, 1] = yNum;
         }
-        
+
 
         public static Texture2D GetTexture(TextureID id) => Graphs[(int)id];
         public static Texture2D GetTexture(AnimationID id) => Animes[(int)id];

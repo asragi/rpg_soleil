@@ -11,7 +11,7 @@ namespace Soleil.Event.Conversation
     /// <summary>
     /// 会話シーンイベントで会話と同時に選択肢を表示するイベント
     /// </summary>
-    class ConversationSelect: EventBase
+    class ConversationSelect : EventBase
     {
         readonly WindowManager wm = WindowManager.GetInstance();
         readonly Vector Position = new Vector(700, 100);
