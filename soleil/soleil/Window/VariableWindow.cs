@@ -14,11 +14,11 @@ namespace Soleil
         /// <summary>
         /// Contentの端からの距離
         /// </summary>
-        protected const int Spacing = 40;
+        protected const int Spacing = 15;
         /// <summary>
         /// ウィンドウフレームの幅
         /// </summary>
-        const int FrameSize = 40;
+        const int FrameSize = 10;
 
         // -----
         protected readonly bool IsStatic;
