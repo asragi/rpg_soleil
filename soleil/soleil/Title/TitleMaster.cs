@@ -31,6 +31,8 @@ namespace Soleil.Title
         TitleGraphics graphics;
         LandingTransition landing;
 
+        private TitleMode mode = TitleMode.Landing;
+
         public TitleMaster(SceneManager sm)
         {
             graphics = new TitleGraphics();
@@ -42,7 +44,18 @@ namespace Soleil.Title
             exitTransition = new ExitTransition();
         }
 
-        public TitleMode Mode { get; set; } = TitleMode.Landing;
+        public TitleMode Mode
+        {
+            get => mode;
+            set
+            {
+                if (mode != value)
+                {
+                    ActionOnChangeMode(value);
+                }
+                mode = value;
+            }
+        }
 
         public void Update()
         {
@@ -59,6 +72,11 @@ namespace Soleil.Title
         {
             firstWindow.Draw(d);
             graphics.Draw(d);
+        }
+
+        private void ActionOnChangeMode(TitleMode mode)
+        {
+            if (mode == TitleMode.FirstWindow) firstWindow.CallWindow();
         }
     }
 }

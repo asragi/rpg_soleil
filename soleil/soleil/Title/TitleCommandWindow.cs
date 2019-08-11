@@ -92,13 +92,13 @@ namespace Soleil.Title
                     textImg.Color = GetProperColor();
                     if (selected)
                     {
-                        selectedImg.Alpha = 1;
+                        selectedImg.Alpha = textImg.Alpha;
                         unselectedImg.Alpha = 0;
                     }
                     else
                     {
                         selectedImg.Alpha = 0;
-                        unselectedImg.Alpha = 1;
+                        unselectedImg.Alpha = textImg.Alpha;
                     }
                 }
             }

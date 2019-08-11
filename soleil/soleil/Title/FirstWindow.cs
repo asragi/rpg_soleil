@@ -27,8 +27,8 @@ namespace Soleil.Title
         public FirstWindow(TitleMaster _master)
         {
             master = _master;
+            selectWindow = new TitleCommandWindow(WindowPos, Commands);
             saveExists = SaveLoad.FileExist();
-            CallWindow();
         }
 
         public void OnInputUp()
@@ -62,6 +62,11 @@ namespace Soleil.Title
             }
         }
 
+        public void CallWindow()
+        {
+            selectWindow.Call();
+        }
+
         public void Update() => selectWindow.Update();
         public void Draw(Drawing d) => selectWindow.Draw(d);
 
@@ -87,12 +92,6 @@ namespace Soleil.Title
         {
             master.Mode = TitleMode.Exit;
             QuitWindow();
-        }
-
-        private void CallWindow()
-        {
-            selectWindow = new TitleCommandWindow(WindowPos, Commands);
-            selectWindow.Call();
         }
 
         private void QuitWindow()
