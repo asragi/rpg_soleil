@@ -274,6 +274,7 @@
     <Compile Include="Title\LandingTransition.cs" />
     <Compile Include="Title\LoadGameTransition.cs" />
     <Compile Include="Title\NewGameTransition.cs" />
+    <Compile Include="Title\TitleCommandWindow.cs" />
     <Compile Include="Title\TitleGraphics.cs" />
     <Compile Include="Title\TitleInput.cs" />
     <Compile Include="Title\TitleMaster.cs" />

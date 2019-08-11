@@ -47,6 +47,7 @@ namespace Soleil.Title
         public void Update()
         {
             input.Update();
+            firstWindow.Update();
             if (Mode == TitleMode.Landing) landing.TransitionUpdate();
             if (Mode == TitleMode.NewGame) newGame.TransitionUpdate();
             if (Mode == TitleMode.Load) loadGame.TransitionUpdate();
@@ -56,6 +57,7 @@ namespace Soleil.Title
 
         public void Draw(Drawing d)
         {
+            firstWindow.Draw(d);
             graphics.Draw(d);
         }
     }
