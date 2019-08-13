@@ -80,11 +80,11 @@ namespace Soleil
                 (act, ocrs) =>
                 {
                     //MP消費
-                    if(MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
+                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
                     {
                         BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "はMPを" + MP.ToString() + "消費した";
-                        ocrs.Add(new OccurenceDamageForCharacter(mes, act.ARange.SourceIndex, MPDmg: MP));
+                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
+                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
                     }
                     else
                     {
