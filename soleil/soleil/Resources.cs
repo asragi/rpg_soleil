@@ -200,6 +200,8 @@ namespace Soleil
 
 
         BattleLuneStanding,
+        BattleLuneChant,
+        BattleLuneMagic,
 
         Size,
     }
@@ -267,6 +269,7 @@ namespace Soleil
         const string MusicPath = "Music/";
         const string SEPath = "SE/";
         const string DataPath = "Data/";
+        const string AnimationPath = "Animation/";
 
         public static void Init(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
@@ -425,8 +428,13 @@ namespace Soleil
             SetSize(AnimationID.SomniaAcceU, 1, 1);
 
             //Battle
-            SetPath(AnimationID.BattleLuneStanding, "Animation/Battle/Lune_battle_n");
+            var BattleAnimationPath = AnimationPath + BattlePath;
+            SetPath(AnimationID.BattleLuneStanding, BattleAnimationPath + "Lune_battle_n");
             SetSize(AnimationID.BattleLuneStanding, 4, 1);
+            SetPath(AnimationID.BattleLuneChant, BattleAnimationPath + "Lune_chant");
+            SetSize(AnimationID.BattleLuneChant, 4, 1);
+            SetPath(AnimationID.BattleLuneMagic, BattleAnimationPath + "Lune_magic");
+            SetSize(AnimationID.BattleLuneMagic, 4, 1);
 
             #endregion
 
