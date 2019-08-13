@@ -33,16 +33,8 @@ namespace Soleil.Menu
                 var id = (SkillID)i;
                 var _data = SkillDataBase.Get(id);
                 if (_data.AttackType != AttackType.Physical) continue;
-                var ele = new SkillMenuPanel(_data, this);
-                if (skillHolder.HasSkill(id)) availableSkillList.Add(ele);
-                else
-                {
-                    ele.Active = false;
-                    ele.Update();
-                    unavailableSkillList.Add(ele);
-                }
-                //if (!skillHolder.HasSkill(id)) continue;
-                //skillList.Add(new SkillMenuPanel(_data, this));
+                if (skillHolder.HasSkill(id)) availableSkillList.Add(new SkillMenuPanel(_data, this, true));
+                else unavailableSkillList.Add(new SkillMenuPanel(_data, this, false));
             }
             var avSkillArray = availableSkillList.ToArray();
             var unavSkillArray = unavailableSkillList.ToArray();
@@ -50,7 +42,6 @@ namespace Soleil.Menu
             avSkillArray.CopyTo(skillArray, 0);
             unavSkillArray.CopyTo(skillArray, avSkillArray.Count());
             return skillArray;
-            //return skillList.ToArray();
         }
     }
 }
