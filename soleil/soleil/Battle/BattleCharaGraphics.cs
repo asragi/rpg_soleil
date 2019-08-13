@@ -22,6 +22,12 @@ namespace Soleil
             statusUI.Damage(decreasedHP, decreasedMP);
         }
 
+        public void Attack(int consumeMP = 0)
+        {
+            bcAnimation.SetMotion(BattleCharaMotionType.Magic, 60);
+            statusUI.Damage(decreasedMP: consumeMP);
+        }
+
         public void Update()
         {
             statusUI.Update();
