@@ -26,16 +26,31 @@ namespace Soleil.Menu
 
         protected override SelectablePanel[] MakeAllPanels()
         {
-            var skillList = new List<SkillMenuPanel>();
+            var availableSkillList = new List<SkillMenuPanel>();
+            var unavailableSkillList = new List<SkillMenuPanel>();
             for (int i = 0; i < (int)SkillID.size; i++)
             {
                 var id = (SkillID)i;
                 var _data = SkillDataBase.Get(id);
                 if (_data.AttackType != AttackType.Physical) continue;
-                if (!skillHolder.HasSkill(id)) continue;
-                skillList.Add(new SkillMenuPanel(_data, this));
+                var ele = new SkillMenuPanel(_data, this);
+                if (skillHolder.HasSkill(id)) availableSkillList.Add(ele);
+                else
+                {
+                    ele.Active = false;
+                    ele.Update();
+                    unavailableSkillList.Add(ele);
+                }
+                //if (!skillHolder.HasSkill(id)) continue;
+                //skillList.Add(new SkillMenuPanel(_data, this));
             }
-            return skillList.ToArray();
+            var avSkillArray = availableSkillList.ToArray();
+            var unavSkillArray = unavailableSkillList.ToArray();
+            var skillArray = new SelectablePanel[avSkillArray.Count() + unavSkillArray.Count()];
+            avSkillArray.CopyTo(skillArray, 0);
+            unavSkillArray.CopyTo(skillArray, avSkillArray.Count());
+            return skillArray;
+            //return skillList.ToArray();
         }
     }
 }
