@@ -61,7 +61,9 @@ namespace Soleil
             };
             for (int i = 0; i < partylist.Length; i++)
             {
-                charas.Add(new PlayableCharacter(charaIndex, partylist[i].Score));
+                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i].Equip);
+                charas.Add(chara);
+
                 sides.Add(Side.Right);
                 indexes[(int)Side.Right].Add(charaIndex);
                 bcgraphicsList.Add(new BattleCharaGraphics(charas.Last(), new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100)));
