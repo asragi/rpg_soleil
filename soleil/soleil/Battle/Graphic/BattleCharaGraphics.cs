@@ -24,7 +24,7 @@ namespace Soleil
 
         public void Attack(int consumeMP = 0)
         {
-            bcAnimation.SetMotion(BattleCharaMotionType.Magic, 60);
+            bcAnimation.SetMotion(BattleCharaMotionType.Magic);
             statusUI.Damage(decreasedMP: consumeMP);
         }
 
