@@ -48,8 +48,8 @@
     <Compile Include="Battle\Action\Buff.cs" />
     <Compile Include="Battle\AttackInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
-    <Compile Include="Battle\BattleCharaAnimation.cs" />
-    <Compile Include="Battle\BattleCharaGraphics.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaAnimation.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaGraphics.cs" />
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
@@ -60,6 +60,7 @@
     <Compile Include="Battle\ConditionedEffect.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\EquipSet.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Person\GrowthType.cs" />
     <Compile Include="Person\Person.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="Battle\SelectWindow\CommandSelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\MagicSelectWindow.cs" />
     <Compile Include="Battle\SelectWindow\SelectItems.cs" />
-    <Compile Include="Battle\StatusUI.cs" />
+    <Compile Include="Battle\Graphic\StatusUI.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="ConversationRead\ConversationPerson.cs" />
     <Compile Include="ConversationRead\ConversationRead.cs" />
