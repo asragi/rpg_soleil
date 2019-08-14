@@ -86,8 +86,8 @@ namespace Soleil
             if (saveExist) SaveLoad.Load();
             party = SaveLoad.GetParty(isNew: !saveExist);
 
-            new TestScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
-            // new TestBattleScene(sm);
+            //new TestScene(sm, party, Map.MapName.MagistolCol1, new Vector(400, 400));
+            new TestBattleScene(sm, party);
             // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
 
 

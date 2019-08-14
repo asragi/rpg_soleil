@@ -13,7 +13,7 @@ namespace Soleil
     class Buff : Action
     {
         protected BuffFunc BFunc;
-        public Buff(BuffFunc bFunc, Range.AttackRange aRange) : base(aRange) => BFunc = bFunc;
+        public Buff(BuffFunc bFunc, Range.AttackRange aRange, int mp = 0) : base(aRange, mp) => BFunc = bFunc;
 
         public Buff GenerateAttack(Range.AttackRange aRange)
         {
@@ -41,6 +41,18 @@ namespace Soleil
                 (act) => true,
                 (act, ocrs) =>
                 {
+                    //MP消費
+                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
+                    {
+                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
+                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
+                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
+                    }
+                    else
+                    {
+                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
+                        return ocrs;
+                    }
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:

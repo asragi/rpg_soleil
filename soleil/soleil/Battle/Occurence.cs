@@ -36,8 +36,24 @@ namespace Soleil
         }
         public override void Affect()
         {
-            if (CharaIndex < 2)
-                BF.statusUIs[CharaIndex].Damage(HPDamage, MPDamage);
+            if (CharaIndex < 3) //敵のUIを作るまでのDebug
+                BF.bcgraphicsList[CharaIndex].Damage(HPDamage, MPDamage);
+        }
+    }
+
+    class OccurenceAttackMotion : Occurence
+    {
+        public int CharaIndex { get; private set; }
+        public int MPConsume = 0;
+        public OccurenceAttackMotion(string message, int charaIndex, int MPConsume_) : base(message)
+        {
+            CharaIndex = charaIndex;
+            MPConsume = MPConsume_;
+        }
+        public override void Affect()
+        {
+            if (CharaIndex < 3)
+                BF.bcgraphicsList[CharaIndex].Attack(MPConsume);
         }
     }
 

@@ -9,11 +9,11 @@ namespace Soleil
     class TestBattleScene : Scene
     {
         BattleField bf;
-        public TestBattleScene(SceneManager sm)
+        public TestBattleScene(SceneManager sm, PersonParty party)
             : base(sm)
         {
             bf = BattleField.GetInstance();
-            bf.InitBattle();
+            bf.InitBattle(party);
         }
 
         override public void Update()

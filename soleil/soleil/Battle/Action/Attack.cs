@@ -43,8 +43,8 @@ namespace Soleil
         public AttackAttribution Attr;
         public MagicFieldName? MField;
         public Attack(AttackFunc attack_, Range.AttackRange aRange,
-            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null)
-            : base(aRange)
+            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null, int mp = 0)
+            : base(aRange, mp)
         {
             AFunc = attack_;
             Attr = attr;
@@ -79,6 +79,18 @@ namespace Soleil
                 (act) => true,
                 (act, ocrs) =>
                 {
+                    //MP消費
+                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
+                    {
+                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
+                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
+                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
+                    }
+                    else
+                    {
+                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
+                        return ocrs;
+                    }
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:

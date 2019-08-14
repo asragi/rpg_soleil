@@ -119,7 +119,8 @@ namespace Soleil
         public override void Quit()
         {
             csw?.Quit();
-            base.Quit();
+            if (!IsQuit)
+                base.Quit();
             IsQuit = true;
             IsActive = false;
 
