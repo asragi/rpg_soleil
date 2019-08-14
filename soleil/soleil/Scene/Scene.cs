@@ -11,13 +11,13 @@ namespace Soleil
     {
         protected SceneManager SceneManager;
         public Camera Camera { get; private set; }
-        protected WindowManager wm;
+        protected WindowManager Wm;
         bool active, dead;
         public Scene(SceneManager sm)
         {
             Camera = new Camera();
             SceneManager = sm;
-            wm = WindowManager.GetInstance();
+            Wm = WindowManager.GetInstance();
             active = true;
             dead = false;
             sm.Add(this);
@@ -26,12 +26,12 @@ namespace Soleil
         virtual public void Update()
         {
             if (!active) return;
-            wm.Update();
+            Wm.Update();
         }
 
         virtual public void Draw(Drawing sb)
         {
-            wm.Draw(sb);
+            Wm.Draw(sb);
         }
 
         public void Kill()
