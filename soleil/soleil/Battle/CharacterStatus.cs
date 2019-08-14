@@ -95,7 +95,7 @@ namespace Soleil
     /// <summary>
     /// 戦闘中におけるcharaの状態
     /// </summary>
-    public class CharacterStatus
+    class CharacterStatus
     {
         public AbilityScore AScore;
         public BuffRate Rates;
@@ -118,7 +118,7 @@ namespace Soleil
         {
             get => Fraction(AScore.STR * Rates[BuffRateName.STRRate]);
         }
-        
+
         public int VIT
         {
             get => Fraction(AScore.VIT * Rates[BuffRateName.VITRate]);
@@ -128,7 +128,7 @@ namespace Soleil
         {
             get => Fraction(AScore.MAG * Rates[BuffRateName.MAGRate]);
         }
-        
+
         public int SPD
         {
             get => Fraction(AScore.SPD * Rates[BuffRateName.SPDRate]);
@@ -162,6 +162,11 @@ namespace Soleil
             private set => mDEF = value;
         }
 
+        public Battle.EquipSet Equips
+        {
+            get; set;
+        }
+
         public int InitialWP = 10000;
         public int WP = 0;
         public int TurnWP = 10000;
@@ -188,10 +193,11 @@ namespace Soleil
             HP = 0;
             MP = 0;
 
+            Equips = new Battle.EquipSet();
             SetParams();
         }
 
-        public CharacterStatus(AbilityScore aScore, int _WP)
+        public CharacterStatus(AbilityScore aScore, int _WP, Battle.EquipSet equips = null)
         {
             AScore = aScore;
             HP = AScore.HPMAX;
@@ -199,23 +205,24 @@ namespace Soleil
             InitialWP = _WP;
             Rates = new BuffRate();
 
+            Equips = equips ?? new Battle.EquipSet();
             SetParams();
         }
 
         void SetParams()
         {
-            //TODO: 所有武器でmATK等をセットする
             PATK = 1f;
             MATK = 1f;
             PDEF = 1f;
-            MATK = 1f;
+            MDEF = 1f;
+
+            //式これで良い？
+            PATK += Equips.GetAttack(Skill.AttackType.Physical);
+            PDEF += Equips.GetDef(AttackAttribution.Beat, Skill.AttackType.Physical);
+            MATK += Equips.GetAttack(Skill.AttackType.Magical);
+            MDEF += Equips.GetDef(AttackAttribution.Beat, Skill.AttackType.Magical);
         }
 
-        //TODO
-        public void GetEquipments()
-        {
-
-        }
 
         public void GetSkills()
         {
