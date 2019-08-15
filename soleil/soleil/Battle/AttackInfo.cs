@@ -33,8 +33,8 @@ namespace Soleil
         }
         static AttackInfo()
         {
-            physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF * 2) / 400 * Revision(); };
-            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500))*((400 - (b.VIT + b.MAG * 2)/ 3 - b.MDEF * 2) / 400) * Revision(); };
+            physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(AttackAttribution.None/*とりあえず*/) * 2) / 400 * Revision(); };
+            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(AttackAttribution.None) * 2) / 400) * Revision(); };
 
             attackTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>>();
             attackTable[ActionName.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10); };
@@ -42,15 +42,18 @@ namespace Soleil
 
 
             buffTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>>();
-            buffTable[ActionName.Guard] = (a, b) => {
+            buffTable[ActionName.Guard] = (a, b) =>
+            {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 2.0f }, { BuffRateName.MAGRate, 2.0f } });
-                };
-            buffTable[ActionName.EndGuard] = (a, b) => {
+            };
+            buffTable[ActionName.EndGuard] = (a, b) =>
+            {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 0.5f }, { BuffRateName.MAGRate, 0.5f } });
             };
-            buffTable[ActionName.ExampleDebuff] = (a, b) => {
+            buffTable[ActionName.ExampleDebuff] = (a, b) =>
+            {
                 return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
             };
 
@@ -58,11 +61,11 @@ namespace Soleil
             for (int i = 0; i < (int)ActionName.Size; i++)
                 actions.Add(null);
             actions[(int)ActionName.NormalAttack] = new Attack(attackTable[ActionName.NormalAttack], Range.OneEnemy.GetInstance());
-            actions[(int)ActionName.ExampleMagic] = new Attack(attackTable[ActionName.ExampleMagic], Range.OneEnemy.GetInstance(), mp:100);
+            actions[(int)ActionName.ExampleMagic] = new Attack(attackTable[ActionName.ExampleMagic], Range.OneEnemy.GetInstance(), mp: 100);
 
             actions[(int)ActionName.Guard] = new Buff(buffTable[ActionName.Guard], Range.Me.GetInstance());
             actions[(int)ActionName.EndGuard] = new Buff(buffTable[ActionName.EndGuard], Range.Me.GetInstance());
-            actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], Range.OneEnemy.GetInstance(), mp:70);
+            actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
 
             actionString = new List<String>();
             for (int i = 0; i < (int)ActionName.Size; i++)

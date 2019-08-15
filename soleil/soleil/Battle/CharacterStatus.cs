@@ -148,19 +148,13 @@ namespace Soleil
             private set => mATK = value;
         }
 
-        float pDEF;
-        public float PDEF
-        {
-            get => Fraction(pDEF * Rates[BuffRateName.pDEFRate]);
-            private set => pDEF = value;
-        }
+        Dictionary<AttackAttribution, float> pDEF;
+        public float PDEF(AttackAttribution attr)
+            => Fraction(pDEF[attr] * Rates[BuffRateName.pDEFRate]);
 
-        float mDEF;
-        public float MDEF
-        {
-            get => Fraction(mDEF * Rates[BuffRateName.mDEFRate]);
-            private set => mDEF = value;
-        }
+        Dictionary<AttackAttribution, float> mDEF;
+        public float MDEF(AttackAttribution attr)
+            => Fraction(mDEF[attr] * Rates[BuffRateName.mDEFRate]);
 
         public Battle.EquipSet Equips
         {
@@ -193,6 +187,8 @@ namespace Soleil
             HP = 0;
             MP = 0;
 
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
             Equips = new Battle.EquipSet();
             SetParams();
         }
@@ -204,23 +200,22 @@ namespace Soleil
             MP = AScore.MPMAX;
             InitialWP = _WP;
             Rates = new BuffRate();
-
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
             Equips = equips ?? new Battle.EquipSet();
             SetParams();
         }
 
         void SetParams()
         {
-            PATK = 1f;
-            MATK = 1f;
-            PDEF = 1f;
-            MDEF = 1f;
-
-            //式これで良い？
-            PATK += Equips.GetAttack(Skill.AttackType.Physical);
-            PDEF += Equips.GetDef(AttackAttribution.Beat, Skill.AttackType.Physical);
-            MATK += Equips.GetAttack(Skill.AttackType.Magical);
-            MDEF += Equips.GetDef(AttackAttribution.Beat, Skill.AttackType.Magical);
+            PATK = Equips.GetAttack(Skill.AttackType.Physical);
+            foreach (AttackAttribution attr in Enum.GetValues(typeof(AttackAttribution)))
+            {
+                if (attr == AttackAttribution.size) continue;
+                pDEF[attr] = Equips.GetDef(attr, Skill.AttackType.Physical);
+                mDEF[attr] = Equips.GetDef(attr, Skill.AttackType.Magical);
+            }
+            MATK = Equips.GetAttack(Skill.AttackType.Magical);
         }
 
 
