@@ -12,7 +12,7 @@ namespace Soleil.Menu
         ItemTargetSelect itemTargetSelect;
         ItemList itemList;
         public ItemMenu(MenuComponent parent, MenuDescription desc)
-            :base(parent, desc)
+            : base(parent, desc)
         {
             itemList = PlayerBaggage.GetInstance().Items;
             itemList.AddListener(this);
@@ -64,14 +64,16 @@ namespace Soleil.Menu
                 if (item.Target == ItemTarget.Nothing)
                 {
                     Console.WriteLine("Event発生など");
-                }else if (item.Target == ItemTarget.OneAlly)
+                }
+                else if (item.Target == ItemTarget.OneAlly)
                 {
                     // inputをstatusに渡す．
                     itemTargetSelect.Call();
                     itemTargetSelect.SetWillUsedItem(id, itemList);
                     IsActive = false;
                     Quit();
-                }else if (item.Target == ItemTarget.AllAlly)
+                }
+                else if (item.Target == ItemTarget.AllAlly)
                 {
                     // inputをstatusに渡す．
                     Console.WriteLine("味方全員を対象");

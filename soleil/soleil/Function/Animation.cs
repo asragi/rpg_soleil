@@ -15,12 +15,12 @@ namespace Soleil
         //readonly AnimationID ID;
         readonly Texture2D texture;
         readonly int xNum, yNum, sheetNum;
-        bool isEnd=false;
+        bool isEnd = false;
         int x, y;
 
         //interval frames pass and animation sheet steps.
         int interval = 1;
-        int frame=0;
+        int frame = 0;
 
         //the viewing sheet of graph.
         int sheets;
@@ -113,7 +113,7 @@ namespace Soleil
         public void End()
         {
             frame = interval * sheetNum;
-            Sheets = sheetNum-1;
+            Sheets = sheetNum - 1;
         }
         public bool IsEnd()
             => isEnd;
@@ -138,13 +138,13 @@ namespace Soleil
                 }
             }
         }
-        public void Draw(Drawing d, Vector2 pos, float size=1,float angle=0)
+        public void Draw(Drawing d, Vector2 pos, float size = 1, float angle = 0)
         {
             AnimationNext();
             if (flipHorizontally)
                 d.DrawFlipHorizontally(pos + position.YAxialInversion(), texture, new Rectangle(x * Width, y * Height, Width, Height), depth, size, angle);
             else
-                d.Draw(pos+position, texture, new Rectangle(x * Width, y * Height, Width, Height), depth, size, angle);
+                d.Draw(pos + position, texture, new Rectangle(x * Width, y * Height, Width, Height), depth, size, angle);
         }
         public void Draw(Drawing d, Vector2 pos, Color color, float size = 1, float angle = 0)
         {

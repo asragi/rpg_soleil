@@ -20,7 +20,7 @@ namespace Soleil.Event.Shop
         Image currency;
 
         public ShopPanel(ItemID id, int value, bool active, ShopItemList parent)
-            :base(id, ItemDataBase.Get(id).Name, parent, active)
+            : base(id, ItemDataBase.Get(id).Name, parent, active)
         {
             var font = FontID.CorpM;
             desc = ItemDataBase.Get(id).Description;
@@ -30,7 +30,7 @@ namespace Soleil.Event.Shop
             ValFont = font;
             currency = new Image(TextureID.Currency, LocalPos + parent.Pos, DepthID.Message, isStatic: true);
 
-            CurrencyPosDiff = new Vector( - Resources.GetFont(font).MeasureString(Price.ToString()).X - 20, 5);
+            CurrencyPosDiff = new Vector(-Resources.GetFont(font).MeasureString(Price.ToString()).X - 20, 5);
         }
 
         public override void Update()

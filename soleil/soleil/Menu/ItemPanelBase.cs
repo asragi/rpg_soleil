@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// <summary>
     /// アイテムに関する情報を取り扱うMenuPanel
     /// </summary>
-    abstract class ItemPanelBase :TextSelectablePanel
+    abstract class ItemPanelBase : TextSelectablePanel
     {
         public readonly ItemID ID;
         Image icon;

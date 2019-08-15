@@ -11,7 +11,7 @@ namespace Soleil
     /// <summary>
     /// カーソルを用いた選択を行う機能を持つウィンドウ
     /// </summary>
-    class SelectableWindow: VariableWindow
+    class SelectableWindow : VariableWindow
     {
         const int LineSpace = 35;
         string[] options;
@@ -59,7 +59,7 @@ namespace Soleil
         {
             if (decided) return;
             Index++;
-            if(Index > optionNum) Index = 0;
+            if (Index > optionNum) Index = 0;
         }
 
         public void Decide()
@@ -84,10 +84,10 @@ namespace Soleil
             {
                 texts[i].Draw(d);
             }
-            if(IsStatic)
+            if (IsStatic)
                 d.DrawStatic(Pos + new Vector(0, 20 + Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
             else
-                d.Draw(Pos + new Vector(0, 20+Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
+                d.Draw(Pos + new Vector(0, 20 + Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
         }
 
         /// <summary>

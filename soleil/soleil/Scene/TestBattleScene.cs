@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class TestBattleScene:Scene
+    class TestBattleScene : Scene
     {
         BattleField bf;
         public TestBattleScene(SceneManager sm, PersonParty party)

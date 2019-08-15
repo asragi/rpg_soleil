@@ -13,7 +13,7 @@ namespace Soleil.Menu
     /// <summary>
     /// 選ばれているものの詳細を表示するウィンドウ
     /// </summary>
-    class DetailWindow: MenuComponent
+    class DetailWindow : MenuComponent
     {
         public static readonly Vector EffectPos = new Vector(164, 11);
         public static readonly Vector Spacing = new Vector(0, 56);
@@ -45,7 +45,7 @@ namespace Soleil.Menu
         /// <summary>
         /// 装備品の性能を比較して表示するクラス
         /// </summary>
-        class EquipEffectImg: MenuComponent
+        class EquipEffectImg : MenuComponent
         {
             private static readonly DepthID Depth = DepthID.Message;
             private static readonly Vector EffectPos = new Vector(98, 20);

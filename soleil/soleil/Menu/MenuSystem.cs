@@ -87,7 +87,7 @@ namespace Soleil.Menu
         };
 
         public MenuSystem(PersonParty _party)
-            :base(null)
+            : base(null)
         {
             party = _party;
             Index = 0;
@@ -242,7 +242,7 @@ namespace Soleil.Menu
         {
             IsActive = false;
             var selected = (MenuName)Index;
-            if(selected == MenuName.Items)
+            if (selected == MenuName.Items)
             {
                 itemMenu.Call();
                 return;
@@ -268,7 +268,7 @@ namespace Soleil.Menu
                 IsActive = true; // debug
                 return;
             }
-            if(selected == MenuName.Save)
+            if (selected == MenuName.Save)
             {
                 // Save用ウィンドウ出現
                 SaveLoad.Save(party);
@@ -281,7 +281,7 @@ namespace Soleil.Menu
         {
             base.OnDisable();
             // Transition Images
-            for (int i = 0; i<menuItems.Length; i++)
+            for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].MoveToBack();
             }
@@ -291,7 +291,7 @@ namespace Soleil.Menu
         {
             base.OnEnable();
             // Transition Images
-            for (int i = 0; i<menuItems.Length; i++)
+            for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].MoveToDefault();
             }

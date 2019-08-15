@@ -13,10 +13,10 @@ namespace Soleil.Map
     {
         int adjustY;
         PlayerObject player;
-        public AdjustConstruct(TextureID tex, int adjustY,ObjectManager om)
+        public AdjustConstruct(TextureID tex, int adjustY, ObjectManager om)
             : this(Vector.Zero, tex, adjustY, om) { }
-        public AdjustConstruct(Vector _pos,TextureID tex,int _adjustY, ObjectManager om)
-            : base(_pos,tex,MapDepth.Adjust,om)
+        public AdjustConstruct(Vector _pos, TextureID tex, int _adjustY, ObjectManager om)
+            : base(_pos, tex, MapDepth.Adjust, om)
         {
             player = om.GetPlayer();
             adjustY = _adjustY;

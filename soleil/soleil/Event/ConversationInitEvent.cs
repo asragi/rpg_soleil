@@ -9,7 +9,7 @@ namespace Soleil.Event
     /// <summary>
     /// メッセージウィンドウを生成する.
     /// </summary>
-    class ConversationInitEvent: EventBase
+    class ConversationInitEvent : EventBase
     {
         ConversationWindow window;
         public ConversationInitEvent(ConversationSystem cs)

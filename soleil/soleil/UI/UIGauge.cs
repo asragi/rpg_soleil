@@ -12,7 +12,7 @@ namespace Soleil.UI
     /// <summary>
     /// 値によって伸び縮みするゲージ状UIのクラス
     /// </summary>
-    class UIGauge: MenuComponent
+    class UIGauge : MenuComponent
     {
         public Vector Pos { get; set; }
         bool isRightSideEnd;
@@ -62,7 +62,7 @@ namespace Soleil.UI
             bool centerBased;
 
             public BarBlock(Vector pos, Vector posdiff, Vector _size, DepthID depth)
-                :base(pos, posdiff, depth, false, true, 0)
+                : base(pos, posdiff, depth, false, true, 0)
             {
                 size = _size;
                 centerBased = false;

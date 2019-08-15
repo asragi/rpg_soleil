@@ -100,13 +100,13 @@ namespace Soleil
         }
         public override void Draw(Drawing sb)
         {
-            for(int i=0;i<size;i++)
-                sb.DrawText(Position + new Vector(80, i*30), Resources.GetFont(FontID.CorpM), choiceList[i], Color.White, DepthID.Message);
+            for (int i = 0; i < size; i++)
+                sb.DrawText(Position + new Vector(80, i * 30), Resources.GetFont(FontID.CorpM), choiceList[i], Color.White, DepthID.Message);
 
             sb.DrawBox(Position + new Vector(0, (int)selectCommand * 30), new Vector(5, 5), Color.White, DepthID.Message);
         }
 
-        int selectCommand=0;
+        int selectCommand = 0;
         public override int? Select()
         {
             if (KeyInput.GetKeyPush(Key.Down))

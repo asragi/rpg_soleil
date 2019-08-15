@@ -16,7 +16,7 @@ namespace Soleil.Map
             Vector pos, Vector size, WorldPointKey dest,
             PersonParty pp, ObjectManager om, BoxManager bm
             )
-            :base (name, pos, size, om, bm)
+            : base(name, pos, size, om, bm)
         {
             var wm = WindowManager.GetInstance();
             EventSequence.SetEventSet(
@@ -27,7 +27,7 @@ namespace Soleil.Map
                     new EventUnit[]{
                         new ToWorldMapEvent(pp, dest)
                     },
-                    new EventUnit[]{ }
+                    new EventUnit[] { }
                 ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player)

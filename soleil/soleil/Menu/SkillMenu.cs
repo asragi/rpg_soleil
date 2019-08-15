@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class SkillMenu: BasicMenu
+    class SkillMenu : BasicMenu
     {
         SkillHolder skillHolder;
         public SkillMenu(MenuComponent parent, MenuDescription desc)

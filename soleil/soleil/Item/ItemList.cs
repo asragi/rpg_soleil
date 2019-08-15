@@ -40,7 +40,7 @@ namespace Soleil.Item
         /// </summary>
         public bool Consume(ItemID id, int num = 1)
         {
-            if(itemPossessMap[id] >= num)
+            if (itemPossessMap[id] >= num)
             {
                 itemPossessMap[id] -= num;
                 Refresh();

@@ -20,7 +20,7 @@ namespace Soleil.Menu
         // ウィンドウ
         protected BasicMenu BasicMenu;
         public virtual Vector ItemNumPosDiff { get => new Vector(360, 0); }
-        
+
         protected bool IsSelected;
 
         public SelectablePanel(BasicMenu parent)
@@ -29,10 +29,10 @@ namespace Soleil.Menu
         }
 
         public virtual void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)
-        {}
+        { }
 
         public virtual void MoveTo(Vector target, int duration, Func<double, double, double, double, double> _easeFunc)
-        {}
+        { }
 
         public void SetSelectedAndFade(bool select)
         {
@@ -48,10 +48,10 @@ namespace Soleil.Menu
         }
 
         protected virtual void OnSelected()
-        {}
-        
+        { }
+
         protected virtual void OnUnselected()
-        {}
+        { }
 
         public abstract void Update();
         public abstract void Draw(Drawing d);

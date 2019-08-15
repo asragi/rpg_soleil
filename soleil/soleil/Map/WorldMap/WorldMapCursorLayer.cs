@@ -27,7 +27,7 @@ namespace Soleil.Map.WorldMap
         public void Move(Direction inputDir)
         {
             if (inputDir == Direction.N) return;
-            Vector cursorPosUpd = cursor.Pos + new Vector(- speed, 0).Rotate(inputDir.Angle());
+            Vector cursorPosUpd = cursor.Pos + new Vector(-speed, 0).Rotate(inputDir.Angle());
             cursor.Pos = Vector.Clamp(cursorPosUpd, WorldMap.WorldMapSize, Vector.Zero);
             speed = Speed;
             var updatePos = UpdateCameraPos(cursor.Pos, camera.GetPosition(), LimitDistance);
@@ -41,7 +41,7 @@ namespace Soleil.Map.WorldMap
                     ModifyValue(diff.Y, Game1.VirtualWindowSizeY, limitDistance)
                     );
                 return new Vector(
-                    MathEx.Clamp(cameraPosUpd.X, WorldMap.WorldMapSize.X - Game1.VirtualWindowSizeX, 0), 
+                    MathEx.Clamp(cameraPosUpd.X, WorldMap.WorldMapSize.X - Game1.VirtualWindowSizeX, 0),
                     MathEx.Clamp(cameraPosUpd.Y, WorldMap.WorldMapSize.Y - Game1.VirtualWindowSizeY, 0));
 
                 double ModifyValue(double x, int windowSize, int limitDist)

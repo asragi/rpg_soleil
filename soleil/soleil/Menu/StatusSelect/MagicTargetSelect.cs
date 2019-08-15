@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class MagicTargetSelect: StatusTargetSelectBase
+    class MagicTargetSelect : StatusTargetSelectBase
     {
         MagicMenu magicMenu;
         public MagicTargetSelect(MagicMenu mg)

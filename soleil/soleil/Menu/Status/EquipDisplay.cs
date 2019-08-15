@@ -152,7 +152,7 @@ namespace Soleil.Menu.Status
                 icons[i].Color = (i == index) ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
             }
         }
-        
+
         private void Reset()
         {
             index = 0;
