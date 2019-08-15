@@ -95,7 +95,7 @@ namespace Soleil
     /// <summary>
     /// 戦闘中におけるcharaの状態
     /// </summary>
-    public class CharacterStatus
+    class CharacterStatus
     {
         public AbilityScore AScore;
         public BuffRate Rates;
@@ -148,18 +148,17 @@ namespace Soleil
             private set => mATK = value;
         }
 
-        float pDEF;
-        public float PDEF
-        {
-            get => Fraction(pDEF * Rates[BuffRateName.pDEFRate]);
-            private set => pDEF = value;
-        }
+        Dictionary<AttackAttribution, float> pDEF;
+        public float PDEF(AttackAttribution attr)
+            => Fraction(pDEF[attr] * Rates[BuffRateName.pDEFRate]);
 
-        float mDEF;
-        public float MDEF
+        Dictionary<AttackAttribution, float> mDEF;
+        public float MDEF(AttackAttribution attr)
+            => Fraction(mDEF[attr] * Rates[BuffRateName.mDEFRate]);
+
+        public Battle.EquipSet Equips
         {
-            get => Fraction(mDEF * Rates[BuffRateName.mDEFRate]);
-            private set => mDEF = value;
+            get; set;
         }
 
         public int InitialWP = 10000;
@@ -188,34 +187,37 @@ namespace Soleil
             HP = 0;
             MP = 0;
 
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
+            Equips = new Battle.EquipSet();
             SetParams();
         }
 
-        public CharacterStatus(AbilityScore aScore, int _WP)
+        public CharacterStatus(AbilityScore aScore, int _WP, Battle.EquipSet equips = null)
         {
             AScore = aScore;
             HP = AScore.HPMAX;
             MP = AScore.MPMAX;
             InitialWP = _WP;
             Rates = new BuffRate();
-
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
+            Equips = equips ?? new Battle.EquipSet();
             SetParams();
         }
 
         void SetParams()
         {
-            //TODO: 所有武器でmATK等をセットする
-            PATK = 1f;
-            MATK = 1f;
-            PDEF = 1f;
-            MATK = 1f;
+            PATK = Equips.GetAttack(Skill.AttackType.Physical);
+            foreach (AttackAttribution attr in Enum.GetValues(typeof(AttackAttribution)))
+            {
+                if (attr == AttackAttribution.size) continue;
+                pDEF[attr] = Equips.GetDef(attr, Skill.AttackType.Physical);
+                mDEF[attr] = Equips.GetDef(attr, Skill.AttackType.Magical);
+            }
+            MATK = Equips.GetAttack(Skill.AttackType.Magical);
         }
 
-        //TODO
-        public void GetEquipments()
-        {
-
-        }
 
         public void GetSkills()
         {

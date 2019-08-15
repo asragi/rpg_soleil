@@ -72,8 +72,11 @@ namespace Soleil.Item
 
         public int GetDefVal(AttackAttribution attr, AttackType t)
         {
-            if (t == AttackType.Physical) return Physical + PhysicalAttr.Values[(int)attr];
-            return Magical + MagicalAttr.Values[(int)attr];
+            int baseVal = (t == AttackType.Physical) ? Physical : Magical;
+            int attrVal = 0;
+            if (attr != AttackAttribution.None)
+                attrVal = (t == AttackType.Physical) ? PhysicalAttr.Values[(int)attr] : MagicalAttr.Values[(int)attr];
+            return baseVal + attrVal;
         }
     }
 
