@@ -271,6 +271,7 @@
     <Compile Include="Skill\MagicLv.cs" />
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
+    <Compile Include="Skill\SkillEffectData.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
     <Compile Include="Skill\SkillLearn.cs" />
     <Compile Include="Title\ExitTransition.cs" />

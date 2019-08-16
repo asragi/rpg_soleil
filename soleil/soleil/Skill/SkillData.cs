@@ -29,6 +29,16 @@ namespace Soleil.Skill
         Other,
     }
 
+    /// <summary>
+    /// 魔法をかける対象
+    /// </summary>
+    enum MagicTarget
+    {
+        OneAlly,
+        AllAlly,
+        Nothing,
+    }
+
     interface ISkill
     {
         SkillID ID { get; }
@@ -51,12 +61,14 @@ namespace Soleil.Skill
         public string Description { get; }
         public int Cost { get; }
 
+        public MagicTarget Target{ get; }
+
         public MagicData(
             string name, SkillID id, MagicCategory category, string desc, int cost,
-            bool onMenu = false, bool onBattle = true)
+            bool onMenu = false, bool onBattle = true, MagicTarget target = MagicTarget.OneAlly)
         {
-            (ID, Category, OnMenu, OnBattle, Name, Description, Cost) =
-                (id, category, onMenu, onBattle, name, desc, cost);
+            (ID, Category, OnMenu, OnBattle, Name, Description, Cost, Target) =
+                (id, category, onMenu, onBattle, name, desc, cost, target);
             AttackType = AttackType.Magical;
         }
     }

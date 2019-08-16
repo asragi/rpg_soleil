@@ -16,6 +16,9 @@ namespace Soleil.Menu
         const int IconXInitial = 50;
         const int IconXEnd = 360;
         MagicIcon[] icons;
+        MagicTargetSelect magicTargetSelect;
+        //今誰の魔法を選ぼうとしているのか(MagicTargetSelectに渡したい)
+        Person currentSelect;
         public MagicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
@@ -90,7 +93,7 @@ namespace Soleil.Menu
                 if (data.Category != categoryToDisplay) continue;
                 if (holder.HasSkill(id))
                 {
-                    magList.Add(new MagicMenuPanel(data, this));
+                    magList.Add(new MagicMenuPanel(data, this,id));
                 }
             }
             return magList.ToArray();
@@ -99,6 +102,7 @@ namespace Soleil.Menu
         public void CallWithPerson(Person p)
         {
             holder = p.Skill;
+            currentSelect = p;
             Index = 0;
             SetIcons();
             categoryToDisplay = DecideInitialPosition(holder);
@@ -133,6 +137,37 @@ namespace Soleil.Menu
                 if (sh.HasCategory(c)) return c;
             }
             return 0;
+        }
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            var nowPanel = (MagicMenuPanel)Panels[Index];
+            magicEffect(nowPanel.ID);
+
+            void magicEffect(SkillID id)
+            {
+                var temp = (MagicData)SkillDataBase.Get(id);
+                if (!temp.OnMenu) return;
+                if(temp.Target == MagicTarget.Nothing)
+                {
+                    Console.WriteLine("Event発生など");
+                }
+                else if (temp.Target == MagicTarget.OneAlly)
+                {
+                    magicTargetSelect.Call();
+                    magicTargetSelect.SetWillUsedSkill(id,currentSelect);
+                    IsActive = false;
+                    Quit();
+                }else if(temp.Target == MagicTarget.AllAlly)
+                {
+                    Console.WriteLine("味方全員を対象")
+                }
+            }
+        }
+        public void SetRefs(MagicTargetSelect mg,StatusMenu sm)
+        {
+            magicTargetSelect = mg;
+            magicTargetSelect.SetRefs(sm);
         }
     }
 }
