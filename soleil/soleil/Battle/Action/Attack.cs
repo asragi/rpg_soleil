@@ -108,7 +108,7 @@ namespace Soleil.Battle
                     ocrs.Add(new Occurence(p.ToString() + "はやられた"));
                     return ocrs;
                 },
-                10001)));
+                9999)));
 
             var ocr = AggregateConditionEffects(ceffects);
             return ocr;
