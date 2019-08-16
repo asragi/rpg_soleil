@@ -145,6 +145,7 @@ namespace Soleil
         Magistol4_wall,
         Magistol4_plant,
 
+        WorldMap,
         WorldMapIcon,
         WorldMapCursor,
 
@@ -377,6 +378,7 @@ namespace Soleil
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMap, "Map/WorldMap/worldmap");
             SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
             SetPath(TextureID.WorldMapCursor, "Map/WorldMap/cursor");
             #endregion
