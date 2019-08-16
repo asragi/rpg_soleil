@@ -52,13 +52,13 @@ namespace Soleil.Battle
                         case Range.OneEnemy aRange:
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒している"));
                             }
                             else
                             {
                                 BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
+                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
+                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
                                 mes += "バフを与えた";
                                 ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
                             }
@@ -66,13 +66,13 @@ namespace Soleil.Battle
                         case Range.Ally aRange:
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒されている"));
+                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒されている"));
                             }
                             else
                             {
                                 BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
+                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
+                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
                                 mes += "バフを与えた";
                                 ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
                             }
@@ -80,12 +80,12 @@ namespace Soleil.Battle
                         case Range.Me me:
                             if (BF.GetCharacter(me.SourceIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(me.SourceIndex.ToString() + "は既に死んでいる"));
+                                ocrs.Add(new Occurence(BF.GetCharacter(me.SourceIndex).Name + "は既に死んでいる"));
                             }
                             else
                             {
                                 BF.GetCharacter(me.SourceIndex).Buff(BRate);
-                                string mes = me.SourceIndex.ToString() + "は";
+                                string mes = BF.GetCharacter(me.SourceIndex).Name + "は";
                                 var cmp = BRate.Comp();
                                 if (cmp == 1)
                                     mes += "能力が上がった";

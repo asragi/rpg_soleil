@@ -61,14 +61,14 @@ namespace Soleil.Battle
                             //Todo: actから参照する
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒している"));
                                 return ocrs;
                             }
                             else if (!HasDamage)
                             {
                                 //効果はないor消されたパターン
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
+                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
+                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
                                 mes += 0.ToString() + " ダメージを与えた";
                                 ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
                             }
@@ -76,8 +76,8 @@ namespace Soleil.Battle
                             {
                                 BF.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
 
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
+                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
+                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
                                 mes += (Damage).ToString() + " ダメージを与えた";
                                 ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
                             }

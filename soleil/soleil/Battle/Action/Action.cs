@@ -52,12 +52,12 @@ namespace Soleil.Battle
                     if (HasSufficientMP)
                     {
                         BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "のターン！";
+                        string mes = BF.GetCharacter(act.ARange.SourceIndex).Name + "のターン！";
                         ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
                     }
                     else
                     {
-                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
+                        ocrs.Add(new Occurence(BF.GetCharacter(act.ARange.SourceIndex).Name + "はMPが不足している"));
                     }
                     return ocrs;
                 }, 100000));

@@ -9,6 +9,7 @@ namespace Soleil.Battle
     class Character
     {
         public CharacterStatus Status;
+        public string Name { get; protected set; }
         protected List<Turn> turns;
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected CommandSelect commandSelect;

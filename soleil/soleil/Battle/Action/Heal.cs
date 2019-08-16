@@ -72,7 +72,7 @@ namespace Soleil.Battle
                             //Todo: actから参照する
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
-                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒されている"));
+                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒されている"));
                                 return ocrs;
                             }
                             else
@@ -80,8 +80,8 @@ namespace Soleil.Battle
 
                                 BF.GetCharacter(aRange.TargetIndex).Heal(HP: RecoverHP, MP: RecoverMP);
 
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "の";
+                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
+                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "の";
                                 mes += "HPを" + (RecoverHP).ToString() + ", MPを" + (RecoverMP).ToString() + " 回復した";
                                 ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: -RecoverHP, MPDmg: -RecoverMP));
                             }

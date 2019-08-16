@@ -15,6 +15,7 @@ namespace Soleil.Battle
             var skills = GetSkillIDs(person.Skill);
             //magics.Add(SkillID.WarmHeal); //Debug
             Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
+            Name = Enum.GetName(typeof(Misc.CharaName), person.Name);
             commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
         }
 
