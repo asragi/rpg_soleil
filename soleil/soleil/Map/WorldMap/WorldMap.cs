@@ -33,13 +33,13 @@ namespace Soleil.Map.WorldMap
                 Set(WorldPointKey.Earthband, new Vector(873, 716), result, _bm);
                 Set(WorldPointKey.AisenBerz, new Vector(1923, 1237), result, _bm);
 
-                SetEdge(WorldPointKey.Flare, WorldPointKey.Magistol, 2, result);
-                SetEdge(WorldPointKey.Flare, WorldPointKey.Parel, 2, result);
-                SetEdge(WorldPointKey.Flare, WorldPointKey.Earthband, 6, result);
-                SetEdge(WorldPointKey.Somnia, WorldPointKey.Magistol, 4, result);
+                SetEdge(WorldPointKey.Flare, WorldPointKey.Somnia, 4, result);
+                SetEdge(WorldPointKey.Flare, WorldPointKey.Magistol, 3, result);
+                SetEdge(WorldPointKey.Flare, WorldPointKey.Parel, 3, result);
+                SetEdge(WorldPointKey.Flare, WorldPointKey.AisenBerz, 9, result);
                 SetEdge(WorldPointKey.Somnia, WorldPointKey.Shimaki, 8, result);
                 SetEdge(WorldPointKey.Magistol, WorldPointKey.Parel, 3, result);
-                SetEdge(WorldPointKey.Parel, WorldPointKey.AisenBerz, 7, result);
+                SetEdge(WorldPointKey.Parel, WorldPointKey.Earthband, 7, result);
                 return result;
 
                 void Set(WorldPointKey key, Vector pos, WorldPoint[] array, BoxManager bm)
