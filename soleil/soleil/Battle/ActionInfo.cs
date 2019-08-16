@@ -8,8 +8,7 @@ namespace Soleil.Battle
     /// <summary>
     /// 行動のデータベース
     /// </summary>
-    /// AttackじゃなくてActionInfoじゃね？
-    static class AttackInfo
+    static class ActionInfo
     {
         static readonly List<Action> actions;
         static readonly List<string> actionString;
@@ -31,7 +30,7 @@ namespace Soleil.Battle
         {
             return (int)x;
         }
-        static AttackInfo()
+        static ActionInfo()
         {
             physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(AttackAttribution.None/*とりあえず*/) * 2) / 400 * Revision(); };
             magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(AttackAttribution.None) * 2) / 400) * Revision(); };
