@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     public enum BuffRateName
     {

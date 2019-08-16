@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using static System.Math;
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// 行動のデータベース
