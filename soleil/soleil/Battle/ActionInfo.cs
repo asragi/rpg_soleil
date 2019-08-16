@@ -37,8 +37,8 @@ namespace Soleil.Battle
             magicalAttack = (a, b, force, attr) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(attr) * 2) / 400) * Revision(); };
 
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
-            attackTable[SkillID.PointFlare] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.Fever); };
-            attackTable[SkillID.HeatWave] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.Fever); };
+            attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
+            attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
             attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
