@@ -11,7 +11,10 @@ namespace Soleil.Battle
     {
         public PlayableCharacter(int index, AbilityScore aScore, Person person) : base(index)
         {
-            Status = new CharacterStatus(aScore, 10000, GetMagicIDs(person.Skill), GetSkillIDs(person.Skill), person.Equip);
+            var magics = GetMagicIDs(person.Skill);
+            var skills = GetSkillIDs(person.Skill);
+            //magics.Add(SkillID.WarmHeal); //Debug
+            Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
             commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
         }
 

@@ -15,7 +15,7 @@ namespace Soleil.Battle
         protected BuffFunc BFunc;
         public Buff(BuffFunc bFunc, Range.AttackRange aRange, int mp = 0) : base(aRange, mp) => BFunc = bFunc;
 
-        public Buff GenerateAttack(Range.AttackRange aRange)
+        public Buff GenerateBuff(Range.AttackRange aRange)
         {
             var tmp = (Buff)MemberwiseClone();
             tmp.ARange = aRange;
@@ -35,11 +35,13 @@ namespace Soleil.Battle
                 case Range.Me aRange:
                     BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
                     break;
+                case Range.Ally aRange:
+                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
+                    break;
             }
 
 
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
+            cEffects.Add(new ConditionedEffect(
                 (act) => HasSufficientMP,
                 (act, ocrs) =>
                 {
@@ -49,6 +51,20 @@ namespace Soleil.Battle
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                            }
+                            else
+                            {
+                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
+                                string mes = aRange.SourceIndex.ToString() + "が";
+                                mes += aRange.TargetIndex.ToString() + "に";
+                                mes += "バフを与えた";
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
+                            }
+                            return ocrs;
+                        case Range.Ally aRange:
+                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            {
+                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒されている"));
                             }
                             else
                             {
