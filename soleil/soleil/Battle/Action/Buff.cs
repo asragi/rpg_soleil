@@ -23,8 +23,10 @@ namespace Soleil.Battle
         }
 
         public BuffRate BRate;
-        public override List<Occurence> Act()
+        public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
+            cEffects = base.CollectConditionedEffects(cEffects);
+
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
@@ -38,21 +40,9 @@ namespace Soleil.Battle
 
             var ceffects = new List<ConditionedEffect>();
             ceffects.Add(new ConditionedEffect(
-                (act) => true,
+                (act) => HasSufficientMP,
                 (act, ocrs) =>
                 {
-                    //MP消費
-                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
-                    {
-                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
-                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
-                    }
-                    else
-                    {
-                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
-                        return ocrs;
-                    }
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
@@ -94,9 +84,7 @@ namespace Soleil.Battle
                 },
                 10000));
 
-
-            var ocr = AggregateConditionEffects(ceffects);
-            return ocr;
+            return cEffects;
         }
     }
 }

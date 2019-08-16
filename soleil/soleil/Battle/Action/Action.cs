@@ -24,8 +24,35 @@ namespace Soleil.Battle
             MP = mp;
         }
 
-        public abstract List<Occurence> Act();
         protected static readonly BattleField BF = BattleField.GetInstance();
+
+        protected bool HasSufficientMP;
+        public List<Occurence> Act() => AggregateConditionEffects(CollectConditionedEffects(new List<ConditionedEffect>()));
+        public virtual List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
+        {
+            //MP消費
+            cEffects.Add(new ConditionedEffect(
+                (act) => true,
+                (act, ocrs) =>
+                {
+                    HasSufficientMP = MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP;
+                    if (HasSufficientMP)
+                    {
+                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
+                        string mes = act.ARange.SourceIndex.ToString() + "のターン！";
+                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
+                    }
+                    else
+                    {
+                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
+                    }
+                    return ocrs;
+                }, 20000));
+
+
+            return cEffects;
+        }
+
 
 
         public List<Occurence> AggregateConditionEffects(IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)

@@ -97,6 +97,15 @@ namespace Soleil.Battle
 
             CEffects = new SortedSet<ConditionedEffect>();
 
+            Enumerable.Range(0, charaIndex).ForEach2(p => CEffects.Add(new ConditionedEffectOnce(
+                (act) => GetCharacter(p).Status.Dead,
+                (act, ocrs) =>
+                {
+                    RemoveCharacter(p);
+                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
+                    return ocrs;
+                },
+                5000)));
 
         }
 
