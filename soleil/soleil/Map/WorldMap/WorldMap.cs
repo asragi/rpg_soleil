@@ -11,12 +11,14 @@ namespace Soleil.Map.WorldMap
         public readonly static Vector WorldMapSize = new Vector(1920, 1080);
         WorldPoint[] points;
         WorldMapPlayerIcon playerIcon;
+        Image worldmap;
 
         public WorldMap(WorldPointKey initialPosition, BoxManager _boxManager)
         {
             points = MakePoints(_boxManager);
             SetPlayerPosition(initialPosition);
             playerIcon = new WorldMapPlayerIcon(GetPlayerPoint());
+            worldmap = new Image(TextureID.WorldMap, Vector.Zero, DepthID.BackGround, isStatic: false, alpha: 1);
 
             WorldPoint[] MakePoints(BoxManager _bm)
             {
@@ -74,12 +76,14 @@ namespace Soleil.Map.WorldMap
 
         public void Update()
         {
+            worldmap.Update();
             playerIcon.Update();
         }
 
         public void Draw(Drawing d)
         {
             playerIcon.Draw(d);
+            worldmap.Draw(d);
             points.ForEach2(p => p?.Draw(d));
         }
     }
