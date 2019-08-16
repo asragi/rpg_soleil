@@ -137,6 +137,7 @@ namespace Soleil.Menu
             magicUserSelect.SetRefs(statusMenu);
             magicTargetSelect.SetRefs(statusMenu);
             skillUserSelect.SetRefs(statusMenu);
+            magicMenu.SetRefs(magicTargetSelect, statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
