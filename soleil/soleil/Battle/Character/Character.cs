@@ -30,6 +30,11 @@ namespace Soleil.Battle
             Status.HP -= HP;
             Status.MP -= MP;
         }
+        public void Heal(int HP = 0, int MP = 0)
+        {
+            Status.HP += HP;
+            Status.MP += MP;
+        }
         public void Buff(BuffRate rate)
         {
             Status.Rates = rate;

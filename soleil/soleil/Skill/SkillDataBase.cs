@@ -124,6 +124,11 @@ namespace Soleil.Skill
             // skill
             SetSkill("ヘッドバット", SkillID.Headbutt, "敵単体に打属性のダメージ．確率で気絶．", 12);
             SetSkill("集中砲火", SkillID.Barrage, "敵単体に突属性のダメージ．", 15);
+
+
+            SetMagic("はたく", SkillID.NormalAttack, MagicCategory.None, "敵単体に無属性の物理攻撃．", 0);
+            SetMagic("ショット", SkillID.NormalMagic, MagicCategory.None, "敵単体に無属性の魔法攻撃．", 0);
+            SetSkill("なきごえ", SkillID.ExampleDebuff, "敵単体に攻撃力低下．", 15);
         }
 
         static void SetSkill(string name, SkillID id, string desc, int cost, bool onMenu = false, bool onBattle = true)
