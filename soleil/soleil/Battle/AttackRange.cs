@@ -103,4 +103,17 @@ namespace Soleil.Range
 
         public override bool ContainRange(int index, BattleField bf) => true;
     }
+
+    /// <summary>
+    /// 効果範囲:敵味方全員(自分以外)
+    /// </summary>
+    class ForOthers : AttackRange
+    {
+        public ForOthers(int sourceIndex) : base(sourceIndex) { }
+
+        static ForOthers singleton = new ForOthers(-1);
+        public static AttackRange GetInstance() => singleton;
+
+        public override bool ContainRange(int index, BattleField bf) => index != SourceIndex;
+    }
 }
