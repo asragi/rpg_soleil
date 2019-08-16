@@ -22,9 +22,7 @@ namespace Soleil.Skill
             #region SKILLDATA
             if (id == SkillID.MagicalHeal)
             {
-                person.RecoverHP(60);
-                commander.RecoverMP(-10);
-                return true;
+                return JohnDoe.Recover(commander, person, 60, 20);
             }
             return false;
             #endregion
