@@ -25,13 +25,13 @@ namespace Soleil.Map.WorldMap
             WorldPoint[] MakePoints(BoxManager _bm)
             {
                 var result = new WorldPoint[(int)WorldPointKey.size];
-                Set(WorldPointKey.Flare, new Vector(400, 300), result, _bm);
-                Set(WorldPointKey.Somnia, new Vector(800, 250), result, _bm);
-                Set(WorldPointKey.Magistol, new Vector(450, 200), result, _bm);
-                Set(WorldPointKey.Parel, new Vector(500, 320), result, _bm);
-                Set(WorldPointKey.Shimaki, new Vector(800, 100), result, _bm);
-                Set(WorldPointKey.Earthband, new Vector(100, 100), result, _bm);
-                Set(WorldPointKey.AisenBerz, new Vector(850, 500), result, _bm);
+                Set(WorldPointKey.Flare, new Vector(1703, 1036), result, _bm);
+                Set(WorldPointKey.Somnia, new Vector(1786, 722), result, _bm);
+                Set(WorldPointKey.Magistol, new Vector(1428, 753), result, _bm);
+                Set(WorldPointKey.Parel, new Vector(1182, 923), result, _bm);
+                Set(WorldPointKey.Shimaki, new Vector(1865, 535), result, _bm);
+                Set(WorldPointKey.Earthband, new Vector(873, 716), result, _bm);
+                Set(WorldPointKey.AisenBerz, new Vector(1923, 1237), result, _bm);
 
                 SetEdge(WorldPointKey.Flare, WorldPointKey.Magistol, 2, result);
                 SetEdge(WorldPointKey.Flare, WorldPointKey.Parel, 2, result);
