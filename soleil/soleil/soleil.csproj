@@ -45,6 +45,7 @@
     <Compile Include="Battle\AbilityScore.cs" />
     <Compile Include="Battle\Action\Action.cs" />
     <Compile Include="Battle\Action\Attack.cs" />
+    <Compile Include="Battle\Action\AttackAttribution.cs" />
     <Compile Include="Battle\Action\Buff.cs" />
     <Compile Include="Battle\ActionInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
