@@ -43,8 +43,10 @@ namespace Soleil.Battle
             get { return (int)RecoverMPf; }
         }
 
-        public override List<Occurence> Act()
+        public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
+            cEffects = base.CollectConditionedEffects(cEffects);
+
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
@@ -52,23 +54,10 @@ namespace Soleil.Battle
                     break;
             }
 
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
-                (act) => true,
+            cEffects.Add(new ConditionedEffect(
+                (act) => HasSufficientMP,
                 (act, ocrs) =>
                 {
-                    //MP消費
-                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
-                    {
-                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "のターン！";
-                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
-                    }
-                    else
-                    {
-                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
-                        return ocrs;
-                    }
                     switch (act.ARange)
                     {
                         case Range.Ally aRange:
@@ -94,8 +83,7 @@ namespace Soleil.Battle
                 },
                 10000));
 
-            var ocr = AggregateConditionEffects(ceffects);
-            return ocr;
+            return cEffects;
         }
     }
 }
