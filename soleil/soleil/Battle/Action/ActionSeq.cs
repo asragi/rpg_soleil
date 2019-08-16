@@ -19,23 +19,11 @@ namespace Soleil.Battle
         public ActionSeq(List<Action> actions, Range.AttackRange aRange, int mp = 0)
             : base(aRange, mp) => Actions = actions;
 
-        public ActionSeq GenerateActionSeq(Range.AttackRange aRange)
+        public override Action Generate(Range.AttackRange aRange)
         {
             var tmp = (ActionSeq)MemberwiseClone();
             tmp.ARange = aRange;
-            tmp.Actions = tmp.Actions.Select<Action, Action>(act =>
-            {
-                switch (act)
-                {
-                    case Attack atk:
-                        return atk.GenerateAttack(aRange);
-                    case Buff buf:
-                        return buf.GenerateBuff(aRange);
-                    case Heal heal:
-                        return heal.GenerateHeal(aRange);
-                }
-                throw new Exception("not implemented");
-            }).ToList();
+            tmp.Actions = tmp.Actions.Select<Action, Action>(act => act.Generate(aRange)).ToList();
             return tmp;
         }
 

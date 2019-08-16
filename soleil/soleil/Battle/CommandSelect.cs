@@ -31,7 +31,7 @@ namespace Soleil.Battle
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
+            EnqueueTurn((ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
@@ -78,7 +78,8 @@ namespace Soleil.Battle
                 case CommandEnum.Skill:
                     {
                         genAkt = ActionInfo.GetAction(commandSelect.Select.AName);
-                        //action = genAkt.Generate(commandSelect.Select.ARange);
+                        action = genAkt.Generate(commandSelect.Select.ARange);
+                        /*
                         switch (genAkt)
                         {
                             case Attack atk:
@@ -96,6 +97,7 @@ namespace Soleil.Battle
                             default:
                                 throw new Exception("not implemented");
                         }
+                        */
                         EnqueueTurn(action, turn);
                         return true;
                     }
@@ -114,7 +116,7 @@ namespace Soleil.Battle
                         ));
                     return true;
                 case CommandEnum.Escape:
-                    action = ((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                    action = (ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
                     EnqueueTurn(action, turn);
                     return true;
             }

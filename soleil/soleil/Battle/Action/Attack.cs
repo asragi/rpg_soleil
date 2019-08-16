@@ -25,12 +25,14 @@ namespace Soleil.Battle
             MField = mField;
         }
 
+        /*
         public Attack GenerateAttack(Range.AttackRange aRange)
         {
             var tmp = (Attack)MemberwiseClone();
             tmp.ARange = aRange;
             return tmp;
         }
+        */
 
         public float DamageF;
         public bool HasDamage = false;

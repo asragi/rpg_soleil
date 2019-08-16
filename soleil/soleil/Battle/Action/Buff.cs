@@ -15,12 +15,14 @@ namespace Soleil.Battle
         protected BuffFunc BFunc;
         public Buff(BuffFunc bFunc, Range.AttackRange aRange, int mp = 0) : base(aRange, mp) => BFunc = bFunc;
 
+        /*
         public Buff GenerateBuff(Range.AttackRange aRange)
         {
             var tmp = (Buff)MemberwiseClone();
             tmp.ARange = aRange;
             return tmp;
         }
+        */
 
         public BuffRate BRate;
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)

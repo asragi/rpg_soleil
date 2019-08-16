@@ -27,12 +27,12 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected bool HasSufficientMP;
 
-        /*public virtual Action Generate(Range.AttackRange aRange)
+        public virtual Action Generate(Range.AttackRange aRange)
         {
             var tmp = (Action)MemberwiseClone();
             tmp.ARange = aRange;
             return tmp;
-        }*/
+        }
 
         public List<Occurence> Act() => AggregateConditionEffects(CollectConditionedEffects(new List<ConditionedEffect>()));
         public virtual List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
