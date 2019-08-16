@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     class Character
     {
@@ -29,6 +29,11 @@ namespace Soleil
         {
             Status.HP -= HP;
             Status.MP -= MP;
+        }
+        public void Heal(int HP = 0, int MP = 0)
+        {
+            Status.HP += HP;
+            Status.MP += MP;
         }
         public void Buff(BuffRate rate)
         {

@@ -45,7 +45,7 @@ namespace Soleil
 
             void Set(CharaName name, GrowthType[] growth,
                 AbilityScore init, AbilityScore last,
-                ItemID[] eq, int[] mgExp, SkillID[] sk)
+                ItemID[] eq, int[] mgExp, Skill.SkillID[] sk)
             {
                 Debug.Assert(eq.Length == 4);
                 Debug.Assert(mgExp.Length == 10);

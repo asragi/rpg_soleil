@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// 条件付きで戦闘中などに効果を発動するもの
@@ -76,6 +76,27 @@ namespace Soleil
             {
                 return BF.GetCharacter(charaIndex).Status.WP > expireTime;
             };
+        }
+    }
+
+
+    /// <summary>
+    /// 一度だけ発動する
+    /// </summary>
+    class ConditionedEffectOnce : ConditionedEffect
+    {
+        bool flag = false;
+        public ConditionedEffectOnce(Condition cond, AffectFunc affect, int priority_)
+            : base(cond, affect, priority_)
+        {
+            Cond = act => { flag = cond(act); return flag; };
+            disable = () => flag;
+        }
+        public ConditionedEffectOnce(Condition cond, AffectFunc affect, int priority_, Func<bool> isAvailable)
+            : base(cond, affect, priority_)
+        {
+            Cond = act => { flag = cond(act); return flag; };
+            disable = () => { return flag || isAvailable(); };
         }
     }
 }

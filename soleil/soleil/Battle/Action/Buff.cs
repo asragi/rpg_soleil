@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     using BuffFunc = Func<CharacterStatus, CharacterStatus, BuffRate>;
     /// <summary>
@@ -15,7 +15,7 @@ namespace Soleil
         protected BuffFunc BFunc;
         public Buff(BuffFunc bFunc, Range.AttackRange aRange, int mp = 0) : base(aRange, mp) => BFunc = bFunc;
 
-        public Buff GenerateAttack(Range.AttackRange aRange)
+        public Buff GenerateBuff(Range.AttackRange aRange)
         {
             var tmp = (Buff)MemberwiseClone();
             tmp.ARange = aRange;
@@ -23,8 +23,10 @@ namespace Soleil
         }
 
         public BuffRate BRate;
-        public override List<Occurence> Act()
+        public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
+            cEffects = base.CollectConditionedEffects(cEffects);
+
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
@@ -33,32 +35,36 @@ namespace Soleil
                 case Range.Me aRange:
                     BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
                     break;
+                case Range.Ally aRange:
+                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
+                    break;
             }
 
 
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
-                (act) => true,
+            cEffects.Add(new ConditionedEffect(
+                (act) => HasSufficientMP,
                 (act, ocrs) =>
                 {
-                    //MP消費
-                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
-                    {
-                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
-                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
-                    }
-                    else
-                    {
-                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
-                        return ocrs;
-                    }
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
                             if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
                             {
                                 ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
+                            }
+                            else
+                            {
+                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
+                                string mes = aRange.SourceIndex.ToString() + "が";
+                                mes += aRange.TargetIndex.ToString() + "に";
+                                mes += "バフを与えた";
+                                ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
+                            }
+                            return ocrs;
+                        case Range.Ally aRange:
+                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
+                            {
+                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒されている"));
                             }
                             else
                             {
@@ -94,9 +100,7 @@ namespace Soleil
                 },
                 10000));
 
-
-            var ocr = AggregateConditionEffects(ceffects);
-            return ocr;
+            return cEffects;
         }
     }
 }

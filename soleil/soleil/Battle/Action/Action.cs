@@ -5,24 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Soleil
+namespace Soleil.Battle
 {
-
-    enum ActionName
-    {
-        //Attack
-        NormalAttack,
-        ExampleMagic,
-
-        //Buff
-        Guard,
-        EndGuard,
-        ExampleDebuff,
-
-        Size,
-    }
-
-
     /// <summary>
     /// ターンでの行動の基底
     /// AttackとBuffの基底
@@ -40,8 +24,42 @@ namespace Soleil
             MP = mp;
         }
 
-        public abstract List<Occurence> Act();
         protected static readonly BattleField BF = BattleField.GetInstance();
+        protected bool HasSufficientMP;
+
+        /*public virtual Action Generate(Range.AttackRange aRange)
+        {
+            var tmp = (Action)MemberwiseClone();
+            tmp.ARange = aRange;
+            return tmp;
+        }*/
+
+        public List<Occurence> Act() => AggregateConditionEffects(CollectConditionedEffects(new List<ConditionedEffect>()));
+        public virtual List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
+        {
+            //MP消費
+            cEffects.Add(new ConditionedEffect(
+                (act) => true,
+                (act, ocrs) =>
+                {
+                    HasSufficientMP = MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP;
+                    if (HasSufficientMP)
+                    {
+                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
+                        string mes = act.ARange.SourceIndex.ToString() + "のターン！";
+                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
+                    }
+                    else
+                    {
+                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
+                    }
+                    return ocrs;
+                }, 100000));
+
+
+            return cEffects;
+        }
+
 
 
         public List<Occurence> AggregateConditionEffects(IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)

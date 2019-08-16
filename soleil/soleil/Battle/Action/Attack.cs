@@ -4,35 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     using AttackFunc = Func<CharacterStatus, CharacterStatus, float>;
-    enum AttackAttribution
-    {
-        None = -1,
-        Beat,
-        Cut,
-        Thrust,
-        Fever,
-        Ice,
-        Electro,
-        size,
-    }
-
-    static class ExtendAttackAttribution
-    {
-        static readonly Dictionary<AttackAttribution, String> dict = new Dictionary<AttackAttribution, string>
-        {
-            {AttackAttribution.Beat, "打撃"},
-            {AttackAttribution.Cut, "斬撃"},
-            {AttackAttribution.Thrust, "弾丸"},
-            {AttackAttribution.Fever, "熱"},
-            {AttackAttribution.Ice, "冷気"},
-            {AttackAttribution.Electro, "電撃"},
-        };
-
-        public static String Name(this AttackAttribution att) => dict[att];
-    }
 
     /// <summary>
     /// ターンでの攻撃行動
@@ -64,8 +38,9 @@ namespace Soleil
         {
             get { return (int)DamageF; }
         }
-        public override List<Occurence> Act()
+        public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
+            cEffects = base.CollectConditionedEffects(cEffects);
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
@@ -74,23 +49,10 @@ namespace Soleil
             }
             HasDamage = true;
 
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
-                (act) => true,
+            cEffects.Add(new ConditionedEffect(
+                (act) => HasSufficientMP,
                 (act, ocrs) =>
                 {
-                    //MP消費
-                    if (MP <= BF.GetCharacter(act.ARange.SourceIndex).Status.MP)
-                    {
-                        BF.GetCharacter(act.ARange.SourceIndex).Damage(MP: MP);
-                        string mes = act.ARange.SourceIndex.ToString() + "の攻撃！";
-                        ocrs.Add(new OccurenceAttackMotion(mes, act.ARange.SourceIndex, MPConsume_: MP));
-                    }
-                    else
-                    {
-                        ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
-                        return ocrs;
-                    }
                     switch (act.ARange)
                     {
                         case Range.OneEnemy aRange:
@@ -124,20 +86,8 @@ namespace Soleil
                 },
                 10000));
 
-            //もっと根幹に組み込むべき条件な気がする
-            var alives = BF.AliveIndexes();
-            alives.ForEach(p => ceffects.Add(new ConditionedEffect(
-                (act) => BF.GetCharacter(p).Status.Dead,
-                (act, ocrs) =>
-                {
-                    BF.RemoveCharacter(p);
-                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
-                    return ocrs;
-                },
-                10001)));
 
-            var ocr = AggregateConditionEffects(ceffects);
-            return ocr;
+            return cEffects;
         }
     }
 }
