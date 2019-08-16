@@ -86,6 +86,12 @@ namespace Soleil.Battle
                             case Buff buf:
                                 action = buf.GenerateAttack(commandSelect.Select.ARange);
                                 break;
+                            case Heal heal:
+                                action = heal.GenerateHeal(commandSelect.Select.ARange);
+                                break;
+                            case ActionSeq seq:
+                                action = seq.GenerateActionSeq(commandSelect.Select.ARange);
+                                break;
                             default:
                                 throw new Exception("not implemented");
                         }

@@ -61,6 +61,9 @@ namespace Soleil.Battle
                 return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
             };
 
+            healTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>>();
+            healTable[SkillID.MagicalHeal] = (a, _) => Tuple.Create<float, float>(45, 0);
+
             actions = new List<Action>();
             for (int i = 0; i < (int)SkillID.size; i++)
                 actions.Add(new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), mp: 0)); //ダミーをつめる
@@ -81,7 +84,10 @@ namespace Soleil.Battle
             SetMagic("クールダウン", SkillID.CoolDown, MagicCategory.Shade, "敵単体へ冷気属性ダメージ．確率で攻撃力低下．", 16);
             // magic
             SetMagic("サンダーボルト", SkillID.Thunder, MagicCategory.Magic, "敵単体へ電撃属性のダメージ．", 9);
-            SetMagic("マジカルヒール", SkillID.MagicalHeal, MagicCategory.Magic, "味方単体を中量回復．", 45, true);
+            */
+            actions[(int)SkillID.MagicalHeal] = new Heal(healTable[SkillID.MagicalHeal], Range.Ally.GetInstance(), mp: 45);
+
+            /*
             SetMagic("エクスプロード", SkillID.Explode, MagicCategory.Magic, "敵全体へ突属性のダメージ．", 73);
             // dark
             SetMagic("リーパー", SkillID.Reaper, MagicCategory.Dark, "敵単体へ斬属性のダメージ．確率で即死．", 13);
