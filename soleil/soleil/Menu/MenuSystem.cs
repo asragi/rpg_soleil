@@ -116,7 +116,7 @@ namespace Soleil.Menu
             statusMenu = new StatusMenu(_party, this);
             // Magic Menu
             magicUserSelect = new MagicUserSelect(this, menuDescription, Descriptions[(int)MenuName.Magic]);
-            magicMenu = new MagicMenu(magicUserSelect, menuDescription);
+            magicMenu = new MagicMenu(magicUserSelect, menuDescription, party);
             magicTargetSelect = new MagicTargetSelect(magicMenu);
             // Skill Menu
             skillUserSelect = new SkillUserSelect(this, menuDescription, Descriptions[(int)MenuName.Skill]);

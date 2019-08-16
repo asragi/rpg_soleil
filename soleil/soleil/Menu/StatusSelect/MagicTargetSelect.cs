@@ -26,10 +26,9 @@ namespace Soleil.Menu
         }
         public override void OnInputSubmit()
         {
-            int selected = StatusMenu.GetIndex();//?
             Person selectedPerson = StatusMenu.GetSelectedPerson();
-            bool isSuccessful = SkillEffectData.UseOnMenu(Commander,selectedPerson,id);
-            Console.WriteLine("Use Magic!:"+Commander.Name + " to " + selectedPerson.Name);
+            Person[] p = new Person[1] { selectedPerson };
+            SkillEffectData.UseOnMenu(Commander,p,id);
         }
         public override void OnInputCancel()
         {
