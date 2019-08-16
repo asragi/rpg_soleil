@@ -27,8 +27,8 @@ namespace Soleil
             : base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
         {
             IsStatic = isStatic;
-            windowTexture = new VariableRectangle(Texture, _pos, DiffPos, _size, Depth, isStatic);
-            backTexture = new VariableRectangle(BackTexture, _pos + BackDiff, DiffPos, _size, Depth, isStatic);
+            windowTexture = new VariableRectangle(Texture, Pos, DiffPos, _size, Depth, isStatic);
+            backTexture = new VariableRectangle(BackTexture, Pos + BackDiff, DiffPos, _size, Depth, isStatic);
             AddComponents(new[] { backTexture, windowTexture });
         }
 
