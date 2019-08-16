@@ -36,6 +36,7 @@ namespace Soleil.Battle
             physicalAttack = (a, b, force, attr) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(attr) * 2) / 400 * Revision(); };
             magicalAttack = (a, b, force, attr) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(attr) * 2) / 400) * Revision(); };
 
+            // Attack Table
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
             attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
             attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
@@ -45,6 +46,7 @@ namespace Soleil.Battle
             attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
 
 
+            // Buff Table
             buffTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>>();
             buffTable[SkillID.Guard] = (a, b) =>
             {
@@ -60,9 +62,15 @@ namespace Soleil.Battle
             {
                 return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
             };
+            buffTable[SkillID.WarmHeal] = (a, b) => b.Rates.IncreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
 
+
+            // Heal Table
             healTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>>();
+            healTable[SkillID.WarmHeal] = (a, _) => Tuple.Create<float, float>(30, 0);
             healTable[SkillID.MagicalHeal] = (a, _) => Tuple.Create<float, float>(45, 0);
+
+
 
             actions = new List<Action>();
             for (int i = 0; i < (int)SkillID.size; i++)
@@ -72,8 +80,10 @@ namespace Soleil.Battle
             //うまいことSkillDataBaseと統合したい
             actions[(int)SkillID.PointFlare] = new Attack(attackTable[SkillID.PointFlare], Range.OneEnemy.GetInstance(), mp: 6);
 
-            //actions[(int)SkillID.WarmHeal] = new Attack(attackTable[SkillID.WarmHeal], Range.OneEnemy.GetInstance(), mp: 6);
-            //actionString[(int)SkillID.WarmHeal] = "ウォーム";
+            actions[(int)SkillID.WarmHeal] = new ActionSeq(new List<Action> {
+                new Heal(healTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
+                new Buff(buffTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
+            }, Range.Ally.GetInstance(), mp: 20);
             //SetMagic("ウォーム", SkillID.WarmHeal, MagicCategory.Sun, "味方単体を回復・攻撃力上昇．", 20);
 
             actions[(int)SkillID.HeatWave] = new Attack(attackTable[SkillID.HeatWave], Range.AllEnemy.GetInstance(), mp: 27);

@@ -84,7 +84,7 @@ namespace Soleil.Battle
                                 action = atk.GenerateAttack(commandSelect.Select.ARange);
                                 break;
                             case Buff buf:
-                                action = buf.GenerateAttack(commandSelect.Select.ARange);
+                                action = buf.GenerateBuff(commandSelect.Select.ARange);
                                 break;
                             case Heal heal:
                                 action = heal.GenerateHeal(commandSelect.Select.ARange);
