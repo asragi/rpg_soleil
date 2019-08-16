@@ -53,7 +53,7 @@ namespace Soleil.Battle
         }
 
         protected override SelectablePanel[] MakeAllPanels() =>
-            magicList.Select(e => new MagicSelectPanel(AttackInfo.GetActionName(e), 1, this)).ToArray();
+            magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -88,7 +88,7 @@ namespace Soleil.Battle
         public override void OnInputSubmit()
         {
             Select.AName = magicList[Index];
-            Select.ARange = AttackInfo.GetAction(Select.AName).ARange.Clone();
+            Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
             switch (Select.ARange)
             {
