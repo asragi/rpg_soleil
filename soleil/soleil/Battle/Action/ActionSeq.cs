@@ -29,8 +29,6 @@ namespace Soleil.Battle
 
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
-            cEffects = base.CollectConditionedEffects(cEffects);
-
             var cEfs = Actions.Aggregate(cEffects, (cefs, act) => act.CollectConditionedEffects(cefs));
             return cEfs;
         }

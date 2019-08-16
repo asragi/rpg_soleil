@@ -27,7 +27,7 @@ namespace Soleil.Battle
         public BuffRate BRate;
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
-            cEffects = base.CollectConditionedEffects(cEffects);
+            //cEffects = base.CollectConditionedEffects(cEffects);
 
             switch (ARange)
             {

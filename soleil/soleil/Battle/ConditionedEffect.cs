@@ -16,7 +16,7 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         static int counter = 0;
         int count;
-        int priority;
+        private int priority;
         public int CompareTo(ConditionedEffect ce)
         {
             var p = priority.CompareTo(ce.priority) * -1;

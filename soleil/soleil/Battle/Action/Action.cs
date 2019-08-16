@@ -25,7 +25,7 @@ namespace Soleil.Battle
         }
 
         protected static readonly BattleField BF = BattleField.GetInstance();
-        protected bool HasSufficientMP;
+        protected bool HasSufficientMP = true;
 
         public virtual Action Generate(Range.AttackRange aRange)
         {
@@ -34,8 +34,14 @@ namespace Soleil.Battle
             return tmp;
         }
 
-        public List<Occurence> Act() => AggregateConditionEffects(CollectConditionedEffects(new List<ConditionedEffect>()));
-        public virtual List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
+        public List<Occurence> Act()
+        {
+            var cEffects = CollectConditionedEffects(new List<ConditionedEffect>());
+            cEffects = CheckMP(cEffects);
+            return AggregateConditionEffects(cEffects);
+        }
+
+        List<ConditionedEffect> CheckMP(List<ConditionedEffect> cEffects)
         {
             //MP消費
             cEffects.Add(new ConditionedEffect(
@@ -59,6 +65,8 @@ namespace Soleil.Battle
 
             return cEffects;
         }
+
+        public abstract List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects);
 
 
 
