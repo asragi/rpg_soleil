@@ -31,7 +31,7 @@ namespace Soleil.Battle
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((Attack)ActionInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
+            EnqueueTurn(((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
@@ -106,7 +106,7 @@ namespace Soleil.Battle
                         ));
                     return true;
                 case CommandEnum.Escape:
-                    action = ((Attack)ActionInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                    action = ((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
                     EnqueueTurn(action, turn);
                     return true;
             }
