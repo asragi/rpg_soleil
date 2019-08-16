@@ -17,6 +17,7 @@ namespace Soleil.Battle
         static readonly Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>> healTable;
 
         static readonly Func<CharacterStatus, CharacterStatus, float, AttackAttribution, float> physicalAttack, magicalAttack;
+        static readonly Func<CharacterStatus, CharacterStatus, float, Tuple<float, float>> healFunc;
 
         /// <summary>
         /// 補正
@@ -35,6 +36,7 @@ namespace Soleil.Battle
         {
             physicalAttack = (a, b, force, attr) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(attr) * 2) / 400 * Revision(); };
             magicalAttack = (a, b, force, attr) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(attr) * 2) / 400) * Revision(); };
+            healFunc = (a, b, force) => Tuple.Create<float, float>((float)(b.AScore.HPMAX * (force / 100.0) * (a.MATK + a.MAG + b.VIT + 3.0) / 300.0) * Revision(), 0);
 
             // Attack Table
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
@@ -67,8 +69,8 @@ namespace Soleil.Battle
 
             // Heal Table
             healTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>>();
-            healTable[SkillID.WarmHeal] = (a, _) => Tuple.Create<float, float>(30, 0);
-            healTable[SkillID.MagicalHeal] = (a, _) => Tuple.Create<float, float>(45, 0);
+            healTable[SkillID.WarmHeal] = (a, _) => healFunc(a, _, 30);
+            healTable[SkillID.MagicalHeal] = (a, _) => healFunc(a, _, 60);
 
 
 
