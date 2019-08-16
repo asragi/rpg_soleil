@@ -12,8 +12,8 @@ namespace Soleil.Battle
         {
             //てきとう
             var aScore = new AbilityScore(1800, 100, 100, 100, 100, 100);
-            Status = new CharacterStatus(aScore, 10000);
-            commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex);
+            Status = new CharacterStatus(aScore, 10000, new List<Skill.SkillID> { Skill.SkillID.NormalAttack }, new List<Skill.SkillID> { });
+            commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
         }
     }
 }

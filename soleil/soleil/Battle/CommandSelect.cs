@@ -47,11 +47,12 @@ namespace Soleil.Battle
         CommandSelectWindow commandSelect;
         Menu.MenuDescription desc;
         Reference<bool> doSelect;
-        public DefaultPlayableCharacterCommandSelect(int charaIndex) : base(charaIndex)
+        public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status) : base(charaIndex)
         {
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex,
+                status.Magics, status.Skills);
             BF.AddBasicMenu(commandSelect);
             BF.AddBasicMenu(desc);
         }

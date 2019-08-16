@@ -56,7 +56,7 @@ namespace Soleil.Skill
 
         //ActionNameを統合
         NormalAttack,
-        ExampleMagic,
+        NormalMagic,
         ExampleDebuff,
 
         //Guard
