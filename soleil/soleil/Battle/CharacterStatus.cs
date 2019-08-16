@@ -105,12 +105,12 @@ namespace Soleil.Battle
         public int HP
         {
             get => hp;
-            set => hp = Math.Max(value, 0);
+            set => hp = MathEx.Clamp(value, AScore.HPMAX, 0);
         }
         public int MP
         {
             get => mp;
-            set => mp = Math.Max(value, 0);
+            set => mp = MathEx.Clamp(value, AScore.MPMAX, 0);
         }
 
         public bool Dead { get => HP <= 0; }

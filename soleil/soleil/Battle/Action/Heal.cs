@@ -52,6 +52,12 @@ namespace Soleil.Battle
                 case Range.OneEnemy aRange:
                     (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
                     break;
+                case Range.Me aRange:
+                    (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
+                    break;
+                case Range.Ally aRange:
+                    (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
+                    break;
             }
 
             cEffects.Add(new ConditionedEffect(
@@ -69,6 +75,7 @@ namespace Soleil.Battle
                             }
                             else
                             {
+
                                 BF.GetCharacter(aRange.TargetIndex).Heal(HP: RecoverHP, MP: RecoverMP);
 
                                 string mes = aRange.SourceIndex.ToString() + "が";

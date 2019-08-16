@@ -48,6 +48,15 @@ namespace Soleil
             else return 0;
         }
 
+        public static int AbsoluteMinus(int x, int y)
+        {
+            if (x > y)
+                return x - y;
+            else if (x < -y)
+                return x + y;
+            else return 0;
+        }
+
         public static bool IsInRange(double x, double y, double z) => x <= y && y < z;
 
         /// <summary>
