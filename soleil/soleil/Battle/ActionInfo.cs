@@ -38,7 +38,7 @@ namespace Soleil.Battle
 
             attackTable = new Dictionary<SkillID, Func<AttackAttribution, Func<CharacterStatus, CharacterStatus, float>>>();
             attackTable[SkillID.NormalAttack] = (attr) => (a, b) => { return physicalAttack(a, b, 10, attr); };
-            attackTable[SkillID.ExampleMagic] = (attr) => (a, b) => { return magicalAttack(a, b, 10, attr); };
+            attackTable[SkillID.NormalMagic] = (attr) => (a, b) => { return magicalAttack(a, b, 10, attr); };
 
 
             buffTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>>();
@@ -64,14 +64,27 @@ namespace Soleil.Battle
             for (int i = 0; i < (int)SkillID.size; i++)
                 actionString.Add("");
 
+            //うまいことSkillDataBaseと統合したい
+            actions[(int)SkillID.PointFlare] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.Fever), Range.OneEnemy.GetInstance(), mp: 6);
+            actionString[(int)SkillID.PointFlare] = "ポイントフレア";
 
+            actions[(int)SkillID.HeatWave] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.Fever), Range.AllEnemy.GetInstance(), mp: 27);
+            actionString[(int)SkillID.HeatWave] = "ヒートウェイヴ";
+
+
+            actions[(int)SkillID.Headbutt] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.Beat), Range.OneEnemy.GetInstance(), mp: 12);
+            actionString[(int)SkillID.Headbutt] = "ヘッドバット";
+            //確率で気絶
+
+            actions[(int)SkillID.Barrage] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.Thrust), Range.OneEnemy.GetInstance(), mp: 15);
+            actionString[(int)SkillID.Barrage] = "集中砲火";
 
             //samples
             actions[(int)SkillID.NormalAttack] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.None), Range.OneEnemy.GetInstance());
             actionString[(int)SkillID.NormalAttack] = "通常攻撃";
 
-            actions[(int)SkillID.ExampleMagic] = new Attack(attackTable[SkillID.ExampleMagic](AttackAttribution.None), Range.OneEnemy.GetInstance(), mp: 100);
-            actionString[(int)SkillID.ExampleMagic] = "魔法攻撃";
+            actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic](AttackAttribution.None), Range.OneEnemy.GetInstance(), mp: 100);
+            actionString[(int)SkillID.NormalMagic] = "魔法攻撃";
 
             actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
             actionString[(int)SkillID.Guard] = "ガード";

@@ -61,7 +61,7 @@ namespace Soleil.Battle
             };
             for (int i = 0; i < partylist.Length; i++)
             {
-                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i].Equip);
+                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i]);
                 charas.Add(chara);
 
                 sides.Add(Side.Right);
