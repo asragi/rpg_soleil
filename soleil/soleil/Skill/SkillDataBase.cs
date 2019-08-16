@@ -54,6 +54,16 @@ namespace Soleil.Skill
         // -- Tella
         Barrage,
 
+        //ActionNameを統合
+        NormalAttack,
+        ExampleMagic,
+        ExampleDebuff,
+
+        //Guard
+        Guard,
+        EndGuard,
+
+
         size
     }
 

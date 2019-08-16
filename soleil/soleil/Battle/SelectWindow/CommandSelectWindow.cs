@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
+using Soleil.Skill;
 
 namespace Soleil.Battle
 {
@@ -20,14 +21,14 @@ namespace Soleil.Battle
         public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
-            msw = new MagicSelectWindow(this, desc, new List<ActionName>()
+            msw = new MagicSelectWindow(this, desc, new List<SkillID>()
                 {
-                    ActionName.NormalAttack,
-                    ActionName.ExampleMagic,
+                    SkillID.NormalAttack,
+                    SkillID.ExampleMagic,
                 }, selectCompleted, charaIndex);
-            ssw = new MagicSelectWindow(this, desc, new List<ActionName>()
+            ssw = new MagicSelectWindow(this, desc, new List<SkillID>()
                 {
-                    ActionName.ExampleDebuff
+                    SkillID.ExampleDebuff
                 }, selectCompleted, charaIndex);
             this.selectCompleted = selectCompleted;
             Init();

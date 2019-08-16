@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using static System.Math;
+using Soleil.Skill;
 namespace Soleil.Battle
 {
     /// <summary>
@@ -12,10 +13,10 @@ namespace Soleil.Battle
     {
         static readonly List<Action> actions;
         static readonly List<string> actionString;
-        static readonly Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>> attackTable;
-        static readonly Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
+        static readonly Dictionary<SkillID, Func<AttackAttribution, Func<CharacterStatus, CharacterStatus, float>>> attackTable;
+        static readonly Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
 
-        static readonly Func<CharacterStatus, CharacterStatus, float, float> physicalAttack, magicalAttack;
+        static readonly Func<CharacterStatus, CharacterStatus, float, AttackAttribution, float> physicalAttack, magicalAttack;
 
         /// <summary>
         /// 補正
@@ -32,51 +33,58 @@ namespace Soleil.Battle
         }
         static ActionInfo()
         {
-            physicalAttack = (a, b, force) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(AttackAttribution.None/*とりあえず*/) * 2) / 400 * Revision(); };
-            magicalAttack = (a, b, force) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(AttackAttribution.None) * 2) / 400) * Revision(); };
+            physicalAttack = (a, b, force, attr) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(attr) * 2) / 400 * Revision(); };
+            magicalAttack = (a, b, force, attr) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(attr) * 2) / 400) * Revision(); };
 
-            attackTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, float>>();
-            attackTable[ActionName.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10); };
-            attackTable[ActionName.ExampleMagic] = (a, b) => { return magicalAttack(a, b, 10); };
+            attackTable = new Dictionary<SkillID, Func<AttackAttribution, Func<CharacterStatus, CharacterStatus, float>>>();
+            attackTable[SkillID.NormalAttack] = (attr) => (a, b) => { return physicalAttack(a, b, 10, attr); };
+            attackTable[SkillID.ExampleMagic] = (attr) => (a, b) => { return magicalAttack(a, b, 10, attr); };
 
 
-            buffTable = new Dictionary<ActionName, Func<CharacterStatus, CharacterStatus, BuffRate>>();
-            buffTable[ActionName.Guard] = (a, b) =>
+            buffTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>>();
+            buffTable[SkillID.Guard] = (a, b) =>
             {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 2.0f }, { BuffRateName.MAGRate, 2.0f } });
             };
-            buffTable[ActionName.EndGuard] = (a, b) =>
+            buffTable[SkillID.EndGuard] = (a, b) =>
             {
                 return b.Rates.MultRate(new Dictionary<BuffRateName, float>()
                     { { BuffRateName.VITRate, 0.5f }, { BuffRateName.MAGRate, 0.5f } });
             };
-            buffTable[ActionName.ExampleDebuff] = (a, b) =>
+            buffTable[SkillID.ExampleDebuff] = (a, b) =>
             {
                 return b.Rates.DecreaseRate(new HashSet<BuffRateName>() { BuffRateName.STRRate });
             };
 
             actions = new List<Action>();
-            for (int i = 0; i < (int)ActionName.Size; i++)
+            for (int i = 0; i < (int)SkillID.size; i++)
                 actions.Add(null);
-            actions[(int)ActionName.NormalAttack] = new Attack(attackTable[ActionName.NormalAttack], Range.OneEnemy.GetInstance());
-            actions[(int)ActionName.ExampleMagic] = new Attack(attackTable[ActionName.ExampleMagic], Range.OneEnemy.GetInstance(), mp: 100);
-
-            actions[(int)ActionName.Guard] = new Buff(buffTable[ActionName.Guard], Range.Me.GetInstance());
-            actions[(int)ActionName.EndGuard] = new Buff(buffTable[ActionName.EndGuard], Range.Me.GetInstance());
-            actions[(int)ActionName.ExampleDebuff] = new Buff(buffTable[ActionName.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
-
             actionString = new List<String>();
-            for (int i = 0; i < (int)ActionName.Size; i++)
+            for (int i = 0; i < (int)SkillID.size; i++)
                 actionString.Add("");
-            actionString[(int)ActionName.NormalAttack] = "通常攻撃";
-            actionString[(int)ActionName.ExampleMagic] = "魔法攻撃";
 
-            actionString[(int)ActionName.ExampleDebuff] = "なきごえ";
+
+
+            //samples
+            actions[(int)SkillID.NormalAttack] = new Attack(attackTable[SkillID.NormalAttack](AttackAttribution.None), Range.OneEnemy.GetInstance());
+            actionString[(int)SkillID.NormalAttack] = "通常攻撃";
+
+            actions[(int)SkillID.ExampleMagic] = new Attack(attackTable[SkillID.ExampleMagic](AttackAttribution.None), Range.OneEnemy.GetInstance(), mp: 100);
+            actionString[(int)SkillID.ExampleMagic] = "魔法攻撃";
+
+            actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
+            actionString[(int)SkillID.Guard] = "ガード";
+
+            actions[(int)SkillID.EndGuard] = new Buff(buffTable[SkillID.EndGuard], Range.Me.GetInstance());
+            actionString[(int)SkillID.EndGuard] = "ガード終了";
+
+            actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
+            actionString[(int)SkillID.ExampleDebuff] = "なきごえ";
         }
 
-        public static Action GetAction(ActionName name) => actions[(int)name];
-        public static string GetActionName(ActionName name) => actionString[(int)name];
+        public static Action GetAction(SkillID name) => actions[(int)name];
+        public static string GetActionName(SkillID name) => actionString[(int)name];
     }
 
 }

@@ -9,7 +9,7 @@ namespace Soleil.Battle
     struct SelectItems
     {
         public CommandEnum Command;
-        public ActionName AName;
+        public Skill.SkillID AName;
         public Range.AttackRange ARange;
     }
 }
