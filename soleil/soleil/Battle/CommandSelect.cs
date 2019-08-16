@@ -78,6 +78,7 @@ namespace Soleil.Battle
                 case CommandEnum.Skill:
                     {
                         genAkt = ActionInfo.GetAction(commandSelect.Select.AName);
+                        //action = genAkt.Generate(commandSelect.Select.ARange);
                         switch (genAkt)
                         {
                             case Attack atk:
@@ -109,7 +110,7 @@ namespace Soleil.Battle
                             return false;
                         },
                         (act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
-                        100000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
+                        90000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;
                 case CommandEnum.Escape:
