@@ -29,16 +29,6 @@ namespace Soleil.Skill
         Other,
     }
 
-    /// <summary>
-    /// 魔法をかける対象
-    /// </summary>
-    enum MagicTarget
-    {
-        OneAlly,
-        AllAlly,
-        Nothing,
-    }
-
     interface ISkill
     {
         SkillID ID { get; }
@@ -48,6 +38,7 @@ namespace Soleil.Skill
         string Name { get; }
         string Description { get; }
         int Cost { get; }
+        Range.AttackRange TargetRange { get; }
     }
 
     struct MagicData : ISkill
@@ -60,14 +51,12 @@ namespace Soleil.Skill
         public string Name { get; }
         public string Description { get; }
         public int Cost { get; }
-
-        public MagicTarget Target{ get; }
-
+        public Range.AttackRange TargetRange { get; }
         public MagicData(
             string name, SkillID id, MagicCategory category, string desc, int cost,
-            bool onMenu = false, bool onBattle = true, MagicTarget target = MagicTarget.OneAlly)
+            Range.AttackRange target,bool onMenu = false, bool onBattle = true)
         {
-            (ID, Category, OnMenu, OnBattle, Name, Description, Cost, Target) =
+            (ID, Category, OnMenu, OnBattle, Name, Description, Cost, TargetRange) =
                 (id, category, onMenu, onBattle, name, desc, cost, target);
             AttackType = AttackType.Magical;
         }
@@ -82,11 +71,11 @@ namespace Soleil.Skill
         public string Name { get; }
         public string Description { get; }
         public int Cost { get; }
-
-        public SkillData(string name, SkillID id, string desc, int cost, bool onMenu = false, bool onBattle = true, AttackType aType = AttackType.Physical)
+        public Range.AttackRange TargetRange { get; }
+        public SkillData(string name, SkillID id, string desc, int cost, Range.AttackRange range, bool onMenu = false, bool onBattle = true, AttackType aType = AttackType.Physical)
         {
-            (ID, AttackType, OnMenu, OnBattle, Name, Description, Cost) =
-                (id, aType, onMenu, onBattle, name, desc, cost);
+            (ID, AttackType, OnMenu, OnBattle, Name, Description, Cost,TargetRange) =
+                (id, aType, onMenu, onBattle, name, desc, cost,range);
         }
     }
 }

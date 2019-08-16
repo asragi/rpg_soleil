@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soleil.Skill
 {
     /// <summary>
-    /// メニュー画面で魔法発動した時の効果(ほんまにこのやり方でいいのかわからない)
+    /// メニュー画面で魔法発動した時の効果(ほんまにこのやり方でいいのかはわからない)
     /// </summary>
     static class SkillEffectData
     {
@@ -17,7 +17,6 @@ namespace Soleil.Skill
         /// <param name="commander">術者</param>
         /// <param name="person">対象</param>
         /// <param name="id">ID</param>
-        /// <returns></returns>
         public static bool UseOnMenu(Person commander,Person person,SkillID id)
         {
             #region SKILLDATA

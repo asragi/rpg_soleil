@@ -148,19 +148,15 @@ namespace Soleil.Menu
             {
                 var temp = (MagicData)SkillDataBase.Get(id);
                 if (!temp.OnMenu) return;
-                if(temp.Target == MagicTarget.Nothing)
-                {
-                    Console.WriteLine("Event発生など");
-                }
-                else if (temp.Target == MagicTarget.OneAlly)
+                if (temp.TargetRange == Range.Ally.GetInstance())
                 {
                     magicTargetSelect.Call();
                     magicTargetSelect.SetWillUsedSkill(id,currentSelect);
                     IsActive = false;
                     Quit();
-                }else if(temp.Target == MagicTarget.AllAlly)
+                }else if(temp.TargetRange == Range.AllAlly.GetInstance())
                 {
-                    Console.WriteLine("味方全員を対象")
+                    Console.WriteLine("味方全員を対象");
                 }
             }
         }
