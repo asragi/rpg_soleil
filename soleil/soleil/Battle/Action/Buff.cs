@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     using BuffFunc = Func<CharacterStatus, CharacterStatus, BuffRate>;
     /// <summary>

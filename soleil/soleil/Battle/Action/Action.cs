@@ -5,24 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Soleil
+namespace Soleil.Battle
 {
-
-    enum ActionName
-    {
-        //Attack
-        NormalAttack,
-        ExampleMagic,
-
-        //Buff
-        Guard,
-        EndGuard,
-        ExampleDebuff,
-
-        Size,
-    }
-
-
     /// <summary>
     /// ターンでの行動の基底
     /// AttackとBuffの基底
