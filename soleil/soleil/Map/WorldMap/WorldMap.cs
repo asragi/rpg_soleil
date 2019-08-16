@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace Soleil.Map.WorldMap
 {
     class WorldMap
     {
-        public readonly static Vector WorldMapSize = new Vector(1920, 1080);
+        private static readonly Texture2D WorldMapTexture = Resources.GetTexture(TextureID.WorldMap);
+        public readonly static Vector WorldMapSize = new Vector(WorldMapTexture.Width, WorldMapTexture.Height);
         WorldPoint[] points;
         WorldMapPlayerIcon playerIcon;
         Image worldmap;
