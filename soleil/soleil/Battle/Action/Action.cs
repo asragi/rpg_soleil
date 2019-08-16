@@ -25,8 +25,15 @@ namespace Soleil.Battle
         }
 
         protected static readonly BattleField BF = BattleField.GetInstance();
-
         protected bool HasSufficientMP;
+
+        /*public virtual Action Generate(Range.AttackRange aRange)
+        {
+            var tmp = (Action)MemberwiseClone();
+            tmp.ARange = aRange;
+            return tmp;
+        }*/
+
         public List<Occurence> Act() => AggregateConditionEffects(CollectConditionedEffects(new List<ConditionedEffect>()));
         public virtual List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
@@ -47,7 +54,7 @@ namespace Soleil.Battle
                         ocrs.Add(new Occurence(act.ARange.SourceIndex.ToString() + "はMPが不足している"));
                     }
                     return ocrs;
-                }, 20000));
+                }, 100000));
 
 
             return cEffects;
