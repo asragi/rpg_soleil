@@ -21,11 +21,6 @@ namespace Soleil.Skill
         {
             #region SKILLDATA
             var data = SkillDataBase.Get(id);
-            if(id == SkillID.WarmHeal)
-            {
-                bool healflag = CommonOperation.Recover(commander, person[0], 60, data.Cost);
-                //+攻撃力上昇
-            }
             if (id == SkillID.MagicalHeal)
             {
                 return CommonOperation.Recover(commander, person[0], 60, data.Cost);
