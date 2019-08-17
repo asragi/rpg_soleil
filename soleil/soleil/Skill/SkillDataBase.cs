@@ -129,6 +129,9 @@ namespace Soleil.Skill
             SetMagic("はたく", SkillID.NormalAttack, MagicCategory.None, "敵単体に無属性の物理攻撃．", 0);
             SetMagic("ショット", SkillID.NormalMagic, MagicCategory.None, "敵単体に無属性の魔法攻撃．", 0);
             SetSkill("なきごえ", SkillID.ExampleDebuff, "敵単体に攻撃力低下．", 15);
+
+            SetSkill("ガード", SkillID.Guard, "テスト用ガード", 0);
+            SetSkill("エンドガード", SkillID.EndGuard, "test", 0);
         }
 
         static void SetSkill(string name, SkillID id, string desc, int cost, bool onMenu = false, bool onBattle = true)
