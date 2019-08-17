@@ -20,9 +20,10 @@ namespace Soleil.Skill
         public static bool UseOnMenu(Person commander,Person person,SkillID id)
         {
             #region SKILLDATA
+            var data = SkillDataBase.Get(id);
             if (id == SkillID.MagicalHeal)
             {
-                return CommonOperation.Recover(commander, person, 60, 20);
+                return CommonOperation.Recover(commander, person, 60, data.Cost);
             }
             return false;
             #endregion
