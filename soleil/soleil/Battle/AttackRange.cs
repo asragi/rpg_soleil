@@ -7,16 +7,39 @@ using Soleil.Battle;
 
 namespace Soleil.Range
 {
-    //typesame enum
     /// <summary>
-    /// 攻撃などの効果範囲を表すclassの基底
+    /// (Typename Enum Idiom)
+    /// Enum AttackRange { 
+    ///      OneEnemy,
+    ///      AllEnemy, ...
+    /// }
+    /// を拡張した記法
+    /// 
+    /// 派生クラスはGetInstance()でダミーを取得出来る
     /// </summary>
     abstract class AttackRange
     {
+        /// <summary>
+        /// 行動を行っている者
+        /// </summary>
         public int SourceIndex;
+
+
         public AttackRange(int sourceIndex) => SourceIndex = sourceIndex;
+
+
+        /// <summary>
+        /// indexが行動対象(Target)に含まれているかを返す
+        /// </summary>
         public abstract bool ContainRange(int index, BattleField bf);
+
+
+        /// <summary>
+        /// 行動対象のListを返す
+        /// </summary>
         public abstract List<int> Targets(BattleField bf);
+
+
         public AttackRange Clone() =>
             MemberwiseClone() as AttackRange;
     }
@@ -26,7 +49,12 @@ namespace Soleil.Range
     /// </summary>
     class OneEnemy : AttackRange
     {
+        /// <summary>
+        /// 行動対象
+        /// </summary>
         public int TargetIndex;
+
+
         public OneEnemy(int sourceIndex, int targetIndex) : base(sourceIndex)
             => TargetIndex = targetIndex;
 

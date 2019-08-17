@@ -24,21 +24,34 @@ namespace Soleil.Battle
         }
     }
 
+    /// <summary>
+    /// SkillIDの選択Window
+    /// </summary>
     class MagicSelectWindow : BasicMenu
     {
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
         public SelectItems Select;
-        List<Skill.SkillID> magicList;
         MenuComponent parent;
         MenuDescription desc;
+
+        /// <summary>
+        /// Window上の選択肢
+        /// </summary>
+        List<Skill.SkillID> magicList;
         int charaIndex;
         static readonly BattleField bf = BattleField.GetInstance();
-        /*
-         攻撃対象の選択window
-         Actionを選択してから実体化する
-             */
+
+        /// <summary>
+        /// 攻撃対象の選択window
+        /// Actionを選択してから実体化する
+        /// </summary>
         CharaSelectWindow csw;
+
+        /// <summary>
+        /// このWindowが開かれているかのフラグ
+        /// IsActiveは開かれていても選択されていない場合はfalseとなる為必要
+        /// </summary>
         bool IsQuit;
         public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<Skill.SkillID> list, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
@@ -85,6 +98,9 @@ namespace Soleil.Battle
             csw?.Draw(d);
         }
 
+        /// <summary>
+        /// 選択したActionのAttackRangeによってCharaSelectWindowを呼び出すか決める
+        /// </summary>
         public override void OnInputSubmit()
         {
             if (magicList.Count == 0) return;

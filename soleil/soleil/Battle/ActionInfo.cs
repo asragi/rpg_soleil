@@ -11,11 +11,22 @@ namespace Soleil.Battle
     /// </summary>
     static class ActionInfo
     {
+        /// <summary>
+        /// Actionのデータ 本体
+        /// </summary>
         static readonly List<Action> actions;
+
+
+        /// <summary>
+        /// actionsを生成するのを楽にするためのテーブル
+        /// </summary>
         static readonly Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>> attackTable;
         static readonly Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>> buffTable;
         static readonly Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>> healTable;
 
+        /// <summary>
+        /// 典型的な攻撃の威力計算関数
+        /// </summary>
         static readonly Func<CharacterStatus, CharacterStatus, float, AttackAttribution, float> physicalAttack, magicalAttack;
         static readonly Func<CharacterStatus, CharacterStatus, float, Tuple<float, float>> healFunc;
 
@@ -28,11 +39,17 @@ namespace Soleil.Battle
         {
             return (float)Global.RandomDouble(0.8, 1.2);
         }
+
+
         static int Fraction(float x)
         {
             return (int)x;
         }
 
+
+        /// <summary>
+        /// SkillDataBaseから取得した情報を元にAttackを生成する補助関数
+        /// </summary>
         static void SetAttack(SkillID id, Range.AttackRange aRange)
         {
             actions[(int)id] = new Attack(attackTable[id], aRange, mp: SkillDataBase.Get(id).Cost);
@@ -52,7 +69,8 @@ namespace Soleil.Battle
             magicalAttack = (a, b, force, attr) => { return ((a.MAG * a.MATK * force * 24) / (a.MAG * a.MATK + 1500)) * ((400 - (b.VIT + b.MAG * 2) / 3 - b.MDEF(attr) * 2) / 400) * Revision(); };
             healFunc = (a, b, force) => Tuple.Create<float, float>((float)(b.AScore.HPMAX * (force / 100.0) * (a.MATK + a.MAG + b.VIT + 3.0) / 300.0) * Revision(), 0);
 
-            // Attack Table
+
+            #region Attack Table
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
             attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
             attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
@@ -67,9 +85,9 @@ namespace Soleil.Battle
             attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
+            #endregion
 
-
-            // Buff Table
+            #region Buff Table
             buffTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, BuffRate>>();
             buffTable[SkillID.Guard] = (a, b) =>
             {
@@ -91,23 +109,22 @@ namespace Soleil.Battle
             buffTable[SkillID.SeaventhHeaven] = (a, b) => b.Rates.IncreaseRate(new HashSet<BuffRateName>(Enum.GetValues(typeof(BuffRateName)).Cast<BuffRateName>())); //全部の能力強化
             buffTable[SkillID.Delay] = (a, b) => b.Rates.DecreaseRate(new HashSet<BuffRateName> { BuffRateName.SPDRate });
             buffTable[SkillID.Haste] = (a, b) => b.Rates.IncreaseRate(new HashSet<BuffRateName> { BuffRateName.SPDRate });
+            #endregion
 
-
-            // Heal Table
+            #region Heal Table
             healTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, Tuple<float, float>>>();
             healTable[SkillID.WarmHeal] = (a, _) => healFunc(a, _, 30);
             healTable[SkillID.MagicalHeal] = (a, _) => healFunc(a, _, 60);
             healTable[SkillID.Fragrance] = (a, _) => healFunc(a, _, 20);
             healTable[SkillID.AlomaDrop] = (a, _) => healFunc(a, _, 60);
-
+            #endregion
 
 
             actions = new List<Action>();
             for (int i = 0; i < (int)SkillID.size; i++)
                 actions.Add(new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), mp: 0)); //ダミーをつめる
-            //actions.Add(null);
+                                                                                                                 //actions.Add(null);
 
-            //うまいことSkillDataBaseと統合したい
             // sun
             SetAttack(SkillID.PointFlare, Range.OneEnemy.GetInstance());
 
@@ -181,13 +198,9 @@ namespace Soleil.Battle
 
             //samples
             actions[(int)SkillID.NormalAttack] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance());
-
             actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic], Range.OneEnemy.GetInstance(), mp: 100);
-
             actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
-
             actions[(int)SkillID.EndGuard] = new Buff(buffTable[SkillID.EndGuard], Range.Me.GetInstance());
-
             actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
         }
 

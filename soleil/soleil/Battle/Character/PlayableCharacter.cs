@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using Soleil.Skill;
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// PlayerのCharacter
+    /// </summary>
     class PlayableCharacter : Character
     {
         public PlayableCharacter(int index, AbilityScore aScore, Person person) : base(index)
