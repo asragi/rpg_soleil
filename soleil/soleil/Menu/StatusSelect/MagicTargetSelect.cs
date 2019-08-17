@@ -27,7 +27,8 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             Person selectedPerson = StatusMenu.GetSelectedPerson();
-            SkillEffectData.UseOnMenu(Commander,selectedPerson,id);
+            Person[] p = new Person[1] { selectedPerson };
+            SkillEffectData.UseOnMenu(Commander,p,id);
         }
         public override void OnInputCancel()
         {

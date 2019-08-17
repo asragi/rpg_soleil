@@ -19,12 +19,15 @@ namespace Soleil.Menu
         MagicTargetSelect magicTargetSelect;
         //今誰の魔法を選ぼうとしているのか(MagicTargetSelectに渡したい)
         Person currentSelect;
-        public MagicMenu(MenuComponent parent, MenuDescription desc)
+        MenuComponent parentMenu;
+        //複数対象魔法を使うときに渡さないといけないので
+        PersonParty party;
+        public MagicMenu(MenuComponent parent, MenuDescription desc, PersonParty _party)
             : base(parent, desc)
         {
             holder = new SkillHolder();
             categoryToDisplay = MagicCategory.Sun;
-
+            party = _party;
             // icon
             icons = new MagicIcon[10];
             var iconSpace = (IconXEnd - IconXInitial) / (icons.Length - 1);
@@ -156,7 +159,7 @@ namespace Soleil.Menu
                     Quit();
                 }else if(temp.TargetRange is Range.AllAlly)
                 {
-                    Console.WriteLine("味方全員を対象");
+                    SkillEffectData.UseOnMenu(currentSelect, party.GetActiveMembers(), id);
                 }
             }
         }
