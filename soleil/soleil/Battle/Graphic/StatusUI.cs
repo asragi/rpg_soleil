@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     //MenuComponent継承してもいいかも
     class StatusUI
@@ -43,6 +43,7 @@ namespace Soleil
         {
             (this.maxHP, this.maxMP) = (maxHP, maxMP);
             (HP, MP) = (maxHP, maxMP);
+            (drawingHP, drawingMP) = (maxHP, maxMP);
             HPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX, -LineDiff), DepthID.Status, alpha: 1);
             MPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX, LineDiff), DepthID.Status, alpha: 1);
             maxHPImage = new TextImage(FontID.CorpM, pos + new Vector(NumberPosX + MaxDiff, -LineDiff + MaxDiff), DepthID.Status, alpha: 0.5f);
@@ -57,19 +58,17 @@ namespace Soleil
 
         public void Damage(int decreasedHP = 0, int decreasedMP = 0)
         {
-            HP -= decreasedHP;
-            if (HP < 0) HP = 0;
-            MP -= decreasedMP;
-            if (MP < 0) MP = 0;
+            HP = MathEx.Clamp(HP - decreasedHP, maxHP, 0);
+            MP = MathEx.Clamp(MP - decreasedMP, maxMP, 0);
         }
 
         const int Amount = 1;
         public void Update()
         {
-            drawingHP -= Amount;
-            if (HP > drawingHP) drawingHP = HP;
-            drawingMP -= Amount;
-            if (MP > drawingMP) drawingMP = MP;
+            var substHP = MathEx.AbsoluteMinus(drawingHP - HP, Amount);
+            drawingHP = substHP + HP;
+            var substMP = MathEx.AbsoluteMinus(drawingMP - MP, Amount);
+            drawingMP = substMP + MP;
 
             HPImage.Text = drawingHP.ToString();
             MPImage.Text = drawingMP.ToString();

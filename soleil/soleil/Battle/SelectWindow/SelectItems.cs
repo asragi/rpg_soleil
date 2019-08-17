@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     struct SelectItems
     {
         public CommandEnum Command;
-        public ActionName AName;
+        public Skill.SkillID AName;
         public Range.AttackRange ARange;
     }
 }

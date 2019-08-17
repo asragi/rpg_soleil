@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
+using Soleil.Skill;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// CommandEnumを選択できるwindow
@@ -17,18 +18,11 @@ namespace Soleil
         public SelectItems Select;
         MagicSelectWindow msw;//magic
         MagicSelectWindow ssw;//skill
-        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex)
+        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, List<SkillID> magics, List<SkillID> skills)
             : base(parent, desc)
         {
-            msw = new MagicSelectWindow(this, desc, new List<ActionName>()
-                {
-                    ActionName.NormalAttack,
-                    ActionName.ExampleMagic,
-                }, selectCompleted, charaIndex);
-            ssw = new MagicSelectWindow(this, desc, new List<ActionName>()
-                {
-                    ActionName.ExampleDebuff
-                }, selectCompleted, charaIndex);
+            msw = new MagicSelectWindow(this, desc, magics, selectCompleted, charaIndex);
+            ssw = new MagicSelectWindow(this, desc, skills, selectCompleted, charaIndex);
             this.selectCompleted = selectCompleted;
             Init();
         }

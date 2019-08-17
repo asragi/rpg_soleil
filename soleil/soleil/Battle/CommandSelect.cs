@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     abstract class CommandSelect
     {
@@ -31,7 +31,7 @@ namespace Soleil
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
+            EnqueueTurn(((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
@@ -47,11 +47,12 @@ namespace Soleil
         CommandSelectWindow commandSelect;
         Menu.MenuDescription desc;
         Reference<bool> doSelect;
-        public DefaultPlayableCharacterCommandSelect(int charaIndex) : base(charaIndex)
+        public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status) : base(charaIndex)
         {
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex,
+                status.Magics, status.Skills);
             BF.AddBasicMenu(commandSelect);
             BF.AddBasicMenu(desc);
         }
@@ -76,14 +77,21 @@ namespace Soleil
                 case CommandEnum.Magic:
                 case CommandEnum.Skill:
                     {
-                        genAkt = AttackInfo.GetAction(commandSelect.Select.AName);
+                        genAkt = ActionInfo.GetAction(commandSelect.Select.AName);
+                        //action = genAkt.Generate(commandSelect.Select.ARange);
                         switch (genAkt)
                         {
                             case Attack atk:
                                 action = atk.GenerateAttack(commandSelect.Select.ARange);
                                 break;
                             case Buff buf:
-                                action = buf.GenerateAttack(commandSelect.Select.ARange);
+                                action = buf.GenerateBuff(commandSelect.Select.ARange);
+                                break;
+                            case Heal heal:
+                                action = heal.GenerateHeal(commandSelect.Select.ARange);
+                                break;
+                            case ActionSeq seq:
+                                action = seq.GenerateActionSeq(commandSelect.Select.ARange);
                                 break;
                             default:
                                 throw new Exception("not implemented");
@@ -102,11 +110,11 @@ namespace Soleil
                             return false;
                         },
                         (act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
-                        100000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
+                        90000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;
                 case CommandEnum.Escape:
-                    action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                    action = ((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
                     EnqueueTurn(action, turn);
                     return true;
             }

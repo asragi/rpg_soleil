@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// アイテムメニューのそれぞれの選択パネルのクラス
@@ -29,7 +29,7 @@ namespace Soleil
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
         public SelectItems Select;
-        List<ActionName> magicList;
+        List<Skill.SkillID> magicList;
         MenuComponent parent;
         MenuDescription desc;
         int charaIndex;
@@ -40,7 +40,7 @@ namespace Soleil
              */
         CharaSelectWindow csw;
         bool IsQuit;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<ActionName> list, Reference<bool> selectCompleted, int charaIndex)
+        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<Skill.SkillID> list, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
@@ -53,7 +53,7 @@ namespace Soleil
         }
 
         protected override SelectablePanel[] MakeAllPanels() =>
-            magicList.Select(e => new MagicSelectPanel(AttackInfo.GetActionName(e), 1, this)).ToArray();
+            magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -88,7 +88,7 @@ namespace Soleil
         public override void OnInputSubmit()
         {
             Select.AName = magicList[Index];
-            Select.ARange = AttackInfo.GetAction(Select.AName).ARange.Clone();
+            Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
             switch (Select.ARange)
             {

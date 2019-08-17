@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AttackAttribution = Soleil.Battle.AttackAttribution;
 namespace Soleil.Item
 {
     /// <summary>

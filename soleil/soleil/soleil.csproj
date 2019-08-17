@@ -44,9 +44,12 @@
   <ItemGroup>
     <Compile Include="Battle\AbilityScore.cs" />
     <Compile Include="Battle\Action\Action.cs" />
+    <Compile Include="Battle\Action\ActionSeq.cs" />
+    <Compile Include="Battle\Action\Heal.cs" />
     <Compile Include="Battle\Action\Attack.cs" />
+    <Compile Include="Battle\Action\AttackAttribution.cs" />
     <Compile Include="Battle\Action\Buff.cs" />
-    <Compile Include="Battle\AttackInfo.cs" />
+    <Compile Include="Battle\ActionInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
     <Compile Include="Battle\Graphic\BattleCharaAnimation.cs" />
     <Compile Include="Battle\Graphic\BattleCharaGraphics.cs" />

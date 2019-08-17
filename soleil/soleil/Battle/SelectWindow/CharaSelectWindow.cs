@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// CharaIndexWindowsで使うpanel

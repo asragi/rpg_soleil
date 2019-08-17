@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     enum Side
     {
@@ -61,7 +61,7 @@ namespace Soleil
             };
             for (int i = 0; i < partylist.Length; i++)
             {
-                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i].Equip);
+                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i]);
                 charas.Add(chara);
 
                 sides.Add(Side.Right);
@@ -97,6 +97,15 @@ namespace Soleil
 
             CEffects = new SortedSet<ConditionedEffect>();
 
+            Enumerable.Range(0, charaIndex).ForEach2(p => CEffects.Add(new ConditionedEffectOnce(
+                (act) => GetCharacter(p).Status.Dead,
+                (act, ocrs) =>
+                {
+                    RemoveCharacter(p);
+                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
+                    return ocrs;
+                },
+                5000)));
 
         }
 
