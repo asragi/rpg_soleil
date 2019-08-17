@@ -32,6 +32,20 @@ namespace Soleil.Battle
         {
             return (int)x;
         }
+
+        static void SetAttack(SkillID id, Range.AttackRange aRange)
+        {
+            actions[(int)id] = new Attack(attackTable[id], aRange, mp: SkillDataBase.Get(id).Cost);
+        }
+        static void SetBuff(SkillID id, Range.AttackRange aRange)
+        {
+            actions[(int)id] = new Buff(buffTable[id], aRange, mp: SkillDataBase.Get(id).Cost);
+        }
+        static void SetHeal(SkillID id, Range.AttackRange aRange)
+        {
+            actions[(int)id] = new Heal(healTable[id], aRange, mp: SkillDataBase.Get(id).Cost);
+        }
+
         static ActionInfo()
         {
             physicalAttack = (a, b, force, attr) => { return (a.STR * a.PATK * force * 24) / (a.STR * a.PATK + 1500) * (400 - b.VIT - b.PDEF(attr) * 2) / 400 * Revision(); };
@@ -42,6 +56,11 @@ namespace Soleil.Battle
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
             attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
             attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
+            attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Ice); };
+            attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Electro); };
+            attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Thrust); };
+            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Cut); };
+
             attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
             attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
@@ -80,33 +99,38 @@ namespace Soleil.Battle
             //actions.Add(null);
 
             //うまいことSkillDataBaseと統合したい
-            actions[(int)SkillID.PointFlare] = new Attack(attackTable[SkillID.PointFlare], Range.OneEnemy.GetInstance(), mp: 6);
+            // sun
+            SetAttack(SkillID.PointFlare, Range.OneEnemy.GetInstance());
 
             actions[(int)SkillID.WarmHeal] = new ActionSeq(new List<Action> {
                 new Heal(healTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
                 new Buff(buffTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
             }, Range.Ally.GetInstance(), mp: 20);
-            //SetMagic("ウォーム", SkillID.WarmHeal, MagicCategory.Sun, "味方単体を回復・攻撃力上昇．", 20);
 
-            actions[(int)SkillID.HeatWave] = new Attack(attackTable[SkillID.HeatWave], Range.AllEnemy.GetInstance(), mp: 27);
-            /*
+            SetAttack(SkillID.HeatWave, Range.AllEnemy.GetInstance());
+
+
             // shade
-            SetMagic("フリーズ", SkillID.Freeze, MagicCategory.Shade, "敵単体へ冷気属性のダメージ．", 5);
-            SetMagic("バインド", SkillID.Bind, MagicCategory.Shade, "敵単体に確率でマヒ付与．", 5);
-            SetMagic("クールダウン", SkillID.CoolDown, MagicCategory.Shade, "敵単体へ冷気属性ダメージ．確率で攻撃力低下．", 16);
-            // magic
-            SetMagic("サンダーボルト", SkillID.Thunder, MagicCategory.Magic, "敵単体へ電撃属性のダメージ．", 9);
-            */
-            actions[(int)SkillID.MagicalHeal] = new Heal(healTable[SkillID.MagicalHeal], Range.Ally.GetInstance(), mp: 45);
+            SetAttack(SkillID.Freeze, Range.OneEnemy.GetInstance());
+            //SetMagic("バインド", SkillID.Bind, MagicCategory.Shade, "敵単体に確率でマヒ付与．", 5);
+            //SetMagic("クールダウン", SkillID.CoolDown, MagicCategory.Shade, "敵単体へ冷気属性ダメージ．確率で攻撃力低下．", 16);
 
-            /*
-            SetMagic("エクスプロード", SkillID.Explode, MagicCategory.Magic, "敵全体へ突属性のダメージ．", 73);
+
+            // magic
+            SetAttack(SkillID.Thunder, Range.OneEnemy.GetInstance());
+            SetHeal(SkillID.MagicalHeal, Range.Ally.GetInstance());
+            SetAttack(SkillID.Explode, Range.AllEnemy.GetInstance());
+
+
             // dark
-            SetMagic("リーパー", SkillID.Reaper, MagicCategory.Dark, "敵単体へ斬属性のダメージ．確率で即死．", 13);
-            SetMagic("イルフラッド", SkillID.IlFlood, MagicCategory.Dark, "敵全体へランダムな状態異常付与．", 18);
-            SetMagic("ライフスティール", SkillID.LifeSteal, MagicCategory.Dark, "敵単体へ無属性のダメージ．吸収効果．", 13);
+            //SetMagic("リーパー", SkillID.Reaper, MagicCategory.Dark, "敵単体へ斬属性のダメージ．確率で即死．", 13);
+            //SetMagic("イルフラッド", SkillID.IlFlood, MagicCategory.Dark, "敵全体へランダムな状態異常付与．", 18);
+            //SetMagic("ライフスティール", SkillID.LifeSteal, MagicCategory.Dark, "敵単体へ無属性のダメージ．吸収効果．", 13);
+
+
             // sound
-            SetMagic("ソニックブーム", SkillID.Sonicboom, MagicCategory.Sound, "敵単体へ斬属性のダメージ．", 8);
+            SetAttack(SkillID.Sonicboom, Range.OneEnemy.GetInstance());
+            /*
             SetMagic("スリップノイズ", SkillID.Noize, MagicCategory.Sound, "敵全体に確率でスタン付与．", 8);
             SetMagic("マキシマイザ", SkillID.Maximizer, MagicCategory.Sound, "味方単体の攻撃力・防御力上昇．", 46);
             // ninja
