@@ -23,10 +23,8 @@ namespace Soleil
             //とりあえず状態異常は気にしない
             commander.RecoverMP(-mp);
             //回復量計算
-            //b.MAXHP * (Force/100) * (a.MATK +a.MAG + b.VIT + 3) / 300 対象b
             double hl = targetScore.HPMAX * (force / 100.0);
-            //MATKが何かわからなかった。漸次
-            hl *= (double)(comScore.MAG+targetScore.VIT+3)/300.0;
+            hl *= (double)(commander.Equip.GetAttack(Skill.AttackType.Magical)+comScore.MAG+targetScore.VIT+3)/300.0;
             target.RecoverHP((int)hl);
             return true;
         }

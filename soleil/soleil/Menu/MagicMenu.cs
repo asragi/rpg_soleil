@@ -93,7 +93,7 @@ namespace Soleil.Menu
                 if (data.Category != categoryToDisplay) continue;
                 if (holder.HasSkill(id))
                 {
-                    magList.Add(new MagicMenuPanel(data, this,id));
+                    magList.Add(new MagicMenuPanel(data, this));
                 }
             }
             return magList.ToArray();
@@ -148,13 +148,13 @@ namespace Soleil.Menu
             {
                 var temp = (MagicData)SkillDataBase.Get(id);
                 if (!temp.OnMenu) return;
-                if (temp.TargetRange == Range.Ally.GetInstance())
+                if (temp.TargetRange is Range.Ally)
                 {
                     magicTargetSelect.Call();
                     magicTargetSelect.SetWillUsedSkill(id,currentSelect);
                     IsActive = false;
                     Quit();
-                }else if(temp.TargetRange == Range.AllAlly.GetInstance())
+                }else if(temp.TargetRange is Range.AllAlly)
                 {
                     Console.WriteLine("味方全員を対象");
                 }
