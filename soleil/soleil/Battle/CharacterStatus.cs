@@ -16,6 +16,12 @@ namespace Soleil.Battle
         pDEFRate,
         mDEFRate,
     }
+
+    /// <summary>
+    /// BuffRateの値の分だけStatusに倍率がかかる
+    /// 種類が多いのでHashSetで列挙する
+    /// 現在は弱体化、普通、強化の3段階がある
+    /// </summary>
     public class BuffRate
     {
         public List<float> Rates;
@@ -162,6 +168,10 @@ namespace Soleil.Battle
             get; set;
         }
 
+
+        /// <summary>
+        /// Characterの保持するMagic
+        /// </summary>
         public List<SkillID> Magics { get; private set; }
         public List<SkillID> Skills { get; private set; }
 

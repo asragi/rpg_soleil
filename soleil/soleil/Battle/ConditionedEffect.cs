@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace Soleil.Battle
 {
+    ///
+    /// ダメージを与えたり、回復したり、バフをかけたりといった効果はこれが持ち、
+    /// ActionTurnが回ってくるとpriorityが高い順にソートされて実行される
+    ///
+
+    using Condition = Func<Action, bool>;
+    using AffectFunc = Func<Action, List<Occurence>, List<Occurence>>;
+
     /// <summary>
     /// 条件付きで戦闘中などに効果を発動するもの
     /// </summary>
-    using Condition = Func<Action, bool>;
-    using AffectFunc = Func<Action, List<Occurence>, List<Occurence>>;
     class ConditionedEffect : IComparable
     {
         protected static readonly BattleField BF = BattleField.GetInstance();
@@ -30,8 +36,20 @@ namespace Soleil.Battle
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Affectの実行条件
+        /// </summary>
         public Condition Cond;
+
+
+        /// <summary>
+        /// 起こる効果 (攻撃をする、Buffをかけるなど)
+        /// </summary>
         public AffectFunc Affect;
+
+        /// <summary>
+        /// ConditionedEffectがまだ有効かどうか
+        /// </summary>
         protected Func<bool> disable;
         public ConditionedEffect(Condition cond, AffectFunc affect, int priority_)
         {
