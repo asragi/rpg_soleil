@@ -22,7 +22,7 @@ namespace Soleil.Skill
             #region SKILLDATA
             if (id == SkillID.MagicalHeal)
             {
-                return JohnDoe.Recover(commander, person, 60, 20);
+                return CommonOperation.Recover(commander, person, 60, 20);
             }
             return false;
             #endregion

@@ -9,7 +9,7 @@ namespace Soleil
     /// <summary>
     /// 回復等の処理を切り出したかった(いい名前は思い浮かばなかった)
     /// </summary>
-    static class JohnDoe
+    static class CommonOperation
     {
         /// <summary>
         /// commanderがtargetを回復 使用MPはmp

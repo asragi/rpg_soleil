@@ -21,7 +21,7 @@ namespace Soleil.Item
         public static bool UseOnMenu(Person p, ItemID itemID)
         {
             #region ITEMDATA
-            if (itemID == ItemID.Portion) return Soleil.JohnDoe.RecoverByRate(p, 30, 0);
+            if (itemID == ItemID.Portion) return Soleil.CommonOperation.RecoverByRate(p, 30, 0);
             return false;
             #endregion
         }
