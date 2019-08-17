@@ -119,6 +119,7 @@ namespace Soleil.Battle
 
         public Character GetCharacter(int index) => charas[index];
 
+        public Side GetSide(int index) => sides[index];
         public Side OppositeSide(Side side)
         {
             switch (side)
@@ -131,6 +132,7 @@ namespace Soleil.Battle
                     return Side.Size;
             }
         }
+        public Side OppositeSide(int index) => OppositeSide(sides[index]);
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
         public List<int> OppositeIndexes(Side side) => indexes[(int)OppositeSide(side)];
         public List<int> SameSideIndexes(int index) => indexes[(int)sides[index]];

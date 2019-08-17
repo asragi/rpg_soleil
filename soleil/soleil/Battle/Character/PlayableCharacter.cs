@@ -13,7 +13,8 @@ namespace Soleil.Battle
         {
             var magics = GetMagicIDs(person.Skill);
             var skills = GetSkillIDs(person.Skill);
-            //magics.Add(SkillID.WarmHeal); //Debug
+            magics.Add(SkillID.WarmHeal); //Debug
+            magics.Add(SkillID.Explode); //Debug
             Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
             Name = Enum.GetName(typeof(Misc.CharaName), person.Name);
             commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);

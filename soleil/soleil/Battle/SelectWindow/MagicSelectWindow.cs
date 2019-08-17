@@ -87,20 +87,27 @@ namespace Soleil.Battle
 
         public override void OnInputSubmit()
         {
+            if (magicList.Count == 0) return;
             Select.AName = magicList[Index];
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
             switch (Select.ARange)
             {
                 case Range.OneEnemy oe:
-                    oe.SourceIndex = charaIndex;
                     csw = new CharaSelectWindow(this, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
                     break;
                 case Range.Ally a:
-                    a.SourceIndex = charaIndex;
                     csw = new CharaSelectWindow(this, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
                     csw.Call();
+                    break;
+                case Range.AllAlly aRange:
+                    aRange.TargetSide = bf.GetSide(charaIndex);
+                    selectCompleted.Val = true;
+                    break;
+                case Range.AllEnemy aRange:
+                    aRange.TargetSide = bf.OppositeSide(charaIndex);
+                    selectCompleted.Val = true;
                     break;
                 default:
                     selectCompleted.Val = true;
