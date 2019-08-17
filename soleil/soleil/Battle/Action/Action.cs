@@ -9,15 +9,27 @@ namespace Soleil.Battle
 {
     /// <summary>
     /// ターンでの行動の基底
-    /// AttackとBuffの基底
+    /// Attack,Buff,Heal等の基底
     /// </summary>
     abstract class Action
     {
+        /// <summary>
+        /// Actionの実行対象
+        /// </summary>
         public Range.AttackRange ARange
         {
             get; protected set;
         }
+
+
+        /// <summary>
+        /// 消費MP
+        /// </summary>
         protected int MP;
+
+
+        /// <param name="aRange">実行対象</param>
+        /// <param name="mp">消費MP</param>
         public Action(Range.AttackRange aRange, int mp = 0)
         {
             ARange = aRange;
@@ -27,6 +39,10 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected bool HasSufficientMP = true;
 
+        /// <summary>
+        /// ActionInfoのActionはダミーのAttackRangeを持っている
+        /// 攻撃対象等を設定したAttackRangeを持つActionを生成する
+        /// </summary>
         public virtual Action Generate(Range.AttackRange aRange)
         {
             var tmp = (Action)MemberwiseClone();
@@ -34,6 +50,10 @@ namespace Soleil.Battle
             return tmp;
         }
 
+        /// <summary>
+        /// Action, BattleFieldの持つConditionedEffectを実行する
+        /// </summary>
+        /// <return> ConditionedEffectを実行した結果OccurenceのList </return>
         public List<Occurence> Act()
         {
             var cEffects = CollectConditionedEffects(new List<ConditionedEffect>());
@@ -41,6 +61,9 @@ namespace Soleil.Battle
             return AggregateConditionEffects(cEffects);
         }
 
+        /// <summary>
+        /// MP消費判定をするConditionedEffectを追加する関数
+        /// </summary>
         List<ConditionedEffect> CheckMP(List<ConditionedEffect> cEffects)
         {
             //MP消費
@@ -66,10 +89,17 @@ namespace Soleil.Battle
             return cEffects;
         }
 
+        /// <summary>
+        /// Actionで実行するConditionedEffectを追加する関数
+        /// </summary>
+        /// <param name="cEffects"> これまで得たConditionedEffectのList </param>
+        /// <returns> 追加した結果得られるConditionedEffectのList </returns>
         public abstract List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects);
 
 
-
+        /// <summary>
+        /// 引数のConditionedEffectを実行して結果Occurenceを得る
+        /// </summary>
         public List<Occurence> AggregateConditionEffects(IEnumerable<ConditionedEffect> additionals, List<Occurence> ocr)
         {
             var ceffects = BF.GetCopiedCEffects();

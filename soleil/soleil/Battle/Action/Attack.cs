@@ -13,6 +13,9 @@ namespace Soleil.Battle
     /// </summary>
     class Attack : Action
     {
+        /// <summary>
+        /// 自分と相手のStatusから威力を計算する関数
+        /// </summary>
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
@@ -34,12 +37,23 @@ namespace Soleil.Battle
         }
         */
 
-        public float DamageF;
         public bool HasDamage = false;
+
+        /// <summary>
+        /// 攻撃ダメージの計算結果
+        /// ダメージ軽減等の計算の為にpublicにしています
+        /// </summary>
+        public float DamageF;
+
+        /// <summary>
+        /// 実際に与えるダメージ
+        /// </summary>
         public int Damage
         {
             get { return (int)DamageF; }
         }
+
+
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
             //cEffects = base.CollectConditionedEffects(cEffects);

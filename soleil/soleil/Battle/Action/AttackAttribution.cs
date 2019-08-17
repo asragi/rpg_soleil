@@ -6,15 +6,26 @@ using System.Threading.Tasks;
 
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// 攻撃属性
+    /// 
+    /// None : 無属性
+    /// Beat : 打属性
+    /// Cut : 斬属性
+    /// Thrust : 突属性
+    /// Fever : 熱属性
+    /// Ice : 冷気属性
+    /// Electro : 電撃属性
+    /// </summary>
     enum AttackAttribution
     {
-        None = -1,
-        Beat,
-        Cut,
-        Thrust,
-        Fever,
-        Ice,
-        Electro,
+        None = -1, //無属性
+        Beat, //打属性
+        Cut, //斬属性
+        Thrust, //突属性
+        Fever, //熱属性
+        Ice, //冷気属性
+        Electro, //電撃属性
         size,
     }
 

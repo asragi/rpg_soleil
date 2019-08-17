@@ -9,7 +9,7 @@ namespace Soleil.Battle
 {
     /// <summary>
     /// Actionの列
-    /// actionsのmpは0に指定すること(それぞれのAction実行毎にmp消費判定が走る)
+    /// actionsのmpは0に指定すること
     /// TODO:Actions の ARangeが違う場合の処理
     /// </summary>
     class ActionSeq : Action

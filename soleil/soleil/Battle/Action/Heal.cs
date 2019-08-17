@@ -13,7 +13,12 @@ namespace Soleil.Battle
     /// </summary>
     class Heal : Action
     {
+        /// <summary>
+        /// 自分と相手のStatusから(HP,MP)の回復量を返す関数
+        /// </summary>
         protected HealFunc HFunc;
+
+
         //public AttackAttribution Attr;
         public MagicFieldName? MField;
         public Heal(HealFunc heal_, Range.AttackRange aRange,
@@ -34,16 +39,25 @@ namespace Soleil.Battle
         }
         */
 
+        /// <summary>
+        /// HP回復量の計算結果
+        /// </summary>
         public float RecoverHPf;
         public int RecoverHP
         {
             get { return (int)RecoverHPf; }
         }
+
+
+        /// <summary>
+        /// MP回復量の計算結果
+        /// </summary>
         public float RecoverMPf;
         public int RecoverMP
         {
             get { return (int)RecoverMPf; }
         }
+
 
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {

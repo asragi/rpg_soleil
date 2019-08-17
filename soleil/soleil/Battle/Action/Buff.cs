@@ -12,7 +12,12 @@ namespace Soleil.Battle
     /// </summary>
     class Buff : Action
     {
+        /// <summary>
+        /// 自分と相手のStatusからBuff効果を計算する関数
+        /// </summary>
         protected BuffFunc BFunc;
+
+
         public Buff(BuffFunc bFunc, Range.AttackRange aRange, int mp = 0) : base(aRange, mp) => BFunc = bFunc;
 
         /*
@@ -24,7 +29,12 @@ namespace Soleil.Battle
         }
         */
 
+        /// <summary>
+        /// 与えるBuff効果
+        /// </summary>
         public BuffRate BRate;
+
+
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
             //cEffects = base.CollectConditionedEffects(cEffects);
