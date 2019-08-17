@@ -46,46 +46,41 @@ namespace Soleil.Battle
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
-                    DamageF = AFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
                     break;
             }
             HasDamage = true;
+            Func<Action, List<Occurence>, int, int, List<Occurence>> func = (act, ocrs, source, target) =>
+            {
+                DamageF = AFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                //Todo: actから参照する
+                if (BF.GetCharacter(target).Status.Dead)
+                {
+                    ocrs.Add(new Occurence(BF.GetCharacter(target).Name + "は既に倒している"));
+                    return ocrs;
+                }
+                else if (!HasDamage)
+                {
+                    //効果はないor消されたパターン
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += 0.ToString() + " ダメージを与えた";
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                }
+                else
+                {
+                    BF.GetCharacter(target).Damage(HP: Damage);
+
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += Damage.ToString() + " ダメージを与えた";
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                }
+                return ocrs;
+            };
 
             cEffects.Add(new ConditionedEffect(
                 (act) => HasSufficientMP,
-                (act, ocrs) =>
-                {
-                    switch (act.ARange)
-                    {
-                        case Range.OneEnemy aRange:
-                            //Todo: actから参照する
-                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒している"));
-                                return ocrs;
-                            }
-                            else if (!HasDamage)
-                            {
-                                //効果はないor消されたパターン
-                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
-                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
-                                mes += 0.ToString() + " ダメージを与えた";
-                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
-                            }
-                            else
-                            {
-                                BF.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
-
-                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
-                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
-                                mes += (Damage).ToString() + " ダメージを与えた";
-                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
-                            }
-                            return ocrs;
-                        default:
-                            throw new Exception("not implemented");
-                    }
-                },
+                (act, ocrs) => ARange.Targets(BF).Aggregate(ocrs, (s, target) => func(act, s, ARange.SourceIndex, target)),
                 10000));
 
 

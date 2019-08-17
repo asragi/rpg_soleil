@@ -16,6 +16,7 @@ namespace Soleil.Range
         public int SourceIndex;
         public AttackRange(int sourceIndex) => SourceIndex = sourceIndex;
         public abstract bool ContainRange(int index, BattleField bf);
+        public abstract List<int> Targets(BattleField bf);
         public AttackRange Clone() =>
             MemberwiseClone() as AttackRange;
     }
@@ -33,6 +34,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
+        public override List<int> Targets(BattleField bf) => new List<int> { TargetIndex };
     }
 
     /// <summary>
@@ -47,6 +49,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
+        public override List<int> Targets(BattleField bf) => bf.SameSideIndexes(TargetSide);
     }
 
     /// <summary>
@@ -60,6 +63,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => index == SourceIndex;
+        public override List<int> Targets(BattleField bf) => new List<int> { SourceIndex };
     }
 
     /// <summary>
@@ -75,6 +79,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => index == TargetIndex;
+        public override List<int> Targets(BattleField bf) => new List<int> { TargetIndex };
     }
 
     /// <summary>
@@ -89,6 +94,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => bf.SameSideIndexes(TargetSide).Contains(index);
+        public override List<int> Targets(BattleField bf) => bf.SameSideIndexes(TargetSide);
     }
 
     /// <summary>
@@ -102,6 +108,7 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => true;
+        public override List<int> Targets(BattleField bf) => bf.AliveIndexes();
     }
 
     /// <summary>
@@ -115,5 +122,11 @@ namespace Soleil.Range
         public static AttackRange GetInstance() => singleton;
 
         public override bool ContainRange(int index, BattleField bf) => index != SourceIndex;
+        public override List<int> Targets(BattleField bf)
+        {
+            var tmp = bf.AliveIndexes();
+            tmp.Remove(SourceIndex);
+            return tmp;
+        }
     }
 }

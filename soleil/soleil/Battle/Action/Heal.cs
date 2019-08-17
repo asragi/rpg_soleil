@@ -14,14 +14,14 @@ namespace Soleil.Battle
     class Heal : Action
     {
         protected HealFunc HFunc;
-        public AttackAttribution Attr; //これいる？
+        //public AttackAttribution Attr;
         public MagicFieldName? MField;
         public Heal(HealFunc heal_, Range.AttackRange aRange,
             AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null, int mp = 0)
             : base(aRange, mp)
         {
             HFunc = heal_;
-            Attr = attr;
+            //Attr = attr;
             MField = mField;
         }
 
@@ -49,47 +49,31 @@ namespace Soleil.Battle
         {
             //cEffects = base.CollectConditionedEffects(cEffects);
 
-            switch (ARange)
+            Func<Action, List<Occurence>, int, int, List<Occurence>> func = (act, ocrs, source, target) =>
             {
-                case Range.OneEnemy aRange:
-                    (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
-                    break;
-                case Range.Me aRange:
-                    (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
-                    break;
-                case Range.Ally aRange:
-                    (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
-                    break;
-            }
+                (RecoverHPf, RecoverMPf) = HFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                //Todo: actから参照する
+                if (BF.GetCharacter(target).Status.Dead)
+                {
+                    ocrs.Add(new Occurence(BF.GetCharacter(target).Name + "は既に倒されている"));
+                    return ocrs;
+                }
+                else
+                {
+
+                    BF.GetCharacter(target).Heal(HP: RecoverHP, MP: RecoverMP);
+
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "の";
+                    mes += "HPを" + (RecoverHP).ToString() + ", MPを" + (RecoverMP).ToString() + " 回復した";
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: -RecoverHP, MPDmg: -RecoverMP));
+                }
+                return ocrs;
+            };
 
             cEffects.Add(new ConditionedEffect(
                 (act) => HasSufficientMP,
-                (act, ocrs) =>
-                {
-                    switch (act.ARange)
-                    {
-                        case Range.Ally aRange:
-                            //Todo: actから参照する
-                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒されている"));
-                                return ocrs;
-                            }
-                            else
-                            {
-
-                                BF.GetCharacter(aRange.TargetIndex).Heal(HP: RecoverHP, MP: RecoverMP);
-
-                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
-                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "の";
-                                mes += "HPを" + (RecoverHP).ToString() + ", MPを" + (RecoverMP).ToString() + " 回復した";
-                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: -RecoverHP, MPDmg: -RecoverMP));
-                            }
-                            return ocrs;
-                        default:
-                            throw new Exception("not implemented");
-                    }
-                },
+                (act, ocrs) => ARange.Targets(BF).Aggregate(ocrs, (s, target) => func(act, s, ARange.SourceIndex, target)),
                 10000));
 
             return cEffects;

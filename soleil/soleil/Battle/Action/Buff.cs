@@ -29,18 +29,64 @@ namespace Soleil.Battle
         {
             //cEffects = base.CollectConditionedEffects(cEffects);
 
-            switch (ARange)
+            Func<Action, List<Occurence>, int, int, List<Occurence>> buffForEnemy = (act, ocrs, source, target) =>
             {
-                case Range.OneEnemy aRange:
-                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
-                    break;
-                case Range.Me aRange:
-                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.SourceIndex).Status);
-                    break;
-                case Range.Ally aRange:
-                    BRate = BFunc(BF.GetCharacter(aRange.SourceIndex).Status, BF.GetCharacter(aRange.TargetIndex).Status);
-                    break;
+                BRate = BFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                if (BF.GetCharacter(target).Status.Dead)
+                {
+                    ocrs.Add(new Occurence(BF.GetCharacter(target).Name + "は既に倒している"));
+                }
+                else
+                {
+                    BF.GetCharacter(target).Buff(BRate);
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += "バフを与えた";
+                    ocrs.Add(new OccurenceBuffForCharacter(mes, target));
+                }
+                return ocrs;
             }
+            ,
+            buffForAlly = (act, ocrs, source, target) =>
+            {
+                BRate = BFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                if (BF.GetCharacter(target).Status.Dead)
+                {
+                    ocrs.Add(new Occurence(BF.GetCharacter(target).Name + "は既に倒されている"));
+                }
+                else
+                {
+                    BF.GetCharacter(target).Buff(BRate);
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += "バフを与えた";
+                    ocrs.Add(new OccurenceBuffForCharacter(mes, target));
+                }
+                return ocrs;
+            }
+            ,
+            buffForMe = (act, ocrs, source, target) =>
+            {
+                BRate = BFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                if (BF.GetCharacter(source).Status.Dead)
+                {
+                    ocrs.Add(new Occurence(BF.GetCharacter(source).Name + "は既に死んでいる"));
+                }
+                else
+                {
+                    BF.GetCharacter(source).Buff(BRate);
+                    string mes = BF.GetCharacter(source).Name + "は";
+                    var cmp = BRate.Comp();
+                    if (cmp == 1)
+                        mes += "能力が上がった";
+                    else if (cmp == -1)
+                        mes += "能力が下がった";
+                    else
+                        mes += "能力が変動した";
+                    ocrs.Add(new OccurenceBuffForCharacter(mes, source));
+                }
+                return ocrs;
+            };
 
 
             cEffects.Add(new ConditionedEffect(
@@ -49,53 +95,24 @@ namespace Soleil.Battle
                 {
                     switch (act.ARange)
                     {
-                        case Range.OneEnemy aRange:
-                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒している"));
-                            }
-                            else
-                            {
-                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
-                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
-                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
-                                mes += "バフを与えた";
-                                ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
-                            }
-                            return ocrs;
-                        case Range.Ally aRange:
-                            if (BF.GetCharacter(aRange.TargetIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(BF.GetCharacter(aRange.TargetIndex).Name + "は既に倒されている"));
-                            }
-                            else
-                            {
-                                BF.GetCharacter(aRange.TargetIndex).Buff(BRate);
-                                string mes = BF.GetCharacter(aRange.SourceIndex).Name + "が";
-                                mes += BF.GetCharacter(aRange.TargetIndex).Name + "に";
-                                mes += "バフを与えた";
-                                ocrs.Add(new OccurenceBuffForCharacter(mes, aRange.TargetIndex));
-                            }
-                            return ocrs;
-                        case Range.Me me:
-                            if (BF.GetCharacter(me.SourceIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(BF.GetCharacter(me.SourceIndex).Name + "は既に死んでいる"));
-                            }
-                            else
-                            {
-                                BF.GetCharacter(me.SourceIndex).Buff(BRate);
-                                string mes = BF.GetCharacter(me.SourceIndex).Name + "は";
-                                var cmp = BRate.Comp();
-                                if (cmp == 1)
-                                    mes += "能力が上がった";
-                                else if (cmp == -1)
-                                    mes += "能力が下がった";
-                                else
-                                    mes += "能力が変動した";
-                                ocrs.Add(new OccurenceBuffForCharacter(mes, me.SourceIndex));
-                            }
-                            return ocrs;
+                        case Range.OneEnemy _:
+                        case Range.AllEnemy _:
+                            return ARange.Targets(BF).Aggregate(ocrs, (s, target) => buffForEnemy(act, s, ARange.SourceIndex, target));
+
+                        case Range.Ally _:
+                        case Range.AllAlly _:
+                            return ARange.Targets(BF).Aggregate(ocrs, (s, target) => target == ARange.SourceIndex ? buffForMe(act, s, ARange.SourceIndex, target) : buffForAlly(act, s, ARange.SourceIndex, target));
+                        case Range.Me _:
+                            return buffForMe(act, ocrs, ARange.SourceIndex, ARange.SourceIndex);
+
+                        case Range.ForAll _:
+                            ocrs = BF.OppositeIndexes(ARange.SourceIndex).Aggregate(ocrs, (s, target) => buffForEnemy(act, s, ARange.SourceIndex, target));
+                            return BF.SameSideIndexes(ARange.SourceIndex).Aggregate(ocrs, (s, target) => target == ARange.SourceIndex ? buffForMe(act, s, ARange.SourceIndex, target) : buffForAlly(act, s, ARange.SourceIndex, target));
+
+                        case Range.ForOthers _:
+                            ocrs = BF.OppositeIndexes(ARange.SourceIndex).Aggregate(ocrs, (s, target) => buffForEnemy(act, s, ARange.SourceIndex, target));
+                            return BF.SameSideIndexes(ARange.SourceIndex).Aggregate(ocrs, (s, target) => target == ARange.SourceIndex ? ocrs : buffForAlly(act, s, ARange.SourceIndex, target));
+
                         default:
                             throw new Exception("not implemented");
                     }
