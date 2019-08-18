@@ -19,6 +19,7 @@ namespace Soleil.Menu
         private string desc;
 
         private Image icon;
+        public readonly SkillID ID;
 
         public MagicMenuPanel(ISkill data, MagicMenu parent)
             : base(data.Name, parent)
@@ -31,6 +32,7 @@ namespace Soleil.Menu
             MagicColor = ColorPalette.MagicColors[magicData.Category];
             icon = new Image(MagicIcon.IconMap[magicData.Category], LocalPos + parent.Pos, DepthID.Message);
             icon.Color = SetColor(MagicColor);
+            ID = data.ID;
         }
 
         protected override void OnSelected()
