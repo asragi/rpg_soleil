@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soleil
 {
     /// <summary>
-    /// 回復等の処理を切り出したかった(いい名前は思い浮かばなかった)
+    /// 回復等スキル共通の処理を切り出すクラス
     /// </summary>
     static class CommonOperation
     {

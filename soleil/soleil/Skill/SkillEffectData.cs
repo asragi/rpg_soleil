@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Soleil.Skill
 {
     /// <summary>
-    /// メニュー画面で魔法発動した時の効果(ほんまにこのやり方でいいのかはわからない)
+    /// メニュー画面で魔法発動した時の効果
     /// </summary>
     static class SkillEffectData
     {
