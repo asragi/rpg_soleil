@@ -65,6 +65,9 @@
     <Compile Include="Battle\EquipSet.cs" />
     <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
+    <Compile Include="Dungeon\DungeonData.cs" />
+    <Compile Include="Dungeon\DungeonDatabase.cs" />
+    <Compile Include="Dungeon\DungeonFloorEvent.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />
     <Compile Include="Person\GrowthType.cs" />
@@ -315,9 +318,7 @@
     <None Include="app.manifest" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dungeon\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
