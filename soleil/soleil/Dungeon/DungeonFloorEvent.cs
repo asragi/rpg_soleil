@@ -11,5 +11,6 @@ namespace Soleil.Dungeon
     /// </summary>
     abstract class DungeonFloorEvent
     {
+
     }
 }
