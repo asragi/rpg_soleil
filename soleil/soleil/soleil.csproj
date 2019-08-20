@@ -70,6 +70,7 @@
     <Compile Include="Dungeon\DungeonData.cs" />
     <Compile Include="Dungeon\DungeonDatabase.cs" />
     <Compile Include="Dungeon\DungeonFloorEvent.cs" />
+    <Compile Include="Dungeon\DungeonMaster.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />
     <Compile Include="Person\GrowthType.cs" />
