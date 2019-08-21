@@ -11,7 +11,7 @@ namespace Soleil.Dungeon
     /// </summary>
     class DungeonExecutor
     {
-        private static readonly NothingEvent nothing;
+        private static readonly NothingEvent nothing = new NothingEvent();
         private readonly DungeonName name;
         private DungeonFloorEvent nowEvent;
         public DungeonExecutor(DungeonName _name)
