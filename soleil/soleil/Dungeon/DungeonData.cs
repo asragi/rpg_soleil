@@ -19,6 +19,7 @@ namespace Soleil.Dungeon
         }
 
         public bool HasEvent(int floor) => events.ContainsKey(floor);
-        public DungeonFloorEvent GetEvent(int floor) => events[floor];
+        public DungeonFloorEvent GetEvent(int floor)
+            => (DungeonFloorEvent)events[floor].Clone();
     }
 }

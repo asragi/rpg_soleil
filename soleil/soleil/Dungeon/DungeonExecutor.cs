@@ -11,10 +11,23 @@ namespace Soleil.Dungeon
     /// </summary>
     class DungeonExecutor
     {
+        private static readonly NothingEvent nothing;
         private readonly DungeonName name;
+        private DungeonFloorEvent nowEvent;
         public DungeonExecutor(DungeonName _name)
         {
             name = _name;
+        }
+
+        public void Update()
+        {
+            if (nowEvent == null) return;
+            if (nowEvent.IsEnd)
+            {
+                nowEvent = null;
+                return;
+            }
+            nowEvent.Act();
         }
 
         /// <summary>
@@ -33,8 +46,10 @@ namespace Soleil.Dungeon
             var data = DungeonDatabase.Get(name);
             if (data.HasEvent(floorNum))
             {
+                nowEvent = data.GetEvent(floorNum);
                 return;
             }
+            nowEvent = nothing;
             return;
         }
     }
