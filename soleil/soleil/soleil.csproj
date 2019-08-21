@@ -69,6 +69,7 @@
     <Compile Include="Dungeon\BattleEvent.cs" />
     <Compile Include="Dungeon\DungeonData.cs" />
     <Compile Include="Dungeon\DungeonDatabase.cs" />
+    <Compile Include="Dungeon\DungeonExecutor.cs" />
     <Compile Include="Dungeon\DungeonFloorEvent.cs" />
     <Compile Include="Dungeon\DungeonMaster.cs" />
     <Compile Include="Scene\DungeonScene.cs" />

@@ -17,5 +17,8 @@ namespace Soleil.Dungeon
         {
             events = dict;
         }
+
+        public bool HasEvent(int floor) => events.ContainsKey(floor);
+        public DungeonFloorEvent GetEvent(int floor) => events[floor];
     }
 }
