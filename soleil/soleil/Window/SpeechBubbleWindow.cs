@@ -11,7 +11,7 @@ namespace Soleil
     /// </summary>
     class SpeechBubbleWindow: MessageWindow
     {
-        private const int ArrowPositionFromLeft = 15 + Event.WindowEventBase.WindowPosDiffX;
+        private const int ArrowPositionFromLeft = Event.WindowEventBase.WindowPosDiffX;
         Image arrow;
 
         public SpeechBubbleWindow(Vector pos, Vector size, bool isStatic = false)

@@ -5,7 +5,7 @@ namespace Soleil.Event
     abstract class WindowEventBase
         : EventBase
     {
-        public const int WindowPosDiffX = 60;
+        public const int WindowPosDiffX = 30;
         private static readonly Vector CharacterMessagePos = new Vector(- WindowPosDiffX, -120);
         protected WindowManager Wm = WindowManager.GetInstance();
         protected Vector Size;
