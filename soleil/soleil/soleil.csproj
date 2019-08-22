@@ -71,6 +71,7 @@
     <Compile Include="Dungeon\DungeonDatabase.cs" />
     <Compile Include="Dungeon\DungeonExecutor.cs" />
     <Compile Include="Dungeon\DungeonFloorEvent.cs" />
+    <Compile Include="Dungeon\DungeonGraphics.cs" />
     <Compile Include="Dungeon\DungeonInput.cs" />
     <Compile Include="Dungeon\DungeonMaster.cs" />
     <Compile Include="Dungeon\FirstSelectWindow.cs" />

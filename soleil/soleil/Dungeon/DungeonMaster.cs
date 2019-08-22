@@ -17,12 +17,15 @@
         DungeonExecutor executor;
         DungeonInput input;
         FirstSelectWindow firstSelect;
+        DungeonGraphics graphics;
+
         public DungeonMaster(DungeonName name)
         {
             executor = new DungeonExecutor(name);
             firstSelect = new FirstSelectWindow();
             firstSelect.Call();
             input = new DungeonInput(this, firstSelect);
+            graphics = new DungeonGraphics();
             Mode = DungeonMode.Init;
         }
 
@@ -32,11 +35,12 @@
         {
             executor.Update();
             input.Update();
+            graphics.Update();
         }
 
         public void Draw(Drawing d)
         {
-
+            graphics.Draw(d);
         }
     }
 }
