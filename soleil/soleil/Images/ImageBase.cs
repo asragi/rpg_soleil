@@ -40,6 +40,7 @@ namespace Soleil
         public float Alpha { get; set; }
 
         // 透明度に関するイージング処理に用いる変数．
+        private float alphaStart;
         private int alphaFrame;
         private int alphaDuration;
         private EFunc alphaEaseFunc;
@@ -81,7 +82,7 @@ namespace Soleil
 
         public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
-            Alpha = (isFadeIn) ? 0 : 1;
+            alphaStart = Alpha;
             alphaFrame = 0;
             alphaFrameWait = FrameWait;
             alphaDuration = duration;
@@ -154,7 +155,7 @@ namespace Soleil
             }
             if (alphaFrame >= alphaDuration) return;
             if (alphaEaseFunc == null) return;
-            Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
+            Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, alphaStart) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, alphaStart);
             alphaFrame++;
 
             if (alphaFrame >= alphaDuration) Alpha = fadeIn ? 1 : 0;
