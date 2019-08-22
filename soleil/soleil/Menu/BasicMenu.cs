@@ -64,7 +64,8 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
-            triangleImage.ForEach2(t => t.Call());
+            triangleImage[0].Call(alpha: InitIndex != 0);
+            triangleImage[1].Call(alpha: AllPanels.Length - RowSize - InitIndex > 0);
             foreach (var item in AllPanels)
             {
                 item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
