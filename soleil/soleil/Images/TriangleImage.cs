@@ -16,8 +16,8 @@ namespace Soleil.Images
         private readonly Vector VibDirection;
         private Vector delta;
 
-        public TriangleImage(Vector pos, DepthID depth, bool centerOrigin = true, bool isStatic = true, float alpha = 0, float angle = 0)
-            :base(Texture, pos, depth, centerOrigin, isStatic, alpha)
+        public TriangleImage(Vector pos, Vector posdiff, DepthID depth, bool centerOrigin = true, bool isStatic = true, float alpha = 0, float angle = 0)
+            :base(Texture, pos, posdiff, depth, centerOrigin, isStatic, alpha)
         {
             Angle = (float)Math.PI * (angle / 180);
             VibDirection = new Vector(0, -1).Rotate(angle);

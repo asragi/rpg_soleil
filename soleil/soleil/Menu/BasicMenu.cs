@@ -42,8 +42,8 @@ namespace Soleil.Menu
             MenuDescription = desc;
             triangleImage = new[]
             {
-                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, TriangleY), DepthID.Message),
-                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, backImage.ImageSize.Y - TriangleY), DepthID.Message, angle: 180)
+                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, TriangleY), WindowPosDiff, DepthID.Message),
+                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, backImage.ImageSize.Y - TriangleY), WindowPosDiff, DepthID.Message, angle: 180)
             };
         }
 
@@ -64,6 +64,7 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, true);
+            triangleImage.ForEach2(t => t.Call());
             foreach (var item in AllPanels)
             {
                 item?.MoveTo(WindowPos + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
@@ -78,6 +79,7 @@ namespace Soleil.Menu
             // Transition Images
             backImage.MoveTo(WindowPos + WindowPosDiff, FadeSpeed, MenuSystem.EaseFunc);
             backImage.Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+            triangleImage.ForEach2(t => t.Quit());
             foreach (var item in Panels)
             {
                 item?.MoveTo(WindowPos + WindowPosDiff + item.LocalPos, FadeSpeed, MenuSystem.EaseFunc);
