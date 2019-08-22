@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Images;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,12 +31,20 @@ namespace Soleil.Menu
         protected MenuDescription MenuDescription;
         public SelectablePanel SelectedPanel => Panels[Index];
 
+        private static readonly int TriangleY = 20;
+        private TriangleImage[] triangleImage;
+
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
             backImage = new Image(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);
             Index = 0;
             MenuDescription = desc;
+            triangleImage = new[]
+            {
+                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, TriangleY), DepthID.Message),
+                new TriangleImage(WindowPos + new Vector(backImage.ImageSize.X / 2, backImage.ImageSize.Y - TriangleY), DepthID.Message, angle: 180)
+            };
         }
 
         protected void Init()
@@ -103,6 +112,7 @@ namespace Soleil.Menu
         {
             base.Update();
             backImage.Update();
+            triangleImage.ForEach2(t => t.Update());
             foreach (var item in Panels)
             {
                 item?.Update();
@@ -113,6 +123,7 @@ namespace Soleil.Menu
         {
             base.Draw(d);
             backImage.Draw(d);
+            triangleImage.ForEach2(t => t.Draw(d));
             foreach (var item in Panels)
             {
                 item?.Draw(d);
@@ -126,6 +137,8 @@ namespace Soleil.Menu
                 Panels[i]?.SetSelectedAndFade(i == Index);
             }
             MenuDescription.Text = Panels[Index].Desctiption;
+            triangleImage[0].Alpha = InitIndex == 0 ? 0 : 1;
+            triangleImage[1].Alpha = AllPanels.Length - RowSize - InitIndex > 0 ? 1 : 0;
         }
 
         // Input
