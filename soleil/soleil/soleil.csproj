@@ -280,10 +280,14 @@
     <Compile Include="Skill\SkillLearn.cs" />
     <Compile Include="Title\ExitTransition.cs" />
     <Compile Include="Title\FirstWindow.cs" />
+    <Compile Include="Title\LandingTransition.cs" />
     <Compile Include="Title\LoadGameTransition.cs" />
     <Compile Include="Title\NewGameTransition.cs" />
+    <Compile Include="Title\TitleCommandWindow.cs" />
+    <Compile Include="Title\TitleGraphics.cs" />
     <Compile Include="Title\TitleInput.cs" />
     <Compile Include="Title\TitleMaster.cs" />
+    <Compile Include="Title\TitleOrnamentBar.cs" />
     <Compile Include="UI\UIGauge.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\IMessageBox.cs" />
