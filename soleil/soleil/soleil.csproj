@@ -75,6 +75,7 @@
     <Compile Include="Dungeon\DungeonInput.cs" />
     <Compile Include="Dungeon\DungeonMaster.cs" />
     <Compile Include="Dungeon\FirstSelectWindow.cs" />
+    <Compile Include="Dungeon\InitialWait.cs" />
     <Compile Include="Dungeon\NothingEvent.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />
