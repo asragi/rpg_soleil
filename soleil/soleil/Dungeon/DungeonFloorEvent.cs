@@ -9,8 +9,11 @@ namespace Soleil.Dungeon
     /// <summary>
     /// 戦闘・アイテム獲得などダンジョンの各フロアで起こる出来事を記述する抽象クラス．
     /// </summary>
-    abstract class DungeonFloorEvent
+    abstract class DungeonFloorEvent: ICloneable
     {
+        public bool IsEnd { get; private set; } = false;
+        public void Act() { }
 
+        public abstract object Clone();
     }
 }

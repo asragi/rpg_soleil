@@ -17,5 +17,7 @@ namespace Soleil.Dungeon
         {
             Enemies = _enemies;
         }
+
+        public override object Clone() => new BattleEvent(Enemies);
     }
 }
