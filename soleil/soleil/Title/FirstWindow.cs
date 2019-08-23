@@ -11,7 +11,7 @@ namespace Soleil.Title
     /// </summary>
     class FirstWindow
     {
-        private static readonly Vector WindowPos = new Vector(128, 186);
+        private static readonly Vector WindowPos = new Vector(162, 321);
         private static readonly string[] Commands = new[]
         {
             "Load Game", "New Game", "Options", "Exit"
@@ -20,15 +20,15 @@ namespace Soleil.Title
         // Ref
         TitleMaster master;
         // Window
-        SelectableWindow selectWindow;
+        TitleCommandWindow selectWindow;
         // Field
         bool saveExists;
 
         public FirstWindow(TitleMaster _master)
         {
             master = _master;
+            selectWindow = new TitleCommandWindow(WindowPos, Commands);
             saveExists = SaveLoad.FileExist();
-            CallWindow();
         }
 
         public void OnInputUp()
@@ -62,6 +62,14 @@ namespace Soleil.Title
             }
         }
 
+        public void CallWindow()
+        {
+            selectWindow.Call();
+        }
+
+        public void Update() => selectWindow.Update();
+        public void Draw(Drawing d) => selectWindow.Draw(d);
+
         private void SelectLoad()
         {
             if (!saveExists) return;
@@ -86,15 +94,9 @@ namespace Soleil.Title
             QuitWindow();
         }
 
-        private void CallWindow()
-        {
-            selectWindow = new SelectableWindow(WindowPos, true, Commands);
-            selectWindow.Call();
-        }
-
         private void QuitWindow()
         {
-            selectWindow.Quit();
+            // selectWindow.Quit();
         }
     }
 }

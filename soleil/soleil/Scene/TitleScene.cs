@@ -22,7 +22,7 @@ namespace Soleil
             master = new TitleMaster(sm);
 
             // Graphics
-            background = new Image(TextureID.WhiteWindow, Vector.Zero, DepthID.BackGround, alpha: 1) { Color = ColorPalette.GlayBlue };
+            background = new Image(TextureID.WhiteWindow, Vector.Zero, DepthID.BackGround, alpha: 1);
         }
 
         public override void Update()
