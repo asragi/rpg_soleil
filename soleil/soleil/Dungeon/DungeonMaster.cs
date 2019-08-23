@@ -24,7 +24,7 @@
         {
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this);
-            firstSelect = new FirstSelectWindow();
+            firstSelect = new FirstSelectWindow(this);
             firstSelect.Call();
             input = new DungeonInput(this, firstSelect);
             graphics = new DungeonGraphics();
