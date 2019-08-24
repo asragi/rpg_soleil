@@ -1,4 +1,5 @@
 ﻿using Soleil.Battle;
+using Soleil.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +26,12 @@ namespace Soleil.Dungeon
             data = new Dictionary<DungeonName, DungeonData>();
 
             data.Add(DungeonName.MagistolUnderground, new DungeonData(
-                new Dictionary<int, DungeonFloorEvent>()
-                {
-                    {1, new BattleEvent(new[] { EnemyName.Test, EnemyName.Test }) },
-                    {3, new BattleEvent(new[] { EnemyName.Test }) }
-                }
+                    new Dictionary<int, DungeonFloorEvent>()
+                    {
+                        {1, new BattleEvent(new[] { EnemyName.Test, EnemyName.Test }) },
+                        {3, new BattleEvent(new[] { EnemyName.Test }) }
+                    },
+                    MapName.MagistolCol1, new Vector(300, 300)
                 )
             );
         }

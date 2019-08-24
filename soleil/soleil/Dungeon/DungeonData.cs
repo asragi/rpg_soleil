@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,13 +12,20 @@ namespace Soleil.Dungeon
     /// </summary>
     struct DungeonData
     {
-        public int FloorNum => events.Keys.Max();
+        public readonly MapName EntranceName;
+        public readonly Vector EntrancePos;
         Dictionary<int, DungeonFloorEvent> events;
-        public DungeonData(Dictionary<int, DungeonFloorEvent> dict)
+
+        public DungeonData(
+            Dictionary<int, DungeonFloorEvent> dict,
+            MapName entrance, Vector entrancePos)
         {
             events = dict;
+            EntranceName = entrance;
+            EntrancePos = entrancePos;
         }
 
+        public int FloorNum => events.Keys.Max();
         public bool HasEvent(int floor) => events.ContainsKey(floor);
         public DungeonFloorEvent GetEvent(int floor)
             => (DungeonFloorEvent)events[floor].Clone();
