@@ -13,12 +13,21 @@ namespace Soleil.Dungeon
     {
         private readonly Dictionary<int, System.Action> actions;
         private readonly PlayerObjectWrap player;
+        private readonly SceneManager sceneManager;
+        private readonly PersonParty party;
 
+        private readonly DungeonName dungeonName;
         private int execFrame;
 
-        public ReturnToHome(PlayerObjectWrap _player)
+        public ReturnToHome(
+            PlayerObjectWrap _player, DungeonName name,
+            SceneManager manager, PersonParty _party
+            )
         {
             player = _player;
+            sceneManager = manager;
+            party = _party;
+            dungeonName = name;
             execFrame = 0;
 
             actions = new Dictionary<int, Action>()
@@ -43,7 +52,11 @@ namespace Soleil.Dungeon
 
         private void ChangeScene()
         {
-
+            var data = DungeonDatabase.Get(dungeonName);
+            var mapName = data.EntranceName;
+            var destination = data.EntrancePos;
+            new MapScene(sceneManager, party, mapName, destination);
+            // sceneManager.KillNowScene();
         }
     }
 }

@@ -20,6 +20,7 @@
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
         ReturnConfirm returnConfirm;
+        ReturnToHome returnToHome;
 
         // Graphics
         DungeonGraphics graphics;
@@ -28,13 +29,15 @@
         // Fields
         private DungeonMode mode;
 
-        public DungeonMaster(DungeonName name)
+        public DungeonMaster(
+            DungeonName name, SceneManager sm, PersonParty party)
         {
             player = new PlayerObjectWrap();
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
             returnConfirm = new ReturnConfirm(this);
+            returnToHome = new ReturnToHome(player, name, sm, party);
             input = new DungeonInput(this, firstSelect, returnConfirm);
             graphics = new DungeonGraphics();
             Mode = DungeonMode.Init;
@@ -78,7 +81,8 @@
                 case DungeonMode.Search:
                     break;
                 case DungeonMode.ReturnHome:
-                    break;
+                    returnToHome.Exec();
+                    return;
                 default:
                     break;
             }

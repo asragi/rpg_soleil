@@ -31,7 +31,7 @@ namespace Soleil.Dungeon
                         {1, new BattleEvent(new[] { EnemyName.Test, EnemyName.Test }) },
                         {3, new BattleEvent(new[] { EnemyName.Test }) }
                     },
-                    MapName.MagistolCol1, new Vector(300, 300)
+                    MapName.MagistolCol1, new Vector(1232, 1222)
                 )
             );
         }
