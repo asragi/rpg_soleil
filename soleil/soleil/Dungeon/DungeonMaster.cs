@@ -23,19 +23,30 @@
         DungeonGraphics graphics;
         PlayerObjectWrap player;
 
+        // Fields
+        private DungeonMode mode;
+
         public DungeonMaster(DungeonName name)
         {
             player = new PlayerObjectWrap();
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
-            firstSelect.Call();
             input = new DungeonInput(this, firstSelect);
             graphics = new DungeonGraphics();
             Mode = DungeonMode.Init;
         }
 
-        public DungeonMode Mode { get; set; }
+        public DungeonMode Mode {
+            get => mode;
+            set {
+                if (mode != value)
+                {
+                    OnModeChange(value);
+                }
+                mode = value;
+            }
+        }
 
         public void Update()
         {
@@ -61,6 +72,26 @@
                     return;
                 case DungeonMode.FirstWindow:
                     break;
+                case DungeonMode.GoNext:
+                    break;
+                case DungeonMode.Search:
+                    break;
+                case DungeonMode.ReturnHome:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void OnModeChange(DungeonMode mode)
+        {
+            switch (mode)
+            {
+                case DungeonMode.Init:
+                    break;
+                case DungeonMode.FirstWindow:
+                    firstSelect.Call();
+                    return;
                 case DungeonMode.GoNext:
                     break;
                 case DungeonMode.Search:

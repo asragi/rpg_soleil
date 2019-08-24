@@ -28,7 +28,7 @@ namespace Soleil.Dungeon
             actions = new Dictionary<int, Action>()
             {
                 {80, StopPlayer },
-                {120, ModeToFirstWindow }
+                {100, ModeToFirstWindow }
             };
 
             Reset();
