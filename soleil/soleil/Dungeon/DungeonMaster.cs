@@ -18,10 +18,14 @@
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
+
+        // Graphics
         DungeonGraphics graphics;
+        PlayerObjectWrap player;
 
         public DungeonMaster(DungeonName name)
         {
+            player = new PlayerObjectWrap();
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this);
             firstSelect = new FirstSelectWindow(this);
@@ -39,11 +43,13 @@
             executor.Update();
             input.Update();
             graphics.Update();
+            player.Update();
         }
 
         public void Draw(Drawing d)
         {
             graphics.Draw(d);
+            player.Draw(d);
         }
 
         private void Exec()

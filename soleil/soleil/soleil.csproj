@@ -77,6 +77,7 @@
     <Compile Include="Dungeon\FirstSelectWindow.cs" />
     <Compile Include="Dungeon\InitialWait.cs" />
     <Compile Include="Dungeon\NothingEvent.cs" />
+    <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />
     <Compile Include="Person\GrowthType.cs" />
