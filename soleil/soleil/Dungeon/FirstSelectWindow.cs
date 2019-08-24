@@ -52,7 +52,7 @@ namespace Soleil.Dungeon
                     master.Mode = DungeonMode.Search;
                     return;
                 case 2:
-                    master.Mode = DungeonMode.ReturnHome;
+                    master.Mode = DungeonMode.ReturnConfirm;
                     return;
             }
         }

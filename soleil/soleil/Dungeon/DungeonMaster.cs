@@ -6,6 +6,7 @@
         FirstWindow,
         GoNext,
         Search,
+        ReturnConfirm,
         ReturnHome,
     }
 
@@ -18,6 +19,7 @@
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
+        ReturnConfirm returnConfirm;
 
         // Graphics
         DungeonGraphics graphics;
@@ -32,7 +34,8 @@
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
-            input = new DungeonInput(this, firstSelect);
+            returnConfirm = new ReturnConfirm(this);
+            input = new DungeonInput(this, firstSelect, returnConfirm);
             graphics = new DungeonGraphics();
             Mode = DungeonMode.Init;
         }
@@ -70,8 +73,6 @@
                 case DungeonMode.Init:
                     initialWait.Exec();
                     return;
-                case DungeonMode.FirstWindow:
-                    break;
                 case DungeonMode.GoNext:
                     break;
                 case DungeonMode.Search:
@@ -87,19 +88,12 @@
         {
             switch (mode)
             {
-                case DungeonMode.Init:
-                    break;
                 case DungeonMode.FirstWindow:
                     firstSelect.Call();
                     return;
-                case DungeonMode.GoNext:
-                    break;
-                case DungeonMode.Search:
-                    break;
-                case DungeonMode.ReturnHome:
-                    break;
-                default:
-                    break;
+                case DungeonMode.ReturnConfirm:
+                    returnConfirm.Call();
+                    return;
             }
         }
     }

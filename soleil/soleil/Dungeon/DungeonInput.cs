@@ -12,14 +12,18 @@ namespace Soleil.Dungeon
         // refs
         private readonly DungeonMaster master;
         private readonly FirstSelectWindow firstSelect;
+        private readonly ReturnConfirm returnConfirm;
 
         // instance
         private InputSmoother smoother;
 
-        public DungeonInput(DungeonMaster _master, FirstSelectWindow fs)
+        public DungeonInput(
+            DungeonMaster _master,
+            FirstSelectWindow fs, ReturnConfirm confirm)
         {
             master = _master;
             firstSelect = fs;
+            returnConfirm = confirm;
             smoother = new InputSmoother();
         }
 
@@ -32,6 +36,9 @@ namespace Soleil.Dungeon
                 case DungeonMode.FirstWindow:
                     SelectFirstWindow(dir);
                     return;
+                case DungeonMode.ReturnConfirm:
+                    ReturnConfirm(dir);
+                    return;
             }
         }
 
@@ -40,6 +47,14 @@ namespace Soleil.Dungeon
             if (dir == Direction.U) firstSelect.OnInputUp();
             if (dir == Direction.D) firstSelect.OnInputDown();
             if (KeyInput.GetKeyPush(Key.A)) firstSelect.OnInputSubmit();
+        }
+
+        private void ReturnConfirm(Direction dir)
+        {
+            if (dir == Direction.U) returnConfirm.OnInputUp();
+            if (dir == Direction.D) returnConfirm.OnInputDown();
+            if (KeyInput.GetKeyPush(Key.A)) returnConfirm.OnInputSubmit();
+            if (KeyInput.GetKeyPush(Key.B)) returnConfirm.OnInputCancel();
         }
     }
 }
