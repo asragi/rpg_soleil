@@ -11,7 +11,7 @@ namespace Soleil.Dungeon
     /// </summary>
     struct DungeonData
     {
-        public int FloorNum => events.Last().Key;
+        public int FloorNum => events.Keys.Max();
         Dictionary<int, DungeonFloorEvent> events;
         public DungeonData(Dictionary<int, DungeonFloorEvent> dict)
         {
