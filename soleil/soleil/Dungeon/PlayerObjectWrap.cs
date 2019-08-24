@@ -28,6 +28,12 @@ namespace Soleil.Dungeon
             Player.SetPosition(InitialPosition);
         }
 
+        public void ExecInput(Direction dir)
+            => Player.Move(dir);
+
+        public void SetDirection(Direction dir)
+            => Player.Direction = dir;
+
         public void Update()
         {
             bm.Update();
