@@ -82,15 +82,15 @@
             switch (Mode)
             {
                 case DungeonMode.Init:
-                    initialWait.Exec();
+                    initialWait.ExecUpdate();
                     return;
                 case DungeonMode.GoNext:
-                    moveNext.Exec();
+                    moveNext.ExecUpdate();
                     break;
                 case DungeonMode.Search:
                     break;
                 case DungeonMode.ReturnHome:
-                    returnToHome.Exec();
+                    returnToHome.ExecUpdate();
                     return;
             }
         }

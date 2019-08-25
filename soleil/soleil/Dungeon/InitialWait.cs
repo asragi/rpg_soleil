@@ -9,15 +9,13 @@ namespace Soleil.Dungeon
     /// <summary>
     /// Dungeonに侵入した初めに行われる演出・ウェイト．
     /// </summary>
-    class InitialWait
+    class InitialWait: DungeonExec
     {
-        private readonly Dictionary<int, System.Action> actions;
         // refs
         private readonly DungeonMaster master;
         private readonly PlayerObjectWrap player;
 
         // fields
-        private int execFrame;
         private bool playerMove;
 
         public InitialWait(DungeonMaster _master, PlayerObjectWrap _player)
@@ -25,7 +23,7 @@ namespace Soleil.Dungeon
             master = _master;
             player = _player;
 
-            actions = new Dictionary<int, Action>()
+            Actions = new Dictionary<int, Action>()
             {
                 {80, StopPlayer },
                 {100, ModeToFirstWindow }
@@ -34,16 +32,14 @@ namespace Soleil.Dungeon
             Reset();
         }
 
-        public void Reset()
+        public override void Reset()
         {
-            execFrame = 0;
+            base.Reset();
             playerMove = true;
         }
 
-        public void Exec()
+        protected override void Exec()
         {
-            execFrame++;
-            if (actions.ContainsKey(execFrame)) actions[execFrame]();
             if (playerMove) player.ExecInput(Direction.R);
         }
 
