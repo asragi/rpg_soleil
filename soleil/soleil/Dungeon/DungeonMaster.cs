@@ -19,6 +19,7 @@
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
+        DungeonExec dungeonSearch;
         MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
@@ -37,6 +38,7 @@
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
+            dungeonSearch = new DungeonSearch(this);
             moveNext = new MoveNext(this, player);
             returnConfirm = new ReturnConfirm(this);
             returnToHome = new ReturnToHome(player, name, sm, party);
@@ -88,6 +90,7 @@
                     moveNext.ExecUpdate();
                     break;
                 case DungeonMode.Search:
+                    dungeonSearch.ExecUpdate();
                     break;
                 case DungeonMode.ReturnHome:
                     returnToHome.ExecUpdate();
@@ -116,6 +119,7 @@
             initialWait.Reset();
             player.Reset();
             moveNext.Reset();
+            dungeonSearch.Reset();
         }
     }
 }
