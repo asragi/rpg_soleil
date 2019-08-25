@@ -76,6 +76,7 @@
     <Compile Include="Dungeon\DungeonMaster.cs" />
     <Compile Include="Dungeon\FirstSelectWindow.cs" />
     <Compile Include="Dungeon\InitialWait.cs" />
+    <Compile Include="Dungeon\MoveNext.cs" />
     <Compile Include="Dungeon\NothingEvent.cs" />
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />

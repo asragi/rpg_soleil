@@ -19,6 +19,7 @@
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
+        MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
 
@@ -36,6 +37,7 @@
             executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
+            moveNext = new MoveNext(this, player);
             returnConfirm = new ReturnConfirm(this);
             returnToHome = new ReturnToHome(player, name, sm, party);
             input = new DungeonInput(this, firstSelect, returnConfirm);
@@ -52,6 +54,12 @@
                 }
                 mode = value;
             }
+        }
+
+        public void ToNextFloor()
+        {
+            Mode = DungeonMode.Init;
+            Reset();
         }
 
         public void Update()
@@ -77,14 +85,13 @@
                     initialWait.Exec();
                     return;
                 case DungeonMode.GoNext:
+                    moveNext.Exec();
                     break;
                 case DungeonMode.Search:
                     break;
                 case DungeonMode.ReturnHome:
                     returnToHome.Exec();
                     return;
-                default:
-                    break;
             }
         }
 
@@ -92,6 +99,9 @@
         {
             switch (mode)
             {
+                case DungeonMode.Init:
+                    Transition.GetInstance().SetMode(TransitionMode.FadeIn);
+                    return;
                 case DungeonMode.FirstWindow:
                     firstSelect.Call();
                     return;
@@ -99,6 +109,13 @@
                     returnConfirm.Call();
                     return;
             }
+        }
+
+        private void Reset()
+        {
+            initialWait.Reset();
+            player.Reset();
+            moveNext.Reset();
         }
     }
 }
