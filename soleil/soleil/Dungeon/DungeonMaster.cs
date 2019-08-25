@@ -3,9 +3,16 @@
     enum DungeonMode
     {
         Init,
+        // Windows
         FirstWindow,
+        // Select Go Next
         GoNext,
+        // Search Dungeon
         Search,
+        InitBattle,
+        AfterBattle,
+        FindItem,
+        // ReturnHome
         ReturnConfirm,
         ReturnHome,
     }
@@ -15,6 +22,7 @@
     /// </summary>
     class DungeonMaster
     {
+        DungeonState dungeonState;
         DungeonExecutor executor;
         DungeonInput input;
         InitialWait initialWait;
@@ -34,11 +42,11 @@
         public DungeonMaster(
             DungeonName name, SceneManager sm, PersonParty party)
         {
+            dungeonState = new DungeonState();
             player = new PlayerObjectWrap();
-            executor = new DungeonExecutor(name);
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
-            dungeonSearch = new DungeonSearch(this);
+            dungeonSearch = new DungeonSearch(this, name, dungeonState);
             moveNext = new MoveNext(this, player);
             returnConfirm = new ReturnConfirm(this);
             returnToHome = new ReturnToHome(player, name, sm, party);
@@ -67,7 +75,6 @@
         public void Update()
         {
             Exec();
-            executor.Update();
             input.Update();
             graphics.Update();
             player.Update();

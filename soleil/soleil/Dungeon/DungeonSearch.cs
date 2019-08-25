@@ -12,10 +12,18 @@ namespace Soleil.Dungeon
     class DungeonSearch: DungeonExec
     {
         private readonly DungeonMaster master;
+        private readonly DungeonState dState;
 
-        public DungeonSearch(DungeonMaster _master)
+        private readonly DungeonExecutor executor;
+
+        public DungeonSearch(
+            DungeonMaster _master, DungeonName name,
+            DungeonState state
+            )
         {
             master = _master;
+            dState = state;
+            executor = new DungeonExecutor(name);
 
             Actions = new Dictionary<int, Action>()
             {
@@ -33,7 +41,8 @@ namespace Soleil.Dungeon
 
         private void NotifyResult()
         {
-            master.Mode = DungeonMode.FirstWindow;
+            master.Mode = executor.OnSearch(dState.FloorNum);
+            Console.WriteLine($"Debug Mode is {master.Mode}");
             Reset();
         }
     }
