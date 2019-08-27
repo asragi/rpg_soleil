@@ -14,8 +14,12 @@ namespace Soleil.Dungeon
         private static readonly Vector WindowPos = new Vector(100, 100);
         private static readonly string[] Options = new[] { "進む", "探索する", "入り口に戻る" };
         SelectableWindow window;
-        public FirstSelectWindow()
+
+        // refs
+        private readonly DungeonMaster master;
+        public FirstSelectWindow(DungeonMaster _master)
         {
+            master = _master;
         }
 
         public void Call()
@@ -38,22 +42,19 @@ namespace Soleil.Dungeon
 
         public void OnInputSubmit()
         {
+            Quit();
             switch (window.Index)
             {
                 case 0:
-                    GoNextFloor();
+                    master.Mode = DungeonMode.GoNext;
                     return;
                 case 1:
-                    Search();
+                    master.Mode = DungeonMode.Search;
                     return;
                 case 2:
-                    ReturnHome();
+                    master.Mode = DungeonMode.ReturnConfirm;
                     return;
             }
         }
-
-        private void GoNextFloor() { }
-        private void Search() { }
-        private void ReturnHome() { }
     }
 }

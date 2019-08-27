@@ -11,9 +11,6 @@ namespace Soleil.Dungeon
     /// </summary>
     abstract class DungeonFloorEvent: ICloneable
     {
-        public bool IsEnd { get; private set; } = false;
-        public void Act() { }
-
         public abstract object Clone();
     }
 }

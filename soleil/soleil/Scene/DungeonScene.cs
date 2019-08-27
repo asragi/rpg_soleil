@@ -10,10 +10,12 @@ namespace Soleil
     class DungeonScene: Scene
     {
         DungeonMaster master;
-        public DungeonScene(SceneManager sm, PersonParty party, DungeonName name)
+        public DungeonScene(
+            SceneManager sm, PersonParty party,
+            DungeonName name)
             :base(sm)
         {
-            master = new DungeonMaster(name);
+            master = new DungeonMaster(name, sm, party);
         }
 
         public override void Update()
