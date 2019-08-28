@@ -20,6 +20,8 @@ namespace Soleil
         Currency,
 
         MessageWindow,
+        MessageWindowBack,
+        MessageWindowArrow,
         ConversationWindow,
 
         TitleBack,
@@ -443,6 +445,8 @@ namespace Soleil
             #region UI
             SetPath(TextureID.FrameTest, UIPath + "window2");
             SetPath(TextureID.MessageWindow, UIPath + "message");
+            SetPath(TextureID.MessageWindowBack, UIPath + "message-back");
+            SetPath(TextureID.MessageWindowArrow, UIPath + "message-arrow");
 
             SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 

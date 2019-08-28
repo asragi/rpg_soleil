@@ -315,6 +315,8 @@
     <Compile Include="Window\MessageBox.cs" />
     <Compile Include="Window\MessageWindow.cs" />
     <Compile Include="Window\SelectableWindow.cs" />
+    <Compile Include="Window\SpeechBubbleWindow.cs" />
+    <Compile Include="Window\VariableRectangle.cs" />
     <Compile Include="Window\VariableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
