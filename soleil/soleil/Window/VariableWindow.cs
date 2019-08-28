@@ -29,7 +29,7 @@ namespace Soleil
             IsStatic = isStatic;
             windowTexture = new VariableRectangle(Texture, Pos, DiffPos, _size, Depth, isStatic);
             backTexture = new VariableRectangle(BackTexture, Pos + BackDiff, DiffPos, _size, Depth, isStatic);
-            AddComponents(new[] { backTexture, windowTexture });
+            AddComponents(backTexture, windowTexture);
         }
 
         protected override float Alpha => windowTexture.Alpha;

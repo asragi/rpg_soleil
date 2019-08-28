@@ -77,7 +77,7 @@ namespace Soleil
             skinImg.Rectangle = new Rectangle(FrameSize, FrameSize, tex.Width - 2 * FrameSize, tex.Height - 2 * FrameSize);
             skinImg.Size = new Vector((size.X - 2 * FrameSize) / (tex.Width - 2 * FrameSize), (size.Y - 2 * FrameSize) / (tex.Height - 2 * FrameSize));
             AddComponents(frameImgs);
-            AddComponents(new[] { skinImg } );
+            AddComponents(skinImg);
         }
 
         public float Alpha => skinImg.Alpha;
