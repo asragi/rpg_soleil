@@ -23,11 +23,11 @@
     class DungeonMaster
     {
         DungeonState dungeonState;
-        DungeonExecutor executor;
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
         DungeonExec dungeonSearch;
+        ItemFindEvent itemFindEvent;
         MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
@@ -42,11 +42,12 @@
         public DungeonMaster(
             DungeonName name, SceneManager sm, PersonParty party)
         {
-            dungeonState = new DungeonState();
+            dungeonState = new DungeonState(name);
             player = new PlayerObjectWrap();
             initialWait = new InitialWait(this, player);
             firstSelect = new FirstSelectWindow(this);
-            dungeonSearch = new DungeonSearch(this, name, dungeonState);
+            dungeonSearch = new DungeonSearch(this, dungeonState);
+            itemFindEvent = new ItemFindEvent(this, dungeonState);
             moveNext = new MoveNext(this, player);
             returnConfirm = new ReturnConfirm(this);
             returnToHome = new ReturnToHome(player, name, sm, party);
@@ -98,7 +99,10 @@
                     break;
                 case DungeonMode.Search:
                     dungeonSearch.ExecUpdate();
-                    break;
+                    return;
+                case DungeonMode.FindItem:
+                    itemFindEvent.Exec();
+                    return;
                 case DungeonMode.ReturnHome:
                     returnToHome.ExecUpdate();
                     return;

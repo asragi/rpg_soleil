@@ -17,13 +17,13 @@ namespace Soleil.Dungeon
         private readonly DungeonExecutor executor;
 
         public DungeonSearch(
-            DungeonMaster _master, DungeonName name,
+            DungeonMaster _master,
             DungeonState state
             )
         {
             master = _master;
             dState = state;
-            executor = new DungeonExecutor(name);
+            executor = new DungeonExecutor(dState.Name);
 
             Actions = new Dictionary<int, Action>()
             {

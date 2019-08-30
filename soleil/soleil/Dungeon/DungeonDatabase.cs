@@ -1,4 +1,6 @@
 ﻿using Soleil.Battle;
+using Soleil.Dungeon.SearchFloorEvent;
+using Soleil.Item;
 using Soleil.Map;
 using System;
 using System.Collections.Generic;
@@ -28,7 +30,7 @@ namespace Soleil.Dungeon
             data.Add(DungeonName.MagistolUnderground, new DungeonData(
                     new Dictionary<int, DungeonFloorEvent>()
                     {
-                        {1, new BattleEvent(new[] { EnemyName.Test, EnemyName.Test }) },
+                        {1, new ItemFind(ItemID.SilverWand) },
                         {3, new BattleEvent(new[] { EnemyName.Test }) }
                     },
                     MapName.MagistolCol1, new Vector(1232, 1222)

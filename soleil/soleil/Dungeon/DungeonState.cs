@@ -12,9 +12,12 @@ namespace Soleil.Dungeon
     class DungeonState
     {
         public int FloorNum { get; private set; }
+        public readonly DungeonName Name;
 
-        public DungeonState(int initFloor = 1)
+        public DungeonState(
+            DungeonName name, int initFloor = 1)
         {
+            Name = name;
             FloorNum = initFloor;
         }
     }

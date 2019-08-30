@@ -67,6 +67,7 @@
     <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Dungeon\DungeonState.cs" />
+    <Compile Include="Dungeon\ItemFindEvent.cs" />
     <Compile Include="Dungeon\SearchFloorEvent\BattleEvent.cs" />
     <Compile Include="Dungeon\DungeonData.cs" />
     <Compile Include="Dungeon\DungeonDatabase.cs" />
