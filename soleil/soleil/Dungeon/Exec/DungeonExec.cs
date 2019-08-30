@@ -29,6 +29,12 @@ namespace Soleil.Dungeon
 
         protected abstract void Exec();
 
+        protected void FadeIn()
+        {
+            var transition = Transition.GetInstance();
+            transition.SetMode(TransitionMode.FadeIn);
+        }
+
         protected void FadeOut()
         {
             var transition = Transition.GetInstance();

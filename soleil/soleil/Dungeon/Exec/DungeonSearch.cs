@@ -42,7 +42,6 @@ namespace Soleil.Dungeon
         private void NotifyResult()
         {
             master.Mode = executor.OnSearch(dState.FloorNum);
-            Console.WriteLine($"Debug Mode is {master.Mode}");
             Reset();
         }
     }
