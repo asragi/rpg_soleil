@@ -9,6 +9,7 @@ namespace Soleil
     /// <summary>
     /// 位置、速度などを扱う構造体
     /// </summary>
+    [Serializable]
     struct Vector
     {
         public double X;

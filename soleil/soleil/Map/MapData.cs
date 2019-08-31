@@ -7,7 +7,7 @@ namespace Soleil.Map
     /// </summary>
     class MapData
     {
-        MapName mapName;
+        public MapName mapName { private set; get; }
         bool[,] flags;
         public MapData(MapName _name)
         {

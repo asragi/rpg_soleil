@@ -1,4 +1,5 @@
 ﻿using Soleil.Misc;
+using Soleil.Map;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,17 +16,28 @@ namespace Soleil
     static class SaveLoad
     {
         private static readonly string FilePath = "./savedata";
-        private static SaveData data;
-
+        private static SaveData data = new SaveData();
+        //#ObjectManagerを持っとくのは御法度だったりしないだろうか...?
+        private static ObjectManager objManager;
         public static void Save(PersonParty party)
         {
-            var save = new SaveData(party);
+            data.SetCharacterDatas(party);
+            data.SetPlayer(objManager.GetPlayer().GetPosition(), objManager.GetPlayer().Direction);
             string path = FilePath;
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 var bf = new BinaryFormatter();
-                bf.Serialize(fs, save);
+                bf.Serialize(fs, data);
             }
+        }
+
+        /// <summary>
+        /// MAP遷移時に呼び出す
+        /// </summary>
+        public static void mapTransition(MapName newmap,ObjectManager om)
+        {
+            data.SetMapData(newmap);
+            objManager = om;
         }
 
         public static void Load()

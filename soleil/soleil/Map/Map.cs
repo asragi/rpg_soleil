@@ -56,6 +56,7 @@ namespace Soleil.Map
             MapCameraManager = new MapCameraManager(player, cam);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
+            SaveLoad.mapTransition(_name, om);
         }
 
         protected virtual void Start()

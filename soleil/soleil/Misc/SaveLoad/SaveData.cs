@@ -1,6 +1,7 @@
 ﻿using Soleil.Battle;
 using Soleil.Item;
 using Soleil.Skill;
+using Soleil.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,11 +14,15 @@ namespace Soleil.Misc
     /// セーブデータをシリアライズ・デシリアライズするための構造体
     /// </summary>
     [Serializable]
-    struct SaveData
+    class SaveData
     {
         CharacterData[] CharacterDatas { get; set; }
-
-        public SaveData(PersonParty _party)
+        MapData mapData { get; set; }
+        public SaveData()
+        {
+            CharacterDatas = new CharacterData[0];
+        }
+        public void SetCharacterDatas(PersonParty _party)
         {
             CharacterDatas = MakePartyData(_party);
 
@@ -36,7 +41,15 @@ namespace Soleil.Misc
                 return result;
             }
         }
-
+        //#CharacterDataのようにクラスにまとめてみたが、mapDataをpublicにできないのでこんな面倒なことに
+        public void SetMapData(MapName name)
+        {
+            mapData = new MapData(name);
+        }
+        public void SetPlayer(Vector v, Direction d)
+        {
+            (mapData.playerPos, mapData.dir) = (v, d);
+        }
         public PersonParty GetParty()
         {
             int length = CharacterDatas.Length;
@@ -166,6 +179,21 @@ namespace Soleil.Misc
                 {
                     return new AbilityScore(HPMAX, MPMAX, STR, VIT, MAG, SPD) { HP = HP, MP = MP };
                 }
+            }
+        }
+        /// <summary>
+        /// セーブするマップ関係のデータ:
+        /// MapName、キャラ位置、向き
+        /// </summary>
+        [Serializable]
+        class MapData
+        {
+            public MapName MapName;
+            public Vector playerPos;
+            public Direction dir;
+            public MapData(MapName name)
+            {
+                MapName = name;
             }
         }
     }
