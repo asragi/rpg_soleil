@@ -18,11 +18,13 @@ namespace Soleil.Misc
     {
         CharacterData[] CharacterDatas { get; set; }
         MapData mapData { get; set; }
+        //#(IListnerをどう保存したものか分からないのでとりあえず保留)
+        Dictionary<ItemID, int> itemPossessMap;
         public SaveData()
         {
             CharacterDatas = new CharacterData[0];
         }
-        public void SetCharacterDatas(PersonParty _party)
+        /*public void SetCharacterDatas(PersonParty _party)
         {
             CharacterDatas = MakePartyData(_party);
 
@@ -41,14 +43,36 @@ namespace Soleil.Misc
                 return result;
             }
         }
-        //#CharacterDataのようにクラスにまとめてみたが、mapDataをpublicにできないのでこんな面倒なことに
-        public void SetMapData(MapName name)
-        {
-            mapData = new MapData(name);
-        }
         public void SetPlayer(Vector v, Direction d)
         {
             (mapData.playerPos, mapData.dir) = (v, d);
+        }*/
+        public void SetDatas(PersonParty _party,Vector v,Direction d)
+        {
+            CharacterDatas = MakePartyData(_party);
+            (mapData.playerPos, mapData.dir) = (v, d);
+            var bag = PlayerBaggage.GetInstance();
+            itemPossessMap = bag.Items.CopyItemPossessMap();
+
+            CharacterData[] MakePartyData(PersonParty party)
+            {
+                int length = (int)CharaName.size;
+                var result = new CharacterData[length];
+                for (int i = 0; i < length; i++)
+                {
+                    var person = party.Get((CharaName)i);
+                    result[i] = new CharacterData(
+                        person.Name, person.Lv, person.Equip, person.Score,
+                        person.Skill, person.Magic
+                    );
+                }
+                return result;
+            }
+
+        }
+        public void SetMapData(MapName name)
+        {
+            mapData = new MapData(name);
         }
         public PersonParty GetParty()
         {

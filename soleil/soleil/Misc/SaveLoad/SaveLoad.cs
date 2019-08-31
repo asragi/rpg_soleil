@@ -21,8 +21,8 @@ namespace Soleil
         private static ObjectManager objManager;
         public static void Save(PersonParty party)
         {
-            data.SetCharacterDatas(party);
-            data.SetPlayer(objManager.GetPlayer().GetPosition(), objManager.GetPlayer().Direction);
+            var player = objManager.GetPlayer();
+            data.SetDatas(party,player.GetPosition(), player.Direction);
             string path = FilePath;
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
