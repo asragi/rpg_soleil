@@ -19,7 +19,8 @@ namespace Soleil.Misc
         CharacterData[] CharacterDatas { get; set; }
         MapData mapData { get; set; }
         //#(IListnerをどう保存したものか分からないのでとりあえず保留)
-        Dictionary<ItemID, int> itemPossessMap;
+        Dictionary<ItemID, int> itemPossessMap { get; set; }
+        int Money { get; set; }
         public SaveData()
         {
             CharacterDatas = new CharacterData[0];
@@ -53,6 +54,7 @@ namespace Soleil.Misc
             (mapData.playerPos, mapData.dir) = (v, d);
             var bag = PlayerBaggage.GetInstance();
             itemPossessMap = bag.Items.CopyItemPossessMap();
+            Money = bag.MoneyWallet.Val;
 
             CharacterData[] MakePartyData(PersonParty party)
             {
