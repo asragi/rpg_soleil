@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// BattleCharaAnimation.SetMotionに記述してあるBattkeCharaMotionを指す
+    /// </summary>
     enum BattleCharaMotionType : int
     {
         Stand,
@@ -15,6 +18,9 @@ namespace Soleil.Battle
         Size,
     }
 
+    /// <summary>
+    /// BattleCharaAnimationの再生、遷移を表現するclassの基底
+    /// </summary>
     class BattleCharaMotion
     {
         protected BattleCharaMotionType BCMotionType;
@@ -24,6 +30,9 @@ namespace Soleil.Battle
             => Tuple.Create(BattleCharaAnimationType.Stand, BCMotionType);
     }
 
+    /// <summary>
+    /// 一定時間Animationを再生する
+    /// </summary>
     class BattleCharaMotionWithTime : BattleCharaMotion
     {
         int timer = 0;
@@ -33,6 +42,10 @@ namespace Soleil.Battle
             : base(bcMotionType)
             => (bcaType, timer, nextMotionType) = (bcaType_, time, nextMotionType_);
 
+        /// <summary>
+        /// BattleCharaMotionTypeは自身が保持しているのとは別のものを指定すると遷移する
+        /// </summary>
+        /// <returns> (再生するAnimation, 遷移するMotionType) </returns>
         public override Tuple<BattleCharaAnimationType, BattleCharaMotionType> Update(BattleCharaAnimation bcAnim)
         {
             if (timer > 1)
@@ -46,6 +59,9 @@ namespace Soleil.Battle
         }
     }
 
+    /// <summary>
+    /// 複数のAnimationを連続で再生する
+    /// </summary>
     class BattleCharaMotionSeq : BattleCharaMotion
     {
         List<BattleCharaMotion> bcmList;

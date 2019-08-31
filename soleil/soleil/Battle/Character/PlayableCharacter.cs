@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 using Soleil.Skill;
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// PlayerのCharacter
+    /// </summary>
     class PlayableCharacter : Character
     {
         public PlayableCharacter(int index, AbilityScore aScore, Person person) : base(index)
         {
             var magics = GetMagicIDs(person.Skill);
             var skills = GetSkillIDs(person.Skill);
-            //magics.Add(SkillID.WarmHeal); //Debug
+            magics.Add(SkillID.WarmHeal); //Debug
+            magics.Add(SkillID.Explode); //Debug
             Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
+            Name = Enum.GetName(typeof(Misc.CharaName), person.Name);
             commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
         }
 

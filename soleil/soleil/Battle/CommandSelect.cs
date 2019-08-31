@@ -11,6 +11,8 @@ namespace Soleil.Battle
         public int CharaIndex = -1;
         protected static readonly BattleField BF = BattleField.GetInstance();
         public CommandSelect(int charaIndex) => CharaIndex = charaIndex;
+
+        /// <returns>選択が完了したかどうか</returns>
         public abstract bool GetAction(Turn turn);
         protected void EnqueueTurn(Action action, Turn turn)
         {
@@ -31,7 +33,7 @@ namespace Soleil.Battle
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
+            EnqueueTurn((ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
@@ -46,6 +48,10 @@ namespace Soleil.Battle
 
         CommandSelectWindow commandSelect;
         Menu.MenuDescription desc;
+
+        /// <summary>
+        /// 行動選択が終わったかどうかをcommandSelectから取得するためのもの
+        /// </summary>
         Reference<bool> doSelect;
         public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status) : base(charaIndex)
         {
@@ -78,7 +84,8 @@ namespace Soleil.Battle
                 case CommandEnum.Skill:
                     {
                         genAkt = ActionInfo.GetAction(commandSelect.Select.AName);
-                        //action = genAkt.Generate(commandSelect.Select.ARange);
+                        action = genAkt.Generate(commandSelect.Select.ARange);
+                        /*
                         switch (genAkt)
                         {
                             case Attack atk:
@@ -96,6 +103,7 @@ namespace Soleil.Battle
                             default:
                                 throw new Exception("not implemented");
                         }
+                        */
                         EnqueueTurn(action, turn);
                         return true;
                     }
@@ -113,8 +121,8 @@ namespace Soleil.Battle
                         90000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;
-                case CommandEnum.Escape:
-                    action = ((Attack)ActionInfo.GetAction(Skill.SkillID.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                case CommandEnum.Escape: //とりあえず通常攻撃が出る
+                    action = (ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
                     EnqueueTurn(action, turn);
                     return true;
             }
