@@ -8,11 +8,11 @@ namespace Soleil.Battle
 {
     class TestEnemyCharacter : Character
     {
-        public TestEnemyCharacter(int index) : base(index)
+        public TestEnemyCharacter(int index, string enemyName) : base(index)
         {
             //てきとう
             var aScore = new AbilityScore(100, 30, 30, 30, 30, 30);
-            Name = "敵" + (index + 1).ToString();
+            Name = enemyName;
             Status = new CharacterStatus(aScore, 10000, new List<Skill.SkillID> { Skill.SkillID.NormalAttack }, new List<Skill.SkillID> { });
             commandSelect = new DefaultCharacterCommandSelect(charaIndex);
         }

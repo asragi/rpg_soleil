@@ -28,10 +28,6 @@ namespace Soleil.Battle
                 else if (x.TurnTime < y.TurnTime) return -1;
                 else return 0;
             });
-            for (int i = 0; i < queue.Count; i++)
-            {
-                queue[i].Index = i;
-            }
         }
         public Turn Top() => queue[0];
 
@@ -75,7 +71,6 @@ namespace Soleil.Battle
 
     class Turn
     {
-        public int Index = -1;　//使ってない?
         public int WaitPoint;
         public CharacterStatus CStatus;
         public int CharaIndex;

@@ -85,7 +85,7 @@ namespace Soleil.Battle
             const int EnemyCnt = 3;
             for (int i = 0; i < EnemyCnt; i++)
             {
-                charas.Add(new TestEnemyCharacter(charaIndex));
+                charas.Add(new TestEnemyCharacter(charaIndex, "敵" + i.ToString()));
                 sides.Add(Side.Left);
                 indexes[(int)Side.Left].Add(charaIndex);
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
