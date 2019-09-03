@@ -23,11 +23,13 @@
     class DungeonMaster
     {
         DungeonState dungeonState;
-        DungeonExecutor executor;
         DungeonInput input;
         InitialWait initialWait;
         FirstSelectWindow firstSelect;
         DungeonExec dungeonSearch;
+        ItemFindEvent itemFindEvent;
+        InitBattle initBattle;
+        AfterBattle afterBattle;
         MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
@@ -42,17 +44,25 @@
         public DungeonMaster(
             DungeonName name, SceneManager sm, PersonParty party)
         {
-            dungeonState = new DungeonState();
-            player = new PlayerObjectWrap();
-            initialWait = new InitialWait(this, player);
-            firstSelect = new FirstSelectWindow(this);
-            dungeonSearch = new DungeonSearch(this, name, dungeonState);
-            moveNext = new MoveNext(this, player);
-            returnConfirm = new ReturnConfirm(this);
-            returnToHome = new ReturnToHome(player, name, sm, party);
-            input = new DungeonInput(this, firstSelect, returnConfirm);
-            graphics = new DungeonGraphics();
+            // States
             Mode = DungeonMode.Init;
+            dungeonState = new DungeonState(name);
+            player = new PlayerObjectWrap();
+            // Execs
+            initialWait = new InitialWait(this, player);
+            dungeonSearch = new DungeonSearch(this, dungeonState);
+            itemFindEvent = new ItemFindEvent(this, dungeonState);
+            moveNext = new MoveNext(this, player);
+            returnToHome = new ReturnToHome(player, name, sm, party);
+            initBattle = new InitBattle(this);
+            afterBattle = new AfterBattle(this);
+            // Displays
+            firstSelect = new FirstSelectWindow(this);
+            returnConfirm = new ReturnConfirm(this);
+            // Input
+            input = new DungeonInput(this, firstSelect, returnConfirm);
+            // Graphics
+            graphics = new DungeonGraphics();
         }
 
         public DungeonMode Mode {
@@ -98,7 +108,16 @@
                     break;
                 case DungeonMode.Search:
                     dungeonSearch.ExecUpdate();
-                    break;
+                    return;
+                case DungeonMode.FindItem:
+                    itemFindEvent.Exec();
+                    return;
+                case DungeonMode.InitBattle:
+                    initBattle.ExecUpdate();
+                    return;
+                case DungeonMode.AfterBattle:
+                    afterBattle.ExecUpdate();
+                    return;
                 case DungeonMode.ReturnHome:
                     returnToHome.ExecUpdate();
                     return;
@@ -107,6 +126,7 @@
 
         private void OnModeChange(DungeonMode mode)
         {
+            System.Console.WriteLine($"Mode Change To {mode}!");
             switch (mode)
             {
                 case DungeonMode.Init:
@@ -127,6 +147,8 @@
             player.Reset();
             moveNext.Reset();
             dungeonSearch.Reset();
+            initBattle.Reset();
+            afterBattle.Reset();
         }
     }
 }

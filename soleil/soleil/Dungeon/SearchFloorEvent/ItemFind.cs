@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Item;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,15 @@ namespace Soleil.Dungeon.SearchFloorEvent
     /// </summary>
     class ItemFind : DungeonFloorEvent
     {
+        public readonly ItemID ID;
+        public readonly int Num;
+        public ItemFind(ItemID id, int num = 1)
+        {
+            ID = id;
+            Num = num;
+        }
+
         public override object Clone()
-            => new ItemFind();
+            => new ItemFind(ID, Num);
     }
 }
