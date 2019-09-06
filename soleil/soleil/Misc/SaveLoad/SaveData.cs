@@ -21,16 +21,20 @@ namespace Soleil.Misc
         Dictionary<ItemID, int> itemPossessMap { get; set; }
         int money { get; set; }
 
-        public SaveData() {
-            var saverefs = new SaveRefs();
+        public SaveData(SaveRefs saverefs) {
             SetDatas(saverefs);
         }
 
         private void SetDatas(SaveRefs refs)
         {
+            // Party
             var _party = refs.Party;
             characterDatas = MakePartyData(_party);
-            mapData = new MapData();
+            // Map
+            var nowMap = refs.NowMap;
+            var player = refs.ObjectManager.GetPlayer();
+            mapData = new MapData(nowMap.Name, player.GetPosition(), player.Direction);
+            // Item
             var bag = PlayerBaggage.GetInstance();
             itemPossessMap = bag.Items.CopyItemPossessMap();
             money = bag.MoneyWallet.Val;

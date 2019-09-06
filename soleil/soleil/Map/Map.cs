@@ -23,6 +23,9 @@ namespace Soleil.Map
     }
     abstract class MapBase
     {
+        public readonly MapName Name;
+        public ObjectManager ObjectManager => om;
+
         MapInputManager mapInputManager;
         protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
@@ -42,6 +45,7 @@ namespace Soleil.Map
 
         public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
+            Name = _name;
             var wm = WindowManager.GetInstance();
             om = new ObjectManager();
             MapData = new MapData(_name);
@@ -56,7 +60,7 @@ namespace Soleil.Map
             MapCameraManager = new MapCameraManager(player, cam);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
-            SaveLoad.mapTransition(_name, om);
+            SaveLoad.SaveRefs.NowMap = this;
         }
 
         protected virtual void Start()

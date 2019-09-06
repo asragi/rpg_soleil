@@ -13,13 +13,15 @@ namespace Soleil.Misc
     /// </summary>
     class SaveRefs
     {
+        // -- Refs
+        // Party
         public PersonParty Party { get; set; }
         // Map
-        public ObjectManager ObjectManager { get; set; }
-        public MapManager MapManager { get; set; }
-        // Items
-        public ItemList ItemList { get; set; }
-        public MoneyWallet MoneyWallet { get; set; }
+        public MapBase NowMap { get; set; }
 
+        // -- Propaties
+
+        // Map
+        public ObjectManager ObjectManager => NowMap.ObjectManager;
     }
 }

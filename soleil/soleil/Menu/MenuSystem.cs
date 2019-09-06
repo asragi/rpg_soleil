@@ -272,7 +272,7 @@ namespace Soleil.Menu
             if (selected == MenuName.Save)
             {
                 // Save用ウィンドウ出現
-                SaveLoad.Save(party);
+                SaveLoad.Save();
                 Console.WriteLine("SAVE");
                 IsActive = true; // debug
                 return;
