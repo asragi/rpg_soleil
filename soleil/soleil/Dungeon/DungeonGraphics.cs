@@ -108,6 +108,7 @@ namespace Soleil.Dungeon
         {
             private readonly Vector FloorDiff = new Vector(70, 0);
             private readonly string SearchText = "探索:";
+            private readonly string UnknownText = "？？？？？？？？？";
             TopInfo baseInfo;
             TextImage searchResultImg;
 
@@ -115,7 +116,7 @@ namespace Soleil.Dungeon
             {
                 baseInfo = new TopInfo(pos, posDiff, SearchText);
                 searchResultImg = new TextImage(TopInfo.Font, pos + FloorDiff, DepthID.Message);
-                searchResultImg.Text = "？？？？？？？？？";
+                searchResultImg.Text = UnknownText;
                 searchResultImg.ActivateOutline(1);
                 AddComponents(baseInfo, searchResultImg);
             }
