@@ -16,12 +16,12 @@ namespace Soleil.Dungeon
         private readonly static Vector TopInfoPos
             = new Vector(30, 30);
         private Image background;
-        private TopInfo topInfo;
+        private FloorInfo topInfo;
 
         public DungeonGraphics()
         {
             background = new Image(TextureID.BattleTemporaryBackground, Vector.Zero, DepthID.BackGround, alpha: 1);
-            topInfo = new TopInfo(TopInfoPos, Vector.Zero, "マギストル地下", 3);
+            topInfo = new FloorInfo(TopInfoPos, Vector.Zero, "マギストル地下", 99);
             topInfo.Call();
         }
 
@@ -44,12 +44,12 @@ namespace Soleil.Dungeon
         {
             private static readonly Vector BackImgDiff = new Vector(-100, 4);
             private const int BackImgLength = 400;
-            private static FontID Font = FontID.CorpM;
+            public readonly static FontID Font = FontID.CorpM;
             private BackBarImage backImg;
             private TextImage textImg;
             
             /// <param name="pos">文字の開始位置</param>
-            public TopInfo(Vector pos, Vector posDiff, string name, int floor)
+            public TopInfo(Vector pos, Vector posDiff, string name)
             {
                 textImg = new TextImage(Font, pos, posDiff, DepthID.Message);
                 textImg.Text = name;
@@ -59,6 +59,39 @@ namespace Soleil.Dungeon
                     false, DepthID.MessageBack);
                 AddComponents(textImg, backImg);
             }
+        }
+
+        /// <summary>
+        /// TopInfo + Floorの階層情報
+        /// </summary>
+        class FloorInfo: MenuComponent
+        {
+            private const int FontDiff = 10;
+            private readonly Vector FloorDiff = new Vector(200, FontDiff);
+            private readonly Vector FloorNumDiff = new Vector(70, 0);
+            private readonly string FloorText = "Floor";
+            TopInfo baseInfo;
+            TextImage floorImg;
+            RightAlignText floorNumImg;
+
+            public FloorInfo(Vector pos, Vector posDiff, string name, int floor)
+            {
+                var font = FontID.CorpMini;
+                baseInfo = new TopInfo(pos, posDiff, name);
+                floorImg = new TextImage(font, pos + FloorDiff, posDiff, DepthID.Message);
+                floorImg.Text = FloorText;
+                floorNumImg = new RightAlignText(
+                    font, pos + FloorNumDiff + FloorDiff, posDiff,
+                    DepthID.Message);
+                FloorNum = floor;
+
+                floorImg.ActivateOutline(1);
+                floorNumImg.ActivateOutline(1);
+
+                AddComponents(baseInfo, floorNumImg, floorImg);
+            }
+
+            public int FloorNum { set => floorNumImg.Text = value.ToString(); }
         }
     }
 }
