@@ -79,6 +79,8 @@
         public void ToNextFloor()
         {
             Mode = DungeonMode.Init;
+            dungeonState.GoNext();
+            graphics.NextFloor(dungeonState);
             Reset();
         }
 

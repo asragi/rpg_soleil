@@ -24,10 +24,16 @@ namespace Soleil.Dungeon
         public DungeonGraphics()
         {
             background = new Image(TextureID.BattleTemporaryBackground, Vector.Zero, DepthID.BackGround, alpha: 1);
-            topInfo = new FloorInfo(TopInfoPos, Vector.Zero, "マギストル地下", 99);
+            topInfo = new FloorInfo(TopInfoPos, Vector.Zero, "マギストル地下", 1);
             topInfo.Call();
             searchInfo = new SearchInfo(TopInfoPos + SearchInfoPos, Vector.Zero);
             searchInfo.Call();
+        }
+
+        public void NextFloor(DungeonState state)
+        {
+            topInfo.FloorNum = state.FloorNum;
+            searchInfo.IsFound = false; // tmp
         }
 
         public void Update()
@@ -111,6 +117,7 @@ namespace Soleil.Dungeon
             private readonly string UnknownText = "？？？？？？？？？";
             TopInfo baseInfo;
             TextImage searchResultImg;
+            bool isFound;
 
             public SearchInfo(Vector pos, Vector posDiff)
             {
@@ -121,6 +128,21 @@ namespace Soleil.Dungeon
                 AddComponents(baseInfo, searchResultImg);
             }
 
+            public bool IsFound
+            {
+                set
+                {
+                    if (isFound != value)
+                        OnChangeFoundState(value);
+                    isFound = value;
+                }
+            }
+
+            private void OnChangeFoundState(bool found)
+            {
+                string target = found ? UnknownText : UnknownText;
+                searchResultImg.Text = target;
+            }
         }
     }
 }

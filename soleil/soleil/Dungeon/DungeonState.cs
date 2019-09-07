@@ -20,5 +20,7 @@ namespace Soleil.Dungeon
             Name = name;
             FloorNum = initFloor;
         }
+
+        public void GoNext() => FloorNum++;
     }
 }
