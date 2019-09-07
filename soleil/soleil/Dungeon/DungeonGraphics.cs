@@ -15,26 +15,33 @@ namespace Soleil.Dungeon
     {
         private readonly static Vector TopInfoPos
             = new Vector(30, 30);
+        private readonly static Vector SearchInfoPos
+            = new Vector(0, 40);
         private Image background;
         private FloorInfo topInfo;
+        private SearchInfo searchInfo;
 
         public DungeonGraphics()
         {
             background = new Image(TextureID.BattleTemporaryBackground, Vector.Zero, DepthID.BackGround, alpha: 1);
             topInfo = new FloorInfo(TopInfoPos, Vector.Zero, "マギストル地下", 99);
             topInfo.Call();
+            searchInfo = new SearchInfo(TopInfoPos + SearchInfoPos, Vector.Zero);
+            searchInfo.Call();
         }
 
         public void Update()
         {
             background.Update();
             topInfo.Update();
+            searchInfo.Update();
         }
 
         public void Draw(Drawing d)
         {
             background.Draw(d);
             topInfo.Draw(d);
+            searchInfo.Draw(d);
         }
 
         /// <summary>
@@ -92,6 +99,27 @@ namespace Soleil.Dungeon
             }
 
             public int FloorNum { set => floorNumImg.Text = value.ToString(); }
+        }
+
+        /// <summary>
+        /// 左上に表示する探索完了情報．
+        /// </summary>
+        class SearchInfo: MenuComponent
+        {
+            private readonly Vector FloorDiff = new Vector(70, 0);
+            private readonly string SearchText = "探索:";
+            TopInfo baseInfo;
+            TextImage searchResultImg;
+
+            public SearchInfo(Vector pos, Vector posDiff)
+            {
+                baseInfo = new TopInfo(pos, posDiff, SearchText);
+                searchResultImg = new TextImage(TopInfo.Font, pos + FloorDiff, DepthID.Message);
+                searchResultImg.Text = "？？？？？？？？？";
+                searchResultImg.ActivateOutline(1);
+                AddComponents(baseInfo, searchResultImg);
+            }
+
         }
     }
 }
