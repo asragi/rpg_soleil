@@ -20,6 +20,9 @@ namespace Soleil.Dungeon.SearchFloorEvent
             Num = num;
         }
 
+        public override string DisplayName
+            => ItemDataBase.Get(ID).Name;
+
         public override object Clone()
             => new ItemFind(ID, Num);
     }

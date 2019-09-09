@@ -11,6 +11,10 @@ namespace Soleil.Dungeon
     /// </summary>
     class NothingEvent : DungeonFloorEvent
     {
+        private static readonly DungeonFloorEvent nothing = new NothingEvent();
+        public static DungeonFloorEvent Nothing => nothing;
+        public override bool Archived => true;
+        public override string DisplayName => "-----------------";
         public override object Clone() => new NothingEvent();
     }
 }

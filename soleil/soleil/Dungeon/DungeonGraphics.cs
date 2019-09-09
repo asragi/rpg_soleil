@@ -21,19 +21,18 @@ namespace Soleil.Dungeon
         private FloorInfo topInfo;
         private SearchInfo searchInfo;
 
-        public DungeonGraphics()
+        public DungeonGraphics(DungeonState state)
         {
             background = new Image(TextureID.BattleTemporaryBackground, Vector.Zero, DepthID.BackGround, alpha: 1);
             topInfo = new FloorInfo(TopInfoPos, Vector.Zero, "マギストル地下", 1);
             topInfo.Call();
-            searchInfo = new SearchInfo(TopInfoPos + SearchInfoPos, Vector.Zero);
+            searchInfo = new SearchInfo(TopInfoPos + SearchInfoPos, Vector.Zero, state);
             searchInfo.Call();
         }
 
         public void NextFloor(DungeonState state)
         {
             topInfo.FloorNum = state.FloorNum;
-            searchInfo.IsFound = false; // tmp
         }
 
         public void Update()
@@ -115,12 +114,14 @@ namespace Soleil.Dungeon
             private readonly Vector FloorDiff = new Vector(70, 0);
             private readonly string SearchText = "探索:";
             private readonly string UnknownText = "？？？？？？？？？";
+
+            private readonly DungeonState dState;
             TopInfo baseInfo;
             TextImage searchResultImg;
-            bool isFound;
 
-            public SearchInfo(Vector pos, Vector posDiff)
+            public SearchInfo(Vector pos, Vector posDiff, DungeonState state)
             {
+                dState = state;
                 baseInfo = new TopInfo(pos, posDiff, SearchText);
                 searchResultImg = new TextImage(TopInfo.Font, pos + FloorDiff, DepthID.Message);
                 searchResultImg.Text = UnknownText;
@@ -128,19 +129,17 @@ namespace Soleil.Dungeon
                 AddComponents(baseInfo, searchResultImg);
             }
 
-            public bool IsFound
+            public override void Update()
             {
-                set
-                {
-                    if (isFound != value)
-                        OnChangeFoundState(value);
-                    isFound = value;
-                }
+                base.Update();
+                ChangeFoundState();
             }
 
-            private void OnChangeFoundState(bool found)
+            private void ChangeFoundState()
             {
-                string target = found ? UnknownText : UnknownText;
+                var targetEvent = DungeonDatabase.Get(dState.Name).GetEvent(dState.FloorNum);
+                string message = targetEvent.DisplayName;
+                string target = targetEvent.Archived ? message : UnknownText;
                 searchResultImg.Text = target;
             }
         }
