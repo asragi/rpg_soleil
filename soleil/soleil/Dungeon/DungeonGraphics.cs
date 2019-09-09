@@ -1,4 +1,5 @@
 ﻿using Soleil.Images;
+using Soleil.Map;
 using Soleil.Menu;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,7 @@ namespace Soleil.Dungeon
         private Image background;
         private FloorInfo topInfo;
         private SearchInfo searchInfo;
+        private MapIndicator indicator;
 
         public DungeonGraphics(DungeonState state)
         {
@@ -28,6 +30,7 @@ namespace Soleil.Dungeon
             topInfo.Call();
             searchInfo = new SearchInfo(TopInfoPos + SearchInfoPos, Vector.Zero, state);
             searchInfo.Call();
+            indicator = new MapIndicator();
         }
 
         public void NextFloor(DungeonState state)
@@ -40,6 +43,7 @@ namespace Soleil.Dungeon
             background.Update();
             topInfo.Update();
             searchInfo.Update();
+            indicator.Update();
         }
 
         public void Draw(Drawing d)
@@ -47,6 +51,7 @@ namespace Soleil.Dungeon
             background.Draw(d);
             topInfo.Draw(d);
             searchInfo.Draw(d);
+            indicator.Draw(d);
         }
 
         /// <summary>
