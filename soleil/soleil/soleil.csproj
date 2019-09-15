@@ -85,6 +85,7 @@
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />
     <Compile Include="Dungeon\ReturnToHome.cs" />
+    <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />
     <Compile Include="Person\GrowthType.cs" />

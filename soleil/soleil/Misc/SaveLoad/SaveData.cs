@@ -16,45 +16,28 @@ namespace Soleil.Misc
     [Serializable]
     class SaveData
     {
-        CharacterData[] CharacterDatas { get; set; }
+        CharacterData[] characterDatas { get; set; }
         MapData mapData { get; set; }
-        //#(IListnerをどう保存したものか分からないのでとりあえず保留)
         Dictionary<ItemID, int> itemPossessMap { get; set; }
-        int Money { get; set; }
-        public SaveData()
-        {
-            CharacterDatas = new CharacterData[0];
-        }
-        /*public void SetCharacterDatas(PersonParty _party)
-        {
-            CharacterDatas = MakePartyData(_party);
+        int money { get; set; }
 
-            CharacterData[] MakePartyData(PersonParty party)
-            {
-                int length = (int)CharaName.size;
-                var result = new CharacterData[length];
-                for (int i = 0; i < length; i++)
-                {
-                    var person = party.Get((CharaName)i);
-                    result[i] = new CharacterData(
-                        person.Name, person.Lv, person.Equip, person.Score,
-                        person.Skill, person.Magic
-                    );
-                }
-                return result;
-            }
+        public SaveData(SaveRefs saverefs) {
+            SetDatas(saverefs);
         }
-        public void SetPlayer(Vector v, Direction d)
+
+        private void SetDatas(SaveRefs refs)
         {
-            (mapData.playerPos, mapData.dir) = (v, d);
-        }*/
-        public void SetDatas(PersonParty _party,Vector v,Direction d)
-        {
-            CharacterDatas = MakePartyData(_party);
-            (mapData.playerPos, mapData.dir) = (v, d);
+            // Party
+            var _party = refs.Party;
+            characterDatas = MakePartyData(_party);
+            // Map
+            var nowMap = refs.NowMap;
+            var player = refs.ObjectManager.GetPlayer();
+            mapData = new MapData(nowMap.Name, player.GetPosition(), player.Direction);
+            // Item
             var bag = PlayerBaggage.GetInstance();
             itemPossessMap = bag.Items.CopyItemPossessMap();
-            Money = bag.MoneyWallet.Val;
+            money = bag.MoneyWallet.Val;
 
             CharacterData[] MakePartyData(PersonParty party)
             {
@@ -72,17 +55,14 @@ namespace Soleil.Misc
             }
 
         }
-        public void SetMapData(MapName name)
-        {
-            mapData = new MapData(name);
-        }
+
         public PersonParty GetParty()
         {
-            int length = CharacterDatas.Length;
+            int length = characterDatas.Length;
             Person[] people = new Person[length];
             for (int i = 0; i < length; i++)
             {
-                people[i] = CharacterDatas[i].Get();
+                people[i] = characterDatas[i].Get();
             }
             return new PersonParty(people);
         }
@@ -212,14 +192,16 @@ namespace Soleil.Misc
         /// MapName、キャラ位置、向き
         /// </summary>
         [Serializable]
-        class MapData
+        struct MapData
         {
             public MapName MapName;
             public Vector playerPos;
             public Direction dir;
-            public MapData(MapName name)
+            public MapData(MapName name, Vector pos, Direction _dir)
             {
                 MapName = name;
+                playerPos = pos;
+                dir = _dir;
             }
         }
     }
