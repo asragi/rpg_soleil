@@ -195,13 +195,13 @@ namespace Soleil.Misc
         struct MapData
         {
             public MapName MapName;
-            public Vector playerPos;
-            public Direction dir;
+            public double playerPosX,playerPosY;
+            public Direction Dir;
             public MapData(MapName name, Vector pos, Direction _dir)
             {
                 MapName = name;
-                playerPos = pos;
-                dir = _dir;
+                (playerPosX,playerPosY) = (pos.X,pos.Y);
+                Dir = _dir;
             }
         }
     }

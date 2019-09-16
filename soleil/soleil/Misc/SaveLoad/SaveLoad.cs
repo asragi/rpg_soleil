@@ -20,12 +20,12 @@ namespace Soleil
 
         public static void Save()
         {
-            data = new SaveData(SaveRefs);
+            SaveData save = new SaveData(SaveRefs);
             string path = FilePath;
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
                 var bf = new BinaryFormatter();
-                bf.Serialize(fs, data);
+                bf.Serialize(fs, save);
             }
         }
 
