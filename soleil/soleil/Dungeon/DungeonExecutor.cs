@@ -14,7 +14,7 @@ namespace Soleil.Dungeon
     {
         private static readonly NothingEvent nothing = new NothingEvent();
         private float SearchFindRate = 0.2f;
-        private float EncounterRate = 0.6f;
+        private float EncounterRate = 0.7f;
 
         private readonly DungeonName name;
         public DungeonExecutor(DungeonName _name)

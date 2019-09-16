@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// Animationの画像自体を指す
+    /// </summary>
     enum BattleCharaAnimationType
     {
         Stand,
@@ -15,6 +18,11 @@ namespace Soleil.Battle
 
         Size,
     }
+
+    /// <summary>
+    /// 再生するAnimationを管理するclass
+    /// BattleCharaMotionTypeを通じて再生の仕方を指定する
+    /// </summary>
     class BattleCharaAnimation
     {
         public Vector Pos;
@@ -51,6 +59,9 @@ namespace Soleil.Battle
             animation[(int)currentAnimationType].Move();
         }
 
+        /// <summary>
+        /// 再生するBattleCharaMotionを指定する
+        /// </summary>
         public void SetMotion(BattleCharaMotionType motion)
         {
             switch (motion)

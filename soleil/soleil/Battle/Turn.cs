@@ -8,6 +8,8 @@ namespace Soleil.Battle
 {
     /// <summary>
     /// Turnの順序を管理する
+    /// TurnTimeが小さい順にソートされて取り出される
+    /// 要はPriorityQueue
     /// </summary>
     class TurnQueue
     {
@@ -26,10 +28,6 @@ namespace Soleil.Battle
                 else if (x.TurnTime < y.TurnTime) return -1;
                 else return 0;
             });
-            for (int i = 0; i < queue.Count; i++)
-            {
-                queue[i].Index = i;
-            }
         }
         public Turn Top() => queue[0];
 
@@ -73,13 +71,13 @@ namespace Soleil.Battle
 
     class Turn
     {
-        public int Index = -1;
         public int WaitPoint;
         public CharacterStatus CStatus;
         public int CharaIndex;
 
         /// <summary>
         /// WaitPointが0以下になるのにかかる時間
+        /// '行動はWaitPointからSPDを減算することを繰り返して最初に0になった者から行動出来る'
         /// </summary>
         public int TurnTime
         {

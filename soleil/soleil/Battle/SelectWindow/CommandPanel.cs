@@ -14,6 +14,11 @@ namespace Soleil.Battle
         Guard,
         Escape,
     }
+
+    /// <summary>
+    /// 最初の行動選択パネル
+    /// Magic, Skill, Guard, Espace のいずれか
+    /// </summary>
     class CommandPanel : SelectablePanel
     {
         public override string Desctiption => "a";

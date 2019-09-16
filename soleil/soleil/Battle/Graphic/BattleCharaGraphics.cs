@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// Character毎の持つ画像、UIを管理する
+    /// </summary>
     class BattleCharaGraphics
     {
         BattleCharaAnimation bcAnimation;
