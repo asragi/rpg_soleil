@@ -2,6 +2,8 @@
 using Soleil.Item;
 using Soleil.Skill;
 using Soleil.Map;
+using Soleil.Event.Shop;
+using Soleil.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace Soleil.Misc
         MapData mapData { get; set; }
         Dictionary<ItemID, int> itemPossessMap { get; set; }
         int money { get; set; }
+        ShopItemList shopItemList { get; set; }
 
         public SaveData(SaveRefs saverefs) {
             SetDatas(saverefs);
@@ -38,6 +41,8 @@ namespace Soleil.Misc
             var bag = PlayerBaggage.GetInstance();
             itemPossessMap = bag.Items.CopyItemPossessMap();
             money = bag.MoneyWallet.Val;
+            //shop item
+            shopItemList = new ShopItemList(ShopStorageStore.GetInstance());
 
             CharacterData[] MakePartyData(PersonParty party)
             {
@@ -202,6 +207,36 @@ namespace Soleil.Misc
                 MapName = name;
                 (playerPosX,playerPosY) = (pos.X,pos.Y);
                 Dir = _dir;
+            }
+        }
+        [Serializable]
+        struct ShopItemList
+        {
+            Dictionary<ShopName, ItemIDStock[]> List;
+            public ShopItemList(ShopStorageStore store)
+            {
+                List = new Dictionary<ShopName, ItemIDStock[]>();
+                for(int shop = 0;shop < (int)ShopName.size; shop++)
+                {
+                    var shopItemList = store.Get((ShopName)shop).items;
+                    ItemIDStock[] addingList = new ItemIDStock[shopItemList.Length];
+                    for(int index = 0;index < shopItemList.Length; index++){
+                        var item = shopItemList[index];
+                        addingList[index] = new ItemIDStock(item.ID, item.netStock);
+                    }
+                    List.Add((ShopName)shop, addingList);
+                }
+            }
+            [Serializable]
+            struct ItemIDStock
+            {
+                public ItemID ID;
+                public double Num;
+                public ItemIDStock(ItemID id, double num)
+                {
+                    ID = id;
+                    Num = num;
+                }
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Soleil.Event
     /// </summary>
     class ShopStorage
     {
-        ShopItem[] items;
+        public ShopItem[] items { get; private set; }
 
         public ShopStorage(ShopItem[] _items)
         {
