@@ -1,6 +1,7 @@
 ﻿using Soleil.Battle;
 using Soleil.Item;
 using Soleil.Skill;
+using Soleil.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,30 @@ namespace Soleil.Misc
     /// セーブデータをシリアライズ・デシリアライズするための構造体
     /// </summary>
     [Serializable]
-    struct SaveData
+    class SaveData
     {
-        CharacterData[] CharacterDatas { get; set; }
+        CharacterData[] characterDatas { get; set; }
+        MapData mapData { get; set; }
+        Dictionary<ItemID, int> itemPossessMap { get; set; }
+        int money { get; set; }
 
-        public SaveData(PersonParty _party)
+        public SaveData(SaveRefs saverefs) {
+            SetDatas(saverefs);
+        }
+
+        private void SetDatas(SaveRefs refs)
         {
-            CharacterDatas = MakePartyData(_party);
+            // Party
+            var _party = refs.Party;
+            characterDatas = MakePartyData(_party);
+            // Map
+            var nowMap = refs.NowMap;
+            var player = refs.ObjectManager.GetPlayer();
+            mapData = new MapData(nowMap.Name, player.GetPosition(), player.Direction);
+            // Item
+            var bag = PlayerBaggage.GetInstance();
+            itemPossessMap = bag.Items.CopyItemPossessMap();
+            money = bag.MoneyWallet.Val;
 
             CharacterData[] MakePartyData(PersonParty party)
             {
@@ -35,15 +53,16 @@ namespace Soleil.Misc
                 }
                 return result;
             }
+
         }
 
         public PersonParty GetParty()
         {
-            int length = CharacterDatas.Length;
+            int length = characterDatas.Length;
             Person[] people = new Person[length];
             for (int i = 0; i < length; i++)
             {
-                people[i] = CharacterDatas[i].Get();
+                people[i] = characterDatas[i].Get();
             }
             return new PersonParty(people);
         }
@@ -166,6 +185,23 @@ namespace Soleil.Misc
                 {
                     return new AbilityScore(HPMAX, MPMAX, STR, VIT, MAG, SPD) { HP = HP, MP = MP };
                 }
+            }
+        }
+        /// <summary>
+        /// セーブするマップ関係のデータ:
+        /// MapName、キャラ位置、向き
+        /// </summary>
+        [Serializable]
+        struct MapData
+        {
+            public MapName MapName;
+            public double playerPosX,playerPosY;
+            public Direction Dir;
+            public MapData(MapName name, Vector pos, Direction _dir)
+            {
+                MapName = name;
+                (playerPosX,playerPosY) = (pos.X,pos.Y);
+                Dir = _dir;
             }
         }
     }

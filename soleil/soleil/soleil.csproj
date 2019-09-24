@@ -87,6 +87,7 @@
     <Compile Include="Dungeon\SearchFloorEvent\NothingEvent.cs" />
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />
+    <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Dungeon\Exec\ReturnToHome.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
     <Compile Include="Skill\CommonOperation.cs" />

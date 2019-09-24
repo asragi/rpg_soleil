@@ -5,27 +5,27 @@
         private static MapManager mapManager = new MapManager();
         public static MapManager GetInstance() => mapManager;
 
-        MapBase nowMap;
+        public MapBase NowMap { get; private set; }
         MapBase previousMap;
 
         public void ChangeMap(MapBase map, Vector position)
         {
-            previousMap = nowMap;
-            nowMap = map;
-            nowMap.SetPlayerPos(position);
+            previousMap = NowMap;
+            NowMap = map;
+            NowMap.SetPlayerPos(position);
         }
 
         public void Update()
         {
             // 移動前マップでイベント処理が終わっていない場合、続行する。
             previousMap?.EventUpdate();
-            nowMap.Update();
+            NowMap.Update();
 
         }
 
         public void Draw(Drawing d)
         {
-            nowMap.Draw(d);
+            NowMap.Draw(d);
         }
     }
 }
