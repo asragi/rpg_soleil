@@ -17,7 +17,7 @@ namespace Soleil
         public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
         {
-            worldMapMaster = new WorldMapMaster(pointKey, this);
+            worldMapMaster = new WorldMapMaster(pointKey, this, _party);
             party = _party;
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
