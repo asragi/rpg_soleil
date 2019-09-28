@@ -1,4 +1,5 @@
-﻿using Soleil.Misc;
+﻿using Soleil.Menu;
+using Soleil.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,11 +31,14 @@ namespace Soleil.Map.WorldMap
         WorldMapMove mapMove;
         InputSmoother inputSmoother;
         WorldMapTransition mapTransition;
+        MenuSystem menuSystem;
+        WorldMapMode beforeMode;
 
         public WorldMapInput(
             WorldMapWindowLayer wmwl, WorldMapCursorLayer cursor,
             WorldMapSelectLayer select, WorldMapMove move,
-            WorldMap map, WorldMapTransition transition)
+            WorldMap map, WorldMapTransition transition,
+            MenuSystem menuSys)
         {
             windowLayer = wmwl;
             cursorLayer = cursor;
@@ -43,6 +47,8 @@ namespace Soleil.Map.WorldMap
             worldMap = map;
             mapTransition = transition;
             inputSmoother = new InputSmoother();
+            menuSystem = menuSys;
+            beforeMode = WorldMapMode.InitWindow; // Menuから戻るときに使う
         }
 
         public WorldMapMode Update(WorldMapMode mode)
@@ -54,6 +60,7 @@ namespace Soleil.Map.WorldMap
             else if (mode == WorldMapMode.MapCursor) return InputCursor(inputDir);
             else if (mode == WorldMapMode.MapSelect) return InputSelect(smoothInput);
             else if (mode == WorldMapMode.Event) return EventInput(smoothInput);
+            else if (mode == WorldMapMode.Menu) return MenuInput(smoothInput, beforeMode);
             return mode;
 
             // 最初に表示される「移動」「街に入る」などの選択を行うウィンドウ
@@ -75,6 +82,12 @@ namespace Soleil.Map.WorldMap
                 {
                     windowLayer.QuitWindow();
                     return EnterTown();
+                }
+                if (KeyInput.GetKeyPush(Key.C))
+                {
+                    menuSystem.Call();
+                    beforeMode = WorldMapMode.InitWindow;
+                    return WorldMapMode.Menu;
                 }
                 var index = windowLayer.GetIndex();
                 if (index == -1) return WorldMapMode.InitWindow; // 選択肢未決定ならindexに-1が返される．
@@ -118,6 +131,12 @@ namespace Soleil.Map.WorldMap
                     cursorLayer.Quit(worldMap.GetPlayerPoint().Pos);
                     return WorldMapMode.InitWindow;
                 }
+                if (KeyInput.GetKeyPush(Key.C))
+                {
+                    menuSystem.Call();
+                    beforeMode = WorldMapMode.MapCursor;
+                    return WorldMapMode.Menu;
+                }
                 return WorldMapMode.MapCursor;
             }
             // 隣接する街から移動先を選ぶモード．
@@ -141,6 +160,12 @@ namespace Soleil.Map.WorldMap
                     selectLayer.QuitWindow();
                     return WorldMapMode.InitWindow;
                 }
+                if (KeyInput.GetKeyPush(Key.C))
+                {
+                    menuSystem.Call();
+                    beforeMode = WorldMapMode.MapSelect;
+                    return WorldMapMode.Menu;
+                }
                 return WorldMapMode.MapSelect;
             }
 
@@ -148,6 +173,14 @@ namespace Soleil.Map.WorldMap
             WorldMapMode EventInput(Direction dir)
             {
                 return WorldMapMode.Event;
+            }
+
+            //Menu時の入力
+            WorldMapMode MenuInput(Direction dir, WorldMapMode beforeMode)
+            {
+                menuSystem.Input(dir);
+                if (!menuSystem.IsQuit) return WorldMapMode.Menu;
+                else return beforeMode;
             }
         }
     }

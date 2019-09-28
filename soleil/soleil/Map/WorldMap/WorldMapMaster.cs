@@ -34,8 +34,8 @@ namespace Soleil.Map.WorldMap
             cursorLayer = new WorldMapCursorLayer(camera, boxManager);
             mapSelectLayer = new WorldMapSelectLayer(worldMap, camera);
             mapTransition = new WorldMapTransition(scene);
-            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap, mapTransition);
             menuSystem = new MenuSystem(_party);
+            mapInput = new WorldMapInput(windowLayer, cursorLayer, mapSelectLayer, mapMove, worldMap, mapTransition, menuSystem);
         }
 
         public void Update()
@@ -47,6 +47,7 @@ namespace Soleil.Map.WorldMap
             worldMap.Update();
             mapTransition.Update(Mode);
             boxManager.Update();
+            menuSystem.Update();
         }
 
         public void Draw(Drawing d)
@@ -54,6 +55,7 @@ namespace Soleil.Map.WorldMap
             worldMap.Draw(d);
             cursorLayer.Draw(d);
             boxManager.Draw(d);
+            menuSystem.Draw(d);
         }
     }
 }
