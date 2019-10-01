@@ -85,9 +85,7 @@ namespace Soleil.Map.WorldMap
                 }
                 if (KeyInput.GetKeyPush(Key.C))
                 {
-                    menuSystem.Call();
-                    beforeMode = WorldMapMode.InitWindow;
-                    return WorldMapMode.Menu;
+                    return MenuCall(WorldMapMode.InitWindow);
                 }
                 var index = windowLayer.GetIndex();
                 if (index == -1) return WorldMapMode.InitWindow; // 選択肢未決定ならindexに-1が返される．
@@ -133,9 +131,7 @@ namespace Soleil.Map.WorldMap
                 }
                 if (KeyInput.GetKeyPush(Key.C))
                 {
-                    menuSystem.Call();
-                    beforeMode = WorldMapMode.MapCursor;
-                    return WorldMapMode.Menu;
+                    return MenuCall(WorldMapMode.MapCursor);
                 }
                 return WorldMapMode.MapCursor;
             }
@@ -162,9 +158,7 @@ namespace Soleil.Map.WorldMap
                 }
                 if (KeyInput.GetKeyPush(Key.C))
                 {
-                    menuSystem.Call();
-                    beforeMode = WorldMapMode.MapSelect;
-                    return WorldMapMode.Menu;
+                    return MenuCall(WorldMapMode.MapSelect);
                 }
                 return WorldMapMode.MapSelect;
             }
@@ -180,7 +174,15 @@ namespace Soleil.Map.WorldMap
             {
                 menuSystem.Input(dir);
                 if (!menuSystem.IsQuit) return WorldMapMode.Menu;
-                else return beforeMode;
+                return beforeMode;
+            }
+
+            // Menuを呼ぶ
+            WorldMapMode MenuCall(WorldMapMode beforemode)
+            {
+                menuSystem.Call();
+                beforeMode = beforemode;
+                return WorldMapMode.Menu;
             }
         }
     }
