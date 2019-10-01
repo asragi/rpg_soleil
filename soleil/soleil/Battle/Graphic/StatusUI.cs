@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace Soleil.Battle
 {
     //MenuComponent継承してもいいかも
+    /// <summary>
+    /// HP,MP表示をする
+    /// </summary>
     class StatusUI
     {
         int maxHP, maxMP;

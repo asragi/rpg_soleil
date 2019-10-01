@@ -21,7 +21,14 @@ namespace Soleil
         Currency,
 
         MessageWindow,
+        MessageWindowBack,
+        MessageWindowArrow,
         ConversationWindow,
+
+        TitleBack,
+        TitleLabelSelected,
+        TitleLabelUnselected,
+        TitleLogo,
 
         MenuFront,
         MenuBack,
@@ -440,9 +447,16 @@ namespace Soleil
             SetPath(TextureID.Triangle, UIPath + "yasoba-triangle");
             SetPath(TextureID.FrameTest, UIPath + "window2");
             SetPath(TextureID.MessageWindow, UIPath + "message");
+            SetPath(TextureID.MessageWindowBack, UIPath + "message-back");
+            SetPath(TextureID.MessageWindowArrow, UIPath + "message-arrow");
 
             SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
+            string title = UIPath + "Title/";
+            SetPath(TextureID.TitleBack, title + "back");
+            SetPath(TextureID.TitleLabelSelected, title + "label");
+            SetPath(TextureID.TitleLabelUnselected, title + "label-un");
+            SetPath(TextureID.TitleLogo, title + "logo");
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
             SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");

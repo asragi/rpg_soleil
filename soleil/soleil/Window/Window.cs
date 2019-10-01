@@ -11,8 +11,8 @@ namespace Soleil
         /// <summary>
         /// アニメーション時のズレ量
         /// </summary>
-        public readonly static Vector DiffPos = new Vector(0, 10);
-        protected const DepthID Depth = DepthID.MessageBack;
+        public static readonly Vector DiffPos = new Vector(0, 10);
+        public static readonly DepthID Depth = DepthID.MessageBack;
         protected abstract float Alpha { get; }
         protected abstract Vector SpaceVector { get; }
         /// <summary>

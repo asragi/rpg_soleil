@@ -109,7 +109,7 @@ namespace Soleil.Menu
                 {
                     targetMP = person.Score.MP;
                     mpNumText.Text = targetMP.ToString();
-                    hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
+                    mpGauge.Refresh((double)targetMP / person.Score.MPMAX);
                 }
                 lvNumText.Text = person.Lv.ToString();
             }

@@ -9,7 +9,7 @@ namespace Soleil.Battle
 {
     /// <summary>
     /// Actionの列
-    /// actionsのmpは0に指定すること(それぞれのAction実行毎にmp消費判定が走る)
+    /// actionsのmpは0に指定すること
     /// TODO:Actions の ARangeが違う場合の処理
     /// </summary>
     class ActionSeq : Action
@@ -19,30 +19,16 @@ namespace Soleil.Battle
         public ActionSeq(List<Action> actions, Range.AttackRange aRange, int mp = 0)
             : base(aRange, mp) => Actions = actions;
 
-        public ActionSeq GenerateActionSeq(Range.AttackRange aRange)
+        public override Action Generate(Range.AttackRange aRange)
         {
             var tmp = (ActionSeq)MemberwiseClone();
             tmp.ARange = aRange;
-            tmp.Actions = tmp.Actions.Select<Action, Action>(act =>
-            {
-                switch (act)
-                {
-                    case Attack atk:
-                        return atk.GenerateAttack(aRange);
-                    case Buff buf:
-                        return buf.GenerateBuff(aRange);
-                    case Heal heal:
-                        return heal.GenerateHeal(aRange);
-                }
-                throw new Exception("not implemented");
-            }).ToList();
+            tmp.Actions = tmp.Actions.Select<Action, Action>(act => act.Generate(aRange)).ToList();
             return tmp;
         }
 
         public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
-            cEffects = base.CollectConditionedEffects(cEffects);
-
             var cEfs = Actions.Aggregate(cEffects, (cefs, act) => act.CollectConditionedEffects(cefs));
             return cEfs;
         }

@@ -24,7 +24,6 @@ namespace Soleil.Item
                 itemPossessMap.Add((ItemID)i, 0);
             }
         }
-
         /// <summary>
         /// 当該アイテムを1つ以上所持しているかどうかを返す．
         /// </summary>
@@ -68,6 +67,10 @@ namespace Soleil.Item
             {
                 item?.OnListen(this);
             }
+        }
+        //distにitemPossessMapをコピー(セーブの時用)
+        public Dictionary<ItemID, int> CopyItemPossessMap() {
+            return new Dictionary<ItemID, int>(itemPossessMap);
         }
     }
 }

@@ -7,12 +7,20 @@ using Microsoft.Xna.Framework;
 
 namespace Soleil.Battle
 {
+    /// <summary>
+    /// 戦闘での陣営
+    /// 左が敵サイド、右が自陣サイドを想定
+    /// </summary>
     enum Side
     {
         Left,
         Right,
         Size,
     }
+
+    /// <summary>
+    /// 戦闘全体を管理する singleton
+    /// </summary>
     class BattleField
     {
         static readonly BattleField singleton = new BattleField();
@@ -37,6 +45,10 @@ namespace Soleil.Battle
 
         public List<BattleCharaGraphics> bcgraphicsList;
 
+        /// <summary>
+        /// priorityでソートされたConditionedEffect
+        /// ターンを超えて起こる効果を持つ
+        /// </summary>
         public SortedSet<ConditionedEffect> CEffects;
         public BattleField()
         {
@@ -73,7 +85,7 @@ namespace Soleil.Battle
             const int EnemyCnt = 3;
             for (int i = 0; i < EnemyCnt; i++)
             {
-                charas.Add(new TestEnemyCharacter(charaIndex));
+                charas.Add(new TestEnemyCharacter(charaIndex, "敵" + i.ToString()));
                 sides.Add(Side.Left);
                 indexes[(int)Side.Left].Add(charaIndex);
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
@@ -112,13 +124,22 @@ namespace Soleil.Battle
         public void AddTurn(Turn turn) => turnQueue.Push(turn);
         public void AddTurn(List<Turn> turn) => turnQueue.PushAll(turn);
 
-        //shallow copy
+
+        /// <summary>
+        /// Shallow CopyされたConditionedEffectのSortedSet
+        /// (取得した先での破壊的変更がCEffectsにも反映される)
+        /// </summary>
         public SortedSet<ConditionedEffect> GetCopiedCEffects()
             => new SortedSet<ConditionedEffect>(CEffects);
         public void AddCEffect(ConditionedEffect cEffect) => CEffects.Add(cEffect);
 
         public Character GetCharacter(int index) => charas[index];
 
+
+        public Side GetSide(int index) => sides[index];
+        /// <summary>
+        /// 相手のSideを取得する
+        /// </summary>
         public Side OppositeSide(Side side)
         {
             switch (side)
@@ -131,10 +152,13 @@ namespace Soleil.Battle
                     return Side.Size;
             }
         }
+        public Side OppositeSide(int index) => OppositeSide(sides[index]);
         public List<int> OppositeIndexes(int index) => indexes[(int)OppositeSide(sides[index])];
         public List<int> OppositeIndexes(Side side) => indexes[(int)OppositeSide(side)];
         public List<int> SameSideIndexes(int index) => indexes[(int)sides[index]];
         public List<int> SameSideIndexes(Side side) => indexes[(int)side];
+
+
         /// <summary>
         /// 生きているcharasのindexをすべて取得
         /// </summary>
@@ -144,6 +168,7 @@ namespace Soleil.Battle
                 if (p) list.Add(i);
                 return list;
             });
+
 
         /// <summary>
         /// charas[index]がやられたときなどに戦場から取り除く
@@ -165,6 +190,11 @@ namespace Soleil.Battle
         BattleEvent beTop;
         int delayCount = 0;
         bool executed = true;
+        /// <summary>
+        /// battleQueがあればそれを実行する
+        /// 無くてかつ最後に取り出したBattleEventが実行終了していればTurnQueueを取り出し、
+        /// Turnを実行する
+        /// </summary>
         public void Update()
         {
             MenuComponentList.ForEach(e => e.Update());
@@ -228,6 +258,11 @@ namespace Soleil.Battle
         }
 
         public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
+
+
+        /// <summary>
+        /// turnQueueにPushされてないかつ一番最初にターンが回ってくるTurnをPushする
+        /// </summary>
         void EnqueueTurn()
         {
             /*

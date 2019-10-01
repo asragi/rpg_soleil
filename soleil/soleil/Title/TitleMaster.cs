@@ -9,6 +9,7 @@ namespace Soleil.Title
     enum TitleMode
     {
         None,
+        Landing,
         FirstWindow,
         SelectSave,
         Load,
@@ -27,9 +28,15 @@ namespace Soleil.Title
         NewGameTransition newGame;
         LoadGameTransition loadGame;
         ExitTransition exitTransition;
+        TitleGraphics graphics;
+        LandingTransition landing;
+
+        private TitleMode mode = TitleMode.Landing;
 
         public TitleMaster(SceneManager sm)
         {
+            graphics = new TitleGraphics();
+            landing = new LandingTransition(graphics, this);
             firstWindow = new FirstWindow(this);
             input = new TitleInput(this, firstWindow);
             newGame = new NewGameTransition(sm);
@@ -37,20 +44,39 @@ namespace Soleil.Title
             exitTransition = new ExitTransition();
         }
 
-        public TitleMode Mode { get; set; } = TitleMode.FirstWindow;
+        public TitleMode Mode
+        {
+            get => mode;
+            set
+            {
+                if (mode != value)
+                {
+                    ActionOnChangeMode(value);
+                }
+                mode = value;
+            }
+        }
 
         public void Update()
         {
             input.Update();
-
+            firstWindow.Update();
+            if (Mode == TitleMode.Landing) landing.TransitionUpdate();
             if (Mode == TitleMode.NewGame) newGame.TransitionUpdate();
             if (Mode == TitleMode.Load) loadGame.TransitionUpdate();
             if (Mode == TitleMode.Exit) exitTransition.TransitionUpdate();
+            graphics.Update();
         }
 
         public void Draw(Drawing d)
         {
+            firstWindow.Draw(d);
+            graphics.Draw(d);
+        }
 
+        private void ActionOnChangeMode(TitleMode mode)
+        {
+            if (mode == TitleMode.FirstWindow) firstWindow.CallWindow();
         }
     }
 }

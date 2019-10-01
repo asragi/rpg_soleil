@@ -89,6 +89,7 @@ namespace Soleil.Battle
     }
 
     //どうせint
+    // もう使ってなさそう?
     class VerticalSelectWindow : SelectWindow<int>
     {
         List<string> choiceList;
