@@ -34,18 +34,18 @@ namespace Soleil.Menu
         // 選択状態の背景（これCursorとしてくらすにしたほうがよいきがする）
         Image selectedBack;
 
-        public TextSelectablePanel(String itemName, BasicMenu parent, bool active = true) : base(parent)
+        public TextSelectablePanel(String itemName, BasicMenu parent, DepthID depth, bool active = true) : base(parent)
         {
             ItemName = itemName;
             // Set Font Image
-            itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X);
+            itemNameImage = new TextWithVal(ItemFont, LocalPos + parent.Pos, (int)ItemNumPosDiff.X, depth: depth);
             itemNameImage.Text = itemName;
             Active = active;
             SetTextColor(ItemColor);
             itemNameImage.ValColor = ItemColor;
 
             // 選択状態を示すやつ
-            selectedBack = new Image(TextureID.MenuSelected, LocalPos + parent.Pos, DepthID.Message, false, true, 0);
+            selectedBack = new Image(TextureID.MenuSelected, LocalPos + parent.Pos, depth);
         }
 
         public override void Fade(int duration, Func<double, double, double, double, double> _easeFunc, bool isFadeIn)

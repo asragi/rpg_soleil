@@ -16,7 +16,7 @@ namespace Soleil.Battle
         public override string Desctiption => ItemName;
 
         public MagicSelectPanel(String itemName, int num, MagicSelectWindow parent)
-            : base(itemName, parent)
+            : base(itemName, parent, DepthID.MenuMessage)
         {
             // itemNum
             Val = num;
