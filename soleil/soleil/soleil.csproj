@@ -66,6 +66,7 @@
     <Compile Include="Battle\EquipSet.cs" />
     <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
+    <Compile Include="Images\TriangleImage.cs" />
     <Compile Include="Dungeon\DungeonState.cs" />
     <Compile Include="Dungeon\Exec\AfterBattle.cs" />
     <Compile Include="Dungeon\Exec\InitBattle.cs" />

@@ -16,6 +16,7 @@ namespace Soleil
         FrameTest,
         WhiteWindow,
         IndicatorBack,
+        Triangle,
         BackBar,
         Currency,
 
@@ -443,6 +444,7 @@ namespace Soleil
             #endregion
 
             #region UI
+            SetPath(TextureID.Triangle, UIPath + "yasoba-triangle");
             SetPath(TextureID.FrameTest, UIPath + "window2");
             SetPath(TextureID.MessageWindow, UIPath + "message");
             SetPath(TextureID.MessageWindowBack, UIPath + "message-back");
