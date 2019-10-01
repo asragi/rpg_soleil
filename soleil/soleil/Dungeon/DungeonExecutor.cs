@@ -29,7 +29,7 @@ namespace Soleil.Dungeon
             var data = DungeonDatabase.Get(name);
             float rand = (float)Global.RandomDouble(0, 1.0);
             var targetEvent = data.GetEvent(floorNum);
-            if (data.HasEvent(floorNum) && !targetEvent.Archived)
+            if (data.HasEvent(floorNum) && !targetEvent.Achieved)
             {
                 if (rand <= SearchFindRate)
                 {

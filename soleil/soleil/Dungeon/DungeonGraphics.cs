@@ -144,7 +144,7 @@ namespace Soleil.Dungeon
             {
                 var targetEvent = DungeonDatabase.Get(dState.Name).GetEvent(dState.FloorNum);
                 string message = targetEvent.DisplayName;
-                string target = targetEvent.Archived ? message : UnknownText;
+                string target = targetEvent.Achieved ? message : UnknownText;
                 searchResultImg.Text = target;
             }
         }
