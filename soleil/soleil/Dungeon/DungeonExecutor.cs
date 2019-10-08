@@ -12,7 +12,6 @@ namespace Soleil.Dungeon
     /// </summary>
     class DungeonExecutor
     {
-        private static readonly NothingEvent nothing = new NothingEvent();
         private float SearchFindRate = 0.2f;
         private float EncounterRate = 0.7f;
 
@@ -29,12 +28,14 @@ namespace Soleil.Dungeon
         {
             var data = DungeonDatabase.Get(name);
             float rand = (float)Global.RandomDouble(0, 1.0);
-            if (data.HasEvent(floorNum))
+            var targetEvent = data.GetEvent(floorNum);
+            if (data.HasEvent(floorNum) && !targetEvent.Achieved)
             {
                 if (rand <= SearchFindRate)
                 {
                     // 探索成功
-                    return DecideReturnMode(data.GetEvent(floorNum));
+                    targetEvent.Archived = true;
+                    return DecideReturnMode(targetEvent);
                 }
             }
             if (rand <= EncounterRate)

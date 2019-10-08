@@ -62,7 +62,7 @@
             // Input
             input = new DungeonInput(this, firstSelect, returnConfirm);
             // Graphics
-            graphics = new DungeonGraphics();
+            graphics = new DungeonGraphics(dungeonState);
         }
 
         public DungeonMode Mode {
@@ -79,6 +79,8 @@
         public void ToNextFloor()
         {
             Mode = DungeonMode.Init;
+            dungeonState.GoNext();
+            graphics.NextFloor(dungeonState);
             Reset();
         }
 

@@ -11,7 +11,7 @@ namespace Soleil.Dungeon
     /// </summary>
     class FirstSelectWindow
     {
-        private static readonly Vector WindowPos = new Vector(100, 100);
+        private static readonly Vector WindowPos = new Vector(55, 200);
         private static readonly string[] Options = new[] { "進む", "探索する", "入り口に戻る" };
         SelectableWindow window;
 
