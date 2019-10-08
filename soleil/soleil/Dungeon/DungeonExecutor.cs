@@ -34,7 +34,7 @@ namespace Soleil.Dungeon
                 if (rand <= SearchFindRate)
                 {
                     // 探索成功
-                    targetEvent.Archived = true;
+                    targetEvent.Achieve();
                     return DecideReturnMode(targetEvent);
                 }
             }
