@@ -33,6 +33,7 @@ namespace Soleil
                 var target = toasts[i];
                 if (target.InUse) continue;
                 target.Invoke(icon, text, num);
+                return;
             }
         }
 
@@ -73,7 +74,7 @@ namespace Soleil
                 AddComponents(backImg, iconImg, textImg, numText);
             }
 
-            public bool InUse => displayTime > DisplayTime + EasingFrame;
+            public bool InUse => displayTime < DisplayTime + EasingFrame;
 
             public void Invoke(TextureID icon, string text, int num = -1)
             {
@@ -88,7 +89,7 @@ namespace Soleil
             {
                 base.Update();
 
-                if (displayTime > DisplayTime) return;
+                if (displayTime > DisplayTime + EasingFrame) return;
                 displayTime++;
                 if (displayTime == DisplayTime) Quit();
             }

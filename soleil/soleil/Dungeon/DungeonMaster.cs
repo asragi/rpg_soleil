@@ -33,6 +33,7 @@
         MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
+        ToastMaster toastMaster;
 
         // Graphics
         DungeonGraphics graphics;
@@ -59,6 +60,7 @@
             // Displays
             firstSelect = new FirstSelectWindow(this);
             returnConfirm = new ReturnConfirm(this);
+            toastMaster = new ToastMaster();
             // Input
             input = new DungeonInput(this, firstSelect, returnConfirm);
             // Graphics
@@ -90,12 +92,15 @@
             input.Update();
             graphics.Update();
             player.Update();
+            toastMaster.Update();
+            if (KeyInput.GetKeyPush(Key.D)) toastMaster.Invoke(TextureID.IconWand, "シルバーワンド", 2);
         }
 
         public void Draw(Drawing d)
         {
             graphics.Draw(d);
             player.Draw(d);
+            toastMaster.Draw(d);
         }
 
         private void Exec()
