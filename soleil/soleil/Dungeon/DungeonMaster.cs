@@ -45,6 +45,7 @@
         public DungeonMaster(
             DungeonName name, SceneManager sm, PersonParty party)
         {
+            toastMaster = new ToastMaster();
             // States
             Mode = DungeonMode.Init;
             dungeonState = new DungeonState(name);
@@ -52,7 +53,7 @@
             // Execs
             initialWait = new InitialWait(this, player);
             dungeonSearch = new DungeonSearch(this, dungeonState);
-            itemFindEvent = new ItemFindEvent(this, dungeonState);
+            itemFindEvent = new ItemFindEvent(this, dungeonState, toastMaster);
             moveNext = new MoveNext(this, player);
             returnToHome = new ReturnToHome(player, name, sm, party);
             initBattle = new InitBattle(this);
@@ -60,7 +61,6 @@
             // Displays
             firstSelect = new FirstSelectWindow(this);
             returnConfirm = new ReturnConfirm(this);
-            toastMaster = new ToastMaster();
             // Input
             input = new DungeonInput(this, firstSelect, returnConfirm);
             // Graphics
@@ -93,7 +93,6 @@
             graphics.Update();
             player.Update();
             toastMaster.Update();
-            if (KeyInput.GetKeyPush(Key.D)) toastMaster.Invoke(TextureID.IconWand, "シルバーワンド", 2);
         }
 
         public void Draw(Drawing d)

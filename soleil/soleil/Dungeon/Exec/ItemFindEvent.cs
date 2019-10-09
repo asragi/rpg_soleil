@@ -15,13 +15,15 @@ namespace Soleil.Dungeon
     {
         DungeonMaster master;
         DungeonState state;
+        ToastMaster toastMaster;
 
         public ItemFindEvent(
             DungeonMaster _master,
-            DungeonState _state)
+            DungeonState _state, ToastMaster toast)
         {
             master = _master;
             state = _state;
+            toastMaster = toast;
         }
 
         public void Exec()
@@ -30,7 +32,9 @@ namespace Soleil.Dungeon
             var dungeonData = DungeonDatabase.Get(state.Name);
             var eventData = (ItemFind)dungeonData.GetEvent(state.FloorNum);
             var itemBag = PlayerBaggage.GetInstance().Items;
-            itemBag.AddItem(eventData.ID, eventData.Num);
+            var itemData = ItemDataBase.Get(eventData.ID);
+            itemBag.AddItem(itemData.ID, eventData.Num);
+            toastMaster.Invoke(itemData.Type.GetIcon(), itemData.Name, eventData.Num);
             // Change Mode
             master.Mode = DungeonMode.FirstWindow;
         }

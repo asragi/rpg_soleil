@@ -16,7 +16,7 @@ namespace Soleil
         private readonly Vector PositionDiff = new Vector(0, -53);
         private readonly Vector PosDiff = new Vector(40, 0);
         private readonly DepthID Depth = DepthID.Message;
-        private const int ToastMax = 6;
+        private const int ToastMax = 7;
         private readonly Toast[] toasts;
 
         public ToastMaster()
@@ -52,8 +52,8 @@ namespace Soleil
         {
             private const int DisplayTime = 120;
             private static Vector IconPos = new Vector(60, 15);
-            private static Vector TextPos = new Vector(83, 12);
-            private static Vector NumPos = new Vector(288, 12);
+            private static Vector TextPos = new Vector(83, 10);
+            private static Vector NumPos = new Vector(288, 10);
             private const FontID Font = FontID.CorpM;
             private static int EasingFrame = MenuSystem.FadeSpeed;
 
