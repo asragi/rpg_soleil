@@ -30,6 +30,6 @@ namespace Soleil.Dungeon
         public DungeonFloorEvent GetEventClone(int floor)
             => (DungeonFloorEvent)events[floor].Clone();
         public DungeonFloorEvent GetEvent(int floor)
-            => events[floor];
+            => HasEvent(floor) ? events[floor] : NothingEvent.Nothing;
     }
 }
