@@ -34,7 +34,7 @@ namespace Soleil.Dungeon
             var itemBag = PlayerBaggage.GetInstance().Items;
             var itemData = ItemDataBase.Get(eventData.ID);
             itemBag.AddItem(itemData.ID, eventData.Num);
-            toastMaster.Invoke(itemData.Type.GetIcon(), itemData.Name, eventData.Num);
+            toastMaster.PopUpAlert(itemData.Type.GetIcon(), itemData.Name, eventData.Num);
             // Change Mode
             master.Mode = DungeonMode.FirstWindow;
         }

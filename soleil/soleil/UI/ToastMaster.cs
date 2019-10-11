@@ -26,7 +26,7 @@ namespace Soleil
                 toasts[i] = new Toast(BasePos + PositionDiff * i, PosDiff, Depth);
         }
 
-        public void Invoke(TextureID icon, string text, int num = -1)
+        public void PopUpAlert(TextureID icon, string text, int num = -1)
         {
             for (int i = 0; i < toasts.Length; i++)
             {
