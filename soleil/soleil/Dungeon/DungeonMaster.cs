@@ -33,6 +33,7 @@
         MoveNext moveNext;
         ReturnConfirm returnConfirm;
         ReturnToHome returnToHome;
+        ToastMaster toastMaster;
 
         // Graphics
         DungeonGraphics graphics;
@@ -44,6 +45,7 @@
         public DungeonMaster(
             DungeonName name, SceneManager sm, PersonParty party)
         {
+            toastMaster = new ToastMaster();
             // States
             Mode = DungeonMode.Init;
             dungeonState = new DungeonState(name);
@@ -51,7 +53,7 @@
             // Execs
             initialWait = new InitialWait(this, player);
             dungeonSearch = new DungeonSearch(this, dungeonState);
-            itemFindEvent = new ItemFindEvent(this, dungeonState);
+            itemFindEvent = new ItemFindEvent(this, dungeonState, toastMaster);
             moveNext = new MoveNext(this, player);
             returnToHome = new ReturnToHome(player, name, sm, party);
             initBattle = new InitBattle(this);
@@ -90,12 +92,14 @@
             input.Update();
             graphics.Update();
             player.Update();
+            toastMaster.Update();
         }
 
         public void Draw(Drawing d)
         {
             graphics.Draw(d);
             player.Draw(d);
+            toastMaster.Draw(d);
         }
 
         private void Exec()
