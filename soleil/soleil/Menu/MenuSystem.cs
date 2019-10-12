@@ -218,7 +218,7 @@ namespace Soleil.Menu
                 Index = (Index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
-                else if (KeyInput.GetKeyPush(Key.B)) Quit();
+                else if (KeyInput.GetKeyPush(Key.B) || KeyInput.GetKeyPush(Key.C)) Quit();
                 return;
             }
             // Activeな子ウィンドウに入力を送る

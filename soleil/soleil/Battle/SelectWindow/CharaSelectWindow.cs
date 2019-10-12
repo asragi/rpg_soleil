@@ -17,7 +17,7 @@ namespace Soleil.Battle
         public override string Desctiption => ItemName;
 
         public CharaIndexPanel(String index, int num, CharaSelectWindow parent)
-            : base(index, parent)
+            : base(index, parent, DepthID.MenuMessage)
         {
             // itemNum
             Val = num;

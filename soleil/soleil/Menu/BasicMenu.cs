@@ -37,7 +37,7 @@ namespace Soleil.Menu
         public BasicMenu(MenuComponent parent, MenuDescription desc)
             : base(parent)
         {
-            backImage = new Image(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MessageBack, false, true, 0);
+            backImage = new Image(TextureID.MenuModalBack, WindowPos + WindowPosDiff, DepthID.MenuMessageBack, false, true, 0);
             Index = 0;
             MenuDescription = desc;
             triangleImage = new[]

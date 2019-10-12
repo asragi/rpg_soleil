@@ -22,7 +22,7 @@ namespace Soleil.Menu
         public readonly SkillID ID;
 
         public MagicMenuPanel(ISkill data, MagicMenu parent)
-            : base(data.Name, parent)
+            : base(data.Name, parent, DepthID.MenuMessage)
         {
             // itemNum
             Val = data.Cost;
