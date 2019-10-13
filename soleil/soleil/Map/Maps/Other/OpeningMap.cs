@@ -22,8 +22,8 @@ namespace Soleil.Map
                 EventSequences[i] = new EventSequence(ObjectManager.GetPlayer());
             }
             EventSequences[0].SetEventSet(
-                    new MessageWindowEvent(new Vector(480, 200), 0, "test", false),
-                    new MessageWindowEvent(new Vector(480, 200), 0, "オープニングイベント用メッセージ", false),
+                    new MessageWindowEvent(new Vector(480, 270), 0, "test\ntesttest", speech: false, center: true),
+                    new MessageWindowEvent(new Vector(480, 270), 0, "オープニングイベント用メッセージ", false, true),
                     new WaitEvent(60),
                     new FadeOutEvent(),
                     new WaitEvent(60),

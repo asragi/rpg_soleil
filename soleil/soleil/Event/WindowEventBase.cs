@@ -22,9 +22,10 @@ namespace Soleil.Event
         /// <summary>
         /// 座標を指定してウィンドウを出す．
         /// </summary>
-        public WindowEventBase(Vector _pos, Vector _size, WindowTag tag)
+        public WindowEventBase(Vector _pos, Vector _size, WindowTag tag, bool centerOrigin = false)
         {
-            PosFunc = () => _pos;
+            var diff = centerOrigin ? _size / 2 : Vector.Zero;
+            PosFunc = () => _pos - diff;
             Size = _size;
             Tag = tag;
         }

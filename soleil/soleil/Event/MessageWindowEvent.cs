@@ -30,8 +30,8 @@ namespace Soleil.Event
         /// <summary>
         /// マップ上の座標を指定してメッセージウィンドウを出す．
         /// </summary>
-        public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message, bool speech = true)
-            : base(_pos, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message), _tag)
+        public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message, bool speech = true, bool center = false)
+            : base(_pos, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message), _tag, center)
         {
             isSpeech = speech;
             message = _message;
