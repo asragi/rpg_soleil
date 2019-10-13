@@ -12,9 +12,9 @@ namespace Soleil.Map
         public OpeningMap(PersonParty p, Camera cam)
             : base(MapName.Opening, p, cam)
         {
-            MapCameraManager.SetMapSize(960, 540);
-
             CameraPoints = new[] { new CameraPoint(480, 270) };
+            MapCameraManager.SetMapSize(960, 540);
+            MapCameraManager.SetCameraPoint(CameraPoints);
 
             EventSequences = new EventSequence[1];
             for (int i = 0; i < EventSequences.Length; i++)
@@ -22,7 +22,12 @@ namespace Soleil.Map
                 EventSequences[i] = new EventSequence(ObjectManager.GetPlayer());
             }
             EventSequences[0].SetEventSet(
-                    new MessageWindowEvent(Vector.Zero, 0, "test")
+                    new MessageWindowEvent(new Vector(480, 200), 0, "test"),
+                    new MessageWindowEvent(new Vector(480, 200), 0, "オープニングイベント用メッセージ"),
+                    new FadeOutEvent(),
+                    new ChangeMapEvent(MapName.MagistolRoom, new Vector(400, 400), Direction.D, p, cam),
+                    new FadeInEvent(),
+                    new ChangeInputFocusEvent(InputFocus.Player)
                 );
         }
 
