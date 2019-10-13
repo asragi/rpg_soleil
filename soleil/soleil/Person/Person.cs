@@ -57,7 +57,6 @@ namespace Soleil
             Skill = new SkillHolder(data.InitSkill);
             Magic = new MagicLv(data.InitMagicExp, Skill);
             InParty = true; // debug
-            LvUp(57); // debug
         }
 
         public void LvUp(int plus)
