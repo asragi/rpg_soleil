@@ -14,11 +14,14 @@ namespace Soleil
     class SelectableWindow : VariableWindow
     {
         const int LineSpace = 35;
+        const int CursorWidthPlus = 4;
+        private static readonly Vector CursorPosModify = new Vector(0, 2);
         string[] options;
         TextImage[] texts;
         int optionNum;
         public int Index { get; protected set; }
         bool decided;
+        Image cursorImg;
         public SelectableWindow(Vector _pos, Vector _size, WindowTag tag, WindowManager wm, bool isStatic, params string[] _options)
             : base(_pos, _size, tag, wm, isStatic)
         {
@@ -29,19 +32,22 @@ namespace Soleil
                 texts[i] = new TextImage(MessageWindow.DefaultFont, Pos + new Vector(Spacing, Spacing + LineSpace * i), DiffPos, DepthID.Message, isStatic);
                 texts[i].FadeSpeed = FadeSpeed;
                 texts[i].Text = options[i];
-                texts[i].Color = ColorPalette.DarkBlue;
+                texts[i].Color = i == Index ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
             }
+            Vector cursorPos = new Vector(Size.X / 2, VariableRectangle.FrameSize + LineSpace * (0.5f + Index)) + CursorPosModify;
+            cursorImg = new Image(TextureID.White, Pos + cursorPos, DiffPos, DepthID.MessageBack, true, isStatic);
+            cursorImg.Size = new Vector(Size.X - Spacing * 2 + CursorWidthPlus, LineSpace);
+            cursorImg.Color = ColorPalette.DarkBlue;
             optionNum = options.Length - 1;
             Index = 0;
             decided = false;
             AddComponents(texts);
+            AddComponents(cursorImg);
         }
 
         public SelectableWindow(Vector _pos, bool isStatic, params string[] options)
             : this(_pos, ProperSize(MessageWindow.DefaultFont, options), WindowTag.A, WindowManager.GetInstance(), isStatic, options)
-        {
-
-        }
+        { }
 
         public void Reset()
         {
@@ -53,6 +59,7 @@ namespace Soleil
             if (decided) return;
             Index--;
             if (Index < 0) Index = optionNum;
+            RefreshCursorPos();
         }
 
         public void DownCursor()
@@ -60,6 +67,7 @@ namespace Soleil
             if (decided) return;
             Index++;
             if (Index > optionNum) Index = 0;
+            RefreshCursorPos();
         }
 
         public void Decide()
@@ -75,19 +83,6 @@ namespace Soleil
         {
             if (decided) return Index;
             return -1;
-        }
-
-        protected override void DrawContent(Drawing d)
-        {
-            base.DrawContent(d);
-            for (int i = 0; i < texts.Length; i++)
-            {
-                texts[i].Draw(d);
-            }
-            if (IsStatic)
-                d.DrawStatic(Pos + new Vector(0, 20 + Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
-            else
-                d.Draw(Pos + new Vector(0, 20 + Spacing + LineSpace * Index), Resources.GetTexture(TextureID.White), DepthID.Frame, 10);
         }
 
         /// <summary>
@@ -106,6 +101,16 @@ namespace Soleil
             }
 
             return new Vector(2 * Spacing + length, 2 * Spacing + LineSpace * options.Length);
+        }
+
+        private void RefreshCursorPos()
+        {
+            cursorImg.Pos = Pos + new Vector(Size.X / 2, VariableRectangle.FrameSize + LineSpace * (0.5f + Index)) + CursorPosModify;
+            cursorImg.InitPos = cursorImg.Pos;
+            for (int i = 0; i < texts.Length; i++)
+            {
+                texts[i].Color = i == Index ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
+            }
         }
     }
 }
