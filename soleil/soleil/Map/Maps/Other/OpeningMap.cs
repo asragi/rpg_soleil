@@ -24,7 +24,9 @@ namespace Soleil.Map
             EventSequences[0].SetEventSet(
                     new MessageWindowEvent(new Vector(480, 200), 0, "test"),
                     new MessageWindowEvent(new Vector(480, 200), 0, "オープニングイベント用メッセージ"),
+                    new WaitEvent(60),
                     new FadeOutEvent(),
+                    new WaitEvent(60),
                     new ChangeMapEvent(MapName.MagistolRoom, new Vector(400, 400), Direction.D, p, cam),
                     new FadeInEvent(),
                     new ChangeInputFocusEvent(InputFocus.Player)
