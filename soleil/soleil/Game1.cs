@@ -86,7 +86,7 @@ namespace Soleil
             if (saveExist) SaveLoad.Load();
             party = SaveLoad.GetParty(isNew: !saveExist);
 
-            new MapScene(sm, party, Map.MapName.Opening, new Vector(-100, 100));
+            new TitleScene(sm);
             //new TestBattleScene(sm, party);
             // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
             //new DungeonScene(sm, party, Dungeon.DungeonName.MagistolUnderground);
