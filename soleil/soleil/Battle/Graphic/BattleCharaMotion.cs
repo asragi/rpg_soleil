@@ -14,6 +14,9 @@ namespace Soleil.Battle
         Stand,
         Chant,
         Magic,
+        Crisis,
+        Victory,
+        Down,
 
         Size,
     }
@@ -24,10 +27,12 @@ namespace Soleil.Battle
     class BattleCharaMotion
     {
         protected BattleCharaMotionType BCMotionType;
-        public BattleCharaMotion(BattleCharaMotionType bcMotionType) => BCMotionType = bcMotionType;
+        BattleCharaAnimationType bcAnimationType;
+        public BattleCharaMotion(BattleCharaMotionType bcMotionType, BattleCharaAnimationType bcAnimationType = BattleCharaAnimationType.Stand) =>
+            (BCMotionType, this.bcAnimationType) = (bcMotionType, bcAnimationType);
 
         public virtual Tuple<BattleCharaAnimationType, BattleCharaMotionType> Update(BattleCharaAnimation bcAnim)
-            => Tuple.Create(BattleCharaAnimationType.Stand, BCMotionType);
+            => Tuple.Create(bcAnimationType, BCMotionType);
     }
 
     /// <summary>
