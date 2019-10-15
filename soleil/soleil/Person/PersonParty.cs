@@ -43,10 +43,10 @@ namespace Soleil
             return allCharacters[(int)name];
         }
 
-        public int GetPartyNum()
-        {
-            return 2;
-        }
+        public int GetPartyNum() => GetActiveMembers().Length;
+
+        public void SetActive(CharaName name, bool active)
+            => allCharacters[(int)name].InParty = active;
 
         public Person[] GetActiveMembers()
         {
