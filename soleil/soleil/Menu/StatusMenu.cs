@@ -11,6 +11,7 @@ namespace Soleil.Menu
     {
         const int PanelLeft = 368;
         const int PanelRight = 696;
+        const int PanelDiffFor2 = 210;
         const int PanelY = 130;
 
         MenuCharacterPanel[] menuCharacterPanels;
@@ -38,7 +39,18 @@ namespace Soleil.Menu
 
             Vector[] Positions(int num)
             {
+                if (num == 1)
+                    return new [] { new Vector((PanelRight + PanelLeft) / 2, PanelY) };
                 var result = new Vector[num];
+                if (num == 2)
+                {
+                    int center = (PanelLeft + PanelRight) / 2;
+                    for (int i = 0; i < num; i++)
+                    {
+                        result[i] = new Vector(center + PanelDiffFor2 / 2 * Math.Pow((-1), i - 1), PanelY);
+                    }
+                    return result;
+                }
                 int spaceNum = num - 1;
                 int space = spaceNum != 0 ? (PanelRight - PanelLeft) / spaceNum : 0;
                 for (int i = 0; i < num; i++)
