@@ -9,9 +9,10 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class PersonParty
+    class PersonParty: INotifier
     {
         Person[] allCharacters;
+        IListener[] listeners;
 
         /// <summary>
         /// CreateNewParty
@@ -19,7 +20,7 @@ namespace Soleil
         public PersonParty()
         {
             allCharacters = CreateNewParty();
-
+            listeners = new IListener[(int)ListenerType.size];
             Person[] CreateNewParty()
             {
                 Person[] result = new Person[(int)CharaName.size];
@@ -46,7 +47,10 @@ namespace Soleil
         public int GetPartyNum() => GetActiveMembers().Length;
 
         public void SetActive(CharaName name, bool active)
-            => allCharacters[(int)name].InParty = active;
+        {
+            allCharacters[(int)name].InParty = active;
+            OnRefresh();
+        }
 
         public Person[] GetActiveMembers()
         {
@@ -58,6 +62,14 @@ namespace Soleil
                 result.Add(target);
             }
             return result.ToArray();
+        }
+
+        public void AddListener(IListener listener)
+            => listeners[(int)listener.Type] = listener;
+
+        private void OnRefresh()
+        {
+            listeners.ForEach2(l => l?.OnListen(this));
         }
     }
 }

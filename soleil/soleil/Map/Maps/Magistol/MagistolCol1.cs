@@ -68,7 +68,6 @@ namespace Soleil.Map
             if (!Party.Get(Misc.CharaName.Sunny).InParty)
             {
                 EventSequences[0].StartEvent();
-                Console.WriteLine("hoge");
             }
         }
     }
