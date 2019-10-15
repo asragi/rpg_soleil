@@ -186,8 +186,11 @@
     <Compile Include="Map\CollideLayer.cs" />
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
+    <Compile Include="Map\CollideLine.cs" />
+    <Compile Include="Map\CollideObject.cs" />
     <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\ICollideObject.cs" />
+    <Compile Include="Map\IEventer.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapBoxManager.cs" />
     <Compile Include="Map\MapCameraManager.cs" />

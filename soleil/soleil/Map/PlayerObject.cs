@@ -129,8 +129,8 @@
             {
                 // 他キャラクターとの衝突確認
                 if (moveBoxes[i].GetCollideCharacter()) continue;
-                if (moveBoxes[i].GetWallCollide()) continue;
-                return (_pos + moveBoxes[i].GetLocalPos(), (speed == RunSpeed) ? MoveState.Dash : MoveState.Walk);
+                if (moveBoxes[i].WallCollide) continue;
+                return (_pos + moveBoxes[i].LocalPos, (speed == RunSpeed) ? MoveState.Dash : MoveState.Walk);
             }
             return (_pos, MoveState.Stand); // どこにも移動できなさそうなとき
         }
@@ -139,7 +139,7 @@
         {
             for (int i = 0; i < moveBoxes.Length; i++)
             {
-                moveBoxes[i].SetLocalPos(Vector.Zero);
+                moveBoxes[i].LocalPos = Vector.Zero;
             }
         }
 
@@ -156,7 +156,7 @@
                 if (i % 2 == 0) modifyAngle *= -1; // 0,15,-15,30,-30,45,...
                 var resultAngle = centerAngle + modifyAngle;
                 var resultPos = speedVector.Rotate(resultAngle);
-                moveBoxes[i].SetLocalPos(resultPos);
+                moveBoxes[i].LocalPos = resultPos;
             }
         }
 
@@ -165,7 +165,7 @@
         /// </summary>
         public void ProjectHitBox()
         {
-            decideBox.SetLocalPos(DecideBoxDist.Rotate(Direction.Angle()));
+            decideBox.LocalPos = DecideBoxDist.Rotate(Direction.Angle());
             decideBox.IsActive = true;
             decideBoxCount = 2;
         }
@@ -179,7 +179,7 @@
             decideBoxCount--;
             if (decideBoxCount > 0) return;
             decideBox.IsActive = false;
-            decideBox.SetLocalPos(Vector.Zero);
+            decideBox.LocalPos = Vector.Zero;
         }
 
         #endregion

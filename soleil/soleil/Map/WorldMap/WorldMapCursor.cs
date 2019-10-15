@@ -39,8 +39,8 @@ namespace Soleil.Map.WorldMap
         public void Update() => img.Update();
         public void Draw(Drawing d) => img.Draw(d);
 
-        public void OnCollisionEnter(CollideBox cb) { }
-        public void OnCollisionExit(CollideBox cb) { }
-        public void OnCollisionStay(CollideBox cb) { }
+        public void OnCollisionEnter(CollideObject cb) { }
+        public void OnCollisionExit(CollideObject cb)  { }
+        public void OnCollisionStay(CollideObject cb) { }
     }
 }
