@@ -33,9 +33,11 @@ namespace Soleil.Battle
         BattleCharaAnimationType currentAnimationType;
         BattleCharaMotion bcMotion;
         BattleCharaMotionType currentMotionType;
-        public BattleCharaAnimation(Vector pos)
+        Character character;
+        public BattleCharaAnimation(Vector pos, Character chara)
         {
             Pos = pos;
+            character = chara;
             currentAnimationType = BattleCharaAnimationType.Stand;
             animation = new Animation[(int)BattleCharaAnimationType.Size];
             animation[(int)BattleCharaAnimationType.Stand] = new Animation(new AnimationData(AnimationID.BattleLuneStanding, true, 10));
@@ -73,7 +75,7 @@ namespace Soleil.Battle
             switch (motion)
             {
                 case BattleCharaMotionType.Stand:
-                    bcMotion = new BattleCharaMotion(motion);
+                    bcMotion = new BattleCharaMotionChangingWithHP(character);
                     break;
                 case BattleCharaMotionType.Chant:
                     bcMotion = new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Chant, 60);
@@ -83,9 +85,6 @@ namespace Soleil.Battle
                         new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Chant, 60),
                         new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Magic, 75)
                         });
-                    break;
-                case BattleCharaMotionType.Crisis:
-                    bcMotion = new BattleCharaMotion(motion, BattleCharaAnimationType.Crisis);
                     break;
                 case BattleCharaMotionType.Victory:
                     bcMotion = new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Victory, 300);
