@@ -12,7 +12,7 @@ namespace Soleil
     /// <summary>
     /// 画像やテキストの表示に関する抽象クラス
     /// </summary>
-    abstract class ImageBase: IComponent
+    abstract class ImageBase : IComponent
     {
         /// <summary>
         /// イージングの基準点となる座標．
@@ -23,9 +23,11 @@ namespace Soleil
         public Color Color { get; set; } = Color.White;
         private Vector pos;
         public bool IsVisible { get; set; } = true;
-        public virtual Vector Pos {
+        public virtual Vector Pos
+        {
             get => pos;
-            set {
+            set
+            {
                 Vector diff = value - Pos;
                 startPos += diff;
                 targetPos += diff;
@@ -35,13 +37,22 @@ namespace Soleil
         public float Angle { get; set; }
         protected bool IsStatic;
         public abstract Vector ImageSize { get; }
-        public float Alpha { get; set; }
+        private float alpha;
+        public float Alpha {
+            get => alpha;
+            set {
+                alpha = value;
+                // イージング処理中であればイージング後の透明度も合わせる．
+                alphaTarget = value;
+            }
+        }
 
         // 透明度に関するイージング処理に用いる変数．
+        private float alphaStart;
+        private float alphaTarget;
         private int alphaFrame;
         private int alphaDuration;
         private EFunc alphaEaseFunc;
-        bool fadeIn;
         public int FadeSpeed { get; set; } = MenuSystem.FadeSpeed;
 
         /// <summary>
@@ -79,12 +90,12 @@ namespace Soleil
 
         public void Fade(int duration, EFunc _easeFunc, bool isFadeIn)
         {
-            Alpha = (isFadeIn) ? 0 : 1;
+            alphaStart = alpha;
             alphaFrame = 0;
             alphaFrameWait = FrameWait;
             alphaDuration = duration;
             alphaEaseFunc = _easeFunc;
-            fadeIn = isFadeIn;
+            alphaTarget = isFadeIn ? 1 : 0;
         }
 
         public void MoveTo(Vector target, int duration, EFunc _easeFunc)
@@ -109,23 +120,23 @@ namespace Soleil
         public virtual void Call() => Call(true);
         public virtual void Quit() => Quit(true);
 
-        public void Call(bool move = true)
+        public void Call(bool move = true, bool alpha = true)
         {
-            Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            if (alpha) Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
             if (move) MoveToDefault();
         }
 
         public void MoveToDefault() => MoveTo(InitPos, FadeSpeed, MenuSystem.EaseFunc);
-        
 
-        public void Quit(bool move = true)
+
+        public void Quit(bool move = true, bool alpha = true)
         {
-            Fade(FadeSpeed, MenuSystem.EaseFunc, false);
+            if (alpha) Fade(FadeSpeed, MenuSystem.EaseFunc, false);
             if (move) MoveToBack();
         }
 
         public void MoveToBack() => MoveTo(InitPos + PosDiff, FadeSpeed, MenuSystem.EaseFunc);
-        
+
         private void Easing()
         {
             if (moveFrameWait > 0)
@@ -152,10 +163,10 @@ namespace Soleil
             }
             if (alphaFrame >= alphaDuration) return;
             if (alphaEaseFunc == null) return;
-            Alpha = fadeIn ? (float)alphaEaseFunc(alphaFrame, alphaDuration, 1, 0) : (float)alphaEaseFunc(alphaFrame, alphaDuration, 0, 1);
+            alpha = (float)alphaEaseFunc(alphaFrame, alphaDuration, alphaTarget, alphaStart);
             alphaFrame++;
 
-            if (alphaFrame >= alphaDuration) Alpha = fadeIn ? 1 : 0;
+            if (alphaFrame >= alphaDuration) alpha = alphaTarget;
         }
     }
 }

@@ -89,7 +89,8 @@ namespace Soleil.Event.Shop
             }
         }
 
-        public override void OnInputCancel() {
+        public override void OnInputCancel()
+        {
             if (decideWindow != null && decideWindow.IsFocused)
             {
                 InputToDecideWindow();

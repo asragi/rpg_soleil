@@ -9,7 +9,7 @@ namespace Soleil.Map
     /// <summary>
     /// 廊下その1
     /// </summary>
-    class MagistolCol1: MapBase
+    class MagistolCol1 : MapBase
     {
         private static readonly Vector[] ChairPos = new[]
         {
@@ -21,7 +21,7 @@ namespace Soleil.Map
         private const int ChairDiff = 80;
 
         public MagistolCol1(PersonParty party, Camera cam)
-            :base(MapName.MagistolCol1, party, cam)
+            : base(MapName.MagistolCol1, party, cam)
         {
             MapConstructs = new MapConstruct[]
             {

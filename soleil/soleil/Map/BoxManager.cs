@@ -49,7 +49,7 @@ namespace Soleil.Map
 
         private void CalcCollide(int i, int j)
         {
-            if(!BoxList[i].IsActive || !BoxList[j].IsActive)
+            if (!BoxList[i].IsActive || !BoxList[j].IsActive)
             {
                 // どちらかが非アクティブであれば衝突しない
                 BoxList[j].Collide(BoxList[i], false);

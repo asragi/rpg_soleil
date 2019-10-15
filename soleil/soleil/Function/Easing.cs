@@ -91,7 +91,7 @@ namespace Soleil
         public static double InSine(double t, double totaltime, double max, double min)
         {
             max -= min;
-            return -max * Math.Cos(t * (Math.PI/2) / totaltime) + max + min;
+            return -max * Math.Cos(t * (Math.PI / 2) / totaltime) + max + min;
         }
         public static double OutSine(double t, double totaltime, double max, double min)
         {

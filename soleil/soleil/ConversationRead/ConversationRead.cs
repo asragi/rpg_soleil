@@ -28,7 +28,7 @@ namespace Soleil.Event.Conversation
             var deserializeObject = deserializer.Deserialize<List<ConversationYaml>>(input);
             return deserializeObject;
         }
-        
+
         public static EventSet[] ActionFromData(string place, string conversationName, ConversationSystem cs, EventSequence es)
         {
             // 会話に登場する人物のリスト

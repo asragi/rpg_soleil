@@ -4,125 +4,101 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     using AttackFunc = Func<CharacterStatus, CharacterStatus, float>;
-    enum AttackAttribution
-    {
-        None = -1,
-        Beat,
-        Cut,
-        Thrust,
-        Fever,
-        Ice,
-        Electro,
-        size,
-    }
 
-    static class ExtendAttackAttribution
-    {
-        static readonly Dictionary<AttackAttribution, String> dict = new Dictionary<AttackAttribution, string>
-        {
-            {AttackAttribution.Beat, "打撃"},
-            {AttackAttribution.Cut, "斬撃"},
-            {AttackAttribution.Thrust, "弾丸"},
-            {AttackAttribution.Fever, "熱"},
-            {AttackAttribution.Ice, "冷気"},
-            {AttackAttribution.Electro, "電撃"},
-        };
-
-        public static String Name(this AttackAttribution att) => dict[att];
-    }
-
+    /// <summary>
+    /// ターンでの攻撃行動
+    /// </summary>
     class Attack : Action
     {
+        /// <summary>
+        /// 自分と相手のStatusから威力を計算する関数
+        /// </summary>
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
         public Attack(AttackFunc attack_, Range.AttackRange aRange,
-            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null)
-            : base(aRange)
+            AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null, int mp = 0)
+            : base(aRange, mp)
         {
             AFunc = attack_;
             Attr = attr;
             MField = mField;
         }
 
+        /*
         public Attack GenerateAttack(Range.AttackRange aRange)
         {
             var tmp = (Attack)MemberwiseClone();
             tmp.ARange = aRange;
             return tmp;
         }
+        */
 
-        public float DamageF;
         public bool HasDamage = false;
+
+        /// <summary>
+        /// 攻撃ダメージの計算結果
+        /// ダメージ軽減等の計算の為にpublicにしています
+        /// </summary>
+        public float DamageF;
+
+        /// <summary>
+        /// 実際に与えるダメージ
+        /// </summary>
         public int Damage
         {
             get { return (int)DamageF; }
         }
-        public override List<Occurence> Act(BattleField bf)
+
+
+        public override List<ConditionedEffect> CollectConditionedEffects(List<ConditionedEffect> cEffects)
         {
+            //cEffects = base.CollectConditionedEffects(cEffects);
             switch (ARange)
             {
                 case Range.OneEnemy aRange:
-                    DamageF = AFunc(bf.GetCharacter(aRange.SourceIndex).Status, bf.GetCharacter(aRange.TargetIndex).Status);
                     break;
             }
             HasDamage = true;
-
-            var ceffects = new List<ConditionedEffect>();
-            ceffects.Add(new ConditionedEffect(
-                (bfi, act) => true,
-                (bfi, act, ocrs) =>
+            Func<Action, List<Occurence>, int, int, List<Occurence>> func = (act, ocrs, source, target) =>
+            {
+                DamageF = AFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
+                //Todo: actから参照する
+                if (BF.GetCharacter(target).Status.Dead)
                 {
-                    switch (act.ARange)
-                    {
-                        case Range.OneEnemy aRange:
-                            //Todo: actから参照する
-                            if (bf.GetCharacter(aRange.TargetIndex).Status.Dead)
-                            {
-                                ocrs.Add(new Occurence(aRange.TargetIndex.ToString() + "は既に倒している"));
-                                return ocrs;
-                            }
-                            else if (!HasDamage)
-                            {
-                                //効果はないor消されたパターン
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
-                                mes += 0.ToString() + " ダメージを与えた";
-                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
-                            }
-                            else
-                            {
-                                bf.GetCharacter(aRange.TargetIndex).Damage(HP: Damage);
+                    ocrs.Add(new Occurence(BF.GetCharacter(target).Name + "は既に倒している"));
+                    return ocrs;
+                }
+                else if (!HasDamage)
+                {
+                    //効果はないor消されたパターン
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += 0.ToString() + " ダメージを与えた";
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                }
+                else
+                {
+                    BF.GetCharacter(target).Damage(HP: Damage);
 
-                                string mes = aRange.SourceIndex.ToString() + "が";
-                                mes += aRange.TargetIndex.ToString() + "に";
-                                mes += (Damage).ToString() + " ダメージを与えた";
-                                ocrs.Add(new OccurenceDamageForCharacter(mes, aRange.TargetIndex, HPDmg: Damage));
-                            }
-                            return ocrs;
-                        default:
-                            throw new Exception("not implemented");
-                    }
-                },
+                    string mes = BF.GetCharacter(source).Name + "が";
+                    mes += BF.GetCharacter(target).Name + "に";
+                    mes += Damage.ToString() + " ダメージを与えた";
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                }
+                return ocrs;
+            };
+
+            cEffects.Add(new ConditionedEffect(
+                (act) => HasSufficientMP,
+                (act, ocrs) => ARange.Targets(BF).Aggregate(ocrs, (s, target) => func(act, s, ARange.SourceIndex, target)),
                 10000));
 
-            //もっと根幹に組み込むべき条件な気がする
-            var alives = bf.AliveIndexes();
-            alives.ForEach(p => ceffects.Add(new ConditionedEffect(
-                (bfi, act) => bfi.GetCharacter(p).Status.Dead,
-                (bfi, act, ocrs) =>
-                {
-                    bf.RemoveCharacter(p);
-                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
-                    return ocrs;
-                },
-                10001)));
 
-            var ocr = AggregateConditionEffects(bf, ceffects);
-            return ocr;
+            return cEffects;
         }
     }
 }

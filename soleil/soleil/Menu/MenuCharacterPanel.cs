@@ -69,12 +69,12 @@ namespace Soleil.Menu
             hpText.ActivateOutline(1);
             mpText.ActivateOutline(1);
             lvText.ActivateOutline(1);
-            hpNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal,0), posDiff, DepthID.MenuBottom);
+            hpNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, 0), posDiff, DepthID.MenuBottom);
             mpNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, SpaceHPMP), posDiff, DepthID.MenuBottom);
             lvNumText = new RightAlignText(font, pos + HPPos + new Vector(SpaceVal, -SpaceHPMP), posDiff, DepthID.MenuBottom);
             hpNumText.Text = hp.ToString();
             mpNumText.Text = mp.ToString();
-            lvNumText.Text = "3";
+            lvNumText.Text = p.Lv.ToString();
             hpNumText.Color = ColorPalette.GlayBlue;
             mpNumText.Color = ColorPalette.GlayBlue;
             hpNumText.ActivateOutline(1);
@@ -98,19 +98,20 @@ namespace Soleil.Menu
 
             void UpdateStatusVal()
             {
-                if(person.Score.HP != targetHP)
+                if (person.Score.HP != targetHP)
                 {
                     targetHP = person.Score.HP;
                     hpNumText.Text = targetHP.ToString();
                     hpGauge.Refresh((double)targetHP / person.Score.HPMAX);
                 }
 
-                if(person.Score.MP != targetMP)
+                if (person.Score.MP != targetMP)
                 {
                     targetMP = person.Score.MP;
                     mpNumText.Text = targetMP.ToString();
-                    hpGauge.Refresh((double)targetMP / person.Score.HPMAX);
+                    mpGauge.Refresh((double)targetMP / person.Score.MPMAX);
                 }
+                lvNumText.Text = person.Lv.ToString();
             }
         }
     }

@@ -11,7 +11,7 @@ namespace Soleil.Map
         Vector pos;
         public CameraPoint(int x, int y)
         {
-            pos = new Vector(x,y);
+            pos = new Vector(x, y);
         }
         public CameraPoint(Vector vec)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class RightAlignText: TextImage
+    class RightAlignText : TextImage
     {
 
         Vector standardPosition;

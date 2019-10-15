@@ -11,7 +11,7 @@ namespace Soleil.Event
     /// メッセージウィンドウを生成する.
     /// </summary>
     class MessageWindowEvent
-        :WindowEventBase
+        : WindowEventBase
     {
         string message;
 
@@ -30,7 +30,7 @@ namespace Soleil.Event
         /// マップ上の座標を指定してメッセージウィンドウを出す．
         /// </summary>
         public MessageWindowEvent(Vector _pos, WindowTag _tag, string _message)
-            :base(_pos, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message),_tag)
+            : base(_pos, MessageWindow.GetProperSize(MessageWindow.DefaultFont, _message), _tag)
         {
             message = _message;
         }
@@ -38,7 +38,7 @@ namespace Soleil.Event
         public override void Start()
         {
             base.Start();
-            messageW = new MessageWindow(PosFunc(), Size, Tag, Wm);
+            messageW = new SpeechBubbleWindow(PosFunc(), Size);
             messageW.SetMessage(message);
             messageW.Call();
             // FocusをWindowに設定

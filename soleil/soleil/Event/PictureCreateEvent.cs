@@ -10,7 +10,7 @@ namespace Soleil.Event
     /// <summary>
     /// 画面にキャラクターの立ち絵を表示する
     /// </summary>
-    class PictureCreateEvent: EventBase
+    class PictureCreateEvent : EventBase
     {
         CharaName name;
         int position;

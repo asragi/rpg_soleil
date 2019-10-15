@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// Actionによって生じた情報を持つ
     /// </summary>
     class Occurence
     {
+        protected static readonly BattleField BF = BattleField.GetInstance();
         //Effect
         public string Message;
         public bool Visible { get; set; }
@@ -21,7 +22,7 @@ namespace Soleil
             Message = message;
         }
         //使わないかも
-        public virtual void Affect(BattleField bf) { }
+        public virtual void Affect() { }
     }
 
     class OccurenceDamageForCharacter : Occurence
@@ -33,8 +34,26 @@ namespace Soleil
             CharaIndex = charaIndex;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
+            if (CharaIndex < 3) //敵のUIを作るまでのDebug
+                BF.bcgraphicsList[CharaIndex].Damage(HPDamage, MPDamage);
+        }
+    }
+
+    class OccurenceAttackMotion : Occurence
+    {
+        public int CharaIndex { get; private set; }
+        public int MPConsume = 0;
+        public OccurenceAttackMotion(string message, int charaIndex, int MPConsume_) : base(message)
+        {
+            CharaIndex = charaIndex;
+            MPConsume = MPConsume_;
+        }
+        public override void Affect()
+        {
+            if (CharaIndex < 3)
+                BF.bcgraphicsList[CharaIndex].Attack(MPConsume);
         }
     }
 
@@ -48,7 +67,7 @@ namespace Soleil
             CharaIndex = charaIndex;
             (this.STRrate, this.VITrate, this.MAGrate, this.SPDrate) = (STRrate, VITrate, MAGrate, SPDrate);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
         }
     }
@@ -59,6 +78,6 @@ namespace Soleil
         {
 
         }
-        public override void Affect(BattleField bf) { }
+        public override void Affect() { }
     }
 }

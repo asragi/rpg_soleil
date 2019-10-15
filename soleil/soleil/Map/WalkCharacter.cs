@@ -41,7 +41,7 @@ namespace Soleil.Map
         /// </summary>
         protected override void CheckMoveState()
         {
-            if(MoveState == MoveState.Walk)
+            if (MoveState == MoveState.Walk)
             {
                 NowAnimation = walkAnimation[(int)Direction];
             }

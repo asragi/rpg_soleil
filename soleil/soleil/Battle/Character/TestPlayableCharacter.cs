@@ -4,16 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     class TestPlayableCharacter : Character
     {
-        public TestPlayableCharacter(BattleField bField, int index) : base(bField, index)
+        public TestPlayableCharacter(int index) : base(index)
         {
             //てきとう
             var aScore = new AbilityScore(1800, 100, 100, 100, 100, 100);
-            Status = new CharacterStatus(aScore, 10000);
-            commandSelect = new DefaultPlayableCharacterCommandSelect(bField, charaIndex);
+            Name = "Player" + (index + 1).ToString();
+            Status = new CharacterStatus(aScore, 10000, new List<Skill.SkillID> { Skill.SkillID.NormalAttack }, new List<Skill.SkillID> { });
+            commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
         }
     }
 }

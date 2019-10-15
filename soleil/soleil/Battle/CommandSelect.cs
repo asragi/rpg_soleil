@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     abstract class CommandSelect
     {
         public int CharaIndex = -1;
-        protected BattleField BF;
-        public CommandSelect(BattleField bf, int charaIndex) => (BF, CharaIndex) = (bf, charaIndex);
+        protected static readonly BattleField BF = BattleField.GetInstance();
+        public CommandSelect(int charaIndex) => CharaIndex = charaIndex;
+
+        /// <returns>選択が完了したかどうか</returns>
         public abstract bool GetAction(Turn turn);
         protected void EnqueueTurn(Action action, Turn turn)
         {
@@ -18,9 +20,12 @@ namespace Soleil
         }
     }
 
+    /// <summary>
+    /// 暫定的な敵のコマンドセレクトアルゴリズム
+    /// </summary>
     class DefaultCharacterCommandSelect : CommandSelect
     {
-        public DefaultCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+        public DefaultCharacterCommandSelect(int charaIndex) : base(charaIndex)
         {
         }
 
@@ -28,138 +33,100 @@ namespace Soleil
         {
             var indexes = BF.OppositeIndexes(CharaIndex);
             int target = indexes[Global.Random(indexes.Count)];
-            EnqueueTurn(((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, target)), turn);
+            EnqueueTurn((ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, target)), turn);
             return true;
         }
     }
 
+
+    /// <summary>
+    /// 自機のコマンドセレクトアルゴリズム
+    /// </summary>
     class DefaultPlayableCharacterCommandSelect : CommandSelect
     {
-        Stack<BattleUI> windows;
-        BattleField bf;
         Action genAkt;
-        public DefaultPlayableCharacterCommandSelect(BattleField bf, int charaIndex) : base(bf, charaIndex)
+
+        CommandSelectWindow commandSelect;
+        Menu.MenuDescription desc;
+
+        /// <summary>
+        /// 行動選択が終わったかどうかをcommandSelectから取得するためのもの
+        /// </summary>
+        Reference<bool> doSelect;
+        public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status) : base(charaIndex)
         {
-            this.bf = bf;
-            windows = new Stack<BattleUI>();
+            doSelect = new Reference<bool>(false);
+            desc = new Menu.MenuDescription(new Vector(300, 50));
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex,
+                status.Magics, status.Skills);
+            BF.AddBasicMenu(commandSelect);
+            BF.AddBasicMenu(desc);
         }
 
-        
+        bool first = true;
         public override bool GetAction(Turn turn)
         {
-            System.Action retExec = () =>
+            if (first)
             {
-                windows.ForEach2(e => bf.RemoveUI(e));
-                windows.Clear();
-            };
-
-            if(windows.Count==0)
-            {
-                //var sw = new CommandSelectWindow(new Vector(600, 200));
-                var sw = new VerticalSelectWindow(new Vector(600, 200), new List<string> { "Magic", "Skill", "Guard", "Escape" }, SelectPhase.Initial);
-                windows.Push(sw);
-                bf.AddUI(sw);
+                commandSelect.Call();
+                first = false;
             }
+            if (!doSelect.Val)
+                return false;
 
-            var top = (VerticalSelectWindow)windows.Peek();
-            var cmd = top.Select();
-            if (!cmd.HasValue) return false;
+            doSelect.Val = false;
+            first = true;
+            commandSelect.Quit();
             Action action = null;
-            switch (top.SPhase)
+            switch (commandSelect.Select.Command)
             {
-                case SelectPhase.Initial:
-                    //debug なにを選んでも攻撃
-                    switch (cmd.Value)
+                case CommandEnum.Magic:
+                case CommandEnum.Skill:
                     {
-                        case 0://Command.Magic:
-                            var swm = new VerticalSelectWindow(new Vector(700, 300), new List<string> { "NormalAttack", "NormalAttack" }, SelectPhase.Magic);
-                            windows.Push(swm);
-                            bf.AddUI(swm);
-                            break;
-                        case 1://Command.Skill:
-                            var sws = new VerticalSelectWindow(new Vector(700, 300), new List<string> { "ExampleDebuff", "ExampleDebuff" }, SelectPhase.Skill);
-                            windows.Push(sws);
-                            bf.AddUI(sws);
-                            break;
-                        case 2://Command.Guard:
-                            /*
-                            act = ((Buff)AttackInfo.GetAction(ActionName.Guard)).GenerateAttack(new Range.Me(CharaIndex));
-                            EnqueueTurn(act, turn);
-                            act = ((Buff)AttackInfo.GetAction(ActionName.EndGuard)).GenerateAttack(new Range.Me(CharaIndex));
-                            BF.EnqueueTurn(new ActionTurn(turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP + 100, turn.CStatus, turn.CharaIndex, act));
-                            */
-                            bf.AddCEffect(new ConditionedEffectWithExpireTime(
-                                (bf, act) => { if(act is Attack atk) {
-                                        return atk.ARange.ContainRange(CharaIndex, bf); } return false; },
-                                (bf, act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
-                                100000, CharaIndex, turn.WaitPoint + bf.GetCharacter(CharaIndex).Status.TurnWP
-                                ));
-                            retExec();
-                            return true;
-                        case 3://Command.Escape:
-                            action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                            EnqueueTurn(action, turn);
-                            retExec();
-                            return true;
-                        default:
-                            break;
-                    }
-
-                    break;
-                case SelectPhase.Magic:
-                    if (true)
-                    {
-                        genAkt = AttackInfo.GetAction(ActionName.NormalAttack);
-                        var sws = new VerticalSelectWindow(new Vector(750, 350), bf.OppositeIndexes(CharaIndex).Select(p=>p.ToString()).ToList(), SelectPhase.Character);
-                        windows.Push(sws);
-                        bf.AddUI(sws);
-                        break;
-                    }
-                    else
-                    {
-                        action = ((Attack)AttackInfo.GetAction(ActionName.NormalAttack)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
+                        genAkt = ActionInfo.GetAction(commandSelect.Select.AName);
+                        action = genAkt.Generate(commandSelect.Select.ARange);
+                        /*
+                        switch (genAkt)
+                        {
+                            case Attack atk:
+                                action = atk.GenerateAttack(commandSelect.Select.ARange);
+                                break;
+                            case Buff buf:
+                                action = buf.GenerateBuff(commandSelect.Select.ARange);
+                                break;
+                            case Heal heal:
+                                action = heal.GenerateHeal(commandSelect.Select.ARange);
+                                break;
+                            case ActionSeq seq:
+                                action = seq.GenerateActionSeq(commandSelect.Select.ARange);
+                                break;
+                            default:
+                                throw new Exception("not implemented");
+                        }
+                        */
                         EnqueueTurn(action, turn);
-                        retExec();
                         return true;
                     }
-                case SelectPhase.Skill:
-                    //全体攻撃など選択する必要のないとき
-                    //TODO: 何を選択するのかをいい感じに記述する
-                    if (true)
-                    {
-                        genAkt = AttackInfo.GetAction(ActionName.ExampleDebuff);
-                        var sws = new VerticalSelectWindow(new Vector(750, 350), bf.OppositeIndexes(CharaIndex).Select(p => p.ToString()).ToList(), SelectPhase.Character);
-                        windows.Push(sws);
-                        bf.AddUI(sws);
-                        break;
-                    }
-                    else
-                    {
-                        action = ((Buff)AttackInfo.GetAction(ActionName.ExampleDebuff)).GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex).First()));
-                        EnqueueTurn(action, turn);
-                        retExec();
-                        return true;
-                    }
-                case SelectPhase.Character:
-                    switch(genAkt)
-                    {
-                        case Attack atk:
-                            action = atk.GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex)[cmd.Value]));
-                            break;
-                        case Buff buf:
-                            action = buf.GenerateAttack(new Range.OneEnemy(CharaIndex, bf.OppositeIndexes(CharaIndex)[cmd.Value]));
-                            break;
-                        default:
-                            throw new Exception("not implemented");
-                    }
-                    EnqueueTurn(action, turn);
-                    retExec();
+                case CommandEnum.Guard:
+                    BF.AddCEffect(new ConditionedEffectWithExpireTime(
+                        (act) =>
+                        {
+                            if (act is Attack atk)
+                            {
+                                return atk.ARange.ContainRange(CharaIndex, BattleField.GetInstance());
+                            }
+                            return false;
+                        },
+                        (act, ocrs) => { var atk = (Attack)act; atk.DamageF *= 0.75f; ocrs.Add(new Occurence("ガードによりダメージが軽減した")); return ocrs; },
+                        90000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
+                        ));
                     return true;
-                default:
-                    throw new Exception("??????");
+                case CommandEnum.Escape: //とりあえず通常攻撃が出る
+                    action = (ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                    EnqueueTurn(action, turn);
+                    return true;
             }
-            
-            
+
             return false;
         }
     }

@@ -2,7 +2,7 @@
 
 namespace Soleil
 {
-    class ConversationWindow: Window, IMessageBox
+    class ConversationWindow : Window, IMessageBox
     {
         const TextureID Texture = TextureID.ConversationWindow;
         const int x = 140;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class WorldMapScene: Scene
+    class WorldMapScene : Scene
     {
         WorldMapMaster worldMapMaster;
         PersonParty party;
@@ -17,7 +17,7 @@ namespace Soleil
         public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
         {
-            worldMapMaster = new WorldMapMaster(pointKey, this);
+            worldMapMaster = new WorldMapMaster(pointKey, this, _party);
             party = _party;
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);

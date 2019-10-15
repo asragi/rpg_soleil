@@ -11,7 +11,7 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 防具の詳細性能表示クラス．
     /// </summary>
-    class ArmorDetail: MenuComponent
+    class ArmorDetail : MenuComponent
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
@@ -23,7 +23,7 @@ namespace Soleil.Menu.Detail
         TextWithVal atkExplain;
         TextWithVal defExplain;
         public ArmorDetail(Vector _pos)
-            :base()
+            : base()
         {
             InitPos = _pos;
             var font = DetailWindow.Font;
@@ -36,11 +36,11 @@ namespace Soleil.Menu.Detail
         {
             if (!(panel is ItemPanelBase)) return;
             var itemPanel = (ItemPanelBase)panel;
-            
+
             var data = ItemDataBase.Get(itemPanel.ID);
             var type = ItemDataBase.Get(itemPanel.ID).Type;
 
-            if(type == ItemType.Accessory || type == ItemType.Armor)
+            if (type == ItemType.Accessory || type == ItemType.Armor)
             {
                 // 攻撃性能を非表示に
                 atkExplain.Enable = false; // 攻撃力が上がる防具......？
@@ -51,7 +51,7 @@ namespace Soleil.Menu.Detail
                 defExplain.Val = ((IArmor)data).DefData.Physical;
                 return;
             }
-            if(type == ItemType.Weapon)
+            if (type == ItemType.Weapon)
             {
                 // 攻撃力表示設定
                 atkExplain.Enable = true;
@@ -68,7 +68,7 @@ namespace Soleil.Menu.Detail
             }
             // 装備でない
             atkExplain.Enable = false;
-            defExplain.Enable = false;            
+            defExplain.Enable = false;
         }
     }
 }

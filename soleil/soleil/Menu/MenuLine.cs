@@ -42,7 +42,7 @@ namespace Soleil.Menu
             base.Call();
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i].Call(move:false);
+                lines[i].Call(move: false);
             }
         }
 
@@ -51,7 +51,7 @@ namespace Soleil.Menu
             base.Quit();
             for (int i = 0; i < lines.Length; i++)
             {
-                lines[i].Quit(move:false);
+                lines[i].Quit(move: false);
             }
         }
 
@@ -73,11 +73,11 @@ namespace Soleil.Menu
                     tmp.X += MoveSpeed;
                 }
                 // 完全に画面の外に出たら最初に先頭に戻す
-                if(moveLeft && tmp.X < -texWidth)
+                if (moveLeft && tmp.X < -texWidth)
                 {
                     tmp.X += (lines.Length - 1) * texWidth;
                 }
-                else if(!moveLeft && tmp.X > Game1.VirtualWindowSizeX)
+                else if (!moveLeft && tmp.X > Game1.VirtualWindowSizeX)
                 {
                     tmp.X -= (lines.Length - 1) * texWidth;
                 }
@@ -94,7 +94,7 @@ namespace Soleil.Menu
 
             double Ease()
             {
-                if (easeFrame > MenuSystem.FadeSpeed) return (isDiff)? posY + diffY : posY;
+                if (easeFrame > MenuSystem.FadeSpeed) return (isDiff) ? posY + diffY : posY;
                 return MenuSystem.EaseFunc(easeFrame, MenuSystem.FadeSpeed, destinationY, startY);
             }
         }

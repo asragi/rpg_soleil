@@ -15,6 +15,28 @@ namespace Soleil.Item
         Accessory,
     }
 
+    static class ItemTypeEx
+    {
+        public static TextureID GetIcon(this ItemType type)
+        {
+            switch (type)
+            {
+                case ItemType.Consumable:
+                    return TextureID.IconPot;
+                case ItemType.Unconsumable:
+                    return TextureID.IconJewel;
+                case ItemType.Weapon:
+                    return TextureID.IconWand;
+                case ItemType.Armor:
+                    return TextureID.IconArmor;
+                case ItemType.Accessory:
+                    return TextureID.IconAccessary;
+                default:
+                    throw new ArgumentOutOfRangeException("ItemIDが不正です．");
+            }
+        }
+    }
+
     enum ItemID
     {
         // Empty（使用不可能アイテム）
@@ -80,7 +102,7 @@ namespace Soleil.Item
         {
             data[(int)id] = new NormalItem(id, menu, battle, effectVal, name, desc);
         }
-        
+
         // 装備など自明に使用不可能なもの用のset
         static void Set(String name, ItemID id, int effectVal, String desc)
         {

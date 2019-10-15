@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class SkillMenu: BasicMenu
+    class SkillMenu : BasicMenu
     {
         SkillHolder skillHolder;
         public SkillMenu(MenuComponent parent, MenuDescription desc)
@@ -26,16 +26,22 @@ namespace Soleil.Menu
 
         protected override SelectablePanel[] MakeAllPanels()
         {
-            var skillList = new List<SkillMenuPanel>();
+            //onMenuがtrueのものを上側に置く
+            var availableSkillList = new List<SkillMenuPanel>();
+            var unavailableSkillList = new List<SkillMenuPanel>();
             for (int i = 0; i < (int)SkillID.size; i++)
             {
                 var id = (SkillID)i;
                 var _data = SkillDataBase.Get(id);
                 if (_data.AttackType != AttackType.Physical) continue;
                 if (!skillHolder.HasSkill(id)) continue;
-                skillList.Add(new SkillMenuPanel(_data, this));
+                if (_data.OnMenu) availableSkillList.Add(new SkillMenuPanel(_data, this, true));
+                else unavailableSkillList.Add(new SkillMenuPanel(_data, this, false));
             }
-            return skillList.ToArray();
+            var skillArray = new SelectablePanel[availableSkillList.Count() + unavailableSkillList.Count()];
+            availableSkillList.ToArray().CopyTo(skillArray, 0);
+            unavailableSkillList.ToArray().CopyTo(skillArray, availableSkillList.Count());
+            return skillArray;
         }
     }
 }

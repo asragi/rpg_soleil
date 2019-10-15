@@ -16,12 +16,12 @@ namespace Soleil
         }
         public static Texture2D ColorChange(Texture2D texture, Dictionary<Color, Color> dictionary)
         {
-            int h=texture.Height, w=texture.Width;
+            int h = texture.Height, w = texture.Width;
             var tex = new Texture2D(graphicDevice, w, h);
 
-            var data = new Color[w*h];
+            var data = new Color[w * h];
             texture.GetData(data);
-            data = data.Select(p => dictionary.ContainsKey(p) ? dictionary[p] : p ).ToArray();
+            data = data.Select(p => dictionary.ContainsKey(p) ? dictionary[p] : p).ToArray();
             tex.SetData(data);
 
             return tex;

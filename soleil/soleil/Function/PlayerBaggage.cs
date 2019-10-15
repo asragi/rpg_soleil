@@ -19,7 +19,7 @@ namespace Soleil
         public ItemList Items;
         public MoneyWallet MoneyWallet;
 
-        private PlayerBaggage(){ }
+        private PlayerBaggage() { }
 
         public void SetData(ItemList itemList, MoneyWallet moneyWallet)
         {

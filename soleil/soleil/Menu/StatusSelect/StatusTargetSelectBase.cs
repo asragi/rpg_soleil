@@ -11,7 +11,7 @@ namespace Soleil.Menu
         protected StatusMenu StatusMenu;
 
         public StatusTargetSelectBase(MenuChild parent)
-            :base(parent)
+            : base(parent)
         {
 
         }

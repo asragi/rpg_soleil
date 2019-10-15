@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class CharacterPicture: IComponent
+    class CharacterPicture : IComponent
     {
         public static DepthID Depth = DepthID.PlayerFront;
         public bool IsDark;
@@ -15,7 +15,8 @@ namespace Soleil
         Image image;
         Image grayImage;
 
-        public Vector Pos {
+        public Vector Pos
+        {
             get => image.Pos;
             set
             {

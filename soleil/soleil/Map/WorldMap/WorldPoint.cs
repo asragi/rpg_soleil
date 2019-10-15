@@ -22,7 +22,7 @@ namespace Soleil.Map.WorldMap
     /// <summary>
     /// 地図上に存在する町などの各施設を表すクラス．
     /// </summary>
-    class WorldPoint: ICollideObject
+    class WorldPoint : ICollideObject
     {
         readonly string TimeUnit = "時間";
         readonly Vector DescriptionPos = WorldMapWindowLayer.Position + new Vector(350, 0);

@@ -15,12 +15,12 @@ namespace Soleil.Map
         public readonly string Name;
         public static Vector DefaultBoxSize = new Vector(30, 30);
         protected CollideBox ExistanceBox;
-        protected virtual CollideLayer CollideLayer { get {return CollideLayer.Character; } }
+        protected virtual CollideLayer CollideLayer { get { return CollideLayer.Character; } }
         protected EventSequence EventSequence;
         protected PlayerObject Player;
 
         public MapEventObject(string name, Vector _pos, Vector? _boxSize, ObjectManager om, BoxManager bm)
-            :base(om)
+            : base(om)
         {
             Name = name;
             Pos = _pos;

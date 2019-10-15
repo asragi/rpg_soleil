@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    enum MoveState { Stand,Walk,Dash }
+    enum MoveState { Stand, Walk, Dash }
 
     /// <summary>
     /// Map上の存在判定のあるオブジェクトのうち、移動しないもの。
@@ -25,7 +25,7 @@ namespace Soleil.Map
         private Animation[] standAnimation;
 
         public MapCharacter(string name, Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
-            :base(name, pos, boxSize, om, bm)
+            : base(name, pos, boxSize, om, bm)
         {
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;

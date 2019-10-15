@@ -13,7 +13,7 @@ namespace Soleil.Menu
     /// <summary>
     /// 選ばれているものの詳細を表示するウィンドウ
     /// </summary>
-    class DetailWindow: MenuComponent
+    class DetailWindow : MenuComponent
     {
         public static readonly Vector EffectPos = new Vector(164, 11);
         public static readonly Vector Spacing = new Vector(0, 56);
@@ -30,8 +30,8 @@ namespace Soleil.Menu
             backImg.Size = new Vector(311, 140); // tmp
             backImg.Color = ColorPalette.DarkBlue;
 
-            luneEquip = new EquipEffectImg(pos + EffectPos, TextureID.WorldMapIcon, party.Get(CharaName.Lune));
-            sunnyEquip = new EquipEffectImg(pos + EffectPos + Spacing, TextureID.WorldMapIcon, party.Get(CharaName.Sunny));
+            luneEquip = new EquipEffectImg(pos + EffectPos, TextureID.BattleTurnQueueFaceLune, party.Get(CharaName.Lune));
+            sunnyEquip = new EquipEffectImg(pos + EffectPos + Spacing, TextureID.BattleTurnQueueFaceSun, party.Get(CharaName.Sunny));
             AddComponents(new IComponent[] { backImg, armorDetail, luneEquip, sunnyEquip });
         }
 
@@ -45,7 +45,7 @@ namespace Soleil.Menu
         /// <summary>
         /// 装備品の性能を比較して表示するクラス
         /// </summary>
-        class EquipEffectImg: MenuComponent
+        class EquipEffectImg : MenuComponent
         {
             private static readonly DepthID Depth = DepthID.Message;
             private static readonly Vector EffectPos = new Vector(98, 20);

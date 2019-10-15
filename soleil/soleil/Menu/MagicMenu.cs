@@ -16,12 +16,18 @@ namespace Soleil.Menu
         const int IconXInitial = 50;
         const int IconXEnd = 360;
         MagicIcon[] icons;
-        public MagicMenu(MenuComponent parent, MenuDescription desc)
+        MagicTargetSelect magicTargetSelect;
+        //今誰の魔法を選ぼうとしているのか(MagicTargetSelectに渡したい)
+        Person currentSelect;
+        MenuComponent parentMenu;
+        //複数対象魔法を使うときに渡さないといけないので
+        PersonParty party;
+        public MagicMenu(MenuComponent parent, MenuDescription desc, PersonParty _party)
             : base(parent, desc)
         {
             holder = new SkillHolder();
             categoryToDisplay = MagicCategory.Sun;
-
+            party = _party;
             // icon
             icons = new MagicIcon[10];
             var iconSpace = (IconXEnd - IconXInitial) / (icons.Length - 1);
@@ -36,7 +42,7 @@ namespace Soleil.Menu
         public void InputSide(bool isRight)
         {
             int index = (int)categoryToDisplay;
-            int diff = isRight ? 1 : - 1;
+            int diff = isRight ? 1 : -1;
             index += diff;
             index += (int)MagicCategory.size;
             index %= (int)MagicCategory.size;
@@ -99,6 +105,7 @@ namespace Soleil.Menu
         public void CallWithPerson(Person p)
         {
             holder = p.Skill;
+            currentSelect = p;
             Index = 0;
             SetIcons();
             categoryToDisplay = DecideInitialPosition(holder);
@@ -133,6 +140,33 @@ namespace Soleil.Menu
                 if (sh.HasCategory(c)) return c;
             }
             return 0;
+        }
+        public override void OnInputSubmit()
+        {
+            base.OnInputSubmit();
+            var nowPanel = (MagicMenuPanel)Panels[Index];
+            magicEffect(nowPanel.ID);
+
+            void magicEffect(SkillID id)
+            {
+                var temp = (MagicData)SkillDataBase.Get(id);
+                if (!temp.OnMenu) return;
+                if (temp.TargetRange is Range.Ally)
+                {
+                    magicTargetSelect.Call();
+                    magicTargetSelect.SetWillUsedSkill(id,currentSelect);
+                    IsActive = false;
+                    Quit();
+                }else if(temp.TargetRange is Range.AllAlly)
+                {
+                    SkillEffectData.UseOnMenu(currentSelect, party.GetActiveMembers(), id);
+                }
+            }
+        }
+        public void SetRefs(MagicTargetSelect mg,StatusMenu sm)
+        {
+            magicTargetSelect = mg;
+            magicTargetSelect.SetRefs(sm);
         }
     }
 }

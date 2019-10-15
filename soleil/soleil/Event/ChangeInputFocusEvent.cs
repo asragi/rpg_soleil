@@ -4,7 +4,7 @@ using System;
 namespace Soleil.Event
 {
     class ChangeInputFocusEvent
-        :EventBase
+        : EventBase
     {
         MapInputManager mim;
         InputFocus focus;

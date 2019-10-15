@@ -20,7 +20,7 @@
         Direction nextMoveDir;
 
         public PlayerObject(ObjectManager om, BoxManager bm)
-            : base("player", new Vector(700,400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
+            : base("player", new Vector(700, 400), new Vector(BoxSizeX, BoxSizeY), om, bm, false)
         {
             Movable = true;
             visible = true;
@@ -42,7 +42,7 @@
             var posDiff = new Vector(0, -50);
             var standAnims = new AnimationData[9];
             var sPeriod = 8;
-            standAnims[(int)Direction.R] = new AnimationData(AnimationID.LuneStandR,posDiff, true, sPeriod);
+            standAnims[(int)Direction.R] = new AnimationData(AnimationID.LuneStandR, posDiff, true, sPeriod);
             standAnims[(int)Direction.RD] = new AnimationData(AnimationID.LuneStandDR, posDiff, true, sPeriod);
             standAnims[(int)Direction.D] = new AnimationData(AnimationID.LuneStandD, posDiff, true, sPeriod);
             standAnims[(int)Direction.LD] = new AnimationData(AnimationID.LuneStandDL, posDiff, true, sPeriod);
