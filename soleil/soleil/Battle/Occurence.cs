@@ -80,4 +80,20 @@ namespace Soleil.Battle
         }
         public override void Affect() { }
     }
+
+    class OccurenceBattleEnd : Occurence
+    {
+        public bool DidWin;
+        public OccurenceBattleEnd() : base("")
+        {
+            DidWin = BF.SameSideIndexes(Side.Left).Count == 0;
+            if (DidWin)
+                Message = "戦闘に勝利した";
+            else
+                Message = "戦闘に敗北した";
+        }
+        public override void Affect()
+        {
+        }
+    }
 }

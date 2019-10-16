@@ -43,9 +43,9 @@ namespace Soleil.Battle
             animation[(int)BattleCharaAnimationType.Stand] = new Animation(new AnimationData(AnimationID.BattleLuneStanding, true, 10));
             animation[(int)BattleCharaAnimationType.Chant] = new Animation(new AnimationData(AnimationID.BattleLuneChant, true, 10));
             animation[(int)BattleCharaAnimationType.Magic] = new Animation(new AnimationData(AnimationID.BattleLuneMagic, false, 10));
-            animation[(int)BattleCharaAnimationType.Crisis] = new Animation(new AnimationData(AnimationID.BattleLuneCrisis, false, 10));
-            animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleLuneVictory, false, 10));
-            animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleLuneDown, false));
+            animation[(int)BattleCharaAnimationType.Crisis] = new Animation(new AnimationData(AnimationID.BattleLuneCrisis, true, 10));
+            animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleLuneVictory, false, 5));
+            animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleLuneDown, true));
 
             SetMotion(BattleCharaMotionType.Stand);
         }
