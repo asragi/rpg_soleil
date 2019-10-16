@@ -10,7 +10,7 @@ namespace Soleil.Menu
     {
         private IComponent[] components;
 
-        protected void AddComponents(IComponent[] comps)
+        protected void AddComponents(params IComponent[] comps)
         {
             if (components == null) components = comps;
             else components = components.Concat(comps).ToArray();

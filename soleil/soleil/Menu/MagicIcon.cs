@@ -38,12 +38,13 @@ namespace Soleil.Menu
 
         public MagicIcon(Vector _localPos, MagicCategory c, BasicMenu _parent)
         {
+            var depth = DepthID.MenuMessage;
             parent = _parent;
             localPos = _localPos;
             var pos = localPos + _parent.Pos;
-            iconImg = new Image(IconMap[c], pos, DepthID.Message);
+            iconImg = new Image(IconMap[c], pos, depth);
             iconColor = ColorPalette.MagicColors[c];
-            disableIcon = new TextImage(FontID.CorpM, pos + AdjustPos, DepthID.Message);
+            disableIcon = new TextImage(FontID.CorpM, pos + AdjustPos, depth);
             disableIcon.Text = "・";
         }
 

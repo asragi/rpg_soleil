@@ -38,7 +38,7 @@ namespace Soleil.Event
         public override void Start()
         {
             base.Start();
-            messageW = new MessageWindow(PosFunc(), Size, Tag, Wm);
+            messageW = new SpeechBubbleWindow(PosFunc(), Size);
             messageW.SetMessage(message);
             messageW.Call();
             // FocusをWindowに設定

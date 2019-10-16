@@ -1,11 +1,6 @@
 ﻿using Soleil.Misc;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Soleil
 {
@@ -15,11 +10,17 @@ namespace Soleil
     static class SaveLoad
     {
         private static readonly string FilePath = "./savedata";
+        public static SaveRefs SaveRefs { get; private set; }
         private static SaveData data;
 
-        public static void Save(PersonParty party)
+        static SaveLoad()
         {
-            var save = new SaveData(party);
+            SaveRefs = new SaveRefs();
+        }
+
+        public static void Save()
+        {
+            SaveData save = new SaveData(SaveRefs);
             string path = FilePath;
             using (var fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             {
@@ -47,9 +48,12 @@ namespace Soleil
         // 以下Load用
         public static PersonParty GetParty(bool isNew)
         {
+            PersonParty party;
             // New Game
-            if (isNew) return new PersonParty();
-            return data.GetParty();
+            if (isNew) party = new PersonParty();
+            else party = data.GetParty();
+            SaveRefs.Party = party;
+            return party;
         }
     }
 }

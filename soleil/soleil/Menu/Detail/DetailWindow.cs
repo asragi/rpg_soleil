@@ -30,8 +30,8 @@ namespace Soleil.Menu
             backImg.Size = new Vector(311, 140); // tmp
             backImg.Color = ColorPalette.DarkBlue;
 
-            luneEquip = new EquipEffectImg(pos + EffectPos, TextureID.WorldMapIcon, party.Get(CharaName.Lune));
-            sunnyEquip = new EquipEffectImg(pos + EffectPos + Spacing, TextureID.WorldMapIcon, party.Get(CharaName.Sunny));
+            luneEquip = new EquipEffectImg(pos + EffectPos, TextureID.BattleTurnQueueFaceLune, party.Get(CharaName.Lune));
+            sunnyEquip = new EquipEffectImg(pos + EffectPos + Spacing, TextureID.BattleTurnQueueFaceSun, party.Get(CharaName.Sunny));
             AddComponents(new IComponent[] { backImg, armorDetail, luneEquip, sunnyEquip });
         }
 

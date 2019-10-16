@@ -12,9 +12,9 @@ namespace Soleil
     /// </summary>
     interface ICollideObject
     {
-        void OnCollisionEnter(CollideBox cb);
-        void OnCollisionStay(CollideBox cb);
-        void OnCollisionExit(CollideBox cb);
+        void OnCollisionEnter(CollideObject cb);
+        void OnCollisionStay(CollideObject cb);
+        void OnCollisionExit(CollideObject cb);
         Vector GetPosition();
     }
 }

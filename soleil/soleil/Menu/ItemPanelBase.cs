@@ -13,43 +13,25 @@ namespace Soleil.Menu
     /// </summary>
     abstract class ItemPanelBase : TextSelectablePanel
     {
+        private const DepthID Depth = DepthID.MenuMessage;
         public readonly ItemID ID;
         Image icon;
         public static readonly Vector IconSpace = new Vector(8, 10);
 
         public ItemPanelBase(ItemID id, string name, BasicMenu parent, bool active = true)
-            : base(name, parent, active)
+            : base(name, parent, Depth, active)
         {
             ID = id;
-            icon = DecideIcon(ID, parent);
+            icon = DecideIcon(ID, parent, Depth);
             icon.Color = SetColor(ItemColor);
         }
 
-        private Image DecideIcon(ItemID id, BasicMenu parent)
+        private Image DecideIcon(ItemID id, BasicMenu parent, DepthID depth)
         {
             var itemType = ItemDataBase.Get(id).Type;
-            TextureID tex = DecideTexID(itemType);
+            TextureID tex = itemType.GetIcon();
 
-            return new Image(tex, LocalPos + parent.Pos, Vector.Zero, DepthID.Message);
-
-            TextureID DecideTexID(ItemType item)
-            {
-                switch (itemType)
-                {
-                    case ItemType.Consumable:
-                        return TextureID.IconPot;
-                    case ItemType.Unconsumable:
-                        return TextureID.IconJewel;
-                    case ItemType.Weapon:
-                        return TextureID.IconWand;
-                    case ItemType.Armor:
-                        return TextureID.IconArmor;
-                    case ItemType.Accessory:
-                        return TextureID.IconAccessary;
-                    default:
-                        throw new ArgumentOutOfRangeException("ItemIDが不正です．");
-                }
-            }
+            return new Image(tex, LocalPos + parent.Pos, Vector.Zero, depth);
         }
 
         protected override void OnSelected()

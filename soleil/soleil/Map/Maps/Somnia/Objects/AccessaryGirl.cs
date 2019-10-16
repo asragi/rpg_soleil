@@ -31,31 +31,21 @@ namespace Soleil.Map.Maps.Somnia
 
             EventSequence.SetEventSet(
                 new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
-                    new EventUnit[] {
-                    new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "また会ったね")) },
-                    new EventUnit[] {
-                    new EventSet(
-                        new MessageWindowEvent(Pos + WindowPosDiff, 0, "はじめまして")) }),
+                        new MessageWindowEvent(this, "また会ったね"),
+                        new MessageWindowEvent(this, "はじめまして") 
+                    ),
                 new EventSet(
-                    new MessageWindowEvent(Pos + WindowPosDiff, 0, "アクセサリー売るよ"),
+                    new MessageWindowEvent(this, "アクセサリー売るよ"),
                     new ShopEvent(ShopName.Accessary, party, boolSet, (int)BoolName.Sold)
                 ),
                 new BoolEventBranch(EventSequence, () => boolSet[(int)BoolName.Sold],
-                    new EventUnit[] {
-                        new EventSet(
-                            new MessageWindowEvent(Pos + WindowPosDiff, 0, "毎度あり！"))
-                    },
-                    new EventUnit[] {
-                        new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
-                        new EventUnit[]
-                        {
-                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "残念")),
-                        },
-                        new EventUnit[]{
-                            new EventSet( new MessageWindowEvent(Pos + WindowPosDiff, 0, "ちっ\n冷やかしは帰りな")),
-                        })
-                    }),
+                    new MessageWindowEvent(this, "毎度あり！")
+                    ,
+                    new BoolEventBranch(EventSequence, () => preservedBools[(int)BoolName.First],
+                        new EventSet( new MessageWindowEvent(this, "残念")),
+                        new EventSet( new MessageWindowEvent(this, "ちっ\n冷やかしは帰りな"))
+                    )
+                ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player),
                     new BoolSetEvent(preservedBools, (int)BoolName.First, true)
@@ -63,7 +53,7 @@ namespace Soleil.Map.Maps.Somnia
             );
         }
 
-        public override void OnCollisionEnter(CollideBox col)
+        public override void OnCollisionEnter(CollideObject col)
         {
             if (col.Layer == CollideLayer.PlayerHit)
             {

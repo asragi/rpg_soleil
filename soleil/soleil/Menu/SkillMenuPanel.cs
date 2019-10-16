@@ -12,8 +12,8 @@ namespace Soleil.Menu
         public override string Desctiption => desc;
         private string desc;
 
-        public SkillMenuPanel(ISkill data, SkillMenu parent)
-            : base(data.Name, parent)
+        public SkillMenuPanel(ISkill data, SkillMenu parent, bool active = true)
+            : base(data.Name, parent, DepthID.MenuMessage, active)
         {
             Val = data.Cost;
             desc = data.Description;

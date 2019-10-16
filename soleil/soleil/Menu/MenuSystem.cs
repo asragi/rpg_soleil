@@ -116,7 +116,7 @@ namespace Soleil.Menu
             statusMenu = new StatusMenu(_party, this);
             // Magic Menu
             magicUserSelect = new MagicUserSelect(this, menuDescription, Descriptions[(int)MenuName.Magic]);
-            magicMenu = new MagicMenu(magicUserSelect, menuDescription);
+            magicMenu = new MagicMenu(magicUserSelect, menuDescription, party);
             magicTargetSelect = new MagicTargetSelect(magicMenu);
             // Skill Menu
             skillUserSelect = new SkillUserSelect(this, menuDescription, Descriptions[(int)MenuName.Skill]);
@@ -137,6 +137,7 @@ namespace Soleil.Menu
             magicUserSelect.SetRefs(statusMenu);
             magicTargetSelect.SetRefs(statusMenu);
             skillUserSelect.SetRefs(statusMenu);
+            magicMenu.SetRefs(magicTargetSelect, statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
@@ -217,7 +218,7 @@ namespace Soleil.Menu
                 Index = (Index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
-                else if (KeyInput.GetKeyPush(Key.B)) Quit();
+                else if (KeyInput.GetKeyPush(Key.B) || KeyInput.GetKeyPush(Key.C)) Quit();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
@@ -271,7 +272,7 @@ namespace Soleil.Menu
             if (selected == MenuName.Save)
             {
                 // Save用ウィンドウ出現
-                SaveLoad.Save(party);
+                SaveLoad.Save();
                 Console.WriteLine("SAVE");
                 IsActive = true; // debug
                 return;

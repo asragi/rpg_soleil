@@ -16,11 +16,21 @@ namespace Soleil
         FrameTest,
         WhiteWindow,
         IndicatorBack,
+        Triangle,
         BackBar,
         Currency,
 
+        ToastBack,
+
         MessageWindow,
+        MessageWindowBack,
+        MessageWindowArrow,
         ConversationWindow,
+
+        TitleBack,
+        TitleLabelSelected,
+        TitleLabelUnselected,
+        TitleLogo,
 
         MenuFront,
         MenuBack,
@@ -145,6 +155,7 @@ namespace Soleil
         Magistol4_wall,
         Magistol4_plant,
 
+        WorldMap,
         WorldMapIcon,
         WorldMapCursor,
 
@@ -209,6 +220,14 @@ namespace Soleil
 
     enum EffectAnimationID
     {
+        PointFlare,
+
+        Thunder,
+        MagicalHeal,
+        Explode,
+
+        Blow,
+
         Size,
     }
 
@@ -328,6 +347,7 @@ namespace Soleil
             SetPath(TextureID.White, "white");
             SetPath(TextureID.BackBar, $"{UIPath}backBar");
             SetPath(TextureID.Currency, $"{UIPath}currency");
+            SetPath(TextureID.ToastBack, $"{UIPath}Dungeon/yasoba-toast");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
@@ -383,6 +403,7 @@ namespace Soleil
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMap, "Map/WorldMap/worldmap");
             SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
             SetPath(TextureID.WorldMapCursor, "Map/WorldMap/cursor");
             #endregion
@@ -450,11 +471,19 @@ namespace Soleil
             #endregion
 
             #region UI
+            SetPath(TextureID.Triangle, UIPath + "yasoba-triangle");
             SetPath(TextureID.FrameTest, UIPath + "window2");
             SetPath(TextureID.MessageWindow, UIPath + "message");
+            SetPath(TextureID.MessageWindowBack, UIPath + "message-back");
+            SetPath(TextureID.MessageWindowArrow, UIPath + "message-arrow");
 
             SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
+            string title = UIPath + "Title/";
+            SetPath(TextureID.TitleBack, title + "back");
+            SetPath(TextureID.TitleLabelSelected, title + "label");
+            SetPath(TextureID.TitleLabelUnselected, title + "label-un");
+            SetPath(TextureID.TitleLogo, title + "logo");
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
             SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
@@ -528,7 +557,17 @@ namespace Soleil
             SetSize(AnimationID.Arrow, 1, 9);
 
             #region EffectAnimation
-
+            string effectPath = "Animation/Effect/";
+            SetPath(EffectAnimationID.PointFlare, effectPath + "s_fire");
+            SetSize(EffectAnimationID.PointFlare, 6, 5);
+            SetPath(EffectAnimationID.Thunder, effectPath + "m_thunder");
+            SetSize(EffectAnimationID.Thunder, 3, 7);
+            SetPath(EffectAnimationID.MagicalHeal, effectPath + "m_heal");
+            SetSize(EffectAnimationID.MagicalHeal, 4, 8);
+            SetPath(EffectAnimationID.Explode, effectPath + "m_explode");
+            SetSize(EffectAnimationID.Explode, 6, 5);
+            SetPath(EffectAnimationID.Blow, effectPath + "skill_blow");
+            SetSize(EffectAnimationID.Blow, 4, 4);
             #endregion
 
 

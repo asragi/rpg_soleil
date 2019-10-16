@@ -77,7 +77,7 @@ namespace Soleil.Map
             else player.Walk();
 
             // Call Menu
-            if (KeyInput.GetKeyPush(Key.B))
+            if (KeyInput.GetKeyPush(Key.C))
             {
                 menuSystem.Call();
                 SetFocus(InputFocus.Menu);

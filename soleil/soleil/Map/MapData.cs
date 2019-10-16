@@ -7,11 +7,11 @@ namespace Soleil.Map
     /// </summary>
     class MapData
     {
-        MapName mapName;
+        public MapName MapName { private set; get; }
         bool[,] flags;
         public MapData(MapName _name)
         {
-            mapName = _name;
+            MapName = _name;
         }
 
 
@@ -20,7 +20,7 @@ namespace Soleil.Map
         /// </summary>
         public void SetMapFlag()
         {
-            flags = GetFlag(mapName);
+            flags = GetFlag(MapName);
             bool[,] GetFlag(MapName name)
             {
                 switch (name)
