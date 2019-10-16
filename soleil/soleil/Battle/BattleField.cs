@@ -336,9 +336,11 @@ namespace Soleil.Battle
             //てきとう
             sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.CorpM), message, Color.White, DepthID.Message);
 
+            /*
             sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.CorpM), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+                */
             sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
             for (int i = 0; i < 5; i++)
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);

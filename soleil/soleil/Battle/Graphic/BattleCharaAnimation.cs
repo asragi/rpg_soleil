@@ -40,12 +40,26 @@ namespace Soleil.Battle
             character = chara;
             currentAnimationType = BattleCharaAnimationType.Stand;
             animation = new Animation[(int)BattleCharaAnimationType.Size];
-            animation[(int)BattleCharaAnimationType.Stand] = new Animation(new AnimationData(AnimationID.BattleLuneStanding, true, 10));
-            animation[(int)BattleCharaAnimationType.Chant] = new Animation(new AnimationData(AnimationID.BattleLuneChant, true, 10));
-            animation[(int)BattleCharaAnimationType.Magic] = new Animation(new AnimationData(AnimationID.BattleLuneMagic, false, 10));
-            animation[(int)BattleCharaAnimationType.Crisis] = new Animation(new AnimationData(AnimationID.BattleLuneCrisis, true, 10));
-            animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleLuneVictory, false, 5));
-            animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleLuneDown, true));
+            switch (chara.CharacterType)
+            {
+                case CharacterType.Lune:
+                case CharacterType.Tella: //とりあえず
+                    animation[(int)BattleCharaAnimationType.Stand] = new Animation(new AnimationData(AnimationID.BattleLuneStanding, true, 10));
+                    animation[(int)BattleCharaAnimationType.Chant] = new Animation(new AnimationData(AnimationID.BattleLuneChant, true, 10));
+                    animation[(int)BattleCharaAnimationType.Magic] = new Animation(new AnimationData(AnimationID.BattleLuneMagic, false, 10));
+                    animation[(int)BattleCharaAnimationType.Crisis] = new Animation(new AnimationData(AnimationID.BattleLuneCrisis, true, 10));
+                    animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleLuneVictory, false, 5));
+                    animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleLuneDown, true));
+                    break;
+                case CharacterType.Sunny:
+                    animation[(int)BattleCharaAnimationType.Stand] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
+                    animation[(int)BattleCharaAnimationType.Chant] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
+                    animation[(int)BattleCharaAnimationType.Magic] = new Animation(new AnimationData(AnimationID.BattleSunnyMagic, new Vector(-30, 0), false, 10));
+                    animation[(int)BattleCharaAnimationType.Crisis] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
+                    animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
+                    animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
+                    break;
+            }
 
             SetMotion(BattleCharaMotionType.Stand);
         }
@@ -82,7 +96,7 @@ namespace Soleil.Battle
                     break;
                 case BattleCharaMotionType.Magic:
                     bcMotion = new BattleCharaMotionSeq(motion, new List<BattleCharaMotion>{
-                        new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Chant, 60),
+                        new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Chant, 40),
                         new BattleCharaMotionWithTime(motion, BattleCharaAnimationType.Magic, 75)
                         });
                     break;
