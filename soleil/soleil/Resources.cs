@@ -215,6 +215,8 @@ namespace Soleil
         BattleSunnyStanding,
         BattleSunnyMagic,
 
+        BattleTestEnemyStanding,
+
         Size,
     }
 
@@ -467,6 +469,10 @@ namespace Soleil
             SetSize(AnimationID.BattleSunnyStanding, 4, 2);
             SetPath(AnimationID.BattleSunnyMagic, BattleAnimationPath + "Sunny_magic");
             SetSize(AnimationID.BattleSunnyMagic, 4, 2);
+
+
+            SetPath(AnimationID.BattleTestEnemyStanding, BattleAnimationPath + "Testenemy_stand");
+            SetSize(AnimationID.BattleTestEnemyStanding, 5, 2);
 
             #endregion
 

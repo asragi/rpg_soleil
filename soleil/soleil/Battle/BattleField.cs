@@ -43,7 +43,7 @@ namespace Soleil.Battle
 
         List<TextureID> textureIDList;
 
-        public List<BattleCharaGraphics> bcgraphicsList;
+        public List<Effect> Effects;
 
         /// <summary>
         /// priorityでソートされたConditionedEffect
@@ -64,28 +64,27 @@ namespace Soleil.Battle
             charas = new List<Character>();
             sides = new List<Side>();
             indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
-            bcgraphicsList = new List<BattleCharaGraphics>();
+            Effects = new List<Effect>();
             textureIDList = new List<TextureID> //とりあえず
             {
                 TextureID.BattleTurnQueueFaceLune,
                 TextureID.BattleTurnQueueFaceSun,
-                TextureID.BattleTurnQueueFaceSun,
+                TextureID.BattleTurnQueueFaceLune,
             };
             for (int i = 0; i < partylist.Length; i++)
             {
-                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i]);
+                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i], new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100));
                 charas.Add(chara);
 
                 sides.Add(Side.Right);
                 indexes[(int)Side.Right].Add(charaIndex);
-                bcgraphicsList.Add(new BattleCharaGraphics(charas.Last(), new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100)));
                 charaIndex++;
             }
 
             const int EnemyCnt = 3;
             for (int i = 0; i < EnemyCnt; i++)
             {
-                charas.Add(new TestEnemyCharacter(charaIndex, "敵" + i.ToString()));
+                charas.Add(new TestEnemyCharacter(charaIndex, "敵" + i.ToString(), new Vector(100 + i * 200, 350), new Vector(300 - i * 50, 200 + i * 100)));
                 sides.Add(Side.Left);
                 indexes[(int)Side.Left].Add(charaIndex);
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
@@ -278,7 +277,7 @@ namespace Soleil.Battle
                     //とりあえず勝ったとき TODO:敗北
                     executed = false;
                     if (be.DidWin)
-                        bcgraphicsList.ForEach(e => e.Win());
+                        charas.ForEach(e => e.Win());
                     if (delayCount < 0 && KeyInput.GetKeyPush(Key.A))
                     {
                         //sceneの切り替え
@@ -290,7 +289,9 @@ namespace Soleil.Battle
                     break;
             }
 
-            bcgraphicsList.ForEach(e => e.Update());
+            charas.ForEach(e => e.Update());
+            Effects.ForEach(e => e.Move());
+            Effects.RemoveAll(e => e.Disable);
         }
 
         public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
@@ -346,13 +347,14 @@ namespace Soleil.Battle
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
-            bcgraphicsList.ForEach(e => e.Draw(sb));
-            for (int i = 3; i < charas.Count; i++)
+            Effects.ForEach2(e => e.Draw(sb));
+            charas.ForEach(e => e.Draw(sb));
+            /*for (int i = 3; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + (i - 3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
                 sb.DrawText(new Vector(100 + (i - 3) * 180, 390), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
-            }
+            }*/
 
 
             MenuComponentList.ForEach(e => e.Draw(sb));

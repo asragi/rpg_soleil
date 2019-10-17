@@ -59,6 +59,11 @@ namespace Soleil.Battle
                     animation[(int)BattleCharaAnimationType.Victory] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
                     animation[(int)BattleCharaAnimationType.Down] = new Animation(new AnimationData(AnimationID.BattleSunnyStanding, true, 10));
                     break;
+                default:
+                    for (int i = 0; i < animation.Length; i++)
+                        animation[i] = new Animation(new AnimationData(AnimationID.BattleTestEnemyStanding, true, 4));
+                    break;
+
             }
 
             SetMotion(BattleCharaMotionType.Stand);

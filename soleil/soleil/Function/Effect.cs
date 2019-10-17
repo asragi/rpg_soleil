@@ -21,10 +21,10 @@ namespace Soleil
             Position = position;
             this.effects = effects;
         }
-        public Effect(Vector position, List<Effect> effect, Color color)
+        public Effect(Vector position, List<Effect> effects, Color color)
         {
             Position = position;
-            this.effects = effect;
+            this.effects = effects;
             Color = color;
         }
 

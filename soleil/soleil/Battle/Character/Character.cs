@@ -24,6 +24,7 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected CommandSelect commandSelect;
         public CharacterType CharacterType;
+        public BattleCharaGraphics BCGraphics;
 
         protected int CharacterIndex;
         public Character(int index, CharacterType charaType)
@@ -70,6 +71,10 @@ namespace Soleil.Battle
         {
             Status.Rates = rate;
         }
+
+        public void Win() => BCGraphics?.Win();
+        public void Update() => BCGraphics?.Update();
+        public void Draw(Drawing d) => BCGraphics?.Draw(d);
 
 
         //kari

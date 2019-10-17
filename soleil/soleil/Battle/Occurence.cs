@@ -36,8 +36,9 @@ namespace Soleil.Battle
         }
         public override void Affect()
         {
-            if (CharaIndex < 3) //敵のUIを作るまでのDebug
-                BF.bcgraphicsList[CharaIndex].Damage(HPDamage, MPDamage);
+            BF.GetCharacter(CharaIndex).BCGraphics?.Damage(HPDamage, MPDamage);
+
+            BF.Effects.Add(new AfterCountingEffect(90, new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos, new EffectAnimationData(EffectAnimationID.Explode, false, 4), false, BF.Effects), BF.Effects));
         }
     }
 
@@ -52,8 +53,7 @@ namespace Soleil.Battle
         }
         public override void Affect()
         {
-            if (CharaIndex < 3)
-                BF.bcgraphicsList[CharaIndex].Attack(MPConsume);
+            BF.GetCharacter(CharaIndex).BCGraphics?.Attack(MPConsume);
         }
     }
 
