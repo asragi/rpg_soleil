@@ -12,7 +12,7 @@ namespace Soleil.Battle
     /// </summary>
     class PlayableCharacter : Character
     {
-        public PlayableCharacter(int index, AbilityScore aScore, Person person) : base(index)
+        public PlayableCharacter(int index, AbilityScore aScore, Person person) : base(index, (CharacterType)(int)person.Name)
         {
             var magics = GetMagicIDs(person.Skill);
             var skills = GetSkillIDs(person.Skill);
@@ -20,7 +20,7 @@ namespace Soleil.Battle
             magics.Add(SkillID.Explode); //Debug
             Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
             Name = Enum.GetName(typeof(Misc.CharaName), person.Name);
-            commandSelect = new DefaultPlayableCharacterCommandSelect(charaIndex, Status);
+            commandSelect = new DefaultPlayableCharacterCommandSelect(CharacterIndex, Status);
         }
 
         /// <summary>

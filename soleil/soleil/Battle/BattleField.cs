@@ -114,10 +114,20 @@ namespace Soleil.Battle
                 (act, ocrs) =>
                 {
                     RemoveCharacter(p);
-                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
+                    ocrs.Add(new Occurence(GetCharacter(p).Name + "はやられた"));
                     return ocrs;
                 },
                 5000)));
+            CEffects.Add(new ConditionedEffectOnce(
+                //どちらかのSideが全滅したか判定
+                (act) => Enumerable.Range(0, 2).Select(i => indexes[i].Count == 0).Any(p => p),
+                (act, ocrs) =>
+                {
+                    ocrs.Add(new OccurenceBattleEnd());
+                    return ocrs;
+                },
+                4900
+                ));
 
         }
 
@@ -222,7 +232,19 @@ namespace Soleil.Battle
 
                     //TODO:Occurenceに応じたBattleEventを生成する
                     ocrs.ForEach(e => e.Affect());
-                    ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
+                    ocrs.ForEach(e =>
+                    {
+                        switch (e)
+                        {
+                            case OccurenceBattleEnd ocr:
+                                battleQue.Enqueue(new BattleMessage(ocr.Message, 0));
+                                battleQue.Enqueue(new BattleEnd(180, ocr.DidWin));
+                                break;
+                            default:
+                                battleQue.Enqueue(new BattleMessage(e.Message, 60));
+                                break;
+                        }
+                    });
                 }
                 //Turnが行動選択Turnのとき
                 else
@@ -251,6 +273,20 @@ namespace Soleil.Battle
                         executed = true;
                         delayCount = 0;
                     }
+                    break;
+                case BattleEnd be:
+                    //とりあえず勝ったとき TODO:敗北
+                    executed = false;
+                    if (be.DidWin)
+                        bcgraphicsList.ForEach(e => e.Win());
+                    if (delayCount < 0 && KeyInput.GetKeyPush(Key.A))
+                    {
+                        //sceneの切り替え
+                        executed = true;
+                        delayCount = 0;
+                    }
+                    if (delayCount == 1)
+                        delayCount = -1;
                     break;
             }
 
@@ -300,9 +336,11 @@ namespace Soleil.Battle
             //てきとう
             sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.CorpM), message, Color.White, DepthID.Message);
 
+            /*
             sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.CorpM), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
+                */
             sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
             for (int i = 0; i < 5; i++)
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);

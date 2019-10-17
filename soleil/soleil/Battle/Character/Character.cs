@@ -6,6 +6,16 @@ using System.Threading.Tasks;
 
 namespace Soleil.Battle
 {
+    enum CharacterType
+    {
+        Lune,
+        Sunny,
+        Tella,
+
+        TestEnemy,
+        Size,
+    }
+
     class Character
     {
         public CharacterStatus Status;
@@ -13,11 +23,13 @@ namespace Soleil.Battle
         protected List<Turn> turns;
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected CommandSelect commandSelect;
+        public CharacterType CharacterType;
 
-        protected int charaIndex;
-        public Character(int index)
+        protected int CharacterIndex;
+        public Character(int index, CharacterType charaType)
         {
-            charaIndex = index;
+            CharacterIndex = index;
+            CharacterType = charaType;
             turns = new List<Turn>();
         }
 
@@ -66,7 +78,7 @@ namespace Soleil.Battle
         /// </summary>
         public Turn NextTurn()
         {
-            var turn = new Turn(Status.NextWaitPoint(), Status, charaIndex);
+            var turn = new Turn(Status.NextWaitPoint(), Status, CharacterIndex);
             turns.Add(turn);
             return turn;
         }

@@ -208,6 +208,12 @@ namespace Soleil
         BattleLuneStanding,
         BattleLuneChant,
         BattleLuneMagic,
+        BattleLuneDown,
+        BattleLuneVictory,
+        BattleLuneCrisis,
+
+        BattleSunnyStanding,
+        BattleSunnyMagic,
 
         Size,
     }
@@ -451,6 +457,16 @@ namespace Soleil
             SetSize(AnimationID.BattleLuneChant, 4, 1);
             SetPath(AnimationID.BattleLuneMagic, BattleAnimationPath + "Lune_magic");
             SetSize(AnimationID.BattleLuneMagic, 4, 1);
+            SetPath(AnimationID.BattleLuneCrisis, BattleAnimationPath + "Lune_crisis");
+            SetSize(AnimationID.BattleLuneCrisis, 4, 1);
+            SetPath(AnimationID.BattleLuneVictory, BattleAnimationPath + "Lune_victory");
+            SetSize(AnimationID.BattleLuneVictory, 5, 4);
+            SetPath(AnimationID.BattleLuneDown, BattleAnimationPath + "Lune_down");
+            SetSize(AnimationID.BattleLuneDown, 1, 1);
+            SetPath(AnimationID.BattleSunnyStanding, BattleAnimationPath + "Sunny_battle_n");
+            SetSize(AnimationID.BattleSunnyStanding, 4, 2);
+            SetPath(AnimationID.BattleSunnyMagic, BattleAnimationPath + "Sunny_magic");
+            SetSize(AnimationID.BattleSunnyMagic, 4, 2);
 
             #endregion
 
