@@ -80,6 +80,14 @@ namespace Soleil
             AddComponents(skinImg);
         }
 
-        public float Alpha => skinImg.Alpha;
+        public float Alpha
+        {
+            get => skinImg.Alpha;
+            set
+            {
+                frameImgs.ForEach2(i => i.Alpha = value);
+                skinImg.Alpha = value;
+            }
+        }
     }
 }

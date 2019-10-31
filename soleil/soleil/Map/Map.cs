@@ -11,6 +11,7 @@ namespace Soleil.Map
 {
     enum MapName
     {
+        Opening,
         Flare1,
         Flare2,
         Somnia1,

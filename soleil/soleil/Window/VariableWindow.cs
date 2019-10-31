@@ -32,6 +32,13 @@ namespace Soleil
             AddComponents(backTexture, windowTexture);
         }
 
+        public float BackImgAlpha { set
+            {
+                windowTexture.Alpha = value;
+                backTexture.Alpha = value;
+            } 
+        }
+
         protected override float Alpha => windowTexture.Alpha;
         protected override Vector SpaceVector => SpacingVec;
 

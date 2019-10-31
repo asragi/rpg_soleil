@@ -37,7 +37,7 @@ namespace Soleil.Title
         private void InitNewGame()
         {
             var party = SaveLoad.GetParty(isNew: true);
-            new MapScene(sceneManager, party, Map.MapName.MagistolRoom, new Vector(400, 400));
+            new MapScene(sceneManager, party, Map.MapName.Opening, new Vector(-100, -100));
         }
     }
 }

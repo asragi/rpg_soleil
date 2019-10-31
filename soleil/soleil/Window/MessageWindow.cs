@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace Soleil
 {
@@ -7,6 +8,7 @@ namespace Soleil
         MessageBox messageBox;
         public static FontID DefaultFont = FontID.CorpM;
         public string Text { get => messageBox.Message; set => messageBox.Message = value; }
+        public Color Color { set => messageBox.Color = value; }
 
         public MessageWindow(Vector pos, Vector size, bool isStatic = false)
             : this(pos, size, WindowTag.A, WindowManager.GetInstance(), isStatic) { }
