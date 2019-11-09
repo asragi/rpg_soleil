@@ -13,7 +13,7 @@ namespace Soleil
         /// <summary>
         /// ウィンドウフレームの幅
         /// </summary>
-        const int FrameSize = 10;
+        public const int FrameSize = 10;
         readonly Image skinImg;
         readonly Image[] frameImgs;
 
