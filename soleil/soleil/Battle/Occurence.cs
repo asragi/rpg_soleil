@@ -29,16 +29,22 @@ namespace Soleil.Battle
     {
         public int CharaIndex { get; private set; }
         public int HPDamage = 0, MPDamage = 0;
-        public OccurenceDamageForCharacter(string message, int charaIndex, int HPDmg = 0, int MPDmg = 0) : base(message)
+        EffectAnimationID eaID;
+        public OccurenceDamageForCharacter(string message, int charaIndex, EffectAnimationID eaID, int HPDmg = 0, int MPDmg = 0) : base(message)
         {
             CharaIndex = charaIndex;
+            this.eaID = eaID;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
         public override void Affect()
         {
             BF.GetCharacter(CharaIndex).BCGraphics?.Damage(HPDamage, MPDamage);
 
-            BF.Effects.Add(new AfterCountingEffect(90, new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos, new EffectAnimationData(EffectAnimationID.Explode, false, 4), false, BF.Effects), BF.Effects));
+            BF.Effects.Add(new AfterCountingEffect(90,
+                new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos,
+                    new EffectAnimationData(eaID, false, 4),
+                    false, BF.Effects),
+                BF.Effects));
         }
     }
 
