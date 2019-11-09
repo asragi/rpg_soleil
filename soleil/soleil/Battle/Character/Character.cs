@@ -34,6 +34,13 @@ namespace Soleil.Battle
             turns = new List<Turn>();
         }
 
+        public virtual Character Generate(int index)
+        {
+            var tmp = (Character)MemberwiseClone();
+            tmp.CharacterIndex = index;
+            return tmp;
+        }
+
         /// <summary>
         /// 行動選択ターンが来たときに呼び出される
         /// </summary>
