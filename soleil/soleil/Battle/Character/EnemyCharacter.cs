@@ -21,7 +21,7 @@ namespace Soleil.Battle
         public EnemyCharacter Generate(int index, Vector statusPos, Vector charaPos)
         {
             var tmp = (EnemyCharacter)Generate(index);
-            tmp.commandSelect = new DefaultCharacterCommandSelect(CharacterIndex);
+            tmp.commandSelect = new DefaultCharacterCommandSelect(index);
             tmp.BCGraphics = new BattleCharaGraphics(this, statusPos, charaPos);
             return tmp;
         }
