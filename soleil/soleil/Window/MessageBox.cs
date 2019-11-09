@@ -1,4 +1,5 @@
-﻿using Soleil.Menu;
+﻿using Microsoft.Xna.Framework;
+using Soleil.Menu;
 
 namespace Soleil
 {
@@ -28,6 +29,8 @@ namespace Soleil
             charIndex = 0;
             AddComponents(new[] { fontImage });
         }
+
+        public Color Color { set => fontImage.Color = value; }
 
         public void SetMessage(string msg)
         {

@@ -17,6 +17,8 @@ namespace Soleil.Map
         {
             switch (mapName)
             {
+                case MapName.Opening:
+                    return new OpeningMap(party, cam);
                 case MapName.Flare1:
                     return new Flare1(party, cam);
                 case MapName.Somnia1:
