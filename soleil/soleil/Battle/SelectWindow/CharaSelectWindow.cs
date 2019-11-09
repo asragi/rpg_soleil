@@ -21,11 +21,13 @@ namespace Soleil.Battle
         int index;
 
         MenuDescription menuDescription; //未使用 MagicSelectWindowと合わせるため一応保持する
-        public CharaSelectWindow(MenuComponent parent, MenuDescription desc, List<int> charaindexList, Reference<bool> selectCompleted)
+        MagicSelectWindow parent;
+        public CharaSelectWindow(MagicSelectWindow parent, MenuDescription desc, List<int> charaindexList, Reference<bool> selectCompleted)
             : base(parent)
         {
             this.selectCompleted = selectCompleted;
             this.charaindexList = charaindexList;
+            this.parent = parent;
             menuDescription = desc;
         }
 
@@ -67,6 +69,13 @@ namespace Soleil.Battle
         }
 
         public override void OnInputCancel() { Quit(); ReturnParent(); }
+
+        protected override void ReturnParent()
+        {
+            base.ReturnParent();
+            parent.Activate();
+        }
+
         public override void Quit()
         {
             if (IsActive)
