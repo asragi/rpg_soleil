@@ -72,19 +72,19 @@ namespace Soleil.Battle
 
             #region Attack Table
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
-            attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
-            attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
-            attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Ice); };
-            attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Electro); };
-            attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Thrust); };
-            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Cut); };
-            attackTable[SkillID.PileBunker] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Thrust); };
-            attackTable[SkillID.DimensionKill] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
+            attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 19, AttackAttribution.Fever); };
+            attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 40, AttackAttribution.Fever); };
+            attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 20, AttackAttribution.Ice); };
+            attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 22, AttackAttribution.Electro); };
+            attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 44, AttackAttribution.Thrust); };
+            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b,39, AttackAttribution.Cut); };
+            attackTable[SkillID.PileBunker] = (a, b) => { return magicalAttack(a, b, 41, AttackAttribution.Thrust); };
+            attackTable[SkillID.DimensionKill] = (a, b) => { return magicalAttack(a, b, 88, AttackAttribution.None); };
 
-            attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
+            attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 36, AttackAttribution.None); };
+            attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 44, AttackAttribution.None); };
+            attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 15, AttackAttribution.None); };
+            attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 15, AttackAttribution.None); };
             #endregion
 
             #region Buff Table
