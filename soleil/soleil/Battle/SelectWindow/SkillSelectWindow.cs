@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
+using Soleil.Skill;
 
 namespace Soleil.Battle
 {
@@ -133,10 +134,25 @@ namespace Soleil.Battle
             base.Call();
             IsActive = true;
         }
+
         public void Inactivate()
         {
             base.Quit();
             IsActive = false;
+        }
+
+        protected override SelectablePanel[] MakeAllPanels()
+        {
+            var skillArray = new List<SelectablePanel>();
+            for (int i = 0; i < (int)SkillID.size; i++)
+            {
+                var id = (SkillID)i;
+                var _data = SkillDataBase.Get(id);
+                if (_data.AttackType != AttackType.Physical) continue;
+                if (!SHolder.HasSkill(id)) continue;
+                skillArray.Add(new SkillMenuPanel(_data, this));
+            }
+            return skillArray.ToArray();
         }
     }
 }
