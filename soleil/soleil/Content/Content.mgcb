@@ -86,18 +86,6 @@
 /processorParam:TextureFormat=Color
 /build:Animation/Battle/Lune_victory.png
 
-#begin Animation/Effect/m_explode.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Effect/m_explode.png
-
 #begin Animation/Battle/Sunny_battle_n.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -110,18 +98,6 @@
 /processorParam:TextureFormat=Color
 /build:Animation/Battle/Sunny_battle_n.png
 
-#begin Animation/Effect/m_heal.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Animation/Effect/m_heal.png
-
 #begin Animation/Battle/Sunny_magic.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -133,6 +109,42 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Animation/Battle/Sunny_magic.png
+
+#begin Animation/Battle/Testenemy_stand.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Battle/Testenemy_stand.png
+
+#begin Animation/Effect/m_explode.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Effect/m_explode.png
+
+#begin Animation/Effect/m_heal.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Animation/Effect/m_heal.png
 
 #begin Animation/Effect/m_thunder.png
 /importer:TextureImporter

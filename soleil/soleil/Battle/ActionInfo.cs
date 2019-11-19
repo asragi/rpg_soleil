@@ -50,9 +50,9 @@ namespace Soleil.Battle
         /// <summary>
         /// SkillDataBaseから取得した情報を元にAttackを生成する補助関数
         /// </summary>
-        static void SetAttack(SkillID id, Range.AttackRange aRange)
+        static void SetAttack(SkillID id, Range.AttackRange aRange, EffectAnimationID eaID)
         {
-            actions[(int)id] = new Attack(attackTable[id], aRange, mp: SkillDataBase.Get(id).Cost);
+            actions[(int)id] = new Attack(attackTable[id], aRange, eaID, mp: SkillDataBase.Get(id).Cost);
         }
         static void SetBuff(SkillID id, Range.AttackRange aRange)
         {
@@ -72,19 +72,19 @@ namespace Soleil.Battle
 
             #region Attack Table
             attackTable = new Dictionary<SkillID, Func<CharacterStatus, CharacterStatus, float>>();
-            attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
-            attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Fever); };
-            attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Ice); };
-            attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Electro); };
-            attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Thrust); };
-            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Cut); };
-            attackTable[SkillID.PileBunker] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.Thrust); };
-            attackTable[SkillID.DimensionKill] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
+            attackTable[SkillID.PointFlare] = (a, b) => { return magicalAttack(a, b, 19, AttackAttribution.Fever); };
+            attackTable[SkillID.HeatWave] = (a, b) => { return magicalAttack(a, b, 40, AttackAttribution.Fever); };
+            attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 20, AttackAttribution.Ice); };
+            attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 22, AttackAttribution.Electro); };
+            attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 44, AttackAttribution.Thrust); };
+            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b,39, AttackAttribution.Cut); };
+            attackTable[SkillID.PileBunker] = (a, b) => { return magicalAttack(a, b, 41, AttackAttribution.Thrust); };
+            attackTable[SkillID.DimensionKill] = (a, b) => { return magicalAttack(a, b, 88, AttackAttribution.None); };
 
-            attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 10, AttackAttribution.None); };
-            attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 10, AttackAttribution.None); };
+            attackTable[SkillID.Headbutt] = (a, b) => { return physicalAttack(a, b, 36, AttackAttribution.None); };
+            attackTable[SkillID.Barrage] = (a, b) => { return physicalAttack(a, b, 44, AttackAttribution.None); };
+            attackTable[SkillID.NormalAttack] = (a, b) => { return physicalAttack(a, b, 15, AttackAttribution.None); };
+            attackTable[SkillID.NormalMagic] = (a, b) => { return magicalAttack(a, b, 15, AttackAttribution.None); };
             #endregion
 
             #region Buff Table
@@ -122,30 +122,30 @@ namespace Soleil.Battle
 
             actions = new List<Action>();
             for (int i = 0; i < (int)SkillID.size; i++)
-                actions.Add(new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), mp: 0)); //ダミーをつめる
-                                                                                                                 //actions.Add(null);
+                actions.Add(new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 0)); //ダミーをつめる
+                                                                                                                                            //actions.Add(null);
 
             // sun
-            SetAttack(SkillID.PointFlare, Range.OneEnemy.GetInstance());
+            SetAttack(SkillID.PointFlare, Range.OneEnemy.GetInstance(), EffectAnimationID.PointFlare);
 
             actions[(int)SkillID.WarmHeal] = new ActionSeq(new List<Action> {
                 new Heal(healTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
                 new Buff(buffTable[SkillID.WarmHeal], Range.Ally.GetInstance()),
             }, Range.Ally.GetInstance(), mp: 20);
 
-            SetAttack(SkillID.HeatWave, Range.AllEnemy.GetInstance());
+            SetAttack(SkillID.HeatWave, Range.AllEnemy.GetInstance(), EffectAnimationID.Explode);
 
 
             // shade
-            SetAttack(SkillID.Freeze, Range.OneEnemy.GetInstance());
+            SetAttack(SkillID.Freeze, Range.OneEnemy.GetInstance(), EffectAnimationID.Explode);
             //SetMagic("バインド", SkillID.Bind, MagicCategory.Shade, "敵単体に確率でマヒ付与．", 5);
             //SetMagic("クールダウン", SkillID.CoolDown, MagicCategory.Shade, "敵単体へ冷気属性ダメージ．確率で攻撃力低下．", 16);
 
 
             // magic
-            SetAttack(SkillID.Thunder, Range.OneEnemy.GetInstance());
+            SetAttack(SkillID.Thunder, Range.OneEnemy.GetInstance(), EffectAnimationID.Thunder);
             SetHeal(SkillID.MagicalHeal, Range.Ally.GetInstance());
-            SetAttack(SkillID.Explode, Range.AllEnemy.GetInstance());
+            SetAttack(SkillID.Explode, Range.AllEnemy.GetInstance(), EffectAnimationID.Explode);
 
 
             // dark
@@ -155,7 +155,7 @@ namespace Soleil.Battle
 
 
             // sound
-            SetAttack(SkillID.Sonicboom, Range.OneEnemy.GetInstance());
+            SetAttack(SkillID.Sonicboom, Range.OneEnemy.GetInstance(), EffectAnimationID.Explode);
             //SetMagic("スリップノイズ", SkillID.Noize, MagicCategory.Sound, "敵全体に確率でスタン付与．", 8);
             SetBuff(SkillID.Maximizer, Range.Ally.GetInstance());
 
@@ -174,13 +174,13 @@ namespace Soleil.Battle
 
             // metal
             //SetMagic("アルケム", SkillID.Alchem, MagicCategory.Metal, "一部のアイテムを変換する．", 8);
-            SetAttack(SkillID.PileBunker, Range.OneEnemy.GetInstance());
+            SetAttack(SkillID.PileBunker, Range.OneEnemy.GetInstance(), EffectAnimationID.Explode);
             SetBuff(SkillID.MetalCoat, Range.AllAlly.GetInstance());
 
 
             // space
             //SetMagic("テレポート", SkillID.Teleport, MagicCategory.Space, "ワールドマップで時間経過なく移動できる．", 20, onBattle: false);
-            SetAttack(SkillID.DimensionKill, Range.AllEnemy.GetInstance());
+            SetAttack(SkillID.DimensionKill, Range.AllEnemy.GetInstance(), EffectAnimationID.Explode);
             SetBuff(SkillID.SeaventhHeaven, Range.AllAlly.GetInstance());
 
 
@@ -191,14 +191,14 @@ namespace Soleil.Battle
 
 
             // skill
-            actions[(int)SkillID.Headbutt] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), mp: 12);
+            actions[(int)SkillID.Headbutt] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 12);
             //確率で気絶
 
-            actions[(int)SkillID.Barrage] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), mp: 15);
+            actions[(int)SkillID.Barrage] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 15);
 
             //samples
-            actions[(int)SkillID.NormalAttack] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance());
-            actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic], Range.OneEnemy.GetInstance(), mp: 100);
+            actions[(int)SkillID.NormalAttack] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Blow);
+            actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 100);
             actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
             actions[(int)SkillID.EndGuard] = new Buff(buffTable[SkillID.EndGuard], Range.Me.GetInstance());
             actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);

@@ -24,6 +24,7 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         protected CommandSelect commandSelect;
         public CharacterType CharacterType;
+        public BattleCharaGraphics BCGraphics;
 
         protected int CharacterIndex;
         public Character(int index, CharacterType charaType)
@@ -31,6 +32,13 @@ namespace Soleil.Battle
             CharacterIndex = index;
             CharacterType = charaType;
             turns = new List<Turn>();
+        }
+
+        public virtual Character Generate(int index)
+        {
+            var tmp = (Character)MemberwiseClone();
+            tmp.CharacterIndex = index;
+            return tmp;
         }
 
         /// <summary>
@@ -70,6 +78,10 @@ namespace Soleil.Battle
         {
             Status.Rates = rate;
         }
+
+        public void Win() => BCGraphics?.Win();
+        public void Update() => BCGraphics?.Update();
+        public void Draw(Drawing d) => BCGraphics?.Draw(d);
 
 
         //kari

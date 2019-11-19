@@ -112,10 +112,12 @@ namespace Soleil.Battle
                 case Range.OneEnemy oe:
                     csw = new CharaSelectWindow(this, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
+                    Inactivate();
                     break;
                 case Range.Ally a:
                     csw = new CharaSelectWindow(this, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
                     csw.Call();
+                    Inactivate();
                     break;
                 case Range.AllAlly aRange:
                     aRange.TargetSide = bf.GetSide(charaIndex);
@@ -147,6 +149,17 @@ namespace Soleil.Battle
             IsQuit = true;
             IsActive = false;
 
+        }
+
+        public void Activate()
+        {
+            base.Call();
+            IsActive = true;
+        }
+        public void Inactivate()
+        {
+            base.Quit();
+            IsActive = false;
         }
     }
 }

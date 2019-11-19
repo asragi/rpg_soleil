@@ -8,43 +8,28 @@ using Soleil.Menu;
 
 namespace Soleil.Battle
 {
-    /// <summary>
-    /// CharaIndexWindowsで使うpanel
-    /// </summary>
-    class CharaIndexPanel : TextSelectablePanel
-    {
-        public readonly Vector CostPosDiff = new Vector(300, 0);
-        public override string Desctiption => ItemName;
-
-        public CharaIndexPanel(String index, int num, CharaSelectWindow parent)
-            : base(index, parent, DepthID.MenuMessage)
-        {
-            // itemNum
-            Val = num;
-            LocalPos = Vector.Zero;
-        }
-    }
 
     ///<summary>
-    /// 攻撃対象を選択するwindow 暫定実装
-    /// 多分矢印で選択とかになるのでは
+    /// 攻撃対象を選択する矢印
     ///</summary>
-    class CharaSelectWindow : BasicMenu
+    class CharaSelectWindow : MenuChild
     {
-        protected override Vector WindowPos => new Vector(350, 150);
         Reference<bool> selectCompleted;
         public int SelectIndex { get; private set; }
-        List<int> charaIndexList;
-        public CharaSelectWindow(MenuComponent parent, MenuDescription desc, List<int> charaIndexList, Reference<bool> selectCompleted)
-            : base(parent, desc)
+        List<int> charaindexList;
+
+        int index;
+
+        MenuDescription menuDescription; //未使用 MagicSelectWindowと合わせるため一応保持する
+        MagicSelectWindow parent;
+        public CharaSelectWindow(MagicSelectWindow parent, MenuDescription desc, List<int> charaindexList, Reference<bool> selectCompleted)
+            : base(parent)
         {
             this.selectCompleted = selectCompleted;
-            this.charaIndexList = charaIndexList;
-            Init();
+            this.charaindexList = charaindexList;
+            this.parent = parent;
+            menuDescription = desc;
         }
-
-        protected override SelectablePanel[] MakeAllPanels() =>
-            charaIndexList.Select(e => new CharaIndexPanel(e.ToString(), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -57,12 +42,39 @@ namespace Soleil.Battle
                 Input(KeyInput.GetStickFlickDirection(1));
         }
 
+        public override void Draw(Drawing d)
+        {
+            if (IsActive)
+            {
+                base.Draw(d);
+                var pos = BattleField.GetInstance().GetCharacter(charaindexList[index]).BCGraphics.Pos;
+                d.Draw(pos + new Vector(0, -50), Resources.GetTexture(TextureID.Triangle), DepthID.MenuMessage, 2, (float)Math.PI);
+            }
+        }
+
+        public override void OnInputUp()
+        {
+            index = (index - 1 + charaindexList.Count) % charaindexList.Count;
+        }
+
+        public override void OnInputDown()
+        {
+            index = (index + 1 + charaindexList.Count) % charaindexList.Count;
+        }
+
         public override void OnInputSubmit()
         {
-            SelectIndex = charaIndexList[Index];
+            SelectIndex = charaindexList[index];
             selectCompleted.Val = true;
         }
+
         public override void OnInputCancel() { Quit(); ReturnParent(); }
+
+        protected override void ReturnParent()
+        {
+            base.ReturnParent();
+            parent.Activate();
+        }
 
         public override void Quit()
         {
