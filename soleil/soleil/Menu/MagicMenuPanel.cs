@@ -21,7 +21,7 @@ namespace Soleil.Menu
         private Image icon;
         public readonly SkillID ID;
 
-        public MagicMenuPanel(ISkill data, MagicMenu parent)
+        public MagicMenuPanel(ISkill data, MagicMenuBase parent)
             : base(data.Name, parent, DepthID.MenuMessage)
         {
             // itemNum

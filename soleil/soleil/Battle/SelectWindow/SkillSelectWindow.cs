@@ -10,7 +10,7 @@ namespace Soleil.Battle
     /// <summary>
     /// SkillIDの選択Window
     /// </summary>
-    class MagicSelectWindow : MagicMenuBase
+    class SkillSelectWindow : SkillMenu
     {
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
@@ -32,7 +32,7 @@ namespace Soleil.Battle
         /// IsActiveは開かれていても選択されていない場合はfalseとなる為必要
         /// </summary>
         bool IsQuit;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
+        public SkillSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
@@ -43,9 +43,6 @@ namespace Soleil.Battle
             SetPerson(person);
             IsQuit = true;
         }
-
-        //protected override SelectablePanel[] MakeAllPanels() =>
-        //    magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -82,7 +79,7 @@ namespace Soleil.Battle
         /// </summary>
         public override void OnInputSubmit()
         {
-            var nowPanel = (MagicMenuPanel)Panels[Index];
+            var nowPanel = (SkillMenuPanel)Panels[Index];
             //magicが一つもないとき？
             Select.AName = nowPanel.ID;
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();

@@ -53,12 +53,11 @@ namespace Soleil.Battle
         /// 行動選択が終わったかどうかをcommandSelectから取得するためのもの
         /// </summary>
         Reference<bool> doSelect;
-        public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status) : base(charaIndex)
+        public DefaultPlayableCharacterCommandSelect(int charaIndex, CharacterStatus status, Person person) : base(charaIndex)
         {
             doSelect = new Reference<bool>(false);
             desc = new Menu.MenuDescription(new Vector(300, 50));
-            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex,
-                status.Magics, status.Skills);
+            commandSelect = new CommandSelectWindow(new Menu.MenuDescription(new Vector()), desc, doSelect, charaIndex, person);
             BF.AddBasicMenu(commandSelect);
             BF.AddBasicMenu(desc);
         }

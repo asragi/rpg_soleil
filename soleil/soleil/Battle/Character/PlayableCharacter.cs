@@ -21,7 +21,7 @@ namespace Soleil.Battle
             magics.Add(SkillID.Explode); //Debug
             Status = new CharacterStatus(aScore, 10000, magics, skills, person.Equip);
             Name = Enum.GetName(typeof(Misc.CharaName), person.Name);
-            commandSelect = new DefaultPlayableCharacterCommandSelect(CharacterIndex, Status);
+            commandSelect = new DefaultPlayableCharacterCommandSelect(CharacterIndex, Status, person);
             BCGraphics = new BattleCharaGraphics(this, statusPos, charaPos);
         }
 

@@ -17,10 +17,15 @@ namespace Soleil.Menu
             Init();
         }
 
-        public void CallWithPerson(Person p)
+        public void SetPerson(Person p)
         {
             skillHolder = p.Skill;
             Init();
+        }
+
+        public void CallWithPerson(Person p)
+        {
+            SetPerson(p);
             Call();
         }
 
