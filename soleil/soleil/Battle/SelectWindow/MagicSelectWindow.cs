@@ -82,8 +82,8 @@ namespace Soleil.Battle
         /// </summary>
         public override void OnInputSubmit()
         {
-            var nowPanel = (MagicMenuPanel)Panels[Index];
-            //magicが一つもないとき？
+            if (Panels[Index] is EmptyPanel) return;
+            var nowPanel = Panels[Index] as MagicMenuPanel;
             Select.AName = nowPanel.ID;
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;

@@ -79,8 +79,8 @@ namespace Soleil.Battle
         /// </summary>
         public override void OnInputSubmit()
         {
-            var nowPanel = (SkillMenuPanel)Panels[Index];
-            //magicが一つもないとき？
+            if (Panels[Index] is EmptyPanel) return;
+            var nowPanel = Panels[Index] as SkillMenuPanel;
             Select.AName = nowPanel.ID;
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
