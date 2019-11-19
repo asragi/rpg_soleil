@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Soleil.Menu;
+using Soleil.Skill;
 
 namespace Soleil.Battle
 {
     /// <summary>
     /// SkillIDの選択Window
     /// </summary>
-    class MagicSelectWindow : MagicMenuBase
+    class SkillSelectWindow : SkillMenu
     {
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
@@ -32,7 +33,7 @@ namespace Soleil.Battle
         /// IsActiveは開かれていても選択されていない場合はfalseとなる為必要
         /// </summary>
         bool IsQuit;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
+        public SkillSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
@@ -43,9 +44,6 @@ namespace Soleil.Battle
             SetPerson(person);
             IsQuit = true;
         }
-
-        //protected override SelectablePanel[] MakeAllPanels() =>
-        //    magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -83,7 +81,7 @@ namespace Soleil.Battle
         public override void OnInputSubmit()
         {
             if (Panels[Index] is EmptyPanel) return;
-            var nowPanel = Panels[Index] as MagicMenuPanel;
+            var nowPanel = Panels[Index] as SkillMenuPanel;
             Select.AName = nowPanel.ID;
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
@@ -136,10 +134,25 @@ namespace Soleil.Battle
             base.Call();
             IsActive = true;
         }
+
         public void Inactivate()
         {
             base.Quit();
             IsActive = false;
+        }
+
+        protected override SelectablePanel[] MakeAllPanels()
+        {
+            var skillArray = new List<SelectablePanel>();
+            for (int i = 0; i < (int)SkillID.size; i++)
+            {
+                var id = (SkillID)i;
+                var _data = SkillDataBase.Get(id);
+                if (_data.AttackType != AttackType.Physical) continue;
+                if (!SHolder.HasSkill(id)) continue;
+                skillArray.Add(new SkillMenuPanel(_data, this));
+            }
+            return skillArray.ToArray();
         }
     }
 }

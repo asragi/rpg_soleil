@@ -21,13 +21,23 @@ namespace Soleil.Battle
         int index;
 
         MenuDescription menuDescription; //未使用 MagicSelectWindowと合わせるため一応保持する
-        MagicSelectWindow parent;
+        MagicSelectWindow magicParent;
         public CharaSelectWindow(MagicSelectWindow parent, MenuDescription desc, List<int> charaindexList, Reference<bool> selectCompleted)
             : base(parent)
         {
             this.selectCompleted = selectCompleted;
             this.charaindexList = charaindexList;
-            this.parent = parent;
+            this.magicParent = parent;
+            menuDescription = desc;
+        }
+
+        SkillSelectWindow skillParent;
+        public CharaSelectWindow(SkillSelectWindow parent, MenuDescription desc, List<int> charaindexList, Reference<bool> selectCompleted)
+            : base(parent)
+        {
+            this.selectCompleted = selectCompleted;
+            this.charaindexList = charaindexList;
+            this.skillParent = parent;
             menuDescription = desc;
         }
 
@@ -73,7 +83,8 @@ namespace Soleil.Battle
         protected override void ReturnParent()
         {
             base.ReturnParent();
-            parent.Activate();
+            magicParent?.Activate();
+            skillParent?.Activate();
         }
 
         public override void Quit()
