@@ -38,7 +38,7 @@ namespace Soleil.Map
             new Cigerman(new Vector(750, 600), om, bm);
             new MapChangeObject((new Vector(15, 370), new Vector(15, 630)), MapName.Somnia2, new Vector(906, 513), Direction.L, om, bm, Party, cam);
             new MapChangeObject((new Vector(750, 20), new Vector(1050, 20)), MapName.Somnia4, new Vector(896, 500), Direction.U, om, bm, Party, cam);
-            new WorldmapObject("wmc", new Vector(1250, 800), new Vector(30, 200), WorldPointKey.Somnia, Party, om, bm);
+            new WorldmapObject((new Vector(806, 883), new Vector(1016, 673)), WorldPointKey.Somnia, Direction.LU, Party, om, bm);
         }
     }
 }
