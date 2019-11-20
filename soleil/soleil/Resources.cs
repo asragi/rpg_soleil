@@ -248,6 +248,8 @@ namespace Soleil
 
     enum MusicID : int
     {
+        SunCity,
+        Battle1,
         Size,
     }
 
@@ -263,6 +265,7 @@ namespace Soleil
         public static Texture2D[] Animes;
         public static Texture2D[] EffectAnimes;
         public static SpriteFont[] Fonts;
+        public static MusicData[] MusicDataSet;
         public static List<List<string>>[] CharacterData;
         public static SoundEffect[] SEs;
         public static int[,] AnimeSplit;
@@ -302,6 +305,7 @@ namespace Soleil
             ColorDictionary = new Dictionary<Color, Color>[(int)ColorDictionaryID.Size];
             Fonts = new SpriteFont[(int)FontID.Size];
             SEs = new SoundEffect[(int)SoundID.Size];
+            MusicDataSet = new MusicData[(int)MusicID.Size];
             SetParamaters();
 
             //Load Graphics
@@ -558,6 +562,12 @@ namespace Soleil
             }
             #endregion
 
+            #region Music
+            SetPath(MusicID.SunCity, "gairo_wo_terasu");
+            SetData(MusicID.SunCity);
+            SetPath(MusicID.Battle1, "battle1");
+            SetData(MusicID.Battle1);
+            #endregion
 
             SetPath(AnimationID.Arrow, "Arrow");
             SetSize(AnimationID.Arrow, 1, 9);
@@ -605,6 +615,14 @@ namespace Soleil
             EffectAnimeSplit[(int)id, 1] = yNum;
         }
 
+        // 音楽の詳細データセット
+        static void SetData(MusicID id, bool repeat = true) => SetData(id, -1, -1, repeat);
+        static void SetData(MusicID id, long loopInit, long loopEnd, bool repeat = true)
+        {
+            MusicDataSet[(int)id].LoopInitByte = loopInit;
+            MusicDataSet[(int)id].LoopEndByte = loopEnd;
+            MusicDataSet[(int)id].Repeat = repeat;
+        }
 
         public static Texture2D GetTexture(TextureID id) => Graphs[(int)id];
         public static Texture2D GetTexture(AnimationID id) => Animes[(int)id];
@@ -639,7 +657,7 @@ namespace Soleil
             return dict;
         }
 
-        public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+        public static string MusicPass(MusicID id) => "music/" + songPath[(int)id];
 
         public static Vector GetSize(this FontID id, string text)
         {
