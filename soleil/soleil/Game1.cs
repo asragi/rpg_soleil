@@ -101,12 +101,8 @@ namespace Soleil
 
                 item.AddItem(Item.ItemID.Portion);
                 item.AddItem(Item.ItemID.Zarigani);
-                for (int i = (int)Item.ItemID.d0; i < (int)Item.ItemID.d7 + 1; i++)
-                {
-                    item.AddItem((Item.ItemID)i, i);
-                }
 
-                var wallet = new Map.MoneyWallet(500000);
+                var wallet = new Map.MoneyWallet(50000);
                 playerBaggage.SetData(item, wallet);
             }
         }
