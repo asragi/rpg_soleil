@@ -15,6 +15,7 @@
             NowMap.SetPlayerPos(position);
 
             ChangeMusic();
+            TimePass();
         }
 
         public void PlayMusic()
@@ -33,6 +34,12 @@
             // 移動前マップでイベント処理が終わっていない場合、続行する。
             previousMap?.EventUpdate();
             NowMap.Update();
+        }
+
+        private void TimePass()
+        {
+            var time = GameDateTime.GetInstance();
+            time.Pass(0, 0, 7);
         }
 
         public void Draw(Drawing d)

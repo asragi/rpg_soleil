@@ -48,7 +48,7 @@ namespace Soleil
 
         public static GameDateTime GetInstance() => gameDateTime;
         private static GameDateTime gameDateTime = new GameDateTime();
-        private GameDateTime() { }
+        private GameDateTime() { Pass(0, 8, 32); }
 
         /// <summary>
         /// 時間を経過させる．
