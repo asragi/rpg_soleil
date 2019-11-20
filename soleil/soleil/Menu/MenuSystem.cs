@@ -165,6 +165,7 @@ namespace Soleil.Menu
         public override void Call()
         {
             base.Call();
+            Audio.PlaySound(SoundID.MenuOpen);
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
             for (int i = 0; i < menuItems.Length; i++)
@@ -184,6 +185,7 @@ namespace Soleil.Menu
         public override void Quit()
         {
             base.Quit();
+            Audio.PlaySound(SoundID.Back);
             // Set bools
             IsActive = false;
             IsQuit = true;

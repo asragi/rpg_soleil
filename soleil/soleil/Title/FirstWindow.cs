@@ -72,24 +72,31 @@ namespace Soleil.Title
 
         private void SelectLoad()
         {
-            if (!saveExists) return;
+            if (!saveExists)
+            {
+                Audio.PlaySound(SoundID.Back);
+                return;
+            }
+            Audio.PlaySound(SoundID.DecideHard);
             master.Mode = TitleMode.SelectSave;
             QuitWindow();
         }
 
         private void SelectNew()
         {
+            Audio.PlaySound(SoundID.DecideHard);
             master.Mode = TitleMode.NewGame;
             QuitWindow();
         }
 
         private void SelectOption()
         {
-
+            Audio.PlaySound(SoundID.Back);
         }
 
         private void SelectExit()
         {
+            Audio.PlaySound(SoundID.DecideHard);
             master.Mode = TitleMode.Exit;
             QuitWindow();
         }

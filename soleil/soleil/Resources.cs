@@ -255,6 +255,21 @@ namespace Soleil
 
     enum SoundID : int
     {
+        // System
+        DecideSoft,
+        DecideHard,
+        MenuOpen,
+        MenuCursor,
+        Back,
+
+        // Map
+        MapMove,
+
+        // Battle
+        Magic,
+        Head,
+        Fire,
+
         Size,
     }
 
@@ -567,6 +582,21 @@ namespace Soleil
             SetData(MusicID.SunCity);
             SetPath(MusicID.Battle1, "battle1");
             SetData(MusicID.Battle1);
+            #endregion
+
+            #region SE
+            string se = "SE/";
+            SetPath(SoundID.DecideSoft, se + "decision9");
+            SetPath(SoundID.MenuOpen, se + "decision24");
+            SetPath(SoundID.DecideHard, se + "decision25");
+            SetPath(SoundID.Back, se + "whiff");
+            SetPath(SoundID.Fire, se + "fire");
+            SetPath(SoundID.Head, se + "attack3");
+            SetPath(SoundID.Magic, se + "special");
+            SetPath(SoundID.MapMove, se + "shoes-tonton1");
+            SetPath(SoundID.MenuCursor, se + "cursor1");
+
+
             #endregion
 
             SetPath(AnimationID.Arrow, "Arrow");
