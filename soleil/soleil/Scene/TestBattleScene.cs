@@ -15,6 +15,7 @@ namespace Soleil
             : base(sm)
         {
             bf = BattleField.GetInstance();
+            bf.SetSceneManager(sm);
             var enemies = new List<EnemyCharacter>();
             foreach (var name in _enemies)
             {
