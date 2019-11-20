@@ -68,12 +68,17 @@ namespace Soleil.Battle
             sides = new List<Side>();
             indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
             Effects = new List<Effect>();
-            textureIDList = new List<TextureID> //とりあえず
+            textureIDList = new List<TextureID>();
+            var faceDict = new Dictionary<Misc.CharaName, TextureID>
             {
-                TextureID.BattleTurnQueueFaceLune,
-                TextureID.BattleTurnQueueFaceSun,
-                TextureID.BattleTurnQueueFaceLune,
+                {Misc.CharaName.Lune, TextureID.BattleTurnQueueFaceLune },
+                {Misc.CharaName.Sunny, TextureID.BattleTurnQueueFaceSun },
+                {Misc.CharaName.Tella, TextureID.BattleTurnQueueFace4 },
             };
+            for (int i = 0; i < partylist.Length; ++i)
+            {
+                textureIDList.Add(faceDict[partylist[i].Name]);
+            }
             for (int i = 0; i < partylist.Length; i++)
             {
                 var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i], new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100));
