@@ -1,4 +1,5 @@
-﻿using Soleil.Dungeon.SearchFloorEvent;
+﻿using Soleil.Battle;
+using Soleil.Dungeon.SearchFloorEvent;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Soleil.Dungeon
         /// <summary>
         /// フロア探索時の処理結果に応じてModeを変更．
         /// </summary>
-        public DungeonMode OnSearch(int floorNum)
+        public (DungeonMode, BattleData) OnSearch(int floorNum)
         {
             var data = DungeonDatabase.Get(name);
             float rand = (float)Global.RandomDouble(0, 1.0);
@@ -41,20 +42,20 @@ namespace Soleil.Dungeon
             if (rand <= EncounterRate)
             {
                 // 戦闘突入
-                return DungeonMode.InitBattle;
+                return (DungeonMode.InitBattle, data.GetRandomBattle(floorNum));
             }
             // 何も起きない
-            return DungeonMode.FirstWindow;
+            return (DungeonMode.FirstWindow, BattleData.None);
         }
 
-        private DungeonMode DecideReturnMode(DungeonFloorEvent floorEvent)
+        private (DungeonMode, BattleData) DecideReturnMode(DungeonFloorEvent floorEvent)
         {
             switch (floorEvent)
             {
                 case ItemFind _:
-                    return DungeonMode.FindItem;
-                case BattleEvent _:
-                    return DungeonMode.InitBattle;
+                    return (DungeonMode.FindItem, BattleData.None);
+                case BattleEvent b:
+                    return (DungeonMode.InitBattle, b.BattleData);
             }
             throw new ArgumentOutOfRangeException($"{floorEvent}のケースが実装されていません．");
         }
