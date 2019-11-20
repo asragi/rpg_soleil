@@ -14,7 +14,7 @@ namespace Soleil.Map
     {
         protected readonly List<CollideObject> BoxList;
         int indexNum;
-        bool visible = true; // for debug
+        bool visible = false; // for debug
 
         public BoxManager()
         {
