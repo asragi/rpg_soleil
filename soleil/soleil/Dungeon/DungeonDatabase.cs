@@ -32,6 +32,10 @@ namespace Soleil.Dungeon
                     {
                         {1, new ItemFind(ItemID.SilverWand) },
                     },
+                    new []
+                    {
+                        new EnemyAppearance(1, 12, new BattleData(CharacterType.TestEnemy, CharacterType.TestEnemy))
+                    },
                     MapName.MagistolCol1, new Vector(1232, 1222)
                 )
             );

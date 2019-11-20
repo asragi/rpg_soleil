@@ -10,7 +10,7 @@ namespace Soleil.Battle
     {
         public CharacterType[] Enemies;
 
-        public BattleData(CharacterType[] enemies)
+        public BattleData(params CharacterType[] enemies)
         {
             Enemies = enemies;
         }

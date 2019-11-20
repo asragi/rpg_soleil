@@ -35,6 +35,7 @@ namespace Soleil.Dungeon
         private void ChangeScene()
         {
             master.Mode = DungeonMode.AfterBattle;
+            //new TestBattleScene();
             Reset();
         }
     }
