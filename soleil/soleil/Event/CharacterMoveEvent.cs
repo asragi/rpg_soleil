@@ -9,10 +9,11 @@ namespace Soleil.Event
 {
     class CharacterMoveEvent : EventBase
     {
-        WalkCharacter target;
-        Direction dir;
-        int duration, frame;
-        bool waitEnd;
+        readonly WalkCharacter target;
+        readonly Direction dir;
+        readonly int duration;
+        int frame;
+        readonly bool waitEnd;
         public CharacterMoveEvent(WalkCharacter _target, Direction _dir, int _duration, bool _waitEnd = true)
         {
             frame = 0;
@@ -24,7 +25,16 @@ namespace Soleil.Event
             base.Execute();
             frame++;
             target.Move(dir);
-            if (frame >= duration) Next();
+            if (frame >= duration)
+            {
+                Reset();
+                Next();
+            }
+        }
+
+        private void Reset()
+        {
+            frame = 0;
         }
     }
 }

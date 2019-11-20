@@ -21,6 +21,7 @@ namespace Soleil.Map
             )
             : base(om)
         {
+            Pos = (pos.Item1 + pos.Item2) / 2;
             returnDir = _returnDir;
             new CollideLine(this, pos, CollideLayer.RoadEvent, bm);
             var wm = WindowManager.GetInstance();
