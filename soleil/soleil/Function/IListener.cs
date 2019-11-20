@@ -9,6 +9,7 @@ namespace Soleil
     enum ListenerType
     {
         ItemMenu,
+        StatusMenu,
         size,
     }
     /// <summary>
