@@ -13,6 +13,8 @@
             previousMap = NowMap;
             NowMap = map;
             NowMap.SetPlayerPos(position);
+
+            TimePass();
         }
 
         public void Update()
@@ -21,6 +23,12 @@
             previousMap?.EventUpdate();
             NowMap.Update();
 
+        }
+
+        private void TimePass()
+        {
+            var time = GameDateTime.GetInstance();
+            time.Pass(0, 0, 7);
         }
 
         public void Draw(Drawing d)
