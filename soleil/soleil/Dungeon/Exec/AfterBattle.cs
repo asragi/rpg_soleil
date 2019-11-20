@@ -24,6 +24,7 @@ namespace Soleil.Dungeon
 
         private void Next()
         {
+            Audio.StopMusic();
             master.Mode = DungeonMode.FirstWindow;
             Reset();
         }

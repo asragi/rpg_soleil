@@ -17,10 +17,15 @@
             ChangeMusic();
         }
 
+        public void PlayMusic()
+        {
+            Audio.PlayMusic(NowMap.MapMusic);
+        }
+
         private void ChangeMusic()
         {
             if (previousMap != null && previousMap.MapMusic == NowMap.MapMusic) return;
-            Audio.PlayMusic(NowMap.MapMusic);
+            PlayMusic();
         }
 
         public void Update()

@@ -252,6 +252,7 @@ namespace Soleil
         ShadeCity,
         MagicCity,
         Battle1,
+        WorldMap,
         Size,
     }
 
@@ -588,6 +589,8 @@ namespace Soleil
             SetData(MusicID.MagicCity);
             SetPath(MusicID.Battle1, "battle1");
             SetData(MusicID.Battle1);
+            SetPath(MusicID.WorldMap, "bgm_maoudamashii_healing06");
+            SetData(MusicID.WorldMap);
             #endregion
 
             #region SE

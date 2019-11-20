@@ -20,6 +20,7 @@ namespace Soleil
             transition.SetMode(TransitionMode.FadeIn);
 
             master = new TitleMaster(sm);
+            Audio.StopMusic();
 
             // Graphics
             background = new Image(TextureID.WhiteWindow, Vector.Zero, DepthID.BackGround, alpha: 1);
