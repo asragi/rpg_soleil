@@ -20,6 +20,7 @@ namespace Soleil.Map
             EventSequence.SetEventSet(
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.None),
+                    new PlaySoundEvent(SoundID.MapMove),
                     new CharacterMoveEvent(om.GetPlayer(), dir, 15, false),
                     new FadeOutEvent(),
                     new ChangeMapEvent(mapName, destination, dir, party, cam),

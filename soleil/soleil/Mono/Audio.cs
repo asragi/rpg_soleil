@@ -40,6 +40,7 @@ namespace Soleil
 
         public static void StopMusic()
         {
+            if (wave == null) return;
             wave.Stop();
         }
 

@@ -249,12 +249,30 @@ namespace Soleil
     enum MusicID : int
     {
         SunCity,
+        ShadeCity,
+        MagicCity,
         Battle1,
+        WorldMap,
         Size,
     }
 
     enum SoundID : int
     {
+        // System
+        DecideSoft,
+        DecideHard,
+        MenuOpen,
+        MenuCursor,
+        Back,
+
+        // Map
+        MapMove,
+
+        // Battle
+        Magic,
+        Head,
+        Fire,
+
         Size,
     }
 
@@ -565,8 +583,29 @@ namespace Soleil
             #region Music
             SetPath(MusicID.SunCity, "gairo_wo_terasu");
             SetData(MusicID.SunCity);
+            SetPath(MusicID.ShadeCity, "hi_no_ataranai_machi_ni_kurashite");
+            SetData(MusicID.ShadeCity);
+            SetPath(MusicID.MagicCity, "bgm_maoudamashii_fantasy14");
+            SetData(MusicID.MagicCity);
             SetPath(MusicID.Battle1, "battle1");
             SetData(MusicID.Battle1);
+            SetPath(MusicID.WorldMap, "bgm_maoudamashii_healing06");
+            SetData(MusicID.WorldMap);
+            #endregion
+
+            #region SE
+            string se = "SE/";
+            SetPath(SoundID.DecideSoft, se + "decision9");
+            SetPath(SoundID.MenuOpen, se + "decision24");
+            SetPath(SoundID.DecideHard, se + "decision25");
+            SetPath(SoundID.Back, se + "whiff");
+            SetPath(SoundID.Fire, se + "fire");
+            SetPath(SoundID.Head, se + "attack3");
+            SetPath(SoundID.Magic, se + "special");
+            SetPath(SoundID.MapMove, se + "shoes-tonton1");
+            SetPath(SoundID.MenuCursor, se + "cursor1");
+
+
             #endregion
 
             SetPath(AnimationID.Arrow, "Arrow");

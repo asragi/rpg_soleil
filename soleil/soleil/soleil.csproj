@@ -71,6 +71,7 @@
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Battle\SelectWindow\SkillSelectWindow.cs" />
     <Compile Include="Dungeon\EnemyAppearance.cs" />
+    <Compile Include="Event\PlaySoundEvent.cs" />
     <Compile Include="Event\WaitEvent.cs" />
     <Compile Include="Event\CharacterActivateEvent.cs" />
     <Compile Include="Images\TriangleImage.cs" />

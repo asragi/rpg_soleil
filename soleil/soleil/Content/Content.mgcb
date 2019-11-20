@@ -1116,6 +1116,66 @@
 /processorParam:TextureFormat=Color
 /build:Map/WorldMap/yasoba-building-icon.png
 
+#begin SE/attack3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/attack3.wav
+
+#begin SE/cursor1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/cursor1.wav
+
+#begin SE/decision16.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/decision16.wav
+
+#begin SE/decision24.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/decision24.wav
+
+#begin SE/decision25.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/decision25.wav
+
+#begin SE/decision9.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/decision9.wav
+
+#begin SE/fire.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/fire.wav
+
+#begin SE/shoes-tonton1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/shoes-tonton1.wav
+
+#begin SE/special.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/special.wav
+
+#begin SE/whiff.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:SE/whiff.wav
+
 #begin UI/backBar.png
 /importer:TextureImporter
 /processor:TextureProcessor

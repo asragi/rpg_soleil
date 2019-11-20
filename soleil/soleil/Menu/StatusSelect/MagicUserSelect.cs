@@ -29,6 +29,7 @@ namespace Soleil.Menu
         {
             Person selected = StatusMenu.GetSelectedPerson();
             IsActive = false;
+            Audio.PlaySound(SoundID.DecideSoft);
             menuSystem.CallChild(MenuName.Magic, selected);
         }
     }
