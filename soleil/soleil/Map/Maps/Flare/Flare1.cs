@@ -55,6 +55,7 @@ namespace Soleil.Map
                 new CameraPoint(5320, 1500),
             };
             MapCameraManager.SetCameraPoint(CameraPoints);
+            new WorldmapObject((new Vector(1402, 1971), new Vector(1664, 2107)), WorldMap.WorldPointKey.Flare, Direction.RU, party, om, bm);
         }
 
     }

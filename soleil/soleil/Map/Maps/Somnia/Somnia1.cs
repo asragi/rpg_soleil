@@ -28,7 +28,7 @@ namespace Soleil.Map
             CameraPoints = new CameraPoint[] {
                 new CameraPoint(400, 300), // hotel entrance
                 new CameraPoint(650, 555), // center
-                new CameraPoint(1100, 840), // right down
+                //new CameraPoint(1100, 840), // right down
                 new CameraPoint(140, 455), // left
                 new CameraPoint(880, 260),
             };
