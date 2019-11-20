@@ -10,6 +10,7 @@ namespace Soleil.Map
 {
     class Somnia4 : MapBase
     {
+        public override MusicID MapMusic => MusicID.ShadeCity;
         public Somnia4(PersonParty party, Camera cam)
             : base(MapName.Somnia4, party, cam)
         {

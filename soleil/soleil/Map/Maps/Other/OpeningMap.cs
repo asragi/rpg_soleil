@@ -33,6 +33,8 @@ namespace Soleil.Map
                 );
         }
 
+        public override MusicID MapMusic => MusicID.MagicCity;
+
         protected override void Start()
         {
             base.Start();

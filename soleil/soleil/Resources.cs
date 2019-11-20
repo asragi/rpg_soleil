@@ -249,6 +249,8 @@ namespace Soleil
     enum MusicID : int
     {
         SunCity,
+        ShadeCity,
+        MagicCity,
         Battle1,
         Size,
     }
@@ -580,6 +582,10 @@ namespace Soleil
             #region Music
             SetPath(MusicID.SunCity, "gairo_wo_terasu");
             SetData(MusicID.SunCity);
+            SetPath(MusicID.ShadeCity, "hi_no_ataranai_machi_ni_kurashite");
+            SetData(MusicID.ShadeCity);
+            SetPath(MusicID.MagicCity, "bgm_maoudamashii_fantasy14");
+            SetData(MusicID.MagicCity);
             SetPath(MusicID.Battle1, "battle1");
             SetData(MusicID.Battle1);
             #endregion

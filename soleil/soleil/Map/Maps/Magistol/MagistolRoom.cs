@@ -11,6 +11,7 @@ namespace Soleil.Map
     /// </summary>
     class MagistolRoom : MapBase
     {
+        public override MusicID MapMusic => MusicID.MagicCity;
         public MagistolRoom(PersonParty party, Camera cam)
            : base(MapName.MagistolRoom, party, cam)
         {

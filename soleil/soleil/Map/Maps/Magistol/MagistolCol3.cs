@@ -11,6 +11,7 @@ namespace Soleil.Map
     /// </summary>
     class MagistolCol3 : MapBase
     {
+        public override MusicID MapMusic => MusicID.MagicCity;
         private static readonly Vector[] ChairPos = new[]
         {
             new Vector(123, 1238),
