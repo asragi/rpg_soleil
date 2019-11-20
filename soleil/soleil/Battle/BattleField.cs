@@ -58,6 +58,7 @@ namespace Soleil.Battle
 
         public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
+            onEnd = false;
             MenuComponentList = new List<Menu.MenuComponent>();
 
             var partylist = party.GetActiveMembers();
@@ -331,7 +332,7 @@ namespace Soleil.Battle
 
         SceneManager sceneManager;
         public void SetSceneManager(SceneManager sm) => sceneManager = sm;
-        private const int EndWaitMax = 100;
+        private const int EndWaitMax = 60;
         private int endWait;
         private void OnEnd()
         {
