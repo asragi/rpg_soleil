@@ -24,6 +24,7 @@ namespace Soleil
             bf.InitBattle(party, enemies);
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
+            Audio.PlayMusic(MusicID.Battle1);
         }
 
         override public void Update()

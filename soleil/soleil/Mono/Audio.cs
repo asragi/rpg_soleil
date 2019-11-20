@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using NAudio;
+using NAudio.Wave;
 
 namespace Soleil
 {
@@ -10,7 +12,7 @@ namespace Soleil
     /// </summary>
     static class Audio
     {
-        /*
+        
         public static AudioFileReader music;
         static WaveOut wave;
         static long[] loopByte;
@@ -50,7 +52,6 @@ namespace Soleil
         {
             System.Diagnostics.Debug.WriteLine(music.Position + ":" + music.Position/music.CurrentTime.TotalMilliseconds + ":" + music.TotalTime.TotalMilliseconds);
         }
-        */
     }
 
     struct MusicData
