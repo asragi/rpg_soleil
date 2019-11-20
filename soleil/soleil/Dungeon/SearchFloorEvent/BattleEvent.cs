@@ -12,13 +12,13 @@ namespace Soleil.Dungeon
     /// </summary>
     class BattleEvent: DungeonFloorEvent
     {
-        public readonly EnemyName[] Enemies;
-        public BattleEvent(EnemyName[] _enemies)
+        public readonly BattleData BattleData;
+        public BattleEvent(BattleData battleData)
         {
-            Enemies = _enemies;
+            BattleData = battleData;
         }
 
         public override string DisplayName => "戦闘";
-        public override object Clone() => new BattleEvent(Enemies);
+        public override object Clone() => new BattleEvent(BattleData);
     }
 }

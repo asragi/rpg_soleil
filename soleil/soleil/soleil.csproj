@@ -52,6 +52,7 @@
     <Compile Include="Battle\Action\Buff.cs" />
     <Compile Include="Battle\ActionInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
+    <Compile Include="Battle\BattleData.cs" />
     <Compile Include="Battle\Character\EnemyName.cs" />
     <Compile Include="Battle\Character\EnemyCharacter.cs" />
     <Compile Include="Battle\Graphic\BattleCharaAnimation.cs" />
