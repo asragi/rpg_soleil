@@ -28,6 +28,7 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             Person selected = StatusMenu.GetSelectedPerson();
+            Audio.PlaySound(SoundID.DecideSoft);
             IsActive = false;
             menuSystem.CallChild(MenuName.Status, selected);
         }

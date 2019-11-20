@@ -27,6 +27,7 @@ namespace Soleil.Menu
         public override void OnInputSubmit()
         {
             Person selectedPerson = StatusMenu.GetSelectedPerson();
+            Audio.PlaySound(SoundID.DecideSoft);
             Person[] p = new Person[1] { selectedPerson };
             SkillEffectData.UseOnMenu(Commander,p,id);
         }

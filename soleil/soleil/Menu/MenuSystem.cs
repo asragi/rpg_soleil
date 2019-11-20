@@ -212,6 +212,7 @@ namespace Soleil.Menu
         public void Input(Direction dir)
         {
             var input = dir;
+            if (dir != Direction.N) Audio.PlaySound(SoundID.MenuCursor);
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
@@ -228,6 +229,7 @@ namespace Soleil.Menu
             {
                 if (!child.IsActive) continue;
                 child.Input(input);
+                if (KeyInput.GetKeyPush(Key.B)) Audio.PlaySound(SoundID.Back);
             }
         }
 
@@ -248,21 +250,25 @@ namespace Soleil.Menu
             if (selected == MenuName.Items)
             {
                 itemMenu.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Status)
             {
                 statusTargetSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Magic)
             {
                 magicUserSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Skill)
             {
                 skillUserSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Option)
