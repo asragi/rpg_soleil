@@ -18,15 +18,10 @@ namespace Soleil.Map.Maps.Somnia
             SetStandAnimation(standAnim);
 
             EventSequence.SetEventSet(
-                new MessageWindowEvent(om.GetPlayer(), "テストメッセージ"),
-                new MessageWindowEvent(this, "俺の髪型，なかなかだろ？"),
-                new SelectWindowEvent(om.GetPlayer(), "イケイケじゃん", "ハンバーグみたいだね"),
-                new BoolEventBranch(EventSequence, () => WindowManager.GetInstance().GetDecideIndex() == 0,
-                        new MessageWindowEvent(this, "訊くまでもなかったか"),
-                        new MessageWindowEvent(this, "俺の髪型が\nサザエさんみてーだと？？")
-                ),
+                new MessageWindowEvent(this, "あんたら，よそから来たモンか？"),
+                new MessageWindowEvent(this, "痛い目にあわないウチに\n帰った方がいいと思うぜ"),
                 new ChangeInputFocusEvent(InputFocus.Player)
-            );
+            ) ;
         }
 
         public override void OnCollisionEnter(CollideObject col)
