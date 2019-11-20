@@ -20,6 +20,7 @@ namespace Soleil
                 new EnemyCharacter("敵" + 3.ToString(), CharacterType.TestEnemy),
             };
             bf.InitBattle(party, enemies);
+            Audio.PlayMusic(MusicID.Battle1);
         }
 
         override public void Update()
