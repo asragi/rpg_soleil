@@ -14,12 +14,13 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         //Effect
         public string Message;
-        public bool Visible { get; set; }
+        public int time;
         //Target
         //Damage
-        public Occurence(string message)
+        public Occurence(string message, int time = 60)
         {
             Message = message;
+            this.time = time;
         }
         //使わないかも
         public virtual void Affect() { }
@@ -29,22 +30,15 @@ namespace Soleil.Battle
     {
         public int CharaIndex { get; private set; }
         public int HPDamage = 0, MPDamage = 0;
-        EffectAnimationID eaID;
-        public OccurenceDamageForCharacter(string message, int charaIndex, EffectAnimationID eaID, int HPDmg = 0, int MPDmg = 0) : base(message)
+        public OccurenceDamageForCharacter(string message, int charaIndex, int HPDmg = 0, int MPDmg = 0)
+            : base(message, 60)
         {
             CharaIndex = charaIndex;
-            this.eaID = eaID;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
         public override void Affect()
         {
             BF.GetCharacter(CharaIndex).BCGraphics?.Damage(HPDamage, MPDamage);
-
-            BF.Effects.Add(new AfterCountingEffect(90,
-                new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos,
-                    new EffectAnimationData(eaID, false, 4),
-                    false, BF.Effects),
-                BF.Effects));
         }
     }
 
@@ -52,7 +46,8 @@ namespace Soleil.Battle
     {
         public int CharaIndex { get; private set; }
         public int MPConsume = 0;
-        public OccurenceAttackMotion(string message, int charaIndex, int MPConsume_) : base(message)
+        public OccurenceAttackMotion(string message, int charaIndex, int MPConsume_)
+            : base(message, 90)
         {
             CharaIndex = charaIndex;
             MPConsume = MPConsume_;
@@ -63,12 +58,33 @@ namespace Soleil.Battle
         }
     }
 
+    class OccurenceEffect : Occurence
+    {
+        public int CharaIndex { get; private set; }
+        EffectAnimationID eaID;
+        public OccurenceEffect(string message, int charaIndex, EffectAnimationID eaID)
+            : base(message, 50)
+        {
+            CharaIndex = charaIndex;
+            this.eaID = eaID;
+        }
+        public override void Affect()
+        {
+            BF.Effects.Add(new AfterCountingEffect(10,
+                new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos,
+                    new EffectAnimationData(eaID, false, 4),
+                    false, BF.Effects),
+                BF.Effects));
+        }
+    }
+
     class OccurenceBuffForCharacter : Occurence
     {
         public int CharaIndex { get; private set; }
         public int STRrate, VITrate, MAGrate, SPDrate;
         //rate 0...変化なし -1...デバフ 1...バフ?
-        public OccurenceBuffForCharacter(string message, int charaIndex, int STRrate = 0, int VITrate = 0, int MAGrate = 0, int SPDrate = 0) : base(message)
+        public OccurenceBuffForCharacter(string message, int charaIndex, int STRrate = 0, int VITrate = 0, int MAGrate = 0, int SPDrate = 0)
+            : base(message, 60)
         {
             CharaIndex = charaIndex;
             (this.STRrate, this.VITrate, this.MAGrate, this.SPDrate) = (STRrate, VITrate, MAGrate, SPDrate);
@@ -80,7 +96,8 @@ namespace Soleil.Battle
 
     class OccurenceForField : Occurence
     {
-        public OccurenceForField(string message) : base(message)
+        public OccurenceForField(string message)
+            : base(message, 0)
         {
 
         }
@@ -91,7 +108,7 @@ namespace Soleil.Battle
     {
         public bool DidWin;
         public bool DidLose;
-        public OccurenceBattleEnd() : base("")
+        public OccurenceBattleEnd() : base("", 180)
         {
             DidWin = BF.SameSideIndexes(Side.Left).Count == 0;
             DidLose = BF.SameSideIndexes(Side.Right).Count == 0;
@@ -101,7 +118,8 @@ namespace Soleil.Battle
                 Message = "戦闘に敗北した";
 
         }
-        public OccurenceBattleEnd(string mes) : base(mes)
+        public OccurenceBattleEnd(string mes)
+            : base(mes, 180)
         { }
 
         public override void Affect()

@@ -64,7 +64,7 @@ namespace Soleil.Battle
         /// <summary>
         /// MP消費判定をするConditionedEffectを追加する関数
         /// </summary>
-        List<ConditionedEffect> CheckMP(List<ConditionedEffect> cEffects)
+        protected virtual List<ConditionedEffect> CheckMP(List<ConditionedEffect> cEffects)
         {
             //MP消費
             cEffects.Add(new ConditionedEffect(

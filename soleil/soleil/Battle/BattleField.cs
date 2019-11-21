@@ -242,7 +242,6 @@ namespace Soleil.Battle
                     var ocrs = actTurn.action.Act();
 
                     //TODO:Occurenceに応じたBattleEventを生成する
-                    ocrs.ForEach(e => e.Affect());
                     ocrs.ForEach(e =>
                     {
                         switch (e)
@@ -252,7 +251,7 @@ namespace Soleil.Battle
                                 battleQue.Enqueue(new BattleEnd(180, ocr.DidWin));
                                 break;
                             default:
-                                battleQue.Enqueue(new BattleMessage(e.Message, 60));
+                                battleQue.Enqueue(new BattleEffect(e));
                                 break;
                         }
                     });
@@ -284,6 +283,12 @@ namespace Soleil.Battle
                         executed = true;
                         delayCount = 0;
                     }
+                    break;
+                case BattleEffect be:
+                    message = be.Occur.Message;
+                    if (executed)
+                        be.Act();
+                    executed = delayCount <= 1;
                     break;
                 case BattleEnd be:
                     //とりあえず勝ったとき TODO:敗北
