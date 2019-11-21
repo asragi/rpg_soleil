@@ -33,6 +33,7 @@ namespace Soleil.Map
 
             // Objects
             new AccessaryGirl(new Vector(650, 330), party, om, bm);
+            new BlueGirl(new Vector(800, 400), om, bm);
             new MapChangeObject((new Vector(0, 530), new Vector(206, 530)), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
             new MapChangeObject((new Vector(752, 530), new Vector(960, 530)), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
         }

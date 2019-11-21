@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map.Maps.Flare;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -55,6 +56,7 @@ namespace Soleil.Map
                 new CameraPoint(5320, 1500),
             };
             MapCameraManager.SetCameraPoint(CameraPoints);
+            new RedHat(new Vector(880, 1528), om, bm);
             new WorldmapObject((new Vector(1402, 1971), new Vector(1664, 2107)), WorldMap.WorldPointKey.Flare, Direction.RU, party, om, bm);
         }
 

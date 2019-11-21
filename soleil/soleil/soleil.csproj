@@ -96,7 +96,10 @@
     <Compile Include="Dungeon\SearchFloorEvent\NothingEvent.cs" />
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />
+    <Compile Include="Map\Maps\Flare\RedHat.cs" />
+    <Compile Include="Map\Maps\Magistol\BlackSuit.cs" />
     <Compile Include="Map\Maps\Other\OpeningMap.cs" />
+    <Compile Include="Map\Maps\Somnia\Objects\BlueGirl.cs" />
     <Compile Include="Menu\MagicMenuBase.cs" />
     <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Dungeon\Exec\ReturnToHome.cs" />

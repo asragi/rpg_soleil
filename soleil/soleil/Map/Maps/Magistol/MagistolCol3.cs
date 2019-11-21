@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map.Maps.Magistol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +43,7 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
+            new BlackSuit(new Vector(1322,661), party, om, bm);
             new MapChangeObject((new Vector(115, 1450), new Vector(205, 1503)), MapName.MagistolShop, new Vector(650, 500), Direction.LD, om, bm, party, cam);
         }
     }
