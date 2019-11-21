@@ -35,11 +35,13 @@ namespace Soleil.Map.WorldMap
 
                 SetEdge(WorldPointKey.Flare, WorldPointKey.Somnia, 4, result);
                 SetEdge(WorldPointKey.Flare, WorldPointKey.Magistol, 3, result);
+                /*
                 SetEdge(WorldPointKey.Flare, WorldPointKey.Parel, 3, result);
                 SetEdge(WorldPointKey.Flare, WorldPointKey.AisenBerz, 9, result);
                 SetEdge(WorldPointKey.Somnia, WorldPointKey.Shimaki, 8, result);
                 SetEdge(WorldPointKey.Magistol, WorldPointKey.Parel, 3, result);
                 SetEdge(WorldPointKey.Parel, WorldPointKey.Earthband, 7, result);
+                */
                 return result;
 
                 void Set(WorldPointKey key, Vector pos, WorldPoint[] array, BoxManager bm)
