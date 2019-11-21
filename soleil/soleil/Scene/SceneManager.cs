@@ -9,7 +9,7 @@ namespace Soleil
 {
     class SceneManager
     {
-        private static SceneManager sceneManager = new SceneManager();
+        private static SceneManager sceneManager;
         Transition transition;
         public Scene NowScene => scenes.Last();
         List<Scene> scenes;
@@ -20,6 +20,11 @@ namespace Soleil
         }
 
         public static SceneManager GetInstance() => sceneManager;
+
+        static SceneManager ()
+        {
+            sceneManager = new SceneManager();
+        }
 
         public void Add(Scene scene)
         {
