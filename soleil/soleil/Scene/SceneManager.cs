@@ -12,7 +12,9 @@ namespace Soleil
         private static SceneManager sceneManager;
         Transition transition;
         public Scene NowScene => scenes.Last();
+        private Scene beforeScene;
         List<Scene> scenes;
+        bool changing;
         private SceneManager()
         {
             scenes = new List<Scene>();
@@ -28,6 +30,11 @@ namespace Soleil
 
         public void Add(Scene scene)
         {
+            if (scenes.Count > 0)
+            {
+                beforeScene = NowScene;
+                changing = true;
+            }
             scenes.Add(scene);
         }
 
@@ -42,7 +49,16 @@ namespace Soleil
 
         public void Draw(Drawing sb)
         {
-            NowScene.Draw(sb); // いい感じにする
+            if (changing)
+            {
+                beforeScene.Draw(sb);
+                beforeScene = null;
+                changing = false;
+            }
+            else
+            {
+                NowScene.Draw(sb); // いい感じにする
+            }
             transition.Draw(sb);
         }
     }
