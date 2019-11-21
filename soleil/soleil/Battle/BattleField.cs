@@ -45,6 +45,8 @@ namespace Soleil.Battle
 
         public List<Effect> Effects;
 
+        bool onEnd;
+
         /// <summary>
         /// priorityでソートされたConditionedEffect
         /// ターンを超えて起こる効果を持つ
@@ -56,6 +58,7 @@ namespace Soleil.Battle
 
         public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
+            onEnd = false;
             MenuComponentList = new List<Menu.MenuComponent>();
 
             var partylist = party.GetActiveMembers();
@@ -205,6 +208,11 @@ namespace Soleil.Battle
         /// </summary>
         public void Update()
         {
+            if (onEnd)
+            {
+                OnEnd();
+                return;
+            }
             MenuComponentList.ForEach(e => e.Update());
             if (delayCount > 0)
             {
@@ -282,6 +290,11 @@ namespace Soleil.Battle
                         //sceneの切り替え
                         executed = true;
                         delayCount = 0;
+                        // とりあえずの実装 by ragi
+                        onEnd = true;
+                        endWait = EndWaitMax;
+                        var transition = Transition.GetInstance();
+                        transition.SetMode(TransitionMode.FadeOut);
                     }
                     if (delayCount == 1)
                         delayCount = -1;
@@ -315,6 +328,19 @@ namespace Soleil.Battle
                 .FindMin(p => p.TurnTime).CharaIndex;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
+        }
+
+        SceneManager sceneManager;
+        public void SetSceneManager(SceneManager sm) => sceneManager = sm;
+        private const int EndWaitMax = 60;
+        private int endWait;
+        private void OnEnd()
+        {
+            endWait--;
+            if (endWait < 0)
+            {
+                sceneManager.KillNowScene();
+            }
         }
 
         /*
