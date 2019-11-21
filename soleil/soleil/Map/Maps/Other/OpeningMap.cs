@@ -34,6 +34,7 @@ namespace Soleil.Map
                     new FadeInEvent(),
                     new WaitEvent(50),
                     new MessageWindowEvent(new Vector(480, 270), 0, "現在はプロトタイプ版です！\nマップをじっくり眺めてみたり\n散策をお楽しみください！", false, true),
+                    new MessageWindowEvent(new Vector(480, 270), 0, "NF展示中にも機能が増えるかも.....？", false, true),
                     new ChangeInputFocusEvent(InputFocus.Player)
                 );
         }
