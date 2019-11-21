@@ -31,7 +31,10 @@ namespace Soleil.Dungeon
                     new Dictionary<int, DungeonFloorEvent>()
                     {
                         {1, new ItemFind(ItemID.SilverWand) },
-                        {3, new BattleEvent(new[] { EnemyName.Test }) }
+                    },
+                    new []
+                    {
+                        new EnemyAppearance(1, 12, new BattleData(CharacterType.TestEnemy, CharacterType.TestEnemy))
                     },
                     MapName.MagistolCol1, new Vector(1232, 1222)
                 )

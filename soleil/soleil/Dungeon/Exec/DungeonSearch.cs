@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Battle;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,7 @@ namespace Soleil.Dungeon
             dState = state;
             executor = new DungeonExecutor(dState.Name);
 
-            Actions = new Dictionary<int, Action>()
+            Actions = new Dictionary<int, System.Action>()
             {
                 {5, InitSearch },
                 {120, NotifyResult }
@@ -41,7 +42,12 @@ namespace Soleil.Dungeon
 
         private void NotifyResult()
         {
-            master.Mode = executor.OnSearch(dState.FloorNum);
+            (DungeonMode mode, BattleData data) = executor.OnSearch(dState.FloorNum);
+            if (mode == DungeonMode.InitBattle)
+            {
+                master.StartBattle(data);
+            }
+            master.Mode = mode;
             Reset();
         }
     }
