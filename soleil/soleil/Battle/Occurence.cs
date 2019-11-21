@@ -90,14 +90,20 @@ namespace Soleil.Battle
     class OccurenceBattleEnd : Occurence
     {
         public bool DidWin;
+        public bool DidLose;
         public OccurenceBattleEnd() : base("")
         {
             DidWin = BF.SameSideIndexes(Side.Left).Count == 0;
+            DidLose = BF.SameSideIndexes(Side.Right).Count == 0;
             if (DidWin)
                 Message = "戦闘に勝利した";
-            else
+            else if (DidLose)
                 Message = "戦闘に敗北した";
+
         }
+        public OccurenceBattleEnd(string mes) : base(mes)
+        { }
+
         public override void Affect()
         {
         }

@@ -120,8 +120,8 @@ namespace Soleil.Battle
                         90000, CharaIndex, turn.WaitPoint + BF.GetCharacter(CharaIndex).Status.TurnWP
                         ));
                     return true;
-                case CommandEnum.Escape: //とりあえず通常攻撃が出る
-                    action = (ActionInfo.GetAction(Skill.SkillID.NormalAttack)).Generate(new Range.OneEnemy(CharaIndex, BF.OppositeIndexes(CharaIndex).First()));
+                case CommandEnum.Escape:
+                    action = (ActionInfo.GetAction(Skill.SkillID.Escape)).Generate(new Range.AllEnemy(CharaIndex, BF.OppositeSide(CharaIndex)));
                     EnqueueTurn(action, turn);
                     return true;
             }
