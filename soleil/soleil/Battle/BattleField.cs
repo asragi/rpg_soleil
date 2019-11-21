@@ -45,6 +45,8 @@ namespace Soleil.Battle
 
         public List<Effect> Effects;
 
+        bool onEnd;
+
         /// <summary>
         /// priorityでソートされたConditionedEffect
         /// ターンを超えて起こる効果を持つ
@@ -56,6 +58,7 @@ namespace Soleil.Battle
 
         public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
+            onEnd = false;
             MenuComponentList = new List<Menu.MenuComponent>();
 
             var partylist = party.GetActiveMembers();
@@ -65,12 +68,17 @@ namespace Soleil.Battle
             sides = new List<Side>();
             indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
             Effects = new List<Effect>();
-            textureIDList = new List<TextureID> //とりあえず
+            textureIDList = new List<TextureID>();
+            var faceDict = new Dictionary<Misc.CharaName, TextureID>
             {
-                TextureID.BattleTurnQueueFaceLune,
-                TextureID.BattleTurnQueueFaceSun,
-                TextureID.BattleTurnQueueFaceLune,
+                {Misc.CharaName.Lune, TextureID.BattleTurnQueueFaceLune },
+                {Misc.CharaName.Sunny, TextureID.BattleTurnQueueFaceSun },
+                {Misc.CharaName.Tella, TextureID.BattleTurnQueueFace4 },
             };
+            for (int i = 0; i < partylist.Length; ++i)
+            {
+                textureIDList.Add(faceDict[partylist[i].Name]);
+            }
             for (int i = 0; i < partylist.Length; i++)
             {
                 var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i], new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100));
@@ -205,6 +213,11 @@ namespace Soleil.Battle
         /// </summary>
         public void Update()
         {
+            if (onEnd)
+            {
+                OnEnd();
+                return;
+            }
             MenuComponentList.ForEach(e => e.Update());
             if (delayCount > 0)
             {
@@ -282,6 +295,11 @@ namespace Soleil.Battle
                         //sceneの切り替え
                         executed = true;
                         delayCount = 0;
+                        // とりあえずの実装 by ragi
+                        onEnd = true;
+                        endWait = EndWaitMax;
+                        var transition = Transition.GetInstance();
+                        transition.SetMode(TransitionMode.FadeOut);
                     }
                     if (delayCount == 1)
                         delayCount = -1;
@@ -315,6 +333,19 @@ namespace Soleil.Battle
                 .FindMin(p => p.TurnTime).CharaIndex;
             turnQueue.Push(lastTurn[minIndex]);
             lastTurn[minIndex] = charas[minIndex].NextTurn();
+        }
+
+        SceneManager sceneManager;
+        public void SetSceneManager(SceneManager sm) => sceneManager = sm;
+        private const int EndWaitMax = 60;
+        private int endWait;
+        private void OnEnd()
+        {
+            endWait--;
+            if (endWait < 0)
+            {
+                sceneManager.KillNowScene();
+            }
         }
 
         /*

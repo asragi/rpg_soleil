@@ -203,6 +203,9 @@ namespace Soleil
 
         SomniaMob1,
         SomniaAcceU,
+        MobRedHat,
+        MobBlueGirl,
+        MobBlackSuit,
 
 
         BattleLuneStanding,
@@ -450,6 +453,12 @@ namespace Soleil
             SetSize(AnimationID.SomniaMob1, 3, 1);
             SetPath(AnimationID.SomniaAcceU, "Animation/Map/Character/Mob/Somnia/acce");
             SetSize(AnimationID.SomniaAcceU, 1, 1);
+            SetPath(AnimationID.MobBlackSuit, "Animation/Map/Character/Mob/mob1");
+            SetSize(AnimationID.MobBlackSuit, 1, 1);
+            SetPath(AnimationID.MobRedHat, "Animation/Map/Character/Mob/mob2");
+            SetSize(AnimationID.MobRedHat, 1, 1);
+            SetPath(AnimationID.MobBlueGirl, "Animation/Map/Character/Mob/mob3");
+            SetSize(AnimationID.MobBlueGirl, 1, 1);
 
             //Battle
             var BattleAnimationPath = AnimationPath + BattlePath;
