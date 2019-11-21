@@ -34,6 +34,7 @@ namespace Soleil.Menu
             if (useSuccess)
             {
                 itemList.Consume(id);
+                Audio.PlaySound(SoundID.DecideSoft);
                 if (!itemList.HasItem(id)) OnInputCancel();
             }
             else

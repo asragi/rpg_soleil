@@ -15,13 +15,15 @@ namespace Soleil.Dungeon
 
             Actions = new Dictionary<int, Action>()
             {
-                {1, FadeIn },
+                {1, SetMusic },
+                {2, FadeIn },
                 {40, Next }
             };
         }
 
         protected override void Exec() { }
 
+        private void SetMusic() => Audio.StopMusic();
         private void Next()
         {
             master.Mode = DungeonMode.FirstWindow;

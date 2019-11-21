@@ -71,6 +71,7 @@ namespace Soleil.Menu.Status
 
         public void OnInputSubmit()
         {
+            Audio.PlaySound(SoundID.DecideSoft);
             if (equipWindow.Active)
             {
                 equipWindow.OnInputSubmit();

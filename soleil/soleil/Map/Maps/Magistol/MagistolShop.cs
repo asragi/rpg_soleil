@@ -8,6 +8,7 @@ namespace Soleil.Map
 {
     class MagistolShop : MapBase
     {
+        public override MusicID MapMusic => MusicID.MagicCity;
         private const int ChairDiff = 60;
         private static readonly Vector[] ChairPos = new[]
         {

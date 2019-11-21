@@ -22,6 +22,7 @@ namespace Soleil
             }
             bf.SetSceneManager(sm);
             bf.InitBattle(party, enemies);
+            Audio.PlayMusic(MusicID.Battle1);
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
         }

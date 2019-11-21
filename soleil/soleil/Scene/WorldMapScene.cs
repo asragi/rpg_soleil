@@ -22,6 +22,7 @@ namespace Soleil
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
             mapIndicator = new MapIndicator();
+            Audio.PlayMusic(MusicID.WorldMap);
         }
 
         public void ChangeSceneToMap(WorldPointKey key)
@@ -29,7 +30,7 @@ namespace Soleil
             MapName name;
             Vector position;
             (name, position) = WorldMapPositionData.Get(key);
-            new TestScene(SceneManager, party, name, position);
+            new MapScene(SceneManager, party, name, position);
             Kill();
         }
 

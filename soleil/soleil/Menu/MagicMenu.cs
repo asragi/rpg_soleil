@@ -39,6 +39,7 @@ namespace Soleil.Menu
             {
                 var temp = (MagicData)SkillDataBase.Get(id);
                 if (!temp.OnMenu) return;
+                Audio.PlaySound(SoundID.DecideSoft);
                 if (temp.TargetRange is Range.Ally)
                 {
                     magicTargetSelect.Call();

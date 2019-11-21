@@ -16,6 +16,7 @@ namespace Soleil
             :base(sm)
         {
             master = new DungeonMaster(name, sm, party);
+            Audio.StopMusic();
         }
 
         public override void Update()
