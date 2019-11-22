@@ -31,6 +31,7 @@ namespace Soleil.Battle
         int charaIndex;
         List<Character> charas;
         List<bool> alive;
+        bool[] shouldDraw;
 
         MagicField magicField;
         TurnQueue turnQueue;
@@ -100,6 +101,7 @@ namespace Soleil.Battle
 
 
             alive = new List<bool>(charas.Count);
+            shouldDraw = Enumerable.Repeat(true, charas.Count).ToArray();
             for (int i = 0; i < charas.Count; i++) alive.Add(true);
 
             magicField = new SimpleMagicField();
@@ -121,6 +123,7 @@ namespace Soleil.Battle
                 {
                     RemoveCharacter(p);
                     ocrs.Add(new Occurence(GetCharacter(p).Name + "はやられた"));
+                    ocrs.Add(new DeleteGraphics(p, shouldDraw));
                     return ocrs;
                 },
                 5000)));
@@ -384,7 +387,12 @@ namespace Soleil.Battle
 
 
             Effects.ForEach2(e => e.Draw(sb));
-            charas.ForEach(e => e.Draw(sb));
+            //charas.ForEach(e => e.Draw(sb));
+            for (int i = 0; i < charas.Count; i++)
+            {
+                if (sides[i] == Side.Left && !shouldDraw[i]) continue;
+                charas[i].Draw(sb);
+            }
             /*for (int i = 3; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + (i - 3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);

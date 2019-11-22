@@ -126,4 +126,21 @@ namespace Soleil.Battle
         {
         }
     }
+
+    class DeleteGraphics : Occurence
+    {
+        int index;
+        bool[] refSet;
+        public DeleteGraphics(int i, bool[] refBool)
+            :base("", 3)
+        {
+            refSet = refBool;
+            index = i;
+        }
+
+        public override void Affect()
+        {
+            refSet[index] = false;
+        }
+    }
 }
