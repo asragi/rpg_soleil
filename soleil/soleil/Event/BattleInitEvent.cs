@@ -14,6 +14,7 @@ namespace Soleil.Event
         readonly PersonParty party;
         readonly Dictionary<int, System.Action> actions;
         int frame;
+        MusicID beforeMusic;
         public BattleInitEvent(BattleData _d, PersonParty p)
         {
             data = _d;
@@ -23,7 +24,7 @@ namespace Soleil.Event
 
             actions.Add(1, FadeOut);
             actions.Add(40, InitBattle);
-            actions.Add(45, FadeIn);
+            actions.Add(41, FadeIn);
             actions.Add(100, End);
         }
 
@@ -47,12 +48,14 @@ namespace Soleil.Event
 
         private void FadeOut()
         {
+            beforeMusic = Audio.NowPlaying;
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeOut);
         }
 
         private void FadeIn()
         {
+            Audio.PlayMusic(beforeMusic);
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
         }

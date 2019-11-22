@@ -12,7 +12,7 @@ namespace Soleil
     /// </summary>
     static class Audio
     {
-        
+        public static MusicID NowPlaying { get; private set; }
         public static AudioFileReader music;
         static WaveOut wave;
         static long[] loopByte;
@@ -36,6 +36,7 @@ namespace Soleil
             wave = new WaveOut();
             wave.Init(music);
             wave.Play();
+            NowPlaying = id;
         }
 
         public static void StopMusic()
