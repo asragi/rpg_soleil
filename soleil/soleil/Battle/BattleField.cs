@@ -93,7 +93,8 @@ namespace Soleil.Battle
 
             for (int i = 0; i < enemies.Count; i++)
             {
-                charas.Add(enemies[i].Generate(charaIndex, new Vector(100 + i * 200, 350), new Vector(300 - i * 50, 200 + i * 100)));
+                // Status UI の座標を画面の外にしてある
+                charas.Add(enemies[i].Generate(charaIndex, new Vector(100 + i * 200, 1250), new Vector(300 - i * 50, 300 + i * 100)));
                 sides.Add(Side.Left);
                 indexes[(int)Side.Left].Add(charaIndex);
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
