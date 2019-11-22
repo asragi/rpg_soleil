@@ -30,7 +30,13 @@ namespace Soleil.Dungeon
             data.Add(DungeonName.MagistolUnderground, new DungeonData(
                     new Dictionary<int, DungeonFloorEvent>()
                     {
-                        {1, new ItemFind(ItemID.SilverWand) },
+                        {1, new ItemFind(ItemID.Zarigani) },
+                        {2, new ItemFind(ItemID.Portion) },
+                        {3, new ItemFind(ItemID.RubyPendant) },
+                        {4, new ItemFind(ItemID.Portion) },
+                        {5, new ItemFind(ItemID.SilverWand) },
+                        {6, new ItemFind(ItemID.OldWand) },
+                        {7, new ItemFind(ItemID.Portion) },
                     },
                     new []
                     {

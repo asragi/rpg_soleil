@@ -52,7 +52,7 @@ namespace Soleil
             var lastScore = data.LastScore;
             growthTypes = data.Growth;
             score = GrowthParams.GetParamsByLv(growthTypes, initScore, lastScore, Lv);
-            Equip = new EquipSet();
+            Equip = new EquipSet(data.InitEquip);
             Skill = new SkillHolder(data.InitSkill);
             Magic = new MagicLv(data.InitMagicExp, Skill);
             InParty = name == CharaName.Lune || name == CharaName.Sunny;

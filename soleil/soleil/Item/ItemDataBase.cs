@@ -49,11 +49,21 @@ namespace Soleil.Item
         // 装備
         // 武器
         OldWand,
+        WoodWand,
         SilverWand,
+        LionHeart,
+        BadgerNail,
+        SnakeEyes,
+        EagleFeather,
         // 防具
         Uniform,
+        CottonShirt,
         // アクセサリー
         BeadsWork, // ビーズのアクセサリー
+        SunHairAcce,
+        SunAcce,
+        LetherGlove,
+        RubyPendant,
 
         // Debug
         d0,
@@ -85,11 +95,21 @@ namespace Soleil.Item
             SetUse("活きのいいザリガニ", ItemID.Zarigani, ItemTarget.OneAlly, "食べる......？", ItemEffectType.Special);
             // 武器
             SetWeapon("古びた魔法杖", ItemID.OldWand, new AttackData(6, 12), null, null, "使用感のある古びた杖");
-            SetWeapon("シルバーワンド", ItemID.SilverWand, new AttackData(24, 30), null, null, "高級な魔法杖");
+            SetWeapon("ウッドワンド", ItemID.WoodWand, new AttackData(6, 20), null, null, "良質な木から作られた一般的な杖");
+            SetWeapon("シルバーワンド", ItemID.SilverWand, new AttackData(18, 18), null, null, "銀の装飾があしらわれた一般的な杖");
+            SetWeapon("ライオンハート", ItemID.LionHeart, new AttackData(36, 36), null, new AbilityScore(0, 0, 5, 0, 0, 0), "力強い獅子の装飾が施された魔法杖");
+            SetWeapon("バジャーネイル", ItemID.BadgerNail, new AttackData(34, 34), null, new AbilityScore(0, 0, 0, 5, 0, 0), "アナグマをモチーフにデザインされた魔法杖");
+            SetWeapon("スネークアイズ", ItemID.SnakeEyes, new AttackData(30, 30), null, new AbilityScore(0, 0, 0, 0, 5, 0), "力強い獅子の装飾が施された魔法杖");
+            SetWeapon("イーグルフェザー", ItemID.EagleFeather, new AttackData(32, 32), null, new AbilityScore(0, 0, 0, 0, 0, 5), "アナグマをモチーフにデザインされた魔法杖");
             // 防具
             SetArmor("ユニフォーム", ItemID.Uniform, new DefData(3, 8, null, new AttrDef(ice: 10, blow: 10)), null, "制服をリメイクしたもの．");
+            SetArmor("コットンシャツ", ItemID.CottonShirt, new DefData(8, 3, null, null), null, "魔法学校で制服として採用されているシャツ．");
             // アクセサリー
-            SetAc("ビーズのアクセサリー", ItemID.BeadsWork, new DefData(1, 5, null, null), null, "手作りの可愛いアクセサリー");
+            SetAc("ビーズのアクセサリー", ItemID.BeadsWork, new DefData(1, 2, null, null), null, "手作りの可愛いアクセサリー");
+            SetAc("太陽石の髪留め", ItemID.SunHairAcce, new DefData(1, 5, new AttrDef(heat: 5), new AttrDef(heat: 5)), null, "黄金色の鉱石を用いた髪留め");
+            SetAc("太陽石のお守り", ItemID.SunAcce, new DefData(1, 5, new AttrDef(heat: 5), new AttrDef(heat: 5)), null, "黄金色の鉱石を用いたお守り");
+            SetAc("レザーグラブ", ItemID.LetherGlove, new DefData(5, 0, new AttrDef(heat: 8), null), null, "革で作られた丈夫な手袋．");
+            SetAc("ルビーのペンダント", ItemID.RubyPendant, new DefData(1, 5, new AttrDef(heat: 5), new AttrDef(heat: 5)), null, "ルビーが輝くペンダント");
 
             // Debug
             for (int i = (int)ItemID.d0; i < 1 + (int)ItemID.d7; i++)
