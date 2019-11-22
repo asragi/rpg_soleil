@@ -72,6 +72,7 @@ namespace Soleil.Battle
 
         public override void OnInputSubmit()
         {
+            Audio.PlaySound(SoundID.DecideSoft);
             Select.Command = (CommandEnum)Index;
             switch (Select.Command)
             {
@@ -88,6 +89,17 @@ namespace Soleil.Battle
             IsActive = false;
         }
         public override void OnInputCancel() { }
+        public override void OnInputDown()
+        {
+            base.OnInputDown();
+            Audio.PlaySound(SoundID.MenuCursor);
+        }
+
+        public override void OnInputUp()
+        {
+            base.OnInputUp();
+            Audio.PlaySound(SoundID.MenuCursor);
+        }
         public override void Quit()
         {
             IsActive = false;
