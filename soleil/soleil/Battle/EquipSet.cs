@@ -19,12 +19,16 @@ namespace Soleil.Battle
         public AccessaryData[] Accessary { get; set; }
 
         public EquipSet()
+            :this(new[] { ItemID.WoodWand, ItemID.CottonShirt, ItemID.BeadsWork, ItemID.BeadsWork })
+        { }
+
+        public EquipSet(ItemID[] equipIDs)
         {
-            Weapon = (WeaponData)ItemDataBase.Get(ItemID.OldWand);
-            Armor = (ArmorData)ItemDataBase.Get(ItemID.Uniform);
+            Weapon = (WeaponData)ItemDataBase.Get(equipIDs[0]);
+            Armor = (ArmorData)ItemDataBase.Get(equipIDs[1]);
             Accessary = new AccessaryData[AccessarySize];
-            Accessary[0] = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
-            Accessary[1] = (AccessaryData)ItemDataBase.Get(ItemID.BeadsWork);
+            Accessary[0] = (AccessaryData)ItemDataBase.Get(equipIDs[2]);
+            Accessary[1] = (AccessaryData)ItemDataBase.Get(equipIDs[3]);
         }
 
         public int GetDef(AttackAttribution attr, AttackType attackType)
