@@ -77,7 +77,7 @@ namespace Soleil.Battle
             attackTable[SkillID.Freeze] = (a, b) => { return magicalAttack(a, b, 20, AttackAttribution.Ice); };
             attackTable[SkillID.Thunder] = (a, b) => { return magicalAttack(a, b, 22, AttackAttribution.Electro); };
             attackTable[SkillID.Explode] = (a, b) => { return magicalAttack(a, b, 44, AttackAttribution.Thrust); };
-            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b,39, AttackAttribution.Cut); };
+            attackTable[SkillID.Sonicboom] = (a, b) => { return magicalAttack(a, b, 39, AttackAttribution.Cut); };
             attackTable[SkillID.PileBunker] = (a, b) => { return magicalAttack(a, b, 41, AttackAttribution.Thrust); };
             attackTable[SkillID.DimensionKill] = (a, b) => { return magicalAttack(a, b, 88, AttackAttribution.None); };
 
@@ -201,7 +201,9 @@ namespace Soleil.Battle
             actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 100);
             actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
             actions[(int)SkillID.EndGuard] = new Buff(buffTable[SkillID.EndGuard], Range.Me.GetInstance());
-            actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
+            actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70); actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
+
+            actions[(int)SkillID.Escape] = new Escape((a, b) => { return 0.2f; });
         }
 
         public static Action GetAction(SkillID name) => actions[(int)name];

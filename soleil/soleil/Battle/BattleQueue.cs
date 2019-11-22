@@ -15,6 +15,7 @@ namespace Soleil.Battle
         public int DequeCount { get; private set; }
         public BattleEvent(int dequeCount) => DequeCount = dequeCount;
     }
+
     class BattleMessage : BattleEvent
     {
         public string Message { get; private set; }
@@ -23,6 +24,7 @@ namespace Soleil.Battle
             Message = message;
         }
     }
+
     class BattleCommandSelect : BattleEvent
     {
         public int CharaIndex { get; private set; }
@@ -31,9 +33,22 @@ namespace Soleil.Battle
             CharaIndex = charaIndex;
         }
     }
+
     class BattleEnd : BattleEvent
     {
         public bool DidWin;
         public BattleEnd(int dequeCount, bool didWin) : base(dequeCount) => DidWin = didWin;
+    }
+
+    class BattleEffect : BattleEvent
+    {
+        public Occurence Occur;
+        public BattleEffect(Occurence occurence) : base(occurence.time)
+        {
+            this.Occur = occurence;
+        }
+
+        public void Act() =>
+            Occur.Affect();
     }
 }

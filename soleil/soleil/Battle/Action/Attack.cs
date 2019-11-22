@@ -67,6 +67,7 @@ namespace Soleil.Battle
             HasDamage = true;
             Func<Action, List<Occurence>, int, int, List<Occurence>> func = (act, ocrs, source, target) =>
             {
+                ocrs.Add(new OccurenceEffect("", target, eaID));
                 DamageF = AFunc(BF.GetCharacter(source).Status, BF.GetCharacter(target).Status);
                 //Todo: actから参照する
                 if (BF.GetCharacter(target).Status.Dead)
@@ -80,7 +81,7 @@ namespace Soleil.Battle
                     string mes = BF.GetCharacter(source).Name + "が";
                     mes += BF.GetCharacter(target).Name + "に";
                     mes += 0.ToString() + " ダメージを与えた";
-                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, eaID, HPDmg: Damage));
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
                 }
                 else
                 {
@@ -89,7 +90,7 @@ namespace Soleil.Battle
                     string mes = BF.GetCharacter(source).Name + "が";
                     mes += BF.GetCharacter(target).Name + "に";
                     mes += Damage.ToString() + " ダメージを与えた";
-                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, eaID, HPDmg: Damage));
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
                 }
                 return ocrs;
             };

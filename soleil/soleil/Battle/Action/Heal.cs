@@ -80,7 +80,7 @@ namespace Soleil.Battle
                     string mes = BF.GetCharacter(source).Name + "が";
                     mes += BF.GetCharacter(target).Name + "の";
                     mes += "HPを" + (RecoverHP).ToString() + ", MPを" + (RecoverMP).ToString() + " 回復した";
-                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, EffectAnimationID.MagicalHeal, HPDmg: -RecoverHP, MPDmg: -RecoverMP));
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: -RecoverHP, MPDmg: -RecoverMP));
                 }
                 return ocrs;
             };

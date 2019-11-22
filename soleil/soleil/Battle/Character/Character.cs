@@ -79,6 +79,7 @@ namespace Soleil.Battle
             Status.Rates = rate;
         }
 
+
         public void Win() => BCGraphics?.Win();
         public void Update() => BCGraphics?.Update();
         public void Draw(Drawing d) => BCGraphics?.Draw(d);

@@ -62,6 +62,7 @@ namespace Soleil.Skill
         //Guard
         Guard,
         EndGuard,
+        Escape,
 
 
         size
@@ -97,7 +98,7 @@ namespace Soleil.Skill
             SetMagic("イルフラッド", SkillID.IlFlood, MagicCategory.Dark, "敵全体へランダムな状態異常付与．", 18, Range.AllEnemy.GetInstance());
             SetMagic("ライフスティール", SkillID.LifeSteal, MagicCategory.Dark, "敵単体へ無属性のダメージ．吸収効果．", 13, Range.OneEnemy.GetInstance());
             // sound
-            SetMagic("ソニックブーム", SkillID.Sonicboom, MagicCategory.Sound, "敵単体へ斬属性のダメージ．", 8,Range.OneEnemy.GetInstance());
+            SetMagic("ソニックブーム", SkillID.Sonicboom, MagicCategory.Sound, "敵単体へ斬属性のダメージ．", 8, Range.OneEnemy.GetInstance());
             SetMagic("スリップノイズ", SkillID.Noize, MagicCategory.Sound, "敵全体に確率でスタン付与．", 8, Range.AllEnemy.GetInstance());
             SetMagic("マキシマイザ", SkillID.Maximizer, MagicCategory.Sound, "味方単体の攻撃力・防御力上昇．", 46, Range.Ally.GetInstance());
             // ninja
@@ -113,7 +114,7 @@ namespace Soleil.Skill
             SetMagic("パイルバンカー", SkillID.PileBunker, MagicCategory.Metal, "敵単体に突属性ダメージ．", 15, Range.OneEnemy.GetInstance());
             SetMagic("メタルコート", SkillID.MetalCoat, MagicCategory.Metal, "味方全体の防御力上昇．", 25, Range.AllAlly.GetInstance());
             // space
-            SetMagic("テレポート", SkillID.Teleport, MagicCategory.Space, "ワールドマップで時間経過なく移動できる．", 20, Range.AllAlly.GetInstance(),onBattle: false);
+            SetMagic("テレポート", SkillID.Teleport, MagicCategory.Space, "ワールドマップで時間経過なく移動できる．", 20, Range.AllAlly.GetInstance(), onBattle: false);
             SetMagic("ディメンジョンキル", SkillID.DimensionKill, MagicCategory.Space, "敵全体に無属性ダメージ．", 88, Range.AllEnemy.GetInstance());
             SetMagic("セヴンスヘヴン", SkillID.SeaventhHeaven, MagicCategory.Space, "味方全体の全能力上昇．", 82, Range.AllAlly.GetInstance());
             // time
@@ -125,23 +126,24 @@ namespace Soleil.Skill
             SetSkill("ヘッドバット", SkillID.Headbutt, "敵単体に打属性のダメージ．確率で気絶．", 12, Range.OneEnemy.GetInstance());
             SetSkill("集中砲火", SkillID.Barrage, "敵単体に突属性のダメージ．", 15, Range.OneEnemy.GetInstance());
 
-            SetMagic("はたく", SkillID.NormalAttack, MagicCategory.None, "敵単体に無属性の物理攻撃．", 0 , Range.OneEnemy.GetInstance());
+            SetMagic("はたく", SkillID.NormalAttack, MagicCategory.None, "敵単体に無属性の物理攻撃．", 0, Range.OneEnemy.GetInstance());
             SetMagic("ショット", SkillID.NormalMagic, MagicCategory.None, "敵単体に無属性の魔法攻撃．", 0, Range.OneEnemy.GetInstance());
             SetSkill("なきごえ", SkillID.ExampleDebuff, "敵単体に攻撃力低下．", 15, Range.OneEnemy.GetInstance());
 
             SetSkill("ガード", SkillID.Guard, "テスト用ガード", 0, Range.Me.GetInstance());
             SetSkill("エンドガード", SkillID.EndGuard, "test", 0, Range.Me.GetInstance());
 
+            SetSkill("逃亡", SkillID.Escape, "Escape", 0, Range.AllEnemy.GetInstance());
         }
 
-        static void SetSkill(string name, SkillID id, string desc, int cost, Range.AttackRange range,bool onMenu = false, bool onBattle = true)
+        static void SetSkill(string name, SkillID id, string desc, int cost, Range.AttackRange range, bool onMenu = false, bool onBattle = true)
         {
             data[(int)id] = new SkillData(name, id, desc, cost, range, onMenu, onBattle);
         }
 
-        static void SetMagic(string name, SkillID id, MagicCategory category, string desc, int cost, Range.AttackRange range,bool onMenu = false, bool onBattle = true)
+        static void SetMagic(string name, SkillID id, MagicCategory category, string desc, int cost, Range.AttackRange range, bool onMenu = false, bool onBattle = true)
         {
-            data[(int)id] = new MagicData(name, id, category, desc, cost, range ,onMenu, onBattle);
+            data[(int)id] = new MagicData(name, id, category, desc, cost, range, onMenu, onBattle);
         }
     }
 }
