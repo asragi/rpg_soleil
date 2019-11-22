@@ -39,6 +39,7 @@ namespace Soleil.Battle
         public override void Affect()
         {
             BF.GetCharacter(CharaIndex).BCGraphics?.Damage(HPDamage, MPDamage);
+            Audio.PlaySound(SoundID.Head);
         }
     }
 
@@ -72,9 +73,11 @@ namespace Soleil.Battle
         {
             BF.Effects.Add(new AfterCountingEffect(10,
                 new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos,
-                    new EffectAnimationData(eaID, false, 4),
+                    new EffectAnimationData(eaID, false, 3),
                     false, BF.Effects),
                 BF.Effects));
+            //tmp
+            if (EffectAnimationID.Blow != eaID) Audio.PlaySound(SoundID.Magic);
         }
     }
 
