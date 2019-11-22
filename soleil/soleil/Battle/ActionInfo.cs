@@ -191,7 +191,7 @@ namespace Soleil.Battle
 
 
             // skill
-            actions[(int)SkillID.Headbutt] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 12);
+            actions[(int)SkillID.Headbutt] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Blow, mp: 12);
             //確率で気絶
 
             actions[(int)SkillID.Barrage] = new Attack(attackTable[SkillID.NormalAttack], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 15);

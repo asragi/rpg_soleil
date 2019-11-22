@@ -60,6 +60,7 @@ namespace Soleil.Battle
         public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
             onEnd = false;
+            message = string.Empty;
             MenuComponentList = new List<Menu.MenuComponent>();
 
             var partylist = party.GetActiveMembers();

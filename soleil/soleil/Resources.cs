@@ -503,7 +503,7 @@ namespace Soleil
 
 
             SetPath(AnimationID.BattleTestEnemyStanding, BattleAnimationPath + "Testenemy_stand");
-            SetSize(AnimationID.BattleTestEnemyStanding, 5, 2);
+            SetSize(AnimationID.BattleTestEnemyStanding, 2, 1);
 
             #endregion
 
