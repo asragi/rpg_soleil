@@ -38,6 +38,10 @@ namespace Soleil.Title
         {
             var party = SaveLoad.GetParty(isNew: true);
             new MapScene(sceneManager, party, Map.MapName.Opening, new Vector(-100, -100));
+            // Initialize
+            // --Time
+            var timer = GameDateTime.GetInstance();
+            timer.Initialize();
         }
     }
 }

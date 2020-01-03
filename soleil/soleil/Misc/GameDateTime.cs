@@ -23,6 +23,9 @@ namespace Soleil
     /// </summary>
     class GameDateTime
     {
+        private const int InitialDay = 0;
+        private const int InitialHour = 6;
+        private const int InitialMinute = 18;
         /// <summary>
         /// ゲーム開始時からの経過Minutes合計: 実質的なカウンタ．
         /// </summary>
@@ -49,6 +52,12 @@ namespace Soleil
         public static GameDateTime GetInstance() => gameDateTime;
         private static GameDateTime gameDateTime = new GameDateTime();
         private GameDateTime() { }
+
+        public void Initialize()
+        {
+            MinutesSum = 0;
+            Pass(InitialDay, InitialHour, InitialMinute);
+        }
 
         /// <summary>
         /// 時間を経過させる．
