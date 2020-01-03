@@ -18,6 +18,7 @@ namespace Soleil
         /// </summary>
         protected const int Spacing = 15;
         private static readonly Vector SpacingVec = new Vector(Spacing);
+        protected readonly Vector Size;
 
         protected bool IsStatic;
         VariableRectangle windowTexture;
@@ -26,10 +27,18 @@ namespace Soleil
         public VariableWindow(Vector _pos, Vector _size, WindowTag _tag, WindowManager wm, bool isStatic = false)
             : base(LimitWindowPos(_pos, _size, isStatic), _tag, wm)
         {
+            Size = _size;
             IsStatic = isStatic;
             windowTexture = new VariableRectangle(Texture, Pos, DiffPos, _size, Depth, isStatic);
             backTexture = new VariableRectangle(BackTexture, Pos + BackDiff, DiffPos, _size, Depth, isStatic);
             AddComponents(backTexture, windowTexture);
+        }
+
+        public float BackImgAlpha { set
+            {
+                windowTexture.Alpha = value;
+                backTexture.Alpha = value;
+            } 
         }
 
         protected override float Alpha => windowTexture.Alpha;

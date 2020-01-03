@@ -59,6 +59,7 @@ namespace Soleil.Menu
                 var tmp = ItemDataBase.Get(id);
                 if (!(tmp is ConsumableItem)) return; // Consumableでないなら終了; 「使用できる武器」みたいなのは必要に応じてまた．
                 if (!tmp.OnMenu) return; // Menuで使用可能でないなら終了
+                Audio.PlaySound(SoundID.DecideSoft);
                 var item = (ConsumableItem)tmp;
 
                 if (item.Target == ItemTarget.Nothing)

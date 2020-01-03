@@ -203,11 +203,22 @@ namespace Soleil
 
         SomniaMob1,
         SomniaAcceU,
+        MobRedHat,
+        MobBlueGirl,
+        MobBlackSuit,
 
 
         BattleLuneStanding,
         BattleLuneChant,
         BattleLuneMagic,
+        BattleLuneDown,
+        BattleLuneVictory,
+        BattleLuneCrisis,
+
+        BattleSunnyStanding,
+        BattleSunnyMagic,
+
+        BattleTestEnemyStanding,
 
         Size,
     }
@@ -240,11 +251,31 @@ namespace Soleil
 
     enum MusicID : int
     {
+        SunCity,
+        ShadeCity,
+        MagicCity,
+        Battle1,
+        WorldMap,
         Size,
     }
 
     enum SoundID : int
     {
+        // System
+        DecideSoft,
+        DecideHard,
+        MenuOpen,
+        MenuCursor,
+        Back,
+
+        // Map
+        MapMove,
+
+        // Battle
+        Magic,
+        Head,
+        Fire,
+
         Size,
     }
 
@@ -255,6 +286,7 @@ namespace Soleil
         public static Texture2D[] Animes;
         public static Texture2D[] EffectAnimes;
         public static SpriteFont[] Fonts;
+        public static MusicData[] MusicDataSet;
         public static List<List<string>>[] CharacterData;
         public static SoundEffect[] SEs;
         public static int[,] AnimeSplit;
@@ -294,6 +326,7 @@ namespace Soleil
             ColorDictionary = new Dictionary<Color, Color>[(int)ColorDictionaryID.Size];
             Fonts = new SpriteFont[(int)FontID.Size];
             SEs = new SoundEffect[(int)SoundID.Size];
+            MusicDataSet = new MusicData[(int)MusicID.Size];
             SetParamaters();
 
             //Load Graphics
@@ -442,6 +475,12 @@ namespace Soleil
             SetSize(AnimationID.SomniaMob1, 3, 1);
             SetPath(AnimationID.SomniaAcceU, "Animation/Map/Character/Mob/Somnia/acce");
             SetSize(AnimationID.SomniaAcceU, 1, 1);
+            SetPath(AnimationID.MobBlackSuit, "Animation/Map/Character/Mob/mob1");
+            SetSize(AnimationID.MobBlackSuit, 1, 1);
+            SetPath(AnimationID.MobRedHat, "Animation/Map/Character/Mob/mob2");
+            SetSize(AnimationID.MobRedHat, 1, 1);
+            SetPath(AnimationID.MobBlueGirl, "Animation/Map/Character/Mob/mob3");
+            SetSize(AnimationID.MobBlueGirl, 1, 1);
 
             //Battle
             var BattleAnimationPath = AnimationPath + BattlePath;
@@ -451,6 +490,20 @@ namespace Soleil
             SetSize(AnimationID.BattleLuneChant, 4, 1);
             SetPath(AnimationID.BattleLuneMagic, BattleAnimationPath + "Lune_magic");
             SetSize(AnimationID.BattleLuneMagic, 4, 1);
+            SetPath(AnimationID.BattleLuneCrisis, BattleAnimationPath + "Lune_crisis");
+            SetSize(AnimationID.BattleLuneCrisis, 4, 1);
+            SetPath(AnimationID.BattleLuneVictory, BattleAnimationPath + "Lune_victory");
+            SetSize(AnimationID.BattleLuneVictory, 5, 4);
+            SetPath(AnimationID.BattleLuneDown, BattleAnimationPath + "Lune_down");
+            SetSize(AnimationID.BattleLuneDown, 1, 1);
+            SetPath(AnimationID.BattleSunnyStanding, BattleAnimationPath + "Sunny_battle_n");
+            SetSize(AnimationID.BattleSunnyStanding, 4, 2);
+            SetPath(AnimationID.BattleSunnyMagic, BattleAnimationPath + "Sunny_magic");
+            SetSize(AnimationID.BattleSunnyMagic, 4, 2);
+
+
+            SetPath(AnimationID.BattleTestEnemyStanding, BattleAnimationPath + "Testenemy_stand");
+            SetSize(AnimationID.BattleTestEnemyStanding, 5, 2);
 
             #endregion
 
@@ -536,6 +589,33 @@ namespace Soleil
             }
             #endregion
 
+            #region Music
+            SetPath(MusicID.SunCity, "gairo_wo_terasu");
+            SetData(MusicID.SunCity);
+            SetPath(MusicID.ShadeCity, "hi_no_ataranai_machi_ni_kurashite");
+            SetData(MusicID.ShadeCity);
+            SetPath(MusicID.MagicCity, "bgm_maoudamashii_fantasy14");
+            SetData(MusicID.MagicCity);
+            SetPath(MusicID.Battle1, "battle1");
+            SetData(MusicID.Battle1);
+            SetPath(MusicID.WorldMap, "bgm_maoudamashii_healing06");
+            SetData(MusicID.WorldMap);
+            #endregion
+
+            #region SE
+            string se = "SE/";
+            SetPath(SoundID.DecideSoft, se + "decision9");
+            SetPath(SoundID.MenuOpen, se + "decision24");
+            SetPath(SoundID.DecideHard, se + "decision25");
+            SetPath(SoundID.Back, se + "whiff");
+            SetPath(SoundID.Fire, se + "fire");
+            SetPath(SoundID.Head, se + "attack3");
+            SetPath(SoundID.Magic, se + "special");
+            SetPath(SoundID.MapMove, se + "shoes-tonton1");
+            SetPath(SoundID.MenuCursor, se + "cursor1");
+
+
+            #endregion
 
             SetPath(AnimationID.Arrow, "Arrow");
             SetSize(AnimationID.Arrow, 1, 9);
@@ -583,6 +663,14 @@ namespace Soleil
             EffectAnimeSplit[(int)id, 1] = yNum;
         }
 
+        // 音楽の詳細データセット
+        static void SetData(MusicID id, bool repeat = true) => SetData(id, -1, -1, repeat);
+        static void SetData(MusicID id, long loopInit, long loopEnd, bool repeat = true)
+        {
+            MusicDataSet[(int)id].LoopInitByte = loopInit;
+            MusicDataSet[(int)id].LoopEndByte = loopEnd;
+            MusicDataSet[(int)id].Repeat = repeat;
+        }
 
         public static Texture2D GetTexture(TextureID id) => Graphs[(int)id];
         public static Texture2D GetTexture(AnimationID id) => Animes[(int)id];
@@ -617,7 +705,7 @@ namespace Soleil
             return dict;
         }
 
-        public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+        public static string MusicPass(MusicID id) => "music/" + songPath[(int)id];
 
         public static Vector GetSize(this FontID id, string text)
         {

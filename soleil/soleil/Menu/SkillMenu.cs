@@ -9,18 +9,23 @@ namespace Soleil.Menu
 {
     class SkillMenu : BasicMenu
     {
-        SkillHolder skillHolder;
+        protected SkillHolder SHolder;
         public SkillMenu(MenuComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
-            skillHolder = new SkillHolder();
+            SHolder = new SkillHolder();
+            Init();
+        }
+
+        public void SetPerson(Person p)
+        {
+            SHolder = p.Skill;
             Init();
         }
 
         public void CallWithPerson(Person p)
         {
-            skillHolder = p.Skill;
-            Init();
+            SetPerson(p);
             Call();
         }
 
@@ -34,7 +39,7 @@ namespace Soleil.Menu
                 var id = (SkillID)i;
                 var _data = SkillDataBase.Get(id);
                 if (_data.AttackType != AttackType.Physical) continue;
-                if (!skillHolder.HasSkill(id)) continue;
+                if (!SHolder.HasSkill(id)) continue;
                 if (_data.OnMenu) availableSkillList.Add(new SkillMenuPanel(_data, this, true));
                 else unavailableSkillList.Add(new SkillMenuPanel(_data, this, false));
             }

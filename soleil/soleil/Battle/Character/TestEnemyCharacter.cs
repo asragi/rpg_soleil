@@ -8,13 +8,15 @@ namespace Soleil.Battle
 {
     class TestEnemyCharacter : Character
     {
-        public TestEnemyCharacter(int index, string enemyName) : base(index)
+        public TestEnemyCharacter(int index, string enemyName, Vector statusPos, Vector charaPos)
+            : base(index, CharacterType.TestEnemy)
         {
             //てきとう
-            var aScore = new AbilityScore(100, 30, 30, 30, 30, 30);
+            var aScore = new AbilityScore(100, 10, 10, 10, 10, 10);
             Name = enemyName;
             Status = new CharacterStatus(aScore, 10000, new List<Skill.SkillID> { Skill.SkillID.NormalAttack }, new List<Skill.SkillID> { });
-            commandSelect = new DefaultCharacterCommandSelect(charaIndex);
+            commandSelect = new DefaultCharacterCommandSelect(CharacterIndex);
+            BCGraphics = new BattleCharaGraphics(this, statusPos, charaPos);
         }
     }
 }

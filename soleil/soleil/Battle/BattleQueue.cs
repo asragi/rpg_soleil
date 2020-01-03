@@ -31,4 +31,9 @@ namespace Soleil.Battle
             CharaIndex = charaIndex;
         }
     }
+    class BattleEnd : BattleEvent
+    {
+        public bool DidWin;
+        public BattleEnd(int dequeCount, bool didWin) : base(dequeCount) => DidWin = didWin;
+    }
 }

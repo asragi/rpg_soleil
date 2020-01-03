@@ -19,11 +19,13 @@ namespace Soleil.Battle
         protected AttackFunc AFunc;
         public AttackAttribution Attr;
         public MagicFieldName? MField;
-        public Attack(AttackFunc attack_, Range.AttackRange aRange,
+        EffectAnimationID eaID;
+        public Attack(AttackFunc attack_, Range.AttackRange aRange, EffectAnimationID eaID,
             AttackAttribution attr = AttackAttribution.None, MagicFieldName? mField = null, int mp = 0)
             : base(aRange, mp)
         {
             AFunc = attack_;
+            this.eaID = eaID;
             Attr = attr;
             MField = mField;
         }
@@ -78,7 +80,7 @@ namespace Soleil.Battle
                     string mes = BF.GetCharacter(source).Name + "が";
                     mes += BF.GetCharacter(target).Name + "に";
                     mes += 0.ToString() + " ダメージを与えた";
-                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, eaID, HPDmg: Damage));
                 }
                 else
                 {
@@ -87,7 +89,7 @@ namespace Soleil.Battle
                     string mes = BF.GetCharacter(source).Name + "が";
                     mes += BF.GetCharacter(target).Name + "に";
                     mes += Damage.ToString() + " ダメージを与えた";
-                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, HPDmg: Damage));
+                    ocrs.Add(new OccurenceDamageForCharacter(mes, target, eaID, HPDmg: Damage));
                 }
                 return ocrs;
             };

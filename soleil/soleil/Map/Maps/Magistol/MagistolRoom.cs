@@ -11,6 +11,7 @@ namespace Soleil.Map
     /// </summary>
     class MagistolRoom : MapBase
     {
+        public override MusicID MapMusic => MusicID.MagicCity;
         public MagistolRoom(PersonParty party, Camera cam)
            : base(MapName.MagistolRoom, party, cam)
         {
@@ -31,7 +32,7 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            new MapChangeObject("mco", new Vector(400, 250), new Vector(10, 100), MapName.MagistolCol1, new Vector(1232, 1222), Direction.U, om, bm, party, cam);
+            new MapChangeObject((new Vector(280, 264), new Vector(376, 308)), MapName.MagistolCol1, new Vector(1232, 1222), Direction.U, om, bm, party, cam);
         }
     }
 }

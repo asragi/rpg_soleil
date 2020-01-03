@@ -12,12 +12,14 @@ namespace Soleil.Battle
     /// </summary>
     class BattleCharaGraphics
     {
+        public Vector Pos;
         BattleCharaAnimation bcAnimation;
         StatusUI statusUI;
         public BattleCharaGraphics(Character chara, Vector statusPos, Vector charaPos)
         {
+            Pos = charaPos;
             statusUI = new StatusUI(chara.Status.AScore.HPMAX, chara.Status.AScore.MPMAX, statusPos);
-            bcAnimation = new BattleCharaAnimation(charaPos);
+            bcAnimation = new BattleCharaAnimation(charaPos, chara);
         }
 
         public void Damage(int decreasedHP = 0, int decreasedMP = 0)
@@ -30,6 +32,9 @@ namespace Soleil.Battle
             bcAnimation.SetMotion(BattleCharaMotionType.Magic);
             statusUI.Damage(decreasedMP: consumeMP);
         }
+
+        public void Down() => bcAnimation.SetMotion(BattleCharaMotionType.Down);
+        public void Win() => bcAnimation.SetMotion(BattleCharaMotionType.Victory);
 
         public void Update()
         {

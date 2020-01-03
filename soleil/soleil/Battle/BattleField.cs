@@ -43,7 +43,9 @@ namespace Soleil.Battle
 
         List<TextureID> textureIDList;
 
-        public List<BattleCharaGraphics> bcgraphicsList;
+        public List<Effect> Effects;
+
+        bool onEnd;
 
         /// <summary>
         /// priorityでソートされたConditionedEffect
@@ -54,8 +56,9 @@ namespace Soleil.Battle
         {
         }
 
-        public void InitBattle(PersonParty party)
+        public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
+            onEnd = false;
             MenuComponentList = new List<Menu.MenuComponent>();
 
             var partylist = party.GetActiveMembers();
@@ -64,28 +67,31 @@ namespace Soleil.Battle
             charas = new List<Character>();
             sides = new List<Side>();
             indexes = new List<int>[(int)Side.Size] { new List<int>(), new List<int>() };
-            bcgraphicsList = new List<BattleCharaGraphics>();
-            textureIDList = new List<TextureID> //とりあえず
+            Effects = new List<Effect>();
+            textureIDList = new List<TextureID>();
+            var faceDict = new Dictionary<Misc.CharaName, TextureID>
             {
-                TextureID.BattleTurnQueueFaceLune,
-                TextureID.BattleTurnQueueFaceSun,
-                TextureID.BattleTurnQueueFaceSun,
+                {Misc.CharaName.Lune, TextureID.BattleTurnQueueFaceLune },
+                {Misc.CharaName.Sunny, TextureID.BattleTurnQueueFaceSun },
+                {Misc.CharaName.Tella, TextureID.BattleTurnQueueFace4 },
             };
+            for (int i = 0; i < partylist.Length; ++i)
+            {
+                textureIDList.Add(faceDict[partylist[i].Name]);
+            }
             for (int i = 0; i < partylist.Length; i++)
             {
-                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i]);
+                var chara = new PlayableCharacter(charaIndex, partylist[i].Score, partylist[i], new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100));
                 charas.Add(chara);
 
                 sides.Add(Side.Right);
                 indexes[(int)Side.Right].Add(charaIndex);
-                bcgraphicsList.Add(new BattleCharaGraphics(charas.Last(), new Vector(750 - (partylist.Length - i - 1) * 200, 450), new Vector(600 + i * 50, 200 + i * 100)));
                 charaIndex++;
             }
 
-            const int EnemyCnt = 3;
-            for (int i = 0; i < EnemyCnt; i++)
+            for (int i = 0; i < enemies.Count; i++)
             {
-                charas.Add(new TestEnemyCharacter(charaIndex, "敵" + i.ToString()));
+                charas.Add(enemies[i].Generate(charaIndex, new Vector(100 + i * 200, 350), new Vector(300 - i * 50, 200 + i * 100)));
                 sides.Add(Side.Left);
                 indexes[(int)Side.Left].Add(charaIndex);
                 textureIDList.Add(TextureID.BattleTurnQueueFace1 + i);
@@ -114,10 +120,20 @@ namespace Soleil.Battle
                 (act, ocrs) =>
                 {
                     RemoveCharacter(p);
-                    ocrs.Add(new Occurence(p.ToString() + "はやられた"));
+                    ocrs.Add(new Occurence(GetCharacter(p).Name + "はやられた"));
                     return ocrs;
                 },
                 5000)));
+            CEffects.Add(new ConditionedEffectOnce(
+                //どちらかのSideが全滅したか判定
+                (act) => Enumerable.Range(0, 2).Select(i => indexes[i].Count == 0).Any(p => p),
+                (act, ocrs) =>
+                {
+                    ocrs.Add(new OccurenceBattleEnd());
+                    return ocrs;
+                },
+                4900
+                ));
 
         }
 
@@ -197,6 +213,11 @@ namespace Soleil.Battle
         /// </summary>
         public void Update()
         {
+            if (onEnd)
+            {
+                OnEnd();
+                return;
+            }
             MenuComponentList.ForEach(e => e.Update());
             if (delayCount > 0)
             {
@@ -222,7 +243,19 @@ namespace Soleil.Battle
 
                     //TODO:Occurenceに応じたBattleEventを生成する
                     ocrs.ForEach(e => e.Affect());
-                    ocrs.ForEach(ocr => battleQue.Enqueue(new BattleMessage(ocr.Message, 60)));
+                    ocrs.ForEach(e =>
+                    {
+                        switch (e)
+                        {
+                            case OccurenceBattleEnd ocr:
+                                battleQue.Enqueue(new BattleMessage(ocr.Message, 0));
+                                battleQue.Enqueue(new BattleEnd(180, ocr.DidWin));
+                                break;
+                            default:
+                                battleQue.Enqueue(new BattleMessage(e.Message, 60));
+                                break;
+                        }
+                    });
                 }
                 //Turnが行動選択Turnのとき
                 else
@@ -252,9 +285,30 @@ namespace Soleil.Battle
                         delayCount = 0;
                     }
                     break;
+                case BattleEnd be:
+                    //とりあえず勝ったとき TODO:敗北
+                    executed = false;
+                    if (be.DidWin)
+                        charas.ForEach(e => e.Win());
+                    if (delayCount < 0 && KeyInput.GetKeyPush(Key.A))
+                    {
+                        //sceneの切り替え
+                        executed = true;
+                        delayCount = 0;
+                        // とりあえずの実装 by ragi
+                        onEnd = true;
+                        endWait = EndWaitMax;
+                        var transition = Transition.GetInstance();
+                        transition.SetMode(TransitionMode.FadeOut);
+                    }
+                    if (delayCount == 1)
+                        delayCount = -1;
+                    break;
             }
 
-            bcgraphicsList.ForEach(e => e.Update());
+            charas.ForEach(e => e.Update());
+            Effects.ForEach(e => e.Move());
+            Effects.RemoveAll(e => e.Disable);
         }
 
         public void EnqueueTurn(Turn turn) => turnQueue.Push(turn);
@@ -281,6 +335,19 @@ namespace Soleil.Battle
             lastTurn[minIndex] = charas[minIndex].NextTurn();
         }
 
+        SceneManager sceneManager;
+        public void SetSceneManager(SceneManager sm) => sceneManager = sm;
+        private const int EndWaitMax = 60;
+        private int endWait;
+        private void OnEnd()
+        {
+            endWait--;
+            if (endWait < 0)
+            {
+                sceneManager.KillNowScene();
+            }
+        }
+
         /*
         void ExecOccurence(Occurence ocr)
         {
@@ -300,21 +367,25 @@ namespace Soleil.Battle
             //てきとう
             sb.DrawText(new Vector(300, 100), Resources.GetFont(FontID.CorpM), message, Color.White, DepthID.Message);
 
+            /*
             sb.DrawText(new Vector(400, 50), Resources.GetFont(FontID.CorpM), topTurn.CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
             for (int i = 0; i < turnQueue.Count; i++)
                 sb.DrawText(new Vector(510 + i * 110, 50), Resources.GetFont(FontID.CorpM), turnQueue[i].CharaIndex.ToString() + "のターン", Color.White, DepthID.Message);
-            sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
+                */
+            if(topTurn != null)
+                sb.Draw(new Vector(450, 50), Resources.GetTexture(textureIDList[topTurn.CharaIndex]), DepthID.MenuTop);
             for (int i = 0; i < 5; i++)
                 sb.Draw(new Vector(600 + i * TurnQueueTextureWidth, 50), Resources.GetTexture(textureIDList[turnQueue[i].CharaIndex]), DepthID.MenuTop);
 
 
-            bcgraphicsList.ForEach(e => e.Draw(sb));
-            for (int i = 3; i < charas.Count; i++)
+            Effects.ForEach2(e => e.Draw(sb));
+            charas.ForEach(e => e.Draw(sb));
+            /*for (int i = 3; i < charas.Count; i++)
             {
                 sb.DrawText(new Vector(100 + (i - 3) * 180, 350), Resources.GetFont(FontID.CorpM), i.ToString() + ":", Color.White, DepthID.Message);
                 //TODO:表示するステータスはchara[i].Statusから分離する
                 sb.DrawText(new Vector(100 + (i - 3) * 180, 390), Resources.GetFont(FontID.CorpM), charas[i].Status.HP.ToString() + "/" + charas[i].Status.AScore.HPMAX.ToString(), Color.White, DepthID.Message, 0.75f);
-            }
+            }*/
 
 
             MenuComponentList.ForEach(e => e.Draw(sb));

@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -51,7 +52,9 @@
     <Compile Include="Battle\Action\Buff.cs" />
     <Compile Include="Battle\ActionInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
+    <Compile Include="Battle\BattleData.cs" />
     <Compile Include="Battle\Character\EnemyName.cs" />
+    <Compile Include="Battle\Character\EnemyCharacter.cs" />
     <Compile Include="Battle\Graphic\BattleCharaAnimation.cs" />
     <Compile Include="Battle\Graphic\BattleCharaGraphics.cs" />
     <Compile Include="Battle\BattleField.cs" />
@@ -67,6 +70,10 @@
     <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
     <Compile Include="Event\CharacterActivateEvent.cs" />
+    <Compile Include="Battle\SelectWindow\SkillSelectWindow.cs" />
+    <Compile Include="Event\PlaySoundEvent.cs" />
+    <Compile Include="Dungeon\EnemyAppearance.cs" />
+    <Compile Include="Event\WaitEvent.cs" />
     <Compile Include="Images\TriangleImage.cs" />
     <Compile Include="Dungeon\DungeonState.cs" />
     <Compile Include="Dungeon\Exec\AfterBattle.cs" />
@@ -89,6 +96,8 @@
     <Compile Include="Dungeon\SearchFloorEvent\NothingEvent.cs" />
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />
+    <Compile Include="Map\Maps\Other\OpeningMap.cs" />
+    <Compile Include="Menu\MagicMenuBase.cs" />
     <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Dungeon\Exec\ReturnToHome.cs" />
     <Compile Include="Scene\DungeonScene.cs" />
@@ -187,8 +196,11 @@
     <Compile Include="Map\CollideLayer.cs" />
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
+    <Compile Include="Map\CollideLine.cs" />
+    <Compile Include="Map\CollideObject.cs" />
     <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\ICollideObject.cs" />
+    <Compile Include="Map\IEventer.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapBoxManager.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
@@ -333,7 +345,11 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet, Version=6.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.6.0.0\lib\net45\YamlDotNet.dll</HintPath>

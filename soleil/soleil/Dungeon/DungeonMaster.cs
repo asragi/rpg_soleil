@@ -1,4 +1,6 @@
-﻿namespace Soleil.Dungeon
+﻿using Soleil.Battle;
+
+namespace Soleil.Dungeon
 {
     enum DungeonMode
     {
@@ -56,7 +58,7 @@
             itemFindEvent = new ItemFindEvent(this, dungeonState, toastMaster);
             moveNext = new MoveNext(this, player);
             returnToHome = new ReturnToHome(player, name, sm, party);
-            initBattle = new InitBattle(this);
+            initBattle = new InitBattle(this, party, sm);
             afterBattle = new AfterBattle(this);
             // Displays
             firstSelect = new FirstSelectWindow(this);
@@ -84,6 +86,12 @@
             dungeonState.GoNext();
             graphics.NextFloor(dungeonState);
             Reset();
+        }
+
+        public void StartBattle(BattleData data)
+        {
+            initBattle.SetBattle(data);
+            Mode = DungeonMode.InitBattle;
         }
 
         public void Update()

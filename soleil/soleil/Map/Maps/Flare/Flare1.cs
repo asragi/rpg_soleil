@@ -8,9 +8,11 @@ namespace Soleil.Map
 {
     class Flare1 : MapBase
     {
+        public override MusicID MapMusic => MusicID.SunCity;
         public Flare1(PersonParty party, Camera cam)
             : base(MapName.Flare1, party, cam)
         {
+
             // 3分割された背景の位置設定用変数
             int width1 = Resources.GetTexture(TextureID.Flare1_1_1_1).Width;
             int width2 = width1 + Resources.GetTexture(TextureID.Flare1_1_2_1).Width;

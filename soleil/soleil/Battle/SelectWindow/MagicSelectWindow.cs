@@ -8,26 +8,9 @@ using Soleil.Menu;
 namespace Soleil.Battle
 {
     /// <summary>
-    /// アイテムメニューのそれぞれの選択パネルのクラス
-    /// </summary>
-    class MagicSelectPanel : TextSelectablePanel
-    {
-        public readonly Vector CostPosDiff = new Vector(300, 0);
-        public override string Desctiption => ItemName;
-
-        public MagicSelectPanel(String itemName, int num, MagicSelectWindow parent)
-            : base(itemName, parent, DepthID.MenuMessage)
-        {
-            // itemNum
-            Val = num;
-            LocalPos = Vector.Zero;
-        }
-    }
-
-    /// <summary>
     /// SkillIDの選択Window
     /// </summary>
-    class MagicSelectWindow : BasicMenu
+    class MagicSelectWindow : MagicMenuBase
     {
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
@@ -35,10 +18,6 @@ namespace Soleil.Battle
         MenuComponent parent;
         MenuDescription desc;
 
-        /// <summary>
-        /// Window上の選択肢
-        /// </summary>
-        List<Skill.SkillID> magicList;
         int charaIndex;
         static readonly BattleField bf = BattleField.GetInstance();
 
@@ -53,20 +32,20 @@ namespace Soleil.Battle
         /// IsActiveは開かれていても選択されていない場合はfalseとなる為必要
         /// </summary>
         bool IsQuit;
-        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, List<Skill.SkillID> list, Reference<bool> selectCompleted, int charaIndex)
+        public MagicSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;
-            magicList = list;
             this.parent = parent;
             this.desc = desc;
             this.charaIndex = charaIndex;
+
+            SetPerson(person);
             IsQuit = true;
-            Init();
         }
 
-        protected override SelectablePanel[] MakeAllPanels() =>
-            magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
+        //protected override SelectablePanel[] MakeAllPanels() =>
+        //    magicList.Select(e => new MagicSelectPanel(ActionInfo.GetActionName(e), 1, this)).ToArray();
 
         public override void Update()
         {
@@ -103,8 +82,9 @@ namespace Soleil.Battle
         /// </summary>
         public override void OnInputSubmit()
         {
-            if (magicList.Count == 0) return;
-            Select.AName = magicList[Index];
+            if (Panels[Index] is EmptyPanel) return;
+            var nowPanel = Panels[Index] as MagicMenuPanel;
+            Select.AName = nowPanel.ID;
             Select.ARange = ActionInfo.GetAction(Select.AName).ARange.Clone();
             Select.ARange.SourceIndex = charaIndex;
             switch (Select.ARange)
@@ -112,10 +92,12 @@ namespace Soleil.Battle
                 case Range.OneEnemy oe:
                     csw = new CharaSelectWindow(this, desc, bf.OppositeIndexes(charaIndex), selectCompleted);
                     csw.Call();
+                    Inactivate();
                     break;
                 case Range.Ally a:
                     csw = new CharaSelectWindow(this, desc, bf.SameSideIndexes(charaIndex), selectCompleted);
                     csw.Call();
+                    Inactivate();
                     break;
                 case Range.AllAlly aRange:
                     aRange.TargetSide = bf.GetSide(charaIndex);
@@ -147,6 +129,17 @@ namespace Soleil.Battle
             IsQuit = true;
             IsActive = false;
 
+        }
+
+        public void Activate()
+        {
+            base.Call();
+            IsActive = true;
+        }
+        public void Inactivate()
+        {
+            base.Quit();
+            IsActive = false;
         }
     }
 }

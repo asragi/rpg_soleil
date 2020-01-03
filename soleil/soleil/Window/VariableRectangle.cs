@@ -13,7 +13,7 @@ namespace Soleil
         /// <summary>
         /// ウィンドウフレームの幅
         /// </summary>
-        const int FrameSize = 10;
+        public const int FrameSize = 10;
         readonly Image skinImg;
         readonly Image[] frameImgs;
 
@@ -80,6 +80,14 @@ namespace Soleil
             AddComponents(skinImg);
         }
 
-        public float Alpha => skinImg.Alpha;
+        public float Alpha
+        {
+            get => skinImg.Alpha;
+            set
+            {
+                frameImgs.ForEach2(i => i.Alpha = value);
+                skinImg.Alpha = value;
+            }
+        }
     }
 }

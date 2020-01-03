@@ -14,6 +14,8 @@ namespace Soleil.Battle
         Stand,
         Chant,
         Magic,
+        Victory,
+        Down,
 
         Size,
     }
@@ -24,10 +26,12 @@ namespace Soleil.Battle
     class BattleCharaMotion
     {
         protected BattleCharaMotionType BCMotionType;
-        public BattleCharaMotion(BattleCharaMotionType bcMotionType) => BCMotionType = bcMotionType;
+        BattleCharaAnimationType bcAnimationType;
+        public BattleCharaMotion(BattleCharaMotionType bcMotionType, BattleCharaAnimationType bcAnimationType = BattleCharaAnimationType.Stand) =>
+            (BCMotionType, this.bcAnimationType) = (bcMotionType, bcAnimationType);
 
         public virtual Tuple<BattleCharaAnimationType, BattleCharaMotionType> Update(BattleCharaAnimation bcAnim)
-            => Tuple.Create(BattleCharaAnimationType.Stand, BCMotionType);
+            => Tuple.Create(bcAnimationType, BCMotionType);
     }
 
     /// <summary>
@@ -80,6 +84,35 @@ namespace Soleil.Battle
                     return Tuple.Create(retAnimType, retMotionType);
             }
             return Tuple.Create(retAnimType, BCMotionType);
+        }
+    }
+
+    /// <summary>
+    /// 体力によってMotionTypeが変化する
+    /// 現在Stanging専用？
+    /// </summary>
+    class BattleCharaMotionChangingWithHP : BattleCharaMotion
+    {
+        readonly BattleField BF = BattleField.GetInstance();
+        readonly Character Chara;
+        public BattleCharaMotionChangingWithHP(Character chara)
+            : base(BattleCharaMotionType.Stand) => Chara = chara;
+
+        /// <summary>
+        /// BattleCharaMotionTypeは自身が保持しているのとは別のものを指定すると遷移する
+        /// </summary>
+        /// <returns> (再生するAnimation, 遷移するMotionType) </returns>
+        public override Tuple<BattleCharaAnimationType, BattleCharaMotionType> Update(BattleCharaAnimation bcAnim)
+        {
+            var hp = Chara.Status.HP;
+            var hpmax = Chara.Status.AScore.HPMAX;
+            var rate = (double)hp / hpmax;
+            if (rate > 0.3)
+                return Tuple.Create(BattleCharaAnimationType.Stand, BCMotionType);
+            else if (rate > 0)
+                return Tuple.Create(BattleCharaAnimationType.Crisis, BCMotionType);
+            else
+                return Tuple.Create(BattleCharaAnimationType.Down, BCMotionType);
         }
     }
 }

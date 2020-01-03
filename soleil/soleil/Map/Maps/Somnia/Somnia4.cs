@@ -10,12 +10,7 @@ namespace Soleil.Map
 {
     class Somnia4 : MapBase
     {
-        // Object
-        AccessaryGirl accessaryGirl;
-        // 移動イベントたち
-        MapChangeObject mcoRight;
-        MapChangeObject mcoLeft;
-
+        public override MusicID MapMusic => MusicID.ShadeCity;
         public Somnia4(PersonParty party, Camera cam)
             : base(MapName.Somnia4, party, cam)
         {
@@ -37,9 +32,9 @@ namespace Soleil.Map
             MapCameraManager.SetCameraPoint(CameraPoints);
 
             // Objects
-            accessaryGirl = new AccessaryGirl(new Vector(650, 330), party, om, bm);
-            mcoLeft = new MapChangeObject("mcl", new Vector(103, 540), new Vector(206, 6), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
-            mcoRight = new MapChangeObject("mcr", new Vector(858, 540), new Vector(206, 6), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
+            new AccessaryGirl(new Vector(650, 330), party, om, bm);
+            new MapChangeObject((new Vector(0, 530), new Vector(206, 530)), MapName.Somnia2, new Vector(307, 119), Direction.D, om, bm, Party, cam);
+            new MapChangeObject((new Vector(752, 530), new Vector(960, 530)), MapName.Somnia1, new Vector(880, 150), Direction.D, om, bm, Party, cam);
         }
     }
 }

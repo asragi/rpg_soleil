@@ -17,12 +17,12 @@ namespace Soleil.Battle
         Reference<bool> selectCompleted;
         public SelectItems Select;
         MagicSelectWindow msw;//magic
-        MagicSelectWindow ssw;//skill
-        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, List<SkillID> magics, List<SkillID> skills)
+        SkillSelectWindow ssw;//skill
+        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, Person person)
             : base(parent, desc)
         {
-            msw = new MagicSelectWindow(this, desc, magics, selectCompleted, charaIndex);
-            ssw = new MagicSelectWindow(this, desc, skills, selectCompleted, charaIndex);
+            msw = new MagicSelectWindow(this, desc, person, selectCompleted, charaIndex);
+            ssw = new SkillSelectWindow(this, desc, person, selectCompleted, charaIndex);
             this.selectCompleted = selectCompleted;
             Init();
         }

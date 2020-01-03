@@ -11,6 +11,7 @@ namespace Soleil.Map
 {
     enum MapName
     {
+        Opening,
         Flare1,
         Flare2,
         Somnia1,
@@ -24,6 +25,8 @@ namespace Soleil.Map
     abstract class MapBase
     {
         public readonly MapName Name;
+        public abstract MusicID MapMusic { get; }
+        public virtual bool StopMusic => false;
         public ObjectManager ObjectManager => om;
 
         MapInputManager mapInputManager;

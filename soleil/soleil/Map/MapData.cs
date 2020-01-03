@@ -25,6 +25,8 @@ namespace Soleil.Map
             {
                 switch (name)
                 {
+                    case MapName.Opening:
+                        return new bool[0, 0];
                     case MapName.Flare1:
                         return CSVIO.GetMapData("flare1", 8090, 2895);
                     case MapName.Somnia1:
