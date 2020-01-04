@@ -30,7 +30,7 @@ namespace Soleil.Map
                     new WaitEvent(60),
                     new FadeOutEvent(),
                     new WaitEvent(60),
-                    new ChangeMapEvent(MapName.MagistolRoom, new Vector(400, 400), Direction.D, p, cam),
+                    new ChangeMapEvent(MapName.MagistolRoom, new Vector(590, 410), Direction.LD, p, cam),
                     new FadeInEvent(),
                     new WaitEvent(50),
                     new MessageWindowEvent(new Vector(480, 270), 0, "現在はプロトタイプ版です！\nマップをじっくり眺めてみたり\n散策をお楽しみください！", false, true),

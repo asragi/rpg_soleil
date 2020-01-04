@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Soleil.Map.Maps.Magistol;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,7 @@ namespace Soleil.Map
 
             // Objects
             new MapChangeObject((new Vector(280, 264), new Vector(376, 308)), MapName.MagistolCol1, new Vector(1232, 1222), Direction.U, om, bm, party, cam);
+            new SunnyInLuneRoom(new Vector(400, 400), om, bm);
         }
     }
 }
