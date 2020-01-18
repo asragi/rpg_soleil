@@ -45,6 +45,7 @@ namespace Soleil.Map
         protected MapConstruct[] MapConstructs;
         protected CameraPoint[] CameraPoints;
         protected PersonParty Party;
+        protected ToastMaster ToastMaster;
 
         public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
@@ -56,6 +57,7 @@ namespace Soleil.Map
             bm = new MapBoxManager(MapData);
             player = new PlayerObject(om, bm);
             Party = _party;
+            ToastMaster = new ToastMaster();
             menuSystem = new MenuSystem(_party);
             mapInputManager = MapInputManager.GetInstance();
             mapInputManager.SetPlayer(player);
@@ -82,6 +84,7 @@ namespace Soleil.Map
             MapCameraManager.Update();
             PictureHolder.Update();
             ConversationSystem.Update();
+            ToastMaster.Update();
         }
 
         /// <summary>
@@ -109,6 +112,7 @@ namespace Soleil.Map
             om.Draw(sb);
             PictureHolder.Draw(sb);
             ConversationSystem.Draw(sb);
+            ToastMaster.Draw(sb);
         }
     }
 }
