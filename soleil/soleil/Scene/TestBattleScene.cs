@@ -21,6 +21,7 @@ namespace Soleil
             {
                 enemies.Add(new EnemyCharacter("敵", name));
             }
+
             bf.InitBattle(party, enemies);
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
