@@ -38,7 +38,6 @@ namespace Soleil
             Equip = equip;
             Skill = skill;
             Magic = magicLv;
-            InParty = true; // debug
         }
 
         /// <summary>
@@ -56,7 +55,7 @@ namespace Soleil
             Equip = new EquipSet();
             Skill = new SkillHolder(data.InitSkill);
             Magic = new MagicLv(data.InitMagicExp, Skill);
-            InParty = true; // debug
+            InParty = name == CharaName.Lune;
         }
 
         public void LvUp(int plus)
