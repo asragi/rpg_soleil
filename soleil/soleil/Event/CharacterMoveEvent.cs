@@ -19,6 +19,12 @@ namespace Soleil.Event
             (target, dir, duration, waitEnd) = (_target, _dir, _duration, _waitEnd);
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            frame = 0;
+        }
+
         public override void Execute()
         {
             base.Execute();
