@@ -22,11 +22,13 @@ namespace Soleil.Map
         public Direction Direction = Direction.D;
         protected MoveState MoveState;
         protected Animation NowAnimation;
+        protected ObjectManager ObjectManager;
         private Animation[] standAnimation;
 
         public MapCharacter(string name, Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool _symmetry = true)
             : base(name, pos, boxSize, om, bm)
         {
+            ObjectManager = om;
             Symmetry = _symmetry;
             MoveState = MoveState.Stand;
             // n方向のアニメーション
@@ -50,6 +52,14 @@ namespace Soleil.Map
             ChangeDepth();
             CheckMoveState();
             NowAnimation.Move();
+        }
+
+        public void FaceToPlayer()
+        {
+            var player = ObjectManager.GetPlayer();
+            var vec = player.Pos - Pos;
+            if (vec.GetLength() < MathEx.Eps) return;
+            Direction = vec.ToDirection();
         }
 
         protected virtual void CheckMoveState()

@@ -20,5 +20,15 @@ namespace Soleil.Map
         {
             return ((int)dir - 1) * 45;
         }
+
+        public static Direction ToDirection(this Vector vec)
+        {
+            var angle = vec.GetAngle();
+            // 角度の基準をDirectionに合わせる．
+            angle = 180 + angle;
+            // 角度中心から左右に判定を広げる．
+            angle = (angle + 22.5) % 360;
+            return (Direction)(angle / 45 + 1);
+        }
     }
 }
