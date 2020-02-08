@@ -21,13 +21,14 @@ namespace Soleil.Map
             )
             : base(om)
         {
+            Pos = (pos.Item1 + pos.Item2) / 2.0f;
             returnDir = _returnDir;
             new CollideLine(this, pos, CollideLayer.RoadEvent, bm);
             var wm = WindowManager.GetInstance();
             EventSequence = new EventSequence(om.GetPlayer());
             EventSequence.SetEventSet(
                 new EventSet(
-                        new SelectWindowEvent(Pos, WindowTag.A, options)
+                        new SelectWindowEvent(this, options)
                     ),
                 new BoolEventBranch(EventSequence, () => wm.GetDecideIndex() == 0,
                     new ToWorldMapEvent(pp, dest),
