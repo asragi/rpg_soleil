@@ -12,6 +12,9 @@ namespace Soleil.Misc
         MeetPrincipal,
     }
 
+    /// <summary>
+    /// Singletonでゲームの現在の目的を保持するクラス．
+    /// </summary>
     class PurposeHolder: INotifier // Singleton
     {
         private IListener[] listeners;
@@ -31,6 +34,7 @@ namespace Soleil.Misc
         public void SetPurpose(PurposeName p)
         {
             PurposeName = p;
+            // Notify listeners that purpose was updated.
             listeners.ForEach2(l => l?.OnListen(this));
         }
     }
