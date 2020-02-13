@@ -26,6 +26,7 @@ namespace Soleil.Map
 
             var purposeHolder = PurposeHolder.Instance;
             purposeHolder.SetListener(this);
+            SetPurpose(purposeHolder.PurposeName);
         }
 
         public ListenerType Type => ListenerType.PurposeIndicator;
@@ -35,14 +36,27 @@ namespace Soleil.Map
         {
             if (i is PurposeHolder purposeHolder)
             {
-                Text = purposeHolder.PurposeName switch
-                {
-                    PurposeName.MeetPrincipal => "校長先生に挨拶しよう",
-                    _ => string.Empty
-                };
-                if (Text.Length > 0) Call();
-                else Quit();
+                SetPurpose(purposeHolder.PurposeName);
+                return;
             }
+        }
+
+        private void SetPurpose(PurposeName name)
+        {
+            if (name == PurposeName.Clear)
+            {
+                int beforeTextNum = Text.Length;
+                Text = string.Empty;
+                if (beforeTextNum != 0) Quit();
+                return;
+            }
+            Text = name switch
+            {
+                PurposeName.MeetPrincipal => "校長先生に挨拶しよう",
+                _ => throw new NotImplementedException("Invalid PurposeName!")
+            };
+            Call();
+            return;
         }
     }
 }
