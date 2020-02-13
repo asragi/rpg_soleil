@@ -14,13 +14,14 @@ namespace Soleil.Map
     class PurposeIndicator: MenuComponent, IListener
     {
         private static readonly Vector Position = new Vector(950, 150);
-        private static readonly Vector TextDiff = new Vector(10, 15);
+        private static readonly Vector TextDiff = new Vector(15, 0);
 
         readonly RightAlignText text;
 
         public PurposeIndicator()
         {
             text = new RightAlignText(FontID.CorpMini, Position, TextDiff, DepthID.Message);
+            text.ActivateOutline(1);
             AddComponents(text);
 
             var purposeHolder = PurposeHolder.Instance;
