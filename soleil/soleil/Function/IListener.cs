@@ -10,6 +10,7 @@ namespace Soleil
     {
         ItemMenu,
         StatusMenu,
+        PurposeIndicator,
         size,
     }
     /// <summary>

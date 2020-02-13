@@ -99,7 +99,9 @@
     <Compile Include="Map\Maps\Magistol\Objects\SunnyInLuneRoom.cs" />
     <Compile Include="Map\Maps\Other\OpeningMap.cs" />
     <Compile Include="Map\Objects\SunnyObj.cs" />
+    <Compile Include="Map\PurposeIndicator.cs" />
     <Compile Include="Menu\MagicMenuBase.cs" />
+    <Compile Include="Misc\PurposeHolder.cs" />
     <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Dungeon\Exec\ReturnToHome.cs" />
     <Compile Include="Scene\DungeonScene.cs" />

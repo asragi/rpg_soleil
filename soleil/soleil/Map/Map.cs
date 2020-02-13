@@ -46,6 +46,8 @@ namespace Soleil.Map
         protected CameraPoint[] CameraPoints;
         protected PersonParty Party;
 
+        private PurposeIndicator purposeIndicator;
+
         public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
             Name = _name;
@@ -64,6 +66,7 @@ namespace Soleil.Map
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
             EventSequences = new EventSequence[10];
+            purposeIndicator = new PurposeIndicator();
             SaveLoad.SaveRefs.NowMap = this;
         }
 
@@ -83,6 +86,7 @@ namespace Soleil.Map
             MapCameraManager.Update();
             PictureHolder.Update();
             ConversationSystem.Update();
+            purposeIndicator.Update();
         }
 
         /// <summary>
@@ -111,6 +115,7 @@ namespace Soleil.Map
             PictureHolder.Draw(sb);
             ConversationSystem.Draw(sb);
             EventSequences.ForEach2(e => e?.Draw(sb));
+            purposeIndicator.Draw(sb);
         }
     }
 }
