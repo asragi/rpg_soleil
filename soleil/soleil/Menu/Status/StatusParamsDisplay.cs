@@ -17,7 +17,7 @@ namespace Soleil.Menu.Status
         {
             "STR",
             "VIT",
-            "MAG",
+            "PSY",
             "SPD",
             "ATK",
             "MAG",
