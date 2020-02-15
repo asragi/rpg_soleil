@@ -40,11 +40,6 @@ namespace Soleil
             }
         }
 
-        public static bool FileExist()
-        {
-            return File.Exists(FilePath);
-        }
-
         // 以下Load用
         public static PersonParty GetParty(bool isNew)
         {
