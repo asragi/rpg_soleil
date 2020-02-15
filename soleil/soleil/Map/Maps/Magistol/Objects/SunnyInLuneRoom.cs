@@ -1,4 +1,5 @@
-﻿using Soleil.Map.Objects;
+﻿using Soleil.Event;
+using Soleil.Map.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,15 @@ namespace Soleil.Map.Maps.Magistol
 {
     class SunnyInLuneRoom : SunnyObj
     {
-        public SunnyInLuneRoom(Vector pos, ObjectManager om, BoxManager bm)
+        public SunnyInLuneRoom(Vector pos, PersonParty party, ObjectManager om, BoxManager bm)
             : base (pos, om, bm)
         {
-
+            EventSequence.SetEventSet(
+                new MessageWindowEvent(this, "財布はルーネに任せるから"),
+                new MessageWindowEvent(this, "とりあえず校長先生に挨拶してから行こう"),
+                new CharacterActivateEvent(party, Misc.CharaName.Sunny, true),
+                new ChangeInputFocusEvent(InputFocus.Player)
+                );
         }
 
         public override void OnCollisionEnter(CollideObject collide)
@@ -20,6 +26,7 @@ namespace Soleil.Map.Maps.Magistol
             base.OnCollisionEnter(collide);
             if (collide.Layer != CollideLayer.PlayerHit) return;
             FaceToPlayer();
+            EventSequence.StartEvent();
         }
     }
 }
