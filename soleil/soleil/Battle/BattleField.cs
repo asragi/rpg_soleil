@@ -39,7 +39,7 @@ namespace Soleil.Battle
         /// turnQueueにPushされていない最初のTurn
         /// </summary>
         List<Turn> lastTurn;
-        List<Menu.MenuComponent> MenuComponentList;
+        List<Menu.EasingComponent> MenuComponentList;
 
         List<TextureID> textureIDList;
 
@@ -59,7 +59,7 @@ namespace Soleil.Battle
         public void InitBattle(PersonParty party, List<EnemyCharacter> enemies)
         {
             onEnd = false;
-            MenuComponentList = new List<Menu.MenuComponent>();
+            MenuComponentList = new List<Menu.EasingComponent>();
 
             var partylist = party.GetActiveMembers();
 
@@ -355,8 +355,8 @@ namespace Soleil.Battle
         }
         */
 
-        public void AddBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Add(bui);
-        public bool RemoveBasicMenu(Menu.MenuComponent bui) => MenuComponentList.Remove(bui);
+        public void AddBasicMenu(Menu.EasingComponent bui) => MenuComponentList.Add(bui);
+        public bool RemoveBasicMenu(Menu.EasingComponent bui) => MenuComponentList.Remove(bui);
 
         string message = "";
         const int TurnQueueTextureWidth = 80;

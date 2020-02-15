@@ -31,7 +31,7 @@ namespace Soleil.Menu
         StatusMagicCategory statusMagicCategory;
         readonly Vector CategoryPos;
 
-        public StatusSystem(MenuComponent parent, MenuDescription desc, PersonParty party)
+        public StatusSystem(EasingComponent parent, MenuDescription desc, PersonParty party)
             : base(parent)
         {
             // const

@@ -8,7 +8,7 @@ using AttackAttribution = Soleil.Battle.AttackAttribution;
 
 namespace Soleil.Menu.Status
 {
-    class StatusParamsDisplay : MenuComponent, IPersonUpdate
+    class StatusParamsDisplay : EasingComponent, IPersonUpdate
     {
         const int DiffX = 132;
         const int DiffY = 27;

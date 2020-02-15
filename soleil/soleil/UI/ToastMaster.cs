@@ -48,7 +48,7 @@ namespace Soleil
         /// <summary>
         /// トースト単体のクラス．
         /// </summary>
-        class Toast: MenuComponent
+        class Toast: EasingComponent
         {
             private const int DisplayTime = 120;
             private static Vector IconPos = new Vector(60, 15);

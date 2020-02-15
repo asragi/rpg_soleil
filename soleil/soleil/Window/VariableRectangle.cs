@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class VariableRectangle: MenuComponent
+    class VariableRectangle: EasingComponent
     {
         /// <summary>
         /// ウィンドウフレームの幅

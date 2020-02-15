@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class EquipDisplay : MenuComponent
+    class EquipDisplay : EasingComponent
     {
         readonly Vector Space = TextSelectablePanel.Spacing;
         readonly Vector IconSpace = ItemPanelBase.IconSpace;

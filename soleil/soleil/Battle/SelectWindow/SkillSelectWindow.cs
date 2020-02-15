@@ -16,7 +16,7 @@ namespace Soleil.Battle
         protected override Vector WindowPos => new Vector(450, 100);
         Reference<bool> selectCompleted;
         public SelectItems Select;
-        MenuComponent parent;
+        EasingComponent parent;
         MenuDescription desc;
 
         int charaIndex;
@@ -33,7 +33,7 @@ namespace Soleil.Battle
         /// IsActiveは開かれていても選択されていない場合はfalseとなる為必要
         /// </summary>
         bool IsQuit;
-        public SkillSelectWindow(MenuComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
+        public SkillSelectWindow(EasingComponent parent, MenuDescription desc, Person person, Reference<bool> selectCompleted, int charaIndex)
             : base(parent, desc)
         {
             this.selectCompleted = selectCompleted;

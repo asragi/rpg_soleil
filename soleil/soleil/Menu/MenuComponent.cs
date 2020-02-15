@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    abstract class MenuComponent : IComponent
+    /// <summary>
+    /// イージングを伴い出現・消滅するコンポーネント．
+    /// </summary>
+    abstract class EasingComponent : IComponent
     {
         private IComponent[] components;
 
@@ -27,7 +30,7 @@ namespace Soleil.Menu
             }
         }
 
-        public MenuComponent() { }
+        public EasingComponent() { }
         /// <summary>
         /// IsActiveがtrueになったときに行われる処理
         /// </summary>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class HPMPDisplay : MenuComponent, IPersonUpdate
+    class HPMPDisplay : EasingComponent, IPersonUpdate
     {
         StatusHPMP mp;
         StatusHPMP hp;

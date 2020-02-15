@@ -57,7 +57,7 @@ namespace Soleil.Dungeon
         /// <summary>
         /// 画面左上に表示するダンジョン名など．
         /// </summary>
-        class TopInfo: MenuComponent
+        class TopInfo: EasingComponent
         {
             private static readonly Vector BackImgDiff = new Vector(-100, 4);
             private const int BackImgLength = 400;
@@ -81,7 +81,7 @@ namespace Soleil.Dungeon
         /// <summary>
         /// TopInfo + Floorの階層情報
         /// </summary>
-        class FloorInfo: MenuComponent
+        class FloorInfo: EasingComponent
         {
             private const int FontDiff = 10;
             private readonly Vector FloorDiff = new Vector(200, FontDiff);
@@ -114,7 +114,7 @@ namespace Soleil.Dungeon
         /// <summary>
         /// 左上に表示する探索完了情報．
         /// </summary>
-        class SearchInfo: MenuComponent
+        class SearchInfo: EasingComponent
         {
             private readonly Vector FloorDiff = new Vector(70, 0);
             private readonly string SearchText = "探索:";

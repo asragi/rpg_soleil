@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class MenuDescription : MenuComponent
+    class MenuDescription : EasingComponent
     {
         protected TextImage fontImage;
         public string Text { set { fontImage.Text = value; } }

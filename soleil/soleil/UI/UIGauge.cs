@@ -12,7 +12,7 @@ namespace Soleil.UI
     /// <summary>
     /// 値によって伸び縮みするゲージ状UIのクラス
     /// </summary>
-    class UIGauge : MenuComponent
+    class UIGauge: EasingComponent
     {
         public Vector Pos { get; set; }
         bool isRightSideEnd;

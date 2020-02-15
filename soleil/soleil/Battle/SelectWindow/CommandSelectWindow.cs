@@ -18,7 +18,7 @@ namespace Soleil.Battle
         public SelectItems Select;
         MagicSelectWindow msw;//magic
         SkillSelectWindow ssw;//skill
-        public CommandSelectWindow(MenuComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, Person person)
+        public CommandSelectWindow(EasingComponent parent, MenuDescription desc, Reference<bool> selectCompleted, int charaIndex, Person person)
             : base(parent, desc)
         {
             msw = new MagicSelectWindow(this, desc, person, selectCompleted, charaIndex);

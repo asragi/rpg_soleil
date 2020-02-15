@@ -16,8 +16,8 @@ namespace Soleil.Menu
         const int IconXInitial = 50;
         const int IconXEnd = 360;
         MagicIcon[] icons;
-        MenuComponent parentMenu;
-        public MagicMenuBase(MenuComponent parent, MenuDescription desc)
+        EasingComponent parentMenu;
+        public MagicMenuBase(EasingComponent parent, MenuDescription desc)
             : base(parent, desc)
         {
             Holder = new SkillHolder();

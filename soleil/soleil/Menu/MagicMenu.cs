@@ -11,12 +11,13 @@ namespace Soleil.Menu
     {
         MagicTargetSelect magicTargetSelect;
 
+
         //今誰の魔法を選ぼうとしているのか(MagicTargetSelectに渡したい)
         Person currentSelect;
 
         //複数対象魔法を使うときに渡さないといけないので
         PersonParty party;
-        public MagicMenu(MenuComponent parent, MenuDescription desc, PersonParty _party)
+        public MagicMenu(EasingComponent parent, MenuDescription desc, PersonParty _party)
             : base(parent, desc)
         {
             party = _party;

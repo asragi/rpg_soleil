@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu
 {
-    class MenuCursor : MenuComponent
+    class MenuCursor: EasingComponent
     {
         Image img;
         Vector[] positions;

@@ -12,7 +12,7 @@ namespace Soleil.Event.Shop
     /// <summary>
     /// Shopイベントで用いるウィンドウ等の全体を管理するクラス．
     /// </summary>
-    class ShopSystem : MenuComponent
+    class ShopSystem : EasingComponent
     {
         private readonly static Vector PossessPos = new Vector(102, 453);
         readonly Vector MoneyPos = PossessPos + new Vector(150, 0);

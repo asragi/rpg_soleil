@@ -11,7 +11,7 @@ namespace Soleil.Menu
     /// <summary>
     /// 所持金表示コンポーネント．
     /// </summary>
-    class MoneyComponent : MenuComponent
+    class MoneyComponent : EasingComponent
     {
         // Font設定
         readonly FontID ValFont = FontID.CorpM;

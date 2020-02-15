@@ -6,7 +6,7 @@ namespace Soleil
     /// <summary>
     /// 会話などの文章の文字部分のクラス．
     /// </summary>
-    class MessageBox : MenuComponent
+    class MessageBox: EasingComponent
     {
         const int drawCharPeriod = 4; // nフレームごとに文字更新
         const DepthID Depth = DepthID.Message;

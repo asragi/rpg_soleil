@@ -10,7 +10,7 @@ namespace Soleil.Menu
     /// <summary>
     /// メニュー画面等で使う横に動く装飾用の罫線を描画するクラス
     /// </summary>
-    class MenuLine : MenuComponent
+    class MenuLine : EasingComponent
     {
         const int MoveSpeed = 1;
         Image[] lines;

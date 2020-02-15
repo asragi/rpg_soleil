@@ -11,7 +11,7 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 所持数の表示
     /// </summary>
-    class PossessNum : MenuComponent
+    class PossessNum : EasingComponent
     {
         readonly String ExplainText = "所持数";
         public static readonly Vector NumDiff = new Vector(120, 0);

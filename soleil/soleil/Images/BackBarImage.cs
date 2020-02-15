@@ -11,7 +11,7 @@ namespace Soleil.Images
     /// <summary>
     /// 長さの変わる文字背景用の汎用Image．
     /// </summary>
-    class BackBarImage : MenuComponent
+    class BackBarImage : EasingComponent
     {
         // 画像の端からの切り出し量
         public const int EdgeSize = 36;

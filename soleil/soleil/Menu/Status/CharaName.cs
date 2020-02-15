@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil.Menu.Status
 {
-    class CharaName : MenuComponent, IPersonUpdate
+    class CharaName : EasingComponent, IPersonUpdate
     {
         readonly FontID MainFont = FontID.CorpM;
         readonly FontID SubFont = FontID.CorpMini;

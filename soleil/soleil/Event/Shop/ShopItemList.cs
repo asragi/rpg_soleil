@@ -20,7 +20,7 @@ namespace Soleil.Event.Shop
         ShopDecideWindow decideWindow;
         public bool ReadyForEnd { get; private set; } = false;
 
-        public ShopItemList(MenuComponent parent, MenuDescription description, ShopName name)
+        public ShopItemList(EasingComponent parent, MenuDescription description, ShopName name)
             : base(parent, description)
         {
             var p = PlayerBaggage.GetInstance();

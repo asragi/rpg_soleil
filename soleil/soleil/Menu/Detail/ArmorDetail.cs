@@ -11,7 +11,7 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 防具の詳細性能表示クラス．
     /// </summary>
-    class ArmorDetail : MenuComponent
+    class ArmorDetail : EasingComponent
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
