@@ -31,6 +31,12 @@ namespace Soleil.Map
             EventSequence = new EventSequence(Player);
         }
 
+        public bool Exist
+        {
+            get => ExistanceBox.IsActive;
+            set => ExistanceBox.IsActive = value;
+        }
+
         public override void Update()
         {
             base.Update();
