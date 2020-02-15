@@ -37,6 +37,14 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnDisable() { }
 
+        /// <summary>
+        /// Componentsの参照をnullにする．
+        /// </summary>
+        public void Clear()
+        {
+            components = null;
+        }
+
         public virtual void Quit()
         {
             if (components != null)

@@ -65,6 +65,7 @@ namespace Soleil.Map
             MapCameraManager = new MapCameraManager(player, cam);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
+            EventSequences = new EventSequence[10];
             SaveLoad.SaveRefs.NowMap = this;
         }
 
@@ -99,7 +100,7 @@ namespace Soleil.Map
         private void EventSequenceUpdate()
         {
             if (EventSequences == null) return;
-            for (int i = 0; i < EventSequences.Length; i++) EventSequences[i].Update();
+            for (int i = 0; i < EventSequences.Length; i++) EventSequences[i]?.Update();
         }
 
         public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);
@@ -113,6 +114,7 @@ namespace Soleil.Map
             PictureHolder.Draw(sb);
             ConversationSystem.Draw(sb);
             ToastMaster.Draw(sb);
+            EventSequences.ForEach2(e => e?.Draw(sb));
         }
     }
 }

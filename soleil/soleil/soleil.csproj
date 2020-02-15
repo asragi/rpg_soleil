@@ -69,6 +69,7 @@
     <Compile Include="Battle\EquipSet.cs" />
     <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
+    <Compile Include="Event\CharacterActivateEvent.cs" />
     <Compile Include="Battle\SelectWindow\SkillSelectWindow.cs" />
     <Compile Include="Event\EarnMoneyEvent.cs" />
     <Compile Include="Event\GetItemEvent.cs" />
@@ -97,7 +98,9 @@
     <Compile Include="Dungeon\SearchFloorEvent\NothingEvent.cs" />
     <Compile Include="Dungeon\PlayerObjectWrap.cs" />
     <Compile Include="Dungeon\ReturnConfirm.cs" />
+    <Compile Include="Map\Maps\Magistol\Objects\SunnyInLuneRoom.cs" />
     <Compile Include="Map\Maps\Other\OpeningMap.cs" />
+    <Compile Include="Map\Objects\SunnyObj.cs" />
     <Compile Include="Menu\MagicMenuBase.cs" />
     <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
     <Compile Include="Dungeon\Exec\ReturnToHome.cs" />
