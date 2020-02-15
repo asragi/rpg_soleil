@@ -17,6 +17,7 @@ namespace Soleil.Map.Maps.Magistol
                 new MessageWindowEvent(this, "財布はルーネに任せるから"),
                 new MessageWindowEvent(this, "とりあえず校長先生に挨拶してから行こう"),
                 new CharacterActivateEvent(party, Misc.CharaName.Sunny, true),
+                new CharacterDisappearEvent(this),
                 new ChangeInputFocusEvent(InputFocus.Player)
                 );
         }
