@@ -16,7 +16,7 @@ namespace Soleil.Menu
         ItemList itemList;
 
         public ItemTargetSelect(ItemMenu _parent)
-            :base(_parent)
+            : base(_parent)
         {
             itemMenu = _parent;
         }
@@ -34,6 +34,7 @@ namespace Soleil.Menu
             if (useSuccess)
             {
                 itemList.Consume(id);
+                Audio.PlaySound(SoundID.DecideSoft);
                 if (!itemList.HasItem(id)) OnInputCancel();
             }
             else

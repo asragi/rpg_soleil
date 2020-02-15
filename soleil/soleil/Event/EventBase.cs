@@ -3,7 +3,7 @@
     /// <summary>
     /// Event類の基底クラス
     /// </summary>
-    abstract class EventBase: EventUnit
+    abstract class EventBase : EventUnit
     {
         bool started;
         EventSet myEventSet;

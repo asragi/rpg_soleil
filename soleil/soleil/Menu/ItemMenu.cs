@@ -11,8 +11,9 @@ namespace Soleil.Menu
     {
         ItemTargetSelect itemTargetSelect;
         ItemList itemList;
+
         public ItemMenu(EasingComponent parent, MenuDescription desc)
-            :base(parent, desc)
+            : base(parent, desc)
         {
             itemList = PlayerBaggage.GetInstance().Items;
             itemList.AddListener(this);
@@ -59,19 +60,22 @@ namespace Soleil.Menu
                 var tmp = ItemDataBase.Get(id);
                 if (!(tmp is ConsumableItem)) return; // Consumableでないなら終了; 「使用できる武器」みたいなのは必要に応じてまた．
                 if (!tmp.OnMenu) return; // Menuで使用可能でないなら終了
+                Audio.PlaySound(SoundID.DecideSoft);
                 var item = (ConsumableItem)tmp;
 
                 if (item.Target == ItemTarget.Nothing)
                 {
                     Console.WriteLine("Event発生など");
-                }else if (item.Target == ItemTarget.OneAlly)
+                }
+                else if (item.Target == ItemTarget.OneAlly)
                 {
                     // inputをstatusに渡す．
                     itemTargetSelect.Call();
                     itemTargetSelect.SetWillUsedItem(id, itemList);
                     IsActive = false;
                     Quit();
-                }else if (item.Target == ItemTarget.AllAlly)
+                }
+                else if (item.Target == ItemTarget.AllAlly)
                 {
                     // inputをstatusに渡す．
                     Console.WriteLine("味方全員を対象");

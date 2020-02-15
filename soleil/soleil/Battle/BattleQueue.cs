@@ -4,8 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
+    /// <summary>
+    /// 戦闘中のEvent
+    /// Turnに応じて生成される
+    /// </summary>
     abstract class BattleEvent
     {
         public int DequeCount { get; private set; }
@@ -26,5 +30,10 @@ namespace Soleil
         {
             CharaIndex = charaIndex;
         }
+    }
+    class BattleEnd : BattleEvent
+    {
+        public bool DidWin;
+        public BattleEnd(int dequeCount, bool didWin) : base(dequeCount) => DidWin = didWin;
     }
 }

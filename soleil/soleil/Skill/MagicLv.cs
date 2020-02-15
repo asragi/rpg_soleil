@@ -17,6 +17,20 @@ namespace Soleil.Skill
         private Dictionary<MagicCategory, int> dictMagicExp;
         private SkillHolder skillHolder;
 
+        public int this[MagicCategory cat]
+        {
+            get => dictMagicExp[cat];
+        }
+
+        public MagicLv(int[] exps, SkillHolder _skillHolder)
+            : this(_skillHolder)
+        {
+            for (int i = 0; i < exps.Length; i++)
+            {
+                AddExp(exps[i], (MagicCategory)i);
+            }
+        }
+
         public MagicLv(SkillHolder _skillHolder)
         {
             skillHolder = _skillHolder;
@@ -29,7 +43,13 @@ namespace Soleil.Skill
         /// </summary>
         public int GetLv(MagicCategory category)
         {
-            return MathEx.Clamp(dictMagicExp[category] / 10, 9, 0);
+            for (int i = 0; i < 9; i++)
+            {
+                // 次のLvまで(30*Lv)の経験値が必要 -> 累積が15*Lv*(Lv+1)以上になる．
+                int thresh = 15 * i * (i + 1);
+                if (dictMagicExp[category] <= thresh) return i;
+            }
+            return 9;
         }
         /// <summary>
         /// MagicCategoryが習得済みか

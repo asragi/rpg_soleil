@@ -11,14 +11,24 @@ namespace Soleil.Map
 {
     enum MapName
     {
+        Opening,
         Flare1,
         Flare2,
         Somnia1,
         Somnia2,
         Somnia4,
+        MagistolRoom,
+        MagistolCol1,
+        MagistolCol3,
+        MagistolShop,
     }
     abstract class MapBase
     {
+        public readonly MapName Name;
+        public abstract MusicID MapMusic { get; }
+        public virtual bool StopMusic => false;
+        public ObjectManager ObjectManager => om;
+
         MapInputManager mapInputManager;
         protected MapCameraManager MapCameraManager;
         protected ObjectManager om;
@@ -38,6 +48,7 @@ namespace Soleil.Map
 
         public MapBase(MapName _name, PersonParty _party, Camera cam)
         {
+            Name = _name;
             var wm = WindowManager.GetInstance();
             om = new ObjectManager();
             MapData = new MapData(_name);
@@ -52,6 +63,8 @@ namespace Soleil.Map
             MapCameraManager = new MapCameraManager(player, cam);
             PictureHolder = new CharacterPictureHolder();
             ConversationSystem = new ConversationSystem(wm);
+            EventSequences = new EventSequence[10];
+            SaveLoad.SaveRefs.NowMap = this;
         }
 
         protected virtual void Start()
@@ -61,7 +74,7 @@ namespace Soleil.Map
 
         virtual public void Update()
         {
-            if(!started) Start();
+            if (!started) Start();
             om.Update();
             EventSequenceUpdate();
             bm.Update();
@@ -84,7 +97,7 @@ namespace Soleil.Map
         private void EventSequenceUpdate()
         {
             if (EventSequences == null) return;
-            for (int i = 0; i < EventSequences.Length; i++) EventSequences[i].Update();
+            for (int i = 0; i < EventSequences.Length; i++) EventSequences[i]?.Update();
         }
 
         public void SetPlayerPos(Vector pos) => om.SetPlayerPos(pos);
@@ -97,6 +110,7 @@ namespace Soleil.Map
             om.Draw(sb);
             PictureHolder.Draw(sb);
             ConversationSystem.Draw(sb);
+            EventSequences.ForEach2(e => e?.Draw(sb));
         }
     }
 }

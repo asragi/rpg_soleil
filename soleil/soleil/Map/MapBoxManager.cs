@@ -9,7 +9,7 @@ namespace Soleil.Map
     /// <summary>
     /// Map上での衝突判定を行うクラス
     /// </summary>
-    class MapBoxManager: BoxManager
+    class MapBoxManager : BoxManager
     {
         MapData mapData;
         public MapBoxManager(MapData data) : base()
@@ -27,10 +27,12 @@ namespace Soleil.Map
         {
             for (int i = 0; i < BoxList.Count; i++)
             {
-                double xi = BoxList[i].WorldPos().X,
-                    yi = BoxList[i].WorldPos().Y,
-                    wi = BoxList[i].Size.X,
-                    hi = BoxList[i].Size.Y;
+                if (!(BoxList[i] is CollideBox)) continue;
+                CollideBox box = (CollideBox)BoxList[i];
+                double xi = box.WorldPos.X,
+                    yi = box.WorldPos.Y,
+                    wi = box.Size.X,
+                    hi = box.Size.Y;
                 bool col = false;
                 for (int j = 0; j < wi; j++)
                 {
@@ -39,7 +41,7 @@ namespace Soleil.Map
                         col = col || CalcWallCollide(xi, yi, wi, hi, j, k); // 一つでもtrueならtrue
                     }
                 }
-                BoxList[i].SetWallCollide(col);
+                BoxList[i].WallCollide = col;
             }
         }
 

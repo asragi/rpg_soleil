@@ -32,17 +32,17 @@ namespace Soleil.Map
             return Dead;
         }
 
-        virtual public void OnCollisionEnter(CollideBox collide)
+        virtual public void OnCollisionEnter(CollideObject collide)
         {
 
         }
 
-        virtual public void OnCollisionStay(CollideBox collide)
+        virtual public void OnCollisionStay(CollideObject collide)
         {
 
         }
 
-        virtual public void OnCollisionExit(CollideBox collide)
+        virtual public void OnCollisionExit(CollideObject collide)
         {
 
         }

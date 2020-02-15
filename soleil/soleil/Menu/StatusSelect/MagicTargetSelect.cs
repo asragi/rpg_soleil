@@ -3,22 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Soleil.Skill;
 
 namespace Soleil.Menu
 {
-    class MagicTargetSelect: StatusTargetSelectBase
+    class MagicTargetSelect : StatusTargetSelectBase
     {
+        //その魔法を唱える人
+        Person Commander;
         MagicMenu magicMenu;
+        // 使用情報
+        SkillID id;
         public MagicTargetSelect(MagicMenu mg)
             : base(mg)
         {
             magicMenu = mg;
         }
-
+        public void SetWillUsedSkill(SkillID _id,Person com)
+        {
+            id = _id;
+            Commander = com;
+        }
         public override void OnInputSubmit()
         {
-            int selected = StatusMenu.GetIndex();
-            Console.WriteLine("Use Magic!");
+            Person selectedPerson = StatusMenu.GetSelectedPerson();
+            Audio.PlaySound(SoundID.DecideSoft);
+            Person[] p = new Person[1] { selectedPerson };
+            SkillEffectData.UseOnMenu(Commander,p,id);
+        }
+        public override void OnInputCancel()
+        {
+            base.OnInputCancel();
+            magicMenu.Call();
         }
     }
 }

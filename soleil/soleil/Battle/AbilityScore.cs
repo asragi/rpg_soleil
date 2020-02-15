@@ -1,6 +1,8 @@
 ﻿namespace Soleil
 {
-
+    /// <summary>
+    /// 戦闘中の強化や装備を含めないステータス情報
+    /// </summary>
     public struct AbilityScore
     {
         public int HPMAX;

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Soleil.Skill;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     public enum BuffRateName
     {
@@ -15,6 +16,12 @@ namespace Soleil
         pDEFRate,
         mDEFRate,
     }
+
+    /// <summary>
+    /// BuffRateの値の分だけStatusに倍率がかかる
+    /// 種類が多いのでHashSetで列挙する
+    /// 現在は弱体化、普通、強化の3段階がある
+    /// </summary>
     public class BuffRate
     {
         public List<float> Rates;
@@ -91,7 +98,11 @@ namespace Soleil
             else return 0;
         }
     }
-    public class CharacterStatus
+
+    /// <summary>
+    /// 戦闘中におけるcharaの状態
+    /// </summary>
+    class CharacterStatus
     {
         public AbilityScore AScore;
         public BuffRate Rates;
@@ -100,12 +111,12 @@ namespace Soleil
         public int HP
         {
             get => hp;
-            set => hp = Math.Max(value, 0);
+            set => hp = MathEx.Clamp(value, AScore.HPMAX, 0);
         }
         public int MP
         {
             get => mp;
-            set => mp = Math.Max(value, 0);
+            set => mp = MathEx.Clamp(value, AScore.MPMAX, 0);
         }
 
         public bool Dead { get => HP <= 0; }
@@ -114,7 +125,7 @@ namespace Soleil
         {
             get => Fraction(AScore.STR * Rates[BuffRateName.STRRate]);
         }
-        
+
         public int VIT
         {
             get => Fraction(AScore.VIT * Rates[BuffRateName.VITRate]);
@@ -124,7 +135,7 @@ namespace Soleil
         {
             get => Fraction(AScore.MAG * Rates[BuffRateName.MAGRate]);
         }
-        
+
         public int SPD
         {
             get => Fraction(AScore.SPD * Rates[BuffRateName.SPDRate]);
@@ -144,19 +155,25 @@ namespace Soleil
             private set => mATK = value;
         }
 
-        float pDEF;
-        public float PDEF
+        Dictionary<AttackAttribution, float> pDEF;
+        public float PDEF(AttackAttribution attr)
+            => Fraction(pDEF[attr] * Rates[BuffRateName.pDEFRate]);
+
+        Dictionary<AttackAttribution, float> mDEF;
+        public float MDEF(AttackAttribution attr)
+            => Fraction(mDEF[attr] * Rates[BuffRateName.mDEFRate]);
+
+        public EquipSet Equips
         {
-            get => Fraction(pDEF * Rates[BuffRateName.pDEFRate]);
-            private set => pDEF = value;
+            get; set;
         }
 
-        float mDEF;
-        public float MDEF
-        {
-            get => Fraction(mDEF * Rates[BuffRateName.mDEFRate]);
-            private set => mDEF = value;
-        }
+
+        /// <summary>
+        /// Characterの保持するMagic
+        /// </summary>
+        public List<SkillID> Magics { get; private set; }
+        public List<SkillID> Skills { get; private set; }
 
         public int InitialWP = 10000;
         public int WP = 0;
@@ -184,34 +201,41 @@ namespace Soleil
             HP = 0;
             MP = 0;
 
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
+            Equips = new Battle.EquipSet();
+            Magics = new List<SkillID> { SkillID.NormalAttack };
+            Skills = new List<SkillID> { };
             SetParams();
         }
 
-        public CharacterStatus(AbilityScore aScore, int _WP)
+        public CharacterStatus(AbilityScore aScore, int _WP, List<SkillID> magics, List<SkillID> skills, Battle.EquipSet equips = null)
         {
             AScore = aScore;
             HP = AScore.HPMAX;
             MP = AScore.MPMAX;
             InitialWP = _WP;
             Rates = new BuffRate();
-
+            pDEF = new Dictionary<AttackAttribution, float>();
+            mDEF = new Dictionary<AttackAttribution, float>();
+            Equips = equips ?? new Battle.EquipSet();
+            Magics = magics;
+            Skills = skills;
             SetParams();
         }
 
         void SetParams()
         {
-            //TODO: 所有武器でmATK等をセットする
-            PATK = 1f;
-            MATK = 1f;
-            PDEF = 1f;
-            MATK = 1f;
+            PATK = Equips.GetAttack(AttackType.Physical);
+            foreach (AttackAttribution attr in Enum.GetValues(typeof(AttackAttribution)))
+            {
+                if (attr == AttackAttribution.size) continue;
+                pDEF[attr] = Equips.GetDef(attr, AttackType.Physical);
+                mDEF[attr] = Equips.GetDef(attr, AttackType.Magical);
+            }
+            MATK = Equips.GetAttack(AttackType.Magical);
         }
 
-        //TODO
-        public void GetEquipments()
-        {
-
-        }
 
         public void GetSkills()
         {

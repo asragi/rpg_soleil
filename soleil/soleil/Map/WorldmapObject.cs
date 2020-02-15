@@ -12,10 +12,11 @@ namespace Soleil.Map
         };
 
         public WorldmapObject(
+            string name,
             Vector pos, Vector size, WorldPointKey dest,
             PersonParty pp, ObjectManager om, BoxManager bm
             )
-            :base (pos, size, om, bm)
+            : base(name, pos, size, om, bm)
         {
             var wm = WindowManager.GetInstance();
             EventSequence.SetEventSet(
@@ -26,7 +27,7 @@ namespace Soleil.Map
                     new EventUnit[]{
                         new ToWorldMapEvent(pp, dest)
                     },
-                    new EventUnit[]{ }
+                    new EventUnit[] { }
                 ),
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.Player)
@@ -34,7 +35,7 @@ namespace Soleil.Map
             );
         }
 
-        public override void OnCollisionEnter(CollideBox col)
+        public override void OnCollisionEnter(CollideObject col)
         {
             if (col.Layer == CollideLayer.PlayerHit)
             {

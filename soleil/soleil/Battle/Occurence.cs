@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Soleil
+namespace Soleil.Battle
 {
     /// <summary>
     /// Actionによって生じた情報を持つ
     /// </summary>
     class Occurence
     {
+        protected static readonly BattleField BF = BattleField.GetInstance();
         //Effect
         public string Message;
         public bool Visible { get; set; }
@@ -21,20 +22,44 @@ namespace Soleil
             Message = message;
         }
         //使わないかも
-        public virtual void Affect(BattleField bf) { }
+        public virtual void Affect() { }
     }
 
     class OccurenceDamageForCharacter : Occurence
     {
         public int CharaIndex { get; private set; }
         public int HPDamage = 0, MPDamage = 0;
-        public OccurenceDamageForCharacter(string message, int charaIndex, int HPDmg = 0, int MPDmg = 0) : base(message)
+        EffectAnimationID eaID;
+        public OccurenceDamageForCharacter(string message, int charaIndex, EffectAnimationID eaID, int HPDmg = 0, int MPDmg = 0) : base(message)
         {
             CharaIndex = charaIndex;
+            this.eaID = eaID;
             (HPDamage, MPDamage) = (HPDmg, MPDmg);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
+            BF.GetCharacter(CharaIndex).BCGraphics?.Damage(HPDamage, MPDamage);
+
+            BF.Effects.Add(new AfterCountingEffect(90,
+                new AnimationEffect(BF.GetCharacter(CharaIndex).BCGraphics.Pos,
+                    new EffectAnimationData(eaID, false, 4),
+                    false, BF.Effects),
+                BF.Effects));
+        }
+    }
+
+    class OccurenceAttackMotion : Occurence
+    {
+        public int CharaIndex { get; private set; }
+        public int MPConsume = 0;
+        public OccurenceAttackMotion(string message, int charaIndex, int MPConsume_) : base(message)
+        {
+            CharaIndex = charaIndex;
+            MPConsume = MPConsume_;
+        }
+        public override void Affect()
+        {
+            BF.GetCharacter(CharaIndex).BCGraphics?.Attack(MPConsume);
         }
     }
 
@@ -48,7 +73,7 @@ namespace Soleil
             CharaIndex = charaIndex;
             (this.STRrate, this.VITrate, this.MAGrate, this.SPDrate) = (STRrate, VITrate, MAGrate, SPDrate);
         }
-        public override void Affect(BattleField bf)
+        public override void Affect()
         {
         }
     }
@@ -59,6 +84,22 @@ namespace Soleil
         {
 
         }
-        public override void Affect(BattleField bf) { }
+        public override void Affect() { }
+    }
+
+    class OccurenceBattleEnd : Occurence
+    {
+        public bool DidWin;
+        public OccurenceBattleEnd() : base("")
+        {
+            DidWin = BF.SameSideIndexes(Side.Left).Count == 0;
+            if (DidWin)
+                Message = "戦闘に勝利した";
+            else
+                Message = "戦闘に敗北した";
+        }
+        public override void Affect()
+        {
+        }
     }
 }

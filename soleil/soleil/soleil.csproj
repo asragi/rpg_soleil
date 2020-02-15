@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -44,22 +45,74 @@
   <ItemGroup>
     <Compile Include="Battle\AbilityScore.cs" />
     <Compile Include="Battle\Action\Action.cs" />
+    <Compile Include="Battle\Action\ActionSeq.cs" />
+    <Compile Include="Battle\Action\Heal.cs" />
     <Compile Include="Battle\Action\Attack.cs" />
+    <Compile Include="Battle\Action\AttackAttribution.cs" />
     <Compile Include="Battle\Action\Buff.cs" />
-    <Compile Include="Battle\AttackInfo.cs" />
+    <Compile Include="Battle\ActionInfo.cs" />
     <Compile Include="Battle\AttackRange.cs" />
+    <Compile Include="Battle\BattleData.cs" />
+    <Compile Include="Battle\Character\EnemyName.cs" />
+    <Compile Include="Battle\Character\EnemyCharacter.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaAnimation.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaGraphics.cs" />
     <Compile Include="Battle\BattleField.cs" />
     <Compile Include="Battle\Character\Character.cs" />
     <Compile Include="Battle\CharacterStatus.cs" />
+    <Compile Include="Battle\Character\PlayableCharacter.cs" />
     <Compile Include="Battle\Character\TestEnemyCharacter.cs" />
     <Compile Include="Battle\Character\TestPlayableCharacter.cs" />
     <Compile Include="Battle\BattleQueue.cs" />
     <Compile Include="Battle\ConditionedEffect.cs" />
     <Compile Include="Battle\CommandSelect.cs" />
     <Compile Include="Battle\EquipSet.cs" />
+    <Compile Include="Battle\Graphic\BattleCharaMotion.cs" />
     <Compile Include="Battle\MagicField.cs" />
-    <Compile Include="Battle\Person.cs" />
+    <Compile Include="Event\CharacterActivateEvent.cs" />
+    <Compile Include="Battle\SelectWindow\SkillSelectWindow.cs" />
+    <Compile Include="Event\PlaySoundEvent.cs" />
+    <Compile Include="Dungeon\EnemyAppearance.cs" />
+    <Compile Include="Event\WaitEvent.cs" />
+    <Compile Include="Images\TriangleImage.cs" />
+    <Compile Include="Dungeon\DungeonState.cs" />
+    <Compile Include="Dungeon\Exec\AfterBattle.cs" />
+    <Compile Include="Dungeon\Exec\InitBattle.cs" />
+    <Compile Include="Dungeon\Exec\ItemFindEvent.cs" />
+    <Compile Include="Dungeon\SearchFloorEvent\BattleEvent.cs" />
+    <Compile Include="Dungeon\DungeonData.cs" />
+    <Compile Include="Dungeon\DungeonDatabase.cs" />
+    <Compile Include="Dungeon\Exec\DungeonExec.cs" />
+    <Compile Include="Dungeon\DungeonExecutor.cs" />
+    <Compile Include="Dungeon\SearchFloorEvent\DungeonFloorEvent.cs" />
+    <Compile Include="Dungeon\DungeonGraphics.cs" />
+    <Compile Include="Dungeon\DungeonInput.cs" />
+    <Compile Include="Dungeon\DungeonMaster.cs" />
+    <Compile Include="Dungeon\Exec\DungeonSearch.cs" />
+    <Compile Include="Dungeon\FirstSelectWindow.cs" />
+    <Compile Include="Dungeon\Exec\InitialWait.cs" />
+    <Compile Include="Dungeon\Exec\MoveNext.cs" />
+    <Compile Include="Dungeon\SearchFloorEvent\ItemFind.cs" />
+    <Compile Include="Dungeon\SearchFloorEvent\NothingEvent.cs" />
+    <Compile Include="Dungeon\PlayerObjectWrap.cs" />
+    <Compile Include="Dungeon\ReturnConfirm.cs" />
+    <Compile Include="Map\Maps\Magistol\Objects\SunnyInLuneRoom.cs" />
+    <Compile Include="Map\Maps\Other\OpeningMap.cs" />
+    <Compile Include="Map\Objects\SunnyObj.cs" />
+    <Compile Include="Menu\MagicMenuBase.cs" />
+    <Compile Include="Misc\SaveLoad\SaveRefs.cs" />
+    <Compile Include="Dungeon\Exec\ReturnToHome.cs" />
+    <Compile Include="Scene\DungeonScene.cs" />
+    <Compile Include="Skill\CommonOperation.cs" />
+    <Compile Include="Person\GrowthType.cs" />
+    <Compile Include="Person\Person.cs" />
     <Compile Include="Battle\SelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\CharaSelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\CommandPanel.cs" />
+    <Compile Include="Battle\SelectWindow\CommandSelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\MagicSelectWindow.cs" />
+    <Compile Include="Battle\SelectWindow\SelectItems.cs" />
+    <Compile Include="Battle\Graphic\StatusUI.cs" />
     <Compile Include="Battle\Turn.cs" />
     <Compile Include="ConversationRead\ConversationPerson.cs" />
     <Compile Include="ConversationRead\ConversationRead.cs" />
@@ -94,6 +147,7 @@
     <Compile Include="Event\PictureCreateEvent.cs" />
     <Compile Include="Event\SelectWindowEvent.cs" />
     <Compile Include="Event\Shop\ShopDatabase.cs" />
+    <Compile Include="Event\Shop\ShopDecideWindow.cs" />
     <Compile Include="Event\Shop\ShopEvent.cs" />
     <Compile Include="Event\Shop\ShopItemList.cs" />
     <Compile Include="Event\Shop\ShopPanel.cs" />
@@ -144,8 +198,11 @@
     <Compile Include="Map\CollideLayer.cs" />
     <Compile Include="Event\EventBase.cs" />
     <Compile Include="Event\EventSet.cs" />
+    <Compile Include="Map\CollideLine.cs" />
+    <Compile Include="Map\CollideObject.cs" />
     <Compile Include="Map\DashCharacter.cs" />
     <Compile Include="Map\ICollideObject.cs" />
+    <Compile Include="Map\IEventer.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\MapBoxManager.cs" />
     <Compile Include="Map\MapCameraManager.cs" />
@@ -161,6 +218,10 @@
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Map\MapConstruct.cs" />
     <Compile Include="Map\Maps\Flare\Flare1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol1.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolCol3.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolRoom.cs" />
+    <Compile Include="Map\Maps\Magistol\MagistolShop.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\AccessaryGirl.cs" />
     <Compile Include="Map\Maps\Somnia\Objects\Cigerman.cs" />
     <Compile Include="Map\WorldmapObject.cs" />
@@ -187,7 +248,6 @@
     <Compile Include="Menu\BasicMenu.cs" />
     <Compile Include="Menu\DescriptionWindow.cs" />
     <Compile Include="Menu\Detail\ArmorDetail.cs" />
-    <Compile Include="Menu\Detail\DetailComponent.cs" />
     <Compile Include="Menu\Detail\DetailWindow.cs" />
     <Compile Include="Menu\Detail\PossessNum.cs" />
     <Compile Include="Menu\EmptyPanel.cs" />
@@ -233,7 +293,11 @@
     <Compile Include="Misc\CharaName.cs" />
     <Compile Include="Misc\GameDateTime.cs" />
     <Compile Include="Misc\InputSmoother.cs" />
-    <Compile Include="Misc\PersonParty.cs" />
+    <Compile Include="Person\PersonData.cs" />
+    <Compile Include="Person\PersonDatabase.cs" />
+    <Compile Include="Person\PersonParty.cs" />
+    <Compile Include="Misc\SaveLoad\SaveData.cs" />
+    <Compile Include="Misc\SaveLoad\SaveLoad.cs" />
     <Compile Include="Mono\Audio.cs" />
     <Compile Include="Mono\Drawing.cs" />
     <Compile Include="Mono\Drawing3D.cs" />
@@ -242,22 +306,38 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources.cs" />
+    <Compile Include="Scene\MapScene.cs" />
     <Compile Include="Scene\Scene.cs" />
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\TestBattleScene.cs" />
     <Compile Include="Scene\TestScene.cs" />
+    <Compile Include="Scene\TitleScene.cs" />
     <Compile Include="Scene\WorldMapScene.cs" />
     <Compile Include="Skill\MagicLv.cs" />
     <Compile Include="Skill\SkillData.cs" />
     <Compile Include="Skill\SkillDataBase.cs" />
+    <Compile Include="Skill\SkillEffectData.cs" />
     <Compile Include="Skill\SkillHolder.cs" />
     <Compile Include="Skill\SkillLearn.cs" />
+    <Compile Include="Title\ExitTransition.cs" />
+    <Compile Include="Title\FirstWindow.cs" />
+    <Compile Include="Title\LandingTransition.cs" />
+    <Compile Include="Title\LoadGameTransition.cs" />
+    <Compile Include="Title\NewGameTransition.cs" />
+    <Compile Include="Title\TitleCommandWindow.cs" />
+    <Compile Include="Title\TitleGraphics.cs" />
+    <Compile Include="Title\TitleInput.cs" />
+    <Compile Include="Title\TitleMaster.cs" />
+    <Compile Include="Title\TitleOrnamentBar.cs" />
+    <Compile Include="UI\ToastMaster.cs" />
     <Compile Include="UI\UIGauge.cs" />
     <Compile Include="Window\ConversationWindow.cs" />
     <Compile Include="Window\IMessageBox.cs" />
     <Compile Include="Window\MessageBox.cs" />
     <Compile Include="Window\MessageWindow.cs" />
     <Compile Include="Window\SelectableWindow.cs" />
+    <Compile Include="Window\SpeechBubbleWindow.cs" />
+    <Compile Include="Window\VariableRectangle.cs" />
     <Compile Include="Window\VariableWindow.cs" />
     <Compile Include="Window\Window.cs" />
     <Compile Include="Window\WindowManager.cs" />
@@ -267,7 +347,11 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.9.0\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="YamlDotNet, Version=6.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.6.0.0\lib\net45\YamlDotNet.dll</HintPath>

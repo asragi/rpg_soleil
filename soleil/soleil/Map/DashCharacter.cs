@@ -12,8 +12,8 @@ namespace Soleil.Map
     abstract class DashCharacter : WalkCharacter
     {
         private Animation[] dashAnimation;
-        public DashCharacter(Vector pos,Vector? boxSize,ObjectManager om, BoxManager bm, bool symmetry = true)
-            :base(pos,boxSize,om,bm, symmetry)
+        public DashCharacter(string name, Vector pos, Vector? boxSize, ObjectManager om, BoxManager bm, bool symmetry = true)
+            : base(name, pos, boxSize, om, bm, symmetry)
         {
             dashAnimation = new Animation[9];
         }

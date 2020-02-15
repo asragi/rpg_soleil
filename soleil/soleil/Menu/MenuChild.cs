@@ -38,7 +38,7 @@ namespace Soleil.Menu
             IsActive = active;
         }
 
-        public void Input(Direction dir)
+        public virtual void Input(Direction dir)
         {
             if (KeyInput.GetKeyPush(Key.A)) { OnInputSubmit(); return; }
             if (KeyInput.GetKeyPush(Key.B)) { OnInputCancel(); return; }

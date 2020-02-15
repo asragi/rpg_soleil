@@ -24,7 +24,6 @@ namespace Soleil.Item
                 itemPossessMap.Add((ItemID)i, 0);
             }
         }
-
         /// <summary>
         /// 当該アイテムを1つ以上所持しているかどうかを返す．
         /// </summary>
@@ -40,7 +39,7 @@ namespace Soleil.Item
         /// </summary>
         public bool Consume(ItemID id, int num = 1)
         {
-            if(itemPossessMap[id] >= num)
+            if (itemPossessMap[id] >= num)
             {
                 itemPossessMap[id] -= num;
                 Refresh();
@@ -68,6 +67,10 @@ namespace Soleil.Item
             {
                 item?.OnListen(this);
             }
+        }
+        //distにitemPossessMapをコピー(セーブの時用)
+        public Dictionary<ItemID, int> CopyItemPossessMap() {
+            return new Dictionary<ItemID, int>(itemPossessMap);
         }
     }
 }

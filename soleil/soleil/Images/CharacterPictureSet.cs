@@ -18,14 +18,15 @@ namespace Soleil
     /// <summary>
     /// キャラクターごとの立ち絵のセット
     /// </summary>
-    class CharacterPictureSet: IComponent
+    class CharacterPictureSet : IComponent
     {
         FaceType faceType;
         public CharaName Name { get; private set; }
         CharacterPicture[] pictures;
 
         public Vector pos;
-        public Vector Pos {
+        public Vector Pos
+        {
             get => pos;
             set
             {

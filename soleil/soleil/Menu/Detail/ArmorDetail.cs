@@ -11,46 +11,36 @@ namespace Soleil.Menu.Detail
     /// <summary>
     /// 防具の詳細性能表示クラス．
     /// </summary>
-    class ArmorDetail : DetailComponent
+    class ArmorDetail : EasingComponent
     {
         readonly string AtkExpText = "攻撃力";
         readonly string ExplainText = "防御力";
-        readonly Vector DefExpPos = new Vector(0, 60);
-        readonly int Space = 220;
+        private static readonly Vector ExplainPos = new Vector(32, 32);
+        readonly Vector DefExpPos = new Vector(0, 53);
+        readonly int Space = 118;
         readonly Vector InitPos;
 
         TextWithVal atkExplain;
         TextWithVal defExplain;
         public ArmorDetail(Vector _pos)
-            :base()
+            : base()
         {
             InitPos = _pos;
             var font = DetailWindow.Font;
-            atkExplain = new TextWithVal(font, _pos, Space, AtkExpText);
-            defExplain = new TextWithVal(font, _pos+DefExpPos, Space, ExplainText);
+            atkExplain = new TextWithVal(font, _pos + ExplainPos, Space, AtkExpText);
+            defExplain = new TextWithVal(font, _pos + ExplainPos + DefExpPos, Space, ExplainText);
+            AddComponents(new[] { atkExplain, defExplain });
         }
 
-        public void Call()
-        {
-            atkExplain.Call();
-            defExplain.Call();
-        }
-
-        public void Quit()
-        {
-            atkExplain.Quit();
-            defExplain.Quit();
-        }
-
-        private void Refresh(SelectablePanel panel)
+        public void Refresh(SelectablePanel panel)
         {
             if (!(panel is ItemPanelBase)) return;
             var itemPanel = (ItemPanelBase)panel;
-            
+
             var data = ItemDataBase.Get(itemPanel.ID);
             var type = ItemDataBase.Get(itemPanel.ID).Type;
 
-            if(type == ItemType.Accessory || type == ItemType.Armor)
+            if (type == ItemType.Accessory || type == ItemType.Armor)
             {
                 // 攻撃性能を非表示に
                 atkExplain.Enable = false; // 攻撃力が上がる防具......？
@@ -61,7 +51,7 @@ namespace Soleil.Menu.Detail
                 defExplain.Val = ((IArmor)data).DefData.Physical;
                 return;
             }
-            if(type == ItemType.Weapon)
+            if (type == ItemType.Weapon)
             {
                 // 攻撃力表示設定
                 atkExplain.Enable = true;
@@ -78,22 +68,7 @@ namespace Soleil.Menu.Detail
             }
             // 装備でない
             atkExplain.Enable = false;
-            defExplain.Enable = false;            
-        }
-
-        public void Update(SelectablePanel panel)
-        {
-            base.Update();
-            Refresh(panel);
-            atkExplain.Update();
-            defExplain.Update();
-        }
-
-        public override void Draw(Drawing d)
-        {
-            base.Draw(d);
-            atkExplain.Draw(d);
-            defExplain.Draw(d);
+            defExplain.Enable = false;
         }
     }
 }

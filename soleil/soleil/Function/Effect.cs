@@ -13,18 +13,18 @@ namespace Soleil
     {
         public Vector Position;
         protected int frame = 0;
-        protected List<Effect> effect;
+        protected List<Effect> effects;
         public bool Disable = false;    //trueで破棄
         protected Color Color;
-        public Effect(Vector position, List<Effect> effect)
+        public Effect(Vector position, List<Effect> effects)
         {
             Position = position;
-            this.effect = effect;
+            this.effects = effects;
         }
-        public Effect(Vector position, List<Effect> effect, Color color)
+        public Effect(Vector position, List<Effect> effects, Color color)
         {
             Position = position;
-            this.effect = effect;
+            this.effects = effects;
             Color = color;
         }
 
@@ -42,14 +42,14 @@ namespace Soleil
     {
         int frameLimit;
         Vector size;
-        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effect) 
-            : base(position, effect)
+        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effects)
+            : base(position, effects)
         {
             frameLimit = frame;
             this.size = size;
         }
-        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effect, Color color)
-            : base(position, effect, color)
+        public BoxAbsoluteEffect(Vector position, Vector size, int frame, List<Effect> effects, Color color)
+            : base(position, effects, color)
         {
             frameLimit = frame;
             this.size = size;
@@ -65,7 +65,7 @@ namespace Soleil
         public override void Draw(Drawing d)
         {
             base.Draw(d);
-                d.DrawBoxStatic(Position, size, Color, DepthID.Effect);
+            d.DrawBoxStatic(Position, size, Color, DepthID.Effect);
         }
     }
 
@@ -74,15 +74,15 @@ namespace Soleil
         Texture2D texture;
         int frameLimit;
         bool flip;
-        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect) 
-            : base(position, effect)
+        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effects)
+            : base(position, effects)
         {
             this.texture = texture;
             frameLimit = frame;
             this.flip = flip;
         }
-        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect, Color color)
-            : base(position, effect, color)
+        public TextureEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effects, Color color)
+            : base(position, effects, color)
         {
             this.texture = texture;
             frameLimit = frame;
@@ -111,15 +111,15 @@ namespace Soleil
         Texture2D texture;
         int frameLimit;
         bool flip;
-        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect)
-            : base(position, effect)
+        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effects)
+            : base(position, effects)
         {
             this.texture = texture;
             frameLimit = frame;
             this.flip = flip;
         }
-        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effect,Color color)
-            : base(position, effect, color)
+        public TextureAbsoluteEffect(Vector position, Texture2D texture, int frame, bool flip, List<Effect> effects, Color color)
+            : base(position, effects, color)
         {
             this.texture = texture;
             frameLimit = frame;
@@ -143,18 +143,18 @@ namespace Soleil
         }
     }
 
-    class AnimationEffect:Effect
+    class AnimationEffect : Effect
     {
         Animation animation;
         bool flip;
-        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effect)
-            : base(position, effect)
+        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effects)
+            : base(position, effects)
         {
             animation = new Animation(animationData);
             this.flip = flip;
         }
-        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effect,Color color)
-            : base(position, effect, color)
+        public AnimationEffect(Vector position, EffectAnimationData animationData, bool flip, List<Effect> effects, Color color)
+            : base(position, effects, color)
         {
             animation = new Animation(animationData);
             this.flip = flip;
@@ -177,21 +177,21 @@ namespace Soleil
                 animation.Draw(d, Position);
         }
     }
-    
+
 
     class ShakeWindowEffect : Effect
     {
         int limitFrame;
         bool onFlag, offFlag;
         Camera camera;
-        public ShakeWindowEffect(int frame, Camera camera, List<Effect> effect)
-            : base(new Vector(-3, 3), effect)
+        public ShakeWindowEffect(int frame, Camera camera, List<Effect> effects)
+            : base(new Vector(-3, 3), effects)
         {
             this.camera = camera;
             limitFrame = frame;
         }
-        public ShakeWindowEffect(Vector position, int frame, List<Effect> effect) 
-            : base(position, effect)
+        public ShakeWindowEffect(Vector position, int frame, List<Effect> effects)
+            : base(position, effects)
         {
             limitFrame = frame;
         }
@@ -216,6 +216,29 @@ namespace Soleil
         public override void Draw(Drawing d)
         {
             base.Draw(d);
+        }
+    }
+
+    class AfterCountingEffect : Effect
+    {
+        int count;
+        Effect effect;
+        public AfterCountingEffect(int count, Effect effect, List<Effect> effects) : base(new Vector(), effects) =>
+            (this.count, this.effect) = (count, effect);
+
+        public override void Move()
+        {
+            if (count > 0)
+                count--;
+            else
+                effect.Move();
+            Disable = effect.Disable;
+        }
+
+        public override void Draw(Drawing d)
+        {
+            if (count == 0)
+                effect.Draw(d);
         }
     }
 }

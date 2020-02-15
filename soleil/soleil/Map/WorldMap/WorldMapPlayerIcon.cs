@@ -22,9 +22,10 @@ namespace Soleil.Map.WorldMap
         public WorldMapPlayerIcon(WorldPoint playerpoint)
         {
             Point = playerpoint;
-            iconImg = new Image(TextureID.BackBar, Point.Pos,
+            iconImg = new Image(TextureID.Triangle, Point.Pos,
                 Vector.Zero, DepthID.Player,
-                true, false, 1);
+                true, false, 1)
+            { Angle = (float)Math.PI, Size = new Vector(2) };
         }
 
         public void Update()

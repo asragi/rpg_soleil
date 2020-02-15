@@ -13,7 +13,7 @@ namespace Soleil.Menu
     {
         private IComponent[] components;
 
-        protected void AddComponents(IComponent[] comps)
+        protected void AddComponents(params IComponent[] comps)
         {
             if (components == null) components = comps;
             else components = components.Concat(comps).ToArray();
@@ -40,7 +40,16 @@ namespace Soleil.Menu
         /// </summary>
         protected virtual void OnDisable() { }
 
-        public virtual void Quit() {
+        /// <summary>
+        /// Componentsの参照をnullにする．
+        /// </summary>
+        public void Clear()
+        {
+            components = null;
+        }
+
+        public virtual void Quit()
+        {
             if (components != null)
             {
                 foreach (var item in components)
@@ -50,7 +59,8 @@ namespace Soleil.Menu
             }
         }
 
-        public virtual void Call() {
+        public virtual void Call()
+        {
             if (components != null)
             {
                 foreach (var item in components)
@@ -79,7 +89,8 @@ namespace Soleil.Menu
                 }
             }
         }
-        public virtual void Draw(Drawing d) {
+        public virtual void Draw(Drawing d)
+        {
             if (components != null)
             {
                 foreach (var item in components)

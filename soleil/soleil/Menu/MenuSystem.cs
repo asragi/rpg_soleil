@@ -13,7 +13,6 @@ namespace Soleil.Menu
         Items = 0,
         Magic,
         Skill,
-        // Equip,
         Status,
         Option,
         Save,
@@ -37,6 +36,7 @@ namespace Soleil.Menu
             "ゲームデータのセーブを行います。"
         };
 
+        PersonParty party;
         Image backImage, frontImage;
 
         MenuItem[] menuItems;
@@ -76,21 +76,20 @@ namespace Soleil.Menu
             TextureID.MenuItem2,
             TextureID.MenuMagic1,
             TextureID.MenuMagic2,
-            TextureID.MenuMagic1,
-            TextureID.MenuMagic2,
+            TextureID.MenuSkill1,
+            TextureID.MenuSkill2,
             TextureID.MenuEquip1,
             TextureID.MenuEquip2,
-            // TextureID.MenuStatus1,
-            // TextureID.MenuStatus2,
             TextureID.MenuOption1,
             TextureID.MenuOption2,
             TextureID.MenuSave1,
             TextureID.MenuSave2
         };
 
-        public MenuSystem(PersonParty party)
-            :base(null)
+        public MenuSystem(PersonParty _party)
+            : base(null)
         {
+            party = _party;
             Index = 0;
             // Image初期化
             backImage = new Image(TextureID.MenuBack, Vector.Zero, Vector.Zero, DepthID.MenuBack);
@@ -113,17 +112,17 @@ namespace Soleil.Menu
             itemTargetSelect = new ItemTargetSelect(itemMenu);
             // Item Target Select
             // Status Menu
-            statusTargetSelect = new StatusTargetSelect(this);
-            statusMenu = new StatusMenu(party, this);
+            statusTargetSelect = new StatusTargetSelect(this, menuDescription, Descriptions[(int)MenuName.Status]);
+            statusMenu = new StatusMenu(_party, this);
             // Magic Menu
-            magicUserSelect = new MagicUserSelect(this);
-            magicMenu = new MagicMenu(magicUserSelect, menuDescription);
+            magicUserSelect = new MagicUserSelect(this, menuDescription, Descriptions[(int)MenuName.Magic]);
+            magicMenu = new MagicMenu(magicUserSelect, menuDescription, party);
             magicTargetSelect = new MagicTargetSelect(magicMenu);
             // Skill Menu
-            skillUserSelect = new SkillUserSelect(this);
+            skillUserSelect = new SkillUserSelect(this, menuDescription, Descriptions[(int)MenuName.Skill]);
             skillMenu = new SkillMenu(skillUserSelect, menuDescription);
             // 詳細ステータス
-            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, party);
+            statusSystem = new StatusSystem(statusTargetSelect, menuDescription, _party);
             // MenuChildren(foreach用. 描画順に．)
             menuChildren = new MenuChild[] {
                 statusMenu, statusTargetSelect,
@@ -138,6 +137,7 @@ namespace Soleil.Menu
             magicUserSelect.SetRefs(statusMenu);
             magicTargetSelect.SetRefs(statusMenu);
             skillUserSelect.SetRefs(statusMenu);
+            magicMenu.SetRefs(magicTargetSelect, statusMenu);
 
             // メニューと同時に立ち上がったり閉じたりしてほしいInputに関係ないものたち．
             AddComponents(new IComponent[]
@@ -156,7 +156,7 @@ namespace Soleil.Menu
             IsActive = false;
 
             // Money
-            moneyComponent = new MoneyComponent(MoneyComponentPos);
+            moneyComponent = new MoneyComponent(MoneyComponentPos, new Vector(30, 0));
         }
 
         /// <summary>
@@ -165,6 +165,7 @@ namespace Soleil.Menu
         public override void Call()
         {
             base.Call();
+            Audio.PlaySound(SoundID.MenuOpen);
             transition.SetDepth(DepthID.Effect);
             ImageTransition(TransitionMode.FadeOut);
             for (int i = 0; i < menuItems.Length; i++)
@@ -184,6 +185,7 @@ namespace Soleil.Menu
         public override void Quit()
         {
             base.Quit();
+            Audio.PlaySound(SoundID.Back);
             // Set bools
             IsActive = false;
             IsQuit = true;
@@ -210,6 +212,7 @@ namespace Soleil.Menu
         public void Input(Direction dir)
         {
             var input = dir;
+            if (dir != Direction.N) Audio.PlaySound(SoundID.MenuCursor);
             // IsActiveなら自身の項目を動かす
             if (IsActive)
             {
@@ -218,7 +221,7 @@ namespace Soleil.Menu
                 Index = (Index + menuItems.Length) % menuItems.Length;
                 menuDescription.Text = Descriptions[Index];
                 if (KeyInput.GetKeyPush(Key.A)) Decide();
-                else if (KeyInput.GetKeyPush(Key.B)) Quit();
+                else if (KeyInput.GetKeyPush(Key.B) || KeyInput.GetKeyPush(Key.C)) Quit();
                 return;
             }
             // Activeな子ウィンドウに入力を送る
@@ -226,6 +229,7 @@ namespace Soleil.Menu
             {
                 if (!child.IsActive) continue;
                 child.Input(input);
+                if (KeyInput.GetKeyPush(Key.B)) Audio.PlaySound(SoundID.Back);
             }
         }
 
@@ -243,24 +247,28 @@ namespace Soleil.Menu
         {
             IsActive = false;
             var selected = (MenuName)Index;
-            if(selected == MenuName.Items)
+            if (selected == MenuName.Items)
             {
                 itemMenu.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Status)
             {
                 statusTargetSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Magic)
             {
                 magicUserSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Skill)
             {
                 skillUserSelect.Call();
+                Audio.PlaySound(SoundID.DecideSoft);
                 return;
             }
             if (selected == MenuName.Option)
@@ -269,10 +277,11 @@ namespace Soleil.Menu
                 IsActive = true; // debug
                 return;
             }
-            if(selected == MenuName.Save)
+            if (selected == MenuName.Save)
             {
                 // Save用ウィンドウ出現
-
+                SaveLoad.Save();
+                Console.WriteLine("SAVE");
                 IsActive = true; // debug
                 return;
             }
@@ -281,7 +290,7 @@ namespace Soleil.Menu
         {
             base.OnDisable();
             // Transition Images
-            for (int i = 0; i<menuItems.Length; i++)
+            for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].MoveToBack();
             }
@@ -291,7 +300,7 @@ namespace Soleil.Menu
         {
             base.OnEnable();
             // Transition Images
-            for (int i = 0; i<menuItems.Length; i++)
+            for (int i = 0; i < menuItems.Length; i++)
             {
                 menuItems[i].MoveToDefault();
             }

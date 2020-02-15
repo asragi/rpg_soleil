@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace Soleil.Map
 {
-    class MapChangeObject : MapEventObject
+    class MapChangeObject : MapObject, IEventer
     {
-        public MapChangeObject(Vector pos, Vector size, MapName mapName, Vector destination, Direction dir,
+        protected EventSequence EventSequence;
+        public MapChangeObject((Vector, Vector) pos, MapName mapName, Vector destination, Direction dir,
             ObjectManager om, BoxManager bm, PersonParty party, Camera cam)
-            : base(pos, size, om, bm)
+            : base(om)
         {
-            Pos = pos;
-            ExistanceBox.Layer = CollideLayer.RoadEvent;
+            new CollideLine(this, pos, CollideLayer.RoadEvent, bm);
+            Pos = (pos.Item1 + pos.Item2) / 2;
+            EventSequence = new EventSequence(om.GetPlayer());
             EventSequence.SetEventSet(
                 new EventSet(
                     new ChangeInputFocusEvent(InputFocus.None),
+                    new PlaySoundEvent(SoundID.MapMove),
                     new CharacterMoveEvent(om.GetPlayer(), dir, 15, false),
                     new FadeOutEvent(),
                     new ChangeMapEvent(mapName, destination, dir, party, cam),
@@ -27,11 +30,28 @@ namespace Soleil.Map
             );
         }
 
-        public override void OnCollisionEnter(CollideBox col)
+        public override void OnCollisionEnter(CollideObject col)
         {
             base.OnCollisionEnter(col);
             if (col.Layer != CollideLayer.Player) return;
             EventSequence.StartEvent();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            EventUpdate();
+        }
+
+        virtual public void EventUpdate()
+        {
+            EventSequence.Update();
+        }
+
+        public override void Draw(Drawing sb)
+        {
+            base.Draw(sb);
+            EventSequence.Draw(sb);
         }
     }
 }

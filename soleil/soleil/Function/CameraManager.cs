@@ -17,11 +17,16 @@ namespace Soleil
             set => sceneManager.NowScene.Camera.SetPositon(value);
         }
 
-        private static CameraManager cameraManager = new CameraManager();
+        private static readonly CameraManager cameraManager;
         public static CameraManager GetInstance() => cameraManager;
         SceneManager sceneManager;
 
-        private CameraManager() => 
+        private CameraManager() =>
             sceneManager = SceneManager.GetInstance();
+
+        static CameraManager()
+        {
+            cameraManager = new CameraManager();
+        }
     }
 }

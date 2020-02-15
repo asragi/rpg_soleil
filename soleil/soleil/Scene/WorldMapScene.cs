@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    class WorldMapScene: Scene
+    class WorldMapScene : Scene
     {
         WorldMapMaster worldMapMaster;
         PersonParty party;
@@ -17,11 +17,12 @@ namespace Soleil
         public WorldMapScene(SceneManager sm, PersonParty _party, WorldPointKey pointKey)
             : base(sm)
         {
-            worldMapMaster = new WorldMapMaster(pointKey, this);
+            worldMapMaster = new WorldMapMaster(pointKey, this, _party);
             party = _party;
             var transition = Transition.GetInstance();
             transition.SetMode(TransitionMode.FadeIn);
             mapIndicator = new MapIndicator();
+            Audio.PlayMusic(MusicID.WorldMap);
         }
 
         public void ChangeSceneToMap(WorldPointKey key)
@@ -29,7 +30,7 @@ namespace Soleil
             MapName name;
             Vector position;
             (name, position) = WorldMapPositionData.Get(key);
-            new TestScene(SceneManager, party, name, position);
+            new MapScene(SceneManager, party, name, position);
             Kill();
         }
 

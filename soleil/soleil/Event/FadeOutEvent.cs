@@ -3,12 +3,12 @@
 namespace Soleil.Event
 {
     class FadeOutEvent
-        :EventBase
+        : EventBase
     {
         Transition transition;
         bool started;
         public FadeOutEvent()
-            :base()
+            : base()
         {
             transition = Transition.GetInstance();
         }

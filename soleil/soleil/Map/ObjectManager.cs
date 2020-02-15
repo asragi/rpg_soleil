@@ -43,7 +43,7 @@ namespace Soleil.Map
             objects.RemoveAll(s => s.IsDead());
             foreach (var item in objects)
             {
-                if(item is MapEventObject a) a.EventUpdate();
+                if(item is IEventer a) a.EventUpdate();
             }
         }
 

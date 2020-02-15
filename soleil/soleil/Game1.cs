@@ -11,7 +11,7 @@ namespace Soleil
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         Drawing drawing;
         SceneManager sm;
         PersonParty party;
@@ -81,11 +81,15 @@ namespace Soleil
             LoadItemData(); // Debug
             // SceneManager
             sm = SceneManager.GetInstance();
-            party = new PersonParty();
-            //new TestScene(sm, party, Map.MapName.Somnia1, new Vector(400, 400));
-            // new TestBattleScene(sm);
-             new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
+            // !debug! Save
+            bool saveExist = SaveLoad.FileExist();
+            if (saveExist) SaveLoad.Load();
+            party = SaveLoad.GetParty(isNew: !saveExist);
 
+            new TitleScene(sm);
+            //new TestBattleScene(sm, party, new[] { Battle.CharacterType.TestEnemy, Battle.CharacterType.TestEnemy });
+            // new WorldMapScene(sm, party, Map.WorldMap.WorldPointKey.Somnia);
+            //new DungeonScene(sm, party, Dungeon.DungeonName.MagistolUnderground);
 
 
             drawing.DrawRate = DrawRate;
@@ -102,7 +106,7 @@ namespace Soleil
                     item.AddItem((Item.ItemID)i, i);
                 }
 
-                var wallet = new Map.MoneyWallet(50000);
+                var wallet = new Map.MoneyWallet(500000);
                 playerBaggage.SetData(item, wallet);
             }
         }
@@ -148,7 +152,7 @@ namespace Soleil
                 Exit();
                 End = false;
             }
-            
+
 
             // TODO: Add your update logic here
             //Audio.Update();

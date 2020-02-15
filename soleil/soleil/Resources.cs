@@ -16,10 +16,21 @@ namespace Soleil
         FrameTest,
         WhiteWindow,
         IndicatorBack,
+        Triangle,
         BackBar,
+        Currency,
+
+        ToastBack,
 
         MessageWindow,
+        MessageWindowBack,
+        MessageWindowArrow,
         ConversationWindow,
+
+        TitleBack,
+        TitleLabelSelected,
+        TitleLabelUnselected,
+        TitleLogo,
 
         MenuFront,
         MenuBack,
@@ -30,6 +41,8 @@ namespace Soleil
         MenuItem2,
         MenuMagic1,
         MenuMagic2,
+        MenuSkill1,
+        MenuSkill2,
         MenuOption1,
         MenuOption2,
         MenuStatus1,
@@ -50,6 +63,16 @@ namespace Soleil
         IconAccessary,
         IconPot,
         IconJewel,
+        MagicSun,
+        MagicShade,
+        MagicMagic,
+        MagicDark,
+        MagicSound,
+        MagicNinja,
+        MagicWood,
+        MagicMetal,
+        MagicSpace,
+        MagicTime,
 
         Rule0,
         Rule1,
@@ -110,8 +133,48 @@ namespace Soleil
         Somnia4_4,
         Somnia4_5,
 
+        Magistol1_back,
+        Magistol1_dark,
+        Magistol1_wall,
+        Magistol1_cloth,
+
+        Magistol2_back,
+        Magistol2_chair,
+        Magistol2_plant,
+        Magistol2_wall,
+        Magistol2_stair,
+        Magistol2_shelf,
+
+        Magistol3_back,
+        Magistol3_chair,
+        Magistol3_wall,
+
+        Magistol4_back,
+        Magistol4_chair1,
+        Magistol4_chair2,
+        Magistol4_wall,
+        Magistol4_plant,
+
+        WorldMap,
         WorldMapIcon,
         WorldMapCursor,
+
+        BattleTemporaryBackground,
+        BattleCommandSelectedMagic,
+        BattleCommandUnselectedMagic,
+        BattleCommandSelectedSkill,
+        BattleCommandUnselectedSkill,
+        BattleCommandSelectedGuard,
+        BattleCommandUnselectedGuard,
+        BattleCommandSelectedEscape,
+        BattleCommandUnselectedEscape,
+        BattleTurnQueueFace1,
+        BattleTurnQueueFace2,
+        BattleTurnQueueFace3,
+        BattleTurnQueueFace4,
+        BattleTurnQueueFaceSun,
+        BattleTurnQueueFaceLune,
+
 
         White, Size
     }
@@ -140,12 +203,36 @@ namespace Soleil
 
         SomniaMob1,
         SomniaAcceU,
+        MobRedHat,
+        MobBlueGirl,
+        MobBlackSuit,
+
+
+        BattleLuneStanding,
+        BattleLuneChant,
+        BattleLuneMagic,
+        BattleLuneDown,
+        BattleLuneVictory,
+        BattleLuneCrisis,
+
+        BattleSunnyStanding,
+        BattleSunnyMagic,
+
+        BattleTestEnemyStanding,
 
         Size,
     }
 
     enum EffectAnimationID
     {
+        PointFlare,
+
+        Thunder,
+        MagicalHeal,
+        Explode,
+
+        Blow,
+
         Size,
     }
 
@@ -164,11 +251,31 @@ namespace Soleil
 
     enum MusicID : int
     {
+        SunCity,
+        ShadeCity,
+        MagicCity,
+        Battle1,
+        WorldMap,
         Size,
     }
 
     enum SoundID : int
     {
+        // System
+        DecideSoft,
+        DecideHard,
+        MenuOpen,
+        MenuCursor,
+        Back,
+
+        // Map
+        MapMove,
+
+        // Battle
+        Magic,
+        Head,
+        Fire,
+
         Size,
     }
 
@@ -179,6 +286,7 @@ namespace Soleil
         public static Texture2D[] Animes;
         public static Texture2D[] EffectAnimes;
         public static SpriteFont[] Fonts;
+        public static MusicData[] MusicDataSet;
         public static List<List<string>>[] CharacterData;
         public static SoundEffect[] SEs;
         public static int[,] AnimeSplit;
@@ -199,14 +307,15 @@ namespace Soleil
         const string UIPath = "UI/";
         const string TitlePath = "Title/";
         const string MenuPath = "Menu/";
+        const string BattlePath = "Battle/";
         const string StagePath = "Stage/";
         const string CharacterSelectPath = "CharacterSelect/";
-        const string BattlePath = "Battle/";
         const string AkaPath = "Aka/";
         const string EffectPath = "Effect/";
         const string MusicPath = "Music/";
         const string SEPath = "SE/";
         const string DataPath = "Data/";
+        const string AnimationPath = "Animation/";
 
         public static void Init(Microsoft.Xna.Framework.Content.ContentManager Content)
         {
@@ -217,6 +326,7 @@ namespace Soleil
             ColorDictionary = new Dictionary<Color, Color>[(int)ColorDictionaryID.Size];
             Fonts = new SpriteFont[(int)FontID.Size];
             SEs = new SoundEffect[(int)SoundID.Size];
+            MusicDataSet = new MusicData[(int)MusicID.Size];
             SetParamaters();
 
             //Load Graphics
@@ -232,10 +342,10 @@ namespace Soleil
                 SEs[i] = Content.Load<SoundEffect>(sePath[i]);
 
 
-            
+
             for (int i = 0; i < (int)ColorDictionaryID.Size; i++)
                 ColorDictionary[i] = ReadDictionary(colorDataPath[i]);
-            
+
         }
 
         public static void ReadWindowSize()
@@ -263,6 +373,8 @@ namespace Soleil
 
             SetPath(TextureID.White, "white");
             SetPath(TextureID.BackBar, $"{UIPath}backBar");
+            SetPath(TextureID.Currency, $"{UIPath}currency");
+            SetPath(TextureID.ToastBack, $"{UIPath}Dungeon/yasoba-toast");
 
             SetPath(TextureID.Flare1_1_1_1, "Map/Back/Flare/1/flare1-1-1");
             SetPath(TextureID.Flare1_1_2_1, "Map/Back/Flare/1/flare1-1-2");
@@ -291,9 +403,34 @@ namespace Soleil
             SetPath(TextureID.Somnia4_4, "Map/Back/Somnia/4/somnia4-4");
             SetPath(TextureID.Somnia4_5, "Map/Back/Somnia/4/somnia4-5");
 
+            string mag = "Map/Back/Magistol/";
+
+            SetPath(TextureID.Magistol1_back, mag + "room/1");
+            SetPath(TextureID.Magistol1_dark, mag + "room/2");
+            SetPath(TextureID.Magistol1_cloth, mag + "room/3");
+            SetPath(TextureID.Magistol1_wall, mag + "room/wall");
+
+            SetPath(TextureID.Magistol2_back, mag + "col1/col");
+            SetPath(TextureID.Magistol2_chair, mag + "col1/chair");
+            SetPath(TextureID.Magistol2_plant, mag + "col1/plant");
+            SetPath(TextureID.Magistol2_wall, mag + "col1/wall");
+            SetPath(TextureID.Magistol2_stair, mag + "col1/stair");
+            SetPath(TextureID.Magistol2_shelf, mag + "col1/shelf");
+
+            SetPath(TextureID.Magistol3_back, mag + "shop/back");
+            SetPath(TextureID.Magistol3_chair, mag + "shop/chair");
+            SetPath(TextureID.Magistol3_wall, mag + "shop/wall");
+
+            SetPath(TextureID.Magistol4_back, mag + "col3/back");
+            SetPath(TextureID.Magistol4_chair1, mag + "col3/chair1");
+            SetPath(TextureID.Magistol4_chair2, mag + "col3/chair2");
+            SetPath(TextureID.Magistol4_wall, mag + "col3/wall");
+            SetPath(TextureID.Magistol4_plant, mag + "col3/plant");
+
             SetPath(TextureID.WhiteWindow, "UI/WindowWhite");
             SetPath(TextureID.IndicatorBack, "UI/indicatorTemp");
 
+            SetPath(TextureID.WorldMap, "Map/WorldMap/worldmap");
             SetPath(TextureID.WorldMapIcon, "Map/WorldMap/yasoba-building-icon");
             SetPath(TextureID.WorldMapCursor, "Map/WorldMap/cursor");
             #endregion
@@ -338,20 +475,60 @@ namespace Soleil
             SetSize(AnimationID.SomniaMob1, 3, 1);
             SetPath(AnimationID.SomniaAcceU, "Animation/Map/Character/Mob/Somnia/acce");
             SetSize(AnimationID.SomniaAcceU, 1, 1);
+            SetPath(AnimationID.MobBlackSuit, "Animation/Map/Character/Mob/mob1");
+            SetSize(AnimationID.MobBlackSuit, 1, 1);
+            SetPath(AnimationID.MobRedHat, "Animation/Map/Character/Mob/mob2");
+            SetSize(AnimationID.MobRedHat, 1, 1);
+            SetPath(AnimationID.MobBlueGirl, "Animation/Map/Character/Mob/mob3");
+            SetSize(AnimationID.MobBlueGirl, 1, 1);
+
+            //Battle
+            var BattleAnimationPath = AnimationPath + BattlePath;
+            SetPath(AnimationID.BattleLuneStanding, BattleAnimationPath + "Lune_battle_n");
+            SetSize(AnimationID.BattleLuneStanding, 4, 1);
+            SetPath(AnimationID.BattleLuneChant, BattleAnimationPath + "Lune_chant");
+            SetSize(AnimationID.BattleLuneChant, 4, 1);
+            SetPath(AnimationID.BattleLuneMagic, BattleAnimationPath + "Lune_magic");
+            SetSize(AnimationID.BattleLuneMagic, 4, 1);
+            SetPath(AnimationID.BattleLuneCrisis, BattleAnimationPath + "Lune_crisis");
+            SetSize(AnimationID.BattleLuneCrisis, 4, 1);
+            SetPath(AnimationID.BattleLuneVictory, BattleAnimationPath + "Lune_victory");
+            SetSize(AnimationID.BattleLuneVictory, 5, 4);
+            SetPath(AnimationID.BattleLuneDown, BattleAnimationPath + "Lune_down");
+            SetSize(AnimationID.BattleLuneDown, 1, 1);
+            SetPath(AnimationID.BattleSunnyStanding, BattleAnimationPath + "Sunny_battle_n");
+            SetSize(AnimationID.BattleSunnyStanding, 4, 2);
+            SetPath(AnimationID.BattleSunnyMagic, BattleAnimationPath + "Sunny_magic");
+            SetSize(AnimationID.BattleSunnyMagic, 4, 2);
+
+
+            SetPath(AnimationID.BattleTestEnemyStanding, BattleAnimationPath + "Testenemy_stand");
+            SetSize(AnimationID.BattleTestEnemyStanding, 5, 2);
+
             #endregion
 
             #region UI
+            SetPath(TextureID.Triangle, UIPath + "yasoba-triangle");
             SetPath(TextureID.FrameTest, UIPath + "window2");
             SetPath(TextureID.MessageWindow, UIPath + "message");
+            SetPath(TextureID.MessageWindowBack, UIPath + "message-back");
+            SetPath(TextureID.MessageWindowArrow, UIPath + "message-arrow");
 
             SetPath(TextureID.ConversationWindow, UIPath + "yasoba-window");
 
+            string title = UIPath + "Title/";
+            SetPath(TextureID.TitleBack, title + "back");
+            SetPath(TextureID.TitleLabelSelected, title + "label");
+            SetPath(TextureID.TitleLabelUnselected, title + "label-un");
+            SetPath(TextureID.TitleLogo, title + "logo");
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
             SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
             SetPath(TextureID.MenuItem2, UIPath + MenuPath + "menuitem2");
             SetPath(TextureID.MenuMagic1, UIPath + MenuPath + "menumagic1");
             SetPath(TextureID.MenuMagic2, UIPath + MenuPath + "menumagic2");
+            SetPath(TextureID.MenuSkill1, UIPath + MenuPath + "menuskill1");
+            SetPath(TextureID.MenuSkill2, UIPath + MenuPath + "menuskill2");
             SetPath(TextureID.MenuOption1, UIPath + MenuPath + "menuoption1");
             SetPath(TextureID.MenuOption2, UIPath + MenuPath + "menuoption2");
             SetPath(TextureID.MenuStatus1, UIPath + MenuPath + "menustatus1");
@@ -377,6 +554,34 @@ namespace Soleil
             SetPath(TextureID.IconPot, UIPath + MenuPath + "icons/" + "icon-pot");
             SetPath(TextureID.IconJewel, UIPath + MenuPath + "icons/" + "icon-jewel");
 
+            string mIcon = UIPath + MenuPath + "magicicon/";
+            SetPath(TextureID.MagicSun, mIcon + "micon-sun");
+            SetPath(TextureID.MagicShade, mIcon + "micon-moon");
+            SetPath(TextureID.MagicMagic, mIcon + "micon-magic");
+            SetPath(TextureID.MagicDark, mIcon + "micon-dark");
+            SetPath(TextureID.MagicSound, mIcon + "micon-sound");
+            SetPath(TextureID.MagicNinja, mIcon + "micon-ninja");
+            SetPath(TextureID.MagicWood, mIcon + "micon-leaf");
+            SetPath(TextureID.MagicMetal, mIcon + "micon-gear");
+            SetPath(TextureID.MagicSpace, mIcon + "micon-space");
+            SetPath(TextureID.MagicTime, mIcon + "micon-time");
+
+            SetPath(TextureID.BattleTemporaryBackground, UIPath + BattlePath + "tempBack");
+            SetPath(TextureID.BattleCommandSelectedMagic, UIPath + BattlePath + "magicSelected");
+            SetPath(TextureID.BattleCommandUnselectedMagic, UIPath + BattlePath + "magicUnselect");
+            SetPath(TextureID.BattleCommandSelectedSkill, UIPath + BattlePath + "skillSelected");
+            SetPath(TextureID.BattleCommandUnselectedSkill, UIPath + BattlePath + "skillUnselect");
+            SetPath(TextureID.BattleCommandSelectedGuard, UIPath + BattlePath + "guardSelected");
+            SetPath(TextureID.BattleCommandUnselectedGuard, UIPath + BattlePath + "guardUnselect");
+            SetPath(TextureID.BattleCommandSelectedEscape, UIPath + BattlePath + "escapeSelected");
+            SetPath(TextureID.BattleCommandUnselectedEscape, UIPath + BattlePath + "escapeUnselect");
+            SetPath(TextureID.BattleTurnQueueFace1, UIPath + BattlePath + "face1");
+            SetPath(TextureID.BattleTurnQueueFace2, UIPath + BattlePath + "face2");
+            SetPath(TextureID.BattleTurnQueueFace3, UIPath + BattlePath + "face3");
+            SetPath(TextureID.BattleTurnQueueFace4, UIPath + BattlePath + "face4");
+            SetPath(TextureID.BattleTurnQueueFaceSun, UIPath + BattlePath + "faceSun");
+            SetPath(TextureID.BattleTurnQueueFaceLune, UIPath + BattlePath + "faceLune");
+
 
             for (int i = 0; i < 20; i++)
             {
@@ -384,15 +589,52 @@ namespace Soleil
             }
             #endregion
 
+            #region Music
+            SetPath(MusicID.SunCity, "gairo_wo_terasu");
+            SetData(MusicID.SunCity);
+            SetPath(MusicID.ShadeCity, "hi_no_ataranai_machi_ni_kurashite");
+            SetData(MusicID.ShadeCity);
+            SetPath(MusicID.MagicCity, "bgm_maoudamashii_fantasy14");
+            SetData(MusicID.MagicCity);
+            SetPath(MusicID.Battle1, "battle1");
+            SetData(MusicID.Battle1);
+            SetPath(MusicID.WorldMap, "bgm_maoudamashii_healing06");
+            SetData(MusicID.WorldMap);
+            #endregion
+
+            #region SE
+            string se = "SE/";
+            SetPath(SoundID.DecideSoft, se + "decision9");
+            SetPath(SoundID.MenuOpen, se + "decision24");
+            SetPath(SoundID.DecideHard, se + "decision25");
+            SetPath(SoundID.Back, se + "whiff");
+            SetPath(SoundID.Fire, se + "fire");
+            SetPath(SoundID.Head, se + "attack3");
+            SetPath(SoundID.Magic, se + "special");
+            SetPath(SoundID.MapMove, se + "shoes-tonton1");
+            SetPath(SoundID.MenuCursor, se + "cursor1");
+
+
+            #endregion
 
             SetPath(AnimationID.Arrow, "Arrow");
             SetSize(AnimationID.Arrow, 1, 9);
 
             #region EffectAnimation
-
+            string effectPath = "Animation/Effect/";
+            SetPath(EffectAnimationID.PointFlare, effectPath + "s_fire");
+            SetSize(EffectAnimationID.PointFlare, 6, 5);
+            SetPath(EffectAnimationID.Thunder, effectPath + "m_thunder");
+            SetSize(EffectAnimationID.Thunder, 3, 7);
+            SetPath(EffectAnimationID.MagicalHeal, effectPath + "m_heal");
+            SetSize(EffectAnimationID.MagicalHeal, 4, 8);
+            SetPath(EffectAnimationID.Explode, effectPath + "m_explode");
+            SetSize(EffectAnimationID.Explode, 6, 5);
+            SetPath(EffectAnimationID.Blow, effectPath + "skill_blow");
+            SetSize(EffectAnimationID.Blow, 4, 4);
             #endregion
 
-            
+
             SetPath(FontID.CorpM, "corpm");
             SetPath(FontID.CorpMini, "corpmini");
 
@@ -420,7 +662,15 @@ namespace Soleil
             EffectAnimeSplit[(int)id, 0] = xNum;
             EffectAnimeSplit[(int)id, 1] = yNum;
         }
-        
+
+        // 音楽の詳細データセット
+        static void SetData(MusicID id, bool repeat = true) => SetData(id, -1, -1, repeat);
+        static void SetData(MusicID id, long loopInit, long loopEnd, bool repeat = true)
+        {
+            MusicDataSet[(int)id].LoopInitByte = loopInit;
+            MusicDataSet[(int)id].LoopEndByte = loopEnd;
+            MusicDataSet[(int)id].Repeat = repeat;
+        }
 
         public static Texture2D GetTexture(TextureID id) => Graphs[(int)id];
         public static Texture2D GetTexture(AnimationID id) => Animes[(int)id];
@@ -455,6 +705,11 @@ namespace Soleil
             return dict;
         }
 
-        public static string MusicPass(MusicID id) => "Data/" + songPath[(int)id];
+        public static string MusicPass(MusicID id) => "music/" + songPath[(int)id];
+
+        public static Vector GetSize(this FontID id, string text)
+        {
+            return (Vector)GetFont(id).MeasureString(text);
+        }
     }
 }

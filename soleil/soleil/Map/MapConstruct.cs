@@ -27,11 +27,11 @@ namespace Soleil.Map
         MapDepth mapDepth;
         protected DepthID depthId;
 
-        public MapConstruct(TextureID tex,MapDepth dep,ObjectManager om)
-            : this(Vector.Zero,tex,dep,om){}
+        public MapConstruct(TextureID tex, MapDepth dep, ObjectManager om)
+            : this(Vector.Zero, tex, dep, om) { }
 
-        public MapConstruct(Vector _pos, TextureID tex,MapDepth dep, ObjectManager om)
-            :base(om)
+        public MapConstruct(Vector _pos, TextureID tex, MapDepth dep, ObjectManager om)
+            : base(om)
         {
             Pos = _pos;
             texture = Resources.GetTexture(tex);

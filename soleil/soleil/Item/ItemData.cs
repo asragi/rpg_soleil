@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using AttackAttribution = Soleil.Battle.AttackAttribution;
 namespace Soleil.Item
 {
     /// <summary>
@@ -44,7 +45,7 @@ namespace Soleil.Item
     {
         public int Physical;
         public int Magical;
-        
+
         public AttackData(int p, int m)
         {
             Physical = p;
@@ -72,8 +73,11 @@ namespace Soleil.Item
 
         public int GetDefVal(AttackAttribution attr, AttackType t)
         {
-            if (t == AttackType.Physical) return Physical + PhysicalAttr.Values[(int)attr];
-            return Magical + MagicalAttr.Values[(int)attr];
+            int baseVal = (t == AttackType.Physical) ? Physical : Magical;
+            int attrVal = 0;
+            if (attr != AttackAttribution.None)
+                attrVal = (t == AttackType.Physical) ? PhysicalAttr.Values[(int)attr] : MagicalAttr.Values[(int)attr];
+            return baseVal + attrVal;
         }
     }
 
@@ -83,7 +87,7 @@ namespace Soleil.Item
     struct AttrDef
     {
         public int[] Values;
-        public AttrDef(int heat=0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
+        public AttrDef(int heat = 0, int thunder = 0, int ice = 0, int blow = 0, int slash = 0, int thrust = 0)
         {
             Values = new int[(int)AttackAttribution.size];
             Values[(int)AttackAttribution.Fever] = heat;
@@ -207,7 +211,7 @@ namespace Soleil.Item
         public DefData DefData { get; }
         public AbilityScore AbilityScore { get; }
 
-        public AccessaryData (ItemID iD, DefData def, AbilityScore? score, string name, string description)
+        public AccessaryData(ItemID iD, DefData def, AbilityScore? score, string name, string description)
         {
             ID = iD;
             Name = name;

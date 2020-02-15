@@ -71,6 +71,7 @@ namespace Soleil.Menu.Status
 
         public void OnInputSubmit()
         {
+            Audio.PlaySound(SoundID.DecideSoft);
             if (equipWindow.Active)
             {
                 equipWindow.OnInputSubmit();
@@ -152,7 +153,7 @@ namespace Soleil.Menu.Status
                 icons[i].Color = (i == index) ? ColorPalette.AliceBlue : ColorPalette.DarkBlue;
             }
         }
-        
+
         private void Reset()
         {
             index = 0;
