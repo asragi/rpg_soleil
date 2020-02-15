@@ -35,6 +35,8 @@ namespace Soleil.Map
             standAnimation = new Animation[9];
         }
 
+        public bool Visible { get; set; } = true;
+
         /// <summary>
         /// Stand状態のアニメーションを設定する.
         /// </summary>
@@ -82,7 +84,7 @@ namespace Soleil.Map
 
         public override void Draw(Drawing sb)
         {
-            NowAnimation?.DrawWithDepth(sb, Pos, Color.White, Depth);
+            if (Visible) NowAnimation?.DrawWithDepth(sb, Pos, Color.White, Depth);
             base.Draw(sb);
         }
     }

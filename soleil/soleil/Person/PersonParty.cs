@@ -64,6 +64,11 @@ namespace Soleil
             return result.ToArray();
         }
 
+        public bool GetActive(CharaName name)
+        {
+            return allCharacters[(int)name].InParty;
+        }
+
         public void AddListener(IListener listener)
             => listeners[(int)listener.Type] = listener;
 
