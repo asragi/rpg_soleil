@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -35,9 +37,27 @@ namespace Soleil.Title
 
         public TitleMaster(SceneManager sm)
         {
+            // Try Loading
+            bool dataExists = true;
+            try
+            {
+                SaveLoad.Load();
+            }
+            catch (SerializationException e)
+            {
+                // TODO: Notify user of a broken savedata.
+                Console.WriteLine($"Invalid Save-data! {e.ToString()}");
+                dataExists = false;
+            }
+            catch (FileNotFoundException)
+            {
+                dataExists = false;
+            }
+
+            // Make Instances
             graphics = new TitleGraphics();
             landing = new LandingTransition(graphics, this);
-            firstWindow = new FirstWindow(this);
+            firstWindow = new FirstWindow(this, dataExists);
             input = new TitleInput(this, firstWindow);
             newGame = new NewGameTransition(sm);
             loadGame = new LoadGameTransition(sm);

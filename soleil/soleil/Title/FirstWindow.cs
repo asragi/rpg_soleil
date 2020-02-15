@@ -24,11 +24,12 @@ namespace Soleil.Title
         // Field
         bool saveExists;
 
-        public FirstWindow(TitleMaster _master)
+        public FirstWindow(TitleMaster _master, bool dataExist)
         {
             master = _master;
             selectWindow = new TitleCommandWindow(WindowPos, Commands);
-            saveExists = SaveLoad.FileExist();
+            saveExists = dataExist;
+            selectWindow.Index = saveExists ? 0 : 1;
         }
 
         public void OnInputUp()
