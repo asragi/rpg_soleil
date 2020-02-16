@@ -23,7 +23,7 @@ namespace Soleil.Event
 
             // 気合
             var createdSet = new List<EventBase>();
-            for (int i = decidedSet.Length - 1; i >= 0; --i)
+            for (int i = 0; i < decidedSet.Length; ++i)
             {
                 var target = decidedSet[i];
                 if (target is EventSet eSet)
