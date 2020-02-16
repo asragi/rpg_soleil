@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Soleil
 {
-    enum Weekday
+    public enum Weekday
     {
         Sunday = 0,
         Monday,
@@ -21,7 +21,7 @@ namespace Soleil
     /// <summary>
     /// ゲーム中の時間を表すクラス
     /// </summary>
-    class GameDateTime
+    public class GameDateTime
     {
         private const int InitialDay = 0;
         private const int InitialHour = 6;
