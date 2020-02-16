@@ -19,8 +19,6 @@ namespace Soleil.Map
         readonly DepthID BackDepth = DepthID.PlayerBack;
         protected DepthID Depth;
         protected bool Symmetry; // アニメーションが左右対称かどうか
-        public Direction Direction = Direction.D;
-        protected MoveState MoveState;
         protected Animation NowAnimation;
         protected ObjectManager ObjectManager;
         private Animation[] standAnimation;
@@ -36,6 +34,8 @@ namespace Soleil.Map
         }
 
         public bool Visible { get; set; } = true;
+        public Direction Direction { get; set; } = Direction.D;
+        public MoveState MoveState { get; set; }
 
         /// <summary>
         /// Stand状態のアニメーションを設定する.

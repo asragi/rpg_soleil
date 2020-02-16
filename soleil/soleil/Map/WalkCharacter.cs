@@ -36,6 +36,13 @@ namespace Soleil.Map
             Direction = dir;
         }
 
+        public virtual void Move(Vector vec, MoveState ms = MoveState.Walk)
+        {
+            MoveState = ms;
+            Pos += vec;
+            Direction = vec.ToDirection();
+        }
+
         /// <summary>
         /// 基底クラスのUpdateから呼び出される。MoveStateに応じてアニメーションを変更する。
         /// </summary>

@@ -57,10 +57,12 @@ namespace Soleil.Event
             base.Execute();
             if (frame <= 0)
             {
+                character.MoveState = MoveState.Stand;
                 Next();
                 return;
             }
             frame--;
+            character.Move(walkVec);
         }
     }
 }
