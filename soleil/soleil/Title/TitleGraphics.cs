@@ -11,7 +11,7 @@ namespace Soleil.Title
     {
         private static readonly Vector LogoPos = new Vector(140, 70);
         private static readonly Vector ShadowPos = new Vector(416, 295);
-        private static readonly Vector CityPos = new Vector(272, 46);
+        private static readonly Vector CityPos = new Vector(256, 44);
         private static readonly Vector EyeCatchPos = new Vector(388, -39);
         Image back, logo;
         Image eyecatch, shadow, citySilhouette;
@@ -27,7 +27,6 @@ namespace Soleil.Title
             bar2 = new TitleOrnamentBar((new Vector(500, 536.5), new Vector(603.5, 518.2)));
             DepthID eyeCatchDepth = DepthID.Player;
             eyecatch = new Image(TextureID.TitleCharacter, EyeCatchPos, eyeCatchDepth);
-            eyecatch.Size = new Vector(0.2875f);
             shadow = new Image(TextureID.TitleKage, ShadowPos, eyeCatchDepth);
             citySilhouette = new Image(TextureID.TitleSilhouette, CityPos, eyeCatchDepth);
             components = new IComponent[] { back, logo, citySilhouette, shadow, eyecatch, bar1, bar2 };
