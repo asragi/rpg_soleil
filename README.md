@@ -1,6 +1,8 @@
 # project: rpg_soleil
 RPGを作るプロジェクトです．
 
+[![Image from Gyazo](https://i.gyazo.com/893e447827ddf701908f0a4b40fed46b.gif)](https://gyazo.com/893e447827ddf701908f0a4b40fed46b)
+
 ## 開発環境セットアップ
 リソース等の取得のためKMCのアカウントが必要です．
 
@@ -28,8 +30,10 @@ Mediam版をインストールしてください．
 VisualStudioでビルドをします．
 
 ### 外部ファイルをビルド先フォルダに移す．
-`/Resource/Misc/`内にあるファイルの全てを`soleil/soleil/bin/Windows/x86/Debug/`に移す．
-`resource.sh`を実行してKMCのサーバーから音楽ファイルをダウンロードする（KMCアカウントが必要）．
+
+ - `/Resource/Misc/`内にあるファイルの全てを`soleil/soleil/bin/Windows/x86/Debug/`に移す．
+ - `resource.sh`を実行してKMCのサーバーから音楽ファイルをダウンロードする（KMCアカウントが必要）．
+   - `$ sh resource.sh`
 
 ### 動作確認
 実行して動いたら完了です．
