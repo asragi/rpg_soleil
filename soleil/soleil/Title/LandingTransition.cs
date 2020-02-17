@@ -27,9 +27,11 @@ namespace Soleil.Title
 
             sequence = new Dictionary<int, System.Action>();
             sequence.Add(60, PopUpBackground);
-            sequence.Add(120, PopUpTitle);
-            sequence.Add(150, PopUpBar);
-            sequence.Add(180, End);
+            sequence.Add(100, PopUpCity);
+            sequence.Add(170, PopUpCharacter);
+            sequence.Add(210, PopUpTitle);
+            sequence.Add(250, PopUpBar);
+            sequence.Add(300, End);
         }
 
         public void TransitionUpdate()
@@ -38,6 +40,8 @@ namespace Soleil.Title
             if (sequence.ContainsKey(frame)) sequence[frame]();
         }
 
+        private void PopUpCharacter() => graphics.CallCharacter();
+        private void PopUpCity() => graphics.CallCitySilhouette();
         private void PopUpBackground() => graphics.CallBackImage();
         private void PopUpTitle() => graphics.CallLogo();
         private void PopUpBar() => graphics.CallBar();
