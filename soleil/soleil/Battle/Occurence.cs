@@ -14,13 +14,13 @@ namespace Soleil.Battle
         protected static readonly BattleField BF = BattleField.GetInstance();
         //Effect
         public string Message;
-        public int time;
+        public int Time;
         //Target
         //Damage
         public Occurence(string message, int time = 60)
         {
             Message = message;
-            this.time = time;
+            this.Time = time;
         }
         //使わないかも
         public virtual void Affect() { }

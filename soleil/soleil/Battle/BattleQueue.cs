@@ -43,7 +43,7 @@ namespace Soleil.Battle
     class BattleEffect : BattleEvent
     {
         public Occurence Occur;
-        public BattleEffect(Occurence occurence) : base(occurence.time)
+        public BattleEffect(Occurence occurence) : base(occurence.Time)
         {
             this.Occur = occurence;
         }

@@ -201,8 +201,7 @@ namespace Soleil.Battle
             actions[(int)SkillID.NormalMagic] = new Attack(attackTable[SkillID.NormalMagic], Range.OneEnemy.GetInstance(), EffectAnimationID.Explode, mp: 100);
             actions[(int)SkillID.Guard] = new Buff(buffTable[SkillID.Guard], Range.Me.GetInstance());
             actions[(int)SkillID.EndGuard] = new Buff(buffTable[SkillID.EndGuard], Range.Me.GetInstance());
-            actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70); actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
-
+            actions[(int)SkillID.ExampleDebuff] = new Buff(buffTable[SkillID.ExampleDebuff], Range.OneEnemy.GetInstance(), mp: 70);
             actions[(int)SkillID.Escape] = new Escape((a, b) => { return 0.2f; });
         }
 
