@@ -2,6 +2,7 @@
 RPGを作るプロジェクトです．
 
 ## 開発環境セットアップ
+リソース等の取得のためKMCのアカウントが必要です．
 
 ### Visual Studio のインストール
 Visual Studio 2017以降のインストールが必要です．
@@ -28,6 +29,7 @@ VisualStudioでビルドをします．
 
 ### 外部ファイルをビルド先フォルダに移す．
 `/Resource/Misc/`内にあるファイルの全てを`soleil/soleil/bin/Windows/x86/Debug/`に移す．
+`resource.sh`を実行してKMCのサーバーから音楽ファイルをダウンロードする（KMCアカウントが必要）．
 
 ### 動作確認
 実行して動いたら完了です．
