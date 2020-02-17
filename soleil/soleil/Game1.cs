@@ -82,9 +82,7 @@ namespace Soleil
             // SceneManager
             sm = SceneManager.GetInstance();
             // !debug! Save
-            bool saveExist = SaveLoad.FileExist();
-            if (saveExist) SaveLoad.Load();
-            party = SaveLoad.GetParty(isNew: !saveExist);
+            party = SaveLoad.GetParty(isNew: true);
 
             new TitleScene(sm);
             //new TestBattleScene(sm, party, new[] { Battle.CharacterType.TestEnemy, Battle.CharacterType.TestEnemy });

@@ -31,7 +31,14 @@ namespace Soleil.Title
             }
         }
 
-        public int Index { get => index; set => index = (value + commands.Length) % commands.Length; }
+        public int Index { 
+            get => index;
+            set
+            {
+                index = (value + commands.Length) % commands.Length;
+                RefreshSelected();
+            }
+        }
 
         public void UpCursor()
         {
