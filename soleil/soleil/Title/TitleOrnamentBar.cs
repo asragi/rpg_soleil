@@ -10,7 +10,7 @@ namespace Soleil.Title
     {
         private const TextureID Texture = TextureID.MenuLine;
         private const int MoveSpeed = 1;
-        private const DepthID Depth = DepthID.Message;
+        private const DepthID Depth = DepthID.Ground;
 
         private readonly int texWidth, texNum;
         private readonly Image[] lines;

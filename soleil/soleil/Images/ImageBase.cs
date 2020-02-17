@@ -122,7 +122,7 @@ namespace Soleil
 
         public void Call(bool move = true, bool alpha = true)
         {
-            if (alpha) Fade(MenuSystem.FadeSpeed, MenuSystem.EaseFunc, true);
+            if (alpha) Fade(FadeSpeed, MenuSystem.EaseFunc, true);
             if (move) MoveToDefault();
         }
 

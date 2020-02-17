@@ -31,6 +31,9 @@ namespace Soleil
         TitleLabelSelected,
         TitleLabelUnselected,
         TitleLogo,
+        TitleCharacter,
+        TitleSilhouette,
+        TitleKage,
 
         MenuFront,
         MenuBack,
@@ -521,6 +524,9 @@ namespace Soleil
             SetPath(TextureID.TitleLabelSelected, title + "label");
             SetPath(TextureID.TitleLabelUnselected, title + "label-un");
             SetPath(TextureID.TitleLogo, title + "logo");
+            SetPath(TextureID.TitleCharacter, title + "titleillust_com");
+            SetPath(TextureID.TitleSilhouette, title + "title_haikei_silhouette");
+            SetPath(TextureID.TitleKage, title + "title_haikei_kage");
 
             SetPath(TextureID.MenuFront, UIPath + MenuPath + "menufront");
             SetPath(TextureID.MenuItem1, UIPath + MenuPath + "menuitem1");
